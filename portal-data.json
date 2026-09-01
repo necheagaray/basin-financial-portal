@@ -1,87 +1,2339 @@
 {
-  "generated": "2026-09-01T13:42:03",
+  "generated": "2026-09-01T14:33:07.352Z",
   "laborWeeks": [
+    {
+      "weekKey": "08-08",
+      "weekDate": "2026-08-08",
+      "week": "Week Ending 08-08",
+      "totals": {
+        "dlCustomer": 969,
+        "dlInternal": 58.8,
+        "dlSick": 21.5,
+        "dlVacation": 48,
+        "dlTotal": 1097.3,
+        "adminTotal": 363,
+        "total": 1460.3,
+        "utilization": 88.3
+      },
+      "employees": {
+        "Kennedy, Aleph": {
+          "customer": 38.5,
+          "internal": 1.5,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Heaton, Alex": {
+          "customer": 34.25,
+          "internal": 5.75,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Martinez, Alicia": {
+          "customer": 41.25,
+          "internal": 1,
+          "sick": 0,
+          "vacation": 0,
+          "total": 42.25
+        },
+        "De Monsalbert, Barbara": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Wolf, Ben": {
+          "customer": 35.5,
+          "internal": 4.5,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Knepper, Brennan": {
+          "customer": 28,
+          "internal": 5,
+          "sick": 0,
+          "vacation": 8,
+          "total": 41
+        },
+        "Harris, Brooke": {
+          "customer": 0,
+          "internal": 40,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Glennon, Connor": {
+          "customer": 39.5,
+          "internal": 10.5,
+          "sick": 0,
+          "vacation": 0,
+          "total": 50
+        },
+        "Martinez, Cory": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Cuccia, Craig": {
+          "customer": 32,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 8,
+          "total": 40
+        },
+        "Jurczak, Edward": {
+          "customer": 26.5,
+          "internal": 0,
+          "sick": 13.5,
+          "vacation": 0,
+          "total": 40
+        },
+        "McDonald, Enrique": {
+          "customer": 44,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 44
+        },
+        "Alvero, Garrett": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Rendano, Gary": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Cina, Heather": {
+          "customer": 0,
+          "internal": 33.5,
+          "sick": 0,
+          "vacation": 6.5,
+          "total": 40
+        },
+        "Bosworth Jr., HJ": {
+          "customer": 43,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 43
+        },
+        "Hellmich, Jed": {
+          "customer": 51.5,
+          "internal": 1.5,
+          "sick": 0,
+          "vacation": 0,
+          "total": 53
+        },
+        "Meariman, Joel": {
+          "customer": 0,
+          "internal": 39.25,
+          "sick": 3.75,
+          "vacation": 0,
+          "total": 43
+        },
+        "Taylor, John": {
+          "customer": 16,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 24,
+          "total": 40
+        },
+        "Catanzano, Jonathan": {
+          "customer": 32,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 8,
+          "total": 40
+        },
+        "Beaupierre, Kevin": {
+          "customer": 10,
+          "internal": 30,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Henry, Kirk": {
+          "customer": 20,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 24,
+          "total": 44
+        },
+        "Torrealba, Max": {
+          "customer": 3,
+          "internal": 37,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Carter, Michael": {
+          "customer": 34.5,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 34.5
+        },
+        "Echeagaray, Nick": {
+          "customer": 0,
+          "internal": 40,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Poche, Parker": {
+          "customer": 38.5,
+          "internal": 2,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40.5
+        },
+        "McNeil, Payton": {
+          "customer": 42,
+          "internal": 9,
+          "sick": 0,
+          "vacation": 0,
+          "total": 51
+        },
+        "Knepper, Riley": {
+          "customer": 36,
+          "internal": 2,
+          "sick": 0,
+          "vacation": 0,
+          "total": 38
+        },
+        "Jourdan, Ross": {
+          "customer": 30,
+          "internal": 10,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Johnson, Rylon": {
+          "customer": 0,
+          "internal": 40,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Eustis, Seth": {
+          "customer": 13,
+          "internal": 3,
+          "sick": 0,
+          "vacation": 0,
+          "total": 16
+        },
+        "Sakib, Shadman": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Mobley, Tatiana": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Dumas, Toni": {
+          "customer": 32,
+          "internal": 0,
+          "sick": 8,
+          "vacation": 0,
+          "total": 40
+        },
+        "Tiyapattanaputi, Warakorn": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Ryland, Reese": {
+          "customer": 37,
+          "internal": 3,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        }
+      },
+      "customers": {
+        "St. Tammany Parish Procurement": 53.5,
+        "Diamond Z Engineering, Inc.": 9.25,
+        "Floor & Decor": 46.5,
+        "Edged": 17.5,
+        "Quality Infratech Intelligence, LLC (QII)": 51.75,
+        "Quality Technology Services, LLC": 287.25,
+        "Corgan": 139.75,
+        "Copeland and Johns": 18,
+        "Blue Whale Development": 10.5,
+        "Rosehill Construction": 46.5,
+        "Digital Engineering": 91,
+        "JP Department of PW": 73.5,
+        "SCNZ Architects, LLC": 5.5,
+        "Hoist & Crane Service Group": 1,
+        "Arnett Construction Company, Inc.": 0.5,
+        "Woodward Design Group": 2,
+        "Basic Systems, Inc.": 73,
+        "Waskey Bridges Inc.": 19,
+        "Duplantis Design group": 2,
+        "Meyer & Associates, Inc.": 27,
+        "CarMax": 61.5,
+        "J Caldarera Company": 0.5,
+        "Highland Associates": 1
+      },
+      "projects": {
+        "5008": {
+          "hours": 31,
+          "customer": "JP Department of PW",
+          "name": "5008",
+          "employees": {
+            "Carter, Michael": 31
+          }
+        },
+        "6012": {
+          "hours": 80,
+          "customer": "Digital Engineering",
+          "name": "6012",
+          "employees": {
+            "De Monsalbert, Barbara": 40,
+            "Martinez, Cory": 40
+          }
+        },
+        "20001": {
+          "hours": 42.5,
+          "customer": "JP Department of PW",
+          "name": "20001",
+          "employees": {
+            "Knepper, Brennan": 9,
+            "Glennon, Connor": 0.5,
+            "Carter, Michael": 3,
+            "Knepper, Riley": 30
+          }
+        },
+        "22006": {
+          "hours": 0.5,
+          "customer": "J Caldarera Company",
+          "name": "22006",
+          "employees": {
+            "Carter, Michael": 0.5
+          }
+        },
+        "24-042": {
+          "hours": 53.5,
+          "customer": "St. Tammany Parish Procurement",
+          "name": "24-042",
+          "employees": {
+            "Kennedy, Aleph": 25.5,
+            "Knepper, Brennan": 13,
+            "Glennon, Connor": 2,
+            "Eustis, Seth": 13
+          }
+        },
+        "26-094": {
+          "hours": 9.25,
+          "customer": "Diamond Z Engineering, Inc.",
+          "name": "26-094",
+          "employees": {
+            "Kennedy, Aleph": 8,
+            "Martinez, Alicia": 0.25,
+            "Glennon, Connor": 1
+          }
+        },
+        "24-002": {
+          "hours": 46.5,
+          "customer": "Floor & Decor",
+          "name": "24-002",
+          "employees": {
+            "Kennedy, Aleph": 5,
+            "Martinez, Alicia": 24.5,
+            "Glennon, Connor": 4,
+            "Cuccia, Craig": 3,
+            "Beaupierre, Kevin": 10
+          }
+        },
+        "25-096": {
+          "hours": 16.5,
+          "customer": "Edged",
+          "name": "25-096",
+          "employees": {
+            "Heaton, Alex": 1,
+            "Catanzano, Jonathan": 15,
+            "Tiyapattanaputi, Warakorn": 0.5
+          }
+        },
+        "26-075": {
+          "hours": 9.75,
+          "customer": "Quality Infratech Intelligence, LLC (QII)",
+          "name": "26-075",
+          "employees": {
+            "Heaton, Alex": 5.75,
+            "Catanzano, Jonathan": 4
+          }
+        },
+        "25-086": {
+          "hours": 193.25,
+          "customer": "Quality Technology Services, LLC",
+          "name": "25-086",
+          "employees": {
+            "Heaton, Alex": 19.25,
+            "Cuccia, Craig": 13,
+            "Jurczak, Edward": 26.5,
+            "Alvero, Garrett": 8,
+            "Rendano, Gary": 40,
+            "Hellmich, Jed": 26.5,
+            "Torrealba, Max": 1,
+            "Jourdan, Ross": 11,
+            "Sakib, Shadman": 8,
+            "Mobley, Tatiana": 40
+          }
+        },
+        "26-091": {
+          "hours": 8.25,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-091",
+          "employees": {
+            "Heaton, Alex": 8.25
+          }
+        },
+        "26-098": {
+          "hours": 1.25,
+          "customer": "Corgan",
+          "name": "26-098",
+          "employees": {
+            "Martinez, Alicia": 1.25
+          }
+        },
+        "25-040": {
+          "hours": 18,
+          "customer": "Copeland and Johns",
+          "name": "25-040",
+          "employees": {
+            "Martinez, Alicia": 0.5,
+            "Knepper, Brennan": 6,
+            "Glennon, Connor": 1.5,
+            "Henry, Kirk": 4,
+            "Knepper, Riley": 6
+          }
+        },
+        "26-038": {
+          "hours": 4.5,
+          "customer": "Blue Whale Development",
+          "name": "26-038",
+          "employees": {
+            "Martinez, Alicia": 4,
+            "Glennon, Connor": 0.5
+          }
+        },
+        "26-011": {
+          "hours": 15.25,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-011",
+          "employees": {
+            "Martinez, Alicia": 9.25,
+            "Cuccia, Craig": 6
+          }
+        },
+        "25-023": {
+          "hours": 14,
+          "customer": "Rosehill Construction",
+          "name": "25-023",
+          "employees": {
+            "Martinez, Alicia": 1.5,
+            "Glennon, Connor": 1,
+            "Ryland, Reese": 11.5
+          }
+        },
+        "25-105": {
+          "hours": 42.5,
+          "customer": "Corgan",
+          "name": "25-105",
+          "employees": {
+            "Wolf, Ben": 12,
+            "Poche, Parker": 13.5,
+            "McNeil, Payton": 17
+          }
+        },
+        "26-097": {
+          "hours": 6,
+          "customer": "Blue Whale Development",
+          "name": "26-097",
+          "employees": {
+            "Wolf, Ben": 6
+          }
+        },
+        "24-023": {
+          "hours": 30,
+          "customer": "Quality Technology Services, LLC",
+          "name": "24-023",
+          "employees": {
+            "Wolf, Ben": 13.5,
+            "Hellmich, Jed": 4.5,
+            "Taylor, John": 2.5,
+            "Catanzano, Jonathan": 6,
+            "Tiyapattanaputi, Warakorn": 3.5
+          }
+        },
+        "25-064": {
+          "hours": 40,
+          "customer": "Quality Technology Services, LLC",
+          "name": "25-064",
+          "employees": {
+            "Wolf, Ben": 4,
+            "Alvero, Garrett": 32,
+            "Hellmich, Jed": 4
+          }
+        },
+        "26-093": {
+          "hours": 46.5,
+          "customer": "Corgan",
+          "name": "26-093",
+          "employees": {
+            "Glennon, Connor": 19.5,
+            "Cuccia, Craig": 10,
+            "Hellmich, Jed": 16.5,
+            "Taylor, John": 0.5
+          }
+        },
+        "26-047": {
+          "hours": 5.5,
+          "customer": "SCNZ Architects, LLC",
+          "name": "26-047",
+          "employees": {
+            "Glennon, Connor": 1,
+            "Henry, Kirk": 3,
+            "Ryland, Reese": 1.5
+          }
+        },
+        "25-097": {
+          "hours": 1,
+          "customer": "Hoist & Crane Service Group",
+          "name": "25-097",
+          "employees": {
+            "Glennon, Connor": 1
+          }
+        },
+        "26-086": {
+          "hours": 0.5,
+          "customer": "Arnett Construction Company, Inc.",
+          "name": "26-086",
+          "employees": {
+            "Glennon, Connor": 0.5
+          }
+        },
+        "24-101": {
+          "hours": 4,
+          "customer": "Rosehill Construction",
+          "name": "24-101",
+          "employees": {
+            "Glennon, Connor": 0.5,
+            "Ryland, Reese": 3.5
+          }
+        },
+        "25-003": {
+          "hours": 1.5,
+          "customer": "Rosehill Construction",
+          "name": "25-003",
+          "employees": {
+            "Glennon, Connor": 1.5
+          }
+        },
+        "25-035": {
+          "hours": 2,
+          "customer": "Rosehill Construction",
+          "name": "25-035",
+          "employees": {
+            "Glennon, Connor": 2
+          }
+        },
+        "26-034": {
+          "hours": 1,
+          "customer": "Rosehill Construction",
+          "name": "26-034",
+          "employees": {
+            "Glennon, Connor": 1
+          }
+        },
+        "24-100": {
+          "hours": 2,
+          "customer": "Woodward Design Group",
+          "name": "24-100",
+          "employees": {
+            "Glennon, Connor": 2
+          }
+        },
+        "25-121": {
+          "hours": 73,
+          "customer": "Basic Systems, Inc.",
+          "name": "25-121",
+          "employees": {
+            "McDonald, Enrique": 28,
+            "Bosworth Jr., HJ": 32,
+            "Sakib, Shadman": 13
+          }
+        },
+        "26-015": {
+          "hours": 12,
+          "customer": "Waskey Bridges Inc.",
+          "name": "26-015",
+          "employees": {
+            "McDonald, Enrique": 12
+          }
+        },
+        "26-030": {
+          "hours": 7,
+          "customer": "Waskey Bridges Inc.",
+          "name": "26-030",
+          "employees": {
+            "McDonald, Enrique": 4,
+            "Sakib, Shadman": 3
+          }
+        },
+        "26-009": {
+          "hours": 11,
+          "customer": "Digital Engineering",
+          "name": "26-009",
+          "employees": {
+            "Bosworth Jr., HJ": 11
+          }
+        },
+        "26-069": {
+          "hours": 47,
+          "customer": "Corgan",
+          "name": "26-069",
+          "employees": {
+            "Taylor, John": 13,
+            "Poche, Parker": 24,
+            "McNeil, Payton": 10
+          }
+        },
+        "25-085": {
+          "hours": 1,
+          "customer": "Edged",
+          "name": "25-085",
+          "employees": {
+            "Catanzano, Jonathan": 1
+          }
+        },
+        "26-081": {
+          "hours": 3,
+          "customer": "Quality Infratech Intelligence, LLC (QII)",
+          "name": "26-081",
+          "employees": {
+            "Catanzano, Jonathan": 3
+          }
+        },
+        "26-085": {
+          "hours": 25,
+          "customer": "Quality Infratech Intelligence, LLC (QII)",
+          "name": "26-085",
+          "employees": {
+            "Catanzano, Jonathan": 3,
+            "Tiyapattanaputi, Warakorn": 22
+          }
+        },
+        "26-003": {
+          "hours": 2,
+          "customer": "Duplantis Design group",
+          "name": "26-003",
+          "employees": {
+            "Henry, Kirk": 2
+          }
+        },
+        "25-054": {
+          "hours": 6,
+          "customer": "Meyer & Associates, Inc.",
+          "name": "25-054",
+          "employees": {
+            "Henry, Kirk": 6
+          }
+        },
+        "26-058": {
+          "hours": 21,
+          "customer": "Meyer & Associates, Inc.",
+          "name": "26-058",
+          "employees": {
+            "Henry, Kirk": 5,
+            "Sakib, Shadman": 16
+          }
+        },
+        "25-093": {
+          "hours": 4,
+          "customer": "CarMax",
+          "name": "25-093",
+          "employees": {
+            "Torrealba, Max": 2,
+            "McNeil, Payton": 2
+          }
+        },
+        "25-021": {
+          "hours": 1.5,
+          "customer": "Corgan",
+          "name": "25-021",
+          "employees": {
+            "Poche, Parker": 0.5,
+            "McNeil, Payton": 1
+          }
+        },
+        "25-084": {
+          "hours": 0.5,
+          "customer": "Quality Technology Services, LLC",
+          "name": "25-084",
+          "employees": {
+            "Poche, Parker": 0.5
+          }
+        },
+        "24-009": {
+          "hours": 1,
+          "customer": "Corgan",
+          "name": "24-009",
+          "employees": {
+            "McNeil, Payton": 1
+          }
+        },
+        "25-075": {
+          "hours": 1,
+          "customer": "CarMax",
+          "name": "25-075",
+          "employees": {
+            "McNeil, Payton": 1
+          }
+        },
+        "25-078": {
+          "hours": 7,
+          "customer": "CarMax",
+          "name": "25-078",
+          "employees": {
+            "McNeil, Payton": 7
+          }
+        },
+        "26-031": {
+          "hours": 49.5,
+          "customer": "CarMax",
+          "name": "26-031",
+          "employees": {
+            "McNeil, Payton": 2,
+            "Dumas, Toni": 32,
+            "Ryland, Reese": 15.5
+          }
+        },
+        "24-069": {
+          "hours": 1,
+          "customer": "Highland Associates",
+          "name": "24-069",
+          "employees": {
+            "McNeil, Payton": 1
+          }
+        },
+        "26-096": {
+          "hours": 24,
+          "customer": "Rosehill Construction",
+          "name": "26-096",
+          "employees": {
+            "Jourdan, Ross": 19,
+            "Ryland, Reese": 5
+          }
+        },
+        "26-070": {
+          "hours": 6,
+          "customer": "Quality Infratech Intelligence, LLC (QII)",
+          "name": "26-070",
+          "employees": {
+            "Tiyapattanaputi, Warakorn": 6
+          }
+        },
+        "26-099": {
+          "hours": 8,
+          "customer": "Quality Infratech Intelligence, LLC (QII)",
+          "name": "26-099",
+          "employees": {
+            "Tiyapattanaputi, Warakorn": 8
+          }
+        }
+      }
+    },
+    {
+      "weekKey": "08-15",
+      "weekDate": "2026-08-15",
+      "week": "Week Ending 08-15",
+      "totals": {
+        "dlCustomer": 994.3,
+        "dlInternal": 86.3,
+        "dlSick": 13.3,
+        "dlVacation": 28,
+        "dlTotal": 1121.8,
+        "adminTotal": 334.3,
+        "total": 1456,
+        "utilization": 88.6
+      },
+      "employees": {
+        "Kennedy, Aleph": {
+          "customer": 34,
+          "internal": 6,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Heaton, Alex": {
+          "customer": 28.25,
+          "internal": 11.75,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Martinez, Alicia": {
+          "customer": 36.75,
+          "internal": 2,
+          "sick": 1.25,
+          "vacation": 0,
+          "total": 40
+        },
+        "De Monsalbert, Barbara": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Wolf, Ben": {
+          "customer": 34.5,
+          "internal": 4,
+          "sick": 1.5,
+          "vacation": 0,
+          "total": 40
+        },
+        "Knepper, Brennan": {
+          "customer": 32,
+          "internal": 8,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Harris, Brooke": {
+          "customer": 0,
+          "internal": 40,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Glennon, Connor": {
+          "customer": 32.5,
+          "internal": 14,
+          "sick": 1,
+          "vacation": 0,
+          "total": 47.5
+        },
+        "Martinez, Cory": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Cuccia, Craig": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Jurczak, Edward": {
+          "customer": 40.25,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40.25
+        },
+        "McDonald, Enrique": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Alvero, Garrett": {
+          "customer": 24,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 16,
+          "total": 40
+        },
+        "Rendano, Gary": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Cina, Heather": {
+          "customer": 0,
+          "internal": 40,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Bosworth Jr., HJ": {
+          "customer": 43,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 43
+        },
+        "Hellmich, Jed": {
+          "customer": 52.5,
+          "internal": 10,
+          "sick": 0,
+          "vacation": 0,
+          "total": 62.5
+        },
+        "Meariman, Joel": {
+          "customer": 0,
+          "internal": 36.25,
+          "sick": 4.5,
+          "vacation": 0,
+          "total": 40.75
+        },
+        "Taylor, John": {
+          "customer": 16,
+          "internal": 2,
+          "sick": 0,
+          "vacation": 0,
+          "total": 18
+        },
+        "Catanzano, Jonathan": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Beaupierre, Kevin": {
+          "customer": 9.5,
+          "internal": 26,
+          "sick": 0,
+          "vacation": 0,
+          "total": 35.5
+        },
+        "Henry, Kirk": {
+          "customer": 54,
+          "internal": 0.5,
+          "sick": 1.5,
+          "vacation": 0,
+          "total": 56
+        },
+        "Torrealba, Max": {
+          "customer": 0,
+          "internal": 40,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Carter, Michael": {
+          "customer": 32,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 32
+        },
+        "Echeagaray, Nick": {
+          "customer": 0,
+          "internal": 40,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Poche, Parker": {
+          "customer": 38,
+          "internal": 2,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "McNeil, Payton": {
+          "customer": 29,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 11,
+          "total": 40
+        },
+        "Knepper, Riley": {
+          "customer": 40,
+          "internal": 8,
+          "sick": 0,
+          "vacation": 0,
+          "total": 48
+        },
+        "Jourdan, Ross": {
+          "customer": 31.5,
+          "internal": 8.5,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Johnson, Rylon": {
+          "customer": 0,
+          "internal": 40,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Eustis, Seth": {
+          "customer": 28,
+          "internal": 4,
+          "sick": 0,
+          "vacation": 0,
+          "total": 32
+        },
+        "Sakib, Shadman": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Mobley, Tatiana": {
+          "customer": 32.5,
+          "internal": 0,
+          "sick": 8,
+          "vacation": 0,
+          "total": 40.5
+        },
+        "Dumas, Toni": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Tiyapattanaputi, Warakorn": {
+          "customer": 32.5,
+          "internal": 7.5,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Ryland, Reese": {
+          "customer": 39,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 1,
+          "total": 40
+        }
+      },
+      "customers": {
+        "Corgan": 135,
+        "St. Tammany Parish Procurement": 5,
+        "Diamond Z Engineering, Inc.": 33.5,
+        "Blue Whale Development": 74.75,
+        "Floor & Decor": 18.75,
+        "Edged": 23,
+        "Quality Technology Services, LLC": 311,
+        "Enbridge": 0.5,
+        "Copeland and Johns": 6,
+        "Hoist & Crane Service Group": 4.25,
+        "Rosehill Construction": 50.5,
+        "Digital Engineering": 88,
+        "J Caldarera Company": 16.5,
+        "- No Customer/Project -": 2.5,
+        "SCNZ Architects, LLC": 33,
+        "Randall-Paulson Architects": 0.5,
+        "Arnett Construction Company, Inc.": 0.5,
+        "Woodward Design Group": 1.5,
+        "JP Department of PW": 70,
+        "Basic Systems, Inc.": 74,
+        "Waskey Bridges Inc.": 35,
+        "Duplantis Design group": 6.5,
+        "Meyer & Associates, Inc.": 31,
+        "CarMax": 19,
+        "Quality Infratech Intelligence, LLC (QII)": 18,
+        "Jos. R. Labadot, Inc.": 1.5
+      },
+      "projects": {
+        "5008": {
+          "hours": 26.5,
+          "customer": "JP Department of PW",
+          "name": "5008",
+          "employees": {
+            "Carter, Michael": 25.5,
+            "McNeil, Payton": 1
+          }
+        },
+        "6012": {
+          "hours": 80,
+          "customer": "Digital Engineering",
+          "name": "6012",
+          "employees": {
+            "De Monsalbert, Barbara": 40,
+            "Martinez, Cory": 40
+          }
+        },
+        "20001": {
+          "hours": 43.5,
+          "customer": "JP Department of PW",
+          "name": "20001",
+          "employees": {
+            "Glennon, Connor": 1,
+            "Carter, Michael": 2.5,
+            "Knepper, Riley": 40
+          }
+        },
+        "22006": {
+          "hours": 16.5,
+          "customer": "J Caldarera Company",
+          "name": "22006",
+          "employees": {
+            "Knepper, Brennan": 8,
+            "Glennon, Connor": 0.5,
+            "Carter, Michael": 4,
+            "Eustis, Seth": 4
+          }
+        },
+        "26-093": {
+          "hours": 78.5,
+          "customer": "Corgan",
+          "name": "26-093",
+          "employees": {
+            "Kennedy, Aleph": 5,
+            "Glennon, Connor": 14,
+            "Alvero, Garrett": 23,
+            "Hellmich, Jed": 16,
+            "Taylor, John": 10,
+            "Poche, Parker": 9,
+            "Jourdan, Ross": 1.5
+          }
+        },
+        "24-042": {
+          "hours": 5,
+          "customer": "St. Tammany Parish Procurement",
+          "name": "24-042",
+          "employees": {
+            "Kennedy, Aleph": 5
+          }
+        },
+        "26-094": {
+          "hours": 33.5,
+          "customer": "Diamond Z Engineering, Inc.",
+          "name": "26-094",
+          "employees": {
+            "Kennedy, Aleph": 17.5,
+            "Martinez, Alicia": 2.5,
+            "Glennon, Connor": 1.5,
+            "Jourdan, Ross": 12
+          }
+        },
+        "26-097": {
+          "hours": 71,
+          "customer": "Blue Whale Development",
+          "name": "26-097",
+          "employees": {
+            "Kennedy, Aleph": 2.5,
+            "Wolf, Ben": 18,
+            "Knepper, Brennan": 24,
+            "Glennon, Connor": 1,
+            "Eustis, Seth": 24,
+            "Ryland, Reese": 1.5
+          }
+        },
+        "24-002": {
+          "hours": 18.75,
+          "customer": "Floor & Decor",
+          "name": "24-002",
+          "employees": {
+            "Kennedy, Aleph": 4,
+            "Martinez, Alicia": 5.75,
+            "Glennon, Connor": 2,
+            "Cuccia, Craig": 7
+          }
+        },
+        "25-096": {
+          "hours": 21,
+          "customer": "Edged",
+          "name": "25-096",
+          "employees": {
+            "Heaton, Alex": 0.5,
+            "Catanzano, Jonathan": 9,
+            "Tiyapattanaputi, Warakorn": 11.5
+          }
+        },
+        "25-086": {
+          "hours": 209,
+          "customer": "Quality Technology Services, LLC",
+          "name": "25-086",
+          "employees": {
+            "Heaton, Alex": 27.75,
+            "Cuccia, Craig": 24.5,
+            "Jurczak, Edward": 40.25,
+            "Rendano, Gary": 40,
+            "Hellmich, Jed": 21,
+            "Mobley, Tatiana": 32.5,
+            "Dumas, Toni": 23
+          }
+        },
+        "25-107": {
+          "hours": 0.5,
+          "customer": "Enbridge",
+          "name": "25-107",
+          "employees": {
+            "Martinez, Alicia": 0.5
+          }
+        },
+        "25-040": {
+          "hours": 6,
+          "customer": "Copeland and Johns",
+          "name": "25-040",
+          "employees": {
+            "Martinez, Alicia": 4,
+            "Glennon, Connor": 2
+          }
+        },
+        "25-097": {
+          "hours": 4.25,
+          "customer": "Hoist & Crane Service Group",
+          "name": "25-097",
+          "employees": {
+            "Martinez, Alicia": 1.75,
+            "Glennon, Connor": 1,
+            "Poche, Parker": 1.5
+          }
+        },
+        "26-038": {
+          "hours": 3.75,
+          "customer": "Blue Whale Development",
+          "name": "26-038",
+          "employees": {
+            "Martinez, Alicia": 3.75
+          }
+        },
+        "26-011": {
+          "hours": 27.5,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-011",
+          "employees": {
+            "Martinez, Alicia": 15,
+            "Cuccia, Craig": 8.5,
+            "Hellmich, Jed": 4
+          }
+        },
+        "26-033": {
+          "hours": 1,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-033",
+          "employees": {
+            "Martinez, Alicia": 1
+          }
+        },
+        "25-023": {
+          "hours": 15.5,
+          "customer": "Rosehill Construction",
+          "name": "25-023",
+          "employees": {
+            "Martinez, Alicia": 2.5,
+            "Glennon, Connor": 2,
+            "Ryland, Reese": 11
+          }
+        },
+        "25-105": {
+          "hours": 34.5,
+          "customer": "Corgan",
+          "name": "25-105",
+          "employees": {
+            "Wolf, Ben": 5.5,
+            "Poche, Parker": 19,
+            "McNeil, Payton": 10
+          }
+        },
+        "24-023": {
+          "hours": 45,
+          "customer": "Quality Technology Services, LLC",
+          "name": "24-023",
+          "employees": {
+            "Wolf, Ben": 4,
+            "Hellmich, Jed": 3,
+            "Taylor, John": 6,
+            "Catanzano, Jonathan": 29,
+            "Tiyapattanaputi, Warakorn": 3
+          }
+        },
+        "25-064": {
+          "hours": 15.5,
+          "customer": "Quality Technology Services, LLC",
+          "name": "25-064",
+          "employees": {
+            "Wolf, Ben": 7,
+            "Alvero, Garrett": 1,
+            "Hellmich, Jed": 7.5
+          }
+        },
+        "26-047": {
+          "hours": 33,
+          "customer": "SCNZ Architects, LLC",
+          "name": "26-047",
+          "employees": {
+            "Glennon, Connor": 1.5,
+            "Henry, Kirk": 22.5,
+            "Ryland, Reese": 9
+          }
+        },
+        "24-093": {
+          "hours": 0.5,
+          "customer": "Randall-Paulson Architects",
+          "name": "24-093",
+          "employees": {
+            "Glennon, Connor": 0.5
+          }
+        },
+        "26-086": {
+          "hours": 0.5,
+          "customer": "Arnett Construction Company, Inc.",
+          "name": "26-086",
+          "employees": {
+            "Glennon, Connor": 0.5
+          }
+        },
+        "26-096": {
+          "hours": 26.5,
+          "customer": "Rosehill Construction",
+          "name": "26-096",
+          "employees": {
+            "Glennon, Connor": 1,
+            "Jourdan, Ross": 18,
+            "Ryland, Reese": 7.5
+          }
+        },
+        "24-100": {
+          "hours": 1.5,
+          "customer": "Woodward Design Group",
+          "name": "24-100",
+          "employees": {
+            "Glennon, Connor": 1.5
+          }
+        },
+        "25-121": {
+          "hours": 74,
+          "customer": "Basic Systems, Inc.",
+          "name": "25-121",
+          "employees": {
+            "McDonald, Enrique": 40,
+            "Sakib, Shadman": 34
+          }
+        },
+        "26-009": {
+          "hours": 8,
+          "customer": "Digital Engineering",
+          "name": "26-009",
+          "employees": {
+            "Bosworth Jr., HJ": 8
+          }
+        },
+        "26-030": {
+          "hours": 35,
+          "customer": "Waskey Bridges Inc.",
+          "name": "26-030",
+          "employees": {
+            "Bosworth Jr., HJ": 35
+          }
+        },
+        "26-028": {
+          "hours": 1,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-028",
+          "employees": {
+            "Hellmich, Jed": 1
+          }
+        },
+        "25-085": {
+          "hours": 2,
+          "customer": "Edged",
+          "name": "25-085",
+          "employees": {
+            "Catanzano, Jonathan": 2
+          }
+        },
+        "26-069": {
+          "hours": 17.5,
+          "customer": "Corgan",
+          "name": "26-069",
+          "employees": {
+            "Beaupierre, Kevin": 9.5,
+            "Poche, Parker": 6,
+            "McNeil, Payton": 2
+          }
+        },
+        "24-073": {
+          "hours": 1.5,
+          "customer": "Duplantis Design group",
+          "name": "24-073",
+          "employees": {
+            "Henry, Kirk": 1.5
+          }
+        },
+        "26-003": {
+          "hours": 5,
+          "customer": "Duplantis Design group",
+          "name": "26-003",
+          "employees": {
+            "Henry, Kirk": 5
+          }
+        },
+        "25-054": {
+          "hours": 3.5,
+          "customer": "Meyer & Associates, Inc.",
+          "name": "25-054",
+          "employees": {
+            "Henry, Kirk": 3.5
+          }
+        },
+        "26-050": {
+          "hours": 9.5,
+          "customer": "Meyer & Associates, Inc.",
+          "name": "26-050",
+          "employees": {
+            "Henry, Kirk": 9.5
+          }
+        },
+        "26-058": {
+          "hours": 18,
+          "customer": "Meyer & Associates, Inc.",
+          "name": "26-058",
+          "employees": {
+            "Henry, Kirk": 12,
+            "Sakib, Shadman": 6
+          }
+        },
+        "26-098": {
+          "hours": 1.5,
+          "customer": "Corgan",
+          "name": "26-098",
+          "employees": {
+            "Poche, Parker": 1.5
+          }
+        },
+        "26-031": {
+          "hours": 18,
+          "customer": "CarMax",
+          "name": "26-031",
+          "employees": {
+            "Poche, Parker": 1,
+            "Dumas, Toni": 17
+          }
+        },
+        "24-009": {
+          "hours": 1,
+          "customer": "Corgan",
+          "name": "24-009",
+          "employees": {
+            "McNeil, Payton": 1
+          }
+        },
+        "25-021": {
+          "hours": 1,
+          "customer": "Corgan",
+          "name": "25-021",
+          "employees": {
+            "McNeil, Payton": 1
+          }
+        },
+        "26-018": {
+          "hours": 13,
+          "customer": "Corgan",
+          "name": "26-018",
+          "employees": {
+            "McNeil, Payton": 13
+          }
+        },
+        "25-100": {
+          "hours": 1,
+          "customer": "CarMax",
+          "name": "25-100",
+          "employees": {
+            "McNeil, Payton": 1
+          }
+        },
+        "26-070": {
+          "hours": 9,
+          "customer": "Quality Infratech Intelligence, LLC (QII)",
+          "name": "26-070",
+          "employees": {
+            "Tiyapattanaputi, Warakorn": 9
+          }
+        },
+        "26-099": {
+          "hours": 9,
+          "customer": "Quality Infratech Intelligence, LLC (QII)",
+          "name": "26-099",
+          "employees": {
+            "Tiyapattanaputi, Warakorn": 9
+          }
+        },
+        "26-100": {
+          "hours": 1.5,
+          "customer": "Jos. R. Labadot, Inc.",
+          "name": "26-100",
+          "employees": {
+            "Ryland, Reese": 1.5
+          }
+        },
+        "24-101": {
+          "hours": 0.5,
+          "customer": "Rosehill Construction",
+          "name": "24-101",
+          "employees": {
+            "Ryland, Reese": 0.5
+          }
+        },
+        "26-060": {
+          "hours": 8,
+          "customer": "Rosehill Construction",
+          "name": "26-060",
+          "employees": {
+            "Ryland, Reese": 8
+          }
+        }
+      }
+    },
+    {
+      "weekKey": "08-22",
+      "weekDate": "2026-08-22",
+      "week": "Week Ending 08-22",
+      "totals": {
+        "dlCustomer": 1025.8,
+        "dlInternal": 65.5,
+        "dlSick": 2.8,
+        "dlVacation": 45,
+        "dlTotal": 1139,
+        "adminTotal": 184.5,
+        "total": 1323.5,
+        "utilization": 90.1
+      },
+      "employees": {
+        "Kennedy, Aleph": {
+          "customer": 36,
+          "internal": 4,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Heaton, Alex": {
+          "customer": 32,
+          "internal": 8,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Martinez, Alicia": {
+          "customer": 37,
+          "internal": 3,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "De Monsalbert, Barbara": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Wolf, Ben": {
+          "customer": 30.5,
+          "internal": 0,
+          "sick": 1.5,
+          "vacation": 8,
+          "total": 40
+        },
+        "Knepper, Brennan": {
+          "customer": 32,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 8,
+          "total": 40
+        },
+        "Harris, Brooke": {
+          "customer": 0,
+          "internal": 40,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Glennon, Connor": {
+          "customer": 38,
+          "internal": 10,
+          "sick": 0,
+          "vacation": 0,
+          "total": 48
+        },
+        "Martinez, Cory": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Cuccia, Craig": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Jurczak, Edward": {
+          "customer": 23.25,
+          "internal": 0,
+          "sick": 0.75,
+          "vacation": 16,
+          "total": 40
+        },
+        "McDonald, Enrique": {
+          "customer": 39,
+          "internal": 1,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Alvero, Garrett": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Rendano, Gary": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Cina, Heather": {
+          "customer": 0,
+          "internal": 40,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Bosworth Jr., HJ": {
+          "customer": 43,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 43
+        },
+        "Hellmich, Jed": {
+          "customer": 53,
+          "internal": 1.5,
+          "sick": 0,
+          "vacation": 2.5,
+          "total": 57
+        },
+        "Meariman, Joel": {
+          "customer": 0,
+          "internal": 40.5,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40.5
+        },
+        "Catanzano, Jonathan": {
+          "customer": 39,
+          "internal": 1,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Beaupierre, Kevin": {
+          "customer": 10,
+          "internal": 6,
+          "sick": 0,
+          "vacation": 0,
+          "total": 16
+        },
+        "Henry, Kirk": {
+          "customer": 51,
+          "internal": 1,
+          "sick": 0.5,
+          "vacation": 0,
+          "total": 52.5
+        },
+        "Carter, Michael": {
+          "customer": 33.5,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 33.5
+        },
+        "Echeagaray, Nick": {
+          "customer": 0,
+          "internal": 40,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Poche, Parker": {
+          "customer": 37.5,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 2.5,
+          "total": 40
+        },
+        "McNeil, Payton": {
+          "customer": 24,
+          "internal": 16,
+          "sick": 0,
+          "vacation": 8,
+          "total": 48
+        },
+        "Knepper, Riley": {
+          "customer": 48,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 48
+        },
+        "Jourdan, Ross": {
+          "customer": 34.5,
+          "internal": 5.5,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Eustis, Seth": {
+          "customer": 8,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 8
+        },
+        "Sakib, Shadman": {
+          "customer": 8,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 8
+        },
+        "Mobley, Tatiana": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Dumas, Toni": {
+          "customer": 41,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 41
+        },
+        "Le, Tuan": {
+          "customer": 29,
+          "internal": 11,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Tiyapattanaputi, Warakorn": {
+          "customer": 36.5,
+          "internal": 3.5,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Ryland, Reese": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        }
+      },
+      "customers": {
+        "Diamond Z Engineering, Inc.": 32,
+        "Blue Whale Development": 30,
+        "Laitram, LLC": 23.5,
+        "Floor & Decor": 6.75,
+        "Oracle": 17.25,
+        "Quality Technology Services, LLC": 294.25,
+        "Copeland and Johns": 28.5,
+        "Quality Infratech Intelligence, LLC (QII)": 53.75,
+        "Rosehill Construction": 27.5,
+        "Digital Engineering": 80,
+        "Corgan": 126.75,
+        "Build Commercial Construction LLC": 7,
+        "Hoist & Crane Service Group": 24,
+        "Arnett Construction Company, Inc.": 4,
+        "Jos. R. Labadot, Inc.": 0.5,
+        "Woodward Design Group": 6.5,
+        "J Caldarera Company": 1.5,
+        "Basic Systems, Inc.": 47,
+        "Waskey Bridges Inc.": 43,
+        "Edged": 5,
+        "CarMax": 54,
+        "SCNZ Architects, LLC": 11.5,
+        "Duplantis Design group": 8.5,
+        "Meyer & Associates, Inc.": 37.5,
+        "JP Department of PW": 63,
+        "Watermark Design": 10.5
+      },
+      "projects": {
+        "3011": {
+          "hours": 8,
+          "customer": "JP Department of PW",
+          "name": "3011",
+          "employees": {
+            "Carter, Michael": 8
+          }
+        },
+        "5008": {
+          "hours": 12.5,
+          "customer": "JP Department of PW",
+          "name": "5008",
+          "employees": {
+            "Carter, Michael": 11.5,
+            "McNeil, Payton": 1
+          }
+        },
+        "6012": {
+          "hours": 80,
+          "customer": "Digital Engineering",
+          "name": "6012",
+          "employees": {
+            "De Monsalbert, Barbara": 40,
+            "Martinez, Cory": 40
+          }
+        },
+        "20001": {
+          "hours": 42.5,
+          "customer": "JP Department of PW",
+          "name": "20001",
+          "employees": {
+            "Carter, Michael": 2.5,
+            "Knepper, Riley": 40
+          }
+        },
+        "20006": {
+          "hours": 10.5,
+          "customer": "Watermark Design",
+          "name": "20006",
+          "employees": {
+            "Carter, Michael": 10.5
+          }
+        },
+        "22006": {
+          "hours": 1.5,
+          "customer": "J Caldarera Company",
+          "name": "22006",
+          "employees": {
+            "Glennon, Connor": 0.5,
+            "Carter, Michael": 1
+          }
+        },
+        "26-094": {
+          "hours": 30,
+          "customer": "Diamond Z Engineering, Inc.",
+          "name": "26-094",
+          "employees": {
+            "Kennedy, Aleph": 10.5,
+            "Martinez, Alicia": 1,
+            "Glennon, Connor": 2.5,
+            "Ryland, Reese": 16
+          }
+        },
+        "26-097": {
+          "hours": 29,
+          "customer": "Blue Whale Development",
+          "name": "26-097",
+          "employees": {
+            "Kennedy, Aleph": 13,
+            "Wolf, Ben": 8.5,
+            "Glennon, Connor": 2,
+            "Ryland, Reese": 5.5
+          }
+        },
+        "26-103": {
+          "hours": 23.5,
+          "customer": "Laitram, LLC",
+          "name": "26-103",
+          "employees": {
+            "Kennedy, Aleph": 9.5,
+            "Knepper, Brennan": 10,
+            "Knepper, Riley": 4
+          }
+        },
+        "24-002": {
+          "hours": 6.75,
+          "customer": "Floor & Decor",
+          "name": "24-002",
+          "employees": {
+            "Kennedy, Aleph": 3,
+            "Martinez, Alicia": 3.75
+          }
+        },
+        "26-095": {
+          "hours": 17.25,
+          "customer": "Oracle",
+          "name": "26-095",
+          "employees": {
+            "Heaton, Alex": 12.25,
+            "Catanzano, Jonathan": 5
+          }
+        },
+        "25-086": {
+          "hours": 184,
+          "customer": "Quality Technology Services, LLC",
+          "name": "25-086",
+          "employees": {
+            "Heaton, Alex": 19.75,
+            "Cuccia, Craig": 33,
+            "Jurczak, Edward": 23.25,
+            "Alvero, Garrett": 6,
+            "Rendano, Gary": 40,
+            "Hellmich, Jed": 20.5,
+            "Jourdan, Ross": 0.5,
+            "Mobley, Tatiana": 40,
+            "Dumas, Toni": 1
+          }
+        },
+        "26-107": {
+          "hours": 2,
+          "customer": "Diamond Z Engineering, Inc.",
+          "name": "26-107",
+          "employees": {
+            "Martinez, Alicia": 2
+          }
+        },
+        "25-040": {
+          "hours": 28.5,
+          "customer": "Copeland and Johns",
+          "name": "25-040",
+          "employees": {
+            "Martinez, Alicia": 14.25,
+            "Knepper, Brennan": 4,
+            "Glennon, Connor": 5,
+            "Knepper, Riley": 4,
+            "Jourdan, Ross": 1.25
+          }
+        },
+        "26-038": {
+          "hours": 1,
+          "customer": "Blue Whale Development",
+          "name": "26-038",
+          "employees": {
+            "Martinez, Alicia": 1
+          }
+        },
+        "26-064": {
+          "hours": 0.25,
+          "customer": "Quality Infratech Intelligence, LLC (QII)",
+          "name": "26-064",
+          "employees": {
+            "Martinez, Alicia": 0.25
+          }
+        },
+        "26-011": {
+          "hours": 14.5,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-011",
+          "employees": {
+            "Martinez, Alicia": 7.5,
+            "Cuccia, Craig": 7
+          }
+        },
+        "26-033": {
+          "hours": 4.5,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-033",
+          "employees": {
+            "Martinez, Alicia": 4.5
+          }
+        },
+        "25-023": {
+          "hours": 7.75,
+          "customer": "Rosehill Construction",
+          "name": "25-023",
+          "employees": {
+            "Martinez, Alicia": 2.75,
+            "Glennon, Connor": 1,
+            "Ryland, Reese": 4
+          }
+        },
+        "25-105": {
+          "hours": 10.5,
+          "customer": "Corgan",
+          "name": "25-105",
+          "employees": {
+            "Wolf, Ben": 3.5,
+            "Poche, Parker": 3,
+            "McNeil, Payton": 4
+          }
+        },
+        "24-023": {
+          "hours": 33,
+          "customer": "Quality Technology Services, LLC",
+          "name": "24-023",
+          "employees": {
+            "Wolf, Ben": 15,
+            "Hellmich, Jed": 7,
+            "Catanzano, Jonathan": 11
+          }
+        },
+        "25-064": {
+          "hours": 29,
+          "customer": "Quality Technology Services, LLC",
+          "name": "25-064",
+          "employees": {
+            "Wolf, Ben": 3.5,
+            "Alvero, Garrett": 25,
+            "Hellmich, Jed": 0.5
+          }
+        },
+        "24-074": {
+          "hours": 7,
+          "customer": "Build Commercial Construction LLC",
+          "name": "24-074",
+          "employees": {
+            "Knepper, Brennan": 4,
+            "Glennon, Connor": 1,
+            "Ryland, Reese": 2
+          }
+        },
+        "25-097": {
+          "hours": 24,
+          "customer": "Hoist & Crane Service Group",
+          "name": "25-097",
+          "employees": {
+            "Knepper, Brennan": 10,
+            "Glennon, Connor": 4.5,
+            "Poche, Parker": 1.5,
+            "Eustis, Seth": 8
+          }
+        },
+        "26-086": {
+          "hours": 4,
+          "customer": "Arnett Construction Company, Inc.",
+          "name": "26-086",
+          "employees": {
+            "Knepper, Brennan": 4
+          }
+        },
+        "26-093": {
+          "hours": 114,
+          "customer": "Corgan",
+          "name": "26-093",
+          "employees": {
+            "Glennon, Connor": 7.5,
+            "Alvero, Garrett": 9,
+            "Hellmich, Jed": 25,
+            "Poche, Parker": 17.5,
+            "Jourdan, Ross": 26,
+            "Le, Tuan": 29
+          }
+        },
+        "26-100": {
+          "hours": 0.5,
+          "customer": "Jos. R. Labadot, Inc.",
+          "name": "26-100",
+          "employees": {
+            "Glennon, Connor": 0.5
+          }
+        },
+        "24-101": {
+          "hours": 2,
+          "customer": "Rosehill Construction",
+          "name": "24-101",
+          "employees": {
+            "Glennon, Connor": 0.5,
+            "Ryland, Reese": 1.5
+          }
+        },
+        "26-057": {
+          "hours": 1.5,
+          "customer": "Rosehill Construction",
+          "name": "26-057",
+          "employees": {
+            "Glennon, Connor": 1.5
+          }
+        },
+        "26-060": {
+          "hours": 4,
+          "customer": "Rosehill Construction",
+          "name": "26-060",
+          "employees": {
+            "Glennon, Connor": 4
+          }
+        },
+        "26-096": {
+          "hours": 12.25,
+          "customer": "Rosehill Construction",
+          "name": "26-096",
+          "employees": {
+            "Glennon, Connor": 1,
+            "Jourdan, Ross": 6.75,
+            "Ryland, Reese": 4.5
+          }
+        },
+        "24-100": {
+          "hours": 6.5,
+          "customer": "Woodward Design Group",
+          "name": "24-100",
+          "employees": {
+            "Glennon, Connor": 6.5
+          }
+        },
+        "25-121": {
+          "hours": 47,
+          "customer": "Basic Systems, Inc.",
+          "name": "25-121",
+          "employees": {
+            "McDonald, Enrique": 39,
+            "Sakib, Shadman": 8
+          }
+        },
+        "26-030": {
+          "hours": 43,
+          "customer": "Waskey Bridges Inc.",
+          "name": "26-030",
+          "employees": {
+            "Bosworth Jr., HJ": 43
+          }
+        },
+        "25-096": {
+          "hours": 5,
+          "customer": "Edged",
+          "name": "25-096",
+          "employees": {
+            "Catanzano, Jonathan": 5
+          }
+        },
+        "25-078": {
+          "hours": 30.5,
+          "customer": "CarMax",
+          "name": "25-078",
+          "employees": {
+            "Catanzano, Jonathan": 1,
+            "McNeil, Payton": 10,
+            "Dumas, Toni": 19.5
+          }
+        },
+        "26-104": {
+          "hours": 23,
+          "customer": "Quality Infratech Intelligence, LLC (QII)",
+          "name": "26-104",
+          "employees": {
+            "Catanzano, Jonathan": 1,
+            "Tiyapattanaputi, Warakorn": 22
+          }
+        },
+        "26-105": {
+          "hours": 7,
+          "customer": "Quality Infratech Intelligence, LLC (QII)",
+          "name": "26-105",
+          "employees": {
+            "Catanzano, Jonathan": 7
+          }
+        },
+        "26-106": {
+          "hours": 16,
+          "customer": "Quality Infratech Intelligence, LLC (QII)",
+          "name": "26-106",
+          "employees": {
+            "Catanzano, Jonathan": 4,
+            "Tiyapattanaputi, Warakorn": 12
+          }
+        },
+        "26-108": {
+          "hours": 5,
+          "customer": "Quality Infratech Intelligence, LLC (QII)",
+          "name": "26-108",
+          "employees": {
+            "Catanzano, Jonathan": 5
+          }
+        },
+        "26-069": {
+          "hours": 30.5,
+          "customer": "Corgan",
+          "name": "26-069",
+          "employees": {
+            "Beaupierre, Kevin": 10,
+            "Poche, Parker": 14.5,
+            "McNeil, Payton": 6
+          }
+        },
+        "26-047": {
+          "hours": 11.5,
+          "customer": "SCNZ Architects, LLC",
+          "name": "26-047",
+          "employees": {
+            "Henry, Kirk": 5,
+            "Ryland, Reese": 6.5
+          }
+        },
+        "24-078": {
+          "hours": 4.5,
+          "customer": "Duplantis Design group",
+          "name": "24-078",
+          "employees": {
+            "Henry, Kirk": 4.5
+          }
+        },
+        "26-003": {
+          "hours": 4,
+          "customer": "Duplantis Design group",
+          "name": "26-003",
+          "employees": {
+            "Henry, Kirk": 4
+          }
+        },
+        "25-054": {
+          "hours": 2.5,
+          "customer": "Meyer & Associates, Inc.",
+          "name": "25-054",
+          "employees": {
+            "Henry, Kirk": 2.5
+          }
+        },
+        "26-050": {
+          "hours": 33,
+          "customer": "Meyer & Associates, Inc.",
+          "name": "26-050",
+          "employees": {
+            "Henry, Kirk": 33
+          }
+        },
+        "26-058": {
+          "hours": 2,
+          "customer": "Meyer & Associates, Inc.",
+          "name": "26-058",
+          "employees": {
+            "Henry, Kirk": 2
+          }
+        },
+        "26-098": {
+          "hours": 1,
+          "customer": "Corgan",
+          "name": "26-098",
+          "employees": {
+            "Poche, Parker": 1
+          }
+        },
+        "25-100": {
+          "hours": 1,
+          "customer": "CarMax",
+          "name": "25-100",
+          "employees": {
+            "McNeil, Payton": 1
+          }
+        },
+        "26-031": {
+          "hours": 22.5,
+          "customer": "CarMax",
+          "name": "26-031",
+          "employees": {
+            "McNeil, Payton": 2,
+            "Dumas, Toni": 20.5
+          }
+        },
+        "26-109": {
+          "hours": 2.5,
+          "customer": "Quality Infratech Intelligence, LLC (QII)",
+          "name": "26-109",
+          "employees": {
+            "Tiyapattanaputi, Warakorn": 2.5
+          }
+        }
+      }
+    },
     {
       "weekKey": "08-29",
       "weekDate": "2026-08-29",
       "week": "Week Ending 08-29",
       "totals": {
-        "dlCustomer": 905.2,
+        "dlCustomer": 985.3,
         "dlInternal": 125.5,
-        "dlSick": 9.2,
-        "dlVacation": 3.0,
-        "dlTotal": 1043.0,
-        "adminTotal": 241.0,
-        "total": 1284.0,
-        "utilization": 86.8
+        "dlSick": 9.3,
+        "dlVacation": 3,
+        "dlTotal": 1123,
+        "adminTotal": 161,
+        "total": 1284,
+        "utilization": 87.7
       },
       "employees": {
         "Kennedy, Aleph": {
-          "customer": 26.0,
-          "internal": 13.0,
+          "customer": 26,
+          "internal": 13,
           "sick": 0,
-          "vacation": 1.0,
-          "total": 40.0
+          "vacation": 1,
+          "total": 40
         },
         "Heaton, Alex": {
-          "customer": 34.0,
-          "internal": 6.0,
+          "customer": 34,
+          "internal": 6,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
         "Martinez, Alicia": {
           "customer": 36.75,
           "internal": 2.5,
           "sick": 0.75,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
-        "Barbara deMonsabert": {
-          "customer": 40.0,
+        "De Monsalbert, Barbara": {
+          "customer": 40,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
         "Wolf, Ben": {
           "customer": 28.5,
           "internal": 11.5,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
         "Knepper, Brennan": {
-          "customer": 20.0,
-          "internal": 20.0,
+          "customer": 20,
+          "internal": 20,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
         "Harris, Brooke": {
           "customer": 0,
-          "internal": 40.0,
+          "internal": 40,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
         "Glennon, Connor": {
           "customer": 29.5,
           "internal": 14.5,
           "sick": 0,
           "vacation": 0,
-          "total": 44.0
+          "total": 44
         },
         "Martinez, Cory": {
-          "customer": 40.0,
+          "customer": 40,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
         "Cuccia, Craig": {
           "customer": 24.25,
-          "internal": 21.0,
+          "internal": 21,
           "sick": 0,
           "vacation": 0,
           "total": 45.25
@@ -94,190 +2346,223 @@
           "total": 40.25
         },
         "McDonald, Enrique": {
-          "customer": 39.0,
-          "internal": 1.0,
+          "customer": 39,
+          "internal": 1,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
         "Alvero, Garrett": {
-          "customer": 40.0,
+          "customer": 40,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
         "Rendano, Gary": {
-          "customer": 40.0,
+          "customer": 40,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
         "Cina, Heather": {
           "customer": 0,
-          "internal": 40.0,
+          "internal": 40,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
         "Bosworth Jr., HJ": {
-          "customer": 41.0,
+          "customer": 41,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 41.0
+          "total": 41
         },
         "Hellmich, Jed": {
           "customer": 47.5,
           "internal": 0.5,
           "sick": 0,
-          "vacation": 2.0,
-          "total": 50.0
+          "vacation": 2,
+          "total": 50
         },
         "Meariman, Joel": {
           "customer": 0,
-          "internal": 41.0,
+          "internal": 41,
           "sick": 0,
           "vacation": 0,
-          "total": 41.0
+          "total": 41
         },
         "Catanzano, Jonathan": {
-          "customer": 40.0,
+          "customer": 40,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
         "Henry, Kirk": {
           "customer": 37.5,
-          "internal": 1.0,
-          "sick": 6.0,
+          "internal": 1,
+          "sick": 6,
           "vacation": 0,
           "total": 44.5
         },
         "Carter, Michael": {
-          "customer": 33.0,
+          "customer": 33,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 33.0
+          "total": 33
         },
         "Echeagaray, Nick": {
           "customer": 0,
-          "internal": 40.0,
+          "internal": 40,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
         "Poche, Parker": {
           "customer": 39.5,
-          "internal": 1.0,
+          "internal": 1,
           "sick": 0,
           "vacation": 0,
           "total": 40.5
         },
         "McNeil, Payton": {
-          "customer": 20.0,
-          "internal": 2.0,
+          "customer": 20,
+          "internal": 2,
           "sick": 2.5,
           "vacation": 0,
           "total": 24.5
         },
         "Yemula, Rahul": {
-          "customer": 15.0,
-          "internal": 25.0,
+          "customer": 15,
+          "internal": 25,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
         "Knepper, Riley": {
-          "customer": 40.0,
+          "customer": 40,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
         "Jourdan, Ross": {
-          "customer": 37.0,
-          "internal": 3.0,
+          "customer": 37,
+          "internal": 3,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
-        "Tatiana Pavlyukova": {
-          "customer": 40.0,
+        "Mobley, Tatiana": {
+          "customer": 40,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
         "Dumas, Toni": {
-          "customer": 40.0,
+          "customer": 40,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
         "Le, Tuan": {
-          "customer": 39.0,
-          "internal": 1.0,
+          "customer": 39,
+          "internal": 1,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
         "Tiyapattanaputi, Warakorn": {
           "customer": 37.5,
           "internal": 2.5,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         },
         "Ryland, Reese": {
-          "customer": 40.0,
+          "customer": 40,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 40.0
+          "total": 40
         }
       },
       "customers": {
-        "Laitram, LLC": 12.0,
+        "Laitram, LLC": 12,
         "J Caldarera Company": 12.5,
         "Floor & Decor": 11.5,
         "Quality Technology Services, LLC": 361.75,
-        "Flavored Operations, LLC": 1.0,
+        "Flavored Operations, LLC": 1,
         "Diamond Z Engineering, Inc.": 3.5,
         "Copeland and Johns": 8.5,
-        "Blue Whale Development": 8.0,
+        "Blue Whale Development": 8,
         "Rosehill Construction": 37.5,
-        "Digital Engineering": 92.0,
-        "Corgan": 119.0,
+        "Digital Engineering": 92,
+        "Corgan": 119,
         "Hoist & Crane Service Group": 8.5,
         "SCNZ Architects, LLC": 42.5,
         "Arnett Construction Company, Inc.": 0.5,
         "Woodward Design Group": 2.5,
         "JP Department of PW": 39.5,
-        "Basic Systems, Inc.": 40.0,
-        "Waskey Bridges Inc.": 29.0,
-        "Edged": 19.0,
-        "Oracle": 2.0,
+        "Basic Systems, Inc.": 40,
+        "Waskey Bridges Inc.": 29,
+        "Edged": 19,
+        "Oracle": 2,
         "Quality Infratech Intelligence, LLC (QII)": 54.5,
         "Duplantis Design group": 12.5,
         "Meyer & Associates, Inc.": 8.5,
-        "Watermark Design": 26.0,
-        "CarMax": 32.0,
-        "Highland Associates": 1.0
+        "Watermark Design": 26,
+        "CarMax": 32,
+        "Highland Associates": 1
       },
       "projects": {
-        "26-103": {
-          "hours": 12.0,
-          "customer": "Laitram, LLC",
-          "name": "26-103",
+        "3011": {
+          "hours": 3,
+          "customer": "JP Department of PW",
+          "name": "3011",
           "employees": {
-            "Kennedy, Aleph": 4.0,
-            "Glennon, Connor": 1.0,
-            "Ryland, Reese": 7.0
+            "Carter, Michael": 3
+          }
+        },
+        "5008": {
+          "hours": 3,
+          "customer": "JP Department of PW",
+          "name": "5008",
+          "employees": {
+            "Carter, Michael": 3
+          }
+        },
+        "6012": {
+          "hours": 80,
+          "customer": "Digital Engineering",
+          "name": "6012",
+          "employees": {
+            "De Monsalbert, Barbara": 40,
+            "Martinez, Cory": 40
+          }
+        },
+        "20001": {
+          "hours": 33.5,
+          "customer": "JP Department of PW",
+          "name": "20001",
+          "employees": {
+            "Glennon, Connor": 0.5,
+            "Carter, Michael": 1,
+            "Knepper, Riley": 32
+          }
+        },
+        "20006": {
+          "hours": 24,
+          "customer": "Watermark Design",
+          "name": "20006",
+          "employees": {
+            "Carter, Michael": 24
           }
         },
         "22006": {
@@ -285,8 +2570,26 @@
           "customer": "J Caldarera Company",
           "name": "22006",
           "employees": {
-            "Kennedy, Aleph": 12.0,
+            "Kennedy, Aleph": 12,
             "Glennon, Connor": 0.5
+          }
+        },
+        "24002": {
+          "hours": 2,
+          "customer": "Watermark Design",
+          "name": "24002",
+          "employees": {
+            "Carter, Michael": 2
+          }
+        },
+        "26-103": {
+          "hours": 12,
+          "customer": "Laitram, LLC",
+          "name": "26-103",
+          "employees": {
+            "Kennedy, Aleph": 4,
+            "Glennon, Connor": 1,
+            "Ryland, Reese": 7
           }
         },
         "24-002": {
@@ -294,27 +2597,27 @@
           "customer": "Floor & Decor",
           "name": "24-002",
           "employees": {
-            "Kennedy, Aleph": 10.0,
+            "Kennedy, Aleph": 10,
             "Glennon, Connor": 1.5
           }
         },
         "25-086": {
-          "hours": 218.0,
+          "hours": 218,
           "customer": "Quality Technology Services, LLC",
           "name": "25-086",
           "employees": {
-            "Heaton, Alex": 34.0,
+            "Heaton, Alex": 34,
             "Cuccia, Craig": 18.75,
             "Jurczak, Edward": 37.25,
             "Alvero, Garrett": 2.5,
-            "Rendano, Gary": 40.0,
+            "Rendano, Gary": 40,
             "Hellmich, Jed": 31.5,
-            "Tatiana Pavlyukova": 40.0,
-            "Dumas, Toni": 14.0
+            "Mobley, Tatiana": 40,
+            "Dumas, Toni": 14
           }
         },
         "26-039": {
-          "hours": 1.0,
+          "hours": 1,
           "customer": "Flavored Operations, LLC",
           "name": "26-039",
           "employees": {
@@ -336,8 +2639,8 @@
           "name": "25-040",
           "employees": {
             "Martinez, Alicia": 5.5,
-            "Glennon, Connor": 1.0,
-            "Henry, Kirk": 2.0
+            "Glennon, Connor": 1,
+            "Henry, Kirk": 2
           }
         },
         "26-038": {
@@ -366,20 +2669,11 @@
           }
         },
         "25-023": {
-          "hours": 1.0,
+          "hours": 1,
           "customer": "Rosehill Construction",
           "name": "25-023",
           "employees": {
-            "Martinez, Alicia": 1.0
-          }
-        },
-        "6012": {
-          "hours": 80.0,
-          "customer": "Digital Engineering",
-          "name": "6012",
-          "employees": {
-            "Barbara deMonsabert": 40.0,
-            "Martinez, Cory": 40.0
+            "Martinez, Alicia": 1
           }
         },
         "25-105": {
@@ -387,9 +2681,9 @@
           "customer": "Corgan",
           "name": "25-105",
           "employees": {
-            "Wolf, Ben": 9.0,
+            "Wolf, Ben": 9,
             "Poche, Parker": 3.5,
-            "McNeil, Payton": 4.0
+            "McNeil, Payton": 4
           }
         },
         "26-097": {
@@ -397,18 +2691,18 @@
           "customer": "Blue Whale Development",
           "name": "26-097",
           "employees": {
-            "Wolf, Ben": 5.0,
+            "Wolf, Ben": 5,
             "Glennon, Connor": 2.5
           }
         },
         "24-023": {
-          "hours": 26.0,
+          "hours": 26,
           "customer": "Quality Technology Services, LLC",
           "name": "24-023",
           "employees": {
-            "Wolf, Ben": 9.0,
-            "Catanzano, Jonathan": 9.0,
-            "Tiyapattanaputi, Warakorn": 8.0
+            "Wolf, Ben": 9,
+            "Catanzano, Jonathan": 9,
+            "Tiyapattanaputi, Warakorn": 8
           }
         },
         "25-064": {
@@ -417,7 +2711,7 @@
           "name": "25-064",
           "employees": {
             "Wolf, Ben": 5.5,
-            "Hellmich, Jed": 1.0
+            "Hellmich, Jed": 1
           }
         },
         "25-097": {
@@ -425,9 +2719,9 @@
           "customer": "Hoist & Crane Service Group",
           "name": "25-097",
           "employees": {
-            "Knepper, Brennan": 4.0,
+            "Knepper, Brennan": 4,
             "Glennon, Connor": 2.5,
-            "Poche, Parker": 2.0
+            "Poche, Parker": 2
           }
         },
         "26-060": {
@@ -435,25 +2729,25 @@
           "customer": "Rosehill Construction",
           "name": "26-060",
           "employees": {
-            "Knepper, Brennan": 16.0,
+            "Knepper, Brennan": 16,
             "Glennon, Connor": 0.5,
-            "Knepper, Riley": 8.0,
-            "Ryland, Reese": 1.0
+            "Knepper, Riley": 8,
+            "Ryland, Reese": 1
           }
         },
         "26-093": {
-          "hours": 158.0,
+          "hours": 158,
           "customer": "Corgan",
           "name": "26-093",
           "employees": {
-            "Glennon, Connor": 13.0,
-            "Cuccia, Craig": 1.0,
-            "Jurczak, Edward": 3.0,
+            "Glennon, Connor": 13,
+            "Cuccia, Craig": 1,
+            "Jurczak, Edward": 3,
             "Alvero, Garrett": 37.5,
-            "Hellmich, Jed": 15.0,
+            "Hellmich, Jed": 15,
             "Poche, Parker": 20.5,
-            "Jourdan, Ross": 29.0,
-            "Le, Tuan": 39.0
+            "Jourdan, Ross": 29,
+            "Le, Tuan": 39
           }
         },
         "26-047": {
@@ -461,9 +2755,9 @@
           "customer": "SCNZ Architects, LLC",
           "name": "26-047",
           "employees": {
-            "Glennon, Connor": 2.0,
+            "Glennon, Connor": 2,
             "Henry, Kirk": 13.5,
-            "Ryland, Reese": 27.0
+            "Ryland, Reese": 27
           }
         },
         "26-086": {
@@ -475,12 +2769,12 @@
           }
         },
         "26-096": {
-          "hours": 9.0,
+          "hours": 9,
           "customer": "Rosehill Construction",
           "name": "26-096",
           "employees": {
-            "Glennon, Connor": 1.0,
-            "Jourdan, Ross": 8.0
+            "Glennon, Connor": 1,
+            "Jourdan, Ross": 8
           }
         },
         "24-100": {
@@ -491,82 +2785,72 @@
             "Glennon, Connor": 2.5
           }
         },
-        "20001": {
-          "hours": 33.5,
-          "customer": "JP Department of PW",
-          "name": "20001",
-          "employees": {
-            "Glennon, Connor": 0.5,
-            "Carter, Michael": 1.0,
-            "Knepper, Riley": 32.0
-          }
-        },
         "25-121": {
-          "hours": 40.0,
+          "hours": 40,
           "customer": "Basic Systems, Inc.",
           "name": "25-121",
           "employees": {
-            "McDonald, Enrique": 39.0,
-            "Henry, Kirk": 1.0
+            "McDonald, Enrique": 39,
+            "Henry, Kirk": 1
           }
         },
         "26-009": {
-          "hours": 12.0,
+          "hours": 12,
           "customer": "Digital Engineering",
           "name": "26-009",
           "employees": {
-            "Bosworth Jr., HJ": 12.0
+            "Bosworth Jr., HJ": 12
           }
         },
         "26-030": {
-          "hours": 29.0,
+          "hours": 29,
           "customer": "Waskey Bridges Inc.",
           "name": "26-030",
           "employees": {
-            "Bosworth Jr., HJ": 29.0
+            "Bosworth Jr., HJ": 29
           }
         },
         "25-096": {
-          "hours": 19.0,
+          "hours": 19,
           "customer": "Edged",
           "name": "25-096",
           "employees": {
-            "Catanzano, Jonathan": 19.0
+            "Catanzano, Jonathan": 19
           }
         },
         "26-095": {
-          "hours": 2.0,
+          "hours": 2,
           "customer": "Oracle",
           "name": "26-095",
           "employees": {
-            "Catanzano, Jonathan": 2.0
+            "Catanzano, Jonathan": 2
           }
         },
         "26-085": {
-          "hours": 7.0,
+          "hours": 7,
           "customer": "Quality Infratech Intelligence, LLC (QII)",
           "name": "26-085",
           "employees": {
-            "Catanzano, Jonathan": 2.0,
-            "Tiyapattanaputi, Warakorn": 5.0
+            "Catanzano, Jonathan": 2,
+            "Tiyapattanaputi, Warakorn": 5
           }
         },
         "26-105": {
-          "hours": 1.0,
+          "hours": 1,
           "customer": "Quality Infratech Intelligence, LLC (QII)",
           "name": "26-105",
           "employees": {
-            "Catanzano, Jonathan": 1.0
+            "Catanzano, Jonathan": 1
           }
         },
         "26-109": {
-          "hours": 22.0,
+          "hours": 22,
           "customer": "Quality Infratech Intelligence, LLC (QII)",
           "name": "26-109",
           "employees": {
-            "Catanzano, Jonathan": 1.0,
-            "Yemula, Rahul": 15.0,
-            "Tiyapattanaputi, Warakorn": 6.0
+            "Catanzano, Jonathan": 1,
+            "Yemula, Rahul": 15,
+            "Tiyapattanaputi, Warakorn": 6
           }
         },
         "26-110": {
@@ -574,33 +2858,33 @@
           "customer": "Quality Infratech Intelligence, LLC (QII)",
           "name": "26-110",
           "employees": {
-            "Catanzano, Jonathan": 3.0,
+            "Catanzano, Jonathan": 3,
             "Tiyapattanaputi, Warakorn": 5.5
           }
         },
         "26-111": {
-          "hours": 16.0,
+          "hours": 16,
           "customer": "Quality Infratech Intelligence, LLC (QII)",
           "name": "26-111",
           "employees": {
-            "Catanzano, Jonathan": 3.0,
-            "Tiyapattanaputi, Warakorn": 13.0
+            "Catanzano, Jonathan": 3,
+            "Tiyapattanaputi, Warakorn": 13
           }
         },
         "24-073": {
-          "hours": 2.0,
+          "hours": 2,
           "customer": "Duplantis Design group",
           "name": "24-073",
           "employees": {
-            "Henry, Kirk": 2.0
+            "Henry, Kirk": 2
           }
         },
         "24-078": {
-          "hours": 5.0,
+          "hours": 5,
           "customer": "Duplantis Design group",
           "name": "24-078",
           "employees": {
-            "Henry, Kirk": 5.0
+            "Henry, Kirk": 5
           }
         },
         "26-003": {
@@ -635,45 +2919,13 @@
             "Henry, Kirk": 1.5
           }
         },
-        "3011": {
-          "hours": 3.0,
-          "customer": "JP Department of PW",
-          "name": "3011",
-          "employees": {
-            "Carter, Michael": 3.0
-          }
-        },
-        "5008": {
-          "hours": 3.0,
-          "customer": "JP Department of PW",
-          "name": "5008",
-          "employees": {
-            "Carter, Michael": 3.0
-          }
-        },
-        "20006": {
-          "hours": 24.0,
-          "customer": "Watermark Design",
-          "name": "20006",
-          "employees": {
-            "Carter, Michael": 24.0
-          }
-        },
-        "24002": {
-          "hours": 2.0,
-          "customer": "Watermark Design",
-          "name": "24002",
-          "employees": {
-            "Carter, Michael": 2.0
-          }
-        },
         "26-069": {
-          "hours": 19.0,
+          "hours": 19,
           "customer": "Corgan",
           "name": "26-069",
           "employees": {
-            "Poche, Parker": 12.0,
-            "McNeil, Payton": 7.0
+            "Poche, Parker": 12,
+            "McNeil, Payton": 7
           }
         },
         "26-098": {
@@ -685,52 +2937,52 @@
           }
         },
         "26-031": {
-          "hours": 32.0,
+          "hours": 32,
           "customer": "CarMax",
           "name": "26-031",
           "employees": {
-            "McNeil, Payton": 6.0,
-            "Dumas, Toni": 26.0
+            "McNeil, Payton": 6,
+            "Dumas, Toni": 26
           }
         },
         "24-068": {
-          "hours": 1.0,
+          "hours": 1,
           "customer": "Highland Associates",
           "name": "24-068",
           "employees": {
-            "McNeil, Payton": 1.0
+            "McNeil, Payton": 1
           }
         },
         "26-017": {
-          "hours": 2.0,
+          "hours": 2,
           "customer": "Quality Technology Services, LLC",
           "name": "26-017",
           "employees": {
-            "McNeil, Payton": 2.0
+            "McNeil, Payton": 2
           }
         },
         "26-094": {
-          "hours": 3.0,
+          "hours": 3,
           "customer": "Diamond Z Engineering, Inc.",
           "name": "26-094",
           "employees": {
-            "Ryland, Reese": 3.0
+            "Ryland, Reese": 3
           }
         },
         "24-101": {
-          "hours": 1.0,
+          "hours": 1,
           "customer": "Rosehill Construction",
           "name": "24-101",
           "employees": {
-            "Ryland, Reese": 1.0
+            "Ryland, Reese": 1
           }
         },
         "26-056": {
-          "hours": 1.0,
+          "hours": 1,
           "customer": "Rosehill Construction",
           "name": "26-056",
           "employees": {
-            "Ryland, Reese": 1.0
+            "Ryland, Reese": 1
           }
         }
       }
