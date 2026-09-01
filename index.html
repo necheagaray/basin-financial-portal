@@ -463,7 +463,7 @@ body.sky-mode #topbar #lock-btn{color:#397b9c!important;}
 <div class="modal-backdrop" id="auth-modal"><div class="modal" style="width:360px;"><div class="modal-header"><div class="modal-title">Nick Login</div><div class="modal-sub">ADMIN ACCESS</div></div><div class="field"><label>Username</label><input type="text" id="auth-user" value="nick"/></div><div class="field"><label>Password</label><input type="password" id="auth-pass"/></div><div class="modal-footer"><button class="btn-ghost" onclick="closeModal('auth-modal')">Cancel</button><button class="btn-primary" onclick="doLogin()">Login</button></div></div></div>
 <div class="modal-backdrop" id="emp-modal"><div class="modal" style="width:820px;max-width:96vw;max-height:92vh;overflow-y:auto;"><div class="modal-header"><div class="modal-title" id="emp-modal-title">Add Employee</div><div class="modal-sub" id="emp-modal-sub">WORKFORCE</div></div><div id="emp-modal-body"></div><div class="modal-footer"><button class="btn-ghost" onclick="closeModal('emp-modal')">Cancel</button><button class="btn-primary" onclick="saveEmployee()">Save</button></div></div></div>
 <div class="modal-backdrop" id="del-modal"><div class="modal" style="width:400px;"><div class="modal-header"><div class="modal-title">Confirm</div><div class="modal-sub" id="del-sub">ACTION</div></div><div id="del-modal-body"><div style="padding:12px 0;font-size:13px;color:var(--text2);">Remove <strong id="del-emp-name" style="color:var(--text1);"></strong>?</div></div><div class="modal-footer"><button class="btn-ghost" onclick="closeModal('del-modal')">Cancel</button><button class="btn-danger" id="del-confirm-btn" onclick="confirmDelete()" style="padding:8px 18px;font-size:12px;"><i class="fa fa-trash"></i> Delete</button></div></div></div>
-<div class="modal-backdrop" id="github-modal"><div class="modal" style="width:420px;"><div class="modal-header"><div class="modal-title">GitHub Sync</div><div class="modal-sub">REPO CONFIG</div></div><div class="field"><label>Owner</label><input type="text" id="gh-owner"/></div><div class="field"><label>Repo</label><input type="text" id="gh-repo"/></div><div class="field"><label>Branch</label><input type="text" id="gh-branch" value="main"/></div><div class="field"><label>Token</label><input type="password" id="gh-token"/></div><div class="modal-footer"><button class="btn-ghost" onclick="closeModal('github-modal')">Cancel</button><button class="btn-primary" onclick="saveGHConfig()">Save &amp; Sync</button></div></div></div>
+<div class="modal-backdrop" id="github-modal"><div class="modal" style="width:420px;"><div class="modal-header"><div class="modal-title">GitHub Sync</div><div class="modal-sub">REPO CONFIG</div></div><div class="field"><label>Owner</label><input type="text" id="gh-owner"/></div><div class="field"><label>Repo</label><input type="text" id="gh-repo"/></div><div class="field"><label>Branch</label><input type="text" id="gh-branch" value="main"/></div><div class="field"><label>Path to portal-data.json</label><input type="text" id="gh-path" value="portal-data.json" placeholder="portal-data.json"/></div><div class="field"><label>Token (fine-grained PAT, Contents: Read and write)</label><input type="password" id="gh-token"/></div><div style="font-size:11px;line-height:1.5;color:rgba(255,255,255,0.45);margin-top:-4px;">Stored only in this browser, never in the deployed site. Pushing here triggers your Netlify build, so every visitor gets the new week.</div><div class="modal-footer"><button class="btn-ghost" onclick="capDownloadData()">Download file instead</button><button class="btn-ghost" onclick="closeModal('github-modal')">Cancel</button><button class="btn-primary" onclick="saveGHConfig()">Save &amp; Sync</button></div></div></div>
 
 
 <div id="budget-forecast" class="portal-section" style="display:none;">
@@ -3487,9 +3487,45 @@ function openDel(name){DEL_EMP=name;document.getElementById('del-emp-name').text
 function confirmDelete(){if(!DEL_EMP)return;WF_DATA.wages=WF_DATA.wages.filter(function(x){return x.name!==DEL_EMP;});WF_DATA.summary=WF_DATA.summary.filter(function(x){return x.name!==DEL_EMP;});['health','dental','vision','lincoln','k401'].forEach(function(k){delete(WF_DATA[k]||{})[DEL_EMP];});persist();closeModal('del-modal');renderSheet();toast('Removed '+dn(DEL_EMP)+'.','info');DEL_EMP=null;}
 
 function persist(){localStorage.setItem('basin_wf_data',JSON.stringify(WF_DATA));var dot=document.getElementById('sync-dot');if(dot)dot.className='sync-dot pending';}
-async function syncToGitHub(){if(!GH_CONFIG||!GH_CONFIG.token){openModal('github-modal');return;}var dot=document.getElementById('sync-dot');if(dot)dot.className='sync-dot pending';try{var url='https://api.github.com/repos/'+GH_CONFIG.owner+'/'+GH_CONFIG.repo+'/contents/data/workforce.json';var shaRes=await fetch(url,{headers:{'Authorization':'token '+GH_CONFIG.token}});var sha=null;if(shaRes.ok){var sd=await shaRes.json();sha=sd.sha;}var content=btoa(unescape(encodeURIComponent(JSON.stringify(WF_DATA,null,2))));var body={message:'Update workforce '+new Date().toISOString().slice(0,10),content:content,branch:GH_CONFIG.branch||'main'};if(sha)body.sha=sha;var res=await fetch(url,{method:'PUT',headers:{'Authorization':'token '+GH_CONFIG.token,'Content-Type':'application/json'},body:JSON.stringify(body)});if(res.ok){if(dot)dot.className='sync-dot ok';toast('Synced!','success');}else throw new Error('Status '+res.status);}catch(e){if(dot)dot.className='sync-dot err';toast('Sync failed: '+e.message,'error');}}
-function saveGHConfig(){GH_CONFIG={owner:document.getElementById('gh-owner').value.trim(),repo:document.getElementById('gh-repo').value.trim(),branch:document.getElementById('gh-branch').value.trim()||'main',token:document.getElementById('gh-token').value.trim()};if(!GH_CONFIG.owner||!GH_CONFIG.repo||!GH_CONFIG.token){toast('All fields required.','error');return;}localStorage.setItem('basin_gh_config',JSON.stringify(GH_CONFIG));closeModal('github-modal');syncToGitHub();}
+async function syncToGitHub(silent){
+  if(!GH_CONFIG||!GH_CONFIG.token){ if(!silent){ prefillGHModal(); openModal('github-modal'); } return; }
+  var weeks=capLoadStoredWeeks();
+  if(!weeks.length){ if(!silent) toast('No uploaded weeks to publish yet','error'); return; }
+  function readKey(k){ try{ return JSON.parse(localStorage.getItem(k)||'null'); }catch(e){ return null; } }
+  var payload={generated:new Date().toISOString(),laborWeeks:weeks,
+    q4:readKey('basin_q4_forecast_v1'),budgetActuals:readKey('basin_budget_actuals')};
+  var dot=document.getElementById('sync-dot'); if(dot)dot.className='sync-dot pending';
+  var msg=document.getElementById('sync-msg'); if(msg)msg.textContent='Publishing '+weeks.length+' week(s)...';
+  try{
+    var path=(GH_CONFIG.path||'portal-data.json').replace(/^\/+/,'');
+    var url='https://api.github.com/repos/'+GH_CONFIG.owner+'/'+GH_CONFIG.repo+'/contents/'+path;
+    var branch=GH_CONFIG.branch||'main';
+    var shaRes=await fetch(url+'?ref='+encodeURIComponent(branch),{headers:{'Authorization':'token '+GH_CONFIG.token}});
+    var sha=null; if(shaRes.ok){ var sd=await shaRes.json(); sha=sd.sha; }
+    var content=btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2))));
+    var body={message:'Publish capacity data ('+weeks.length+' weeks) '+new Date().toISOString().slice(0,10),
+      content:content,branch:branch};
+    if(sha)body.sha=sha;
+    var res=await fetch(url,{method:'PUT',headers:{'Authorization':'token '+GH_CONFIG.token,
+      'Content-Type':'application/json'},body:JSON.stringify(body)});
+    if(res.ok){ if(dot)dot.className='sync-dot ok';
+      if(msg)msg.textContent='Published '+weeks.length+' week(s)';
+      toast('Published \u2014 Netlify will rebuild shortly','success'); }
+    else { var t=await res.text(); throw new Error('GitHub '+res.status+' '+t.slice(0,80)); }
+  }catch(e){ if(dot)dot.className='sync-dot err';
+    if(msg)msg.textContent='Publish failed';
+    toast('Publish failed: '+e.message,'error'); }
+}
+function saveGHConfig(){GH_CONFIG={owner:document.getElementById('gh-owner').value.trim(),repo:document.getElementById('gh-repo').value.trim(),branch:document.getElementById('gh-branch').value.trim()||'main',path:(document.getElementById('gh-path').value.trim()||'portal-data.json'),token:document.getElementById('gh-token').value.trim()};localStorage.setItem('basin_gh_config',JSON.stringify(GH_CONFIG));closeModal('github-modal');syncToGitHub();}
 function exportCSV(){var names=filteredNames();var rows=names.map(function(n){var w=WF_DATA.wages.find(function(x){return x.name===n;})||{},s=WF_DATA.summary.find(function(x){return x.name===n;})||{};return[n,dn(n),w.dept||'',w.position||'',w.payType||'',w.annualSalary||0,s.totalLaborCost||0];});var csv=[['Name','Display','Dept','Position','PayType','Salary','TotalLabor']].concat(rows).map(function(r){return r.map(function(v){return'"'+v+'"';}).join(',');}).join('\n');var a=document.createElement('a');a.href='data:text/csv,'+encodeURIComponent(csv);a.download='basin_workforce.csv';a.click();}
+function prefillGHModal(){
+  if(!GH_CONFIG) return;
+  ['owner','repo','branch','path','token'].forEach(function(k){
+    var el=document.getElementById('gh-'+k);
+    if(el&&GH_CONFIG[k]) el.value=GH_CONFIG[k];
+  });
+}
+
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 document.addEventListener('click',function(e){if(e.target.classList.contains('modal-backdrop'))closeModal(e.target.id);});
@@ -8474,6 +8510,16 @@ function loadPublishedData() {
 // Writes out everything currently held in this browser so it can be dropped
 // into the deploy folder and served to everyone.
 function capPublishData() {
+  // Configured for GitHub? Push straight to the repo; Netlify rebuilds from it.
+  if (GH_CONFIG && GH_CONFIG.token) { syncToGitHub(); return; }
+  // Not configured yet — open the setup dialog so the repo details can be
+  // entered. The dialog also offers a one-off file download as a fallback.
+  if (typeof prefillGHModal === 'function') prefillGHModal();
+  openModal('github-modal');
+}
+
+// One-off export, for when GitHub isn't set up
+function capDownloadData() {
   function readKey(k) {
     try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch(e) { return null; }
   }
@@ -8593,6 +8639,8 @@ function handleCapUpload(input) {
         if (remaining === 0) {
           CAP_SELECTED_WEEK = null;
           initCapacity();
+          // Auto-publish so the new week reaches everyone without extra steps
+          if (GH_CONFIG && GH_CONFIG.token) syncToGitHub(true);
         }
       } catch(err) {
         toast('Parse error: '+err.message, 'error');
