@@ -3489,7 +3489,7 @@ function confirmDelete(){if(!DEL_EMP)return;WF_DATA.wages=WF_DATA.wages.filter(f
 function persist(){localStorage.setItem('basin_wf_data',JSON.stringify(WF_DATA));var dot=document.getElementById('sync-dot');if(dot)dot.className='sync-dot pending';}
 async function syncToGitHub(silent){
   if(!GH_CONFIG||!GH_CONFIG.token){ if(!silent){ prefillGHModal(); openModal('github-modal'); } return; }
-  var weeks=capLoadStoredWeeks();
+  var weeks=(WF_DATA.laborWeeks||[]).filter(function(w){ return !capIsSeedWeek(w.weekKey); });
   if(!weeks.length){ if(!silent) toast('No uploaded weeks to publish yet','error'); return; }
   function readKey(k){ try{ return JSON.parse(localStorage.getItem(k)||'null'); }catch(e){ return null; } }
   var payload={generated:new Date().toISOString(),laborWeeks:weeks,
@@ -4961,11 +4961,8 @@ function capWeekAvgDLRate(wk) {
 
 function capIsDirectLabor(displayName) {
   var w = capGetWageInfo(displayName).wage;
-  if (!w) return true; // default to DL if unknown
-  // The workbook's GL column is the authoritative DL/Admin split; dept is a
-  // display grouping (Owner/PM sits under Owner but bills to Admin).
-  if (w.gl) return String(w.gl).toLowerCase().indexOf('admin') < 0;
-  return w.dept !== 'Admin.';
+  if (!w) return true;                 // unknown name counts as DL, never Admin
+  return w.dept !== 'Admin.';          // Admin = the Admin. department only
 }
 
 // ─── FILE UPLOAD ──────────────────────────────────────────────
@@ -5278,8 +5275,10 @@ function capDeleteWeek(weekKey) {
     ? 'Remove the built-in sample week ('+weekKey+')?\n\nYou can bring it back from the empty state if you need it.'
     : 'Delete week '+weekKey+'? This cannot be undone.';
   if (!confirm(msg)) return;
-  // The sample week isn't in storage — remember the dismissal instead
+  // Neither the sample week nor a published week lives in local storage, so
+  // record the removal rather than trying to filter it out of nothing.
   if (seed) capSetSeedHidden(true);
+  capMarkDeleted(weekKey);
   // Remove from localStorage
   var stored = capLoadStoredWeeks().filter(function(w){ return w.weekKey !== weekKey; });
   capSaveWeeks(stored);
@@ -8562,7 +8561,7 @@ function capDownloadData() {
   function readKey(k) {
     try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch(e) { return null; }
   }
-  var weeks = capLoadStoredWeeks();
+  var weeks = (WF_DATA.laborWeeks||[]).filter(function(w){ return !capIsSeedWeek(w.weekKey); });
   if (!weeks.length) { toast('No uploaded weeks to publish yet', 'error'); return; }
   var payload = {
     generated: new Date().toISOString(),
@@ -8581,6 +8580,18 @@ function capDownloadData() {
 // The seed week is a built-in sample, not an upload, so deleting it has to be
 // remembered separately or initCapacity() would just re-add it on next load.
 var CAP_SEED_HIDDEN_KEY = 'basin_cap_seed_hidden';
+// Weeks that came from portal-data.json aren't in local storage, so deleting
+// one has to be remembered separately or the published copy just comes back.
+var CAP_DELETED_KEY = 'basin_cap_deleted';
+function capDeletedKeys(){ try{ return JSON.parse(localStorage.getItem(CAP_DELETED_KEY)||'[]'); }catch(e){ return []; } }
+function capMarkDeleted(k){
+  var d=capDeletedKeys();
+  if(d.indexOf(k)<0){ d.push(k); try{ localStorage.setItem(CAP_DELETED_KEY, JSON.stringify(d)); }catch(e){} }
+}
+function capUnmarkDeleted(keys){
+  var d=capDeletedKeys().filter(function(k){ return keys.indexOf(k)<0; });
+  try{ localStorage.setItem(CAP_DELETED_KEY, JSON.stringify(d)); }catch(e){}
+}
 function capSeedHidden(){ try{ return localStorage.getItem(CAP_SEED_HIDDEN_KEY)==='1'; }catch(e){ return false; } }
 function capSetSeedHidden(v){ try{ v?localStorage.setItem(CAP_SEED_HIDDEN_KEY,'1'):localStorage.removeItem(CAP_SEED_HIDDEN_KEY); }catch(e){} }
 function capIsSeedWeek(weekKey){ return (SEED.laborWeeks||[]).some(function(s){ return s.weekKey===weekKey; }); }
@@ -8594,6 +8605,7 @@ function capLoadStoredWeeks() {
 
 function capSaveWeeks(weeks) {
   try { localStorage.setItem(CAP_WEEKS_KEY, JSON.stringify(weeks)); } catch(e) {}
+  capUnmarkDeleted((weeks||[]).map(function(w){ return w.weekKey; }));
 }
 
 var CAP_NAME_ALIASES = {
@@ -8756,14 +8768,15 @@ function parseEmployeeSummary(rows) {
     }
   }
 
-  var DL_DEPTS=['Civil','Structural','Surveying','Intern'];
-  var wageMap={}; (WF_DATA.wages||[]).forEach(function(w){wageMap[w.name]=w;});
+  // Use the same shared classifier the dashboard uses. The old code looked the
+  // employee up by exact name, so anyone written "First Last" instead of
+  // "Last, First" found no wage record and was silently counted as Admin.
   var dlCust=0,dlInt=0,dlSick=0,dlVac=0,dlTot=0,adTot=0;
   Object.keys(employees).forEach(function(name){
-    var d=employees[name],w=wageMap[name]||{},dept=w.dept||'';
-    var isDL=DL_DEPTS.indexOf(dept)>=0||name==='Bobeck, Daniel'||name==='Eustis, Wes';
-    if (isDL){ dlCust+=d.customer;dlInt+=d.internal;dlSick+=d.sick;dlVac+=d.vacation;dlTot+=d.total; }
-    else adTot+=d.total;
+    var d=employees[name];
+    if (capIsDirectLabor(name)){
+      dlCust+=d.customer;dlInt+=d.internal;dlSick+=d.sick;dlVac+=d.vacation;dlTot+=d.total;
+    } else adTot+=d.total;
   });
   var dlUtil=(dlCust+dlInt+dlSick+dlVac)>0?Math.round(dlCust/(dlCust+dlInt+dlSick+dlVac)*1000)/10:0;
   return {
@@ -8803,8 +8816,9 @@ loadPublishedData();
 function initCapacity() {
   // Published weeks are the baseline every visitor sees; this browser's own
   // uploads override them where the weekKey matches.
-  var stored = capLoadStoredWeeks();
-  var pub    = capPublishedWeeks();
+  var stored  = capLoadStoredWeeks();
+  var deleted = capDeletedKeys();
+  var pub     = capPublishedWeeks().filter(function(w){ return deleted.indexOf(w.weekKey) < 0; });
   if (pub.length) {
     var byKey = {};
     pub.forEach(function(w){ byKey[w.weekKey] = w; });
