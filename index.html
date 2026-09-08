@@ -644,24 +644,27 @@ body.sky-mode #topbar #lock-btn{color:#397b9c!important;}
 #wf-sep-content   ::-webkit-scrollbar-thumb:hover{background:rgba(0,220,160,0.5);}
 
 /* Floating pager */
-#wf-scroll-nav{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:60;
-  display:none;flex-direction:column;align-items:center;gap:4px;padding:9px 8px;
-  background:linear-gradient(180deg,rgba(7,16,25,0.94),rgba(3,9,15,0.94));
-  border:1px solid rgba(0,200,140,0.22);border-radius:26px;
-  box-shadow:0 12px 34px rgba(0,0,0,0.55),inset 0 1px 0 rgba(255,255,255,0.05);
-  backdrop-filter:blur(9px);opacity:0.68;transition:opacity 0.2s,border-color 0.2s;}
-#wf-scroll-nav:hover{opacity:1;border-color:rgba(0,220,160,0.45);}
+#wf-scroll-nav{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:60;
+  display:none;flex-direction:column;align-items:center;gap:5px;padding:10px 9px;
+  background:linear-gradient(180deg,rgba(10,22,32,0.98),rgba(4,11,18,0.98));
+  border:1.5px solid rgba(0,220,160,0.55);border-radius:28px;
+  box-shadow:0 14px 38px rgba(0,0,0,0.7),0 0 22px rgba(0,220,160,0.18),
+             inset 0 1px 0 rgba(255,255,255,0.10);
+  backdrop-filter:blur(10px);opacity:1;transition:border-color 0.2s,box-shadow 0.2s;}
+#wf-scroll-nav:hover{border-color:rgba(0,240,180,0.9);
+  box-shadow:0 14px 38px rgba(0,0,0,0.7),0 0 30px rgba(0,220,160,0.4),
+             inset 0 1px 0 rgba(255,255,255,0.14);}
 #wf-scroll-nav.on{display:flex;}
 #wf-scroll-nav button{cursor:pointer;display:flex;align-items:center;justify-content:center;
-  border-radius:50%;background:rgba(0,200,140,0.07);border:1px solid rgba(0,200,140,0.2);
-  color:rgba(0,230,160,0.9);line-height:1;padding:0;transition:all 0.15s;}
+  border-radius:50%;background:rgba(0,220,160,0.14);border:1.5px solid rgba(0,220,160,0.45);
+  color:#5ff5c0;line-height:1;padding:0;transition:all 0.15s;}
 #wf-scroll-nav button.sn-step{width:34px;height:34px;font-size:17px;}
 #wf-scroll-nav button.sn-end{width:28px;height:28px;font-size:11px;letter-spacing:-3px;
-  color:rgba(0,230,160,0.55);}
+  color:rgba(0,230,160,0.85);}
 #wf-scroll-nav button:hover{background:rgba(0,230,160,0.24);border-color:rgba(0,230,160,0.65);
   color:#fff;box-shadow:0 0 14px rgba(0,230,160,0.35);}
 #wf-scroll-nav button:active{transform:scale(0.92);}
-.sn-track{width:4px;height:56px;border-radius:3px;background:rgba(255,255,255,0.09);
+.sn-track{width:5px;height:58px;border-radius:3px;background:rgba(255,255,255,0.16);
   overflow:hidden;position:relative;margin:3px 0;}
 .sn-fill{position:absolute;left:0;right:0;top:0;height:22%;border-radius:3px;
   background:linear-gradient(180deg,#00e6a0,#00b4cc);
@@ -821,14 +824,11 @@ body.sky-mode #topbar #lock-btn{color:#397b9c!important;}
 /* The page keeps one ordinary scrollbar so the cards and toolbar above can be
    pushed off-screen, giving the table the rest of the height. The table's own
    bar stays hidden — the arrows drive that. */
-body.wf-locked #app{overflow-y:auto !important;overflow-x:hidden;scrollbar-gutter:stable;}
-body.wf-locked #app::-webkit-scrollbar{width:11px;}
-body.wf-locked #app::-webkit-scrollbar-track{background:rgba(255,255,255,0.03);}
-body.wf-locked #app::-webkit-scrollbar-thumb{
-  background:linear-gradient(180deg,rgba(0,200,140,0.5),rgba(0,150,110,0.5));
-  border-radius:7px;border:2px solid rgba(0,0,0,0.35);}
-body.wf-locked #app::-webkit-scrollbar-thumb:hover{
-  background:linear-gradient(180deg,rgba(0,230,160,0.8),rgba(0,180,130,0.8));}
+/* The page still scrolls (wheel/trackpad) so the cards above can be pushed
+   off, but its bar is hidden — the pager beside it did the same job and the
+   two sitting together read as clutter. */
+body.wf-locked #app{overflow-y:auto !important;overflow-x:hidden;scrollbar-width:none;}
+body.wf-locked #app::-webkit-scrollbar{width:0;height:0;}
 body.wf-locked #workforce.portal-section{
   display:flex !important;flex-direction:column;min-height:0;}
 body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
@@ -5697,12 +5697,12 @@ function renderMetrics() {
 
   // Top section: big number left, column chart right
   var box1_top =
-    '<div style="display:flex;align-items:flex-end;gap:14px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.06);">'+
+    '<div style="display:flex;align-items:flex-end;gap:22px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.06);">'+
       // Big headcount number
       '<div style="flex-shrink:0;">'+
-        '<div style="font-family:var(--hud);font-size:72px;font-weight:900;color:var(--cyan);line-height:0.9;text-shadow:0 0 40px rgba(0,212,255,0.5);">'+W.length+'</div>'+
-        '<div style="font-family:var(--mono);font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:2px;margin-top:8px;">ACTIVE EMPLOYEES</div>'+
-        '<div style="font-family:var(--mono);font-size:9px;color:rgba(0,212,255,0.4);margin-top:3px;">'+
+        '<div style="font-family:var(--hud);font-size:96px;font-weight:900;color:var(--cyan);line-height:0.9;text-shadow:0 0 48px rgba(0,212,255,0.55);">'+W.length+'</div>'+
+        '<div style="font-family:var(--mono);font-size:11px;font-weight:700;color:rgba(255,255,255,0.42);letter-spacing:2.4px;margin-top:10px;">ACTIVE EMPLOYEES</div>'+
+        '<div style="font-family:var(--mono);font-size:11px;color:rgba(0,212,255,0.55);margin-top:5px;">'+
           Object.keys(deptMap).length+' departments'+
         '</div>'+
       '</div>'+
@@ -5711,7 +5711,7 @@ function renderMetrics() {
     '</div>';
 
   // Dept pie (from box5 logic) ─ inline here
-  var CX2=75,CY2=75,R2=60,IR2=36;
+  var CX2=105,CY2=105,R2=88,IR2=53;
   function polar2(deg,r){var rad=(deg-90)*Math.PI/180;return{x:CX2+r*Math.cos(rad),y:CY2+r*Math.sin(rad)};}
   function slicePath2(a1,a2,r,ir){
     var s=polar2(a1,r),e=polar2(a2,r),si=polar2(a1,ir),ei=polar2(a2,ir);
@@ -5733,40 +5733,40 @@ function renderMetrics() {
     if(sweep>12){
       var mid=ang2+sweep/2, lp=polar2(mid,(R2+IR2)/2);
       labels2+='<text x="'+lp.x.toFixed(1)+'" y="'+lp.y.toFixed(1)+'" text-anchor="middle" dominant-baseline="middle"'+
-        ' font-family="Chakra Petch,sans-serif" font-size="8" font-weight="800" fill="rgba(255,255,255,0.9)" style="pointer-events:none;">'+Math.round(pct*100)+'%</text>';
+        ' font-family="Chakra Petch,sans-serif" font-size="12" font-weight="800" fill="rgba(255,255,255,0.95)" style="pointer-events:none;">'+Math.round(pct*100)+'%</text>';
     }
     // Legend row with dept count + avg salary
     var avgSal = dm.count>0 ? dm.sal/dm.count : 0;
     legend2+=
-      '<div class="pie-legend-row" data-dept="'+dept+'" style="display:flex;align-items:center;justify-content:space-between;padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:all 0.2s;"'+
+      '<div class="pie-legend-row" data-dept="'+dept+'" style="display:flex;align-items:center;justify-content:space-between;padding:10px 5px;border-radius:8px;border-bottom:1px solid rgba(255,255,255,0.055);cursor:pointer;transition:all 0.2s;"'+
         ' onmouseenter="pieHover(\''+dept+'\')" onmouseleave="pieClear()">'+
         '<div style="display:flex;align-items:center;gap:8px;">'+
-          '<div style="width:10px;height:10px;border-radius:3px;background:'+color+';box-shadow:0 0 6px '+color+'88;flex-shrink:0;"></div>'+
-          '<span style="font-family:var(--inter);font-size:10px;color:rgba(255,255,255,0.6);">'+dept+'</span>'+
-          '<span style="font-family:var(--hud);font-size:10px;font-weight:700;color:'+color+';">'+dm.count+'</span>'+
+          '<div style="width:13px;height:13px;border-radius:4px;background:'+color+';box-shadow:0 0 8px '+color+'99;flex-shrink:0;"></div>'+
+          '<span style="font-family:var(--inter);font-size:13px;font-weight:600;color:rgba(255,255,255,0.78);">'+dept+'</span>'+
+          '<span style="font-family:var(--hud);font-size:13px;font-weight:800;color:'+color+';">'+dm.count+'</span>'+
         '</div>'+
         '<div style="text-align:right;">'+
-          '<div style="font-family:var(--hud);font-size:10px;font-weight:700;color:'+color+';">'+fmt$(dm.sal)+'</div>'+
-          '<div style="font-family:var(--mono);font-size:8px;color:rgba(255,255,255,0.3);">avg '+fmt$(avgSal)+'</div>'+
+          '<div style="font-family:var(--hud);font-size:14px;font-weight:800;color:'+color+';">'+fmt$(dm.sal)+'</div>'+
+          '<div style="font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.38);">avg '+fmt$(avgSal)+'</div>'+
         '</div>'+
       '</div>';
     ang2=end;
   });
 
   var pieSVG2 =
-    '<svg id="dept-pie" width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">'+
+    '<svg id="dept-pie" width="210" height="210" viewBox="0 0 210 210" xmlns="http://www.w3.org/2000/svg">'+
       '<defs><filter id="pie-glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>'+
       '<circle cx="'+CX2+'" cy="'+CY2+'" r="'+((R2+IR2)/2)+'" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="'+(R2-IR2)+'"/>'+
       slices2+labels2+
       '<circle cx="'+CX2+'" cy="'+CY2+'" r="'+(IR2-3)+'" fill="rgba(4,8,15,0.97)"/>'+
-      '<text x="'+CX2+'" y="'+(CY2-5)+'" text-anchor="middle" font-family="Chakra Petch,sans-serif" font-size="8" font-weight="900" fill="#00d4ff">'+fmt$(totalSalForPie)+'</text>'+
-      '<text x="'+CX2+'" y="'+(CY2+7)+'" text-anchor="middle" font-family="monospace" font-size="6" fill="rgba(255,255,255,0.3)">ANNUAL PAYROLL</text>'+
+      '<text x="'+CX2+'" y="'+(CY2-4)+'" text-anchor="middle" font-family="Chakra Petch,sans-serif" font-size="15" font-weight="900" fill="#00d4ff">'+fmt$(totalSalForPie)+'</text>'+
+      '<text x="'+CX2+'" y="'+(CY2+12)+'" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.38)">ANNUAL PAYROLL</text>'+
     '</svg>';
 
   var box1_bottom =
     '<div>'+
       '<div style="font-family:var(--hud);font-size:8px;font-weight:800;letter-spacing:2px;color:rgba(0,212,255,0.4);text-transform:uppercase;margin-bottom:12px;">Annual Payroll by Department</div>'+
-      '<div style="display:flex;gap:16px;align-items:center;">'+
+      '<div style="display:flex;gap:26px;align-items:center;">'+
         '<div style="flex-shrink:0;">'+pieSVG2+'</div>'+
         '<div style="flex:1;">'+legend2+'</div>'+
       '</div>'+
@@ -5975,14 +5975,17 @@ function renderMetrics() {
   tenureBar += '</div>';
 
   // Legend row
-  var tenureLegend = '<div style="display:flex;flex-wrap:wrap;gap:6px 12px;margin-bottom:8px;">';
+  var tenureLegend = '<div style="display:flex;flex-wrap:wrap;gap:8px 10px;margin-bottom:12px;">';
   tenureBuckets.forEach(function(b){
     if(b.emps.length===0) return;
     var pct = totalWithDate>0?(b.emps.length/totalWithDate*100).toFixed(0):0;
-    tenureLegend += '<div style="display:flex;align-items:center;gap:4px;">'+
-      '<div style="width:8px;height:8px;border-radius:2px;background:'+b.color+';flex-shrink:0;"></div>'+
-      '<span style="font-family:var(--mono);font-size:8px;color:rgba(255,255,255,0.5);">'+b.label+'</span>'+
-      '<span style="font-family:var(--hud);font-size:8px;font-weight:700;color:'+b.color+';">'+b.emps.length+'</span>'+
+    tenureLegend += '<div style="display:flex;align-items:center;gap:7px;padding:4px 11px;'+
+      'border-radius:20px;background:'+b.color+'1a;border:1px solid '+b.color+'4d;">'+
+      '<div style="width:11px;height:11px;border-radius:3px;background:'+b.color+';flex-shrink:0;'+
+        'box-shadow:0 0 7px '+b.color+'99;"></div>'+
+      '<span style="font-family:var(--mono);font-size:11.5px;font-weight:600;'+
+        'color:rgba(255,255,255,0.75);white-space:nowrap;">'+b.label+'</span>'+
+      '<span style="font-family:var(--hud);font-size:13px;font-weight:900;color:'+b.color+';">'+b.emps.length+'</span>'+
     '</div>';
   });
   tenureLegend += '</div>';
@@ -6388,14 +6391,21 @@ function capGetWageInfo(displayName) {
 //   salaried staff-> (annual salary / 52) / hours they worked that week
 // This is the same rule the "Eff. Rate" column in the DL employee wage cost
 // table uses, so project costs and that table always reconcile.
+// A salaried week normally spreads that person's weekly pay across the hours
+// they logged. That only holds for a complete timesheet — below this many
+// hours the division inflates the rate and distorts DL cost/hr, so we fall
+// back to their standard hourly rate instead.
+var CAP_FULL_WEEK_HOURS = 35;
+
 function capEffRate(displayName, weekHours) {
   var w = capGetWageInfo(displayName).wage;
   if (!w) return 0;
   if (w.payType === 'Hourly') return w.hourlyRate || 0;
-  // Owners bill their time like an hourly resource: the cost of a week is the
-  // hours they logged times annual/2080, not their whole weekly salary spread
-  // across however few hours they recorded.
+  var std = w.hourlyRate || ((w.annualSalary || 0) / 2080) || 0;
+  // Owners only ever book time against projects, so they are always hourly
   if (w.dept === 'Owner') return (w.annualSalary || 0) / 2080;
+  // Incomplete timesheet: charge hours worked at the standard rate
+  if (weekHours > 0 && weekHours < CAP_FULL_WEEK_HOURS) return std;
   var weekly = (w.annualSalary || 0) / 52;
   if (weekHours > 0 && weekly > 0) return weekly / weekHours;
   // No hours recorded for them that week (e.g. they appear on a project but not
@@ -7779,22 +7789,27 @@ function buildCustBars(top5Cust, restCustHrs, totalCustHrs) {
         '<div style="font-family:var(--inter);font-size:11px;font-weight:700;color:'+b.color+';'+
           'overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">'+
           b.cust+'</div>'+
-        '<div style="display:flex;gap:8px;flex-shrink:0;">'+
+        // Opaque so the unutilised-DL connector passes behind rather than
+        // across them, and lifted above the connector's layer.
+        '<div style="display:flex;gap:9px;flex-shrink:0;position:relative;z-index:8;'+
+          'padding:3px;border-radius:11px;background:rgba(6,14,22,0.96);">'+
           // RPH pill
-          '<div style="text-align:center;padding:3px 9px;background:rgba('+b.rgb+',0.08);'+
-            'border:1px solid rgba('+b.rgb+',0.2);border-radius:6px;">'+
-            '<div style="font-family:var(--mono);font-size:7px;color:rgba('+b.rgb+',0.5);'+
-              'letter-spacing:1px;text-transform:uppercase;margin-bottom:1px;">'+
+          '<div style="text-align:center;padding:5px 12px;border-radius:8px;'+
+            'background:linear-gradient(180deg,rgba(8,16,24,0.97),rgba(4,10,16,0.97));'+
+            'border:1px solid rgba('+b.rgb+',0.38);box-shadow:0 3px 10px -4px rgba(0,0,0,0.9);">'+
+            '<div style="font-family:var(--mono);font-size:9px;font-weight:700;color:rgba('+b.rgb+',0.75);'+
+              'letter-spacing:1.1px;text-transform:uppercase;margin-bottom:3px;">'+
               (b.usedDefault ? 'Default' : 'Hist.')+' RPH</div>'+
-            '<div style="font-family:var(--hud);font-size:13px;font-weight:800;color:'+b.color+';line-height:1;">'+
+            '<div style="font-family:var(--hud);font-size:16px;font-weight:900;color:'+b.color+';line-height:1;">'+
               '$'+Math.round(b.rph)+'/hr</div>'+
           '</div>'+
           // Est Rev pill
-          '<div style="text-align:center;padding:3px 9px;background:rgba(74,222,128,0.07);'+
-            'border:1px solid rgba(74,222,128,0.2);border-radius:6px;">'+
-            '<div style="font-family:var(--mono);font-size:7px;color:rgba(74,222,128,0.5);'+
-              'letter-spacing:1px;text-transform:uppercase;margin-bottom:1px;">Est. Rev</div>'+
-            '<div style="font-family:var(--hud);font-size:13px;font-weight:800;color:#4ade80;line-height:1;">'+
+          '<div style="text-align:center;padding:5px 12px;border-radius:8px;'+
+            'background:linear-gradient(180deg,rgba(8,16,24,0.97),rgba(4,10,16,0.97));'+
+            'border:1px solid rgba(74,222,128,0.38);box-shadow:0 3px 10px -4px rgba(0,0,0,0.9);">'+
+            '<div style="font-family:var(--mono);font-size:9px;font-weight:700;color:rgba(74,222,128,0.75);'+
+              'letter-spacing:1.1px;text-transform:uppercase;margin-bottom:3px;">Est. Rev</div>'+
+            '<div style="font-family:var(--hud);font-size:16px;font-weight:900;color:#4ade80;line-height:1;">'+
               fmtK(b.estRev)+'</div>'+
           '</div>'+
         '</div>'+
@@ -8692,7 +8707,12 @@ function buildEmpTable(dlEmps, adminEmps, empData, wk) {
   function getERate(name, e) { return capEffRate(name, e.total||0); }
   function getWCost(name, e) {
     var w=(capGetWageInfo(name).wage||{});
-    if (w.payType==='Hourly') return Math.round((w.hourlyRate||0)*e.total);
+    var hrs=e.total||0;
+    if (w.payType==='Hourly') return Math.round((w.hourlyRate||0)*hrs);
+    // owners, and anyone whose timesheet is short of a full week, are charged
+    // for the hours they actually logged
+    if (w.dept==='Owner' || (hrs>0 && hrs<CAP_FULL_WEEK_HOURS))
+      return Math.round(capEffRate(name,hrs)*hrs);
     return Math.round(annualSal(name)/52);
   }
   function custUtil(e) { return e.total>0?e.customer/e.total*100:0; }
@@ -9058,7 +9078,7 @@ function capDrawUnutilLink() {
 
   var wrap = document.createElement('div');
   wrap.id = 'unutil-link';
-  wrap.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:6;';
+  wrap.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:2;';
   wrap.innerHTML =
     '<svg width="' + rr.width + '" height="' + rr.height + '" style="display:block;overflow:visible;">' +
 
@@ -10384,7 +10404,7 @@ function parseEmployeeSummary(rows) {
         var custName=custRaw.replace(/^\d+\s+/,'').trim();
         customers[custName]=(customers[custName]||0)+hrs;
         // Extract project number
-        var projM=label.match(/:\s*(\d{2}-\d{3})/);
+        var projM=label.match(/:\s*(\d{2}-\d{3}(?:\.\d+)?)/);
         var projNum=projM?projM[1]:code;
         if (projNum) {
           if (!projects[projNum]) projects[projNum]={hours:0,customer:custName,name:projNum,employees:{}};
