@@ -5628,11 +5628,11 @@ function renderMetrics() {
   var deptOrder=['Civil','Structural','Surveying','Admin.','Owner','Intern'];
   var maxDeptCount = Math.max.apply(null, deptOrder.filter(function(d){return deptMap[d];}).map(function(d){return deptMap[d].count;})) || 1;
   var maxDeptSal   = Math.max.apply(null, deptOrder.filter(function(d){return deptMap[d];}).map(function(d){return deptMap[d].sal;}))   || 1;
-  var COL_H = 120;
+  var COL_H = 150;
 
   // Vertical column chart SVG with hover tooltips
   var activeDepts = deptOrder.filter(function(d){return deptMap[d];});
-  var colW = 38, colGap = 12;
+  var colW = 54, colGap = 20;
   var svgW = activeDepts.length * (colW + colGap) - colGap + 20;
   var svgH = COL_H + 38;
 
@@ -5686,11 +5686,11 @@ function renderMetrics() {
       ' fill="'+color+'" fill-opacity="0.85"'+
       ' style="transition:filter 0.15s,fill-opacity 0.15s;filter:drop-shadow(0 0 6px '+color+'66);pointer-events:none;"/>';
     // Count label
-    colSVG += '<text x="'+(x+colW/2)+'" y="'+(y-5)+'" text-anchor="middle"'+
-      ' font-family="Chakra Petch,sans-serif" font-size="11" font-weight="900" fill="'+color+'" style="pointer-events:none;">'+dm.count+'</text>';
+    colSVG += '<text x="'+(x+colW/2)+'" y="'+(y-8)+'" text-anchor="middle"'+
+      ' font-family="Chakra Petch,sans-serif" font-size="16" font-weight="900" fill="'+color+'" style="pointer-events:none;">'+dm.count+'</text>';
     // Dept label
-    colSVG += '<text x="'+(x+colW/2)+'" y="'+(COL_H+18)+'" text-anchor="middle"'+
-      ' font-family="monospace" font-size="8" fill="rgba(255,255,255,0.4)" style="pointer-events:none;">'+shortLabel+'</text>';
+    colSVG += '<text x="'+(x+colW/2)+'" y="'+(COL_H+25)+'" text-anchor="middle"'+
+      ' font-family="monospace" font-size="12" font-weight="700" fill="rgba(255,255,255,0.75)" style="pointer-events:none;">'+shortLabel+'</text>';
   });
 
   colSVG += '</svg>'+tooltipDivs+'</div>';
@@ -5742,12 +5742,12 @@ function renderMetrics() {
         ' onmouseenter="pieHover(\''+dept+'\')" onmouseleave="pieClear()">'+
         '<div style="display:flex;align-items:center;gap:8px;">'+
           '<div style="width:13px;height:13px;border-radius:4px;background:'+color+';box-shadow:0 0 8px '+color+'99;flex-shrink:0;"></div>'+
-          '<span style="font-family:var(--inter);font-size:13px;font-weight:600;color:rgba(255,255,255,0.78);">'+dept+'</span>'+
-          '<span style="font-family:var(--hud);font-size:13px;font-weight:800;color:'+color+';">'+dm.count+'</span>'+
+          '<span style="font-family:var(--inter);font-size:14.5px;font-weight:600;color:rgba(255,255,255,0.88);">'+dept+'</span>'+
+          '<span style="font-family:var(--hud);font-size:14px;font-weight:800;color:'+color+';">'+dm.count+'</span>'+
         '</div>'+
         '<div style="text-align:right;">'+
-          '<div style="font-family:var(--hud);font-size:14px;font-weight:800;color:'+color+';">'+fmt$(dm.sal)+'</div>'+
-          '<div style="font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.38);">avg '+fmt$(avgSal)+'</div>'+
+          '<div style="font-family:var(--hud);font-size:16px;font-weight:800;color:'+color+';">'+fmt$(dm.sal)+'</div>'+
+          '<div style="font-family:var(--mono);font-size:11.5px;font-weight:600;color:rgba(255,255,255,0.68);">avg '+fmt$(avgSal)+'</div>'+
         '</div>'+
       '</div>';
     ang2=end;
@@ -5765,7 +5765,9 @@ function renderMetrics() {
 
   var box1_bottom =
     '<div>'+
-      '<div style="font-family:var(--hud);font-size:8px;font-weight:800;letter-spacing:2px;color:rgba(0,212,255,0.4);text-transform:uppercase;margin-bottom:12px;">Annual Payroll by Department</div>'+
+      '<div style="font-family:var(--hud);font-size:14px;font-weight:900;letter-spacing:2.5px;'+
+        'color:rgba(0,212,255,0.98);text-transform:uppercase;margin-bottom:18px;'+
+        'text-shadow:0 0 14px rgba(0,212,255,0.5);">Annual Payroll by Department</div>'+
       '<div style="display:flex;gap:26px;align-items:center;">'+
         '<div style="flex-shrink:0;">'+pieSVG2+'</div>'+
         '<div style="flex:1;">'+legend2+'</div>'+
@@ -6427,22 +6429,18 @@ function capWeekHoursMap(wk) {
   return out;
 }
 
+// This used to carry its own rate rules, which drifted from the employee
+// table's. It now defers to capEffRate so both report the same cost, including
+// the owner and short-timesheet handling.
 function capHourlyCost(displayName, hoursWorked) {
-  var info = capGetWageInfo(displayName);
-  var w = info.wage;
-  if (!w) return 0;
-  var dept = w.dept || '';
-  var isAdmin = dept === 'Admin.';
-  if (isAdmin) {
-    // Admin: use hourly rate directly
-    return w.hourlyRate || (w.annualSalary / 2080) || 0;
-  }
-  if (w.payType === 'Hourly') {
-    return w.hourlyRate || 0;
-  }
-  // DL Salary: weekly salary / hours worked this week
-  var weeklySalary = (w.annualSalary || 0) / 52;
-  return hoursWorked > 0 ? weeklySalary / hoursWorked : 0;
+  return capEffRate(displayName, hoursWorked);
+}
+
+// Owners bill against projects rather than sitting in the DL or Admin pools,
+// so the split excludes them and its totals match the employee table.
+function capIsOwner(displayName){
+  var w = capGetWageInfo(displayName).wage;
+  return !!(w && (w.dept || '') === 'Owner');
 }
 
 // Average direct-labour cost/hr for one week. This is the single source of
@@ -7108,6 +7106,7 @@ function renderCapDashboard(wk) {
   var empData = wk.employees || {};
   var dlEmps = [], adminEmps = [];
   Object.entries(empData).forEach(function(kv){
+    if (capIsOwner(kv[0])) return;                       // owners sit outside the split
     if (capIsDirectLabor(kv[0])) dlEmps.push(kv); else adminEmps.push(kv);
   });
   dlEmps.sort(function(a,b){return b[1].total-a[1].total;});
