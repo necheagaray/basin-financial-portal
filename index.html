@@ -697,11 +697,9 @@ body.sky-mode #topbar #lock-btn{color:#397b9c!important;}
   background:linear-gradient(90deg,rgba(0,0,0,0.55),rgba(0,0,0,0.28),rgba(0,0,0,0.55)) !important;}
 
 /* Keep Edit / Sep reachable on the wide tables */
-#wf-sheet-content .data-table tbody td.act-cell,
-#wf-sheet-content .data-table thead th.act-cell{
-  position:sticky;right:0;z-index:3;
-  background:linear-gradient(270deg,rgba(4,10,16,0.98) 70%,rgba(4,10,16,0.86));
-  box-shadow:-10px 0 16px -10px rgba(0,0,0,0.8);}
+#wf-sheet-content .data-table td.act-cell,
+#wf-sheet-content .data-table th.act-cell{
+  width:98px;min-width:98px;background:transparent;}
 
 /* Custom filter dropdowns — the native select list is OS-drawn and can't be
    themed, so the trigger and the menu are both built here. */
@@ -785,7 +783,7 @@ body.sky-mode #topbar #lock-btn{color:#397b9c!important;}
 
 /* Total Labor Cost: the table is wider than its container, so this column is
    pinned to the right edge and never scrolls out of view. */
-#wf-sheet-content .data-table .act-cell{width:150px;min-width:150px;}
+
 #wf-sheet-content .data-table .tlc-cell{
   position:sticky;z-index:4;
   background:linear-gradient(180deg,rgb(0,34,49),rgb(0,21,33)) !important;
@@ -1286,8 +1284,12 @@ function plPerHead(){
   return n > 0 ? (WF_DATA.plInsurance||0)/n : 0;
 }
 function getOrgAvgs(){
+  // Owners sit far outside the range and would skew every comparison, and a
+  // future hire is not being paid yet, so neither belongs in the org average.
   var excl={'Bobeck, Daniel':1,'Eustis, Wes':1};
-  var active=(WF_DATA.wages||[]).filter(function(w){return !excl[w.name];});
+  var active=(WF_DATA.wages||[]).filter(function(w){
+    return !excl[w.name] && !w.notStarted;
+  });
   var totalSal=active.reduce(function(s,w){return s+(w.annualSalary||0);},0);
   var avgSal=active.length?totalSal/active.length:0;
   var sums=active.reduce(function(acc,w){
@@ -1299,8 +1301,9 @@ function getOrgAvgs(){
   },{tab:0,ei:0});
   return{salary:avgSal,totalTaB:active.length?sums.tab/active.length:0,totalIncentives:active.length?sums.ei/active.length:0};
 }
-function arrowChip(val,avg){
+function arrowChip(val,avg,label){
   if(!avg) return '';
+  label = label || 'vs org<br>average';
   var diff=val-avg, pct=Math.abs(diff/avg*100);
   var up=diff>=0, color=up?'#4ade80':'#f87171';
   var rgb=up?'74,222,128':'248,113,113';
@@ -1313,7 +1316,7 @@ function arrowChip(val,avg){
       Math.round(pct)+'%</span>'+
     '<span style="font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.8px;'+
       'line-height:1.25;text-transform:uppercase;color:rgba(255,255,255,0.5);text-align:left;">'+
-      'vs org<br>average</span>'+
+      label+'</span>'+
   '</div>';
 }
 
@@ -5050,7 +5053,7 @@ function openEmpCard(name) {
         '<div style="margin-top:20px;padding:14px 18px;background:rgba(168,85,247,0.07);border:1px solid rgba(168,85,247,0.2);border-radius:12px;">'+
           '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">'+
             '<div style="font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:1.5px;color:rgba(168,85,247,0.7);text-transform:uppercase;">'+rc+' Rate Class — '+rcCount+' employees</div>'+
-            arrowChip(sal,rcAvgSal)+
+            arrowChip(sal,rcAvgSal,'vs rate<br>class')+
           '</div>'+
           '<div style="display:grid;grid-template-columns:1fr 1px 1fr 1px 1fr;gap:16px;align-items:center;">'+
             '<div><div style="font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:4px;">THIS EMPLOYEE</div><div style="font-family:var(--hud);font-size:20px;font-weight:800;color:#c084fc;">'+fmt$(sal)+'</div></div>'+
@@ -10454,20 +10457,16 @@ function initCapacity() {
 }function actionCell(name) {
   if (!CURRENT_USER) return '';
   var safe = name.replace(/'/g, "\\'");
-  return '<td class="act-cell" style="white-space:nowrap;padding:10px 14px;">'+
-    '<div style="display:flex;gap:6px;">'+
-      '<button onclick="openEdit(\''+safe+'\');event.stopPropagation();" '+
-        'style="display:inline-flex;align-items:center;gap:5px;padding:6px 12px;'+
-        'font-size:11px;font-weight:600;font-family:var(--inter);'+
-        'background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);'+
-        'color:var(--cyan);border-radius:8px;cursor:pointer;">'+
-        '<i class="fa fa-pen" style="font-size:10px;"></i> Edit</button>'+
-      '<button onclick="openSep(\''+safe+'\');event.stopPropagation();" '+
-        'style="display:inline-flex;align-items:center;gap:5px;padding:6px 12px;'+
-        'font-size:11px;font-weight:600;font-family:var(--inter);'+
-        'background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);'+
-        'color:var(--amber);border-radius:8px;cursor:pointer;">'+
-        '<i class="fa fa-user-minus" style="font-size:10px;"></i> Sep</button>'+
+  return '<td class="act-cell" style="white-space:nowrap;padding:10px 8px;">'+
+    '<div style="display:flex;gap:6px;justify-content:flex-end;">'+
+      '<button onclick="openEdit(\''+safe+'\');event.stopPropagation();" title="Edit employee" '+
+        'style="font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0.5px;'+
+        'padding:6px 9px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.32);'+
+        'color:var(--cyan);border-radius:7px;cursor:pointer;">EDIT</button>'+
+      '<button onclick="openSep(\''+safe+'\');event.stopPropagation();" title="Move to separations" '+
+        'style="font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0.5px;'+
+        'padding:6px 9px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.32);'+
+        'color:var(--amber);border-radius:7px;cursor:pointer;">SEP</button>'+
     '</div></td>';
 }
 
@@ -11912,14 +11911,16 @@ function renderBenefitTab(names, key, label, color, sortCol, opts) {
   // opts.bare returns just the table, so several can be stacked on one tab
   if (opts.bare) {
     return '<div style="padding:0 0 22px;">'+
-      '<div style="font-family:var(--hud);font-size:14px;font-weight:900;letter-spacing:2.5px;'+
-        'color:'+color+';text-transform:uppercase;padding:16px 18px 10px;'+
-        'text-shadow:0 0 14px rgba('+rgb+',0.45);">'+(opts.title||label)+'</div>'+
-      '<div style="overflow:auto;max-height:none;">'+
-        '<table class="data-table" style="min-width:900px;">'+
-          '<thead style="position:sticky;top:0;z-index:4;">'+thead+'</thead>'+
-          '<tbody>'+tbody+'</tbody>'+
-        '</table></div></div>';
+      '<div style="position:sticky;top:0;z-index:6;'+
+        'font-family:var(--hud);font-size:14px;font-weight:900;letter-spacing:2.5px;'+
+        'color:'+color+';text-transform:uppercase;padding:14px 18px 10px;'+
+        'background:linear-gradient(180deg,rgba(4,8,15,0.99) 78%,rgba(4,8,15,0.9));'+
+        'text-shadow:0 0 14px rgba('+rgb+',0.45);'+
+        'border-bottom:1px solid rgba('+rgb+',0.22);">'+(opts.title||label)+'</div>'+
+      '<table class="data-table" style="min-width:900px;">'+
+        '<thead style="position:sticky;top:46px;z-index:5;">'+thead+'</thead>'+
+        '<tbody>'+tbody+'</tbody>'+
+      '</table></div>';
   }
   return wrapTable(filterBar(), thead, tbody, rows.length);
 }
@@ -11937,7 +11938,7 @@ function renderDentalVision(names) {
     });
   },0);
   return '<div class="data-card">'+filterBar()+
-    '<div style="overflow:auto;max-height:calc(100vh - 200px);'+
+    '<div style="overflow:auto;max-height:calc(100vh - 200px);position:relative;'+
       'scrollbar-width:thin;scrollbar-color:rgba(0,200,140,0.2) transparent;">'+
       renderBenefitTab(names,'dental','Dental','#a855f7','erDental',{bare:true,title:'Dental'})+
       renderBenefitTab(names,'vision','Vision','#f472b6','erVision',{bare:true,title:'Vision'})+
@@ -12115,7 +12116,7 @@ function renderIncentives(names) {
       grp('$ Bonus', BON, 2)+ gap()+
       grp('Profit Share', PS, 2)+ gap()+
       grp('Defined Benefit', DB, 2)+ gap()+
-      '<th colspan="2" class="tic-cell" style="right:'+(CURRENT_USER?150:0)+'px;text-align:center;'+
+      '<th colspan="2" class="tic-cell" style="right:'+0+'px;text-align:center;'+
         'padding:7px 12px 9px;border-bottom:2.5px solid '+TOT+';">'+
         '<span style="font-family:var(--hud);font-size:10.5px;font-weight:900;letter-spacing:2.4px;'+
         'color:'+TOT+';text-transform:uppercase;text-shadow:0 0 14px rgba(0,212,255,0.7);">Total Incentives</span></th>'+
@@ -12126,7 +12127,7 @@ function renderIncentives(names) {
       sub('Annual $',PS,'ps')+sub('% of Base',PS_D,'psPct')+
       sub('Annual $',DB,'db')+sub('% of Base',DB_D,'dbPct')+
       (function(){
-        var ACT = CURRENT_USER?150:0;
+        var ACT = 0;
         function th(lbl,key,c,cls,right){
           var on = col===key;
           var arw = on ? (dir===1?'\u25b2':'\u25bc') : '<span style="opacity:0.2">\u21c5</span>';
@@ -12136,7 +12137,7 @@ function renderIncentives(names) {
             'text-transform:uppercase;color:'+(on?'#fff':c)+';">'+
             lbl+' <span style="font-size:8px;margin-left:2px;">'+arw+'</span></th>';
         }
-        return th('Annual $','tot',TOT,'tic-amt',ACT+118)+
+        return th('Annual $','tot',TOT,'tic-amt',118)+
                th('% of Base','totPct','rgba(0,212,255,0.7)','tic-pct',ACT);
       })()+
     '</tr>';
@@ -12161,10 +12162,10 @@ function renderIncentives(names) {
         wfCell(r.name,'definedBenefit',money(r.db))+'</td>'+
       '<td class="num" style="padding:10px 14px;font-family:var(--hud);font-size:14px;font-weight:600;color:'+DB_D+';background:rgba(192,132,252,0.04);">'+pct(r.dbPct)+'</td>'+
       '<td style="width:1px;padding:0;border-left:1px solid rgba(255,255,255,0.07);"></td>'+
-      '<td class="num tic-cell tic-amt" style="right:'+((CURRENT_USER?150:0)+118)+'px;padding:10px 18px;'+
+      '<td class="num tic-cell tic-amt" style="right:'+(118)+'px;padding:10px 18px;'+
         'font-family:var(--hud);font-size:17px;font-weight:900;color:'+TOT+';'+
         'text-shadow:0 0 14px rgba(0,212,255,0.55);">'+money(r.tot)+'</td>'+
-      '<td class="num tic-cell tic-pct" style="right:'+(CURRENT_USER?150:0)+'px;padding:10px 16px;'+
+      '<td class="num tic-cell tic-pct" style="right:'+0+'px;padding:10px 16px;'+
         'font-family:var(--hud);font-size:14px;font-weight:800;color:rgba(0,212,255,0.75);">'+pct(r.totPct)+'</td>'+
       (CURRENT_USER?actionCell(r.name):'')+
     '</tr>';
@@ -12184,10 +12185,10 @@ function renderIncentives(names) {
     '<td style="width:1px;padding:0;border-left:1px solid rgba(255,255,255,0.07);"></td>'+
     tc(tDB,DB,14)+tc(P(tDB),DB_D,12.5)+
     '<td style="width:1px;padding:0;border-left:1px solid rgba(255,255,255,0.07);"></td>'+
-    '<td class="num tic-cell tic-amt" style="right:'+((CURRENT_USER?150:0)+118)+'px;padding:11px 18px;'+
+    '<td class="num tic-cell tic-amt" style="right:'+(118)+'px;padding:11px 18px;'+
       'font-family:var(--hud);font-size:18px;font-weight:900;color:#fff;'+
       'text-shadow:0 0 16px rgba(0,212,255,0.95);">'+fmt$(tTot)+'</td>'+
-    '<td class="num tic-cell tic-pct" style="right:'+(CURRENT_USER?150:0)+'px;padding:11px 16px;'+
+    '<td class="num tic-cell tic-pct" style="right:'+0+'px;padding:11px 16px;'+
       'font-family:var(--hud);font-size:13.5px;font-weight:900;color:rgba(0,212,255,0.8);">'+P(tTot)+'</td>'+
     (CURRENT_USER?'<td></td>':'')+
   '</tr>';
@@ -12438,7 +12439,7 @@ function renderSummary(names) {
     grpHdr('Base Wage', BASE, 3)+ spacer()+
     grpHdr('Taxes &amp; Benefits (TaB)', TAB, 2)+ spacer()+
     grpHdr('Employee Incentives', EI, 2)+ spacer()+
-    '<th colspan="1" class="tlc-cell" style="right:'+(CURRENT_USER?150:0)+'px;text-align:center;'+
+    '<th colspan="1" class="tlc-cell" style="right:'+0+'px;text-align:center;'+
       'padding:7px 12px 9px;border-bottom:2.5px solid '+TOT+';">'+
       '<span style="font-family:var(--hud);font-size:10.5px;font-weight:900;letter-spacing:2.4px;'+
       'color:'+TOT+';text-transform:uppercase;text-shadow:0 0 14px rgba(0,212,255,0.7);">Total Labor Cost</span></th>'+
@@ -12457,7 +12458,7 @@ function renderSummary(names) {
       var on = col==='total';
       var arw = on ? (dir===1?'\u25b2':'\u25bc') : '<span style="opacity:0.2">\u21c5</span>';
       return '<th class="num tlc-cell" onclick="renderSummary._sort={col:\'total\',dir:'+(on?-dir:1)+'};renderSheet();" '+
-        'style="right:'+(CURRENT_USER?150:0)+'px;cursor:pointer;white-space:nowrap;padding:8px 18px;text-align:right;'+
+        'style="right:'+0+'px;cursor:pointer;white-space:nowrap;padding:8px 18px;text-align:right;'+
         'font-family:var(--mono);font-size:10.5px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;'+
         'color:'+(on?'#fff':TOT)+';">Annual <span style="font-size:8px;margin-left:2px;">'+arw+'</span></th>';
     })();
@@ -12502,7 +12503,7 @@ function renderSummary(names) {
       '<td class="num" style="padding:10px 14px;font-family:var(--hud);font-size:14px;font-weight:700;color:'+EI_DIM+';background:rgba(251,191,36,0.04);">'+pct(r.eiPct)+'</td>'+
       '<td style="width:1px;padding:0;border-left:1px solid rgba(255,255,255,0.07);"></td>'+
       // Total Labor Cost
-      '<td class="num tlc-cell" style="right:'+(CURRENT_USER?150:0)+'px;padding:10px 18px;'+
+      '<td class="num tlc-cell" style="right:'+0+'px;padding:10px 18px;'+
         'font-family:var(--hud);font-size:17px;font-weight:900;color:'+TOT+';'+
         'text-shadow:0 0 14px rgba(0,212,255,0.55);">'+fmt$(r.total)+'</td>'+
       (CURRENT_USER?actionCell(r.name):'')+
@@ -12522,7 +12523,7 @@ function renderSummary(names) {
     '<td class="num" style="padding:11px 14px;font-family:var(--hud);font-size:15px;font-weight:900;color:'+EI+';">'+fmt$(tEI)+'</td>'+
     '<td class="num" style="padding:11px 14px;font-family:var(--hud);font-size:14px;font-weight:800;color:'+EI_DIM+';">'+pct(tSal>0?tEI/tSal:0)+'</td>'+
     '<td style="width:1px;padding:0;border-left:1px solid rgba(255,255,255,0.07);"></td>'+
-    '<td class="num tlc-cell" style="right:'+(CURRENT_USER?150:0)+'px;padding:11px 18px;'+
+    '<td class="num tlc-cell" style="right:'+0+'px;padding:11px 18px;'+
       'font-family:var(--hud);font-size:18px;font-weight:900;color:#fff;'+
       'text-shadow:0 0 16px rgba(0,212,255,0.95);">'+fmt$(tTotal)+'</td>'+
     (CURRENT_USER?'<td></td>':'')+
