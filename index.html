@@ -6392,6 +6392,10 @@ function capEffRate(displayName, weekHours) {
   var w = capGetWageInfo(displayName).wage;
   if (!w) return 0;
   if (w.payType === 'Hourly') return w.hourlyRate || 0;
+  // Owners bill their time like an hourly resource: the cost of a week is the
+  // hours they logged times annual/2080, not their whole weekly salary spread
+  // across however few hours they recorded.
+  if (w.dept === 'Owner') return (w.annualSalary || 0) / 2080;
   var weekly = (w.annualSalary || 0) / 52;
   if (weekHours > 0 && weekly > 0) return weekly / weekHours;
   // No hours recorded for them that week (e.g. they appear on a project but not
@@ -6457,6 +6461,13 @@ function capWeekAvgDLRate(wk) {
     cost += capHourlyCost(name, h) * h;
   });
   return hrs > 0 ? cost / hrs : 0;
+}
+
+// Sub-projects normally roll into their parent. These stand alone because the
+// sub-project serves a different customer.
+var CAP_NO_ROLLUP = ['26-093', '26-093.1'];
+function capNoRollup(num){
+  return CAP_NO_ROLLUP.indexOf(String(num).trim()) >= 0;
 }
 
 function capIsDirectLabor(displayName) {
@@ -7862,8 +7873,10 @@ function buildProjectBars(top10, rest, maxHrs, projEmpDataJson, totalCustHrs) {
   var allProjs = top10.concat(rest);
   allProjs.forEach(function(kv) {
     var num = kv[0], d = kv[1];
-    // Strip decimal suffix to find parent: "24-023.17" -> "24-023"
-    var parent = num.replace(/\.\d+$/, '');
+    // Strip decimal suffix to find parent: "24-023.17" -> "24-023",
+    // unless the sub-project bills to a different customer than its parent,
+    // in which case merging them would file one customer's hours under another
+    var parent = capNoRollup(num) ? num : num.replace(/\.\d+$/, '');
     if (!consolidated[parent]) {
       consolidated[parent] = {
         hours: 0, customer: d.customer||'', name: '', employees: {}
