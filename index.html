@@ -1051,7 +1051,7 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
   drop-shadow(0 6px 14px rgba(0,0,0,0.3));z-index:5;}
 .bdg.dim{filter:grayscale(0.55) brightness(0.86);opacity:0.55;}
 
-.bk-row{transition:background .18s,transform .18s,box-shadow .18s;border-radius:9px;}
+.bk-row{transition:background .18s,transform .18s,box-shadow .18s;border-radius:9px;cursor:pointer;}
 .bk-row.lit{background:linear-gradient(90deg,rgba(176,125,22,0.16),rgba(176,125,22,0.03));
   transform:translateX(5px);box-shadow:inset 3px 0 0 #b07d16;}
 .bk-row.lit .bk-nm{color:#8a6210;}
@@ -1075,7 +1075,7 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
   letter-spacing:-0.5px;}
 .cl-meta{font-size:9.5px;color:#9ab4c2;margin-top:4px;}
 
-/* ── Direct labour lanes ──────────────────────────────────────────────── */
+/* ── Direct labor lanes ──────────────────────────────────────────────── */
 .dl-lane{position:relative;height:34px;border-radius:9px;overflow:hidden;margin-bottom:6px;
   background:rgba(123,87,200,0.07);border:1px solid rgba(123,87,200,0.14);}
 .dl-fill{position:absolute;left:0;top:0;bottom:0;border-radius:9px 0 0 9px;
@@ -1093,7 +1093,7 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 .dl-hr i{font-size:9px;font-style:normal;font-weight:700;color:#7f6bb0;margin-left:1px;}
 .dl-pc{font-size:9.5px;font-weight:700;color:#8b7bb8;width:30px;text-align:right;}
 
-/* ── Direct labour breakdown ──────────────────────────────────────────── */
+/* ── Direct labor breakdown ──────────────────────────────────────────── */
 #dl-ov{position:fixed;inset:0;z-index:900;display:none;align-items:center;justify-content:center;
   padding:24px;background:rgba(12,26,36,0.55);backdrop-filter:blur(7px);}
 #dl-ov.open{display:flex;}
@@ -1193,6 +1193,216 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 .fy-leg{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);
   font-size:9.5px;color:rgba(255,255,255,0.4);}
 .fy-leg b{color:rgba(255,255,255,0.82);font-weight:700;font-size:10.5px;}
+
+/* ── Unbilled revenue button + overlay ────────────────────────────────── */
+.ub-bar{display:flex;justify-content:flex-end;margin:0 0 14px;}
+.ub-btn{display:inline-flex;align-items:center;gap:13px;cursor:pointer;
+  padding:11px 20px;border-radius:14px;
+  background:linear-gradient(135deg,#fff5e0,#ffe7bd);
+  border:1px solid rgba(176,125,22,0.38);
+  box-shadow:0 8px 22px -10px rgba(176,125,22,0.6), inset 0 1px 0 rgba(255,255,255,0.9);
+  transition:transform .16s ease, box-shadow .16s ease;}
+.ub-btn:hover{transform:translateY(-2px);
+  box-shadow:0 14px 30px -10px rgba(176,125,22,0.75), inset 0 1px 0 rgba(255,255,255,0.9);}
+.ub-k{font-size:9.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#9a7318;}
+.ub-v{font-size:23px;font-weight:800;color:#8a5f0c;letter-spacing:-0.5px;line-height:1;}
+.ub-n{font-size:9px;color:#b08a3e;margin-top:2px;}
+.ub-go{font-size:16px;color:#b07d16;}
+
+#unbilled-ov{position:fixed;inset:0;z-index:900;display:none;align-items:center;
+  justify-content:center;padding:24px;background:rgba(12,26,36,0.55);backdrop-filter:blur(7px);}
+#unbilled-ov.open{display:flex;}
+.ub-card{width:min(880px,96vw);max-height:92vh;overflow:auto;border-radius:22px;
+  background:linear-gradient(180deg,#fffaf0,#f4ead8);
+  box-shadow:0 30px 80px -24px rgba(70,45,10,0.5);padding:28px 32px 24px;position:relative;
+  animation:cfIn .2s cubic-bezier(.2,.8,.3,1);}
+.ub-x{position:absolute;top:18px;right:20px;width:34px;height:34px;border-radius:50%;
+  border:1px solid rgba(120,85,20,0.22);background:#fff;color:#8a6a2a;cursor:pointer;font-size:17px;}
+.ub-x:hover{background:#b07d16;color:#fff;border-color:#b07d16;}
+.ub-title{font-size:13px;font-weight:800;letter-spacing:2.2px;text-transform:uppercase;color:#8a6a2a;}
+.ub-total{font-size:44px;font-weight:800;letter-spacing:-1.5px;color:#a8720f;line-height:1.05;margin-top:4px;}
+.ub-sub{font-size:12px;color:#a58a55;margin-top:4px;}
+.ub-body{display:flex;gap:28px;align-items:center;margin-top:20px;flex-wrap:wrap;}
+.ub-legend{flex:1;min-width:280px;display:flex;flex-direction:column;gap:3px;}
+.ub-row{display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:10px;
+  transition:background .18s ease,transform .18s ease;}
+.ub-row:hover{background:rgba(176,125,22,0.10);transform:translateX(3px);}
+.ub-sw{width:12px;height:12px;border-radius:4px;flex-shrink:0;}
+.ub-pn{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;font-weight:800;
+  color:#8a6a2a;background:rgba(176,125,22,0.13);border-radius:5px;padding:2px 7px;flex-shrink:0;}
+.ub-nm{flex:1;font-size:12.5px;font-weight:600;color:#4a3d22;}
+.ub-amt{font-size:15px;font-weight:800;color:#a8720f;white-space:nowrap;}
+.ub-pct{font-size:10.5px;color:#a58a55;width:42px;text-align:right;}
+.ub-slice{transition:stroke-width .18s ease, opacity .18s ease;}
+.ub-slice.dim{opacity:0.3;}
+.ub-slice.lit{stroke-width:48;}
+
+/* the unbilled note inside a concentration row */
+.conc-ub{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;font-weight:700;
+  color:#a8720f;background:rgba(176,125,22,0.13);border:1px solid rgba(176,125,22,0.3);
+  border-radius:20px;padding:2px 9px;white-space:nowrap;margin:0 10px;}
+
+/* share of total hours, set apart from the hours figure beside it */
+.do-cpc{width:56px;flex-shrink:0;text-align:right;
+  font-family:Georgia,'Times New Roman',serif;font-style:italic;
+  font-size:11.5px;font-weight:400;letter-spacing:0.2px;color:#a396c4;}
+
+/* ── RPH: sub-floor flagging in the breakdown ─────────────────────────── */
+.ro-floor{margin-top:10px;padding:8px 12px;border-radius:9px;font-size:11px;color:#8a6a2a;
+  background:rgba(240,180,20,0.10);border:1px solid rgba(240,180,20,0.32);}
+.ro-floor b{color:#a8720f;}
+.ro-tbl tr.ro-low td{background:rgba(226,80,60,0.055);}
+.ro-tbl tr.ro-marg td{background:rgba(240,180,20,0.05);}
+.ro-rph.ro-low{color:#d43f2a;}
+.ro-rph.ro-marg{color:#c08a10;}
+.ro-fill.ro-low{background:linear-gradient(90deg,#f0a090,#d43f2a);}
+.ro-fill.ro-marg{background:linear-gradient(90deg,#f5d58a,#c08a10);}
+.ro-warn,.ro-near{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:20px;
+  font-size:8.5px;font-weight:800;letter-spacing:0.8px;text-transform:uppercase;}
+.ro-warn{color:#d43f2a;background:rgba(212,63,42,0.13);border:1px solid rgba(212,63,42,0.35);}
+.ro-near{color:#c08a10;background:rgba(192,138,16,0.13);border:1px solid rgba(192,138,16,0.35);}
+
+/* ── Caution sign ─────────────────────────────────────────────────────── */
+.cau-wrap{display:flex;justify-content:center;margin:16px 0 4px;}
+.cau{cursor:pointer;transition:transform .18s cubic-bezier(.2,.8,.3,1),filter .18s;
+  filter:drop-shadow(0 10px 16px rgba(120,80,0,0.28));}
+.cau:hover{transform:translateY(-3px) scale(1.03);
+  filter:drop-shadow(0 16px 22px rgba(120,80,0,0.4));}
+.cau:hover .cau-blink{animation:cauBlink .7s steps(2,end) infinite;}
+@keyframes cauBlink{0%,100%{opacity:1;}50%{opacity:0.2;}}
+
+#lowrph-ov{position:fixed;inset:0;z-index:900;display:none;align-items:center;
+  justify-content:center;padding:24px;background:rgba(30,22,4,0.55);backdrop-filter:blur(7px);}
+#lowrph-ov.open{display:flex;}
+.lr-card{width:min(960px,96vw);max-height:92vh;overflow:auto;border-radius:22px;
+  background:linear-gradient(180deg,#fffdf3,#f7eed2);
+  box-shadow:0 30px 80px -24px rgba(90,65,5,0.5);padding:26px 30px 24px;position:relative;
+  border-top:7px solid #f2c200;animation:cfIn .2s cubic-bezier(.2,.8,.3,1);}
+.lr-x{position:absolute;top:18px;right:20px;width:34px;height:34px;border-radius:50%;
+  border:1px solid rgba(120,85,20,0.22);background:#fff;color:#8a6a2a;cursor:pointer;font-size:17px;}
+.lr-x:hover{background:#d43f2a;color:#fff;border-color:#d43f2a;}
+.lr-top{display:flex;align-items:center;gap:16px;padding-right:52px;}
+.lr-title{font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#8a6a2a;}
+.lr-sub{font-size:12px;color:#a58a55;margin-top:3px;}
+.lr-stat{margin-left:auto;text-align:right;}
+.lr-sv{font-size:30px;font-weight:800;color:#d43f2a;line-height:1;}
+.lr-sk{font-size:9px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:#a58a55;}
+.lr-tbl{width:100%;border-collapse:collapse;margin-top:18px;}
+.lr-tbl th{font-size:9.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;
+  color:#a58a55;text-align:left;padding:8px 10px;border-bottom:1.5px solid rgba(140,100,20,0.2);}
+.lr-tbl th.r,.lr-tbl td.r{text-align:right;}
+.lr-tbl td{padding:10px;border-bottom:1px solid rgba(140,100,20,0.1);font-size:12.5px;color:#4a3d22;}
+.lr-tbl tr:hover td{background:rgba(242,194,0,0.12);}
+.lr-rph{font-size:18px;font-weight:800;color:#d43f2a;white-space:nowrap;}
+.lr-gap{font-size:11px;color:#a58a55;}
+.lr-gauge{width:130px;height:9px;border-radius:5px;background:rgba(140,100,20,0.14);
+  overflow:hidden;position:relative;}
+.lr-gfill{height:100%;border-radius:5px;background:linear-gradient(90deg,#f0a090,#d43f2a);}
+.lr-gmark{position:absolute;top:-3px;bottom:-3px;width:2px;background:#2f7d4f;}
+.lr-note{margin-top:16px;padding:11px 14px;border-radius:10px;font-size:11.5px;color:#7a5f1e;
+  background:rgba(242,194,0,0.14);border:1px solid rgba(242,194,0,0.4);}
+
+/* ── CPE history overlay ──────────────────────────────────────────────── */
+#cpe-ov{position:fixed;inset:0;z-index:900;display:none;align-items:center;justify-content:center;
+  padding:26px;background:rgba(2,10,16,0.72);backdrop-filter:blur(8px);}
+#cpe-ov.open{display:flex;}
+.cpe-card{width:min(1040px,96vw);max-height:92vh;overflow:auto;border-radius:20px;position:relative;
+  background:linear-gradient(180deg,rgba(10,22,32,0.98),rgba(4,11,17,0.99));
+  border:1px solid rgba(0,212,255,0.32);
+  box-shadow:0 30px 80px -24px rgba(0,0,0,0.85), 0 0 40px rgba(0,212,255,0.12);
+  padding:24px 28px 20px;animation:cfIn .2s cubic-bezier(.2,.8,.3,1);}
+.cpe-x{position:absolute;top:16px;right:18px;width:32px;height:32px;border-radius:50%;
+  border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.05);
+  color:rgba(255,255,255,0.7);cursor:pointer;font-size:16px;}
+.cpe-x:hover{background:#00d4ff;color:#03131c;border-color:#00d4ff;}
+.cpe-head{display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap;padding-right:44px;}
+.cpe-title{font-family:var(--hud);font-size:13px;font-weight:900;letter-spacing:2.2px;
+  text-transform:uppercase;color:#00d4ff;text-shadow:0 0 16px rgba(0,212,255,0.5);}
+.cpe-sub{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.4);margin-top:5px;}
+.cpe-tabs{margin-left:auto;display:flex;gap:7px;}
+.cpe-tab{cursor:pointer;font-family:var(--mono);font-size:9px;font-weight:800;letter-spacing:1.2px;
+  text-transform:uppercase;padding:5px 12px;border-radius:20px;color:rgba(0,212,255,0.7);
+  background:rgba(0,212,255,0.09);border:1px solid rgba(0,212,255,0.28);transition:all .15s;}
+.cpe-tab:hover{background:rgba(0,212,255,0.2);}
+.cpe-tab.on{color:#03131c;background:#00d4ff;border-color:#00d4ff;}
+
+.cpe-plot{position:relative;margin-top:20px;min-height:290px;}
+/* the sack sits behind the bars, faint */
+.cpe-bag{position:absolute;left:50%;top:50%;transform:translate(-50%,-46%);
+  width:76%;max-width:540px;height:auto;opacity:0.26;pointer-events:none;}
+.cpe-bars{position:relative;z-index:2;display:flex;align-items:flex-end;gap:10px;height:290px;}
+.cpe-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  height:100%;cursor:default;}
+.cpe-amt{font-family:var(--hud);font-size:11px;font-weight:800;color:rgba(255,255,255,0.5);
+  margin-bottom:6px;white-space:nowrap;}
+.cpe-amt.now{color:#7ef0ff;font-size:12.5px;text-shadow:0 0 12px rgba(0,212,255,0.7);}
+.cpe-bar{width:100%;max-width:46px;border-radius:8px 8px 3px 3px;
+  background:linear-gradient(180deg,rgba(0,212,255,0.4),rgba(0,140,190,0.16));
+  border:1px solid rgba(0,212,255,0.3);
+  transition:filter .15s;}
+.cpe-col:hover .cpe-bar{filter:brightness(1.3);}
+.cpe-bar.now{background:linear-gradient(180deg,#7ef0ff,#00a8d6);border-color:#7ef0ff;
+  box-shadow:0 0 22px rgba(0,212,255,0.6);}
+.cpe-hc{font-family:var(--mono);font-size:9px;font-weight:700;color:rgba(255,255,255,0.32);
+  margin-top:6px;}
+.cpe-mon{font-family:var(--mono);font-size:9.5px;font-weight:700;color:rgba(255,255,255,0.4);
+  margin-top:2px;}
+.cpe-mon.now{color:#7ef0ff;}
+.cpe-foot{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:16px;padding-top:12px;
+  border-top:1px solid rgba(255,255,255,0.08);font-family:var(--mono);font-size:9.5px;
+  color:rgba(255,255,255,0.38);}
+.cpe-foot b{color:#00d4ff;font-size:12px;font-weight:800;}
+.cpe-note{margin-left:auto;color:rgba(255,255,255,0.25);}
+
+/* ── Utilization control ──────────────────────────────────────────────── */
+.util-wrap{margin:16px 0;padding:13px 15px;border-radius:13px;
+  background:linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.015));
+  border:1px solid rgba(255,255,255,0.10);}
+.util-top{display:flex;align-items:baseline;gap:12px;margin-bottom:10px;}
+.util-k{font-family:var(--mono);font-size:8px;letter-spacing:1.5px;text-transform:uppercase;
+  color:rgba(255,255,255,0.32);}
+.util-now{margin-left:auto;font-family:var(--hud);font-size:19px;font-weight:900;color:#00d4ff;
+  text-shadow:0 0 14px rgba(0,212,255,0.5);display:inline-flex;align-items:baseline;gap:8px;}
+.util-now em{font-family:var(--mono);font-size:8.5px;font-style:normal;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+.util-off{margin-left:auto;font-family:var(--mono);font-size:9.5px;color:rgba(255,255,255,0.28);}
+.util-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.util-in{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:9px;
+  background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.3);}
+.util-in input{width:52px;background:transparent;border:none;outline:none;color:#00d4ff;
+  font-family:var(--hud);font-size:14px;font-weight:800;text-align:right;}
+.util-in span{font-family:var(--mono);font-size:10px;color:rgba(0,212,255,0.6);}
+.util-lbl{font-family:var(--mono);font-size:8.5px;letter-spacing:1px;text-transform:uppercase;
+  color:rgba(255,255,255,0.25);margin:0 2px;}
+.util-chip{cursor:pointer;display:inline-flex;flex-direction:column;align-items:center;
+  padding:4px 11px;border-radius:9px;background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.12);transition:all .15s;}
+.util-chip:hover{background:rgba(255,255,255,0.09);border-color:var(--c);}
+.util-chip.on{background:color-mix(in srgb, var(--c) 18%, transparent);border-color:var(--c);
+  box-shadow:0 0 12px -2px var(--c);}
+.util-chip b{font-family:var(--hud);font-size:12.5px;font-weight:900;color:var(--c);}
+.util-chip i{font-family:var(--mono);font-size:7.5px;font-style:normal;letter-spacing:0.6px;
+  color:rgba(255,255,255,0.32);margin-top:1px;}
+.util-clear{cursor:pointer;font-family:var(--mono);font-size:9px;letter-spacing:0.8px;
+  color:rgba(248,113,113,0.7);padding:4px 9px;border-radius:8px;
+  border:1px solid rgba(248,113,113,0.28);}
+.util-clear:hover{color:#fff;background:rgba(248,113,113,0.2);}
+.util-out{margin-top:10px;font-family:var(--mono);font-size:9.5px;color:rgba(255,255,255,0.42);
+  line-height:1.6;}
+.util-out b{color:#00d4ff;font-weight:700;}
+.util-out.dim{color:rgba(255,255,255,0.25);}
+
+/* the derived pool row */
+.pool-locked{display:grid;grid-template-columns:auto 1fr auto auto auto;gap:8px;align-items:center;
+  padding:10px 12px;border-radius:12px;background:rgba(107,122,138,0.10);
+  border:1px dashed rgba(107,122,138,0.45);}
+.pl-dot{width:10px;height:10px;border-radius:50%;background:#6b7a8a;flex-shrink:0;}
+.pl-nm{font-family:var(--inter);font-size:12.5px;font-weight:700;color:rgba(255,255,255,0.62);}
+.pl-nm i{display:block;font-family:var(--mono);font-size:8px;font-style:normal;letter-spacing:0.8px;
+  text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:2px;}
+.pl-rph,.pl-pct,.pl-rev{font-family:var(--hud);font-size:13px;font-weight:800;
+  color:rgba(255,255,255,0.5);text-align:right;}
+.pl-rph span{font-family:var(--mono);font-size:9px;font-weight:600;color:rgba(255,255,255,0.3);}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
@@ -1586,7 +1796,7 @@ function fmt$(n){return '$'+(Math.round(n)||0).toLocaleString();}
 function fmtPct(n){return((n||0)*100).toFixed(1)+'%';}
 function fmtInt(n){return Math.round(n||0).toLocaleString();}
 
-// Professional liability is carried by head for every direct-labour employee,
+// Professional liability is carried by head for every direct-labor employee,
 // less anyone on the exclusion list. Uses the same DL test as the rest of the
 // app (the workbook's GL column), so Owner/PM and Admin are out.
 function plExcluded(name){
@@ -2582,7 +2792,7 @@ var WC_KEY = 'basin_wc_models_v1';
 // August is now an actual month, so the projection window is Sep-Dec.
 var WC_BASE = {
   months: ['Sep','Oct','Nov','Dec'],
-  dlBase:    [220466.99, 232916.99, 240498.31, 246879.62],  // direct labour
+  dlBase:    [220466.99, 232916.99, 240498.31, 246879.62],  // direct labor
   matOther:  [8000, 8000, 8000, 8000],                      // materials + other
   indirect:  [155047.78, 158520.28, 174316.56, 191312.84],
   opexBase:  [269762.24, 289903.24, 270069.74, 332135.85]
@@ -2590,7 +2800,7 @@ var WC_BASE = {
 
 var WC_DEFAULTS = {
   dcRate: 800, ndcRate: 200, dcPct: 0.33,
-  // hours are built per month from headcount x hours x utilisation
+  // hours are built per month from headcount x hours x utilization
   headcount:   [32, 33, 34, 35],
   hoursPerEmp: 174,
   utilization: [0.84, 0.84, 0.82, 0.80],
@@ -2628,7 +2838,7 @@ function wcActuals(){
 function wcCompute(inp){
   var B = WC_BASE, out = { months:[], totals:{} };
   var N = B.months.length;
-  // Hours are built month by month: headcount x hours/employee x utilisation.
+  // Hours are built month by month: headcount x hours/employee x utilization.
   // Falls back to a flat figure if an older saved model is loaded.
   function hrsFor(i){
     if (inp.headcount && inp.utilization)
@@ -2707,7 +2917,7 @@ function wcFull(n){
 
 // ── Per-month hour build ──────────────────────────────────────────────────
 // Hours are no longer one flat figure: each month is headcount x hours x
-// utilisation, so headcount ramps and holiday PTO can be modelled directly.
+// utilization, so headcount ramps and holiday PTO can be modelled directly.
 // ── FY2026 cash basis and estimated tax ───────────────────────────────────
 // Accrual EBITDA less the cash basis adjustment, taxed at the effective rate.
 // Informational: it does not reduce Working Capital Growth.
@@ -2799,13 +3009,13 @@ function wcHoursBuild(I, R){
     '<table style="width:100%;border-collapse:collapse;">'+
       '<tr><td></td>'+cells+'</tr>'+
       inputRow('Headcount','headcount',1,0,200) +
-      inputRow('Utilisation','utilization',0.01,0,1) +
+      inputRow('Utilization','utilization',0.01,0,1) +
       '<tr><td style="font-family:var(--mono);font-size:9.5px;color:rgba(255,255,255,0.45);'+
         'padding:3px 6px 3px 0;">Total DL Hours</td>'+hrsRow+'</tr>'+
     '</table>'+
     '<div class="wc-help" style="margin-top:7px;">Each month is headcount \u00d7 '+
-      (I.hoursPerEmp||174)+' hours \u00d7 utilisation. Headcount ramps through year-end; '+
-      'utilisation steps down in Nov and Dec for holiday PTO.</div>'+
+      (I.hoursPerEmp||174)+' hours \u00d7 utilization. Headcount ramps through year-end; '+
+      'utilization steps down in Nov and Dec for holiday PTO.</div>'+
   '</div>';
 }
 
@@ -3047,7 +3257,7 @@ function wcSet(key, val){
   WC_INPUTS[key] = val;
   wcRerender();
 }
-// per-month array inputs (headcount, utilisation)
+// per-month array inputs (headcount, utilization)
 function wcSetArr(key, idx, val){
   if (!WC_INPUTS) WC_INPUTS = JSON.parse(JSON.stringify(WC_DEFAULTS));
   if (!WC_INPUTS[key]) WC_INPUTS[key] = [];
@@ -4256,6 +4466,12 @@ var YTD_DATA = {
     qts:      { rph:1273.05, rev:14437062, hours:11340.5 },
     nonQts:   { rph:261.74, rev:5738746, hours:21925.3 },
     customerCount: 55,
+    // A 3x bill rate on roughly $50/hr of direct labor puts the floor at
+    // $150/hr. Customers under it are flagged; the revenue threshold keeps
+    // one-off jobs with a handful of hours out of the list.
+    floor: 150,
+    marginal: 160,
+    minRev: 15000,
     // Non-QTS customers with at least 250 DL hours, ranked by rate. The floor
     // keeps a few-hour job from topping the list on a meaningless rate.
     topMinHours: 250,
@@ -4345,6 +4561,21 @@ var YTD_DATA = {
     ]
   },
 
+  // ── Unbilled revenue ──────────────────────────────────────────────────
+  // From the Unbilled QTS Rev worksheet in the project master; the end-of-month
+  // balance per project. UPDATE MONTHLY from the new project master.
+  unbilled: {
+    total: 2499932.7,
+    asOf: 'August 2026',
+    items: [
+      { num:"25-086.1", name:"Turkey P1",             amt:2055060.0 },
+      { num:"26-093.1", name:"SLC",                   amt:326163.7 },
+      { num:"3011",     name:"JP-Harvey Lighting",    amt:13053.0 },
+      { num:"5008",     name:"JP-Ames",               amt:60375.0 },
+      { num:"20001",    name:"JP-Stumpf",             amt:45281.0 }
+    ]
+  },
+
   backlog: {
     total: 10134339,
     projectCount: 81,
@@ -4367,45 +4598,45 @@ var YTD_DATA = {
       { num:"26-093.1", name:"SLC1 Expansion, SLC2 Phase 1, and SLC Phase 2 Offsite Infr", cust:"Quality Technology Services, LLC", bl:1251934, rev:326164 },
       { num:"26-093", name:"SLC2 Campus Plan - DC1-DC2 Civil Construction Drawings", cust:"Corgan", bl:961240, rev:235200 },
       { num:"25-086", name:"QTS Turkey, TX - Phase 2 - Civil Site Plans", cust:"Quality Technology Services, LLC", bl:857656, rev:3979254 },
-      { num:"24-023", name:"QTS Cedar Rapids, IA", cust:"Quality Technology Services, LLC", bl:794029, rev:5403532 },
+      { num:"24-023", name:"QTS Cedar Rapids, IA", cust:"Quality Technology Services, LLC", bl:794029, rev:736279 },
       { num:"26-011", name:"Mason City, IA Data Center", cust:"Quality Technology Services, LLC", bl:649236, rev:207944 },
       { num:"26-069", name:"QTS - DFW3 - Lancaster, TX", cust:"Corgan", bl:612602, rev:304442 },
       { num:"26-070", name:"QII-Fort Bend Parkway, Houston, TX", cust:"Quality Infratech Intelligence, LLC (QII)", bl:523401, rev:45934 },
       { num:"25-105", name:"DAS114 (DC-5, DC-6, DC-7, and DC-8)", cust:"Corgan", bl:429365, rev:384825 },
       { num:"26-091", name:"US Hwy 67, Johnson County, TX", cust:"Quality Technology Services, LLC", bl:299445, rev:0 },
-      { num:"24-042", name:"Tammany Trace Bridge #7", cust:"St. Tammany Parish Procurement", bl:291431, rev:67335 },
+      { num:"24-042", name:"Tammany Trace Bridge #7", cust:"St. Tammany Parish Procurement", bl:291431, rev:37078 },
       { num:"26-068", name:"Southern Star McNew Compressor Station", cust:"Basic Systems, Inc.", bl:227370, rev:0 },
-      { num:"25-075", name:"CarMax-Uxbridge, MA", cust:"CarMax", bl:213840, rev:69830 },
+      { num:"25-075", name:"CarMax-Uxbridge, MA", cust:"CarMax", bl:213840, rev:37860 },
       { num:"23-044", name:"QTS - SLC1", cust:"Quality Technology Services, LLC", bl:190372, rev:2250975 },
       { num:"26-018", name:"QTS-DFW2 Corner Site - Wilmer, TX", cust:"Corgan", bl:190370, rev:74355 },
-      { num:"24003", name:"Seven Oaks - US 90 Street Lighting", cust:"JP Department of PW", bl:157326, rev:78653 },
-      { num:"24-067", name:"DFW2-DAS114", cust:"Corgan", bl:140786, rev:286794 },
+      { num:"24003", name:"Seven Oaks - US 90 Street Lighting", cust:"JP Department of PW", bl:157326, rev:9500 },
+      { num:"24-067", name:"DFW2-DAS114", cust:"Corgan", bl:140786, rev:155052 },
       { num:"26-009", name:"Parish Line Pump Station Improvements Phase 2", cust:"Digital Engineering", bl:133000, rev:19500 },
-      { num:"25-093", name:"CarMax-Riverview,FL", cust:"CarMax", bl:131750, rev:35130 },
+      { num:"25-093", name:"CarMax-Riverview,FL", cust:"CarMax", bl:131750, rev:16400 },
       { num:"25-109", name:"EDGED Monroe Campus", cust:"MG2", bl:117906, rev:107829 },
       { num:"26-031", name:"CarMax-Brownsville, TX", cust:"CarMax", bl:103175, rev:65540 },
       { num:"22006", name:"LA Trace Subdivision Lot Study", cust:"J Caldarera Company", bl:100800, rev:69370 },
       { num:"26-095", name:"ABI01 \u2013 Entry Enhancement Civil Design", cust:"Oracle", bl:95000, rev:0 },
-      { num:"25-100", name:"Carmax Wayne, NJ expansion", cust:"CarMax", bl:93905, rev:86691 },
+      { num:"25-100", name:"Carmax Wayne, NJ expansion", cust:"CarMax", bl:93905, rev:70154 },
       { num:"25-110", name:"EDGED Mobile Campus (Pritchard)", cust:"MG2", bl:90215, rev:63670 },
       { num:"24-004", name:"CarMax Lake Charles, LA", cust:"POH+W Architects Ltd.", bl:76680, rev:0 },
-      { num:"5008", name:"JP East Ames Blvd. Roadway", cust:"JP Department of PW", bl:69175, rev:132457 },
+      { num:"5008", name:"JP East Ames Blvd. Roadway", cust:"JP Department of PW", bl:69175, rev:95375 },
       { num:"26-098", name:"Professional Civil Engineering Services QTS Prototype Stan", cust:"Corgan", bl:68750, rev:6250 },
       { num:"25-081", name:"National Golf Club of Louisiana", cust:"City of Westlake", bl:67631, rev:46120 },
       { num:"25-078", name:"CarMax-Riverdale-UT Site Entitlements", cust:"CarMax", bl:66170, rev:37660 },
       { num:"25-121", name:"Southern Star Viola Energy, Sumner KS", cust:"Basic Systems, Inc.", bl:56258, rev:168772 },
       { num:"26-063", name:"QTS - 201 Erie Rd., Eastlake, OH", cust:"Quality Technology Services, LLC", bl:56000, rev:0 },
-      { num:"20001", name:"JP Stumpf Blvd Lighting", cust:"JP Department of PW", bl:50892, rev:72366 },
+      { num:"20001", name:"JP Stumpf Blvd Lighting", cust:"JP Department of PW", bl:50892, rev:45281 },
       { num:"26-030", name:"Kinder Morgan TGP Compressor Station 530 Rev.1, MS", cust:"Waskey Bridges Inc.", bl:50775, rev:287725 },
-      { num:"24-002", name:"Floor & Decor Site Planning & Lease Exhibits : Floor & Dec", cust:"Floor & Decor", bl:50395, rev:179714 },
+      { num:"24-002", name:"Floor & Decor Site Planning & Lease Exhibits : Floor & Dec", cust:"Floor & Decor", bl:50395, rev:115325 },
       { num:"26-047", name:"Renovation of 5307 Toler - Laitram Harahan Campus", cust:"SCNZ Architects, LLC", bl:47778, rev:42178 },
-      { num:"25-021", name:"QTS-DFW2-DC4 Wilmer, TX (DC-4)", cust:"Corgan", bl:44578, rev:181863 },
+      { num:"25-021", name:"QTS-DFW2-DC4 Wilmer, TX (DC-4)", cust:"Corgan", bl:44578, rev:133452 },
       { num:"26-039", name:"7 Brew - Sulphur, LA - 212 S. Cities", cust:"Flavored Operations, LLC", bl:44385, rev:0 },
-      { num:"22-053", name:"POLC Shed 7 Replacement", cust:"Meyer & Associates, Inc.", bl:41953, rev:231107 },
+      { num:"22-053", name:"POLC Shed 7 Replacement", cust:"Meyer & Associates, Inc.", bl:41953, rev:32874 },
       { num:"24-098", name:"Carmax Waco,TX", cust:"POH+W Architects Ltd.", bl:40140, rev:44560 },
       { num:"26-060", name:"Brookwood - Highway 44, Gonzales, LA", cust:"Rosehill Construction", bl:39281, rev:4040 },
       { num:"25-067", name:"Woodward Design Group - Canal Barge", cust:"Woodward Design Group", bl:37257, rev:8293 },
-      { num:"3011-01", name:"JP Harvey Blvd. Roadway Improvement", cust:"JP Department of PW", bl:36947, rev:193424 },
+      { num:"3011-01", name:"JP Harvey Blvd. Roadway Improvement", cust:"JP Department of PW", bl:36947, rev:183078 },
       { num:"25-076", name:"Boat Dock Modifications - Plaquemines, LA", cust:"Venture Global Gator Express, LLC", bl:36500, rev:175174 },
       { num:"26-055", name:"Lift Station Improvements, Plaquemines Parish, LA", cust:"Trigon Associates", bl:35100, rev:0 },
       { num:"26-024", name:"Brookwood \u2013 Highway 22 \u2013 St. Tammany Parish", cust:"Rosehill Construction", bl:34332, rev:8520 },
@@ -4413,32 +4644,32 @@ var YTD_DATA = {
       { num:"26-049", name:"", cust:"Flavored Operations, LLC", bl:32680, rev:0 },
       { num:"26-015", name:"ARM Mustang Meter Station Platform", cust:"Waskey Bridges Inc.", bl:31500, rev:178500 },
       { num:"26001", name:"700 Metairie Road Property", cust:"J Caldarera Company", bl:28001, rev:788 },
-      { num:"20006", name:"JP Fire Training Center", cust:"Watermark Design", bl:25753, rev:21827 },
+      { num:"20006", name:"JP Fire Training Center", cust:"Watermark Design", bl:25753, rev:0 },
       { num:"26-094", name:"FedEx Parking Lot Expansion", cust:"Diamond Z Engineering", bl:19700, rev:7180 },
       { num:"25002", name:"Harvey Volunteer Fire Station #64", cust:"Watermark Design", bl:19510, rev:10000 },
       { num:"26003", name:"Dickory Ave Multi-Use Path", cust:"JP Department of PW", bl:18500, rev:0 },
       { num:"26-115", name:"Buzzi Substation Tap Structural/Civil Design Stockton, PA", cust:"Engenuity Global", bl:16920, rev:0 },
       { num:"26-010", name:"Tire Choice, Naples, FL", cust:"Monro, Inc.", bl:16140, rev:0 },
-      { num:"25-073", name:"Mars Compressor Platform Analysis & Evaluation", cust:"Kinetica Partners LLC", bl:16082, rev:2838 },
+      { num:"25-073", name:"Mars Compressor Platform Analysis & Evaluation", cust:"Kinetica Partners LLC", bl:16082, rev:0 },
       { num:"26-103", name:"Professional Civil Engineering and Land Surveying Services", cust:"Laitram", bl:15760, rev:1930 },
       { num:"26-033", name:"QTS - Specifications Standards Maintenance", cust:"Quality Technology Services, LLC", bl:15000, rev:10000 },
-      { num:"25-043", name:"F&D Clearwater", cust:"SBLM", bl:14885, rev:44794 },
-      { num:"24-068", name:"DFW2-DC2", cust:"Highland Associates", bl:14271, rev:190715 },
-      { num:"24-073", name:"Rubicon Geismer Lab", cust:"Duplantis Design group", bl:13278, rev:8858 },
-      { num:"25-040", name:"UPS New Orleans Expansion", cust:"Copeland and Johns", bl:13164, rev:87656 },
-      { num:"24-069", name:"DFW2-DC3", cust:"Highland Associates", bl:12095, rev:156325 },
+      { num:"25-043", name:"F&D Clearwater", cust:"SBLM", bl:14885, rev:15220 },
+      { num:"24-068", name:"DFW2-DC2", cust:"Highland Associates", bl:14271, rev:108058 },
+      { num:"24-073", name:"Rubicon Geismer Lab", cust:"Duplantis Design group", bl:13278, rev:1058 },
+      { num:"25-040", name:"UPS New Orleans Expansion", cust:"Copeland and Johns", bl:13164, rev:19052 },
+      { num:"24-069", name:"DFW2-DC3", cust:"Highland Associates", bl:12095, rev:79608 },
       { num:"26-112", name:"1544 & 1556 Tchoupitoulas Street New Orleans, LA 70130", cust:"Neo Infrastructure", bl:8960, rev:0 },
       { num:"26-097", name:"Professional Engineering & Land Surveying 7 Brew Breaux Br", cust:"Blue Whale Development", bl:7300, rev:3400 },
       { num:"26-116", name:"Land Surveying services for the Seven Brew in Lafayette, L", cust:"Kohl's Department Stores", bl:6920, rev:0 },
       { num:"22004-1", name:"JP Water Admin Building WB", cust:"Watermark Design", bl:6645, rev:226 },
-      { num:"25-044", name:"STPSO Training Facility", cust:"Woodward Design Group", bl:4665, rev:41570 },
+      { num:"25-044", name:"STPSO Training Facility", cust:"Woodward Design Group", bl:4665, rev:10482 },
       { num:"26-107", name:"Professional Engineering Services FedEx MobiDock 310 James", cust:"Diamond Z Engineering", bl:4612, rev:1538 },
       { num:"26-092", name:"TX Hwy 89, Sinton, TX", cust:"Quality Technology Services, LLC", bl:4500, rev:0 },
       { num:"26-117", name:"I-44 & US Route 66, Villa Ridge, MO", cust:"Quality Infratech Intelligence, LLC (QII)", bl:4500, rev:0 },
       { num:"26-076", name:"Waterford 3 Chiller Foundations", cust:"Star Service", bl:4206, rev:6784 },
       { num:"26-029", name:"QTS-SLC1 Expansion Campus Campus Planning Eagle Mountain, ", cust:"Quality Technology Services, LLC", bl:4000, rev:239755 },
       { num:"26-038", name:"Platting", cust:"Blue Whale Development", bl:3390, rev:44610 },
-      { num:"24-078", name:"John H. Carter, Inc. - Manufacturing & Repair Facility", cust:"Duplantis Design group", bl:2904, rev:144496 },
+      { num:"24-078", name:"John H. Carter, Inc. - Manufacturing & Repair Facility", cust:"Duplantis Design group", bl:2904, rev:24200 },
       { num:"25-097", name:"Parking Lot Expansion - Hoist & Crane Service", cust:"Hoist & Crane Service Group", bl:2800, rev:32580 },
       { num:"24-002.128", name:"North Bergen, NJ Lease Exhibit", cust:"Floor & Decor", bl:1480, rev:0 },
       { num:"24-002.149", name:"Newark, DE Lease Exhibit", cust:"", bl:1480, rev:0 },
@@ -4449,10 +4680,11 @@ var YTD_DATA = {
   },
 
   labor: {
-    hours: 32598,
+    // Hours come from the Summary by Customer YTD tab, which is the
+    // authoritative total. Work logged without a project number is carried as
+    // its own row so the project list ties to the same figure.
+    hours: 33386.6,
     projectCount: 181,
-    // Top projects by YTD Aug DL hours, decimals rolled into their parent
-    // unless the sub-project bills to a different customer.
     items: [
       { name:"QTS Turkey, TX",                    hrs: 5308.0, num:"25-086",   cust:"Quality Technology Services, LLC", rev:4655779 },
       { name:"JP Sewer Bond Program",             hrs: 2138.0, num:"6012-40",  cust:"Digital Engineering", rev:193400 },
@@ -4465,28 +4697,27 @@ var YTD_DATA = {
       { name:"Kinder Morgan TGP Compressor St\u2026", hrs:  601.0, num:"26-030",   cust:"Waskey Bridges Inc.", rev:287725 },
       { name:"DTE Bell River Mills Filter Sep\u2026", hrs:  587.0, num:"25-122",   cust:"Basic Systems, Inc.", rev:12968 }
     ],
-    // hours grouped by customer, for the breakdown's top chart
     byCustomer: [
-      { cust:"Quality Technology Services, LLC", hrs:11214.5 },
+      { cust:"Quality Technology Services, LLC", hrs:11340.5 },
       { cust:"Corgan", hrs:2831.8 },
-      { cust:"Digital Engineering", hrs:2655.5 },
-      { cust:"Rosehill Construction", hrs:1729.0 },
-      { cust:"Meyer & Associates, Inc.", hrs:1597.5 },
-      { cust:"CarMax", hrs:1529.8 },
+      { cust:"Digital Engineering", hrs:2671.5 },
+      { cust:"Rosehill Construction", hrs:2174.2 },
+      { cust:"Meyer & Associates, Inc.", hrs:1625.5 },
+      { cust:"CarMax", hrs:1531.8 },
       { cust:"JP Department of PW", hrs:1370.0 },
       { cust:"Floor & Decor", hrs:974.5 },
       { cust:"Basic Systems, Inc.", hrs:971.0 },
       { cust:"Waskey Bridges Inc.", hrs:941.0 },
-      { cust:"Duplantis Design group", hrs:924.0 },
+      { cust:"Duplantis Design group", hrs:927.5 },
       { cust:"Edged", hrs:829.8 },
       { cust:"City of Westlake", hrs:471.5 },
       { cust:"Copeland and Johns", hrs:354.5 },
       { cust:"Quality Infratech Intelligence, LLC (QII)", hrs:354.2 },
-      { cust:"SCNZ Architects, LLC", hrs:338.5 },
+      { cust:"SCNZ Architects, LLC", hrs:339.0 },
       { cust:"Blue Whale Development", hrs:337.2 },
-      { cust:"Flavored Operations, LLC", hrs:290.0 },
+      { cust:"Flavored Operations, LLC", hrs:330.5 },
       { cust:"J Caldarera Company", hrs:282.2 },
-      { cust:"POH+W Architects Ltd.", hrs:261.2 },
+      { cust:"POH+W Architects Ltd.", hrs:262.8 },
       { cust:"Venture Global Gator Express, LLC", hrs:220.0 },
       { cust:"Long Law Firm", hrs:211.5 },
       { cust:"St. Tammany Parish Procurement", hrs:175.0 },
@@ -4494,38 +4725,43 @@ var YTD_DATA = {
       { cust:"Diamond Z Engineering", hrs:130.8 },
       { cust:"Woodward Design Group", hrs:119.5 },
       { cust:"Frischhertz", hrs:119.5 },
+      { cust:"Watermark Design", hrs:118.5 },
       { cust:"Hoist & Crane Service Group", hrs:117.2 },
-      { cust:"Watermark Design", hrs:115.5 },
       { cust:"M.R. Pittman Group, LLC", hrs:101.5 },
       { cust:"Layton - LF Driscoll", hrs:92.0 },
       { cust:"New Orleans Center for Aesthetics and Plastic Surgery", hrs:87.0 },
       { cust:"A/C Electric Service, Inc.", hrs:73.0 },
       { cust:"SeaLevel Inc.", hrs:72.5 },
       { cust:"Cycle Construction", hrs:67.5 },
+      { cust:"Build Commercial Construction", hrs:59.0 },
       { cust:"Highland Associates", hrs:57.0 },
       { cust:"Outlyr", hrs:55.5 },
+      { cust:"Galloway Johnson Tompkins Burr & Smith", hrs:49.0 },
       { cust:"Oracle", hrs:43.8 },
       { cust:"Little", hrs:40.5 },
-      { cust:"Laitram", hrs:38.5 },
       { cust:"Traffic Commander", hrs:38.5 },
+      { cust:"Laitram", hrs:38.5 },
       { cust:"Star Service, Inc. A Fidelity Company", hrs:33.0 },
+      { cust:"Enbridge", hrs:32.0 },
       { cust:"Madison Capital Group", hrs:32.0 },
-      { cust:"Enbridge", hrs:30.2 },
       { cust:"Mile High Sliders, LLC", hrs:27.8 },
       { cust:"O'Connor Capital Partners", hrs:20.5 },
       { cust:"Arnett Construction Company", hrs:20.0 },
       { cust:"Suffolk", hrs:17.5 },
-      { cust:"Build Commercial Construction", hrs:17.5 },
+      { cust:"7 Brew Drive Thru Coffee", hrs:16.0 },
       { cust:"Centerpoint Integrated Solutions", hrs:12.5 },
-      { cust:"Studio Kiro", hrs:5.0 },
+      { cust:"Arrowhead Contracting, Inc.", hrs:9.0 },
+      { cust:"Hutton", hrs:5.0 },
       { cust:"Arthur W. Landry", hrs:5.0 },
+      { cust:"Studio Kiro", hrs:5.0 },
       { cust:"The Kitchen Guys", hrs:3.0 },
       { cust:"Jos. R. Labadot", hrs:2.0 },
-      { cust:"Hutton", hrs:1.0 },
       { cust:"Diamond Z Engineering, Inc.", hrs:1.0 },
-      { cust:"Randall-Paulson Architects", hrs:0.5 },
+      { cust:"Harbor Towing and Fleeting, LLC", hrs:0.5 },
+      { cust:"CK Associates", hrs:0.5 },
+      { cust:"Zeeco, Inc.", hrs:0.5 },
       { cust:"Monro, Inc.", hrs:0.5 },
-      { cust:"Harbor Towing and Fleeting, LLC", hrs:0.5 }
+      { cust:"Randall-Paulson Architects", hrs:0.5 }
     ],
     all: [
       { num:"25-086", name:"QTS - Turkey, TX", cust:"Quality Technology Services, LLC", hrs:5308.0, rev:4655779 },
@@ -4543,6 +4779,7 @@ var YTD_DATA = {
       { num:"26-003", name:"BESS Building, Wadley, GA", cust:"Duplantis Design group", hrs:517.0, rev:29160 },
       { num:"25-100", name:"Carmax Wayne, NJ expansion", cust:"CarMax", hrs:493.0, rev:70154 },
       { num:"25-081", name:"National Golf Club of Louisiana", cust:"City of Westlake", hrs:471.5, rev:46120 },
+      { num:"\u2014", name:"No project number assigned", cust:"Rosehill Construction", hrs:445.2, rev:0 },
       { num:"25-115", name:"Calcasieu Waterworks District No.1 Treatment Plant", cust:"Meyer & Associates, Inc.", hrs:436.5, rev:45000 },
       { num:"26-028", name:"QTS-SLC2 Campus Campus Planning Eagle Mountain, UT", cust:"Quality Technology Services, LLC", hrs:434.2, rev:317050 },
       { num:"25-096", name:"Mobile, AL Data Center (Prichard)", cust:"Edged", hrs:432.8, rev:127063 },
@@ -4579,6 +4816,7 @@ var YTD_DATA = {
       { num:"25-118", name:"Schafer Dentistry - Pearl River, LA", cust:"NOLA Dentures and General Dentistry", hrs:134.5, rev:6980 },
       { num:"25-035", name:"Brookwood - Highway 42 Prairerville, LA", cust:"Rosehill Construction", hrs:130.5, rev:20685 },
       { num:"26-094", name:"FedEx Parking Lot Expansion", cust:"Diamond Z Engineering", hrs:128.8, rev:7180 },
+      { num:"\u2014", name:"No project number assigned", cust:"Quality Technology Services, LLC", hrs:126.0, rev:0 },
       { num:"26-093.1", name:"SLC1 Expansion, SLC2 Phase 1, and SLC Phase 2 Offsite Infr", cust:"Quality Technology Services, LLC", hrs:119.2, rev:326164 },
       { num:"25-084", name:"LC + Standards DD Development", cust:"Quality Technology Services, LLC", hrs:117.8, rev:124140 },
       { num:"25-097", name:"Parking Lot Expansion - Hoist & Crane Service", cust:"Hoist & Crane Service Group", hrs:117.2, rev:32580 },
@@ -4605,6 +4843,7 @@ var YTD_DATA = {
       { num:"25-011", name:"S&WB Power", cust:"Frischhertz", hrs:54.0, rev:0 },
       { num:"24002", name:"Redesign of the Shrine on Airline", cust:"Watermark Design", hrs:51.0, rev:18555 },
       { num:"26-018", name:"QTS-DFW2 Corner Site - Wilmer, TX", cust:"Corgan", hrs:50.5, rev:74355 },
+      { num:"\u2014", name:"No project number assigned", cust:"Galloway Johnson Tompkins Burr & Smith", hrs:49.0, rev:0 },
       { num:"26-050", name:"WCCH Booster Station", cust:"Meyer & Associates, Inc.", hrs:48.5, rev:8225 },
       { num:"26-070", name:"QII-Fort Bend Parkway, Houston, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:47.5, rev:45934 },
       { num:"26-048", name:"7 Brew Pineville, LA", cust:"Flavored Operations, LLC", hrs:46.2, rev:500 },
@@ -4614,7 +4853,9 @@ var YTD_DATA = {
       { num:"26-095", name:"ABI01 \u2013 Entry Enhancement Civil Design", cust:"Oracle", hrs:43.8, rev:0 },
       { num:"25-021", name:"QTS-DFW2-DC4 Wilmer, TX (DC-4)", cust:"Corgan", hrs:42.5, rev:133452 },
       { num:"26-072", name:"7Brew \u2013 Airline Hwy.", cust:"Flavored Operations, LLC", hrs:42.5, rev:500 },
+      { num:"\u2014", name:"No project number assigned", cust:"Build Commercial Construction", hrs:41.5, rev:0 },
       { num:"26-051", name:"Intercoast Materials POLC Loading Facility", cust:"Meyer & Associates, Inc.", hrs:41.0, rev:7175 },
+      { num:"\u2014", name:"No project number assigned", cust:"Flavored Operations, LLC", hrs:40.5, rev:0 },
       { num:"25-116", name:"Academy - Pascagoula, MS", cust:"Little", hrs:40.5, rev:12635 },
       { num:"26-056", name:"Brookwood - Union Chapel - Bastrop, TX", cust:"Rosehill Construction", hrs:38.5, rev:5840 },
       { num:"26-103", name:"Professional Civil Engineering and Land Surveying Services", cust:"Laitram", hrs:38.5, rev:1930 },
@@ -4630,6 +4871,7 @@ var YTD_DATA = {
       { num:"26-054", name:"Vinton Water Sector UV", cust:"Meyer & Associates, Inc.", hrs:30.0, rev:5250 },
       { num:"26-091", name:"US Hwy 67, Johnson County, TX", cust:"Quality Technology Services, LLC", hrs:29.5, rev:0 },
       { num:"25-107", name:"Bobcat Facility Septic System", cust:"Enbridge", hrs:28.5, rev:12480 },
+      { num:"\u2014", name:"No project number assigned", cust:"Meyer & Associates, Inc.", hrs:28.0, rev:0 },
       { num:"26-067", name:"Smalls Sliders \u2013 Alameda \u2013 Lakewood, CO", cust:"Mile High Sliders, LLC", hrs:27.8, rev:1510 },
       { num:"26-075", name:"QII Bridgeport, Moreland, GA", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:27.5, rev:4500 },
       { num:"23-068", name:"QTS COS1-DC1", cust:"Corgan", hrs:26.5, rev:10220 },
@@ -4646,6 +4888,8 @@ var YTD_DATA = {
       { num:"26-059", name:"CDR1 76th Ave. SW Tunnel Design, Cedar Rapids, IA", cust:"Suffolk", hrs:17.5, rev:233934 },
       { num:"26-033", name:"QTS - Specifications Standards Maintenance", cust:"Quality Technology Services, LLC", hrs:17.0, rev:10000 },
       { num:"26-099", name:"QII - Emporia, KS", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:17.0, rev:4500 },
+      { num:"\u2014", name:"No project number assigned", cust:"7 Brew Drive Thru Coffee", hrs:16.0, rev:0 },
+      { num:"\u2014", name:"No project number assigned", cust:"Digital Engineering", hrs:16.0, rev:0 },
       { num:"26-106", name:"US Hwy 331, Montgomery, AL", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:16.0, rev:4500 },
       { num:"26-111", name:"Poland #2", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:16.0, rev:4500 },
       { num:"26-092", name:"TX Hwy 89, Sinton, TX", cust:"Quality Technology Services, LLC", hrs:15.5, rev:0 },
@@ -4661,6 +4905,7 @@ var YTD_DATA = {
       { num:"26-061", name:"Hockley #1, Harris County, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:10.0, rev:1000 },
       { num:"26-052", name:"7 Brew - Siegen, Baton Rouge, LA", cust:"Flavored Operations, LLC", hrs:9.8, rev:500 },
       { num:"26-027", name:"Causeway between Airline and W. Napoleon", cust:"Traffic Commander", hrs:9.5, rev:2965 },
+      { num:"\u2014", name:"No project number assigned", cust:"Arrowhead Contracting, Inc.", hrs:9.0, rev:0 },
       { num:"25-125", name:"Brookwood - Dowdy - Gonzales, LA", cust:"Rosehill Construction", hrs:9.0, rev:1790 },
       { num:"26-049", name:"7 Brew 9614 Airline Hwy, East Baton Rouge, LA : Preliminar", cust:"Flavored Operations, LLC", hrs:8.5, rev:500 },
       { num:"26-078", name:"7Brew - Airline - Baton Rouge", cust:"Flavored Operations, LLC", hrs:8.5, rev:500 },
@@ -4682,21 +4927,27 @@ var YTD_DATA = {
       { num:"26-016", name:"7Brew \u2013 Gerstner Memorial \u2013 Lake Charles, LA", cust:"Flavored Operations, LLC", hrs:5.0, rev:500 },
       { num:"26-036", name:"Tanya Becnel v. DeRose Builders, Inc.", cust:"Arthur W. Landry", hrs:5.0, rev:1250 },
       { num:"26-108", name:"West Road, Houston, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:5.0, rev:4500 },
+      { num:"\u2014", name:"No project number assigned", cust:"Hutton", hrs:4.0, rev:0 },
       { num:"23-011", name:"No Project Master entry", cust:"POH+W Architects Ltd.", hrs:4.0, rev:0 },
       { num:"24-073", name:"Rubicon Geismer Lab", cust:"Duplantis Design group", hrs:4.0, rev:1058 },
       { num:"26001", name:"700 Metairie Road Property", cust:"J Caldarera Company", hrs:4.0, rev:788 },
       { num:"26-026", name:"Brookwood \u2013 Perkins \u2013 Baton Rouge, LA", cust:"Rosehill Construction", hrs:4.0, rev:760 },
       { num:"26-082", name:"No Project Master entry", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:4.0, rev:4500 },
       { num:"26-088", name:"Merryville Replacement of LA 110 Sanitary Sewer Gravity Ma", cust:"Meyer & Associates, Inc.", hrs:4.0, rev:700 },
+      { num:"\u2014", name:"No project number assigned", cust:"Duplantis Design group", hrs:3.5, rev:0 },
       { num:"26-002", name:"Brookwood - Bessemer", cust:"Rosehill Construction", hrs:3.5, rev:440 },
+      { num:"\u2014", name:"No project number assigned", cust:"Watermark Design", hrs:3.0, rev:0 },
       { num:"24-064", name:"TKG - New Show Room", cust:"The Kitchen Guys", hrs:3.0, rev:7500 },
       { num:"24-067", name:"DFW2-DAS114", cust:"Corgan", hrs:3.0, rev:155052 },
       { num:"26-081", name:"No Project Master entry", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:3.0, rev:1000 },
       { num:"26-114", name:"Merryville LA110 Sewer Main", cust:"Meyer & Associates, Inc.", hrs:3.0, rev:0 },
+      { num:"\u2014", name:"No project number assigned", cust:"CarMax", hrs:2.0, rev:0 },
       { num:"26-007", name:"Brookwood - Airline (Flea Market)", cust:"Rosehill Construction", hrs:2.0, rev:400 },
       { num:"26-100", name:"Professional Surveying Services - 1425 Sams Ave", cust:"Jos. R. Labadot", hrs:2.0, rev:1500 },
       { num:"26-107", name:"Professional Engineering Services FedEx MobiDock 310 James", cust:"Diamond Z Engineering", hrs:2.0, rev:1538 },
+      { num:"\u2014", name:"No project number assigned", cust:"Enbridge", hrs:1.8, rev:0 },
       { num:"25-061", name:"White Castle Septic System", cust:"Enbridge", hrs:1.8, rev:6240 },
+      { num:"\u2014", name:"No project number assigned", cust:"POH+W Architects Ltd.", hrs:1.5, rev:0 },
       { num:"25-003", name:"Brookwood - 11670 Airline Hwy", cust:"Rosehill Construction", hrs:1.5, rev:0 },
       { num:"25-082", name:"No Project Master entry", cust:"Quality Technology Services, LLC", hrs:1.5, rev:0 },
       { num:"24-091", name:"Laitram Renovations", cust:"SCNZ Architects, LLC", hrs:1.0, rev:580 },
@@ -4705,6 +4956,9 @@ var YTD_DATA = {
       { num:"25-067", name:"Woodward Design Group - Canal Barge", cust:"Woodward Design Group", hrs:1.0, rev:8293 },
       { num:"25-083", name:"CarMax-Warner Robins, GA", cust:"CarMax", hrs:1.0, rev:15040 },
       { num:"26-039", name:"7 Brew - Sulphur, LA - 212 S. Cities", cust:"Flavored Operations, LLC", hrs:1.0, rev:0 },
+      { num:"\u2014", name:"No project number assigned", cust:"CK Associates", hrs:0.5, rev:0 },
+      { num:"\u2014", name:"No project number assigned", cust:"SCNZ Architects, LLC", hrs:0.5, rev:0 },
+      { num:"\u2014", name:"No project number assigned", cust:"Zeeco, Inc.", hrs:0.5, rev:0 },
       { num:"24-093", name:"No Project Master entry", cust:"Randall-Paulson Architects", hrs:0.5, rev:0 },
       { num:"26-010", name:"Tire Choice, Naples, FL", cust:"Monro, Inc.", hrs:0.5, rev:0 },
       { num:"26-046", name:"Side Scan Sonar & Magnetometer Survey, Gulf Gateway Termin", cust:"Harbor Towing and Fleeting, LLC", hrs:0.5, rev:10560 },
@@ -5263,7 +5517,7 @@ function wireConcentration(){
   });
 }
 
-// ── Direct labour breakdown ───────────────────────────────────────────────
+// ── Direct labor breakdown ───────────────────────────────────────────────
 // Hours by customer as strips, then every project as a small card. Kept
 // visually apart from the backlog and RPH overlays: violet, striped fills,
 // and a two-column card grid rather than a table.
@@ -5277,11 +5531,14 @@ function openDL(){
   var cMax = Math.max.apply(null, cust.map(function(c){ return c.hrs; }).concat([1]));
   var strips = cust.map(function(c){
     var nm = c.cust.length > 28 ? c.cust.slice(0,27)+'\u2026' : c.cust;
-    return '<div class="do-crow" title="'+c.cust+' \u2014 '+Math.round(c.hrs).toLocaleString()+' h">'+
+    var share = total ? (c.hrs/total*100) : 0;
+    return '<div class="do-crow" title="'+c.cust+' \u2014 '+Math.round(c.hrs).toLocaleString()+
+        ' h \u00b7 '+share.toFixed(1)+'% of all DL hours">'+
       '<div class="do-cnm">'+nm+'</div>'+
       '<div class="do-ctrack"><div class="do-cfill" style="width:'+
         ((c.hrs/cMax)*100).toFixed(1)+'%;"></div></div>'+
       '<div class="do-chr">'+Math.round(c.hrs).toLocaleString()+' h</div>'+
+      '<div class="do-cpc">'+share.toFixed(1)+'%</div>'+
     '</div>';
   }).join('');
 
@@ -5305,7 +5562,7 @@ function openDL(){
   ov.innerHTML =
     '<div class="do-card">'+
       '<button class="do-x" onclick="closeDL()">\u00d7</button>'+
-      '<div class="do-title">Direct Labour Hours by Project</div>'+
+      '<div class="do-title">Direct Labor Hours by Project</div>'+
       '<div class="do-total">'+Math.round(total).toLocaleString()+
         '<span style="font-size:17px;color:#9086b0;font-weight:700;"> hrs</span></div>'+
       '<div class="do-sub">'+rows.length+' projects \u00b7 '+(lb.byCustomer||[]).length+
@@ -5345,54 +5602,299 @@ function wireBacklogBadges(){
     cloud.classList.remove('on');
   }
 
-  badges.forEach(function(bd){
-    bd.addEventListener('mouseenter', function(){
-      var k = bd.dataset.bk;
-      badges.forEach(function(b){
-        b.classList.toggle('lit', b === bd);
-        b.classList.toggle('dim', b !== bd);
-      });
-      rows.forEach(function(r){ r.classList.toggle('lit', r.dataset.bk === k); });
-
-      cloud.innerHTML =
-        '<div class="cloud-body">'+
-          // a soft cloud silhouette, drawn to fit the text block
-          '<svg viewBox="0 0 274 150" xmlns="http://www.w3.org/2000/svg">'+
-            '<defs><linearGradient id="clg" x1="0" y1="0" x2="0" y2="1">'+
-              '<stop offset="0%" stop-color="#ffffff"/>'+
-              '<stop offset="100%" stop-color="#e9f2f8"/></linearGradient></defs>'+
-            '<g fill="url(#clg)">'+
-              '<ellipse cx="88"  cy="72" rx="62" ry="45"/>'+
-              '<ellipse cx="150" cy="56" rx="56" ry="42"/>'+
-              '<ellipse cx="196" cy="80" rx="54" ry="40"/>'+
-              '<ellipse cx="128" cy="96" rx="76" ry="42"/>'+
-              '<ellipse cx="137" cy="118" rx="52" ry="22"/>'+
-            '</g>'+
-          '</svg>'+
-          '<div class="cloud-txt">'+
-            '<span class="cl-num">'+bd.dataset.num+'</span>'+
-            '<div class="cl-nm">'+bd.dataset.nm+'</div>'+
-            '<div class="cl-cu">'+bd.dataset.cust+'</div>'+
-            '<div class="cl-amt">'+bd.dataset.amt+'</div>'+
-            '<div class="cl-meta">'+bd.dataset.pct+'% of backlog \u00b7 '+
-              bd.dataset.rev+' booked</div>'+
-          '</div>'+
-        '</div>';
-      cloud.classList.add('on');
+  // One routine drives both the sash and the list: whichever the pointer is
+  // on, the matching badge lifts, the others dim, the row lights, and the
+  // cloud fills from that badge's data.
+  function focus(key){
+    var src = null;
+    badges.forEach(function(b){
+      var on = b.dataset.bk === key;
+      if (on) src = b;
+      b.classList.toggle('lit', on);
+      b.classList.toggle('dim', !on);
     });
+    rows.forEach(function(r){ r.classList.toggle('lit', r.dataset.bk === key); });
+    if (!src) return;
+    cloud.innerHTML =
+      '<div class="cloud-body">'+
+        '<svg viewBox="0 0 274 150" xmlns="http://www.w3.org/2000/svg">'+
+          '<defs><linearGradient id="clg" x1="0" y1="0" x2="0" y2="1">'+
+            '<stop offset="0%" stop-color="#ffffff"/>'+
+            '<stop offset="100%" stop-color="#e9f2f8"/></linearGradient></defs>'+
+          '<g fill="url(#clg)">'+
+            '<ellipse cx="88"  cy="72" rx="62" ry="45"/>'+
+            '<ellipse cx="150" cy="56" rx="56" ry="42"/>'+
+            '<ellipse cx="196" cy="80" rx="54" ry="40"/>'+
+            '<ellipse cx="128" cy="96" rx="76" ry="42"/>'+
+            '<ellipse cx="137" cy="118" rx="52" ry="22"/>'+
+          '</g>'+
+        '</svg>'+
+        '<div class="cloud-txt">'+
+          '<span class="cl-num">'+src.dataset.num+'</span>'+
+          '<div class="cl-nm">'+src.dataset.nm+'</div>'+
+          '<div class="cl-cu">'+src.dataset.cust+'</div>'+
+          '<div class="cl-amt">'+src.dataset.amt+'</div>'+
+          '<div class="cl-meta">'+src.dataset.pct+'% of backlog \u00b7 '+
+            src.dataset.rev+' booked</div>'+
+        '</div>'+
+      '</div>';
+    cloud.classList.add('on');
+  }
 
-    bd.addEventListener('mousemove', function(e){
-      var w = cloud.offsetWidth, h = cloud.offsetHeight;
-      var x = Math.min(Math.max(8, e.clientX - w/2), window.innerWidth - w - 8);
-      var y = e.clientY - h - 10;
-      if (y < 8) y = e.clientY + 22;
-      cloud.style.left = x + 'px';
-      cloud.style.top  = y + 'px';
+  function track(e){
+    var w = cloud.offsetWidth, h = cloud.offsetHeight;
+    var x = Math.min(Math.max(8, e.clientX - w/2), window.innerWidth - w - 8);
+    var y = e.clientY - h - 10;
+    if (y < 8) y = e.clientY + 22;
+    cloud.style.left = x + 'px';
+    cloud.style.top  = y + 'px';
+  }
+
+  function bind(el){
+    el.addEventListener('mouseenter', function(){ focus(el.dataset.bk); });
+    el.addEventListener('mousemove', track);
+    el.addEventListener('mouseleave', clear);
+  }
+  badges.forEach(bind);
+  rows.forEach(bind);     // the list behaves exactly like the sash
+}
+function lowRphRows(){
+  var rp = YTD_DATA.rph || {};
+  var floor = rp.floor || 150, minRev = rp.minRev || 15000;
+  return (rp.all||[]).filter(function(r){ return r.rph < floor && r.rev >= minRev; })
+                     .sort(function(a,b){ return a.rph - b.rph; });
+}
+
+function rphCautionSign(rp){
+  var rows = lowRphRows();
+  if (!rows.length) return '';
+  return '<div class="cau-wrap">'+
+    '<svg class="cau" viewBox="0 0 190 146" style="width:176px;height:auto;" '+
+      'onclick="openLowRph()" role="button">'+
+      '<defs>'+
+        '<linearGradient id="cauY" x1="0" y1="0" x2="0" y2="1">'+
+          '<stop offset="0%" stop-color="#ffe14d"/>'+
+          '<stop offset="55%" stop-color="#f2c200"/>'+
+          '<stop offset="100%" stop-color="#d9a500"/></linearGradient>'+
+        '<linearGradient id="cauYb" x1="0" y1="0" x2="0" y2="1">'+
+          '<stop offset="0%" stop-color="#e3b400"/>'+
+          '<stop offset="100%" stop-color="#b98c00"/></linearGradient>'+
+      '</defs>'+
+      '<ellipse cx="95" cy="136" rx="64" ry="7" fill="rgba(90,65,5,0.18)"/>'+
+      // rear leg, angled back
+      '<path d="M112 18 L158 130 L132 130 L104 30 Z" fill="url(#cauYb)"/>'+
+      // front panel: a trapezoid, wide enough to carry the wording
+      '<path d="M74 16 L110 16 L146 130 L36 130 Z" fill="url(#cauY)" '+
+        'stroke="#a98100" stroke-width="2" stroke-linejoin="round"/>'+
+      // hinge strap
+      '<rect x="86" y="14" width="14" height="7" rx="2" fill="#b98c00"/>'+
+      // the slipping figure
+      '<g transform="translate(64,36) scale(0.8)" fill="#1f1a05">'+
+        '<circle cx="12" cy="6" r="6.5"/>'+
+        '<path d="M8 14 L20 22 L34 12 L38 17 L21 30 L10 24 L4 40 L-2 37 Z"/>'+
+        '<path d="M6 40 L20 46 L18 51 L2 45 Z"/>'+
+        '<path d="M-6 44 L10 52 L7 57 L-10 49 Z"/>'+
+      '</g>'+
+      // wording, centred on the panel's own axis
+      '<text x="91" y="103" text-anchor="middle" font-family="Helvetica,Arial" font-size="19" '+
+        'font-weight="900" fill="#1f1a05" letter-spacing="0.5">LOW RPH</text>'+
+      '<text x="91" y="117" text-anchor="middle" font-family="Helvetica,Arial" font-size="8" '+
+        'font-weight="700" fill="#1f1a05" opacity="0.7" letter-spacing="0.8">MARGINS SLIP</text>'+
+      // hazard stripe along the foot
+      '<path d="M40 122 L142 122 L144 128 L38 128 Z" fill="#1f1a05" opacity="0.13"/>'+
+      // blinking lamp
+      '<circle class="cau-blink" cx="92" cy="10" r="8" fill="#d43f2a" opacity="0.26"/>'+
+      '<circle class="cau-blink" cx="92" cy="10" r="4.5" fill="#d43f2a"/>'+
+      '</svg>'+
+  '</div>';
+}
+
+function openLowRph(){
+  var rp = YTD_DATA.rph || {};
+  var rows = lowRphRows();
+  if (!rows.length) return;
+  var floor = rp.floor || 150, minRev = rp.minRev || 15000;
+  var rev = rows.reduce(function(s,r){ return s+r.rev; }, 0);
+  var hrs = rows.reduce(function(s,r){ return s+r.hrs; }, 0);
+  var upsideTot = rows.reduce(function(s,r){ return s + (floor - r.rph)*r.hrs; }, 0);
+
+  var body = rows.map(function(r){
+    var gapHr  = floor - r.rph;
+    var upside = gapHr * r.hrs;
+    return '<tr>'+
+      '<td>'+r.cust+'</td>'+
+      '<td class="r"><span class="lr-rph">$'+Math.round(r.rph).toLocaleString()+'</span></td>'+
+      '<td><div class="lr-gauge">'+
+        '<div class="lr-gfill" style="width:'+Math.min(100,(r.rph/floor)*100).toFixed(1)+'%;"></div>'+
+        '<div class="lr-gmark" style="right:0;"></div>'+
+      '</div></td>'+
+      '<td class="r lr-gap">\u2013$'+Math.round(gapHr).toLocaleString()+'/hr</td>'+
+      '<td class="r" style="color:#8a7550;">'+Math.round(r.hrs).toLocaleString()+' h</td>'+
+      '<td class="r" style="color:#8a7550;">'+ytd$(r.rev)+'</td>'+
+      '<td class="r" style="color:#2f7d4f;font-weight:700;">'+ytd$(upside)+'</td>'+
+    '</tr>';
+  }).join('');
+
+  var ov = document.getElementById('lowrph-ov');
+  if (!ov){
+    ov = document.createElement('div');
+    ov.id = 'lowrph-ov';
+    ov.addEventListener('click', function(e){ if (e.target === ov) closeLowRph(); });
+    document.body.appendChild(ov);
+  }
+  ov.innerHTML =
+    '<div class="lr-card">'+
+      '<button class="lr-x" onclick="closeLowRph()">\u00d7</button>'+
+      '<div class="lr-top">'+
+        '<div>'+
+          '<div class="lr-title">Caution \u00b7 Below a 3\u00d7 Bill Rate</div>'+
+          '<div class="lr-sub">Under $'+floor+'/hr with at least '+ytd$(minRev)+
+            ' of '+YTD_DATA.year+' revenue \u00b7 as of '+(YTD_DATA.asOf||'')+'</div>'+
+        '</div>'+
+        '<div class="lr-stat"><div class="lr-sv">'+rows.length+'</div>'+
+          '<div class="lr-sk">customers</div></div>'+
+      '</div>'+
+      '<table class="lr-tbl">'+
+        '<thead><tr><th>Customer</th><th class="r">Rev / Hour</th><th>vs $'+floor+' floor</th>'+
+        '<th class="r">Gap</th><th class="r">DL Hours</th><th class="r">Revenue</th>'+
+        '<th class="r">Upside at floor</th></tr></thead>'+
+        '<tbody>'+body+'</tbody>'+
+      '</table>'+
+      '<div class="lr-note">These '+rows.length+' customers account for '+
+        Math.round(hrs).toLocaleString()+' direct labor hours and '+ytd$(rev)+
+        ' of revenue. Billing the same hours at the $'+floor+' floor would have produced <b>'+
+        ytd$(upsideTot)+'</b> more. Customers under '+ytd$(minRev)+
+        ' of revenue are excluded, since a few hours can distort a rate.</div>'+
+    '</div>';
+  ov.classList.add('open');
+}
+
+function closeLowRph(){
+  var ov = document.getElementById('lowrph-ov');
+  if (ov) ov.classList.remove('open');
+}
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') closeLowRph();
+});
+
+var UB_PAL = ['#b07d16','#e0a83a','#f0c368','#8a5f0c','#d4913f','#c9a86b'];
+
+function ytdUnbilledBar(D){
+  var u = D.unbilled;
+  if (!u || !u.total) return '';
+  return '<div class="ub-bar">'+
+    '<div class="ub-btn" onclick="openUnbilled()" title="Unbilled revenue by project">'+
+      '<div>'+
+        '<div class="ub-k">Unbilled Revenue</div>'+
+        '<div class="ub-v">'+ytd$(u.total)+'</div>'+
+        '<div class="ub-n">'+u.items.length+' projects \u00b7 as of '+(u.asOf||'')+'</div>'+
+      '</div>'+
+      '<span class="ub-go">\u2197</span>'+
+    '</div>'+
+  '</div>';
+}
+
+// Look up a project's unbilled balance. Concentration lists the parent number
+// (25-086) while the unbilled sheet tracks the sub-project (25-086.1), so a
+// parent match rolls its children together.
+function ubFor(num){
+  var u = YTD_DATA.unbilled;
+  if (!u || !num) return 0;
+  var n = String(num).trim(), total = 0;
+  u.items.forEach(function(it){
+    var k = String(it.num).trim();
+    if (k === n || k.replace(/\.\d+$/,'') === n) total += it.amt;
+  });
+  return total;
+}
+
+function openUnbilled(){
+  var u = YTD_DATA.unbilled;
+  if (!u || !u.items.length) return;
+  var rows = u.items.slice().sort(function(a,b){ return b.amt - a.amt; });
+  var total = rows.reduce(function(s,r){ return s+r.amt; }, 0);
+
+  // donut, drawn as stroked arcs so each slice can be lit on hover
+  var R = 78, C = 2*Math.PI*R, off = 0;
+  var arcs = rows.map(function(r, i){
+    var frac = r.amt/total;
+    var seg = '<circle class="ub-slice" data-ub="'+i+'" cx="110" cy="110" r="'+R+'" fill="none" '+
+      'stroke="'+UB_PAL[i%UB_PAL.length]+'" stroke-width="42" '+
+      'stroke-dasharray="'+(frac*C).toFixed(2)+' '+C.toFixed(2)+'" '+
+      'stroke-dashoffset="'+(-off*C).toFixed(2)+'" '+
+      'transform="rotate(-90 110 110)"><title>'+r.num+' \u00b7 '+ytd$(r.amt)+'</title></circle>';
+    off += frac;
+    return seg;
+  }).join('');
+
+  var legend = rows.map(function(r, i){
+    return '<div class="ub-row" data-ub="'+i+'">'+
+      '<span class="ub-sw" style="background:'+UB_PAL[i%UB_PAL.length]+';"></span>'+
+      '<span class="ub-pn">'+r.num+'</span>'+
+      '<span class="ub-nm">'+r.name+'</span>'+
+      '<span class="ub-amt">'+ytd$(r.amt)+'</span>'+
+      '<span class="ub-pct">'+(r.amt/total*100).toFixed(1)+'%</span>'+
+    '</div>';
+  }).join('');
+
+  var ov = document.getElementById('unbilled-ov');
+  if (!ov){
+    ov = document.createElement('div');
+    ov.id = 'unbilled-ov';
+    ov.addEventListener('click', function(e){ if (e.target === ov) closeUnbilled(); });
+    document.body.appendChild(ov);
+  }
+  ov.innerHTML =
+    '<div class="ub-card">'+
+      '<button class="ub-x" onclick="closeUnbilled()">\u00d7</button>'+
+      '<div class="ub-title">Unbilled Revenue by Project</div>'+
+      '<div class="ub-total">'+ytd$(total)+'</div>'+
+      '<div class="ub-sub">'+rows.length+' projects \u00b7 work performed, not yet invoiced \u00b7 as of '+
+        (u.asOf||'')+'</div>'+
+      '<div class="ub-body">'+
+        '<svg viewBox="0 0 220 220" style="width:220px;height:220px;flex-shrink:0;">'+
+          '<circle cx="110" cy="110" r="'+R+'" fill="none" stroke="rgba(176,125,22,0.10)" stroke-width="42"/>'+
+          arcs+
+          '<text x="110" y="104" text-anchor="middle" font-family="Helvetica,Arial" font-size="20" '+
+            'font-weight="800" fill="#a8720f">'+ytdShort(total)+'</text>'+
+          '<text x="110" y="122" text-anchor="middle" font-family="monospace" font-size="8.5" '+
+            'letter-spacing="1" fill="#a58a55">UNBILLED</text>'+
+        '</svg>'+
+        '<div class="ub-legend">'+legend+'</div>'+
+      '</div>'+
+    '</div>';
+  ov.classList.add('open');
+  wireUnbilled();
+}
+
+// hovering a legend row lights its slice and dims the others
+function wireUnbilled(){
+  var slices = document.querySelectorAll('#unbilled-ov .ub-slice');
+  var legend = document.querySelectorAll('#unbilled-ov .ub-row');
+  function focus(k){
+    slices.forEach(function(sl){
+      sl.classList.toggle('lit', sl.dataset.ub === k);
+      sl.classList.toggle('dim', sl.dataset.ub !== k);
     });
-
-    bd.addEventListener('mouseleave', clear);
+  }
+  function clear(){ slices.forEach(function(sl){ sl.classList.remove('lit','dim'); }); }
+  legend.forEach(function(rw){
+    rw.addEventListener('mouseenter', function(){ focus(rw.dataset.ub); });
+    rw.addEventListener('mouseleave', clear);
+  });
+  slices.forEach(function(sl){
+    sl.addEventListener('mouseenter', function(){ focus(sl.dataset.ub); });
+    sl.addEventListener('mouseleave', clear);
   });
 }
+
+function closeUnbilled(){
+  var ov = document.getElementById('unbilled-ov');
+  if (ov) ov.classList.remove('open');
+}
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') closeUnbilled();
+});
 
 // ── RPH by customer ───────────────────────────────────────────────────────
 // Every customer with hours, ranked by revenue per hour. QTS is flagged so the
@@ -5403,13 +5905,19 @@ function openRPH(){
   if (!rows.length) return;
   var mx = Math.max.apply(null, rows.map(function(r){ return r.rph; }).concat([1]));
 
+  var FLOOR = rp.floor || 150, MARG = rp.marginal || 160;
   var body = rows.map(function(r, ix){
-    var isQ = /quality technology/i.test(r.cust);
-    return '<tr>'+
+    var isQ  = /quality technology/i.test(r.cust);
+    var low  = r.rph < FLOOR;                    // under a 3x bill rate
+    var marg = !low && r.rph < MARG;             // close to the floor
+    var cls  = low ? ' ro-low' : (marg ? ' ro-marg' : '');
+    return '<tr class="'+cls.trim()+'">'+
       '<td class="ro-rank">'+(ix+1)+'</td>'+
-      '<td>'+r.cust+(isQ?'<span class="ro-q">QTS</span>':'')+'</td>'+
-      '<td class="r"><span class="ro-rph">$'+Math.round(r.rph).toLocaleString()+'</span></td>'+
-      '<td><div class="ro-bar"><div class="ro-fill" style="width:'+
+      '<td>'+r.cust+(isQ?'<span class="ro-q">QTS</span>':'')+
+        (low  ? '<span class="ro-warn">below 3\u00d7</span>' : '')+
+        (marg ? '<span class="ro-near">near floor</span>' : '')+'</td>'+
+      '<td class="r"><span class="ro-rph'+cls+'">$'+Math.round(r.rph).toLocaleString()+'</span></td>'+
+      '<td><div class="ro-bar"><div class="ro-fill'+cls+'" style="width:'+
         ((r.rph/mx)*100).toFixed(1)+'%;"></div></div></td>'+
       '<td class="r" style="color:#7f9bab;">'+Math.round(r.hrs).toLocaleString()+' h</td>'+
       '<td class="r" style="color:#8aa8b8;">'+ytd$(r.rev)+'</td>'+
@@ -5431,6 +5939,8 @@ function openRPH(){
         '<span style="font-size:17px;color:#7f9bab;font-weight:700;"> /hr blended</span></div>'+
       '<div class="bo-sub">'+rows.length+' customers \u00b7 '+
         Math.round(rp.hours||0).toLocaleString()+' DL hours \u00b7 as of '+(YTD_DATA.asOf||'')+'</div>'+
+      '<div class="ro-floor">Rows under <b>$'+FLOOR+'/hr</b> fall short of a 3\u00d7 bill rate '+
+        'on roughly $50/hr of direct labor.</div>'+
       '<div class="rph-split" style="margin-top:18px;">'+
         '<div class="rph-half rph-qts"><div class="rph-k">QTS</div>'+
           '<div class="rph-v">$'+Math.round((rp.qts||{}).rph||0).toLocaleString()+'</div>'+
@@ -5488,13 +5998,10 @@ function openBacklog(){
   }).join('');
 
   var body = rows.map(function(r){
-    var share = total ? r.bl/total : 0;
     return '<tr>'+
       '<td class="bo-num">'+r.num+'</td>'+
       '<td>'+r.name+'<div class="bo-cust-cell">'+(r.cust||'\u2014')+'</div></td>'+
       '<td class="r"><span class="bo-bl">'+ytd$(r.bl)+'</span></td>'+
-      '<td class="bo-share"><div class="bo-sbar">'+
-        '<div class="bo-sfill" style="width:'+(share*100).toFixed(1)+'%;"></div></div></td>'+
       '<td class="r"><span class="bo-rev">'+ytd$(r.rev)+'</span></td>'+
     '</tr>';
   }).join('');
@@ -5518,7 +6025,7 @@ function openBacklog(){
       '<div class="bo-cust">'+custBars+'</div>'+
       '<table class="bo-tbl">'+
         '<thead><tr><th>Project</th><th>Name / Customer</th>'+
-        '<th class="r">Backlog</th><th>Share</th><th class="r">Revenue booked</th></tr></thead>'+
+        '<th class="r">Backlog</th><th class="r">2026 Revenue Booked</th></tr></thead>'+
         '<tbody>'+body+'</tbody>'+
       '</table>'+
     '</div>';
@@ -5709,6 +6216,11 @@ function renderYTD(){
     segs += '<div class="rib-seg" data-cc="'+i+'" style="flex:'+(share*1000).toFixed(2)+' 0 0;background:'+col+';">'+(share>=0.05?Math.round(share*100)+'%':'')+'</div>';
     rows += '<div class="conc-row" data-cc="'+i+'"><span class="conc-dot" style="background:'+col+'"></span>'+
             '<span class="conc-name">'+p.name+'</span>'+
+            (function(){
+              var m = String(p.name).match(/^([\d]{2,5}-?[\d.]*)/);
+              var ub = m ? ubFor(m[1]) : 0;
+              return ub > 0 ? '<span class="conc-ub">Unbilled Rev: '+ytd$(ub)+'</span>' : '';
+            })()+
             '<span class="conc-amt">'+ytd$(p.rev)+'</span>'+
             '<span class="conc-pct">'+(share*100).toFixed(1)+'%</span></div>';
   });
@@ -5765,6 +6277,7 @@ function renderYTD(){
     '<div class="rph-cap">Top '+rpTop.length+' non-QTS by rate \u00b7 '+
       (rp.topMinHours||0)+'h+ </div>'+
     rpBars +
+    rphCautionSign(rp)+
     '<div class="rph-foot">Rev per hour \u00b7 '+(rp.customerCount||0)+' customers \u00b7 as of '+(D.asOf||'')+'</div>'+
   '</div>';
 
@@ -5856,6 +6369,7 @@ function renderYTD(){
   requestAnimationFrame(renderStrider);
 
   el.innerHTML =
+    ytdUnbilledBar(D)+
     '<div class="ytd-row1">'+c1+c2+c3+'</div>'+
     conc +
     '<div class="ytd-row3">'+p1+p2+p3+'</div>';
@@ -6938,63 +7452,192 @@ function cpeCard(){
   var delta = prev ? last.cashPerHead - prev.cashPerHead : 0;
   var pct   = prev && prev.cashPerHead ? delta/prev.cashPerHead*100 : 0;
   var up    = delta >= 0;
-
-  var recent = d.slice(-8);
-  var mx = Math.max.apply(null, recent.map(function(r){ return r.cashPerHead; }).concat([1]));
-  var mn = Math.min.apply(null, recent.map(function(r){ return r.cashPerHead; }));
-  var span = (mx - mn) || 1;
-  var spark = recent.map(function(r, i){
-    var h = 24 + ((r.cashPerHead - mn)/span) * 52;
-    var isLast = i === recent.length - 1;
-    var p = r.payDate.split('-');
-    return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;" '+
-      'title="'+p[1]+'/'+p[2]+' \u00b7 $'+Math.round(r.cashPerHead).toLocaleString()+
-      ' \u00b7 '+r.headcount+' staff">'+
-      '<div style="width:100%;max-width:26px;height:'+h.toFixed(0)+'px;border-radius:6px 6px 3px 3px;'+
-        (isLast
-          ? 'background:linear-gradient(180deg,#7ef0ff,#00b6e6);box-shadow:0 0 14px rgba(0,212,255,0.6);'
-          : 'background:linear-gradient(180deg,rgba(0,212,255,0.32),rgba(0,212,255,0.14));')+
-      '"></div>'+
-      '<div style="font-family:var(--mono);font-size:8px;font-weight:700;color:rgba(255,255,255,'+
-        (isLast?'0.7':'0.32')+');">'+p[1]+'/'+p[2]+'</div>'+
-    '</div>';
-  }).join('');
-
   var pd = last.payDate.split('-');
+
   return ''+
-    '<div style="display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:14px;">'+
+    '<div style="display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;">'+
       '<div>'+
-        '<div style="font-family:var(--hud);font-size:38px;font-weight:900;color:#00d4ff;'+
-          'line-height:1;text-shadow:0 0 26px rgba(0,212,255,0.55);">'+
+        '<div style="font-family:var(--hud);font-size:44px;font-weight:900;color:#00d4ff;'+
+          'line-height:1;text-shadow:0 0 30px rgba(0,212,255,0.55);">'+
           fmt$(last.cashPerHead)+'</div>'+
         '<div style="font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:1.4px;'+
-          'text-transform:uppercase;color:rgba(255,255,255,0.34);margin-top:6px;">'+
+          'text-transform:uppercase;color:rgba(255,255,255,0.34);margin-top:7px;">'+
           'Payroll cash needed \u00f7 employee \u00b7 last run</div>'+
       '</div>'+
       (prev ?
         '<div style="display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:20px;'+
           'background:rgba('+(up?'248,113,113':'74,222,128')+',0.12);'+
-          'border:1px solid rgba('+(up?'248,113,113':'74,222,128')+',0.4);margin-bottom:6px;">'+
+          'border:1px solid rgba('+(up?'248,113,113':'74,222,128')+',0.4);margin-bottom:8px;">'+
           '<span style="font-family:var(--hud);font-size:14px;font-weight:900;'+
             'color:'+(up?'#f87171':'#4ade80')+';">'+(up?'\u25b2':'\u25bc')+' '+
             fmt$(Math.abs(delta))+'</span>'+
           '<span style="font-family:var(--mono);font-size:9px;font-weight:700;'+
             'color:rgba(255,255,255,0.4);">'+(up?'+':'')+pct.toFixed(1)+'% vs prior</span>'+
         '</div>' : '')+
-      '<div style="margin-left:auto;text-align:right;margin-bottom:4px;">'+
-        '<div style="font-family:var(--hud);font-size:17px;font-weight:800;color:rgba(255,255,255,0.82);">'+
+      '<div style="margin-left:auto;text-align:right;margin-bottom:6px;">'+
+        '<div style="font-family:var(--hud);font-size:19px;font-weight:800;color:rgba(255,255,255,0.82);">'+
           last.headcount+'</div>'+
         '<div style="font-family:var(--mono);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;'+
           'color:rgba(255,255,255,0.3);">on payroll</div>'+
       '</div>'+
     '</div>'+
-    '<div style="display:flex;align-items:flex-end;gap:7px;height:86px;">'+spark+'</div>'+
+    // history lives behind a click rather than on the card
+    '<div style="margin-top:16px;">'+
+      '<button onclick="openCpeHistory()" '+
+        'style="width:100%;cursor:pointer;display:flex;align-items:center;justify-content:center;'+
+        'gap:9px;padding:11px 16px;border-radius:11px;font-family:var(--mono);font-size:10px;'+
+        'font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:#00d4ff;'+
+        'background:rgba(0,212,255,0.09);border:1px solid rgba(0,212,255,0.32);'+
+        'transition:all .16s;" '+
+        'onmouseover="this.style.background=\'rgba(0,212,255,0.2)\';this.style.borderColor=\'rgba(0,212,255,0.8)\';" '+
+        'onmouseout="this.style.background=\'rgba(0,212,255,0.09)\';this.style.borderColor=\'rgba(0,212,255,0.32)\';">'+
+        '<span style="font-size:13px;">\u25a6</span> View CPE History'+
+      '</button>'+
+    '</div>'+
     '<div style="margin-top:10px;padding-top:9px;border-top:1px solid rgba(255,255,255,0.07);'+
       'font-family:var(--mono);font-size:8.5px;letter-spacing:0.8px;color:rgba(255,255,255,0.28);'+
       'text-align:center;">'+
       'CPE = payroll cash needed \u00f7 headcount \u00b7 as of '+pd[1]+'/'+pd[2]+'/'+pd[0]+
       ' ('+last.range+')</div>';
 }
+
+// ── CPE history ───────────────────────────────────────────────────────────
+// Bars over a faint money-bag backdrop, filterable to the year, quarter or
+// month the latest run falls in.
+var CPE_RANGE = 'year';
+
+function cpeRuns(){
+  var all = (PAYROLL_RUNS||[]).slice().sort(function(a,b){
+    return a.payDate.localeCompare(b.payDate); });
+  if (!all.length) return all;
+  var p = all[all.length-1].payDate.split('-');
+  var y = +p[0], m = +p[1];
+  if (CPE_RANGE === 'month')
+    return all.filter(function(r){ var q=r.payDate.split('-');
+      return +q[0]===y && +q[1]===m; });
+  if (CPE_RANGE === 'quarter'){
+    var qs = Math.floor((m-1)/3)*3 + 1;
+    return all.filter(function(r){ var q=r.payDate.split('-');
+      return +q[0]===y && +q[1]>=qs && +q[1]<=qs+2; });
+  }
+  return all.filter(function(r){ return +r.payDate.split('-')[0] === y; });
+}
+
+function cpeRangeLabel(){
+  var all = (PAYROLL_RUNS||[]).slice().sort(function(a,b){
+    return a.payDate.localeCompare(b.payDate); });
+  if (!all.length) return '';
+  var p = all[all.length-1].payDate.split('-');
+  var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  if (CPE_RANGE === 'month')   return MON[+p[1]-1]+' '+p[0];
+  if (CPE_RANGE === 'quarter') return 'Q'+(Math.floor((+p[1]-1)/3)+1)+' '+p[0];
+  return p[0];
+}
+
+function cpeSetRange(r){ CPE_RANGE = r; openCpeHistory(); }
+
+function openCpeHistory(){
+  var d = cpeRuns();
+  var ov = document.getElementById('cpe-ov');
+  if (!ov){
+    ov = document.createElement('div');
+    ov.id = 'cpe-ov';
+    ov.addEventListener('click', function(e){ if (e.target === ov) closeCpeHistory(); });
+    document.body.appendChild(ov);
+  }
+
+  var vals = d.map(function(r){ return r.cashPerHead; });
+  var mx = Math.max.apply(null, vals.concat([1]));
+  var mn = Math.min.apply(null, vals.concat([mx]));
+  var avg = vals.length ? vals.reduce(function(a,b){return a+b;},0)/vals.length : 0;
+
+  var bars = d.map(function(r, i){
+    var isLast = i === d.length-1;
+    var h = 14 + ((r.cashPerHead - mn*0.92) / ((mx - mn*0.92)||1)) * 76;
+    var p = r.payDate.split('-');
+    return '<div class="cpe-col" title="'+p[1]+'/'+p[2]+' \u00b7 '+fmt$(r.cashPerHead)+
+        ' \u00b7 '+r.headcount+' staff \u00b7 '+fmt$(r.cashNeed)+' cash">'+
+      '<div class="cpe-amt'+(isLast?' now':'')+'">'+fmt$(r.cashPerHead)+'</div>'+
+      '<div class="cpe-bar'+(isLast?' now':'')+'" style="height:'+h.toFixed(1)+'%;"></div>'+
+      '<div class="cpe-hc">'+r.headcount+'</div>'+
+      '<div class="cpe-mon'+(isLast?' now':'')+'">'+p[1]+'/'+p[2]+'</div>'+
+    '</div>';
+  }).join('');
+
+  function tab(k, label){
+    var on = CPE_RANGE === k;
+    return '<span onclick="cpeSetRange(\''+k+'\')" class="cpe-tab'+(on?' on':'')+'">'+label+'</span>';
+  }
+
+  ov.innerHTML =
+    '<div class="cpe-card">'+
+      '<button class="cpe-x" onclick="closeCpeHistory()">\u00d7</button>'+
+      '<div class="cpe-head">'+
+        '<div>'+
+          '<div class="cpe-title">CPE History \u00b7 Payroll Cash per Employee</div>'+
+          '<div class="cpe-sub">'+cpeRangeLabel()+' \u00b7 '+d.length+' pay runs \u00b7 avg '+
+            fmt$(avg)+'</div>'+
+        '</div>'+
+        '<div class="cpe-tabs">'+tab('year','Year')+tab('quarter','Quarter')+tab('month','Month')+'</div>'+
+      '</div>'+
+      '<div class="cpe-plot">'+
+        cpeMoneyBag()+
+        '<div class="cpe-bars">'+bars+'</div>'+
+      '</div>'+
+      '<div class="cpe-foot">'+
+        '<span><b>'+fmt$(mn)+'</b> lowest</span>'+
+        '<span><b>'+fmt$(avg)+'</b> average</span>'+
+        '<span><b>'+fmt$(mx)+'</b> highest</span>'+
+        '<span class="cpe-note">Figure above each bar is CPE; the number beneath is headcount.</span>'+
+      '</div>'+
+    '</div>';
+  ov.classList.add('open');
+}
+
+// The backdrop: an overflowing sack of money carrying the Basin mark.
+function cpeMoneyBag(){
+  return '<svg class="cpe-bag" viewBox="0 0 520 360" preserveAspectRatio="xMidYMid meet">'+
+    '<defs>'+
+      '<linearGradient id="bagG" x1="0" y1="0" x2="0" y2="1">'+
+        '<stop offset="0%" stop-color="#8fd9f0"/>'+
+        '<stop offset="55%" stop-color="#4aa8c8"/>'+
+        '<stop offset="100%" stop-color="#2b6d87"/></linearGradient>'+
+      '<linearGradient id="coinG" x1="0" y1="0" x2="0" y2="1">'+
+        '<stop offset="0%" stop-color="#ffe9a8"/>'+
+        '<stop offset="100%" stop-color="#d0a02c"/></linearGradient>'+
+    '</defs>'+
+    // coins spilling from the mouth of the sack
+    (function(){
+      var c = [[150,96,15],[196,80,12],[240,92,17],[286,78,13],[330,96,15],
+               [118,124,11],[360,122,12],[172,64,9],[262,60,10],[308,58,9],
+               [96,150,9],[386,148,10]];
+      return c.map(function(k){
+        return '<g><ellipse cx="'+k[0]+'" cy="'+k[1]+'" rx="'+k[2]+'" ry="'+(k[2]*0.42)+'" '+
+          'fill="url(#coinG)"/><ellipse cx="'+k[0]+'" cy="'+(k[1]-k[2]*0.22)+'" rx="'+k[2]+
+          '" ry="'+(k[2]*0.42)+'" fill="url(#coinG)" opacity="0.75"/></g>';
+      }).join('');
+    })()+
+    // the sack
+    '<path d="M186 128 C120 168 92 240 116 292 C138 338 250 352 300 350 '+
+      'C372 346 432 318 430 262 C428 206 388 158 330 128 Z" fill="url(#bagG)"/>'+
+    // tie at the neck
+    '<path d="M182 126 C214 112 306 112 336 126 C340 140 330 148 310 150 '+
+      'C270 154 244 154 206 150 C188 148 178 140 182 126 Z" fill="#a8e4f5"/>'+
+    '<path d="M186 138 C230 130 290 130 332 138" fill="none" stroke="#2b6d87" '+
+      'stroke-width="3" stroke-linecap="round"/>'+
+    // the Basin mark on the sack
+    '<image href="'+BASIN_MARK+'" x="216" y="194" width="122" height="124" opacity="0.9" '+
+      'preserveAspectRatio="xMidYMid meet"/>'+
+    '</svg>';
+}
+
+function closeCpeHistory(){
+  var ov = document.getElementById('cpe-ov');
+  if (ov) ov.classList.remove('open');
+}
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') closeCpeHistory();
+});
 
 function payrollChart(){
   var d = payrollRuns();
@@ -7392,6 +8035,9 @@ function renderMetrics() {
       '<div style="background:rgba(255,255,255,0.07);"></div>'+
       capBlock('Surveying',dlSurvey,'#fbbf24')+
     '</div>'+
+
+    // ── Utilization, feeding an unutilized pool into the mixer ─────────────
+    '<div id="cap-util-block">'+capUtilBlock()+'</div>'+
 
     // ── Revenue Pool Mixer ─────────────────────────────────────────────────
     '<div id="rev-pool-mixer">'+
@@ -7957,7 +8603,7 @@ function capGetWageInfo(displayName) {
   return { wage: w, summary: s };
 }
 
-// Effective labour cost rate for one employee in one week:
+// Effective labor cost rate for one employee in one week:
 //   hourly staff  -> their hourly wage
 //   salaried staff-> (annual salary / 52) / hours they worked that week
 // This is the same rule the "Eff. Rate" column in the DL employee wage cost
@@ -8012,9 +8658,9 @@ function capIsOwner(displayName){
   return !!(w && (w.dept || '') === 'Owner');
 }
 
-// Average direct-labour cost/hr for one week. This is the single source of
+// Average direct-labor cost/hr for one week. This is the single source of
 // truth for both the dashboard tile and the prior-weeks trend chart, so the
-// two can no longer drift apart. Direct labour only (Admin excluded), and
+// two can no longer drift apart. Direct labor only (Admin excluded), and
 // capHourlyCost() applies the correct rule per pay type — salaried DL is the
 // weekly salary spread over hours actually worked that week, not annual/2080.
 function capWeekSortKey(w) {
@@ -8163,6 +8809,97 @@ var _revPools = [];
 var _revPoolColors = ['#00ffb4','#00d4ff','#fbbf24','#a855f7','#f87171'];
 var _revPoolCounter = 0;
 
+// ── Utilization ───────────────────────────────────────────────────────────
+// Applying a utilization rate carves the idle share of capacity into its own
+// pool in the mixer at $0/hr, so the revenue estimate reflects only the hours
+// expected to be billable.
+var WF_UTIL_PCT = null;      // null means no rate applied
+var WF_UTIL_SRC = '';        // where the rate came from, for the caption
+
+function capRecentUtil(){
+  return (WF_DATA.laborWeeks||[])
+    .filter(function(w){ return w.totals && w.totals.utilization; })
+    .sort(function(a,b){ return String(b.weekKey).localeCompare(String(a.weekKey)); })
+    .slice(0,4)
+    .map(function(w){ return { key:w.weekKey, pct:Math.round(w.totals.utilization*10)/10 }; });
+}
+
+function capUtilBlock(){
+  var weeks = capRecentUtil();
+  var applied = WF_UTIL_PCT !== null;
+  var moHrs = revPoolTotalDLmo();
+  var idle  = applied ? moHrs * (1 - WF_UTIL_PCT/100) : 0;
+
+  var chips = weeks.map(function(w){
+    var on = applied && WF_UTIL_SRC === w.key;
+    var col = w.pct>=80?'#4ade80':w.pct>=65?'#fbbf24':'#f87171';
+    return '<span class="util-chip'+(on?' on':'')+'" onclick="capApplyUtil('+w.pct+',\''+w.key+'\')" '+
+      'style="--c:'+col+';"><b>'+w.pct.toFixed(1)+'%</b><i>wk '+w.key+'</i></span>';
+  }).join('');
+
+  var avg = weeks.length
+    ? Math.round(weeks.reduce(function(a,w){ return a+w.pct; },0)/weeks.length*10)/10 : 0;
+
+  return '<div class="util-wrap">'+
+    '<div class="util-top">'+
+      '<span class="util-k">Utilization applied to capacity</span>'+
+      (applied
+        ? '<span class="util-now">'+WF_UTIL_PCT.toFixed(1)+'%<em>'+
+            (WF_UTIL_SRC==='manual' ? 'entered' :
+              (WF_UTIL_SRC==='avg4' ? '4-week average' : 'week '+WF_UTIL_SRC))+'</em></span>'
+        : '<span class="util-off">none \u2014 full capacity billable</span>')+
+    '</div>'+
+    '<div class="util-row">'+
+      '<label class="util-in">'+
+        '<input type="number" min="1" max="100" step="0.5" placeholder="78" '+
+          'value="'+(applied?WF_UTIL_PCT:'')+'" '+
+          'onkeydown="if(event.key===\'Enter\'){capApplyUtil(parseFloat(this.value),\'manual\');}" '+
+          'onchange="capApplyUtil(parseFloat(this.value),\'manual\')"/><span>%</span>'+
+      '</label>'+
+      (weeks.length
+        ? '<span class="util-lbl">or apply a recent week</span>'+chips+
+          (weeks.length>1
+            ? '<span class="util-chip avg'+(applied&&WF_UTIL_SRC==='avg4'?' on':'')+'" '+
+              'onclick="capApplyUtil('+avg+',\'avg4\')" style="--c:#00d4ff;">'+
+              '<b>'+avg.toFixed(1)+'%</b><i>'+weeks.length+'-wk avg</i></span>' : '')
+        : '<span class="util-lbl">no capacity weeks loaded</span>')+
+      (applied ? '<span class="util-clear" onclick="capApplyUtil(null)">\u00d7 clear</span>' : '')+
+    '</div>'+
+    (applied
+      ? '<div class="util-out">Unutilized time \u00b7 <b>'+Math.round(idle).toLocaleString()+
+          ' hrs/mo</b> at $0/hr is held as its own pool below, leaving <b>'+
+          Math.round(moHrs-idle).toLocaleString()+' hrs</b> billable.</div>'
+      : '<div class="util-out dim">Apply a rate to carve idle time into its own $0/hr pool.</div>')+
+  '</div>';
+}
+
+function capApplyUtil(pct, src){
+  if (pct === null || isNaN(pct) || pct <= 0 || pct > 100){
+    WF_UTIL_PCT = null; WF_UTIL_SRC = '';
+    _revPools = _revPools.filter(function(p){ return !p.locked; });
+  } else {
+    WF_UTIL_PCT = pct; WF_UTIL_SRC = src || 'manual';
+    var idlePct = Math.round((100 - pct) * 10) / 10;
+    var pool = _revPools.filter(function(p){ return p.locked; })[0];
+    if (!pool){
+      pool = { id: ++_revPoolCounter, name:'Unutilized Time', rph:0,
+               allocPct: idlePct, color:'#6b7a8a', locked:true };
+      _revPools.push(pool);
+    }
+    pool.allocPct = idlePct;
+    pool.rph = 0;
+    // the remaining pools share what is left, keeping their proportions
+    var others = _revPools.filter(function(p){ return !p.locked; });
+    var sum = others.reduce(function(a,p){ return a + p.allocPct; }, 0);
+    var room = 100 - idlePct;
+    if (sum > 0) others.forEach(function(p){ p.allocPct = Math.round(p.allocPct/sum*room*10)/10; });
+    else if (others.length) others[0].allocPct = room;
+  }
+  var ub = document.getElementById('cap-util-block');
+  if (ub) ub.innerHTML = capUtilBlock();
+  revPoolRender(); revPoolRecalc();
+}
+
 function revPoolTotalDLmo() {
   // Get from current rendered value — or recalculate
   var el = document.getElementById('cap-total-mo-hrs');
@@ -8204,7 +8941,19 @@ function revPoolRender() {
   if (!container) return;
   container.innerHTML = _revPools.map(function(pool) {
     var col = pool.color;
-    var rgb = col==='#00ffb4'?'0,255,180':col==='#00d4ff'?'0,212,255':col==='#fbbf24'?'251,191,36':col==='#a855f7'?'168,85,247':'248,113,113';
+    var rgb = col==='#00ffb4'?'0,255,180':col==='#00d4ff'?'0,212,255':col==='#fbbf24'?'251,191,36':col==='#a855f7'?'168,85,247':col==='#6b7a8a'?'107,122,138':'248,113,113';
+    // The unutilized pool is derived from the utilization rate above, so it is
+    // shown but not edited here.
+    if (pool.locked) {
+      return '<div class="pool-locked">'+
+        '<div class="pl-dot"></div>'+
+        '<div class="pl-nm">'+pool.name+'<i>derived from '+
+          (WF_UTIL_PCT!==null?WF_UTIL_PCT.toFixed(1)+'% utilization':'utilization')+'</i></div>'+
+        '<div class="pl-rph">$0<span>/hr</span></div>'+
+        '<div class="pl-pct">'+pool.allocPct.toFixed(1)+'%</div>'+
+        '<div class="pl-rev">$0</div>'+
+      '</div>';
+    }
     return (
       '<div style="display:grid;grid-template-columns:auto 1fr auto auto auto;gap:8px;align-items:center;'+
         'padding:10px 12px;border-radius:12px;background:rgba('+rgb+',0.05);border:1px solid rgba('+rgb+',0.18);">'+
@@ -9361,7 +10110,7 @@ function buildCustBars(top5Cust, restCustHrs, totalCustHrs) {
         '<div style="font-family:var(--inter);font-size:11px;font-weight:700;color:'+b.color+';'+
           'overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">'+
           b.cust+'</div>'+
-        // Opaque so the unutilised-DL connector passes behind rather than
+        // Opaque so the unutilized-DL connector passes behind rather than
         // across them, and lifted above the connector's layer.
         '<div style="display:flex;gap:9px;flex-shrink:0;position:relative;z-index:8;'+
           'padding:3px;border-radius:11px;background:rgba(6,14,22,0.96);">'+
@@ -9501,14 +10250,14 @@ function buildProjectBars(top10, rest, maxHrs, projEmpDataJson, totalCustHrs) {
   }
 
   // ── Avg cost per hour on a project ────────────────────────────────────────
-  // Direct labour wage cost for the week / total hours on the project, where
+  // Direct labor wage cost for the week / total hours on the project, where
   // each employee contributes (their effective rate) x (their hours on the job).
   function projAvgCost(employees) {
     var totalHrs = 0, totalCost = 0;
     Object.entries(employees || {}).forEach(function(kv) {
       var name = kv[0], projHrs = kv[1];
       if (!projHrs) return;
-      // Direct labour wage cost = hours on the project x effective rate.
+      // Direct labor wage cost = hours on the project x effective rate.
       // Every hour on the job counts toward the denominator.
       totalHrs  += projHrs;
       totalCost += capEffRate(name, empWeekHours(name)) * projHrs;
@@ -12111,7 +12860,7 @@ function wfCompany(name){
   return /^p\s*&?\s*c$/i.test(c) ? 'P&C' : c;
 }
 // Labor class follows the department: Admin. and Owner stand alone, the rest
-// are direct labour.
+// are direct labor.
 function wfLaborClass(name){
   var w = (WF_DATA.wages||[]).find(function(x){ return x.name===name; })||{};
   var s = (WF_DATA.summary||[]).find(function(x){ return x.name===name; })||{};
@@ -12622,7 +13371,7 @@ function renderKpiStrip(){
   var cards = '';
 
   if (CURRENT_SHEET === 'summary') {
-    // base wage + TaB + incentives = total labour cost, so show the arithmetic
+    // base wage + TaB + incentives = total labor cost, so show the arithmetic
     cards =
       kpiMeta('Headcount', String(n), [['Scope', WF_DEPT_FILTER||'All depts']])+
       kpiComp('Annual Base Wage', fmt$(sum('sal')),
@@ -13971,7 +14720,7 @@ function renderSummary(names) {
   var BASE='#00dba0', BASE_DIM='rgba(0,219,160,0.7)';
   var TAB ='#a78bfa', TAB_DIM='rgba(167,139,250,0.72)';
   var EI  ='#fbbf24', EI_DIM ='rgba(251,191,36,0.72)';
-  var TOT ='#00d4ff';   // total labour cost — the standout column
+  var TOT ='#00d4ff';   // total labor cost — the standout column
 
   function shN(label, key, color){
     var active = col===key;
