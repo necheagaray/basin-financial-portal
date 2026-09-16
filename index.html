@@ -249,7 +249,7 @@ html,body{height:100%;background:var(--bg);color:var(--text1);font-family:var(--
   border-radius:28px;background:linear-gradient(180deg,#ffffff 0%,#f2f9fd 62%,#e8f3fb 100%);
   box-shadow:0 7px 18px rgba(70,120,160,0.13);z-index:-2;}
 
-.mg-grid{display:grid;grid-template-columns:1fr 1fr 1fr;text-align:center;}
+.mg-grid{display:grid;grid-template-columns:1fr 1fr;text-align:center;}
 .mg-cell{padding:2px 6px;position:relative;}
 .mg-cell+.mg-cell:before{content:'';position:absolute;left:0;top:14%;height:72%;width:1px;background:linear-gradient(180deg,transparent,rgba(90,140,170,0.28),transparent);}
 .mg-k{font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px;}
@@ -310,6 +310,9 @@ html,body{height:100%;background:var(--bg);color:var(--text1);font-family:var(--
 .tm-am{font-size:10.5px;font-weight:600;color:rgba(255,255,255,0.9);margin-top:3px;}
 .bk-row{display:flex;align-items:center;gap:9px;padding:6px 2px;border-bottom:1px solid rgba(120,165,190,0.14);}
 .bk-tick{width:4px;height:16px;border-radius:99px;flex-shrink:0;}
+.bk-num{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:800;
+  color:#b07d16;background:rgba(176,125,22,0.12);border:1px solid rgba(176,125,22,0.26);
+  border-radius:6px;padding:2px 7px;margin-right:9px;white-space:nowrap;flex-shrink:0;}
 .bk-nm{font-size:12.5px;font-weight:600;color:#1a5471;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .bk-am{margin-left:auto;font-size:12.5px;font-weight:800;color:#a1690a;}
 .bk-pc{font-size:11.5px;font-weight:700;color:#7d95a6;width:34px;text-align:right;}
@@ -885,6 +888,311 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
   box-shadow:0 0 12px currentColor, inset 0 1px 0 rgba(255,255,255,0.45);}
 .mrt-bar:after{content:'';position:absolute;top:0;right:0;bottom:0;width:2.5px;
   background:#fff;opacity:0.85;border-radius:2px;box-shadow:0 0 8px #fff;}
+
+/* ── YTD: as-of stamp and the cash-flow overlay ───────────────────────── */
+.sc-titlerow{position:relative;display:flex;align-items:center;}
+.ytd-asof{position:absolute;right:0;top:0;font-size:8.5px;font-weight:600;
+  letter-spacing:0.6px;color:#a8c0ce;white-space:nowrap;text-transform:none;}
+.cash-click{cursor:pointer;transition:transform .16s ease,box-shadow .16s ease;}
+.cash-click:hover{transform:translateY(-2px);
+  box-shadow:0 10px 26px -12px rgba(23,160,111,0.55);}
+.cash-cue{margin-left:8px;font-size:9px;font-weight:700;letter-spacing:1px;
+  color:#17a06f;opacity:0.75;}
+
+#cashflow-ov{position:fixed;inset:0;z-index:900;display:none;
+  align-items:center;justify-content:center;padding:26px;
+  background:rgba(12,26,36,0.55);backdrop-filter:blur(7px);}
+#cashflow-ov.open{display:flex;}
+.cf-card{width:min(1040px,96vw);max-height:92vh;overflow:auto;border-radius:22px;
+  background:linear-gradient(180deg,#f2f7fb,#e4eef5);
+  box-shadow:0 30px 80px -24px rgba(10,40,60,0.55);
+  padding:30px 34px 26px;position:relative;
+  animation:cfIn .2s cubic-bezier(.2,.8,.3,1);}
+@keyframes cfIn{from{opacity:0;transform:translateY(14px) scale(.985);}to{opacity:1;transform:none;}}
+.cf-x{position:absolute;top:18px;right:20px;width:34px;height:34px;border-radius:50%;
+  border:1px solid rgba(20,60,80,0.18);background:#fff;color:#4a6b7c;cursor:pointer;
+  font-size:17px;line-height:1;}
+.cf-x:hover{background:#17a06f;color:#fff;border-color:#17a06f;}
+.cf-title{font-size:13px;font-weight:800;letter-spacing:2.2px;text-transform:uppercase;color:#4a6b7c;}
+.cf-total{font-size:44px;font-weight:800;letter-spacing:-1.5px;color:#0f7a55;line-height:1.05;margin-top:4px;}
+.cf-sub{font-size:12px;color:#7f9bab;margin-top:4px;}
+.cf-bars{display:flex;align-items:flex-end;gap:14px;height:260px;margin:26px 0 6px;}
+.cf-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;}
+.cf-bar{width:100%;border-radius:10px 10px 4px 4px;position:relative;
+  background:linear-gradient(180deg,#2fd39a,#12805a);
+  box-shadow:0 6px 18px -8px rgba(15,122,85,0.7), inset 0 1px 0 rgba(255,255,255,0.45);
+  transition:height .5s cubic-bezier(.2,.8,.3,1), filter .15s;
+  cursor:pointer;}
+.cf-col:hover .cf-bar{filter:brightness(1.1);}
+.cf-bar.dim{background:linear-gradient(180deg,#cfe0ea,#b6cbd9);box-shadow:none;}
+.cf-amt{font-size:11.5px;font-weight:800;color:#0f7a55;margin-bottom:7px;white-space:nowrap;}
+.cf-amt.dim{color:#a8bcc9;}
+.cf-mon{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:#6b8899;margin-top:9px;}
+/* the running total riding above the bars */
+.cf-line{position:absolute;left:0;right:0;width:100%;pointer-events:none;}
+.cf-foot{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px;
+  padding-top:18px;border-top:1px solid rgba(20,60,80,0.12);}
+.cf-f{text-align:center;}
+.cf-fk{font-size:10px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#8aa8b8;}
+.cf-fv{font-size:21px;font-weight:800;color:#0f7a55;margin-top:3px;}
+
+/* ── Backlog sash ─────────────────────────────────────────────────────── */
+.sash{position:relative;margin:16px 0 12px;padding:32px 0 34px;overflow:hidden;border-radius:14px;}
+.sash:before{content:'';position:absolute;left:-12%;right:-12%;top:50%;height:132px;
+  transform:translateY(-50%) rotate(-6.5deg);height:104px;
+  background:linear-gradient(180deg,#8e1d2e 0%,#b3273d 16%,#c8304a 50%,#a32338 84%,#7d1828 100%);
+  box-shadow:0 14px 30px -14px rgba(60,10,20,0.55), inset 0 2px 0 rgba(255,255,255,0.22),
+             inset 0 -2px 0 rgba(0,0,0,0.28);}
+.sash:after{content:'';position:absolute;left:-12%;right:-12%;top:50%;height:132px;
+  transform:translateY(-50%) rotate(-6.5deg);height:104px;pointer-events:none;
+  border-top:3px solid rgba(240,200,110,0.9);
+  border-bottom:3px solid rgba(240,200,110,0.9);
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,0.05) 0 2px,transparent 2px 7px);}
+.sash-in{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;
+  flex-wrap:nowrap;gap:4px;transform:rotate(-6.5deg);padding:0 2px;}
+.sash-cap{position:absolute;z-index:3;left:12px;top:6px;
+  font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#7c93a3;}
+
+/* ── Backlog breakdown overlay ────────────────────────────────────────── */
+#backlog-ov{position:fixed;inset:0;z-index:900;display:none;align-items:center;
+  justify-content:center;padding:24px;background:rgba(12,26,36,0.55);backdrop-filter:blur(7px);}
+#backlog-ov.open{display:flex;}
+.bo-card{width:min(1180px,96vw);max-height:92vh;overflow:auto;border-radius:22px;
+  background:linear-gradient(180deg,#f2f7fb,#e4eef5);
+  box-shadow:0 30px 80px -24px rgba(10,40,60,0.55);padding:28px 32px 24px;position:relative;
+  animation:cfIn .2s cubic-bezier(.2,.8,.3,1);}
+.bo-x{position:absolute;top:18px;right:20px;width:34px;height:34px;border-radius:50%;
+  border:1px solid rgba(20,60,80,0.18);background:#fff;color:#4a6b7c;cursor:pointer;font-size:17px;}
+.bo-x:hover{background:#b07d16;color:#fff;border-color:#b07d16;}
+.bo-title{font-size:13px;font-weight:800;letter-spacing:2.2px;text-transform:uppercase;color:#4a6b7c;}
+.bo-total{font-size:44px;font-weight:800;letter-spacing:-1.5px;color:#b07d16;line-height:1.05;margin-top:4px;}
+.bo-sub{font-size:12px;color:#7f9bab;margin-top:4px;}
+.bo-cust{display:flex;gap:10px;margin:22px 0 6px;height:132px;align-items:flex-end;}
+.bo-c{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;}
+.bo-cbar{width:100%;border-radius:9px 9px 3px 3px;
+  background:linear-gradient(180deg,#f0c368,#b07d16);
+  box-shadow:0 6px 16px -8px rgba(176,125,22,0.75), inset 0 1px 0 rgba(255,255,255,0.5);}
+.bo-camt{font-size:11.5px;font-weight:800;color:#8a6210;margin-bottom:6px;white-space:nowrap;}
+.bo-cnm{font-size:10px;font-weight:700;color:#6b8899;margin-top:8px;text-align:center;
+  line-height:1.25;max-width:100%;}
+.bo-tbl{width:100%;border-collapse:collapse;margin-top:18px;}
+.bo-tbl th{font-size:9.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;
+  color:#8aa8b8;text-align:left;padding:8px 10px;border-bottom:1.5px solid rgba(20,60,80,0.14);}
+.bo-tbl th.r,.bo-tbl td.r{text-align:right;}
+.bo-tbl td{padding:9px 10px;border-bottom:1px solid rgba(20,60,80,0.07);font-size:12.5px;color:#31566b;}
+.bo-tbl tr:hover td{background:rgba(176,125,22,0.07);}
+.bo-num{font-weight:800;color:#25506b;white-space:nowrap;}
+.bo-cust-cell{color:#6b8899;font-size:11.5px;}
+.bo-bl{font-size:17px;font-weight:800;color:#b07d16;white-space:nowrap;}
+.bo-rev{font-size:12px;color:#8aa8b8;white-space:nowrap;}
+.bo-share{width:74px;}
+.bo-sbar{height:7px;border-radius:4px;background:rgba(176,125,22,0.16);overflow:hidden;}
+.bo-sfill{height:100%;border-radius:4px;background:linear-gradient(90deg,#f0c368,#b07d16);}
+
+/* ── Monthly revenue hover readout ────────────────────────────────────── */
+.mo-col{cursor:pointer;position:relative;}
+.mo-col:hover .mo-bar{filter:brightness(1.12) saturate(1.1);
+  box-shadow:0 4px 14px rgba(70,140,190,0.45);}
+#mo-tip{position:fixed;z-index:950;display:none;pointer-events:none;
+  padding:9px 13px;border-radius:12px;white-space:nowrap;
+  background:linear-gradient(180deg,#ffffff,#eef5fa);
+  border:1px solid rgba(20,60,80,0.14);
+  box-shadow:0 14px 34px -12px rgba(10,40,60,0.45);}
+#mo-tip.on{display:block;}
+.mo-tip-m{font-size:9.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:#8aa8b8;}
+.mo-tip-v{font-size:22px;font-weight:800;color:#2b7fc4;line-height:1.1;margin-top:2px;}
+.mo-tip-n{font-size:10.5px;color:#7f9bab;margin-top:4px;}
+.mo-tip-n b{color:#b07d16;font-weight:700;}
+
+/* ── RPH card ─────────────────────────────────────────────────────────── */
+.rph-split{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 12px;}
+.rph-half{border-radius:12px;padding:10px 12px;text-align:center;}
+.rph-qts{background:linear-gradient(180deg,rgba(43,127,196,0.14),rgba(43,127,196,0.05));
+  border:1px solid rgba(43,127,196,0.32);}
+.rph-non{background:linear-gradient(180deg,rgba(23,160,111,0.14),rgba(23,160,111,0.05));
+  border:1px solid rgba(23,160,111,0.32);}
+.rph-k{font-size:9px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#7f9bab;}
+.rph-qts .rph-v{font-size:23px;font-weight:800;color:#2b7fc4;line-height:1.1;margin-top:3px;}
+.rph-non .rph-v{font-size:23px;font-weight:800;color:#17a06f;line-height:1.1;margin-top:3px;}
+.rph-n{font-size:10px;color:#9ab4c2;margin-top:2px;}
+.rph-cap{font-size:9px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;
+  color:#8aa8b8;margin:2px 0 8px;}
+.rph-foot{margin-top:10px;padding-top:9px;border-top:1px solid rgba(20,60,80,0.10);
+  font-size:9.5px;letter-spacing:0.7px;color:#a8c0ce;text-align:center;}
+
+/* ── RPH breakdown overlay ────────────────────────────────────────────── */
+#rph-ov{position:fixed;inset:0;z-index:900;display:none;align-items:center;justify-content:center;
+  padding:24px;background:rgba(12,26,36,0.55);backdrop-filter:blur(7px);}
+#rph-ov.open{display:flex;}
+.ro-card{width:min(1080px,96vw);max-height:92vh;overflow:auto;border-radius:22px;
+  background:linear-gradient(180deg,#f2f7fb,#e4eef5);
+  box-shadow:0 30px 80px -24px rgba(10,40,60,0.55);padding:28px 32px 24px;position:relative;
+  animation:cfIn .2s cubic-bezier(.2,.8,.3,1);}
+.ro-x{position:absolute;top:18px;right:20px;width:34px;height:34px;border-radius:50%;
+  border:1px solid rgba(20,60,80,0.18);background:#fff;color:#4a6b7c;cursor:pointer;font-size:17px;}
+.ro-x:hover{background:#2b7fc4;color:#fff;border-color:#2b7fc4;}
+.ro-tbl{width:100%;border-collapse:collapse;margin-top:16px;}
+.ro-tbl th{font-size:9.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;
+  color:#8aa8b8;text-align:left;padding:8px 10px;border-bottom:1.5px solid rgba(20,60,80,0.14);}
+.ro-tbl th.r,.ro-tbl td.r{text-align:right;}
+.ro-tbl td{padding:9px 10px;border-bottom:1px solid rgba(20,60,80,0.07);font-size:12.5px;color:#31566b;}
+.ro-tbl tr:hover td{background:rgba(43,127,196,0.07);}
+.ro-rank{width:30px;color:#a8c0ce;font-weight:800;font-size:11px;}
+.ro-rph{font-size:17px;font-weight:800;color:#2b7fc4;white-space:nowrap;}
+.ro-q{display:inline-block;margin-left:7px;padding:1px 7px;border-radius:20px;font-size:8.5px;
+  font-weight:800;letter-spacing:0.8px;background:rgba(43,127,196,0.16);color:#2b7fc4;}
+.ro-bar{height:7px;border-radius:4px;background:rgba(43,127,196,0.14);overflow:hidden;width:120px;}
+.ro-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#7cc9f0,#2b7fc4);}
+
+/* ── Backlog badge hover: cloud callout + linked row ──────────────────── */
+.bdg{cursor:pointer;transition:transform .18s cubic-bezier(.2,.8,.3,1),filter .18s;}
+.bdg.lit{transform:scale(1.14) translateY(-3px);filter:brightness(1.12)
+  drop-shadow(0 6px 14px rgba(0,0,0,0.3));z-index:5;}
+.bdg.dim{filter:grayscale(0.55) brightness(0.86);opacity:0.55;}
+
+.bk-row{transition:background .18s,transform .18s,box-shadow .18s;border-radius:9px;}
+.bk-row.lit{background:linear-gradient(90deg,rgba(176,125,22,0.16),rgba(176,125,22,0.03));
+  transform:translateX(5px);box-shadow:inset 3px 0 0 #b07d16;}
+.bk-row.lit .bk-nm{color:#8a6210;}
+.bk-row.lit .bk-am{text-shadow:0 0 12px rgba(176,125,22,0.5);}
+
+/* the callout is drawn as a cloud rather than a box */
+#bdg-cloud{position:fixed;z-index:960;display:none;pointer-events:none;width:274px;}
+#bdg-cloud.on{display:block;animation:cloudIn .22s cubic-bezier(.2,.8,.3,1);}
+@keyframes cloudIn{from{opacity:0;transform:translateY(8px) scale(.96);}to{opacity:1;transform:none;}}
+.cloud-body{position:relative;filter:drop-shadow(0 16px 30px rgba(10,40,60,0.32));}
+.cloud-body svg{display:block;width:100%;height:auto;}
+.cloud-txt{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:30px 30px 34px;text-align:center;}
+.cl-num{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;font-weight:800;
+  letter-spacing:1.2px;color:#b07d16;background:rgba(176,125,22,0.14);
+  border:1px solid rgba(176,125,22,0.3);border-radius:20px;padding:2px 9px;}
+.cl-nm{font-size:12.5px;font-weight:800;color:#25506b;margin-top:6px;line-height:1.25;
+  max-width:200px;}
+.cl-cu{font-size:10px;color:#7f9bab;margin-top:2px;max-width:200px;}
+.cl-amt{font-size:25px;font-weight:800;color:#b07d16;line-height:1.05;margin-top:7px;
+  letter-spacing:-0.5px;}
+.cl-meta{font-size:9.5px;color:#9ab4c2;margin-top:4px;}
+
+/* ── Direct labour lanes ──────────────────────────────────────────────── */
+.dl-lane{position:relative;height:34px;border-radius:9px;overflow:hidden;margin-bottom:6px;
+  background:rgba(123,87,200,0.07);border:1px solid rgba(123,87,200,0.14);}
+.dl-fill{position:absolute;left:0;top:0;bottom:0;border-radius:9px 0 0 9px;
+  transition:width .7s cubic-bezier(.2,.8,.3,1);}
+.dl-face{position:relative;z-index:2;display:flex;align-items:center;gap:9px;
+  height:100%;padding:0 11px;}
+.dl-rk{width:17px;height:17px;border-radius:50%;flex-shrink:0;
+  background:rgba(255,255,255,0.85);color:#7b57c8;
+  font-size:9.5px;font-weight:900;display:flex;align-items:center;justify-content:center;}
+.dl-num{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9.5px;font-weight:800;
+  color:#5c3f99;background:rgba(255,255,255,0.72);border-radius:5px;padding:1px 6px;flex-shrink:0;}
+.dl-nm{font-size:11.5px;font-weight:700;color:#2f3f52;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;flex:1;}
+.dl-hr{font-size:13px;font-weight:800;color:#3c2a63;white-space:nowrap;}
+.dl-hr i{font-size:9px;font-style:normal;font-weight:700;color:#7f6bb0;margin-left:1px;}
+.dl-pc{font-size:9.5px;font-weight:700;color:#8b7bb8;width:30px;text-align:right;}
+
+/* ── Direct labour breakdown ──────────────────────────────────────────── */
+#dl-ov{position:fixed;inset:0;z-index:900;display:none;align-items:center;justify-content:center;
+  padding:24px;background:rgba(12,26,36,0.55);backdrop-filter:blur(7px);}
+#dl-ov.open{display:flex;}
+.do-card{width:min(1100px,96vw);max-height:92vh;overflow:auto;border-radius:22px;
+  background:linear-gradient(180deg,#f6f4fc,#e9e5f6);
+  box-shadow:0 30px 80px -24px rgba(40,20,70,0.5);padding:28px 32px 24px;position:relative;
+  animation:cfIn .2s cubic-bezier(.2,.8,.3,1);}
+.do-x{position:absolute;top:18px;right:20px;width:34px;height:34px;border-radius:50%;
+  border:1px solid rgba(60,30,100,0.18);background:#fff;color:#6b5a90;cursor:pointer;font-size:17px;}
+.do-x:hover{background:#7b57c8;color:#fff;border-color:#7b57c8;}
+.do-title{font-size:13px;font-weight:800;letter-spacing:2.2px;text-transform:uppercase;color:#6b5a90;}
+.do-total{font-size:44px;font-weight:800;letter-spacing:-1.5px;color:#7b57c8;line-height:1.05;margin-top:4px;}
+.do-sub{font-size:12px;color:#9086b0;margin-top:4px;}
+.do-cap{font-size:9.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;
+  color:#9086b0;margin:22px 0 10px;}
+/* customers as horizontal strips, distinct from the other overlays' bars */
+.do-cust{display:flex;flex-direction:column;gap:5px;}
+.do-crow{display:flex;align-items:center;gap:10px;}
+.do-cnm{width:190px;font-size:11.5px;font-weight:700;color:#4a3d70;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;flex-shrink:0;text-align:right;}
+.do-ctrack{flex:1;height:18px;border-radius:5px;background:rgba(123,87,200,0.10);overflow:hidden;}
+.do-cfill{height:100%;border-radius:5px;
+  background:repeating-linear-gradient(115deg,#a78bda 0 7px,#8c6ccb 7px 14px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.35);}
+.do-chr{width:74px;font-size:12px;font-weight:800;color:#5c3f99;text-align:right;flex-shrink:0;}
+/* project list as stacked cards rather than a table */
+.do-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:6px;}
+.do-p{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:11px;
+  background:#fff;border:1px solid rgba(60,30,100,0.09);
+  box-shadow:0 2px 6px -3px rgba(40,20,70,0.18);}
+.do-rk{width:20px;height:20px;border-radius:6px;flex-shrink:0;background:rgba(123,87,200,0.13);
+  color:#7b57c8;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;}
+.do-pn{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9.5px;font-weight:800;
+  color:#7b57c8;flex-shrink:0;}
+.do-pnm{flex:1;min-width:0;font-size:11.5px;font-weight:600;color:#3c3358;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.do-pc{font-size:9.5px;color:#9086b0;}
+.do-ph{font-size:13px;font-weight:800;color:#5c3f99;white-space:nowrap;}
+
+/* ── Revenue concentration focus ──────────────────────────────────────── */
+.rib-seg{cursor:pointer;transition:transform .28s cubic-bezier(.2,.8,.3,1),
+  filter .28s,opacity .28s;transform-origin:center bottom;}
+.rib-seg.lit{transform:scaleY(1.42);filter:brightness(1.12) saturate(1.15);
+  box-shadow:0 0 0 2px rgba(255,255,255,0.85),0 8px 20px -8px rgba(10,50,80,0.5);
+  z-index:3;position:relative;}
+.rib-seg.dim{filter:grayscale(0.6) brightness(1.06);opacity:0.4;transform:scaleY(0.82);}
+
+.conc-row{transition:transform .28s cubic-bezier(.2,.8,.3,1),opacity .28s,
+  filter .28s,background .28s;border-radius:9px;transform-origin:left center;}
+.conc-row.lit{transform:translateX(3px);background:rgba(43,127,196,0.12);
+  box-shadow:inset 3px 0 0 #2b7fc4;z-index:2;position:relative;}
+.conc-row.lit .conc-name{font-weight:800;color:#12456b;letter-spacing:0.2px;}
+.conc-row.lit .conc-amt{color:#2b7fc4;text-shadow:0 0 14px rgba(43,127,196,0.45);}
+.conc-row.lit .conc-dot{transform:scale(1.5);box-shadow:0 0 10px currentColor;}
+.conc-row.dim{transform:scale(0.90);transform-origin:center;opacity:0.3;filter:grayscale(0.55);}
+.conc-dot{transition:transform .28s cubic-bezier(.2,.8,.3,1),box-shadow .28s;}
+
+/* ── Budget summary: full-year instrument panel ───────────────────────── */
+.fy-panel{padding:16px 18px 14px;display:flex;flex-direction:column;gap:2px;}
+.fy-colhead{display:flex;gap:18px;justify-content:flex-end;padding:0 2px 12px;
+  border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:12px;}
+.fy-ch{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);
+  font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:rgba(255,255,255,0.45);}
+.fy-dot{width:9px;height:9px;border-radius:3px;display:inline-block;flex-shrink:0;}
+.fy-dot.hatch{background:transparent;border:1.5px dashed currentColor;}
+
+.fy-row{position:relative;padding:11px 12px 10px;border-radius:12px;
+  transition:background .2s ease,transform .2s ease;}
+.fy-row:hover{background:rgba(255,255,255,0.035);transform:translateX(3px);}
+/* a lit rule down the left edge, brighter on the headline rows */
+.fy-row:before{content:'';position:absolute;left:0;top:10px;bottom:10px;width:2px;
+  border-radius:2px;background:var(--c);opacity:0.35;}
+.fy-row.hero:before{opacity:1;box-shadow:0 0 12px var(--c);}
+.fy-row.hero{background:linear-gradient(90deg,rgba(var(--rgb),0.07),transparent 72%);}
+
+.fy-head{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;}
+.fy-name{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:1.8px;
+  text-transform:uppercase;color:rgba(255,255,255,0.62);}
+.fy-row.hero .fy-name{font-size:12.5px;letter-spacing:2.2px;}
+.fy-chip{font-family:var(--mono);font-size:8.5px;font-weight:800;letter-spacing:0.8px;
+  padding:2px 8px;border-radius:20px;white-space:nowrap;}
+.fy-total{margin-left:auto;font-family:var(--hud);font-size:20px;font-weight:800;
+  letter-spacing:-0.5px;line-height:1;}
+.fy-row.hero .fy-total{font-size:30px;font-weight:900;}
+
+/* the channel: solid actual, hatched projection, lit seam between them */
+.fy-track{position:relative;height:13px;border-radius:7px;overflow:hidden;
+  background:rgba(255,255,255,0.05);
+  box-shadow:inset 0 1px 3px rgba(0,0,0,0.55);}
+.fy-row.hero .fy-track{height:18px;border-radius:9px;}
+.fy-act{position:absolute;left:0;top:0;bottom:0;border-radius:7px 0 0 7px;}
+.fy-proj{position:absolute;top:0;bottom:0;right:0;}
+.fy-split{position:absolute;top:-2px;bottom:-2px;width:2px;transform:translateX(-1px);}
+
+.fy-legs{display:flex;gap:16px;margin-top:7px;}
+.fy-leg{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);
+  font-size:9.5px;color:rgba(255,255,255,0.4);}
+.fy-leg b{color:rgba(255,255,255,0.82);font-weight:700;font-size:10.5px;}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
@@ -1203,7 +1511,7 @@ function getRPH(customer, asOf){
   }
   return RPH_DATA['_nonQTS']||null;
 }
-var BUDGET_DATA = [{"label":"Income","type":"section","vals":[null,null,null,null,null,null,null]},{"label":"4000 \u00b7 Project Income","type":"detail","vals":[17643291.47,1500000.0,1500000.0,1500000.0,1500000.0,1500000.0,25143291.47]},{"label":"Total Income","type":"total","vals":[17643291.47,1500000.0,1500000.0,1500000.0,1500000.0,1500000.0,25143291.47]},{"label":"Cost of Sales","type":"section","vals":[null,null,null,null,null,null,null]},{"label":"5000 \u00b7 COGS \u2013 Direct Costs","type":"subsection","vals":[null,null,null,null,null,null,null]},{"label":"5100 \u00b7 Direct Labor","type":"detail","vals":[1511112.1,219553.993858333,220466.993858333,232916.993858333,240498.307333333,246879.620808333,2671428.00971667]},{"label":"5200 \u00b7 Direct Subcontractor Costs","type":"detail","vals":[721971.98,75000.0,75000.0,75000.0,75000.0,75000.0,1096971.98]},{"label":"5300 \u00b7 Direct Materials/Supplies","type":"detail","vals":[13585.74,4000.0,4000.0,4000.0,4000.0,4000.0,33585.74]},{"label":"5400 \u00b7 Other Direct Costs","type":"detail","vals":[17696.16,4000.0,4000.0,4000.0,4000.0,4000.0,37696.16]},{"label":"Total \u2013 COGS Direct Costs","type":"total","vals":[2264365.98,302553.993858333,303466.993858333,315916.993858333,323498.307333333,329879.620808333,3839681.88971667]},{"label":"6000 \u00b7 COGS \u2013 Indirect Costs","type":"subsection","vals":[null,null,null,null,null,null,null]},{"label":"6100 \u00b7 DL Overhead","type":"detail","vals":[159612.18,18516.6018916667,18593.6018916667,19643.6018916667,15031.1442083333,16031.1442083333,247428.274091667]},{"label":"6110 \u00b7 DL Sick/Vacation","type":"detail","vals":[127690.17,26452.2884166667,26562.2884166667,28062.2884166667,45093.432625,57712.11915,311572.587025]},{"label":"6116 \u00b7 DL Bonus","type":"detail","vals":[311387.0,44483.82,44483.82,44483.82,44483.82,44483.82,533806.1]},{"label":"6117 \u00b7 DL Defined Benefit","type":"detail","vals":[25326.0,3617.67,3617.67,3617.67,3617.67,3617.67,43414.35]},{"label":"6118 \u00b7 DL Profit Sharing","type":"detail","vals":[48799.8,6971.4,6971.4,6971.4,6971.4,6971.4,83656.8]},{"label":"6200 \u00b7 DL Health Insurance","type":"detail","vals":[168805.54,26012.3451923077,26012.3451923077,26012.3451923077,27939.1855769231,29866.0259615385,304647.787115385]},{"label":"6300 \u00b7 DL Life/Disability","type":"detail","vals":[19262.83,2980.16653846154,2980.16653846154,2980.16653846154,3200.91961538462,3421.67269230769,34825.9219230769]},{"label":"6400 \u00b7 DL 401K Match","type":"detail","vals":[42375.55,6754.93,6754.93,6754.93,6754.93,6754.93,76150.2]},{"label":"6500 \u00b7 DL Payroll Taxes","type":"detail","vals":[132093.64,19003.91230625,19071.56230625,19994.06230625,21224.06230625,22454.06230625,233841.30153125]},{"label":"Total \u2013 COGS Indirect Costs","type":"total","vals":[1035352.71,154793.134345353,155047.784345353,158520.284345353,174316.564331891,191312.84431843,1869343.32168638]},{"label":"Total Cost of Sales","type":"total","vals":[3299718.69,457347.128203686,458514.778203686,474437.278203686,497814.871665224,521192.465126763,5709025.21140305]},{"label":"GROSS PROFIT","type":"highlight","vals":[14343572.78,1042652.87179631,1041485.22179631,1025562.72179631,1002185.12833478,978807.534873237,19434266.258597]},{"label":"Gross Margin %","type":"highlight","vals":[0.812976014389905,0.695101914530876,0.694323481197543,0.683708481197543,0.668123418889851,0.652538356582158,0.772940419586082]},{"label":"Expense","type":"section","vals":[null,null,null,null,null,null,null]},{"label":"7100 \u00b7 Admin. Wages/Benefits","type":"subsection","vals":[null,null,null,null,null,null,null]},{"label":"7105 \u00b7 Admin. Labor","type":"detail","vals":[415441.06,68958.3355833333,68958.3355833333,68958.3355833333,71229.1687916667,69891.6687166667,763436.904258333]},{"label":"7106 \u00b7 Admin. Bonus","type":"detail","vals":[27709.0,3958.33,3958.33,3958.33,3958.33,3958.33,47500.65]},{"label":"7107 \u00b7 Admin. Defined Benefit","type":"detail","vals":[184506.0,26358.33,26358.33,26358.33,26358.33,26358.33,316297.65]},{"label":"7108 \u00b7 Admin. Profit Sharing","type":"detail","vals":[49540.24,7077.18,7077.18,7077.18,7077.18,7077.18,84926.14]},{"label":"7110 \u00b7 Admin. Labor Sick/Vacation","type":"detail","vals":[15294.46,3958.33358333333,3958.33358333333,3958.33358333333,6687.500375,8025.00045,41881.961575]},{"label":"7130 \u00b7 Officer Labor Premium","type":"detail","vals":[233846.15,31666.6666666667,31666.6666666667,31666.6666666667,31666.6666666667,31666.6666666667,392179.483333333]},{"label":"7140 \u00b7 Admin. Health Insurance","type":"detail","vals":[29547.39,7585.74416666667,7585.74416666667,7585.74416666667,7585.74416666667,9401.85666666667,69292.2233333333]},{"label":"7150 \u00b7 Admin. Life/Disability","type":"detail","vals":[3827.86,704.34,704.34,704.34,704.34,813.34,7458.56]},{"label":"7160 \u00b7 Admin. 401k Match","type":"detail","vals":[22007.68,2966.665,2966.665,2966.665,2966.665,2966.665,36841.005]},{"label":"7170 \u00b7 Admin. Payroll Taxes","type":"detail","vals":[42789.57,6675.31244875,6675.31244875,6675.31244875,6982.81244875,6982.81244875,76781.13224375]},{"label":"Total \u2013 Admin. Wages/Benefits","type":"total","vals":[1024509.41,159909.23744875,159909.23744875,159909.23744875,165216.73744875,167141.84994875,1836595.70974375]},{"label":"7200 \u00b7 Facilities","type":"subsection","vals":[null,null,null,null,null,null,null]},{"label":"7210 \u00b7 Rent & Lease","type":"detail","vals":[93444.28,16913.0,16913.0,17913.0,16913.0,16913.0,179009.28]},{"label":"7220 \u00b7 Repairs & Maint. \u2013 Metairie","type":"detail","vals":[189253.31,600.0,600.0,10600.0,600.0,600.0,202253.31]},{"label":"7240 \u00b7 Internet/Telephone","type":"detail","vals":[14932.93,3000.0,3000.0,3000.0,3000.0,3000.0,29932.93]},{"label":"7250 \u00b7 Utilities","type":"detail","vals":[5229.92,1041.0,900.0,1041.0,900.0,1041.0,10152.92]},{"label":"Total \u2013 Facilities","type":"total","vals":[302860.44,21554.0,21413.0,32554.0,21413.0,21554.0,421348.44]},{"label":"7300 \u00b7 Business Overhead","type":"subsection","vals":[null,null,null,null,null,null,null]},{"label":"7310 \u00b7 Business Insurance","type":"detail","vals":[18104.23,4800.0,6300.0,6300.0,6300.0,21300.0,63104.23]},{"label":"7312 \u00b7 Officer Life Insurance","type":"detail","vals":[13699.46,2460.0,2460.0,2460.0,2460.0,2460.0,25999.46]},{"label":"7320 \u00b7 Legal & Professional Services","type":"detail","vals":[242633.55,17500.0,22500.0,17500.0,17500.0,17500.0,335133.55]},{"label":"7330 \u00b7 Software Subscriptions","type":"detail","vals":[82540.06,18400.0,24400.0,24400.0,24400.0,24400.0,198540.06]},{"label":"7340 \u00b7 Office Expenses","type":"detail","vals":[73416.38,8000.0,8000.0,8000.0,8000.0,8000.0,113416.38]},{"label":"7350 \u00b7 Advertising & Marketing","type":"detail","vals":[9667.99,1200.0,1200.0,1200.0,1200.0,1200.0,15667.99]},{"label":"7360 \u00b7 Meals & Meetings","type":"detail","vals":[12329.32,1800.0,1800.0,1800.0,1800.0,1800.0,21329.32]},{"label":"7370 \u00b7 Travel","type":"detail","vals":[57220.15,8000.0,8000.0,8000.0,8000.0,8000.0,97220.15]},{"label":"7380 \u00b7 Employee Mileage/Parking","type":"detail","vals":[21767.54,3000.0,3000.0,3000.0,3000.0,3000.0,36767.54]},{"label":"7390 \u00b7 Mobile Phones","type":"detail","vals":[9705.41,1800.0,1800.0,1800.0,1800.0,1800.0,18705.41]},{"label":"7400 \u00b7 Entertainment","type":"detail","vals":[39784.74,500.0,500.0,500.0,500.0,20500.0,62284.74]},{"label":"7410 \u00b7 Client Gifts","type":"detail","vals":[1111.81,500.0,500.0,500.0,500.0,25500.0,28611.81]},{"label":"7420 \u00b7 Charitable Contributions","type":"detail","vals":[5909.14,800.0,800.0,800.0,800.0,800.0,9909.14]},{"label":"7430 \u00b7 Professional Development","type":"detail","vals":[88768.49,3230.0,3230.0,17230.0,3230.0,3230.0,118918.49]},{"label":"7440 \u00b7 Dues & Subscriptions","type":"detail","vals":[4342.16,600.0,600.0,600.0,600.0,600.0,7342.16]},{"label":"7450 \u00b7 Permits & Licenses","type":"detail","vals":[9816.63,800.0,800.0,800.0,800.0,800.0,13816.63]},{"label":"7460 \u00b7 Auto Repair & Maint.","type":"detail","vals":[6162.13,800.0,800.0,800.0,800.0,800.0,10162.13]},{"label":"7470 \u00b7 Shipping & Postage","type":"detail","vals":[2194.85,300.0,300.0,300.0,300.0,300.0,3694.85]},{"label":"7480 \u00b7 Bank Charges & Fees","type":"detail","vals":[1208.97,170.0,150.0,150.0,150.0,150.0,1978.97]},{"label":"7490 \u00b7 Payroll Processing","type":"detail","vals":[8653.46,1300.0,1300.0,1300.0,1300.0,1300.0,15153.46]},{"label":"Total \u2013 Business Overhead","type":"total","vals":[709036.47,75960.0,88440.0,97440.0,83440.0,143440.0,1197756.47]},{"label":"Total Expense","type":"total","vals":[2036406.32,257423.23744875,269762.23744875,289903.23744875,270069.73744875,332135.84994875,3455700.61974375]},{"label":"EBITDA","type":"highlight","vals":[12307166.46,785229.634347564,771722.984347564,735659.484347564,732115.390886026,646671.684924487,15978565.6388532]},{"label":"EBITDA %","type":"highlight","vals":[0.697555015793207,0.523486422898376,0.514481989565043,0.490439656231709,0.48807692725735,0.431114456616325,0.635500155495481]}];
+var BUDGET_DATA = [{"label":"Income","type":"section","vals":[null,null,null,null,null,null,null]},{"label":"4000 \u00b7 Project Income","type":"detail","vals":[17371195.07,3030810.27,1861493.76,1919665.44,1930745.76,1939056.0,28052966.3]},{"label":"Total Income","type":"total","vals":[17371195.07,3030810.27,1861493.76,1919665.44,1930745.76,1939056.0,28052966.3]},{"label":"Cost of Sales","type":"section","vals":[null,null,null,null,null,null,null]},{"label":"5000 \u00b7 COGS \u2013 Direct Costs","type":"subsection","vals":[0.0,0.0,null,null,null,null,0]},{"label":"5100 \u00b7 Direct Labor","type":"detail","vals":[1511112.1,216259.1,247121.79,262540.56,270863.52,277820.7,2785717.77]},{"label":"5200 \u00b7 Direct Subcontractor Costs","type":"detail","vals":[721971.98,168657.69,84067.62,84538.88,84469.47,84399.65,1228105.29]},{"label":"5300 \u00b7 Direct Materials/Supplies","type":"detail","vals":[13585.74,0.0,4483.61,4508.74,4505.04,4501.31,31584.44]},{"label":"5400 \u00b7 Other Direct Costs","type":"detail","vals":[17696.16,3201.54,4483.61,4508.74,4505.04,4501.31,38896.4]},{"label":"Total \u2013 COGS Direct Costs","type":"total","vals":[2264365.98,388118.33,340156.63,356096.92,364343.07,371222.97,4084303.9]},{"label":"6000 \u00b7 COGS \u2013 Indirect Costs","type":"subsection","vals":[0.0,0.0,null,null,null,null,0]},{"label":"6100 \u00b7 DL Overhead","type":"detail","vals":[159612.18,24617.8,18593.6,19643.6,15031.14,16031.14,253529.46]},{"label":"6110 \u00b7 DL Sick/Vacation","type":"detail","vals":[127690.17,16526.17,26562.29,28062.29,45093.43,57712.12,301646.47]},{"label":"6116 \u00b7 DL Bonus","type":"detail","vals":[311387.0,43208.0,44483.82,44483.82,44483.82,44483.82,532530.28]},{"label":"6117 \u00b7 DL Defined Benefit","type":"detail","vals":[25326.0,3058.0,3617.67,3617.67,3617.67,3617.67,42854.68]},{"label":"6118 \u00b7 DL Profit Sharing","type":"detail","vals":[48799.8,10191.0,6971.4,6971.4,6971.4,6971.4,86876.4]},{"label":"6200 \u00b7 DL Health Insurance","type":"detail","vals":[168805.54,27780.35,26012.34,26012.34,27939.18,29866.03,306415.78]},{"label":"6300 \u00b7 DL Life/Disability","type":"detail","vals":[19262.83,2769.05,2980.17,2980.17,3200.92,3421.67,34614.81]},{"label":"6400 \u00b7 DL 401K Match","type":"detail","vals":[42375.55,6538.52,6754.93,6754.93,6754.93,6754.93,75933.79]},{"label":"6500 \u00b7 DL Payroll Taxes","type":"detail","vals":[132093.64,18122.86,19071.56,19994.06,21224.06,22454.06,232960.24]},{"label":"Total \u2013 COGS Indirect Costs","type":"total","vals":[1035352.71,152811.75,155047.78,158520.28,174316.55,191312.84,1867361.91]},{"label":"Total Cost of Sales","type":"total","vals":[3299718.69,540930.08,495204.41,514617.2,538659.62,562535.81,5951665.81]},{"label":"GROSS PROFIT","type":"highlight","vals":[14071476.38,2489880.19,1366289.35,1405048.24,1392086.14,1376520.19,22101300.49]},{"label":"Gross Margin %","type":"highlight","vals":[0.81,0.8215,0.734,0.7319,0.721,0.7099,0.7878]},{"label":"Expense","type":"section","vals":[null,null,null,null,null,null,null]},{"label":"7100 \u00b7 Admin. Wages/Benefits","type":"subsection","vals":[0.0,0.0,null,null,null,null,0]},{"label":"7105 \u00b7 Admin. Labor","type":"detail","vals":[415441.06,67736.23,72406.25,72406.25,74790.63,73386.25,776166.67]},{"label":"7106 \u00b7 Admin. Bonus","type":"detail","vals":[27709.0,3894.0,4156.25,4156.25,4156.25,4156.25,48228.0]},{"label":"7107 \u00b7 Admin. Defined Benefit","type":"detail","vals":[184506.0,25894.0,27676.25,27676.25,27676.25,27676.25,321105.0]},{"label":"7108 \u00b7 Admin. Profit Sharing","type":"detail","vals":[49540.24,8513.0,7431.04,7431.04,7431.04,7431.04,87777.4]},{"label":"7110 \u00b7 Admin. Labor Sick/Vacation","type":"detail","vals":[15294.46,2936.31,4156.25,4156.25,7021.88,8426.25,41991.4]},{"label":"7130 \u00b7 Officer Labor Premium","type":"detail","vals":[233846.15,30692.34,33250.0,33250.0,33250.0,33250.0,397538.49]},{"label":"7140 \u00b7 Admin. Health Insurance","type":"detail","vals":[29547.39,6704.36,7965.03,7965.03,7965.03,9871.95,70018.79]},{"label":"7150 \u00b7 Admin. Life/Disability","type":"detail","vals":[3827.86,595.34,739.56,739.56,739.56,854.01,7495.89]},{"label":"7160 \u00b7 Admin. 401k Match","type":"detail","vals":[22007.68,2875.38,3115.0,3115.0,3115.0,3115.0,37343.06]},{"label":"7170 \u00b7 Admin. Payroll Taxes","type":"detail","vals":[42789.57,3585.04,7009.08,7009.08,7331.95,7331.95,75056.67]},{"label":"Total \u2013 Admin. Wages/Benefits","type":"total","vals":[1024509.41,153426.0,167904.71,167904.71,173477.59,175498.95,1862721.37]},{"label":"7200 \u00b7 Facilities","type":"subsection","vals":[0.0,0.0,null,null,null,null,0]},{"label":"7210 \u00b7 Rent & Lease","type":"detail","vals":[93444.28,16913.75,17758.65,18808.65,17758.65,17758.65,182442.63]},{"label":"7220 \u00b7 Repairs & Maint. \u2013 Metairie","type":"detail","vals":[189253.31,2500.0,630.0,11130.0,630.0,630.0,204773.31]},{"label":"7240 \u00b7 Internet/Telephone","type":"detail","vals":[14932.93,4063.41,3150.0,3150.0,3150.0,3150.0,31596.34]},{"label":"7250 \u00b7 Utilities","type":"detail","vals":[5229.92,1119.32,945.0,1093.05,945.0,1093.05,10425.34]},{"label":"Total \u2013 Facilities","type":"total","vals":[302860.44,24596.48,22483.65,34181.7,22483.65,22631.7,429237.62]},{"label":"7300 \u00b7 Business Overhead","type":"subsection","vals":[0.0,0.0,null,null,null,null,0]},{"label":"7310 \u00b7 Business Insurance","type":"detail","vals":[18104.23,4748.62,6615.0,6615.0,6615.0,22365.0,65062.85]},{"label":"7312 \u00b7 Officer Life Insurance","type":"detail","vals":[13699.46,2460.28,2583.0,2583.0,2583.0,2583.0,26491.74]},{"label":"7320 \u00b7 Legal & Professional Services","type":"detail","vals":[242633.55,47658.75,23625.0,18375.0,18375.0,18375.0,369042.3]},{"label":"7330 \u00b7 Software Subscriptions","type":"detail","vals":[82540.06,17108.19,25620.0,25620.0,25620.0,25620.0,202128.25]},{"label":"7340 \u00b7 Office Expenses","type":"detail","vals":[73416.38,9512.12,8400.0,8400.0,8400.0,8400.0,116528.5]},{"label":"7350 \u00b7 Advertising & Marketing","type":"detail","vals":[9667.99,9840.6,1260.0,1260.0,1260.0,1260.0,24548.59]},{"label":"7360 \u00b7 Meals & Meetings","type":"detail","vals":[12329.32,1304.95,1890.0,1890.0,1890.0,1890.0,21194.27]},{"label":"7370 \u00b7 Travel","type":"detail","vals":[57220.15,7607.44,8400.0,8400.0,8400.0,8400.0,98427.59]},{"label":"7380 \u00b7 Employee Mileage/Parking","type":"detail","vals":[21767.54,2238.98,3150.0,3150.0,3150.0,3150.0,36606.52]},{"label":"7390 \u00b7 Mobile Phones","type":"detail","vals":[9705.41,1491.73,1890.0,1890.0,1890.0,1890.0,18757.14]},{"label":"7400 \u00b7 Entertainment","type":"detail","vals":[39784.74,220.0,525.0,525.0,525.0,21525.0,63104.74]},{"label":"7410 \u00b7 Client Gifts","type":"detail","vals":[1111.81,0.0,525.0,525.0,525.0,26775.0,29461.81]},{"label":"7420 \u00b7 Charitable Contributions","type":"detail","vals":[5909.14,0.0,840.0,840.0,840.0,840.0,9269.14]},{"label":"7430 \u00b7 Professional Development","type":"detail","vals":[88768.49,9766.32,3391.5,18091.5,3391.5,3391.5,126800.81]},{"label":"7440 \u00b7 Dues & Subscriptions","type":"detail","vals":[4342.16,395.36,630.0,630.0,630.0,630.0,7257.52]},{"label":"7450 \u00b7 Permits & Licenses","type":"detail","vals":[9816.63,1825.91,840.0,840.0,840.0,840.0,15002.54]},{"label":"7460 \u00b7 Auto Repair & Maint.","type":"detail","vals":[6162.13,418.02,840.0,840.0,840.0,840.0,9940.15]},{"label":"7470 \u00b7 Shipping & Postage","type":"detail","vals":[2194.85,451.43,315.0,315.0,315.0,315.0,3906.28]},{"label":"7480 \u00b7 Bank Charges & Fees","type":"detail","vals":[1208.97,284.32,157.5,157.5,157.5,157.5,2123.29]},{"label":"7490 \u00b7 Payroll Processing","type":"detail","vals":[8653.46,1280.0,1365.0,1365.0,1365.0,1365.0,15393.46]},{"label":"Total \u2013 Business Overhead","type":"total","vals":[709036.47,118613.02,92862.0,102312.0,87612.0,150612.0,1261047.49]},{"label":"Total Expense","type":"total","vals":[2036406.32,296635.5,283250.36,304398.41,283573.24,348742.65,3553006.48]},{"label":"EBITDA","type":"highlight","vals":[12035070.06,2193244.69,1083038.99,1100649.83,1108512.9,1027777.54,18548294.01]},{"label":"EBITDA %","type":"highlight","vals":[0.6928,0.7236,0.5818,0.5734,0.5741,0.53,0.6612]}];
 
 var WF_DATA=(function(){
   try{
@@ -1400,7 +1708,7 @@ try { BUDGET_ACTUALS = JSON.parse(localStorage.getItem('basin_budget_actuals')||
 
 var BG_MONTHS  = ['jan_jul','aug','sep','oct','nov','dec'];
 var BG_LABELS  = ['Jan – Jul','Aug','Sep','Oct','Nov','Dec'];
-var BG_IS_ACTUAL = [true, false, false, false, false, false]; // updated by uploads
+var BG_IS_ACTUAL = [true, true, false, false, false, false]; // updated by uploads
 
 // Merge actuals overrides into a row's values array (indices 0-5, plus index 6 = FY total)
 function bgRowVals(row) {
@@ -1500,8 +1808,10 @@ function bgHeader() {
   var strapline = isQ4
     ? 'Oct\u2013Dec editable forecast &nbsp;·&nbsp; Click any value cell to edit'
     : isWC
-      ? 'Jan\u2013Jul actuals live from Budget &nbsp;·&nbsp; Aug\u2013Dec driven by your assumptions &nbsp;·&nbsp; Save scenarios to revisit'
-      : 'Jan\u2013Jul actuals &nbsp;·&nbsp; Aug\u2013Dec projected &nbsp;·&nbsp; Upload monthlies to update';
+      ? bgSpanLabel(true)+' actuals live from Budget &nbsp;\u00b7&nbsp; '+bgSpanLabel(false)+
+        ' driven by your assumptions &nbsp;\u00b7&nbsp; Save scenarios to revisit'
+      : bgSpanLabel(true)+' actuals &nbsp;\u00b7&nbsp; '+bgSpanLabel(false)+
+        ' projected &nbsp;\u00b7&nbsp; Upload monthlies to update';
 
   function tab(id, label) {
     var active = BUDGET_TAB === id;
@@ -1808,6 +2118,30 @@ function bgDrawProjection() {
    its hull display. Pass an object to change the readout:
        bgUFO({ label:'GROSS MARGIN', value:'77.3%', sub:'FY 2026' })
    ═══════════════════════════════════════════════════════════════════════ */
+// The UFO carries the year's projected EBITDA. Read from BUDGET_DATA so a new
+// monthly upload flows through without touching this code.
+function bgEbitdaKPI(){
+  var row = (BUDGET_DATA||[]).find(function(r){
+    return String(r.label||'').trim().toUpperCase() === 'EBITDA';
+  });
+  if (!row || !row.vals || !row.vals.length) return null;
+  var fy = row.vals[row.vals.length - 1];          // last column is the FY total
+  if (!fy) return null;
+  var pctRow = (BUDGET_DATA||[]).find(function(r){
+    return String(r.label||'').trim().toUpperCase() === 'EBITDA %';
+  });
+  var inc = (BUDGET_DATA||[]).find(function(r){
+    return String(r.label||'').trim().toUpperCase() === 'TOTAL INCOME';
+  });
+  var margin = (inc && inc.vals && inc.vals[inc.vals.length-1])
+    ? fy / inc.vals[inc.vals.length-1] * 100 : 0;
+  return {
+    label: '2026 PROJECTED EBITDA',
+    value: '$' + (fy/1e6).toFixed(1) + 'M',
+    sub:   margin ? margin.toFixed(0) + '% margin \u00b7 FY 2026' : 'FY 2026'
+  };
+}
+
 function bgUFO(kpi) {
   kpi = kpi || { label: 'KPI PENDING', value: '\u2014\u2014', sub: 'awaiting metric' };
 
@@ -2245,17 +2579,26 @@ function thCell(label, sub, color, minW, extraStyle) {
 var WC_KEY = 'basin_wc_models_v1';
 
 // Per-month baselines carried over from the workbook (Aug–Dec)
+// August is now an actual month, so the projection window is Sep-Dec.
 var WC_BASE = {
-  months: ['Aug','Sep','Oct','Nov','Dec'],
-  dlBase:    [219553.99, 220466.99, 232916.99, 240498.31, 246879.62], // direct labour
-  matOther:  [8000, 8000, 8000, 8000, 8000],                          // materials + other
-  indirect:  [154793.13, 155047.78, 158520.28, 174316.56, 191312.84],
-  opexBase:  [257423.24, 269762.24, 289903.24, 270069.74, 332135.85]
+  months: ['Sep','Oct','Nov','Dec'],
+  dlBase:    [220466.99, 232916.99, 240498.31, 246879.62],  // direct labour
+  matOther:  [8000, 8000, 8000, 8000],                      // materials + other
+  indirect:  [155047.78, 158520.28, 174316.56, 191312.84],
+  opexBase:  [269762.24, 289903.24, 270069.74, 332135.85]
 };
 
 var WC_DEFAULTS = {
-  dcRate: 750, ndcRate: 180, hoursPerMonth: 4594, dcPct: 0.33,
-  subPct: 0.06, opexAdj: 0.10, capexTotal: 200000, distTotal: 8000000, taxRate: 0.32
+  dcRate: 800, ndcRate: 200, dcPct: 0.33,
+  // hours are built per month from headcount x hours x utilisation
+  headcount:   [32, 33, 34, 35],
+  hoursPerEmp: 174,
+  utilization: [0.84, 0.84, 0.82, 0.80],
+  subPct: 0.06, opexAdj: 0.05,
+  capexTotal: 200000, distTotal: 13000000,
+  taxRate: 0.37,
+  cashBasisAdj: 3000000,     // accrual EBITDA less this = cash basis
+  sh1Pct: 0.50, sh2Pct: 0.50 // ownership split for distributions and tax
 };
 
 var WC_INPUTS = null;      // current working assumptions
@@ -2266,33 +2609,49 @@ function wcSaveModels(list){ try { localStorage.setItem(WC_KEY, JSON.stringify(l
 
 // Jan–Jul actuals, read live from the Budget & Forecasting tab
 function wcActuals(){
-  function fy(i){ var r=BUDGET_DATA[i]; return r ? (bgRowVals(r)[0]||0) : 0; }
-  var rev  = fy(2);       // Total Income
-  var cos  = fy(21);      // Total Cost of Sales
-  var exp  = fy(65);      // Total Expense
-  // The workbook splits cost of sales into direct and indirect; the budget tab
-  // carries them as one figure, so report it as Direct and leave Indirect at 0
-  // unless the budget grows a separate line for it.
-  return { rev:rev, direct:cos, indirect:0, opex:exp,
-           ebitda: rev - cos - exp, capex:111000, dist:600000 };
+  function row(lbl){ return BUDGET_DATA.find(function(r){ return r.label === lbl; }); }
+  // Jan-Jul (col 0) plus August actual (col 1)
+  function ja(lbl){
+    var r = row(lbl); if (!r) return 0;
+    var v = bgRowVals(r);
+    return (v[0]||0) + (v[1]||0);
+  }
+  var rev      = ja('Total Income');
+  var direct   = ja('Total \u2013 COGS Direct Costs');
+  var indirect = ja('Total \u2013 COGS Indirect Costs');
+  var opex     = ja('Total Expense');
+  return { rev:rev, direct:direct, indirect:indirect, opex:opex,
+           ebitda: rev - direct - indirect - opex,
+           capex:123000, dist:600000 };   // Jan-Aug actual
 }
 
 function wcCompute(inp){
   var B = WC_BASE, out = { months:[], totals:{} };
-  var dcHrs  = inp.hoursPerMonth * inp.dcPct;
-  var ndcHrs = inp.hoursPerMonth * (1 - inp.dcPct);
-  var revPerMonth = inp.dcRate*dcHrs + inp.ndcRate*ndcHrs;
-  var capexM = inp.capexTotal/5, distM = inp.distTotal/5;
-  for (var i=0;i<5;i++){
-    var rev = revPerMonth;
+  var N = B.months.length;
+  // Hours are built month by month: headcount x hours/employee x utilisation.
+  // Falls back to a flat figure if an older saved model is loaded.
+  function hrsFor(i){
+    if (inp.headcount && inp.utilization)
+      return (inp.headcount[i]||0) * (inp.hoursPerEmp||174) * (inp.utilization[i]||0);
+    return inp.hoursPerMonth || 0;
+  }
+  var capexM = inp.capexTotal/N, distM = inp.distTotal/N;
+  var dcHrs = 0, ndcHrs = 0, revPerMonth = 0;
+  for (var i=0;i<N;i++){
+    var hrs = hrsFor(i);
+    var mDc = hrs*inp.dcPct, mNdc = hrs*(1-inp.dcPct);
+    dcHrs += mDc; ndcHrs += mNdc;
+    var rev = inp.dcRate*mDc + inp.ndcRate*mNdc;
+    revPerMonth += rev;
     var direct = B.dlBase[i] + inp.subPct*rev + B.matOther[i];
     var indirect = B.indirect[i];
     var opex = B.opexBase[i]*(1+inp.opexAdj);
     var ebitda = rev - direct - indirect - opex;
     out.months.push({ name:B.months[i], rev:rev, direct:direct, indirect:indirect,
-      opex:opex, ebitda:ebitda, capex:capexM, dist:distM,
+      opex:opex, ebitda:ebitda, capex:capexM, dist:distM, hrs:hrs,
       wc: ebitda - capexM - distM, tax: ebitda*inp.taxRate });
   }
+  revPerMonth = N ? revPerMonth/N : 0;
   var A = wcActuals();
   // the actuals column needs these two derived rows as well
   A.wc  = A.ebitda - A.capex - A.dist;
@@ -2308,7 +2667,30 @@ function wcCompute(inp){
     capex:A.capex+out.proj.capex, dist:A.dist+out.proj.dist,
     wc:(A.ebitda-A.capex-A.dist)+out.proj.wc, tax:(A.ebitda*inp.taxRate)+out.proj.tax
   };
-  out.derived = { dcHrs:dcHrs, ndcHrs:ndcHrs, revPerMonth:revPerMonth };
+
+  // ── Cash basis: accrual FY EBITDA less the adjustment, taxed at the
+  //    effective rate. Informational — it does not touch Working Capital.
+  var cbAdj = inp.cashBasisAdj || 0;
+  var cashEbitda = out.fy.ebitda - cbAdj;
+  var taxLiab    = cashEbitda * inp.taxRate;
+  out.cash = { accrual:out.fy.ebitda, adj:cbAdj, cashEbitda:cashEbitda,
+               rate:inp.taxRate, taxLiab:taxLiab };
+  out.fy.tax = taxLiab;
+
+  // ── Ownership: split FY distributions and the tax liability in two
+  var s1 = (inp.sh1Pct === undefined ? 0.5 : inp.sh1Pct);
+  var s2 = (inp.sh2Pct === undefined ? 0.5 : inp.sh2Pct);
+  var fyDist = out.fy.dist;
+  out.owners = {
+    s1Pct:s1, s2Pct:s2, totalPct:s1+s2,
+    s1Dist:fyDist*s1, s2Dist:fyDist*s2, dist:fyDist,
+    s1Tax:taxLiab*s1, s2Tax:taxLiab*s2, tax:taxLiab,
+    s1Net:fyDist*s1 - taxLiab*s1, s2Net:fyDist*s2 - taxLiab*s2,
+    net:fyDist - taxLiab
+  };
+
+  out.derived = { dcHrs:dcHrs/(N||1), ndcHrs:ndcHrs/(N||1),
+                  dcHrsTotal:dcHrs, ndcHrsTotal:ndcHrs, revPerMonth:revPerMonth };
   return out;
 }
 
@@ -2322,6 +2704,121 @@ function wcFull(n){
   return neg?'('+s+')':s;
 }
 
+
+// ── Per-month hour build ──────────────────────────────────────────────────
+// Hours are no longer one flat figure: each month is headcount x hours x
+// utilisation, so headcount ramps and holiday PTO can be modelled directly.
+// ── FY2026 cash basis and estimated tax ───────────────────────────────────
+// Accrual EBITDA less the cash basis adjustment, taxed at the effective rate.
+// Informational: it does not reduce Working Capital Growth.
+function wcCashBasisBlock(R){
+  var c = R.cash;
+  function line(lbl, val, opts){
+    opts = opts || {};
+    return '<div style="display:flex;align-items:center;padding:7px 0;'+
+      (opts.top?'border-top:1px solid rgba(255,255,255,0.10);margin-top:4px;':'')+'">'+
+      '<span style="font-family:var(--mono);font-size:10.5px;color:rgba(255,255,255,'+
+        (opts.bold?'0.8':'0.45')+');">'+lbl+'</span>'+
+      '<span style="margin-left:auto;font-family:var(--hud);font-size:'+(opts.bold?'16':'13.5')+'px;'+
+        'font-weight:'+(opts.bold?'900':'700')+';color:'+(opts.color||'rgba(255,255,255,0.85)')+';">'+
+        wcMoney(val)+'</span></div>';
+  }
+  return '<div class="wc-panel" style="margin-top:16px;">'+
+    '<div class="wc-h" style="margin-bottom:2px;">FY2026 Estimated Tax Liability \u00b7 Cash Basis</div>'+
+    '<div class="wc-help" style="margin-bottom:6px;">Informational \u2014 does not reduce Working Capital Growth.</div>'+
+    line('FY2026 EBITDA (Accrual Basis)', c.accrual)+
+    line('(\u2013)  Cash Basis Adjustment', -c.adj, {color:'#ff9090'})+
+    line('FY2026 EBITDA (Cash Basis)', c.cashEbitda, {bold:true, color:'#d580ff', top:true})+
+    '<div style="display:flex;align-items:center;padding:7px 0;">'+
+      '<span style="font-family:var(--mono);font-size:10.5px;color:rgba(255,255,255,0.45);">Effective Tax Rate</span>'+
+      '<span style="margin-left:auto;font-family:var(--hud);font-size:13.5px;font-weight:700;'+
+        'color:rgba(255,255,255,0.85);">'+(c.rate*100).toFixed(0)+'%</span></div>'+
+    line('Estimated Tax Liability', c.taxLiab, {bold:true, color:'#fbbf24', top:true})+
+  '</div>';
+}
+
+// ── Owners distributions, split by ownership ──────────────────────────────
+function wcOwnersBlock(R){
+  var o = R.owners;
+  function col(name, pct, dist, tax, net, accent){
+    return '<div style="flex:1;border-radius:12px;padding:12px 14px;'+
+      'background:rgba('+accent+',0.07);border:1px solid rgba('+accent+',0.3);">'+
+      '<div style="font-family:var(--mono);font-size:9px;font-weight:800;letter-spacing:1.4px;'+
+        'text-transform:uppercase;color:rgba('+accent+',0.9);">'+name+'</div>'+
+      '<div style="font-family:var(--mono);font-size:9.5px;color:rgba(255,255,255,0.35);'+
+        'margin-top:2px;">'+(pct*100).toFixed(1)+'% ownership</div>'+
+      '<div style="margin-top:9px;font-family:var(--mono);font-size:9px;color:rgba(255,255,255,0.4);">Distributions</div>'+
+      '<div style="font-family:var(--hud);font-size:17px;font-weight:800;color:#fff;">'+wcMoney(dist)+'</div>'+
+      '<div style="margin-top:6px;font-family:var(--mono);font-size:9px;color:rgba(255,255,255,0.4);">(\u2013) Est. Tax</div>'+
+      '<div style="font-family:var(--hud);font-size:13.5px;font-weight:700;color:#fbbf24;">'+wcMoney(tax)+'</div>'+
+      '<div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);'+
+        'font-family:var(--mono);font-size:9px;color:rgba(255,255,255,0.4);">Net Retained</div>'+
+      '<div style="font-family:var(--hud);font-size:18px;font-weight:900;color:#4ade80;">'+wcMoney(net)+'</div>'+
+    '</div>';
+  }
+  return '<div class="wc-panel" style="margin-top:16px;">'+
+    '<div class="wc-h" style="margin-bottom:2px;">Owners Distributions \u00b7 FY2026</div>'+
+    '<div class="wc-help" style="margin-bottom:10px;">Distributions are inclusive of expected shareholder '+
+      'tax, so Net Retained is each shareholder\'s distributions less their share of the estimated liability.</div>'+
+    '<div style="display:flex;gap:10px;">'+
+      col('Shareholder 1', o.s1Pct, o.s1Dist, o.s1Tax, o.s1Net, '0,212,255')+
+      col('Shareholder 2', o.s2Pct, o.s2Dist, o.s2Tax, o.s2Net, '213,128,255')+
+      col('FY2026 Total',  o.totalPct, o.dist, o.tax, o.net, '74,222,128')+
+    '</div>'+
+  '</div>';
+}
+
+function wcHoursBuild(I, R){
+  var names = WC_BASE.months;
+  var cells = names.map(function(n,i){
+    return '<th style="font-family:var(--mono);font-size:9px;letter-spacing:1px;'+
+      'color:rgba(255,255,255,0.4);padding:4px 2px;text-align:center;">'+n+'</th>';
+  }).join('');
+  function inputRow(label, key, step, min, max, fmt){
+    var tds = names.map(function(n,i){
+      var v = (I[key]||[])[i];
+      return '<td style="padding:2px;">'+
+        '<input type="number" step="'+step+'" min="'+min+'" max="'+max+'" value="'+v+'" '+
+          'onchange="wcSetArr(\''+key+'\','+i+',parseFloat(this.value))" '+
+          'style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);'+
+          'border-radius:6px;color:#fff;font-family:var(--mono);font-size:11px;padding:4px 3px;'+
+          'text-align:center;outline:none;"/></td>';
+    }).join('');
+    return '<tr><td style="font-family:var(--mono);font-size:9.5px;color:rgba(255,255,255,0.45);'+
+      'padding:3px 6px 3px 0;white-space:nowrap;">'+label+'</td>'+tds+'</tr>';
+  }
+  var hrsRow = names.map(function(n,i){
+    var h = R.months[i] ? R.months[i].hrs : 0;
+    return '<td style="text-align:center;font-family:var(--hud);font-size:11.5px;font-weight:800;'+
+      'color:#00d4ff;padding:4px 2px;">'+Math.round(h).toLocaleString()+'</td>';
+  }).join('');
+
+  return '<div class="wc-input" style="padding-bottom:10px;">'+
+    '<div class="wc-in-top" style="margin-bottom:6px;">'+
+      '<span class="wc-in-label">Available DL Hours \u2014 built by month</span></div>'+
+    '<table style="width:100%;border-collapse:collapse;">'+
+      '<tr><td></td>'+cells+'</tr>'+
+      inputRow('Headcount','headcount',1,0,200) +
+      inputRow('Utilisation','utilization',0.01,0,1) +
+      '<tr><td style="font-family:var(--mono);font-size:9.5px;color:rgba(255,255,255,0.45);'+
+        'padding:3px 6px 3px 0;">Total DL Hours</td>'+hrsRow+'</tr>'+
+    '</table>'+
+    '<div class="wc-help" style="margin-top:7px;">Each month is headcount \u00d7 '+
+      (I.hoursPerEmp||174)+' hours \u00d7 utilisation. Headcount ramps through year-end; '+
+      'utilisation steps down in Nov and Dec for holiday PTO.</div>'+
+  '</div>';
+}
+
+// ── Ownership check ───────────────────────────────────────────────────────
+function wcOwnershipCheck(R){
+  var t = (R.owners.totalPct||0)*100;
+  var ok = Math.abs(t-100) < 0.5;
+  return '<div class="wc-help" style="background:rgba('+(ok?'74,222,128':'248,113,113')+',0.08);'+
+    'border:1px solid rgba('+(ok?'74,222,128':'248,113,113')+',0.3);border-radius:8px;'+
+    'padding:9px 11px;margin-top:-4px;">'+
+    'Total ownership: <b style="color:'+(ok?'#4ade80':'#f87171')+';">'+t.toFixed(1)+'%</b>'+
+    (ok ? '' : ' \u2014 the two shares should total 100%')+'</div>';
+}
 
 function renderBudgetWCTab(el){
   el.innerHTML = bgHeader() +
@@ -2440,14 +2937,13 @@ function renderBudgetWC(el){
         '<div class="wc-panel">'+
           '<div class="wc-h">Model Inputs</div>'+
           '<div class="wc-sub">1 · Revenue Drivers</div>'+
-          slider('dcRate','Data Center — Rate / Hour',300,1500,10,dol,
-            'Billing rate for Data Center work. Jan–Jul blended near $1,090/hr, but about $860/hr excluding QTS Midland.')+
-          slider('ndcRate','Non-Data Center — Rate / Hour',80,400,5,dol,
-            'Billing rate for all other work. Jan–Jul ran about $175/hr blended.')+
-          slider('hoursPerMonth','Available DL Hours / Month',2000,7000,50,num,
-            'Total billable direct labour hours per month before the Data Center split.')+
-          slider('dcPct','% of Hours to Data Center',0,1,0.01,pct,
-            'Share of hours on Data Center work; the rest is Non-Data Center. Shifts revenue between the two rates without changing total hours.')+
+          slider('dcRate','QTS & Corgan — Rate / Hour',300,1500,10,dol,
+            'Billing rate for QTS and Corgan data centre work. Jan–Aug blended $1,133/hr, or about $920/hr excluding QTS Midland.')+
+          slider('ndcRate','All Other Work — Rate / Hour',80,400,5,dol,
+            'Billing rate for all non-QTS/Corgan work. Jan–Aug ran about $225/hr.')+
+          slider('dcPct','% of Hours to QTS & Corgan',0,1,0.01,pct,
+            'Share of hours on QTS and Corgan work; the rest is All Other Work. The Jan–Aug actual mix was 42%.')+
+          wcHoursBuild(I, R)+
           '<div class="wc-help" style="background:rgba(0,212,255,0.06);border-radius:8px;padding:9px 11px;margin-top:-4px;">'+
             'Derived: <b style="color:#00d4ff;">'+Math.round(R.derived.dcHrs).toLocaleString()+'</b> DC hrs + '+
             '<b style="color:#00d4ff;">'+Math.round(R.derived.ndcHrs).toLocaleString()+'</b> non-DC hrs '+
@@ -2459,15 +2955,24 @@ function renderBudgetWC(el){
           slider('opexAdj','Operating Expense Adjustment',-0.10,0.10,0.005,pct,
             'Scales monthly Op. Ex up or down from the baseline plan.')+
 
-          '<div class="wc-sub">3 · Capital Allocation (Aug–Dec)</div>'+
+          '<div class="wc-sub">3 · Capital Allocation (Sep–Dec)</div>'+
           slider('capexTotal','Cap. Ex & Debt Pay — Total',0,600000,10000,dol,
-            'Spread evenly across the five months. Reduces working capital growth dollar for dollar. Jan–Jul actual was $111k.')+
-          slider('distTotal','Distributions — Total',0,12000000,100000,dol,
-            'Owner distributions, spread evenly. Reduces working capital growth. Jan–Jul actual was $600k.')+
+            'Total for Sep–Dec, spread evenly. Reduces working capital growth dollar for dollar. Jan–Aug actual was $123k.')+
+          slider('distTotal','Distributions — Total',0,16000000,100000,dol,
+            'Owner distributions for Sep–Dec, inclusive of expected shareholder tax. Reduces working capital growth. Jan–Aug actual was $600k.')+
 
-          '<div class="wc-sub">4 · Tax</div>'+
+          '<div class="wc-sub">4 · Tax & Cash Basis Adjustment</div>'+
           slider('taxRate','Effective Tax Rate',0,0.5,0.01,pct,
-            'Applied to EBITDA to estimate shareholder tax liability. Informational — does not reduce working capital growth.')+
+            'Applied to FY2026 cash basis EBITDA to estimate the tax liability. Informational — does not reduce working capital growth.')+
+          slider('cashBasisAdj','Cash Basis Adjustment — FY2026',0,8000000,100000,dol,
+            'Accrual FY2026 EBITDA less this amount equals cash basis EBITDA, and the tax rate applies to that reduced figure.')+
+
+          '<div class="wc-sub">5 · Ownership Split</div>'+
+          slider('sh1Pct','Shareholder 1 — Ownership %',0,1,0.01,pct,
+            'Share of FY2026 distributions and of the estimated tax liability.')+
+          slider('sh2Pct','Shareholder 2 — Ownership %',0,1,0.01,pct,
+            'Shareholder 2 share of the same two figures. The two should total 100%.')+
+          wcOwnershipCheck(R)+
 
           '<div style="display:flex;gap:8px;margin-top:6px;">'+
             '<div class="wc-btn" style="flex:1;background:rgba(0,212,255,0.12);border-color:rgba(0,212,255,0.45);color:#00d4ff;" '+
@@ -2507,7 +3012,7 @@ function renderBudgetWC(el){
         '<div class="wc-panel">'+
           '<div class="wc-h">Compact P&amp;L Model</div>'+
           '<table class="wc-table">'+
-            '<thead><tr><th>Line Item</th><th>Actuals<br>Jan–Jul</th>'+
+            '<thead><tr><th>Line Item</th><th>Actuals<br>Jan–Aug</th>'+
               R.months.map(function(m){ return '<th>'+m.name+'<br>Proj</th>'; }).join('')+
               '<th>FY2026<br>Total</th></tr></thead>'+
             '<tbody>'+
@@ -2520,13 +3025,13 @@ function renderBudgetWC(el){
               row('(–) Cap. Ex &amp; Debt Pay','capex',{})+
               row('(–) Distributions','dist',{})+
               row('Working Capital Growth','wc',{bold:true,color:'#00d4ff'})+
-              '<tr class="wc-sec"><td colspan="8">Estimated Tax Liability — informational, does not reduce working capital</td></tr>'+
-              row('Estimated Tax Liability','tax',{color:'#fbbf24'})+
             '</tbody>'+
           '</table>'+
+          wcCashBasisBlock(R)+
+          wcOwnersBlock(R)+
           '<div class="wc-help" style="margin-top:12px;">'+
-            'The Actuals column reads live from Budget &amp; Forecasting, so uploading a new monthly '+
-            'updates this model automatically. Aug–Dec are driven by the assumptions on the left.</div>'+
+            'The Actuals column reads live from Budget &amp; Forecasting, so uploading a new month '+
+            'updates this model automatically. Sep–Dec are driven by the assumptions on the left.</div>'+
         '</div>'+
       '</div>'+
     '</div>';
@@ -2542,6 +3047,14 @@ function wcSet(key, val){
   WC_INPUTS[key] = val;
   wcRerender();
 }
+// per-month array inputs (headcount, utilisation)
+function wcSetArr(key, idx, val){
+  if (!WC_INPUTS) WC_INPUTS = JSON.parse(JSON.stringify(WC_DEFAULTS));
+  if (!WC_INPUTS[key]) WC_INPUTS[key] = [];
+  WC_INPUTS[key][idx] = isNaN(val) ? 0 : val;
+  renderBudgetWC(document.getElementById('wc-body'));
+}
+
 function wcSetText(key, raw){
   var v = parseFloat(String(raw).replace(/[$,\s]/g,''));
   if (isNaN(v)) { wcRerender(); return; }
@@ -2594,11 +3107,22 @@ function wcDeleteModel(id){
   wcRerender();
 }
 
+// Names the closed or open span from BG_IS_ACTUAL, e.g. "Jan-Aug" / "Sep-Dec".
+function bgSpanLabel(wantActual){
+  var NAMES = ['Jan','Aug','Sep','Oct','Nov','Dec'];
+  var hit = [];
+  for (var i=0;i<6;i++) if (!!BG_IS_ACTUAL[i] === !!wantActual) hit.push(i);
+  if (!hit.length) return '\u2014';
+  var a = NAMES[hit[0]], b = NAMES[hit[hit.length-1]];
+  return a === b ? a : a + '\u2013' + b;
+}
+
 function renderBudgetSummary(el) {
   var M = bgCalcMetrics();
-  var actualMonths = 7;
+  var actualMonths = 0;
+  BG_IS_ACTUAL.forEach(function(on,i){ if (on) actualMonths += (i===0 ? 7 : 1); });
   BG_MONTHS.forEach(function(mk,i){
-    if (i>0 && Object.keys(BUDGET_ACTUALS[mk]||{}).length>0) actualMonths++;
+    if (i>0 && !BG_IS_ACTUAL[i] && Object.keys(BUDGET_ACTUALS[mk]||{}).length>0) actualMonths++;
   });
 
   // ── Planet data ────────────────────────────────────────────────────────────
@@ -2768,8 +3292,10 @@ function renderBudgetSummary(el) {
   }).join('');
 
   // ── Summary table with 3 cols: Actuals | Projected | Total ────────────────
-  function rowAct(i)  { var v=bgRowVals(BUDGET_DATA[i]); return v[0]||0; }
-  function rowProj(i) { var v=bgRowVals(BUDGET_DATA[i]); return (v[1]||0)+(v[2]||0)+(v[3]||0)+(v[4]||0)+(v[5]||0); }
+  function rowAct(i)  { var v=bgRowVals(BUDGET_DATA[i]); var t=0;
+    for (var c=0;c<6;c++) if (BG_IS_ACTUAL[c]) t += (v[c]||0); return t; }
+  function rowProj(i) { var v=bgRowVals(BUDGET_DATA[i]); var t=0;
+    for (var c=0;c<6;c++) if (!BG_IS_ACTUAL[c]) t += (v[c]||0); return t; }
   function rowFY(i)   { return rowAct(i)+rowProj(i); }
 
   var rev_a=rowAct(2),  rev_p=rowProj(2),  rev_t=rowFY(2);
@@ -2859,27 +3385,64 @@ function renderBudgetSummary(el) {
     '</th>';
   }
 
-  // ── Build summary table ───────────────────────────────────────────────
+  // ── Full-year readout ───────────────────────────────────────────────
+  // Instrument rows rather than a grid: each line gets a channel where the
+  // actual and projected halves share one bar, so the shape of the year reads
+  // before any number does.
+  function sumBar(a, p, color, rgb){
+    var tot = (a||0) + (p||0);
+    if (tot <= 0) return '';
+    var ap = Math.max(0, Math.min(100, (a/tot)*100));
+    return '<div class="fy-track">'+
+      '<div class="fy-act" style="width:'+ap.toFixed(1)+'%;background:'+
+        'linear-gradient(90deg,rgba('+rgb+',0.5),rgba('+rgb+',0.95));'+
+        'box-shadow:0 0 16px rgba('+rgb+',0.5);"></div>'+
+      '<div class="fy-proj" style="left:'+ap.toFixed(1)+'%;'+
+        'background:repeating-linear-gradient(115deg,rgba('+rgb+',0.34) 0 6px,'+
+        'rgba('+rgb+',0.09) 6px 12px);"></div>'+
+      '<div class="fy-split" style="left:'+ap.toFixed(1)+'%;background:'+color+';'+
+        'box-shadow:0 0 12px '+color+';"></div>'+
+    '</div>';
+  }
+
+  function fyRow(label, a, p, t, color, rgb, opts){
+    opts = opts || {};
+    var big = !!opts.hero;
+    var chip = opts.pctOf
+      ? '<span class="fy-chip" style="color:'+color+';background:rgba('+rgb+',0.13);'+
+          'border:1px solid rgba('+rgb+',0.4);">'+pct(t, opts.pctOf)+' of rev</span>'
+      : '';
+    return '<div class="fy-row'+(big?' hero':'')+'" style="--c:'+color+';--rgb:'+rgb+';">'+
+      '<div class="fy-head">'+
+        '<span class="fy-name"'+(big?' style="color:'+color+';"':'')+'>'+label+'</span>'+
+        chip+
+        '<span class="fy-total"'+(big?' style="color:'+color+';text-shadow:0 0 24px rgba('+rgb+',0.7);"'
+                                    :' style="color:'+color+';"')+'>'+bgFmtM(t)+'</span>'+
+      '</div>'+
+      sumBar(a, p, color, rgb)+
+      '<div class="fy-legs">'+
+        '<span class="fy-leg"><i class="fy-dot" style="background:'+color+';"></i>'+
+          'Actual <b>'+bgFmtM(a)+'</b></span>'+
+        '<span class="fy-leg"><i class="fy-dot hatch" style="border-color:'+color+';"></i>'+
+          'Projected <b>'+bgFmtM(p)+'</b></span>'+
+      '</div>'+
+    '</div>';
+  }
+
   var summaryTable =
-    '<table style="width:100%;border-collapse:collapse;">'+
-      '<thead>'+
-        '<tr style="background:rgba(255,255,255,0.045);border-bottom:2px solid rgba(255,255,255,0.14);">'+
-          sumTh('Line Item', '', 'rgba(255,255,255,0.68)', '255,255,255', {left:true})+
-          sumTh('Actuals',   'Jan\u2013Jul', '#5eeb96', '94,235,150')+
-          sumTh('Projected', 'Aug\u2013Dec', '#f7b32b', '247,179,43')+
-          sumTh('Full Year', 'Total', '#ffd34d', '255,211,77', {
-            bg:'background:rgba(251,191,36,0.09);',
-            border:'border-left:2px solid rgba(251,191,36,0.45);'})+
-        '</tr>'+
-      '</thead>'+
-      '<tbody>'+
-        sumRow('Revenue',            rev_a, rev_p, rev_t, '#e8f0ff', true,  false)+
-        sumRow('Cost of Sales',      cos_a, cos_p, cos_t, '#ff6b6b', false, false)+
-        sumRow('Gross Profit',       gp_a,  gp_p,  gp_t,  '#00e5ff', true,  true,  'GM '+pct(gp_a,rev_a),   'GM '+pct(gp_p,rev_p),   'GM '+pct(gp_t,rev_t))+
-        sumRow('Operating Expenses', exp_a, exp_p, exp_t, '#ffd060', false, false)+
-        sumRow('EBITDA',             ebi_a, ebi_p, ebi_t, '#d580ff', true,  true,  'EBITDA '+pct(ebi_a,rev_a),'EBITDA '+pct(ebi_p,rev_p),'EBITDA '+pct(ebi_t,rev_t))+
-      '</tbody>'+
-    '</table>';
+    '<div class="fy-panel">'+
+      '<div class="fy-colhead">'+
+        '<span class="fy-ch"><i class="fy-dot" style="background:#5eeb96;"></i>Actual \u00b7 '+
+          bgSpanLabel(true)+'</span>'+
+        '<span class="fy-ch"><i class="fy-dot hatch" style="border-color:#f7b32b;"></i>Projected \u00b7 '+
+          bgSpanLabel(false)+'</span>'+
+      '</div>'+
+      fyRow('Revenue',            rev_a, rev_p, rev_t, '#7dd3ff','125,211,255',{hero:true})+
+      fyRow('Cost of Sales',      cos_a, cos_p, cos_t, '#ff7b7b','255,123,123',{pctOf:rev_t})+
+      fyRow('Gross Profit',       gp_a,  gp_p,  gp_t,  '#00e5ff','0,229,255',{hero:true,pctOf:rev_t})+
+      fyRow('Operating Expenses', exp_a, exp_p, exp_t, '#ffd060','255,208,96',{pctOf:rev_t})+
+      fyRow('EBITDA',             ebi_a, ebi_p, ebi_t, '#d580ff','213,128,255',{hero:true,pctOf:rev_t})+
+    '</div>';
 
   // ── Projector beam overlay ─────────────────────────────────────────
   // Geometry is measured at runtime by bgDrawProjection() so the light cone
@@ -3112,7 +3675,7 @@ function renderBudgetDetailed(el) {
         '400px 45px 0 rgba(255,255,255,0.25);pointer-events:none;"></div>'+
 
       // ── UFO cruising through the middle of the page ──
-      '<div class="ufo-lane">'+bgUFO()+'</div>'+
+      '<div class="ufo-lane">'+bgUFO(bgEbitdaKPI())+'</div>'+
 
       '<div style="overflow:auto;max-height:calc(100vh - 200px);">'+
         '<table class="bgdet" style="width:100%;border-collapse:collapse;min-width:900px;">'+
@@ -3636,36 +4199,138 @@ function bgPostForecast() {
    ═══════════════════════════════════════════════════════════════════════ */
 var YTD_DATA = {
   year: 2026,
-  isPlaceholder: true,          // set false once real figures are entered
+  isPlaceholder: false,
+  asOf: 'August 2026',          // UPDATE MONTHLY with the new P&L
 
   // ── Every figure below is zeroed out, waiting on real data. Project and
   //    customer names are the live ones from the weekly timesheet uploads.
-  revenue:        0,            // 2026 revenue YTD
-  cashCollected:  0,            // ← UPDATE MONTHLY: cash actually collected YTD
-  projectCount:   0,            // projects contributing revenue
-  marginYTD:      0,            // 2026 YTD project profit margin
-  margin2025:     0,            // 2025 actual margin
-  marginTarget:   0,            // 2026 target margin
+  revenue:        20402005,     // 4000 - Project Income, Jan-Aug 2026
+  cashCollected:  9449022,      // UPDATE MONTHLY: cash actually collected YTD
+  projectCount:   184,          // projects contributing revenue
+  // (revenue - 5000 COGS Direct Costs) / revenue. Indirect costs are
+  // deliberately excluded: this is project-level profitability.
+  marginYTD:      0.870,
+  directCosts:    2652484,      // 5000 - COGS Direct Costs, Jan-Aug 2026
+  marginMin:      0.67,         // minimum target: a 3x bill rate
+  marginTarget:   0.67,
 
-  projection:     0,            // 2026 PROJECTION
+  // cash receipts by month, feeding the total above
+  cashMonthly: [167565.50, 700526.46, 633345.43, 1316202.70,
+                1243262.10, 2170117.97, 732856.97, 2485145.62,
+                0, 0, 0, 0],
 
-  pace2025:       0,            // 2025 revenue through this same date
-  fullYear2025:   0,            // 2025 full-year revenue
+  projection:     28000000,     // 2026 full-year revenue projection
+
+  pace2025:       7333425,      // 2025 through Aug, straight-lined (8/12 of full year)
+  paceIsEstimate: true,         // flip to false once real Jan-Aug 2025 is loaded
+  fullYear2025:   11000138,     // 2025 full-year revenue
 
   // Jan -> Dec. Leave a month at 0 until it closes; the "avg/mo" figure and
   // the dashed mean line only count closed months.
-  monthly: [0,0,0,0,0,0,0,0,0,0,0,0],
+  // Jan-Jul carried at the average for those months; August actual.
+  monthly: [2480000,2480000,2480000,2480000,2480000,2480000,2480000,3030000,0,0,0,0],
 
   // revenue concentration — top projects by revenue
+  // Top projects by YTD Aug revenue, from the Project Breakdown tab.
+  // The card derives "All others" from total revenue, so only the top slice
+  // is listed here.
   projects: [
-    { name:"QTS - Turkey, TX",                    rev:0 },
-    { name:"QTS - DFW3 - Lancaster, TX",          rev:0 },
-    { name:"JP Sewer Bond Program",               rev:0 },
-    { name:"FedEx Parking Lot Expansion",         rev:0 },
-    { name:"UPS New Orleans Expansion",           rev:0 },
-    { name:"CarMax - Riverdale, UT",              rev:0 },
-    { name:"QTS CDR East & West Campus",          rev:0 }
+    { name:"25-086 \u00b7 QTS Turkey, TX", rev:4655779 },
+    { name:"25-119 \u00b7 QTS State Highway 349, Midland, TX", rev:4173458 },
+    { name:"23-044 \u00b7 QTS SLC1", rev:2250975 },
+    { name:"24-023 \u00b7 QTS CDR East & West Campus", rev:810279 },
+    { name:"25-105 \u00b7 DAS114", rev:632655 },
+    { name:"26-041 \u00b7 SLC1/SLC2 Offsite Road Improvements", rev:350428 },
+    { name:"26-093.1 \u00b7 SLC1 Expansion, SLC2 Phase 1, and SLC Pha\u2026", rev:326164 },
+    { name:"26-028 \u00b7 QTS SLC2 Campus Campus Planning Eagle Mou\u2026", rev:317050 },
+    { name:"26-069 \u00b7 QTS DFW3 - Lancaster, TX", rev:304442 },
+    { name:"26-030 \u00b7 Kinder Morgan TGP Compressor Station 530\u2026", rev:287725 }
   ],
+
+
+  // ── Revenue per hour, Aug 2026 YTD (Summary by Customer YTD) ──────────
+  rph: {
+    blended:  606.50,           // all customers
+    rev:      20175808,
+    hours:    33265.8,
+    qts:      { rph:1273.05, rev:14437062, hours:11340.5 },
+    nonQts:   { rph:261.74, rev:5738746, hours:21925.3 },
+    customerCount: 55,
+    // Non-QTS customers with at least 250 DL hours, ranked by rate. The floor
+    // keeps a few-hour job from topping the list on a meaningless rate.
+    topMinHours: 250,
+    top: [
+      { cust:"Corgan",                              rph:  575.42, hrs:   2831.8, rev:1629488 },
+      { cust:"Waskey Bridges Inc.",                 rph:  505.40, hrs:    941.0, rev:475585 },
+      { cust:"Edged",                               rph:  363.66, hrs:    829.8, rev:301745 },
+      { cust:"Quality Infratech Intelligence, LLC (QII)", rph:  315.97, hrs:    354.2, rev:111934 },
+      { cust:"Floor & Decor",                       rph:  290.09, hrs:    974.5, rev:282690 },
+      { cust:"J Caldarera Company",                 rph:  248.57, hrs:    282.2, rev:70158 },
+      { cust:"JP Department of PW",                 rph:  243.24, hrs:   1370.0, rev:333234 },
+      { cust:"Meyer & Associates, Inc.",            rph:  226.49, hrs:   1625.5, rev:368166 },
+      { cust:"Basic Systems, Inc.",                 rph:  187.17, hrs:    971.0, rev:181740 },
+      { cust:"POH+W Architects Ltd.",               rph:  169.59, hrs:    262.8, rev:44560 }
+    ],
+
+    // every customer with hours, for the breakdown overlay
+    all: [
+      { cust:"Quality Technology Services, LLC", rph:1273.05, hrs:11340.5, rev:14437062 },
+      { cust:"Corgan", rph:575.42, hrs:2831.8, rev:1629488 },
+      { cust:"Waskey Bridges Inc.", rph:505.40, hrs:941.0, rev:475585 },
+      { cust:"Meyer & Associates, Inc.", rph:226.49, hrs:1625.5, rev:368166 },
+      { cust:"JP Department of PW", rph:243.24, hrs:1370.0, rev:333234 },
+      { cust:"Edged", rph:363.66, hrs:829.8, rev:301745 },
+      { cust:"Digital Engineering", rph:105.95, hrs:2671.5, rev:283035 },
+      { cust:"Floor & Decor", rph:290.09, hrs:974.5, rev:282690 },
+      { cust:"CarMax", rph:162.36, hrs:1531.8, rev:248698 },
+      { cust:"Suffolk", rph:13367.63, hrs:17.5, rev:233934 },
+      { cust:"Highland Associates", rph:3292.39, hrs:57.0, rev:187666 },
+      { cust:"Basic Systems, Inc.", rph:187.17, hrs:971.0, rev:181740 },
+      { cust:"Venture Global Gator Express, LLC", rph:796.25, hrs:220.0, rev:175174 },
+      { cust:"Rosehill Construction", rph:75.17, hrs:2174.2, rev:163445 },
+      { cust:"Quality Infratech Intelligence, LLC (QII)", rph:315.97, hrs:354.2, rev:111934 },
+      { cust:"J Caldarera Company", rph:248.57, hrs:282.2, rev:70158 },
+      { cust:"Long Law Firm", rph:263.12, hrs:211.5, rev:55650 },
+      { cust:"Duplantis Design group", rph:58.67, hrs:927.5, rev:54418 },
+      { cust:"Blue Whale Development", rph:142.36, hrs:337.2, rev:48010 },
+      { cust:"City of Westlake", rph:97.82, hrs:471.5, rev:46120 },
+      { cust:"Layton - LF Driscoll", rph:488.50, hrs:92.0, rev:44942 },
+      { cust:"POH+W Architects Ltd.", rph:169.59, hrs:262.8, rev:44560 },
+      { cust:"SCNZ Architects, LLC", rph:126.13, hrs:339.0, rev:42758 },
+      { cust:"St. Tammany Parish Procurement", rph:211.87, hrs:175.0, rev:37078 },
+      { cust:"Hoist & Crane Service Group", rph:277.87, hrs:117.2, rev:32580 },
+      { cust:"Watermark Design", rph:242.88, hrs:118.5, rev:28781 },
+      { cust:"Outlyr", rph:395.86, hrs:55.5, rev:21970 },
+      { cust:"Copeland and Johns", rph:56.71, hrs:354.5, rev:20102 },
+      { cust:"Woodward Design Group", rph:166.88, hrs:119.5, rev:19942 },
+      { cust:"Frischhertz", rph:166.42, hrs:119.5, rev:19888 },
+      { cust:"Enbridge", rph:585.00, hrs:32.0, rev:18720 },
+      { cust:"Diamond Z Engineering", rph:107.06, hrs:130.8, rev:13998 },
+      { cust:"Little", rph:311.98, hrs:40.5, rev:12635 },
+      { cust:"Star Service, Inc. A Fidelity Company", rph:338.91, hrs:33.0, rev:11184 },
+      { cust:"Harbor Towing and Fleeting, LLC", rph:21120.00, hrs:0.5, rev:10560 },
+      { cust:"Traffic Commander", rph:248.96, hrs:38.5, rev:9585 },
+      { cust:"O'Connor Capital Partners", rph:448.78, hrs:20.5, rev:9200 },
+      { cust:"SeaLevel Inc.", rph:121.14, hrs:72.5, rev:8782 },
+      { cust:"Cycle Construction", rph:126.85, hrs:67.5, rev:8563 },
+      { cust:"A/C Electric Service, Inc.", rph:117.19, hrs:73.0, rev:8555 },
+      { cust:"Hutton", rph:1705.00, hrs:5.0, rev:8525 },
+      { cust:"The Kitchen Guys", rph:2500.00, hrs:3.0, rev:7500 },
+      { cust:"NOLA Dentures and General Dentistry", rph:51.90, hrs:134.5, rev:6980 },
+      { cust:"M.R. Pittman Group, LLC", rph:67.24, hrs:101.5, rev:6825 },
+      { cust:"New Orleans Center for Aesthetics and Plastic Surgery", rph:77.01, hrs:87.0, rev:6700 },
+      { cust:"Flavored Operations, LLC", rph:19.67, hrs:330.5, rev:6500 },
+      { cust:"Madison Capital Group", rph:146.56, hrs:32.0, rev:4690 },
+      { cust:"Arnett Construction Company", rph:189.50, hrs:20.0, rev:3790 },
+      { cust:"Centerpoint Integrated Solutions", rph:203.60, hrs:12.5, rev:2545 },
+      { cust:"Build Commercial Construction", rph:33.90, hrs:59.0, rev:2000 },
+      { cust:"Laitram", rph:50.13, hrs:38.5, rev:1930 },
+      { cust:"Mile High Sliders, LLC", rph:54.41, hrs:27.8, rev:1510 },
+      { cust:"Jos. R. Labadot", rph:750.00, hrs:2.0, rev:1500 },
+      { cust:"Arthur W. Landry", rph:250.00, hrs:5.0, rev:1250 },
+      { cust:"Studio Kiro", rph:246.00, hrs:5.0, rev:1230 }
+    ]
+  },
 
   profit: {
     total:  0,
@@ -3681,34 +4346,369 @@ var YTD_DATA = {
   },
 
   backlog: {
-    total: 0,
-    projectCount: 0,
+    total: 10134339,
+    projectCount: 81,
+    // Top jobs, shown as badges on the sash. Decimal sub-projects are rolled
+    // into their parent unless the sub bills to a different customer.
     items: [
-      { name:"QTS - Turkey, TX",                  amt:0 },
-      { name:"SLC2 Campus Plan - DC1-DC2",        amt:0 },
-      { name:"QTS - DFW3 - Lancaster, TX",        amt:0 },
-      { name:"JP Sewer Bond Program",             amt:0 },
-      { name:"Salt Lake City - Eagle Mountain",   amt:0 },
-      { name:"Floor & Decor, Raleigh, NC",        amt:0 },
-      { name:"CPPJ Ph 3 Elliot Rd Pump Station",  amt:0 },
-      { name:"FedEx Parking Lot Expansion",       amt:0 }
+      { name:"SLC1 Expansion, SLC2 Phase 1, and\u2026", amt:1251934,   cust:"Quality Technology Services, LLC", num:"26-093.1", rev:326164 },
+      { name:"SLC2 Campus Plan - DC1-DC2 Civil\u2026", amt:961240,    cust:"Corgan", num:"26-093", rev:235200 },
+      { name:"QTS Turkey, TX - Phase 2 - Civil\u2026", amt:857656,    cust:"Quality Technology Services, LLC", num:"25-086", rev:3979254 },
+      { name:"QTS Cedar Rapids, IA",                  amt:794029,    cust:"Quality Technology Services, LLC", num:"24-023", rev:5403532 },
+      { name:"Mason City, IA Data Center",            amt:649236,    cust:"Quality Technology Services, LLC", num:"26-011", rev:207944 },
+      { name:"QTS DFW3 - Lancaster, TX",              amt:612602,    cust:"Corgan", num:"26-069", rev:304442 },
+      { name:"QII-Fort Bend Parkway, Houston, TX",    amt:523401,    cust:"Quality Infratech Intelligence, LLC (QII)", num:"26-070", rev:45934 },
+      { name:"DAS114",                                amt:429365,    cust:"Corgan", num:"25-105", rev:384825 },
+      { name:"US Hwy 67, Johnson County, TX",         amt:299445,    cust:"Quality Technology Services, LLC", num:"26-091", rev:0 },
+      { name:"Tammany Trace Bridge #7",               amt:291431,    cust:"St. Tammany Parish Procurement", num:"24-042", rev:67335 }
+    ],
+    // Every active job with backlog, for the breakdown overlay.
+    all: [
+      { num:"26-093.1", name:"SLC1 Expansion, SLC2 Phase 1, and SLC Phase 2 Offsite Infr", cust:"Quality Technology Services, LLC", bl:1251934, rev:326164 },
+      { num:"26-093", name:"SLC2 Campus Plan - DC1-DC2 Civil Construction Drawings", cust:"Corgan", bl:961240, rev:235200 },
+      { num:"25-086", name:"QTS Turkey, TX - Phase 2 - Civil Site Plans", cust:"Quality Technology Services, LLC", bl:857656, rev:3979254 },
+      { num:"24-023", name:"QTS Cedar Rapids, IA", cust:"Quality Technology Services, LLC", bl:794029, rev:5403532 },
+      { num:"26-011", name:"Mason City, IA Data Center", cust:"Quality Technology Services, LLC", bl:649236, rev:207944 },
+      { num:"26-069", name:"QTS - DFW3 - Lancaster, TX", cust:"Corgan", bl:612602, rev:304442 },
+      { num:"26-070", name:"QII-Fort Bend Parkway, Houston, TX", cust:"Quality Infratech Intelligence, LLC (QII)", bl:523401, rev:45934 },
+      { num:"25-105", name:"DAS114 (DC-5, DC-6, DC-7, and DC-8)", cust:"Corgan", bl:429365, rev:384825 },
+      { num:"26-091", name:"US Hwy 67, Johnson County, TX", cust:"Quality Technology Services, LLC", bl:299445, rev:0 },
+      { num:"24-042", name:"Tammany Trace Bridge #7", cust:"St. Tammany Parish Procurement", bl:291431, rev:67335 },
+      { num:"26-068", name:"Southern Star McNew Compressor Station", cust:"Basic Systems, Inc.", bl:227370, rev:0 },
+      { num:"25-075", name:"CarMax-Uxbridge, MA", cust:"CarMax", bl:213840, rev:69830 },
+      { num:"23-044", name:"QTS - SLC1", cust:"Quality Technology Services, LLC", bl:190372, rev:2250975 },
+      { num:"26-018", name:"QTS-DFW2 Corner Site - Wilmer, TX", cust:"Corgan", bl:190370, rev:74355 },
+      { num:"24003", name:"Seven Oaks - US 90 Street Lighting", cust:"JP Department of PW", bl:157326, rev:78653 },
+      { num:"24-067", name:"DFW2-DAS114", cust:"Corgan", bl:140786, rev:286794 },
+      { num:"26-009", name:"Parish Line Pump Station Improvements Phase 2", cust:"Digital Engineering", bl:133000, rev:19500 },
+      { num:"25-093", name:"CarMax-Riverview,FL", cust:"CarMax", bl:131750, rev:35130 },
+      { num:"25-109", name:"EDGED Monroe Campus", cust:"MG2", bl:117906, rev:107829 },
+      { num:"26-031", name:"CarMax-Brownsville, TX", cust:"CarMax", bl:103175, rev:65540 },
+      { num:"22006", name:"LA Trace Subdivision Lot Study", cust:"J Caldarera Company", bl:100800, rev:69370 },
+      { num:"26-095", name:"ABI01 \u2013 Entry Enhancement Civil Design", cust:"Oracle", bl:95000, rev:0 },
+      { num:"25-100", name:"Carmax Wayne, NJ expansion", cust:"CarMax", bl:93905, rev:86691 },
+      { num:"25-110", name:"EDGED Mobile Campus (Pritchard)", cust:"MG2", bl:90215, rev:63670 },
+      { num:"24-004", name:"CarMax Lake Charles, LA", cust:"POH+W Architects Ltd.", bl:76680, rev:0 },
+      { num:"5008", name:"JP East Ames Blvd. Roadway", cust:"JP Department of PW", bl:69175, rev:132457 },
+      { num:"26-098", name:"Professional Civil Engineering Services QTS Prototype Stan", cust:"Corgan", bl:68750, rev:6250 },
+      { num:"25-081", name:"National Golf Club of Louisiana", cust:"City of Westlake", bl:67631, rev:46120 },
+      { num:"25-078", name:"CarMax-Riverdale-UT Site Entitlements", cust:"CarMax", bl:66170, rev:37660 },
+      { num:"25-121", name:"Southern Star Viola Energy, Sumner KS", cust:"Basic Systems, Inc.", bl:56258, rev:168772 },
+      { num:"26-063", name:"QTS - 201 Erie Rd., Eastlake, OH", cust:"Quality Technology Services, LLC", bl:56000, rev:0 },
+      { num:"20001", name:"JP Stumpf Blvd Lighting", cust:"JP Department of PW", bl:50892, rev:72366 },
+      { num:"26-030", name:"Kinder Morgan TGP Compressor Station 530 Rev.1, MS", cust:"Waskey Bridges Inc.", bl:50775, rev:287725 },
+      { num:"24-002", name:"Floor & Decor Site Planning & Lease Exhibits : Floor & Dec", cust:"Floor & Decor", bl:50395, rev:179714 },
+      { num:"26-047", name:"Renovation of 5307 Toler - Laitram Harahan Campus", cust:"SCNZ Architects, LLC", bl:47778, rev:42178 },
+      { num:"25-021", name:"QTS-DFW2-DC4 Wilmer, TX (DC-4)", cust:"Corgan", bl:44578, rev:181863 },
+      { num:"26-039", name:"7 Brew - Sulphur, LA - 212 S. Cities", cust:"Flavored Operations, LLC", bl:44385, rev:0 },
+      { num:"22-053", name:"POLC Shed 7 Replacement", cust:"Meyer & Associates, Inc.", bl:41953, rev:231107 },
+      { num:"24-098", name:"Carmax Waco,TX", cust:"POH+W Architects Ltd.", bl:40140, rev:44560 },
+      { num:"26-060", name:"Brookwood - Highway 44, Gonzales, LA", cust:"Rosehill Construction", bl:39281, rev:4040 },
+      { num:"25-067", name:"Woodward Design Group - Canal Barge", cust:"Woodward Design Group", bl:37257, rev:8293 },
+      { num:"3011-01", name:"JP Harvey Blvd. Roadway Improvement", cust:"JP Department of PW", bl:36947, rev:193424 },
+      { num:"25-076", name:"Boat Dock Modifications - Plaquemines, LA", cust:"Venture Global Gator Express, LLC", bl:36500, rev:175174 },
+      { num:"26-055", name:"Lift Station Improvements, Plaquemines Parish, LA", cust:"Trigon Associates", bl:35100, rev:0 },
+      { num:"26-024", name:"Brookwood \u2013 Highway 22 \u2013 St. Tammany Parish", cust:"Rosehill Construction", bl:34332, rev:8520 },
+      { num:"26-048", name:"7 Brew Pineville, LA", cust:"Flavored Operations, LLC", bl:32680, rev:0 },
+      { num:"26-049", name:"", cust:"Flavored Operations, LLC", bl:32680, rev:0 },
+      { num:"26-015", name:"ARM Mustang Meter Station Platform", cust:"Waskey Bridges Inc.", bl:31500, rev:178500 },
+      { num:"26001", name:"700 Metairie Road Property", cust:"J Caldarera Company", bl:28001, rev:788 },
+      { num:"20006", name:"JP Fire Training Center", cust:"Watermark Design", bl:25753, rev:21827 },
+      { num:"26-094", name:"FedEx Parking Lot Expansion", cust:"Diamond Z Engineering", bl:19700, rev:7180 },
+      { num:"25002", name:"Harvey Volunteer Fire Station #64", cust:"Watermark Design", bl:19510, rev:10000 },
+      { num:"26003", name:"Dickory Ave Multi-Use Path", cust:"JP Department of PW", bl:18500, rev:0 },
+      { num:"26-115", name:"Buzzi Substation Tap Structural/Civil Design Stockton, PA", cust:"Engenuity Global", bl:16920, rev:0 },
+      { num:"26-010", name:"Tire Choice, Naples, FL", cust:"Monro, Inc.", bl:16140, rev:0 },
+      { num:"25-073", name:"Mars Compressor Platform Analysis & Evaluation", cust:"Kinetica Partners LLC", bl:16082, rev:2838 },
+      { num:"26-103", name:"Professional Civil Engineering and Land Surveying Services", cust:"Laitram", bl:15760, rev:1930 },
+      { num:"26-033", name:"QTS - Specifications Standards Maintenance", cust:"Quality Technology Services, LLC", bl:15000, rev:10000 },
+      { num:"25-043", name:"F&D Clearwater", cust:"SBLM", bl:14885, rev:44794 },
+      { num:"24-068", name:"DFW2-DC2", cust:"Highland Associates", bl:14271, rev:190715 },
+      { num:"24-073", name:"Rubicon Geismer Lab", cust:"Duplantis Design group", bl:13278, rev:8858 },
+      { num:"25-040", name:"UPS New Orleans Expansion", cust:"Copeland and Johns", bl:13164, rev:87656 },
+      { num:"24-069", name:"DFW2-DC3", cust:"Highland Associates", bl:12095, rev:156325 },
+      { num:"26-112", name:"1544 & 1556 Tchoupitoulas Street New Orleans, LA 70130", cust:"Neo Infrastructure", bl:8960, rev:0 },
+      { num:"26-097", name:"Professional Engineering & Land Surveying 7 Brew Breaux Br", cust:"Blue Whale Development", bl:7300, rev:3400 },
+      { num:"26-116", name:"Land Surveying services for the Seven Brew in Lafayette, L", cust:"Kohl's Department Stores", bl:6920, rev:0 },
+      { num:"22004-1", name:"JP Water Admin Building WB", cust:"Watermark Design", bl:6645, rev:226 },
+      { num:"25-044", name:"STPSO Training Facility", cust:"Woodward Design Group", bl:4665, rev:41570 },
+      { num:"26-107", name:"Professional Engineering Services FedEx MobiDock 310 James", cust:"Diamond Z Engineering", bl:4612, rev:1538 },
+      { num:"26-092", name:"TX Hwy 89, Sinton, TX", cust:"Quality Technology Services, LLC", bl:4500, rev:0 },
+      { num:"26-117", name:"I-44 & US Route 66, Villa Ridge, MO", cust:"Quality Infratech Intelligence, LLC (QII)", bl:4500, rev:0 },
+      { num:"26-076", name:"Waterford 3 Chiller Foundations", cust:"Star Service", bl:4206, rev:6784 },
+      { num:"26-029", name:"QTS-SLC1 Expansion Campus Campus Planning Eagle Mountain, ", cust:"Quality Technology Services, LLC", bl:4000, rev:239755 },
+      { num:"26-038", name:"Platting", cust:"Blue Whale Development", bl:3390, rev:44610 },
+      { num:"24-078", name:"John H. Carter, Inc. - Manufacturing & Repair Facility", cust:"Duplantis Design group", bl:2904, rev:144496 },
+      { num:"25-097", name:"Parking Lot Expansion - Hoist & Crane Service", cust:"Hoist & Crane Service Group", bl:2800, rev:32580 },
+      { num:"24-002.128", name:"North Bergen, NJ Lease Exhibit", cust:"Floor & Decor", bl:1480, rev:0 },
+      { num:"24-002.149", name:"Newark, DE Lease Exhibit", cust:"", bl:1480, rev:0 },
+      { num:"24-002.161", name:"Bridgewater, NJ Lease Exhibit", cust:"Floor & Decor", bl:1480, rev:0 },
+      { num:"26-096", name:"Brookwood - 11203 State Hwy 30, College Station, TX", cust:"Rosehill Construction", bl:764, rev:5076 },
+      { num:"25-122", name:"DTE Bell River Mills Filter Separator Platform", cust:"Basic Systems, Inc.", bl:682, rev:12968 }
     ]
   },
 
   labor: {
-    hours: 0,
-    projectCount: 0,
+    hours: 32598,
+    projectCount: 181,
+    // Top projects by YTD Aug DL hours, decimals rolled into their parent
+    // unless the sub-project bills to a different customer.
     items: [
-      { name:"QTS - Turkey, TX",                  hrs:0 },
-      { name:"QTS - DFW3 - Lancaster, TX",        hrs:0 },
-      { name:"JP Sewer Bond Program",             hrs:0 },
-      { name:"FedEx Parking Lot Expansion",       hrs:0 },
-      { name:"UPS New Orleans Expansion",         hrs:0 },
-      { name:"CarMax - Riverdale, UT",            hrs:0 },
-      { name:"QTS CDR East & West Campus",        hrs:0 },
-      { name:"LBB Concrete Batch Plant",          hrs:0 },
-      { name:"Salt Lake City - Eagle Mountain",   hrs:0 },
-      { name:"SLC2 Campus Plan - DC1-DC2",        hrs:0 }
+      { name:"QTS Turkey, TX",                    hrs: 5308.0, num:"25-086",   cust:"Quality Technology Services, LLC", rev:4655779 },
+      { name:"JP Sewer Bond Program",             hrs: 2138.0, num:"6012-40",  cust:"Digital Engineering", rev:193400 },
+      { name:"DAS114",                            hrs: 1690.5, num:"25-105",   cust:"Corgan", rev:632655 },
+      { name:"QTS CDR East & West Campus",        hrs: 1258.8, num:"24-023",   cust:"Quality Technology Services, LLC", rev:810279 },
+      { name:"QTS State Highway 349, Midland,\u2026", hrs: 1233.5, num:"25-119",   cust:"Quality Technology Services, LLC", rev:4173458 },
+      { name:"Salt Lake City - Eagle Mountain",   hrs: 1224.2, num:"25-064",   cust:"Quality Technology Services, LLC", rev:5357 },
+      { name:"Floor & Decor, Raleigh, NC",        hrs:  974.5, num:"24-002",   cust:"Floor & Decor", rev:282690 },
+      { name:"JP Stumpf Blvd Lighting",           hrs:  763.0, num:"20001",    cust:"JP Department of PW", rev:45281 },
+      { name:"Kinder Morgan TGP Compressor St\u2026", hrs:  601.0, num:"26-030",   cust:"Waskey Bridges Inc.", rev:287725 },
+      { name:"DTE Bell River Mills Filter Sep\u2026", hrs:  587.0, num:"25-122",   cust:"Basic Systems, Inc.", rev:12968 }
+    ],
+    // hours grouped by customer, for the breakdown's top chart
+    byCustomer: [
+      { cust:"Quality Technology Services, LLC", hrs:11214.5 },
+      { cust:"Corgan", hrs:2831.8 },
+      { cust:"Digital Engineering", hrs:2655.5 },
+      { cust:"Rosehill Construction", hrs:1729.0 },
+      { cust:"Meyer & Associates, Inc.", hrs:1597.5 },
+      { cust:"CarMax", hrs:1529.8 },
+      { cust:"JP Department of PW", hrs:1370.0 },
+      { cust:"Floor & Decor", hrs:974.5 },
+      { cust:"Basic Systems, Inc.", hrs:971.0 },
+      { cust:"Waskey Bridges Inc.", hrs:941.0 },
+      { cust:"Duplantis Design group", hrs:924.0 },
+      { cust:"Edged", hrs:829.8 },
+      { cust:"City of Westlake", hrs:471.5 },
+      { cust:"Copeland and Johns", hrs:354.5 },
+      { cust:"Quality Infratech Intelligence, LLC (QII)", hrs:354.2 },
+      { cust:"SCNZ Architects, LLC", hrs:338.5 },
+      { cust:"Blue Whale Development", hrs:337.2 },
+      { cust:"Flavored Operations, LLC", hrs:290.0 },
+      { cust:"J Caldarera Company", hrs:282.2 },
+      { cust:"POH+W Architects Ltd.", hrs:261.2 },
+      { cust:"Venture Global Gator Express, LLC", hrs:220.0 },
+      { cust:"Long Law Firm", hrs:211.5 },
+      { cust:"St. Tammany Parish Procurement", hrs:175.0 },
+      { cust:"NOLA Dentures and General Dentistry", hrs:134.5 },
+      { cust:"Diamond Z Engineering", hrs:130.8 },
+      { cust:"Woodward Design Group", hrs:119.5 },
+      { cust:"Frischhertz", hrs:119.5 },
+      { cust:"Hoist & Crane Service Group", hrs:117.2 },
+      { cust:"Watermark Design", hrs:115.5 },
+      { cust:"M.R. Pittman Group, LLC", hrs:101.5 },
+      { cust:"Layton - LF Driscoll", hrs:92.0 },
+      { cust:"New Orleans Center for Aesthetics and Plastic Surgery", hrs:87.0 },
+      { cust:"A/C Electric Service, Inc.", hrs:73.0 },
+      { cust:"SeaLevel Inc.", hrs:72.5 },
+      { cust:"Cycle Construction", hrs:67.5 },
+      { cust:"Highland Associates", hrs:57.0 },
+      { cust:"Outlyr", hrs:55.5 },
+      { cust:"Oracle", hrs:43.8 },
+      { cust:"Little", hrs:40.5 },
+      { cust:"Laitram", hrs:38.5 },
+      { cust:"Traffic Commander", hrs:38.5 },
+      { cust:"Star Service, Inc. A Fidelity Company", hrs:33.0 },
+      { cust:"Madison Capital Group", hrs:32.0 },
+      { cust:"Enbridge", hrs:30.2 },
+      { cust:"Mile High Sliders, LLC", hrs:27.8 },
+      { cust:"O'Connor Capital Partners", hrs:20.5 },
+      { cust:"Arnett Construction Company", hrs:20.0 },
+      { cust:"Suffolk", hrs:17.5 },
+      { cust:"Build Commercial Construction", hrs:17.5 },
+      { cust:"Centerpoint Integrated Solutions", hrs:12.5 },
+      { cust:"Studio Kiro", hrs:5.0 },
+      { cust:"Arthur W. Landry", hrs:5.0 },
+      { cust:"The Kitchen Guys", hrs:3.0 },
+      { cust:"Jos. R. Labadot", hrs:2.0 },
+      { cust:"Hutton", hrs:1.0 },
+      { cust:"Diamond Z Engineering, Inc.", hrs:1.0 },
+      { cust:"Randall-Paulson Architects", hrs:0.5 },
+      { cust:"Monro, Inc.", hrs:0.5 },
+      { cust:"Harbor Towing and Fleeting, LLC", hrs:0.5 }
+    ],
+    all: [
+      { num:"25-086", name:"QTS - Turkey, TX", cust:"Quality Technology Services, LLC", hrs:5308.0, rev:4655779 },
+      { num:"6012-40", name:"JP Sewer Bond Program", cust:"Digital Engineering", hrs:2138.0, rev:193400 },
+      { num:"25-105", name:"DAS114 (DC-5, DC-6, DC-7, and DC-8)", cust:"Corgan", hrs:1690.5, rev:632655 },
+      { num:"24-023", name:"QTS CDR East & West Campus (Stoney Meadows Laydown)", cust:"Quality Technology Services, LLC", hrs:1258.8, rev:810279 },
+      { num:"25-119", name:"QTS - State Highway 349, Midland, TX", cust:"Quality Technology Services, LLC", hrs:1233.5, rev:4173458 },
+      { num:"25-064", name:"Salt Lake City - Eagle Mountain", cust:"Quality Technology Services, LLC", hrs:1224.2, rev:5357 },
+      { num:"24-002", name:"Floor & Decor, Raleigh, NC (Capital Square)", cust:"Floor & Decor", hrs:974.5, rev:282690 },
+      { num:"20001", name:"JP Stumpf Blvd Lighting", cust:"JP Department of PW", hrs:763.0, rev:45281 },
+      { num:"26-030", name:"Kinder Morgan TGP Compressor Station 530 Rev.1, MS", cust:"Waskey Bridges Inc.", hrs:601.0, rev:287725 },
+      { num:"25-122", name:"DTE Bell River Mills Filter Separator Platform", cust:"Basic Systems, Inc.", hrs:587.0, rev:12968 },
+      { num:"26-069", name:"QTS - DFW3 - Lancaster, TX", cust:"Corgan", hrs:577.8, rev:304442 },
+      { num:"26-031", name:"CarMax-Brownsville, TX", cust:"CarMax", hrs:567.0, rev:65540 },
+      { num:"26-003", name:"BESS Building, Wadley, GA", cust:"Duplantis Design group", hrs:517.0, rev:29160 },
+      { num:"25-100", name:"Carmax Wayne, NJ expansion", cust:"CarMax", hrs:493.0, rev:70154 },
+      { num:"25-081", name:"National Golf Club of Louisiana", cust:"City of Westlake", hrs:471.5, rev:46120 },
+      { num:"25-115", name:"Calcasieu Waterworks District No.1 Treatment Plant", cust:"Meyer & Associates, Inc.", hrs:436.5, rev:45000 },
+      { num:"26-028", name:"QTS-SLC2 Campus Campus Planning Eagle Mountain, UT", cust:"Quality Technology Services, LLC", hrs:434.2, rev:317050 },
+      { num:"25-096", name:"Mobile, AL Data Center (Prichard)", cust:"Edged", hrs:432.8, rev:127063 },
+      { num:"25-078", name:"CarMax-Riverdale-UT", cust:"CarMax", hrs:424.2, rev:45180 },
+      { num:"25-054", name:"POLC New Grain Terminal at Industrial Canal", cust:"Meyer & Associates, Inc.", hrs:419.5, rev:73850 },
+      { num:"24-078", name:"John H. Carter, Inc. - Manufacturing & Repair Facility", cust:"Duplantis Design group", hrs:403.0, rev:24200 },
+      { num:"25-085", name:"Monroe Data Center Campus", cust:"Edged", hrs:397.0, rev:174682 },
+      { num:"26-011", name:"Mason City, IA Data Center", cust:"Quality Technology Services, LLC", hrs:388.0, rev:207944 },
+      { num:"25-121", name:"Southern Star Viola Energy, Sumner KS", cust:"Basic Systems, Inc.", hrs:384.0, rev:168772 },
+      { num:"25-106", name:"CPPJ Phase 3 Elliot Road Pump Station", cust:"Meyer & Associates, Inc.", hrs:382.0, rev:122325 },
+      { num:"26-034", name:"Brookwood \u2013 Highway 59 \u2013 St. Tammany", cust:"Rosehill Construction", hrs:359.8, rev:9820 },
+      { num:"25-040", name:"UPS New Orleans Expansion", cust:"Copeland and Johns", hrs:354.5, rev:20102 },
+      { num:"26-093", name:"SLC2 Campus Plan - DC1-DC2 Civil Construction Drawings", cust:"Corgan", hrs:341.2, rev:235200 },
+      { num:"26-047", name:"Renovation of 5307 Toler - Laitram Harahan Campus", cust:"SCNZ Architects, LLC", hrs:337.5, rev:42178 },
+      { num:"6012", name:"JP Sewer Bond Program", cust:"Digital Engineering", hrs:336.0, rev:63671 },
+      { num:"26-029", name:"QTS-SLC1 Expansion Campus Campus Planning Eagle Mountain, ", cust:"Quality Technology Services, LLC", hrs:298.5, rev:239755 },
+      { num:"24-101", name:"Brookwood - Hillcroft Ave. - Houston, TX", cust:"Rosehill Construction", hrs:296.8, rev:0 },
+      { num:"25-023", name:"Brookwood - Ambassador Caffery Pkwy", cust:"Rosehill Construction", hrs:291.2, rev:39700 },
+      { num:"5008", name:"JP East Ames Blvd. Roadway", cust:"JP Department of PW", hrs:281.0, rev:95375 },
+      { num:"22006", name:"LA Trace Subdivision Lot Study", cust:"J Caldarera Company", hrs:278.2, rev:69370 },
+      { num:"26-015", name:"ARM Mustang Meter Station Platform", cust:"Waskey Bridges Inc.", hrs:272.0, rev:178500 },
+      { num:"26-044", name:"QTS Rapid AI Standards Development", cust:"Quality Technology Services, LLC", hrs:268.0, rev:183375 },
+      { num:"26-018.4", name:"DFW2 Corner - Temporary Construction Parking, Wilmer, TX", cust:"Quality Technology Services, LLC", hrs:262.2, rev:91740 },
+      { num:"24-098", name:"Carmax Waco,TX", cust:"POH+W Architects Ltd.", hrs:257.2, rev:44560 },
+      { num:"26-038", name:"7 Brew - 3209 Johnson Street - Subwork", cust:"Blue Whale Development", hrs:223.8, rev:44610 },
+      { num:"25-076", name:"Boat Dock Modifications - Plaquemines, LA", cust:"Venture Global Gator Express, LLC", hrs:220.0, rev:175174 },
+      { num:"25-098", name:"Allied World v Morphy Makofsky", cust:"Long Law Firm", hrs:211.5, rev:55650 },
+      { num:"3011-01", name:"JP Harvey Blvd. Roadway Improvement", cust:"JP Department of PW", hrs:200.0, rev:170025 },
+      { num:"26-024", name:"Brookwood \u2013 Highway 22 \u2013 St. Tammany Parish", cust:"Rosehill Construction", hrs:194.0, rev:8520 },
+      { num:"26-058", name:"LBB Concrete Batch Plant", cust:"Meyer & Associates, Inc.", hrs:178.0, rev:39518 },
+      { num:"24-042", name:"Tammany Trace Bridge #7", cust:"St. Tammany Parish Procurement", hrs:175.0, rev:37078 },
+      { num:"25-031", name:"Brookwood - Pearl, MS", cust:"Rosehill Construction", hrs:138.8, rev:42895 },
+      { num:"26-009", name:"Parish Line Pump Station Improvements Phase 2", cust:"Digital Engineering", hrs:137.5, rev:19500 },
+      { num:"25-118", name:"Schafer Dentistry - Pearl River, LA", cust:"NOLA Dentures and General Dentistry", hrs:134.5, rev:6980 },
+      { num:"25-035", name:"Brookwood - Highway 42 Prairerville, LA", cust:"Rosehill Construction", hrs:130.5, rev:20685 },
+      { num:"26-094", name:"FedEx Parking Lot Expansion", cust:"Diamond Z Engineering", hrs:128.8, rev:7180 },
+      { num:"26-093.1", name:"SLC1 Expansion, SLC2 Phase 1, and SLC Phase 2 Offsite Infr", cust:"Quality Technology Services, LLC", hrs:119.2, rev:326164 },
+      { num:"25-084", name:"LC + Standards DD Development", cust:"Quality Technology Services, LLC", hrs:117.8, rev:124140 },
+      { num:"25-097", name:"Parking Lot Expansion - Hoist & Crane Service", cust:"Hoist & Crane Service Group", hrs:117.2, rev:32580 },
+      { num:"26-097", name:"Professional Engineering & Land Surveying 7 Brew Breaux Br", cust:"Blue Whale Development", hrs:113.5, rev:3400 },
+      { num:"26-019", name:"7Brew \u2013 Johnston \u2013 Lafayette, LA", cust:"Flavored Operations, LLC", hrs:108.2, rev:500 },
+      { num:"24003", name:"Seven Oaks - US 90 Street Lighting", cust:"JP Department of PW", hrs:105.0, rev:9500 },
+      { num:"26-022", name:"SELA Urban Flood Control Project. Orleans, Parish", cust:"M.R. Pittman Group, LLC", hrs:101.5, rev:6825 },
+      { num:"25-111", name:"DFW2-Jones, Wilmer, TX", cust:"Quality Technology Services, LLC", hrs:100.5, rev:180175 },
+      { num:"26-013", name:"CDR1 Laydown Area North of 68th Ave., Cedar Rapids, IA", cust:"Layton - LF Driscoll", hrs:92.0, rev:44942 },
+      { num:"24-009", name:"QTS DFW2 DAS 100 (DC-1)", cust:"Corgan", hrs:89.5, rev:11712 },
+      { num:"26-012", name:"3100 Metairie Road", cust:"New Orleans Center for Aesthetics and Plastic Surgery", hrs:87.0, rev:6700 },
+      { num:"26-025", name:"Brookwood - N 3rd Street - Baton Rouge, LA", cust:"Rosehill Construction", hrs:76.0, rev:3900 },
+      { num:"25-044", name:"STPSO Training Facility", cust:"Woodward Design Group", hrs:73.5, rev:10482 },
+      { num:"26-065", name:"1106 LeBeau Roof Assessment", cust:"A/C Electric Service, Inc.", hrs:73.0, rev:8555 },
+      { num:"26-096", name:"Brookwood - 11203 State Hwy 30, College Station, TX", cust:"Rosehill Construction", hrs:71.8, rev:5076 },
+      { num:"26-064", name:"QII Cedar Port, Houston, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:68.8, rev:4500 },
+      { num:"26-021", name:"Duke ERE North Carolina Sump Review", cust:"Waskey Bridges Inc.", hrs:68.0, rev:9360 },
+      { num:"24-104", name:"Basin 2 Sea Level Rise Mitigation & Resilience Improvement", cust:"Cycle Construction", hrs:67.5, rev:8563 },
+      { num:"26-042", name:"Frischhertz Dow Lab Racks", cust:"Frischhertz", hrs:65.0, rev:18400 },
+      { num:"26-079", name:"WSLP Hurricane and Storm Risk Reduction Project", cust:"SeaLevel Inc.", hrs:60.5, rev:7020 },
+      { num:"26-060", name:"Brookwood - Highway 44, Gonzales, LA", cust:"Rosehill Construction", hrs:58.8, rev:4040 },
+      { num:"25-102", name:"LIV Golf Ops Center", cust:"Outlyr", hrs:55.5, rev:21970 },
+      { num:"25-112", name:"Mobile Predevelopment DD - Mobile and Washington County, A", cust:"Quality Technology Services, LLC", hrs:54.8, rev:270127 },
+      { num:"25-011", name:"S&WB Power", cust:"Frischhertz", hrs:54.0, rev:0 },
+      { num:"24002", name:"Redesign of the Shrine on Airline", cust:"Watermark Design", hrs:51.0, rev:18555 },
+      { num:"26-018", name:"QTS-DFW2 Corner Site - Wilmer, TX", cust:"Corgan", hrs:50.5, rev:74355 },
+      { num:"26-050", name:"WCCH Booster Station", cust:"Meyer & Associates, Inc.", hrs:48.5, rev:8225 },
+      { num:"26-070", name:"QII-Fort Bend Parkway, Houston, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:47.5, rev:45934 },
+      { num:"26-048", name:"7 Brew Pineville, LA", cust:"Flavored Operations, LLC", hrs:46.2, rev:500 },
+      { num:"24-100", name:"Branch Pilots - Venice, LA", cust:"Woodward Design Group", hrs:45.0, rev:1166 },
+      { num:"25-089", name:"Harvey Canal GuideWall Repairs", cust:"Digital Engineering", hrs:44.0, rev:6464 },
+      { num:"26-085", name:"Hockley Business Park, Harris County, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:44.0, rev:4500 },
+      { num:"26-095", name:"ABI01 \u2013 Entry Enhancement Civil Design", cust:"Oracle", hrs:43.8, rev:0 },
+      { num:"25-021", name:"QTS-DFW2-DC4 Wilmer, TX (DC-4)", cust:"Corgan", hrs:42.5, rev:133452 },
+      { num:"26-072", name:"7Brew \u2013 Airline Hwy.", cust:"Flavored Operations, LLC", hrs:42.5, rev:500 },
+      { num:"26-051", name:"Intercoast Materials POLC Loading Facility", cust:"Meyer & Associates, Inc.", hrs:41.0, rev:7175 },
+      { num:"25-116", name:"Academy - Pascagoula, MS", cust:"Little", hrs:40.5, rev:12635 },
+      { num:"26-056", name:"Brookwood - Union Chapel - Bastrop, TX", cust:"Rosehill Construction", hrs:38.5, rev:5840 },
+      { num:"26-103", name:"Professional Civil Engineering and Land Surveying Services", cust:"Laitram", hrs:38.5, rev:1930 },
+      { num:"25-095", name:"West Calcasieu Community Center - Stall Barn Improvement", cust:"Meyer & Associates, Inc.", hrs:37.0, rev:6475 },
+      { num:"26-017", name:"QTS-DFW2 Marine - Mason Rd. Wilmer, TX", cust:"Quality Technology Services, LLC", hrs:36.0, rev:239711 },
+      { num:"26-063", name:"QTS - 201 Erie Rd., Eastlake, OH", cust:"Quality Technology Services, LLC", hrs:34.8, rev:0 },
+      { num:"20006", name:"JP Fire Training Center", cust:"Watermark Design", hrs:34.5, rev:0 },
+      { num:"24-069", name:"DFW2-DC3", cust:"Highland Associates", hrs:34.5, rev:79608 },
+      { num:"26-076", name:"Waterford 3 Chiller Foundations", cust:"Star Service, Inc. A Fidelity Company", hrs:33.0, rev:11184 },
+      { num:"25-093", name:"CarMax-Riverview,FL", cust:"CarMax", hrs:32.5, rev:16400 },
+      { num:"24-044", name:"7 Brew - 4735 Nelson Rd., Lake Charles, LA", cust:"Madison Capital Group", hrs:32.0, rev:4690 },
+      { num:"25002", name:"Harvey Volunteer Fire Station #64", cust:"Watermark Design", hrs:30.0, rev:10000 },
+      { num:"26-054", name:"Vinton Water Sector UV", cust:"Meyer & Associates, Inc.", hrs:30.0, rev:5250 },
+      { num:"26-091", name:"US Hwy 67, Johnson County, TX", cust:"Quality Technology Services, LLC", hrs:29.5, rev:0 },
+      { num:"25-107", name:"Bobcat Facility Septic System", cust:"Enbridge", hrs:28.5, rev:12480 },
+      { num:"26-067", name:"Smalls Sliders \u2013 Alameda \u2013 Lakewood, CO", cust:"Mile High Sliders, LLC", hrs:27.8, rev:1510 },
+      { num:"26-075", name:"QII Bridgeport, Moreland, GA", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:27.5, rev:4500 },
+      { num:"23-068", name:"QTS COS1-DC1", cust:"Corgan", hrs:26.5, rev:10220 },
+      { num:"26-109", name:"FM 1301, Matagorda County, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:24.5, rev:4500 },
+      { num:"26-104", name:"Salco Road, Chunchula, AL", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:23.0, rev:4500 },
+      { num:"24-068", name:"DFW2-DC2", cust:"Highland Associates", hrs:22.5, rev:108058 },
+      { num:"26-057", name:"Brookwood - Highway 71 - Bastrop, TX", cust:"Rosehill Construction", hrs:22.0, rev:5840 },
+      { num:"26-066", name:"7 Brew - 1301 N Barman Ave - Gonzales, LA", cust:"Flavored Operations, LLC", hrs:22.0, rev:500 },
+      { num:"26-037", name:"W. Napoleon lane closure TTCP", cust:"Traffic Commander", hrs:21.5, rev:3760 },
+      { num:"3011", name:"JP Harvey Blvd. Roadway Improvement", cust:"JP Department of PW", hrs:21.0, rev:13053 },
+      { num:"26-087", name:"1425 Airline Dr. Structural Assessment", cust:"O'Connor Capital Partners", hrs:20.5, rev:9200 },
+      { num:"26-086", name:"7 Brew - 4308 Ambassador Caffery Pkwy", cust:"Arnett Construction Company", hrs:20.0, rev:3790 },
+      { num:"26-073", name:"7Brew \u2013 N Airline \u2013 Gonzales, LA", cust:"Flavored Operations, LLC", hrs:19.5, rev:500 },
+      { num:"26-059", name:"CDR1 76th Ave. SW Tunnel Design, Cedar Rapids, IA", cust:"Suffolk", hrs:17.5, rev:233934 },
+      { num:"26-033", name:"QTS - Specifications Standards Maintenance", cust:"Quality Technology Services, LLC", hrs:17.0, rev:10000 },
+      { num:"26-099", name:"QII - Emporia, KS", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:17.0, rev:4500 },
+      { num:"26-106", name:"US Hwy 331, Montgomery, AL", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:16.0, rev:4500 },
+      { num:"26-111", name:"Poland #2", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:16.0, rev:4500 },
+      { num:"26-092", name:"TX Hwy 89, Sinton, TX", cust:"Quality Technology Services, LLC", hrs:15.5, rev:0 },
+      { num:"24-097", name:"CarMax Waco, TX  (Centerpoint)", cust:"Centerpoint Integrated Solutions", hrs:12.5, rev:2545 },
+      { num:"26-006", name:"Brookwood - Burbank Boat and RV", cust:"Rosehill Construction", hrs:12.5, rev:2035 },
+      { num:"25-074", name:"GSSG Monolith Slab Rebar Support Houma Navigation Canal", cust:"SeaLevel Inc.", hrs:12.0, rev:1762 },
+      { num:"25-075", name:"CarMax-Uxbridge, MA", cust:"CarMax", hrs:12.0, rev:37860 },
+      { num:"26-062", name:"Hockley #2, Harris County, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:12.0, rev:1000 },
+      { num:"26-035", name:"7Brew \u2013 Louisiana Ave. \u2013 Lafayette, LA", cust:"Flavored Operations, LLC", hrs:11.8, rev:500 },
+      { num:"26-083", name:"No Project Master entry", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:11.5, rev:4500 },
+      { num:"24-070", name:"Baston Wellness Center - Mirabeau Ave.", cust:"Build Commercial Construction", hrs:10.5, rev:500 },
+      { num:"26-020", name:"DeRidder - West Park Restroom and Basketball Pavilion (H1-", cust:"Meyer & Associates, Inc.", hrs:10.0, rev:1750 },
+      { num:"26-061", name:"Hockley #1, Harris County, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:10.0, rev:1000 },
+      { num:"26-052", name:"7 Brew - Siegen, Baton Rouge, LA", cust:"Flavored Operations, LLC", hrs:9.8, rev:500 },
+      { num:"26-027", name:"Causeway between Airline and W. Napoleon", cust:"Traffic Commander", hrs:9.5, rev:2965 },
+      { num:"25-125", name:"Brookwood - Dowdy - Gonzales, LA", cust:"Rosehill Construction", hrs:9.0, rev:1790 },
+      { num:"26-049", name:"7 Brew 9614 Airline Hwy, East Baton Rouge, LA : Preliminar", cust:"Flavored Operations, LLC", hrs:8.5, rev:500 },
+      { num:"26-078", name:"7Brew - Airline - Baton Rouge", cust:"Flavored Operations, LLC", hrs:8.5, rev:500 },
+      { num:"26-110", name:"Poland #1", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:8.5, rev:4500 },
+      { num:"25-053", name:"Town of Vinton Water Treatment Plant Improvements", cust:"Meyer & Associates, Inc.", hrs:8.0, rev:21875 },
+      { num:"26-084", name:"No Project Master entry", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:8.0, rev:4500 },
+      { num:"26-105", name:"Niederdamer Str., Lingen, Germany", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:8.0, rev:4500 },
+      { num:"26-004", name:"Cart Path Chateau Club", cust:"Traffic Commander", hrs:7.5, rev:2860 },
+      { num:"26-041", name:"SLC1/SLC2 Offsite Road Improvements (1600 West)", cust:"Quality Technology Services, LLC", hrs:7.5, rev:350428 },
+      { num:"26-080", name:"Brookwood \u2013 Stumberg \u2013 St. George, LA", cust:"Rosehill Construction", hrs:7.5, rev:0 },
+      { num:"24-074", name:"City of Gonzales Care Center", cust:"Build Commercial Construction", hrs:7.0, rev:1500 },
+      { num:"26-071", name:"7Brew \u2013 College Dr. \u2013 Baton Rouge, LA", cust:"Flavored Operations, LLC", hrs:7.0, rev:500 },
+      { num:"26-043", name:"Brookwood \u2013 Pinson \u2013 Birmingham, AL", cust:"Rosehill Construction", hrs:6.0, rev:1080 },
+      { num:"26-098", name:"Professional Civil Engineering Services QTS Prototype Stan", cust:"Corgan", hrs:5.2, rev:6250 },
+      { num:"22-102", name:"Kiro - 2312 Louisiana Ave", cust:"Studio Kiro", hrs:5.0, rev:1230 },
+      { num:"24-022", name:"Eagle Mountain Additional Land Pre-Development", cust:"Quality Technology Services, LLC", hrs:5.0, rev:605 },
+      { num:"25-018", name:"QTS-DFW2 Corner Mason Rd, Wilmer, TX", cust:"Corgan", hrs:5.0, rev:66150 },
+      { num:"26-001", name:"Brookwood - Highway 931 - Gonzales, LA", cust:"Rosehill Construction", hrs:5.0, rev:960 },
+      { num:"26-016", name:"7Brew \u2013 Gerstner Memorial \u2013 Lake Charles, LA", cust:"Flavored Operations, LLC", hrs:5.0, rev:500 },
+      { num:"26-036", name:"Tanya Becnel v. DeRose Builders, Inc.", cust:"Arthur W. Landry", hrs:5.0, rev:1250 },
+      { num:"26-108", name:"West Road, Houston, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:5.0, rev:4500 },
+      { num:"23-011", name:"No Project Master entry", cust:"POH+W Architects Ltd.", hrs:4.0, rev:0 },
+      { num:"24-073", name:"Rubicon Geismer Lab", cust:"Duplantis Design group", hrs:4.0, rev:1058 },
+      { num:"26001", name:"700 Metairie Road Property", cust:"J Caldarera Company", hrs:4.0, rev:788 },
+      { num:"26-026", name:"Brookwood \u2013 Perkins \u2013 Baton Rouge, LA", cust:"Rosehill Construction", hrs:4.0, rev:760 },
+      { num:"26-082", name:"No Project Master entry", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:4.0, rev:4500 },
+      { num:"26-088", name:"Merryville Replacement of LA 110 Sanitary Sewer Gravity Ma", cust:"Meyer & Associates, Inc.", hrs:4.0, rev:700 },
+      { num:"26-002", name:"Brookwood - Bessemer", cust:"Rosehill Construction", hrs:3.5, rev:440 },
+      { num:"24-064", name:"TKG - New Show Room", cust:"The Kitchen Guys", hrs:3.0, rev:7500 },
+      { num:"24-067", name:"DFW2-DAS114", cust:"Corgan", hrs:3.0, rev:155052 },
+      { num:"26-081", name:"No Project Master entry", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:3.0, rev:1000 },
+      { num:"26-114", name:"Merryville LA110 Sewer Main", cust:"Meyer & Associates, Inc.", hrs:3.0, rev:0 },
+      { num:"26-007", name:"Brookwood - Airline (Flea Market)", cust:"Rosehill Construction", hrs:2.0, rev:400 },
+      { num:"26-100", name:"Professional Surveying Services - 1425 Sams Ave", cust:"Jos. R. Labadot", hrs:2.0, rev:1500 },
+      { num:"26-107", name:"Professional Engineering Services FedEx MobiDock 310 James", cust:"Diamond Z Engineering", hrs:2.0, rev:1538 },
+      { num:"25-061", name:"White Castle Septic System", cust:"Enbridge", hrs:1.8, rev:6240 },
+      { num:"25-003", name:"Brookwood - 11670 Airline Hwy", cust:"Rosehill Construction", hrs:1.5, rev:0 },
+      { num:"25-082", name:"No Project Master entry", cust:"Quality Technology Services, LLC", hrs:1.5, rev:0 },
+      { num:"24-091", name:"Laitram Renovations", cust:"SCNZ Architects, LLC", hrs:1.0, rev:580 },
+      { num:"25-059", name:"7 Brew - 4735 Nelson Rd., Lake Charles, LA", cust:"Hutton", hrs:1.0, rev:8525 },
+      { num:"25-060", name:"No Project Master entry", cust:"Diamond Z Engineering, Inc.", hrs:1.0, rev:0 },
+      { num:"25-067", name:"Woodward Design Group - Canal Barge", cust:"Woodward Design Group", hrs:1.0, rev:8293 },
+      { num:"25-083", name:"CarMax-Warner Robins, GA", cust:"CarMax", hrs:1.0, rev:15040 },
+      { num:"26-039", name:"7 Brew - Sulphur, LA - 212 S. Cities", cust:"Flavored Operations, LLC", hrs:1.0, rev:0 },
+      { num:"24-093", name:"No Project Master entry", cust:"Randall-Paulson Architects", hrs:0.5, rev:0 },
+      { num:"26-010", name:"Tire Choice, Naples, FL", cust:"Monro, Inc.", hrs:0.5, rev:0 },
+      { num:"26-046", name:"Side Scan Sonar & Magnetometer Survey, Gulf Gateway Termin", cust:"Harbor Towing and Fleeting, LLC", hrs:0.5, rev:10560 },
+      { num:"26-074", name:"Frischertz \u2013 SunBelt Solar", cust:"Frischhertz", hrs:0.5, rev:1488 }
     ]
   }
 };
@@ -3771,12 +4771,12 @@ function skyArc(cx,cy,r,t0,t1){
   return 'M'+a[0].toFixed(2)+' '+a[1].toFixed(2)+' A'+r+' '+r+' 0 0 1 '+b[0].toFixed(2)+' '+b[1].toFixed(2);
 }
 function skyGauge(pacePct,label){
-  var MAXP=1.5, cx=145, cy=128, r=100, W=290, H=212;
+  var MAXP=3.0, cx=145, cy=128, r=100, W=290, H=212;
   var t = Math.max(0, Math.min(1,(pacePct||0)/MAXP));
   var d = (180 - t*180)*Math.PI/180;
   var nx = cx + (r-34)*Math.cos(d), ny = cy - (r-34)*Math.sin(d);
   var ticks='', marks='';
-  [[0,'0%'],[0.3333,'50%'],[0.6667,'100%'],[1,'150%']].forEach(function(k){
+  [[0,'0%'],[0.3333,'100%'],[0.6667,'200%'],[1,'300%']].forEach(function(k){
     var dd=(180-k[0]*180)*Math.PI/180, co=Math.cos(dd), si=Math.sin(dd);
     marks += '<line x1="'+(cx+(r-11)*co).toFixed(1)+'" y1="'+(cy-(r-11)*si).toFixed(1)+
              '" x2="'+(cx+(r+11)*co).toFixed(1)+'" y2="'+(cy-(r+11)*si).toFixed(1)+
@@ -3944,6 +4944,41 @@ function renderPelicans() {
 }
 
 /* ── monthly revenue trend strip ─────────────────────────────────────── */
+// Hover readout for the monthly bars. The native title tooltip was too slow
+// and looked nothing like the page, so this is a styled one that follows the
+// pointer and appears immediately.
+function wireMonthlyTips(){
+  var tip = document.getElementById('mo-tip');
+  if (!tip){
+    tip = document.createElement('div');
+    tip.id = 'mo-tip';
+    document.body.appendChild(tip);
+  }
+  document.querySelectorAll('.mo-col').forEach(function(col){
+    col.onmouseenter = function(){
+      var mon = col.dataset.mon, amt = col.dataset.amt, note = col.dataset.note;
+      tip.innerHTML =
+        '<div class="mo-tip-m">' + mon + ' 2026</div>' +
+        '<div class="mo-tip-v">' + (amt || 'Not closed') + '</div>' +
+        (note === 'avg'
+          ? '<div class="mo-tip-n"><b>Jan\u2013Jul average</b> \u00b7 not an actual month</div>'
+          : note === 'open'
+            ? '<div class="mo-tip-n">no revenue booked yet</div>'
+            : '<div class="mo-tip-n">actual</div>');
+      tip.classList.add('on');
+    };
+    col.onmousemove = function(e){
+      var w = tip.offsetWidth, h = tip.offsetHeight;
+      var x = Math.min(Math.max(8, e.clientX - w/2), window.innerWidth - w - 8);
+      var y = e.clientY - h - 14;
+      if (y < 8) y = e.clientY + 18;
+      tip.style.left = x + 'px';
+      tip.style.top  = y + 'px';
+    };
+    col.onmouseleave = function(){ tip.classList.remove('on'); };
+  });
+}
+
 function skyMonthly(m){
   m = m || [];
   var AB = ['J','F','M','A','M','J','J','A','S','O','N','D'];
@@ -3970,7 +5005,17 @@ function skyMonthly(m){
   for (var i = 0; i < 12; i++) {
     var v = vals[i] || 0, on = v > 0;
     var h = on ? Math.max(9, (v / mx) * 100) : 5;
-    bars += '<div class="mo-col" title="' + NM[i] + ' \u2014 ' + (on ? ytd$(v) : 'not closed yet') + '">' +
+    // Jan-Jul are carried at the average for those months rather than
+    // individual actuals, so the tooltip says so instead of implying a figure
+    // we do not have.
+    var isAvgMonth = on && i <= 6;
+    var tip = isAvgMonth
+      ? NM[i] + ' \u2014 ' + ytd$(v) + '  (Jan\u2013Jul monthly average)'
+      : NM[i] + ' \u2014 ' + (on ? ytd$(v) : 'not closed yet');
+    bars += '<div class="mo-col' + (isAvgMonth ? ' mo-avg' : '') + '"' +
+      ' data-mon="' + NM[i] + '"' +
+      ' data-amt="' + (on ? ytd$(v) : '') + '"' +
+      ' data-note="' + (isAvgMonth ? 'avg' : (on ? '' : 'open')) + '">' +
       '<div class="mo-bar" style="height:' + h.toFixed(1) + '%;' + (on
         ? 'background:linear-gradient(180deg,#7cc9f0,#4fa8e0);'
         : 'background:rgba(140,180,205,0.20);') + '"></div></div>';
@@ -4184,6 +5229,396 @@ function renderStrider() {
 }
 
 /* ── main render ─────────────────────────────────────────────────────── */
+// ── Revenue concentration focus ───────────────────────────────────────────
+// Hovering a ribbon segment (or its row) grows that project and shrinks and
+// fades the rest, so a single slice reads clearly out of a crowded bar.
+function wireConcentration(){
+  var segs = document.querySelectorAll('.rib-seg[data-cc]');
+  var rows = document.querySelectorAll('.conc-row[data-cc]');
+  if (!segs.length) return;
+
+  function focus(key){
+    segs.forEach(function(sg){
+      sg.classList.toggle('lit', sg.dataset.cc === key);
+      sg.classList.toggle('dim', sg.dataset.cc !== key);
+    });
+    rows.forEach(function(rw){
+      rw.classList.toggle('lit', rw.dataset.cc === key);
+      rw.classList.toggle('dim', rw.dataset.cc !== key);
+    });
+  }
+  function clear(){
+    segs.forEach(function(sg){ sg.classList.remove('lit','dim'); });
+    rows.forEach(function(rw){ rw.classList.remove('lit','dim'); });
+  }
+
+  segs.forEach(function(sg){
+    sg.addEventListener('mouseenter', function(){ focus(sg.dataset.cc); });
+    sg.addEventListener('mouseleave', clear);
+  });
+  // the list works the same way, so either side drives the pair
+  rows.forEach(function(rw){
+    rw.addEventListener('mouseenter', function(){ focus(rw.dataset.cc); });
+    rw.addEventListener('mouseleave', clear);
+  });
+}
+
+// ── Direct labour breakdown ───────────────────────────────────────────────
+// Hours by customer as strips, then every project as a small card. Kept
+// visually apart from the backlog and RPH overlays: violet, striped fills,
+// and a two-column card grid rather than a table.
+function openDL(){
+  var lb = YTD_DATA.labor || {};
+  var rows = (lb.all||[]).slice().sort(function(a,b){ return b.hrs - a.hrs; });
+  if (!rows.length) return;
+  var total = lb.hours || rows.reduce(function(s,r){ return s+r.hrs; }, 0);
+
+  var cust = (lb.byCustomer||[]).slice(0, 12);
+  var cMax = Math.max.apply(null, cust.map(function(c){ return c.hrs; }).concat([1]));
+  var strips = cust.map(function(c){
+    var nm = c.cust.length > 28 ? c.cust.slice(0,27)+'\u2026' : c.cust;
+    return '<div class="do-crow" title="'+c.cust+' \u2014 '+Math.round(c.hrs).toLocaleString()+' h">'+
+      '<div class="do-cnm">'+nm+'</div>'+
+      '<div class="do-ctrack"><div class="do-cfill" style="width:'+
+        ((c.hrs/cMax)*100).toFixed(1)+'%;"></div></div>'+
+      '<div class="do-chr">'+Math.round(c.hrs).toLocaleString()+' h</div>'+
+    '</div>';
+  }).join('');
+
+  var cards = rows.map(function(r, ix){
+    return '<div class="do-p">'+
+      '<span class="do-rk">'+(ix+1)+'</span>'+
+      '<span class="do-pn">'+r.num+'</span>'+
+      '<span class="do-pnm">'+r.name+
+        '<div class="do-pc">'+(r.cust||'\u2014')+'</div></span>'+
+      '<span class="do-ph">'+Math.round(r.hrs).toLocaleString()+' h</span>'+
+    '</div>';
+  }).join('');
+
+  var ov = document.getElementById('dl-ov');
+  if (!ov){
+    ov = document.createElement('div');
+    ov.id = 'dl-ov';
+    ov.addEventListener('click', function(e){ if (e.target === ov) closeDL(); });
+    document.body.appendChild(ov);
+  }
+  ov.innerHTML =
+    '<div class="do-card">'+
+      '<button class="do-x" onclick="closeDL()">\u00d7</button>'+
+      '<div class="do-title">Direct Labour Hours by Project</div>'+
+      '<div class="do-total">'+Math.round(total).toLocaleString()+
+        '<span style="font-size:17px;color:#9086b0;font-weight:700;"> hrs</span></div>'+
+      '<div class="do-sub">'+rows.length+' projects \u00b7 '+(lb.byCustomer||[]).length+
+        ' customers \u00b7 as of '+(YTD_DATA.asOf||'')+'</div>'+
+      '<div class="do-cap">Hours by customer \u00b7 top '+cust.length+'</div>'+
+      '<div class="do-cust">'+strips+'</div>'+
+      '<div class="do-cap">Every project by hours</div>'+
+      '<div class="do-grid">'+cards+'</div>'+
+    '</div>';
+  ov.classList.add('open');
+}
+
+function closeDL(){
+  var ov = document.getElementById('dl-ov');
+  if (ov) ov.classList.remove('open');
+}
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') closeDL();
+});
+
+// ── Backlog badge hover ───────────────────────────────────────────────────
+// Hovering a badge lifts it, dims the rest, lights its row in the list below,
+// and floats a cloud callout with the project's details.
+function wireBacklogBadges(){
+  var cloud = document.getElementById('bdg-cloud');
+  if (!cloud){
+    cloud = document.createElement('div');
+    cloud.id = 'bdg-cloud';
+    document.body.appendChild(cloud);
+  }
+  var badges = document.querySelectorAll('.bdg[data-bk]');
+  var rows   = document.querySelectorAll('.bk-row[data-bk]');
+
+  function clear(){
+    badges.forEach(function(b){ b.classList.remove('lit','dim'); });
+    rows.forEach(function(r){ r.classList.remove('lit'); });
+    cloud.classList.remove('on');
+  }
+
+  badges.forEach(function(bd){
+    bd.addEventListener('mouseenter', function(){
+      var k = bd.dataset.bk;
+      badges.forEach(function(b){
+        b.classList.toggle('lit', b === bd);
+        b.classList.toggle('dim', b !== bd);
+      });
+      rows.forEach(function(r){ r.classList.toggle('lit', r.dataset.bk === k); });
+
+      cloud.innerHTML =
+        '<div class="cloud-body">'+
+          // a soft cloud silhouette, drawn to fit the text block
+          '<svg viewBox="0 0 274 150" xmlns="http://www.w3.org/2000/svg">'+
+            '<defs><linearGradient id="clg" x1="0" y1="0" x2="0" y2="1">'+
+              '<stop offset="0%" stop-color="#ffffff"/>'+
+              '<stop offset="100%" stop-color="#e9f2f8"/></linearGradient></defs>'+
+            '<g fill="url(#clg)">'+
+              '<ellipse cx="88"  cy="72" rx="62" ry="45"/>'+
+              '<ellipse cx="150" cy="56" rx="56" ry="42"/>'+
+              '<ellipse cx="196" cy="80" rx="54" ry="40"/>'+
+              '<ellipse cx="128" cy="96" rx="76" ry="42"/>'+
+              '<ellipse cx="137" cy="118" rx="52" ry="22"/>'+
+            '</g>'+
+          '</svg>'+
+          '<div class="cloud-txt">'+
+            '<span class="cl-num">'+bd.dataset.num+'</span>'+
+            '<div class="cl-nm">'+bd.dataset.nm+'</div>'+
+            '<div class="cl-cu">'+bd.dataset.cust+'</div>'+
+            '<div class="cl-amt">'+bd.dataset.amt+'</div>'+
+            '<div class="cl-meta">'+bd.dataset.pct+'% of backlog \u00b7 '+
+              bd.dataset.rev+' booked</div>'+
+          '</div>'+
+        '</div>';
+      cloud.classList.add('on');
+    });
+
+    bd.addEventListener('mousemove', function(e){
+      var w = cloud.offsetWidth, h = cloud.offsetHeight;
+      var x = Math.min(Math.max(8, e.clientX - w/2), window.innerWidth - w - 8);
+      var y = e.clientY - h - 10;
+      if (y < 8) y = e.clientY + 22;
+      cloud.style.left = x + 'px';
+      cloud.style.top  = y + 'px';
+    });
+
+    bd.addEventListener('mouseleave', clear);
+  });
+}
+
+// ── RPH by customer ───────────────────────────────────────────────────────
+// Every customer with hours, ranked by revenue per hour. QTS is flagged so the
+// split between it and the rest of the book stays visible.
+function openRPH(){
+  var rp = YTD_DATA.rph || {};
+  var rows = (rp.all||[]).slice().sort(function(a,b){ return b.rph - a.rph; });
+  if (!rows.length) return;
+  var mx = Math.max.apply(null, rows.map(function(r){ return r.rph; }).concat([1]));
+
+  var body = rows.map(function(r, ix){
+    var isQ = /quality technology/i.test(r.cust);
+    return '<tr>'+
+      '<td class="ro-rank">'+(ix+1)+'</td>'+
+      '<td>'+r.cust+(isQ?'<span class="ro-q">QTS</span>':'')+'</td>'+
+      '<td class="r"><span class="ro-rph">$'+Math.round(r.rph).toLocaleString()+'</span></td>'+
+      '<td><div class="ro-bar"><div class="ro-fill" style="width:'+
+        ((r.rph/mx)*100).toFixed(1)+'%;"></div></div></td>'+
+      '<td class="r" style="color:#7f9bab;">'+Math.round(r.hrs).toLocaleString()+' h</td>'+
+      '<td class="r" style="color:#8aa8b8;">'+ytd$(r.rev)+'</td>'+
+    '</tr>';
+  }).join('');
+
+  var ov = document.getElementById('rph-ov');
+  if (!ov){
+    ov = document.createElement('div');
+    ov.id = 'rph-ov';
+    ov.addEventListener('click', function(e){ if (e.target === ov) closeRPH(); });
+    document.body.appendChild(ov);
+  }
+  ov.innerHTML =
+    '<div class="ro-card">'+
+      '<button class="ro-x" onclick="closeRPH()">\u00d7</button>'+
+      '<div class="bo-title">Revenue per Hour by Customer</div>'+
+      '<div class="bo-total" style="color:#2b7fc4;">$'+Math.round(rp.blended||0).toLocaleString()+
+        '<span style="font-size:17px;color:#7f9bab;font-weight:700;"> /hr blended</span></div>'+
+      '<div class="bo-sub">'+rows.length+' customers \u00b7 '+
+        Math.round(rp.hours||0).toLocaleString()+' DL hours \u00b7 as of '+(YTD_DATA.asOf||'')+'</div>'+
+      '<div class="rph-split" style="margin-top:18px;">'+
+        '<div class="rph-half rph-qts"><div class="rph-k">QTS</div>'+
+          '<div class="rph-v">$'+Math.round((rp.qts||{}).rph||0).toLocaleString()+'</div>'+
+          '<div class="rph-n">'+ytd$((rp.qts||{}).rev||0)+' on '+
+            Math.round((rp.qts||{}).hours||0).toLocaleString()+' h</div></div>'+
+        '<div class="rph-half rph-non"><div class="rph-k">Non-QTS blended</div>'+
+          '<div class="rph-v">$'+Math.round((rp.nonQts||{}).rph||0).toLocaleString()+'</div>'+
+          '<div class="rph-n">'+ytd$((rp.nonQts||{}).rev||0)+' on '+
+            Math.round((rp.nonQts||{}).hours||0).toLocaleString()+' h</div></div>'+
+      '</div>'+
+      '<table class="ro-tbl">'+
+        '<thead><tr><th></th><th>Customer</th><th class="r">Rev / Hour</th>'+
+        '<th></th><th class="r">DL Hours</th><th class="r">Revenue</th></tr></thead>'+
+        '<tbody>'+body+'</tbody>'+
+      '</table>'+
+    '</div>';
+  ov.classList.add('open');
+}
+
+function closeRPH(){
+  var ov = document.getElementById('rph-ov');
+  if (ov) ov.classList.remove('open');
+}
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') closeRPH();
+});
+
+// ── Backlog breakdown ─────────────────────────────────────────────────────
+// Customers across the top, then every active job with remaining contract
+// value. Backlog is the headline in each row; revenue booked sits beside it
+// in a quieter treatment.
+function openBacklog(){
+  var bk = (YTD_DATA.backlog)||{}, rows = (bk.all||[]).slice();
+  if (!rows.length) return;
+  rows.sort(function(a,b){ return b.bl - a.bl; });
+  var total = rows.reduce(function(s,r){ return s+r.bl; }, 0);
+
+  // group by customer for the top chart
+  var byC = {};
+  rows.forEach(function(r){
+    var c = r.cust || '(no customer)';
+    byC[c] = (byC[c]||0) + r.bl;
+  });
+  var custs = Object.keys(byC).map(function(c){ return {c:c, v:byC[c]}; })
+                    .sort(function(a,b){ return b.v - a.v; }).slice(0, 8);
+  var cMax = Math.max.apply(null, custs.map(function(x){ return x.v; }).concat([1]));
+  var custBars = custs.map(function(x){
+    var h = Math.max(8, x.v/cMax*100);
+    var nm = x.c.length > 26 ? x.c.slice(0,25)+'\u2026' : x.c;
+    return '<div class="bo-c" title="'+x.c+' \u2014 '+ytd$(x.v)+'">'+
+      '<div class="bo-camt">'+ytdShort(x.v)+'</div>'+
+      '<div class="bo-cbar" style="height:'+h.toFixed(1)+'%;"></div>'+
+      '<div class="bo-cnm">'+nm+'</div>'+
+    '</div>';
+  }).join('');
+
+  var body = rows.map(function(r){
+    var share = total ? r.bl/total : 0;
+    return '<tr>'+
+      '<td class="bo-num">'+r.num+'</td>'+
+      '<td>'+r.name+'<div class="bo-cust-cell">'+(r.cust||'\u2014')+'</div></td>'+
+      '<td class="r"><span class="bo-bl">'+ytd$(r.bl)+'</span></td>'+
+      '<td class="bo-share"><div class="bo-sbar">'+
+        '<div class="bo-sfill" style="width:'+(share*100).toFixed(1)+'%;"></div></div></td>'+
+      '<td class="r"><span class="bo-rev">'+ytd$(r.rev)+'</span></td>'+
+    '</tr>';
+  }).join('');
+
+  var ov = document.getElementById('backlog-ov');
+  if (!ov){
+    ov = document.createElement('div');
+    ov.id = 'backlog-ov';
+    ov.addEventListener('click', function(e){ if (e.target === ov) closeBacklog(); });
+    document.body.appendChild(ov);
+  }
+  ov.innerHTML =
+    '<div class="bo-card">'+
+      '<button class="bo-x" onclick="closeBacklog()">\u00d7</button>'+
+      '<div class="bo-title">Backlog by Project</div>'+
+      '<div class="bo-total">'+ytd$(total)+'</div>'+
+      '<div class="bo-sub">'+rows.length+' active projects \u00b7 remaining contract value \u00b7 '+
+        'sub-projects rolled into their parent unless the customer differs</div>'+
+      '<div style="font-size:9.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;'+
+        'color:#8aa8b8;margin-top:20px;">Backlog by customer \u00b7 top '+custs.length+'</div>'+
+      '<div class="bo-cust">'+custBars+'</div>'+
+      '<table class="bo-tbl">'+
+        '<thead><tr><th>Project</th><th>Name / Customer</th>'+
+        '<th class="r">Backlog</th><th>Share</th><th class="r">Revenue booked</th></tr></thead>'+
+        '<tbody>'+body+'</tbody>'+
+      '</table>'+
+    '</div>';
+  ov.classList.add('open');
+}
+
+function closeBacklog(){
+  var ov = document.getElementById('backlog-ov');
+  if (ov) ov.classList.remove('open');
+}
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') closeBacklog();
+});
+
+// ── Cash collected, month by month ────────────────────────────────────────
+// Bars are the month's receipts; the line riding over them is the running
+// total, so the reader sees both the rhythm and how it accumulates to the
+// figure on the card.
+function openCashFlow(){
+  var D = YTD_DATA, cash = D.cashMonthly || [];
+  var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var closed = cash.filter(function(v){ return v > 0; });
+  var total  = cash.reduce(function(a,b){ return a+b; }, 0);
+  var peak   = Math.max.apply(null, cash.concat([1]));
+  var avg    = closed.length ? total/closed.length : 0;
+  var best   = cash.indexOf(peak);
+
+  var ov = document.getElementById('cashflow-ov');
+  if (!ov){
+    ov = document.createElement('div');
+    ov.id = 'cashflow-ov';
+    ov.addEventListener('click', function(e){ if (e.target === ov) closeCashFlow(); });
+    document.body.appendChild(ov);
+  }
+
+  // running total, plotted over the bar field
+  var H = 260, run = 0, pts = [];
+  cash.forEach(function(v, i){
+    if (v <= 0) return;
+    run += v;
+    var x = (i + 0.5) / cash.length * 100;
+    pts.push([x, 100 - (run/total) * 88]);
+  });
+  var path = pts.map(function(p, i){
+    return (i ? 'L' : 'M') + p[0].toFixed(2) + ',' + p[1].toFixed(2);
+  }).join(' ');
+  var dots = '';
+
+  var bars = cash.map(function(v, i){
+    var on = v > 0;
+    var h  = on ? Math.max(6, v/peak*100) : 3;
+    var amt = v >= 1e6 ? '$'+(v/1e6).toFixed(2)+'M' : '$'+Math.round(v/1000)+'k';
+    return '<div class="cf-col">'+
+      '<div class="cf-amt'+(on?'':' dim')+'">'+(on?amt:'\u2014')+'</div>'+
+      '<div class="cf-bar'+(on?'':' dim')+'" style="height:'+h+'%;" '+
+        'title="'+MON[i]+' \u00b7 '+(on?amt:'no receipts')+'"></div>'+
+      '<div class="cf-mon">'+MON[i]+'</div>'+
+    '</div>';
+  }).join('');
+
+  ov.innerHTML =
+    '<div class="cf-card">'+
+      '<button class="cf-x" onclick="closeCashFlow()">\u00d7</button>'+
+      '<div class="cf-title">Cash Collected \u00b7 '+D.year+'</div>'+
+      '<div class="cf-total">'+ytd$(total)+'</div>'+
+      '<div class="cf-sub">'+closed.length+' months collected \u00b7 '+
+        ytdPct(total/(D.revenue||1),1)+' of YTD revenue \u00b7 as of '+(D.asOf||'')+'</div>'+
+      '<div style="position:relative;">'+
+        '<div class="cf-bars">'+bars+'</div>'+
+        '<svg class="cf-line" viewBox="0 0 100 100" preserveAspectRatio="none" '+
+          'style="height:260px;top:26px;left:0;width:100%;">'+
+          '<path d="'+path+'" fill="none" stroke="#0b6b4a" stroke-width="2.4" '+
+            'stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 5" '+
+            'opacity="0.85" vector-effect="non-scaling-stroke"/>'+
+        '</svg>'+
+        '<div style="position:absolute;right:0;top:0;font-size:10px;font-weight:700;'+
+          'letter-spacing:1px;text-transform:uppercase;color:#9ab4c2;">'+
+          '\u2014 running total</div>'+
+      '</div>'+
+      '<div class="cf-foot">'+
+        '<div class="cf-f"><div class="cf-fk">Average / Month</div>'+
+          '<div class="cf-fv">'+ytd$(avg)+'</div></div>'+
+        '<div class="cf-f"><div class="cf-fk">Best Month</div>'+
+          '<div class="cf-fv">'+(best>=0?MON[best]+' \u00b7 '+ytd$(peak):'\u2014')+'</div></div>'+
+        '<div class="cf-f"><div class="cf-fk">Outstanding</div>'+
+          '<div class="cf-fv" style="color:#8b6fd0;">'+
+          ytd$(Math.max(0,(D.revenue||0)-total))+'</div></div>'+
+      '</div>'+
+    '</div>';
+  ov.classList.add('open');
+}
+
+function closeCashFlow(){
+  var ov = document.getElementById('cashflow-ov');
+  if (ov) ov.classList.remove('open');
+}
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') closeCashFlow();
+});
+
 function renderYTD(){
   var D = YTD_DATA, el = document.getElementById('ytd-body');
   if(!el) return;
@@ -4195,15 +5630,19 @@ function renderYTD(){
   var remain   = Math.max(0, D.projection - D.revenue);
   var vsPace   = D.pace2025 ? D.revenue / D.pace2025 : 0;
   var paceDiff = D.revenue - D.pace2025;
-  var mgDelta  = (D.marginYTD - D.marginTarget) * 100;
+  var mgDelta  = (D.marginYTD - (D.marginMin || D.marginTarget)) * 100;
 
   /* ── ROW 1 ───────────────────────────────────────────── */
   var c1 =
   '<div class="sky-card">'+
-    '<div class="sc-label" style="text-align:center;">'+D.year+' Revenue</div>'+
+    '<div class="sc-titlerow">'+
+      '<div class="sc-label" style="text-align:center;flex:1;">'+D.year+' Revenue</div>'+
+      (D.asOf ? '<div class="ytd-asof">as of '+D.asOf+'</div>' : '')+
+    '</div>'+
     '<div class="sc-huge" style="text-align:center;">'+ytd$(D.revenue)+'</div>'+
-    '<div class="cash-box">'+
-      '<div class="sc-label" style="margin-bottom:4px;">Cash Collected</div>'+
+    '<div class="cash-box cash-click" onclick="openCashFlow()" title="Click for the month-by-month breakdown">'+
+      '<div class="sc-label" style="margin-bottom:4px;">Cash Collected'+
+        '<span class="cash-cue">\u25f7 monthly</span></div>'+
       '<div class="cash-v">'+ytd$(D.cashCollected)+'</div>'+
       (D.revenue
         ? '<div class="cash-sub">'+ytdPct(D.cashCollected / D.revenue, 1)+' of revenue'+
@@ -4213,14 +5652,14 @@ function renderYTD(){
     '<div class="mg-box">'+
       '<div class="sc-label" style="margin-bottom:12px;">Project Profit Margin</div>'+
       '<div class="mg-grid">'+
-        '<div class="mg-cell"><div class="mg-k" style="color:#6f8ed0;">2025 Actual</div><div class="mg-v" style="color:#5b7fd4;">'+ytdPct(D.margin2025)+'</div></div>'+
         '<div class="mg-cell"><div class="mg-k" style="color:#dd7b6a;">'+D.year+' YTD</div><div class="mg-v" style="color:#e2735c;">'+ytdPct(D.marginYTD)+'</div></div>'+
-        '<div class="mg-cell"><div class="mg-k" style="color:#3aa981;">'+D.year+' Target</div><div class="mg-v" style="color:#25a173;">'+ytdPct(D.marginTarget)+'</div></div>'+
+        '<div class="mg-cell"><div class="mg-k" style="color:#3aa981;">Minimum Target</div><div class="mg-v" style="color:#25a173;">'+ytdPct(D.marginMin)+'</div></div>'+
       '</div>'+
       '<div class="mg-f">'+
-        '<span>prior year</span>'+
-        '<span style="color:'+(mgDelta<0?'#e2735c':'#25a173')+';font-weight:700;">'+(mgDelta<0?'▼':'▲')+' '+Math.abs(mgDelta).toFixed(1)+'pp vs target</span>'+
-        '<span>'+D.year+' goal</span>'+
+        '<span>'+D.year+' actual</span>'+
+        '<span style="color:'+(mgDelta<0?'#e2735c':'#25a173')+';font-weight:700;">'+
+          (mgDelta<0?'\u25bc':'\u25b2')+' '+Math.abs(mgDelta).toFixed(1)+'pp vs minimum</span>'+
+        '<span>3\u00d7 bill rate</span>'+
       '</div>'+
     '</div>'+
     skyMonthly(D.monthly)+
@@ -4254,7 +5693,8 @@ function renderYTD(){
     '</div>'+
     '<div class="gz-stage">'+skyGauge(vsPace)+'</div>'+
     '<div class="gz-foot">'+
-      '<div><div class="bf-k">2025 Pace</div><div class="bf-v" style="color:#17a06f;">'+ytdShort(D.pace2025)+'</div></div>'+
+      '<div><div class="bf-k">2025 Pace'+(D.paceIsEstimate?' \u00b7 est':'')+'</div>'+
+        '<div class="bf-v" style="color:#17a06f;">'+ytdShort(D.pace2025)+'</div></div>'+
       '<div><div class="bf-k">'+D.year+' YTD</div><div class="bf-v" style="color:#e0932f;">'+ytdShort(D.revenue)+'</div></div>'+
       '<div><div class="bf-k">2025 Full Yr</div><div class="bf-v" style="color:#3f92c9;">'+ytdShort(D.fullYear2025)+'</div></div>'+
     '</div>'+
@@ -4266,16 +5706,16 @@ function renderYTD(){
   var segs='', rows='';
   (D.projects||[]).forEach(function(p,i){
     var share = D.revenue ? p.rev/D.revenue : 0, col = SKY_PAL[i%SKY_PAL.length];
-    segs += '<div class="rib-seg" style="flex:'+(share*1000).toFixed(2)+' 0 0;background:'+col+';">'+(share>=0.05?Math.round(share*100)+'%':'')+'</div>';
-    rows += '<div class="conc-row"><span class="conc-dot" style="background:'+col+'"></span>'+
+    segs += '<div class="rib-seg" data-cc="'+i+'" style="flex:'+(share*1000).toFixed(2)+' 0 0;background:'+col+';">'+(share>=0.05?Math.round(share*100)+'%':'')+'</div>';
+    rows += '<div class="conc-row" data-cc="'+i+'"><span class="conc-dot" style="background:'+col+'"></span>'+
             '<span class="conc-name">'+p.name+'</span>'+
             '<span class="conc-amt">'+ytd$(p.rev)+'</span>'+
             '<span class="conc-pct">'+(share*100).toFixed(1)+'%</span></div>';
   });
   if(other>0){
     var os = D.revenue ? other/D.revenue : 0;
-    segs += '<div class="rib-seg" style="flex:'+(os*1000).toFixed(2)+' 0 0;background:#b7cfdd;color:#42687d;text-shadow:none;">'+Math.round(os*100)+'%</div>';
-    rows += '<div class="conc-row"><span class="conc-dot" style="background:#b7cfdd"></span>'+
+    segs += '<div class="rib-seg" data-cc="other" style="flex:'+(os*1000).toFixed(2)+' 0 0;background:#b7cfdd;color:#42687d;text-shadow:none;">'+Math.round(os*100)+'%</div>';
+    rows += '<div class="conc-row" data-cc="other"><span class="conc-dot" style="background:#b7cfdd"></span>'+
             '<span class="conc-name" style="color:#5c8299;">All others</span>'+
             '<span class="conc-amt" style="color:#5c8299;">'+ytd$(other)+'</span>'+
             '<span class="conc-pct" style="color:#8aa8b8;">'+(os*100).toFixed(1)+'%</span></div>';
@@ -4288,28 +5728,44 @@ function renderYTD(){
     '<div class="conc-grid">'+rows+'</div>'+
   '</div>';
 
-  /* ── ROW 3 : PROFIT ───────────────────────────────────── */
-  var pf = D.profit||{items:[]};
-  var pfMax = Math.max.apply(null,(pf.items||[]).map(function(i){return i.amt;}).concat([1]));
-  var pfBars='';
-  (pf.items||[]).forEach(function(i){
-    pfBars += '<div class="pf-bar-row"><div class="pf-bar-top"><span class="pf-nm">'+i.name+'</span>'+
-      '<span class="pf-am">'+ytd$(i.amt)+'</span></div>'+
-      '<div class="pf-track"><div class="pf-fill" style="width:'+((i.amt/pfMax)*100).toFixed(1)+'%"></div></div></div>';
+  /* ── ROW 3 : RPH ───────────────────────────────────── */
+  var rp = D.rph || {};
+  var rpTop = (rp.top||[]).slice(0,10);
+  var rpMax = Math.max.apply(null, rpTop.map(function(x){ return x.rph; }).concat([1]));
+  var rpBars = '';
+  rpTop.forEach(function(x){
+    var nm = x.cust.length > 26 ? x.cust.slice(0,25)+'\u2026' : x.cust;
+    rpBars += '<div class="pf-bar-row" title="'+x.cust+' \u2014 $'+Math.round(x.rph)+
+        '/hr on '+Math.round(x.hrs).toLocaleString()+' h">'+
+      '<div class="pf-bar-top"><span class="pf-nm">'+nm+'</span>'+
+      '<span class="pf-am">$'+Math.round(x.rph)+'</span></div>'+
+      '<div class="pf-track"><div class="pf-fill" style="width:'+
+        ((x.rph/rpMax)*100).toFixed(1)+'%"></div></div></div>';
   });
-  var pfPct = pf.budget ? pf.total/pf.budget : 0;
+
   var p1 =
   '<div class="sky-card">'+
-    '<div class="sc-head"><div class="sc-label" style="margin:0;">'+D.year+' Project Profit</div>'+
-      '<div class="sc-link">view breakdown &#8599;</div></div>'+
+    '<div class="sc-head"><div class="sc-label" style="margin:0;">'+D.year+' RPH</div>'+
+      '<div class="sc-link" onclick="openRPH()" style="cursor:pointer;">view breakdown &#8599;</div></div>'+
     '<div style="display:flex;align-items:baseline;gap:10px;">'+
-      '<div class="sc-huge" style="font-size:34px;">'+ytd$(pf.total)+'</div>'+
-      '<div style="font-size:16px;font-weight:800;color:#17a06f;">'+ytdPct(D.marginYTD)+'</div></div>'+
-    '<div class="pf-budget">'+
-      '<div class="pf-bud-top"><span>vs Budget '+ytd$(pf.budget)+'</span><span style="margin-left:auto;">'+ytdPct(pfPct)+'</span></div>'+
-      '<div class="pf-bud-track"><div class="pf-bud-fill" style="width:'+Math.min(100,pfPct*100).toFixed(1)+'%"></div></div>'+
-      '<div class="pf-bud-foot"><span>'+ytd$(pf.total)+' actual</span><span>'+ytd$(Math.max(0,pf.budget-pf.total))+' remaining</span></div>'+
-    '</div>'+ pfBars +
+      '<div class="sc-huge" style="font-size:34px;">$'+Math.round(rp.blended||0).toLocaleString()+'</div>'+
+      '<div style="font-size:13px;font-weight:700;color:#7f9bab;">/hr blended</div></div>'+
+    '<div class="rph-split">'+
+      '<div class="rph-half rph-qts">'+
+        '<div class="rph-k">QTS</div>'+
+        '<div class="rph-v">$'+Math.round((rp.qts||{}).rph||0).toLocaleString()+'</div>'+
+        '<div class="rph-n">'+Math.round(((rp.qts||{}).hours)||0).toLocaleString()+' h</div>'+
+      '</div>'+
+      '<div class="rph-half rph-non">'+
+        '<div class="rph-k">Non-QTS blended</div>'+
+        '<div class="rph-v">$'+Math.round((rp.nonQts||{}).rph||0).toLocaleString()+'</div>'+
+        '<div class="rph-n">'+Math.round(((rp.nonQts||{}).hours)||0).toLocaleString()+' h</div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="rph-cap">Top '+rpTop.length+' non-QTS by rate \u00b7 '+
+      (rp.topMinHours||0)+'h+ </div>'+
+    rpBars +
+    '<div class="rph-foot">Rev per hour \u00b7 '+(rp.customerCount||0)+' customers \u00b7 as of '+(D.asOf||'')+'</div>'+
   '</div>';
 
   /* ── ROW 3 : BACKLOG ──────────────────────────────────── */
@@ -4317,35 +5773,42 @@ function renderYTD(){
   // Badge diameter scales with backlog. A pure area (sqrt) scale collapses the
   // small jobs into identical dots because Tesla HQ is over half the book, so
   // a gentler exponent keeps the smaller badges legible while preserving rank.
-  var bkItems = (bk.items||[]).slice().sort(function(a,b){ return b.amt - a.amt; });
+  var bkItems = (bk.items||[]).slice().sort(function(a,b){ return b.amt - a.amt; }).slice(0,10);
   var bkMax   = Math.max.apply(null, bkItems.map(function(i){ return i.amt; }).concat([1]));
   var badges  = '';
   bkItems.forEach(function(i, ix) {
     var col = SKY_PAL[ix % SKY_PAL.length];
-    var d   = Math.max(34, Math.min(116, 116 * Math.pow(i.amt / bkMax, 0.42)));
-    badges += '<div class="bdg" style="width:' + d.toFixed(0) + 'px;height:' + d.toFixed(0) + 'px;"' +
-        ' title="' + i.name + ' — ' + ytd$(i.amt) + '">' +
+    var d   = Math.max(30, Math.min(60, 60 * Math.pow(i.amt / bkMax, 0.42)));
+    badges += '<div class="bdg" data-bk="' + ix + '"' +
+        ' data-num="' + (i.num||'') + '" data-nm="' + i.name + '"' +
+        ' data-cust="' + (i.cust||'') + '" data-amt="' + ytd$(i.amt) + '"' +
+        ' data-rev="' + ytd$(i.rev||0) + '"' +
+        ' data-pct="' + (bk.total ? Math.round(i.amt/bk.total*100) : 0) + '"' +
+        ' style="width:' + d.toFixed(0) + 'px;height:' + d.toFixed(0) + 'px;">' +
       bkBadge(col) +
       '<div class="bdg-txt">' +
-        (d >= 64 ? '<div class="bdg-n">' + i.name + '</div>' : '') +
-        (d >= 44 ? '<div class="bdg-a">' + ytdShort(i.amt) + '</div>' : '') +
+        (d >= 54 ? '<div class="bdg-n">' + i.name + '</div>' : '') +
+        '<div class="bdg-a">' + ytdShort(i.amt) + '</div>' +
       '</div>' +
     '</div>';
   });
   var bkRows='';
-  (bk.items||[]).slice(0,6).forEach(function(i,ix){
+  bkItems.forEach(function(i,ix){
     var s = bk.total ? i.amt/bk.total : 0;
-    bkRows += '<div class="bk-row"><span class="bk-tick" style="background:'+SKY_PAL[ix%SKY_PAL.length]+'"></span>'+
+    bkRows += '<div class="bk-row" data-bk="'+ix+'">'+
+      '<span class="bk-tick" style="background:'+SKY_PAL[ix%SKY_PAL.length]+'"></span>'+
+      '<span class="bk-num">'+(i.num||'')+'</span>'+
       '<span class="bk-nm">'+i.name+'</span><span class="bk-am">'+ytd$(i.amt)+'</span>'+
       '<span class="bk-pc">'+Math.round(s*100)+'%</span></div>';
   });
   var p2 =
   '<div class="sky-card">'+
     '<div class="sc-head"><div class="sc-label" style="margin:0;">Total Backlog</div>'+
-      '<div class="sc-link">view breakdown &#8599;</div></div>'+
+      '<div class="sc-link" onclick="openBacklog()" style="cursor:pointer;">view breakdown &#8599;</div></div>'+
     '<div class="sc-huge" style="font-size:34px;color:#b07d16;">'+ytd$(bk.total)+'</div>'+
     '<div class="sc-note" style="margin-top:6px;">'+bk.projectCount+' projects &middot; remaining contract value</div>'+
-    '<div class="bdg-wrap">'+badges+'</div>'+ bkRows +
+    '<div class="sash"><div class="sash-cap">Backlog Sash \u00b7 top '+bkItems.length+'</div>'+
+      '<div class="sash-in">'+badges+'</div></div>'+ bkRows +
   '</div>';
 
   /* ── ROW 3 : LABOR HOURS ──────────────────────────────── */
@@ -4359,16 +5822,29 @@ function renderYTD(){
       lbBalloon(col, ix) + lbString(h, col)+
       '<div class="lb-x">'+i.name.split(/[\s:]+/)[0]+'</div></div>';
   });
+  // Ten lanes, each a full-width track with the bar running behind the text.
+  // Kept visually distinct from the backlog card's tick-and-row list.
   var lhRows='';
-  lbTop.slice(0,5).forEach(function(i,ix){
-    lhRows += '<div class="lh-row"><span class="lh-rk">#'+(ix+1)+'</span>'+
-      '<span class="lh-nm">'+i.name+'</span><span class="lh-hr">'+Math.round(i.hrs).toLocaleString()+'h</span>'+
-      '<span class="lh-mini"><i style="width:'+((i.hrs/lbMax)*100).toFixed(1)+'%"></i></span></div>';
+  var lbTotal = lbTop.reduce(function(a,x){ return a+x.hrs; }, 0);
+  lbTop.forEach(function(i,ix){
+    var pctOfTop = lbTotal ? i.hrs/lbTotal*100 : 0;
+    lhRows += '<div class="dl-lane" title="'+i.name+' \u00b7 '+(i.cust||'')+'">'+
+      '<div class="dl-fill" style="width:'+((i.hrs/lbMax)*100).toFixed(1)+'%;'+
+        'background:linear-gradient(90deg,'+SKY_PAL[ix%SKY_PAL.length]+'55,'+
+        SKY_PAL[ix%SKY_PAL.length]+'cc);"></div>'+
+      '<div class="dl-face">'+
+        '<span class="dl-rk">'+(ix+1)+'</span>'+
+        '<span class="dl-num">'+(i.num||'')+'</span>'+
+        '<span class="dl-nm">'+i.name+'</span>'+
+        '<span class="dl-hr">'+Math.round(i.hrs).toLocaleString()+'<i>h</i></span>'+
+        '<span class="dl-pc">'+pctOfTop.toFixed(0)+'%</span>'+
+      '</div>'+
+    '</div>';
   });
   var p3 =
   '<div class="sky-card">'+
     '<div class="sc-head"><div class="sc-label" style="margin:0;">'+D.year+' Direct Labor Hours</div>'+
-      '<div class="sc-link">view breakdown &#8599;</div></div>'+
+      '<div class="sc-link" onclick="openDL()" style="cursor:pointer;">view breakdown &#8599;</div></div>'+
     '<div style="display:flex;align-items:baseline;gap:8px;">'+
       '<div class="sc-huge" style="font-size:34px;color:#7b57c8;">'+Math.round(lb.hours||0).toLocaleString()+'</div>'+
       '<div style="font-size:15px;font-weight:700;color:#9b7fd4;">hrs</div></div>'+
@@ -4383,6 +5859,10 @@ function renderYTD(){
     '<div class="ytd-row1">'+c1+c2+c3+'</div>'+
     conc +
     '<div class="ytd-row3">'+p1+p2+p3+'</div>';
+
+  wireMonthlyTips();   // the bars are freshly rendered, so rebind the readout
+  wireBacklogBadges();
+  wireConcentration();
 }
 
 // Puts the Workforce section back to its defaults: Dash tab, Summary sheet,
@@ -5406,7 +6886,7 @@ function mrtRecalc() {
 // one pay date. Replace PAYROLL_RUNS to refresh.
 // ═══════════════════════════════════════════════════════════════════════════
 var BASIN_MARK = 'data:image/png;base64,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';
-var PAYROLL_RUNS = [{"payDate":"2026-06-10","range":"5/24/26-6/6/26","headcount":37,"cashNeed":158752.92,"erTax":11496.34,"totalEarnings":161523.16,"cashPerHead":4290.62},{"payDate":"2026-06-24","range":"6/7/26-6/20/26","headcount":37,"cashNeed":159218.43,"erTax":11576.24,"totalEarnings":163151.02,"cashPerHead":4303.2},{"payDate":"2026-07-08","range":"6/21/26-7/4/26","headcount":38,"cashNeed":166276.89,"erTax":10700.1,"totalEarnings":170509.01,"cashPerHead":4375.71},{"payDate":"2026-07-22","range":"7/5/26-7/18/26","headcount":38,"cashNeed":174349.98,"erTax":11055.03,"totalEarnings":179504.14,"cashPerHead":4588.16},{"payDate":"2026-08-05","range":"7/19/26-8/1/26","headcount":38,"cashNeed":162599.35,"erTax":10224.31,"totalEarnings":167327.7,"cashPerHead":4278.93},{"payDate":"2026-08-19","range":"8/2/26-8/15/26","headcount":38,"cashNeed":164453.29,"erTax":10472.72,"totalEarnings":170199.17,"cashPerHead":4327.72},{"payDate":"2026-09-02","range":"8/16/26-8/29/26","headcount":37,"cashNeed":169823.99,"erTax":10213.79,"totalEarnings":173766.17,"cashPerHead":4589.84}];
+var PAYROLL_RUNS = [{"payDate":"2026-06-10","range":"5/24/26-6/6/26","headcount":37,"cashNeed":158752.92,"erTax":11496.34,"totalEarnings":161523.16,"cashPerHead":4290.62},{"payDate":"2026-06-24","range":"6/7/26-6/20/26","headcount":37,"cashNeed":159218.43,"erTax":11576.24,"totalEarnings":163151.02,"cashPerHead":4303.2},{"payDate":"2026-07-08","range":"6/21/26-7/4/26","headcount":38,"cashNeed":166276.89,"erTax":10700.1,"totalEarnings":170509.01,"cashPerHead":4375.71},{"payDate":"2026-07-22","range":"7/5/26-7/18/26","headcount":38,"cashNeed":174349.98,"erTax":11055.03,"totalEarnings":179504.14,"cashPerHead":4588.16},{"payDate":"2026-08-05","range":"7/19/26-8/1/26","headcount":38,"cashNeed":162599.35,"erTax":10224.31,"totalEarnings":167327.7,"cashPerHead":4278.93},{"payDate":"2026-08-19","range":"8/2/26-8/15/26","headcount":38,"cashNeed":164453.29,"erTax":10472.72,"totalEarnings":170199.17,"cashPerHead":4327.72},{"payDate":"2026-09-02","range":"8/16/26-8/29/26","headcount":37,"cashNeed":169823.99,"erTax":10213.79,"totalEarnings":173766.17,"cashPerHead":4589.84},{"payDate":"2026-09-16","range":"8/30/26-9/12/26","headcount":34,"cashNeed":157768.15,"erTax":9924.78,"totalEarnings":163151.34,"cashPerHead":4640.24}];
 var PAY_RANGE = 'year';   // 'year' | 'quarter' | 'month'
 
 function payrollRuns(){
@@ -5445,6 +6925,75 @@ function payRangeLabel(){
   if (PAY_RANGE === 'month')   return MON[m-1]+' '+y;
   if (PAY_RANGE === 'quarter') return 'Q'+(Math.floor((m-1)/3)+1)+' '+y;
   return y;
+}
+
+// Cash per employee for the most recent run, with the trailing runs behind it
+// so the direction is visible at a glance.
+function cpeCard(){
+  var d = (PAYROLL_RUNS||[]).slice().sort(function(a,b){
+    return a.payDate.localeCompare(b.payDate); });
+  if (!d.length) return '';
+  var last = d[d.length-1];
+  var prev = d.length > 1 ? d[d.length-2] : null;
+  var delta = prev ? last.cashPerHead - prev.cashPerHead : 0;
+  var pct   = prev && prev.cashPerHead ? delta/prev.cashPerHead*100 : 0;
+  var up    = delta >= 0;
+
+  var recent = d.slice(-8);
+  var mx = Math.max.apply(null, recent.map(function(r){ return r.cashPerHead; }).concat([1]));
+  var mn = Math.min.apply(null, recent.map(function(r){ return r.cashPerHead; }));
+  var span = (mx - mn) || 1;
+  var spark = recent.map(function(r, i){
+    var h = 24 + ((r.cashPerHead - mn)/span) * 52;
+    var isLast = i === recent.length - 1;
+    var p = r.payDate.split('-');
+    return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;" '+
+      'title="'+p[1]+'/'+p[2]+' \u00b7 $'+Math.round(r.cashPerHead).toLocaleString()+
+      ' \u00b7 '+r.headcount+' staff">'+
+      '<div style="width:100%;max-width:26px;height:'+h.toFixed(0)+'px;border-radius:6px 6px 3px 3px;'+
+        (isLast
+          ? 'background:linear-gradient(180deg,#7ef0ff,#00b6e6);box-shadow:0 0 14px rgba(0,212,255,0.6);'
+          : 'background:linear-gradient(180deg,rgba(0,212,255,0.32),rgba(0,212,255,0.14));')+
+      '"></div>'+
+      '<div style="font-family:var(--mono);font-size:8px;font-weight:700;color:rgba(255,255,255,'+
+        (isLast?'0.7':'0.32')+');">'+p[1]+'/'+p[2]+'</div>'+
+    '</div>';
+  }).join('');
+
+  var pd = last.payDate.split('-');
+  return ''+
+    '<div style="display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:14px;">'+
+      '<div>'+
+        '<div style="font-family:var(--hud);font-size:38px;font-weight:900;color:#00d4ff;'+
+          'line-height:1;text-shadow:0 0 26px rgba(0,212,255,0.55);">'+
+          fmt$(last.cashPerHead)+'</div>'+
+        '<div style="font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:1.4px;'+
+          'text-transform:uppercase;color:rgba(255,255,255,0.34);margin-top:6px;">'+
+          'Payroll cash needed \u00f7 employee \u00b7 last run</div>'+
+      '</div>'+
+      (prev ?
+        '<div style="display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:20px;'+
+          'background:rgba('+(up?'248,113,113':'74,222,128')+',0.12);'+
+          'border:1px solid rgba('+(up?'248,113,113':'74,222,128')+',0.4);margin-bottom:6px;">'+
+          '<span style="font-family:var(--hud);font-size:14px;font-weight:900;'+
+            'color:'+(up?'#f87171':'#4ade80')+';">'+(up?'\u25b2':'\u25bc')+' '+
+            fmt$(Math.abs(delta))+'</span>'+
+          '<span style="font-family:var(--mono);font-size:9px;font-weight:700;'+
+            'color:rgba(255,255,255,0.4);">'+(up?'+':'')+pct.toFixed(1)+'% vs prior</span>'+
+        '</div>' : '')+
+      '<div style="margin-left:auto;text-align:right;margin-bottom:4px;">'+
+        '<div style="font-family:var(--hud);font-size:17px;font-weight:800;color:rgba(255,255,255,0.82);">'+
+          last.headcount+'</div>'+
+        '<div style="font-family:var(--mono);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;'+
+          'color:rgba(255,255,255,0.3);">on payroll</div>'+
+      '</div>'+
+    '</div>'+
+    '<div style="display:flex;align-items:flex-end;gap:7px;height:86px;">'+spark+'</div>'+
+    '<div style="margin-top:10px;padding-top:9px;border-top:1px solid rgba(255,255,255,0.07);'+
+      'font-family:var(--mono);font-size:8.5px;letter-spacing:0.8px;color:rgba(255,255,255,0.28);'+
+      'text-align:center;">'+
+      'CPE = payroll cash needed \u00f7 headcount \u00b7 as of '+pd[1]+'/'+pd[2]+'/'+pd[0]+
+      ' ('+last.range+')</div>';
 }
 
 function payrollChart(){
@@ -6319,7 +7868,10 @@ function renderMetrics() {
     '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;padding:16px 16px 12px;">'+
       card('Headcount','var(--cyan)',box1)+
       card('Labor Cost Composition','#00ffe0',box4)+
-      card('Payroll Cash by Pay Period','var(--cyan)',payrollChart())+
+      '<div style="display:flex;flex-direction:column;gap:16px;">'+
+        card('Payroll Cash by Pay Period','var(--cyan)',payrollChart())+
+        card('CPE \u00b7 Payroll Cash Needed per Employee','var(--cyan)',cpeCard())+
+      '</div>'+
     '</div>'+
     // ROW 2: DL Capacity (wider) + Margin Rate Table
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 16px 24px;">'+
