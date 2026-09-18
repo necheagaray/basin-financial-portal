@@ -1403,6 +1403,302 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 .pl-rph,.pl-pct,.pl-rev{font-family:var(--hud);font-size:13px;font-weight:800;
   color:rgba(255,255,255,0.5);text-align:right;}
 .pl-rph span{font-family:var(--mono);font-size:9px;font-weight:600;color:rgba(255,255,255,0.3);}
+
+/* ── Q4: revenue method toggle ────────────────────────────────────────── */
+.q4-meth{display:flex;gap:3px;justify-content:flex-end;margin-top:5px;}
+.q4-mb{cursor:pointer;font-family:var(--mono);font-size:7.5px;font-weight:800;letter-spacing:0.8px;
+  text-transform:uppercase;padding:2px 7px;border-radius:20px;color:rgba(255,255,255,0.3);
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);transition:all .14s;}
+.q4-mb:hover{color:rgba(255,255,255,0.75);background:rgba(255,255,255,0.1);}
+.q4-mb.on{color:#03131c;background:#00d4ff;border-color:#00d4ff;}
+
+/* ── Q4: RPH builder ──────────────────────────────────────────────────── */
+#q4-build-ov{position:fixed;inset:0;z-index:950;display:none;align-items:center;
+  justify-content:center;padding:26px;background:rgba(2,8,14,0.75);backdrop-filter:blur(8px);}
+#q4-build-ov.open{display:flex;}
+.qb-card{width:min(940px,96vw);max-height:92vh;overflow:auto;border-radius:20px;position:relative;
+  background:linear-gradient(180deg,rgba(9,20,30,0.99),rgba(4,10,16,1));
+  border:1px solid rgba(0,212,255,0.3);
+  box-shadow:0 30px 80px -24px rgba(0,0,0,0.85),0 0 40px rgba(0,212,255,0.1);
+  padding:24px 28px 20px;animation:cfIn .2s cubic-bezier(.2,.8,.3,1);}
+.qb-x{position:absolute;top:16px;right:18px;width:32px;height:32px;border-radius:50%;
+  border:1px solid rgba(255,255,255,0.16);background:rgba(255,255,255,0.05);
+  color:rgba(255,255,255,0.7);cursor:pointer;font-size:16px;}
+.qb-x:hover{background:#00d4ff;color:#03131c;border-color:#00d4ff;}
+.qb-title{font-family:var(--hud);font-size:13px;font-weight:900;letter-spacing:2.2px;
+  text-transform:uppercase;color:#00d4ff;text-shadow:0 0 16px rgba(0,212,255,0.5);}
+.qb-sub{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.4);margin-top:5px;}
+.qb-hrs{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:18px 0 14px;padding:12px 14px;
+  border-radius:12px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.24);}
+.qb-k{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:1.3px;
+  text-transform:uppercase;color:rgba(255,255,255,0.4);}
+.qb-note{font-family:var(--mono);font-size:8.5px;color:rgba(255,255,255,0.28);flex:1;min-width:200px;}
+.qb-bar{display:flex;height:22px;border-radius:7px;overflow:hidden;margin-bottom:14px;
+  background:rgba(255,255,255,0.05);}
+.qg-head,.qg-row{display:grid;
+  grid-template-columns:14px 1fr 104px 76px 132px 96px 26px;gap:9px;align-items:center;}
+.qg-head{padding:0 4px 7px;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:5px;}
+.qg-head span{font-family:var(--mono);font-size:8px;font-weight:800;letter-spacing:1.2px;
+  text-transform:uppercase;color:rgba(255,255,255,0.28);}
+.qg-head span:nth-child(3),.qg-head span:nth-child(4),
+.qg-head span:nth-child(5),.qg-head span:nth-child(6){text-align:right;}
+.qg-row{padding:7px 4px;border-radius:9px;transition:background .14s;}
+.qg-row:hover{background:rgba(255,255,255,0.03);}
+.qg-dot{width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c);}
+.qg-nm{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:8px;
+  padding:6px 10px;color:#fff;font-family:var(--inter);font-size:12.5px;outline:none;width:100%;}
+.qg-nm:focus{border-color:var(--c);}
+.qg-f{display:inline-flex;align-items:center;gap:3px;justify-content:flex-end;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:8px;
+  padding:5px 8px;}
+.qg-f input{width:56px;background:transparent;border:none;outline:none;color:var(--c,#00d4ff);
+  font-family:var(--hud);font-size:13px;font-weight:800;text-align:right;}
+.qg-f span{font-family:var(--mono);font-size:8.5px;color:rgba(255,255,255,0.32);}
+.qg-f.big input{width:76px;font-size:16px;}
+.qg-hrs{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.45);text-align:right;}
+.qg-rev{font-family:var(--hud);font-size:14px;font-weight:800;color:var(--c);text-align:right;}
+.qg-x{background:none;border:1px solid rgba(248,113,113,0.3);border-radius:6px;color:#f87171;
+  cursor:pointer;font-size:13px;line-height:1;padding:2px 5px;}
+.qg-x:hover{background:rgba(248,113,113,0.2);color:#fff;}
+.qb-add{margin-top:10px;width:100%;cursor:pointer;padding:9px;border-radius:10px;
+  font-family:var(--mono);font-size:9.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
+  color:#00d4ff;background:rgba(0,212,255,0.07);border:1px dashed rgba(0,212,255,0.35);}
+.qb-add:hover{background:rgba(0,212,255,0.16);}
+.qb-foot{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;padding-top:14px;
+  border-top:1px solid rgba(255,255,255,0.1);}
+.qb-f{flex:1;min-width:150px;padding:10px 13px;border-radius:11px;
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);}
+.qb-f.bad{background:rgba(248,113,113,0.1);border-color:rgba(248,113,113,0.4);}
+.qb-f.hero{background:rgba(0,212,255,0.1);border-color:rgba(0,212,255,0.45);}
+.qb-fk{display:block;font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:1.2px;
+  text-transform:uppercase;color:rgba(255,255,255,0.38);}
+.qb-fv{display:block;font-family:var(--hud);font-size:21px;font-weight:900;color:#fff;margin-top:3px;}
+.qb-f.hero .qb-fv{color:#00d4ff;text-shadow:0 0 18px rgba(0,212,255,0.6);font-size:25px;}
+.qb-warn{font-family:var(--mono);font-size:8.5px;color:#f87171;}
+.qb-actions{display:flex;gap:10px;margin-top:16px;}
+.qb-apply{flex:1;cursor:pointer;padding:12px;border-radius:11px;font-family:var(--mono);
+  font-size:10px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;
+  color:#03131c;background:linear-gradient(135deg,#7ef0ff,#00b6e6);border:none;}
+.qb-apply:hover{filter:brightness(1.12);}
+.qb-cancel{cursor:pointer;padding:12px 20px;border-radius:11px;font-family:var(--mono);
+  font-size:10px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;
+  color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.14);}
+.qb-cancel:hover{color:#fff;background:rgba(255,255,255,0.1);}
+
+/* ── Q4: direct labor build ───────────────────────────────────────────── */
+#q4-dl-ov{position:fixed;inset:0;z-index:950;display:none;align-items:center;
+  justify-content:center;padding:26px;background:rgba(2,8,14,0.75);backdrop-filter:blur(8px);}
+#q4-dl-ov.open{display:flex;}
+.dlb-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin:18px 0 14px;}
+.dlb-grid.three{grid-template-columns:repeat(3,1fr);}
+.dlb-f{padding:11px 13px;border-radius:11px;background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.11);}
+.dlb-k{display:block;font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:1.1px;
+  text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px;}
+.dlb-h{display:block;font-family:var(--mono);font-size:8px;color:rgba(255,255,255,0.26);
+  margin-top:5px;line-height:1.4;}
+.dlb-chain{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:11px 14px;
+  border-radius:11px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.24);
+  font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.55);margin-bottom:14px;}
+.dlb-chain i{font-style:normal;color:rgba(255,255,255,0.3);}
+.dlb-chain b{margin-left:auto;font-family:var(--hud);font-size:16px;font-weight:900;color:#00d4ff;}
+.dlb-out{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:4px;}
+.dlb-o{padding:12px 14px;border-radius:12px;background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.11);}
+.dlb-o.hero{background:rgba(255,107,107,0.1);border-color:rgba(255,107,107,0.4);}
+.dlb-ok{display:block;font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:1.1px;
+  text-transform:uppercase;color:rgba(255,255,255,0.4);}
+.dlb-ov{display:block;font-family:var(--hud);font-size:22px;font-weight:900;color:#fff;margin-top:4px;}
+.dlb-o.hero .dlb-ov{color:#ff8a8a;text-shadow:0 0 18px rgba(255,107,107,0.5);font-size:25px;}
+.dlb-on{display:block;font-family:var(--mono);font-size:8.5px;color:rgba(255,255,255,0.32);
+  margin-top:4px;}
+.dlb-note{margin-top:14px;padding:11px 14px;border-radius:10px;font-family:var(--mono);
+  font-size:9.5px;line-height:1.6;color:rgba(255,255,255,0.4);
+  background:rgba(255,255,255,0.035);border:1px solid rgba(255,255,255,0.09);}
+
+/* ── Q4: inline rate on percent-of-revenue lines ──────────────────────── */
+.q4-rate{display:flex;align-items:center;gap:3px;justify-content:flex-end;margin-top:4px;}
+.q4-rate input{width:46px;background:rgba(255,107,107,0.1);border:1px solid rgba(255,107,107,0.35);
+  border-radius:6px;padding:2px 5px;color:#ff9090;font-family:var(--hud);font-size:11px;
+  font-weight:800;text-align:right;outline:none;}
+.q4-rate input:focus{border-color:#ff9090;}
+.q4-rate span{font-family:var(--mono);font-size:7.5px;color:rgba(255,255,255,0.3);}
+
+/* ── Full-year panel as a projection screen ───────────────────────────── */
+.scr-rig{position:relative;padding-top:2px;margin-bottom:26px;}
+
+/* roller housing the screen pulls down from */
+.scr-roller{position:relative;height:16px;border-radius:5px;margin:0 -2px 0;
+  background:linear-gradient(180deg,#3c4450 0%,#20262e 45%,#12161b 100%);
+  box-shadow:0 3px 8px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.16);}
+.scr-slot{position:absolute;left:14px;right:14px;bottom:2px;height:3px;border-radius:2px;
+  background:rgba(0,0,0,0.65);box-shadow:inset 0 1px 1px rgba(0,0,0,0.9);}
+.scr-cap{position:absolute;top:-2px;width:11px;height:20px;border-radius:3px;
+  background:linear-gradient(180deg,#4a545f,#1b2027);
+  box-shadow:0 2px 5px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.2);}
+.scr-cap.l{left:-6px;} .scr-cap.r{right:-6px;}
+
+/* the surface itself: faintly lit fabric, brighter where the beam lands */
+.scr-surface{position:relative;overflow:hidden;
+  border-radius:0 0 4px 4px;
+  background:
+    radial-gradient(120% 90% at 18% 0%, rgba(255,241,200,0.075) 0%, transparent 58%),
+    linear-gradient(180deg, rgba(255,255,255,0.055) 0%, rgba(255,255,255,0.022) 38%,
+                    rgba(255,255,255,0.012) 100%),
+    linear-gradient(180deg, #0a0d14, #06080e);
+  border:1px solid rgba(251,191,36,0.14);border-top:none;
+  box-shadow:inset 0 14px 28px -18px rgba(0,0,0,0.9),
+             0 26px 50px -28px rgba(0,0,0,0.85),
+             0 0 60px rgba(251,191,36,0.05);}
+/* fabric grain */
+.scr-grain{position:absolute;inset:0;pointer-events:none;opacity:0.5;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='0.05'/></svg>");}
+/* the light cone washing across from the lens side */
+.scr-wash{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(112deg, rgba(255,246,214,0.10) 0%, rgba(255,246,214,0.04) 26%,
+             transparent 55%);}
+/* fine horizontal scan lines, as on a projected image */
+.scr-scan{position:absolute;inset:0;pointer-events:none;opacity:0.55;
+  background:repeating-linear-gradient(180deg,rgba(255,255,255,0.022) 0 1px,transparent 1px 3px);}
+/* edge falloff */
+.scr-vig{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 100% at 50% 45%, transparent 55%, rgba(0,0,0,0.5) 100%);}
+/* screen tabs at the corners */
+.scr-corner{position:absolute;width:15px;height:15px;pointer-events:none;
+  border-color:rgba(251,191,36,0.45);}
+.scr-corner.tl{top:7px;left:7px;border-left:1.5px solid;border-top:1.5px solid;}
+.scr-corner.tr{top:7px;right:7px;border-right:1.5px solid;border-top:1.5px solid;}
+.scr-corner.bl{bottom:7px;left:7px;border-left:1.5px solid;border-bottom:1.5px solid;}
+.scr-corner.br{bottom:7px;right:7px;border-right:1.5px solid;border-bottom:1.5px solid;}
+/* running indicator */
+.scr-live{position:absolute;bottom:11px;left:26px;z-index:4;display:flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:7.5px;font-weight:800;letter-spacing:2px;
+  color:rgba(251,191,36,0.55);}
+.scr-live i{width:5px;height:5px;border-radius:50%;background:#fbbf24;
+  box-shadow:0 0 7px #fbbf24;animation:scrBlink 2.6s ease-in-out infinite;}
+@keyframes scrBlink{0%,100%{opacity:1;}50%{opacity:0.25;}}
+.scr-body{position:relative;z-index:3;padding-bottom:12px;}
+
+/* weighted bottom bar with its pull cord */
+.scr-bar{position:relative;height:11px;border-radius:0 0 6px 6px;margin:0 6px;
+  background:linear-gradient(180deg,#2c333c,#141920);
+  box-shadow:0 5px 12px -4px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.12);}
+.scr-pull{position:absolute;right:34px;top:100%;width:1.5px;height:14px;
+  background:linear-gradient(180deg,rgba(255,255,255,0.2),rgba(255,255,255,0.04));}
+.scr-pull:after{content:'';position:absolute;left:50%;top:14px;width:6px;height:6px;
+  border-radius:50%;transform:translateX(-50%);
+  background:radial-gradient(circle at 34% 30%,#5a646f,#1c2128);
+  box-shadow:0 2px 4px rgba(0,0,0,0.7);}
+
+/* the projected figures sit slightly luminous on the fabric */
+.scr-body .fy-total{text-shadow:0 0 22px rgba(255,255,255,0.14);}
+.scr-body .fy-row.hero .fy-total{text-shadow:0 0 30px currentColor,0 0 8px rgba(255,255,255,0.3);}
+.scr-body .fy-name{text-shadow:0 0 14px rgba(255,255,255,0.12);}
+
+/* ── Active projects ──────────────────────────────────────────────────── */
+#active-projects{background:linear-gradient(160deg,#050910 0%,#03060c 55%,#020509 100%);}
+.ap-layout{display:grid;grid-template-columns:1fr;gap:16px;padding:18px 22px 26px;
+  align-items:start;transition:grid-template-columns .22s ease;}
+.ap-layout.has-card{grid-template-columns:1fr 330px;}
+.ap-side{position:sticky;top:18px;}
+
+.ap-wrap{border-radius:16px;overflow:hidden;
+  background:linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.012));
+  border:1px solid rgba(255,255,255,0.10);
+  box-shadow:0 24px 50px -30px rgba(0,0,0,0.85);}
+.ap-head{display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap;
+  padding:18px 20px 16px;border-bottom:1px solid rgba(255,255,255,0.08);
+  background:linear-gradient(180deg,rgba(0,212,255,0.05),transparent);}
+.ap-title{font-family:var(--hud);font-size:16px;font-weight:900;letter-spacing:2.6px;
+  text-transform:uppercase;color:#00d4ff;text-shadow:0 0 20px rgba(0,212,255,0.45);}
+.ap-sub{font-family:var(--mono);font-size:9.5px;color:rgba(255,255,255,0.32);margin-top:6px;}
+.ap-kpis{margin-left:auto;display:flex;gap:9px;flex-wrap:wrap;}
+.ap-k{padding:8px 13px;border-radius:11px;text-align:right;min-width:104px;
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);}
+.ap-k span{display:block;font-family:var(--mono);font-size:7.5px;font-weight:700;
+  letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+.ap-k b{display:block;font-family:var(--hud);font-size:17px;font-weight:900;
+  color:rgba(255,255,255,0.9);margin-top:3px;}
+.ap-k.gold{background:rgba(251,191,36,0.09);border-color:rgba(251,191,36,0.32);}
+.ap-k.gold b{color:#fbbf24;}
+.ap-k.cyan{background:rgba(0,212,255,0.09);border-color:rgba(0,212,255,0.32);}
+.ap-k.cyan b{color:#00d4ff;}
+
+.ap-scroll{max-height:calc(100vh - 250px);overflow:auto;}
+.ap-tbl{width:100%;border-collapse:collapse;}
+.ap-tbl thead th{position:sticky;top:0;z-index:3;cursor:pointer;user-select:none;
+  padding:10px 12px;text-align:left;white-space:nowrap;
+  font-family:var(--mono);font-size:8.5px;font-weight:800;letter-spacing:1.4px;
+  text-transform:uppercase;color:rgba(255,255,255,0.42);
+  background:rgba(6,12,20,0.98);border-bottom:1px solid rgba(255,255,255,0.12);
+  transition:color .14s,background .14s;}
+.ap-tbl thead th:hover{color:#fff;background:rgba(0,212,255,0.1);}
+.ap-tbl thead th.on{color:#00d4ff;}
+.ap-tbl thead th.r{text-align:right;}
+.ap-arw{font-size:7.5px;margin-left:2px;}
+.ap-idle{font-style:normal;opacity:0.22;}
+
+.ap-tbl tbody td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.045);
+  font-size:12.5px;color:rgba(255,255,255,0.72);}
+.ap-tbl tbody td.r{text-align:right;}
+.ap-tbl tbody tr{cursor:pointer;transition:background .12s;}
+.ap-tbl tbody tr:nth-child(even) td{background:rgba(255,255,255,0.016);}
+.ap-tbl tbody tr:hover td{background:rgba(0,212,255,0.07);}
+.ap-tbl tbody tr.sel td{background:rgba(0,212,255,0.13);
+  box-shadow:inset 0 0 0 1px rgba(0,212,255,0.22);}
+.ap-tbl tbody tr.sel td:first-child{box-shadow:inset 3px 0 0 #00d4ff;}
+.ap-num{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;font-weight:800;
+  color:#7ed9ff;white-space:nowrap;}
+.ap-roll{display:inline-block;margin-left:5px;font-style:normal;font-size:8px;font-weight:800;
+  color:#fbbf24;background:rgba(251,191,36,0.15);border-radius:20px;padding:1px 5px;}
+.ap-nm{font-weight:600;color:rgba(255,255,255,0.86);}
+.ap-cu{font-size:11.5px;color:rgba(255,255,255,0.45);}
+.ap-mn{font-family:var(--hud);font-size:13px;font-weight:700;}
+.ap-bl{font-family:var(--hud);font-size:13.5px;font-weight:800;color:#fbbf24;}
+.ap-hr{font-family:var(--mono);font-size:12px;color:rgba(255,255,255,0.6);}
+.ap-rp{font-family:var(--hud);font-size:13.5px;font-weight:800;color:#00d4ff;}
+.ap-zero{color:rgba(255,255,255,0.18);}
+
+.ap-tbl tfoot td{position:sticky;bottom:0;padding:12px;
+  background:rgba(6,12,20,0.98);border-top:1px solid rgba(255,255,255,0.14);
+  font-family:var(--hud);font-size:14px;font-weight:900;color:rgba(255,255,255,0.88);}
+.ap-tbl tfoot td:first-child{font-family:var(--mono);font-size:10px;font-weight:800;
+  letter-spacing:1.4px;color:rgba(255,255,255,0.4);}
+
+/* the detail card */
+.ap-card{position:relative;border-radius:16px;padding:20px 20px 16px;
+  background:linear-gradient(180deg,rgba(0,212,255,0.09),rgba(255,255,255,0.02));
+  border:1px solid rgba(0,212,255,0.32);
+  box-shadow:0 22px 46px -26px rgba(0,0,0,0.9),0 0 34px rgba(0,212,255,0.08);
+  animation:apIn .2s cubic-bezier(.2,.8,.3,1);}
+@keyframes apIn{from{opacity:0;transform:translateX(14px);}to{opacity:1;transform:none;}}
+.apc-x{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;
+  border:1px solid rgba(255,255,255,0.16);background:rgba(255,255,255,0.05);
+  color:rgba(255,255,255,0.6);cursor:pointer;font-size:14px;}
+.apc-x:hover{background:#00d4ff;color:#03131c;border-color:#00d4ff;}
+.apc-num{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;font-weight:800;
+  letter-spacing:1px;color:#00d4ff;}
+.apc-nm{font-family:var(--inter);font-size:15px;font-weight:700;color:#fff;margin-top:5px;
+  line-height:1.3;padding-right:24px;}
+.apc-cu{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.42);margin-top:4px;}
+.apc-bar{height:6px;border-radius:4px;margin-top:14px;overflow:hidden;
+  background:rgba(255,255,255,0.08);}
+.apc-bar div{height:100%;border-radius:4px;
+  background:linear-gradient(90deg,rgba(0,212,255,0.5),#00d4ff);
+  box-shadow:0 0 12px rgba(0,212,255,0.6);}
+.apc-barl{font-family:var(--mono);font-size:8.5px;letter-spacing:0.8px;
+  color:rgba(255,255,255,0.35);margin-top:5px;}
+.apc-body{margin-top:14px;}
+.apc-l{display:flex;align-items:baseline;gap:10px;padding:7px 0;
+  border-bottom:1px solid rgba(255,255,255,0.06);}
+.apc-l span{font-family:var(--mono);font-size:9px;letter-spacing:0.8px;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);}
+.apc-l b{margin-left:auto;font-family:var(--hud);font-size:14px;font-weight:800;
+  color:rgba(255,255,255,0.88);}
+.apc-l b.gold{color:#fbbf24;} .apc-l b.cyan{color:#00d4ff;}
+.apc-note{margin-top:12px;font-family:var(--mono);font-size:8.5px;
+  color:rgba(255,255,255,0.22);text-align:center;}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
@@ -3450,20 +3746,33 @@ function renderBudgetSummary(el) {
           'background:radial-gradient(circle,'+p.atmosphere+' 0%,transparent 70%);'+
           'animation:atmPulse '+(2+i*0.7)+'s ease-in-out infinite;pointer-events:none;"></div>'+
 
-        // Ring system (for cyan planet)
-        (hasRings ?
-          '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-20deg);'+
-            'width:'+(ps+24)+'px;height:'+(ps*0.18)+'px;border-radius:50%;'+
-            'border:3px solid rgba(0,212,255,0.35);pointer-events:none;"></div>'+
-          '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-20deg);'+
-            'width:'+(ps+36)+'px;height:'+(ps*0.25)+'px;border-radius:50%;'+
-            'border:1.5px solid rgba(0,212,255,0.18);pointer-events:none;"></div>'
-        : '')+
-
         // Planet sphere with rim lighting
         '<div style="position:relative;width:'+ps+'px;height:'+ps+'px;border-radius:50%;flex-shrink:0;">'+
+
+          // Ring system: the back half sits behind the sphere, the front half
+          // crosses over it, so the planet reads as sitting inside the rings.
+          (hasRings ? (function(){
+            function ring(w, h, bw, op, z, clip){
+              return '<div style="position:absolute;top:50%;left:50%;z-index:'+z+';'+
+                'width:'+w.toFixed(1)+'px;height:'+h.toFixed(1)+'px;margin-left:'+(-w/2).toFixed(1)+'px;'+
+                'margin-top:'+(-h/2).toFixed(1)+'px;border-radius:50%;'+
+                'border:'+bw+'px solid rgba(0,212,255,'+op+');'+
+                'transform:rotate(-18deg);pointer-events:none;'+
+                (clip ? 'clip-path:'+clip+';' : '')+'"></div>';
+            }
+            var w1 = ps*2.05, h1 = ps*0.58;      // main ring
+            var w2 = ps*2.5,  h2 = ps*0.72;      // outer, fainter ring
+            return (
+              // back halves, behind the planet
+              ring(w1,h1,3,  0.5,  0, 'inset(0 0 50% 0)')+
+              ring(w2,h2,1.5,0.22, 0, 'inset(0 0 50% 0)')+
+              // front halves, over the planet
+              ring(w1,h1,3,  0.65, 3, 'inset(50% 0 0 0)')+
+              ring(w2,h2,1.5,0.3,  3, 'inset(50% 0 0 0)')
+            );
+          })() : '')+
           // Main sphere
-          '<div style="position:absolute;inset:0;border-radius:50%;'+
+          '<div style="position:absolute;inset:0;border-radius:50%;z-index:1;'+
             'background:'+PLANET_TEXTURES[i]+';'+
             'box-shadow:'+
               '0 0 '+(ps*1.2).toFixed(0)+'px rgba('+p.rgb+',0.45),'+
@@ -3694,11 +4003,23 @@ function renderBudgetSummary(el) {
             'color:rgba(255,255,255,0.42);text-transform:uppercase;">'+
             'Actuals + Projection + Total</div>'+
         '</div>'+
-        '<div id="proj-screen" style="position:relative;background:rgba(255,255,255,0.02);'+
-          'border:1px solid rgba(251,191,36,0.16);border-radius:14px;overflow:hidden;'+
-          'box-shadow:0 0 0 1px rgba(251,191,36,0.05),0 0 40px rgba(251,191,36,0.07),'+
-          '0 0 90px rgba(251,191,36,0.05);">'+
-          summaryTable+
+        // The panel is built as a pull-down projection screen: a roller
+        // housing above, the hanging surface carrying the projected figures,
+        // and a weighted bar below.
+        '<div class="scr-rig">'+
+          '<div class="scr-roller"><span class="scr-cap l"></span>'+
+            '<span class="scr-slot"></span><span class="scr-cap r"></span></div>'+
+          '<div id="proj-screen" class="scr-surface">'+
+            '<div class="scr-grain"></div>'+
+            '<div class="scr-wash"></div>'+
+            '<div class="scr-scan"></div>'+
+            '<div class="scr-vig"></div>'+
+            '<div class="scr-corner tl"></div><div class="scr-corner tr"></div>'+
+            '<div class="scr-corner bl"></div><div class="scr-corner br"></div>'+
+            '<div class="scr-live"><i></i>PROJECTING</div>'+
+            '<div class="scr-body">'+summaryTable+'</div>'+
+          '</div>'+
+          '<div class="scr-bar"><span class="scr-pull"></span></div>'+
         '</div>'+
         // Progress bar
         '<div style="margin-top:16px;display:flex;align-items:center;gap:10px;">'+
@@ -3754,7 +4075,7 @@ function renderBudgetDetailed(el) {
   var starsBg = 'background:radial-gradient(ellipse 100% 50% at 50% 0%,rgba(0,212,255,0.04) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(251,191,36,0.03) 0%,transparent 50%),linear-gradient(180deg,rgba(4,6,18,0.98) 0%,rgba(3,5,15,1) 100%);';
 
   var colHeaders =
-    thCell('Actuals', actualMonths+'/12 · '+actualPct+'%', ACTUALS_COLOR, '130')+
+    thCell('Jan–Jul', '● Actual', ACTUALS_COLOR, '130')+
     COL_COLORS.map(function(cc,i){
       var isAct = isActual[i+1];
       var label = ['Aug','Sep','Oct','Nov','Dec'][i];
@@ -3917,6 +4238,448 @@ function hexToRgbInline(hex) {
 // ═══════════════════════════════════════════════════════════════════════════
 // Q4 FORECAST — Space-themed monthly cards
 // ═══════════════════════════════════════════════════════════════════════════
+// ── Q4 forecast: revenue build methods ────────────────────────────────────
+// Project income can be entered directly or built from RPH groups: each group
+// takes a share of the month's direct labor hours and carries its own revenue
+// per hour, so group revenue = share x hours x RPH and the groups sum to the
+// month's income. Other lines will get their own methods; this is the first.
+var Q4_KEY_SHARED = 'basin_q4_forecast_v1';
+
+function q4Read(){
+  try { return JSON.parse(localStorage.getItem(Q4_KEY_SHARED)||'{}'); } catch(e){ return {}; }
+}
+function q4Write(d){
+  try { localStorage.setItem(Q4_KEY_SHARED, JSON.stringify(d)); } catch(e){}
+}
+
+// 'manual' (default) or 'rph'
+function q4Method(month){
+  var d = q4Read();
+  return ((d.methods||{})[month+'_rev']) || 'manual';
+}
+function q4SetMethod(month, m){
+  var d = q4Read();
+  d.methods = d.methods || {};
+  d.methods[month+'_rev'] = m;
+  q4Write(d);
+}
+
+// Direct labor hours for the month. Seeded from the EBITDA-WC model's monthly
+// build (headcount x hours x utilization) so the two stay consistent, and
+// editable here until the Direct Labor line gets its own method.
+function q4DlHours(month){
+  // when the DL line is built, its billable hours are the authoritative figure
+  if (q4DlMethod(month) === 'build') return Math.round(q4DlCalc(month).billHrs);
+  var d = q4Read();
+  var saved = (d.dlHours||{})[month];
+  if (saved !== undefined) return saved;
+  var idx = {oct:1, nov:2, dec:3}[month];          // WC_BASE runs Sep-Dec
+  try {
+    var I = (typeof WC_INPUTS !== 'undefined' && WC_INPUTS) ? WC_INPUTS : WC_DEFAULTS;
+    if (I && I.headcount && I.utilization)
+      return Math.round((I.headcount[idx]||0) * (I.hoursPerEmp||174) * (I.utilization[idx]||0));
+  } catch(e){}
+  return 4800;
+}
+function q4SetDlHours(month, hrs){
+  var d = q4Read();
+  d.dlHours = d.dlHours || {};
+  d.dlHours[month] = Math.max(0, hrs||0);
+  q4Write(d);
+}
+
+// ── Q4: percent-of-revenue lines ──────────────────────────────────────────
+// Direct Subcontractor Costs track revenue, so the line is entered as a rate
+// and multiplied by whatever Project Income resolves to for that month --
+// manual figure or RPH build alike.
+var Q4_PCT_LINES = { a5200: { label:'Direct Subcontractor Costs', def:6 } };
+
+function q4PctMethod(month, key){
+  var d = q4Read();
+  return ((d.methods||{})[month+'_'+key]) || 'manual';
+}
+function q4SetPctMethod(month, key, m){
+  var d = q4Read();
+  d.methods = d.methods || {};
+  d.methods[month+'_'+key] = m;
+  q4Write(d);
+}
+function q4PctRate(month, key){
+  var d = q4Read();
+  var saved = ((d.pctRates||{})[month]||{})[key];
+  return (saved !== undefined) ? saved : (Q4_PCT_LINES[key] ? Q4_PCT_LINES[key].def : 0);
+}
+function q4SetPctRate(month, key, v){
+  var d = q4Read();
+  d.pctRates = d.pctRates || {};
+  d.pctRates[month] = d.pctRates[month] || {};
+  d.pctRates[month][key] = isNaN(v) ? 0 : Math.max(0, v);
+  q4Write(d);
+}
+function q4RevDefault(month){
+  var col = {oct:3, nov:4, dec:5}[month];
+  var row = BUDGET_DATA[1];                      // 4000 - Project Income
+  if (!row) return 0;
+  var v = (typeof bgRowVals === 'function') ? bgRowVals(row) : (row.vals||[]);
+  return v[col] || 0;
+}
+
+function q4Revenue(month){
+  if (q4Method(month) === 'rph') return q4RphRevenue(month);
+  var d = q4Read();
+  var saved = (d[month]||{})['a4000'];
+  return (saved !== undefined) ? saved : q4RevDefault(month);
+}
+function q4PctAmount(month, key){
+  return q4Revenue(month) * (q4PctRate(month,key)/100);
+}
+function q4PctUseManual(month, key){ q4SetPctMethod(month,key,'manual'); renderBudget(); }
+function q4PctUseRate(month, key){ q4SetPctMethod(month,key,'pct'); renderBudget(); }
+
+// inline rate editor, shown on the cell itself
+function q4EditPctRate(month, key, v){
+  q4SetPctRate(month, key, parseFloat(v));
+  renderBudget();
+}
+
+// ── Q4: direct labor build ────────────────────────────────────────────────
+// Available hours = headcount x workdays x 8. Utilization of those hours is
+// the billable share and drives Direct Labor cost (5100); sick/vacation and
+// DL overhead are percentages of the same available hours, so they land on
+// 6110 and 6100 respectively. All three use one average cost per hour.
+function q4Workdays(month){
+  var m = {oct:9, nov:10, dec:11}[month];      // JS months are 0-based
+  var d = new Date(2026, m+1, 0).getDate();
+  var n = 0;
+  for (var i=1;i<=d;i++){
+    var wd = new Date(2026, m, i).getDay();
+    if (wd !== 0 && wd !== 6) n++;
+  }
+  return n;
+}
+
+function q4DlDefaults(month){
+  return { headcount:34, workdays:q4Workdays(month), hoursPerDay:8,
+           utilPct:80, costPerHr:50, vacPct:6, ohPct:10 };
+}
+
+function q4Dl(month){
+  var d = q4Read();
+  var saved = (d.dlBuild||{})[month] || {};
+  var def = q4DlDefaults(month);
+  Object.keys(def).forEach(function(k){ if (saved[k] === undefined) saved[k] = def[k]; });
+  return saved;
+}
+function q4SetDl(month, field, v){
+  var d = q4Read();
+  d.dlBuild = d.dlBuild || {};
+  d.dlBuild[month] = q4Dl(month);
+  d.dlBuild[month][field] = isNaN(v) ? 0 : v;
+  q4Write(d);
+}
+
+// what the build produces
+function q4DlCalc(month){
+  var b = q4Dl(month);
+  var avail   = b.headcount * b.workdays * b.hoursPerDay;
+  var billHrs = avail * (b.utilPct/100);
+  return {
+    b:b, avail:avail, billHrs:billHrs,
+    dl:      billHrs * b.costPerHr,                      // 5100
+    vac:     avail * (b.vacPct/100) * b.costPerHr,        // 6110
+    oh:      avail * (b.ohPct/100)  * b.costPerHr,        // 6100
+    idleHrs: avail - billHrs
+  };
+}
+
+// 'manual' or 'build'
+function q4DlMethod(month){
+  var d = q4Read();
+  return ((d.methods||{})[month+'_dl']) || 'manual';
+}
+function q4SetDlMethod(month, m){
+  var d = q4Read();
+  d.methods = d.methods || {};
+  d.methods[month+'_dl'] = m;
+  q4Write(d);
+}
+function q4DlUseManual(month){ q4SetDlMethod(month,'manual'); renderBudget(); }
+
+// ── The DL builder ────────────────────────────────────────────────────────
+var Q4_DL_MONTH = null;
+
+function q4OpenDlBuilder(month){ Q4_DL_MONTH = month; q4RenderDlBuilder(); }
+
+function q4RenderDlBuilder(){
+  var month = Q4_DL_MONTH;
+  if (!month) return;
+  var LB = {oct:'October', nov:'November', dec:'December'}[month];
+  var c = q4DlCalc(month), b = c.b;
+
+  function fld(label, field, step, suffix, hint){
+    return '<div class="dlb-f">'+
+      '<span class="dlb-k">'+label+'</span>'+
+      '<label class="qg-f"><input type="number" step="'+step+'" min="0" value="'+b[field]+'" '+
+        'onchange="q4EditDl(\''+field+'\',parseFloat(this.value))"/>'+
+        (suffix?'<span>'+suffix+'</span>':'')+'</label>'+
+      (hint?'<span class="dlb-h">'+hint+'</span>':'')+
+    '</div>';
+  }
+
+  var ov = document.getElementById('q4-dl-ov');
+  if (!ov){
+    ov = document.createElement('div');
+    ov.id = 'q4-dl-ov';
+    ov.addEventListener('click', function(e){ if (e.target === ov) q4CloseDlBuilder(); });
+    document.body.appendChild(ov);
+  }
+  ov.innerHTML =
+    '<div class="qb-card">'+
+      '<button class="qb-x" onclick="q4CloseDlBuilder()">\u00d7</button>'+
+      '<div class="qb-title">Direct Labor \u00b7 Build</div>'+
+      '<div class="qb-sub">'+LB+' 2026 \u00b7 headcount \u00d7 workdays \u00d7 8 hrs, '+
+        'costed at an average rate</div>'+
+
+      '<div class="dlb-grid">'+
+        fld('Average headcount','headcount',1,'staff')+
+        fld('Workdays (Mon\u2013Fri)','workdays',1,'days','Calendar for '+LB+': '+q4Workdays(month))+
+        fld('Hours per day','hoursPerDay',0.5,'hrs')+
+        fld('Avg DL cost / hour','costPerHr',1,'$/hr')+
+      '</div>'+
+
+      '<div class="dlb-chain">'+
+        '<span>'+b.headcount+' staff</span><i>\u00d7</i>'+
+        '<span>'+b.workdays+' days</span><i>\u00d7</i>'+
+        '<span>'+b.hoursPerDay+' hrs</span><i>=</i>'+
+        '<b>'+Math.round(c.avail).toLocaleString()+' available hrs</b>'+
+      '</div>'+
+
+      '<div class="dlb-grid three">'+
+        fld('Utilization','utilPct',0.5,'%','Billable share of available hours')+
+        fld('Sick / vacation','vacPct',0.5,'%','Percent of available hours')+
+        fld('DL overhead','ohPct',0.5,'%','Percent of available hours')+
+      '</div>'+
+
+      '<div class="dlb-out">'+
+        '<div class="dlb-o hero">'+
+          '<span class="dlb-ok">5100 \u00b7 Direct Labor</span>'+
+          '<span class="dlb-ov">'+bgFmtM(c.dl)+'</span>'+
+          '<span class="dlb-on">'+Math.round(c.billHrs).toLocaleString()+' billable hrs \u00d7 $'+
+            b.costPerHr+'</span></div>'+
+        '<div class="dlb-o">'+
+          '<span class="dlb-ok">6110 \u00b7 DL Sick/Vacation</span>'+
+          '<span class="dlb-ov">'+bgFmtM(c.vac)+'</span>'+
+          '<span class="dlb-on">'+b.vacPct+'% of available hrs</span></div>'+
+        '<div class="dlb-o">'+
+          '<span class="dlb-ok">6100 \u00b7 DL Overhead</span>'+
+          '<span class="dlb-ov">'+bgFmtM(c.oh)+'</span>'+
+          '<span class="dlb-on">'+b.ohPct+'% of available hrs</span></div>'+
+      '</div>'+
+      '<div class="dlb-note">Unutilized time is '+
+        Math.round(c.idleHrs).toLocaleString()+' hrs and carries no direct labor cost. '+
+        'The '+Math.round(c.billHrs).toLocaleString()+' billable hours also feed the '+
+        'Project Income RPH build for '+LB+'.</div>'+
+
+      '<div class="qb-actions">'+
+        '<button class="qb-apply" onclick="q4ApplyDl()">Apply to '+LB+'</button>'+
+        '<button class="qb-cancel" onclick="q4CloseDlBuilder()">Close</button>'+
+      '</div>'+
+    '</div>';
+  ov.classList.add('open');
+}
+
+function q4EditDl(field, v){ q4SetDl(Q4_DL_MONTH, field, v); q4RenderDlBuilder(); }
+
+function q4ApplyDl(){
+  q4SetDlMethod(Q4_DL_MONTH, 'build');
+  q4CloseDlBuilder();
+  renderBudget();
+}
+
+function q4CloseDlBuilder(){
+  var ov = document.getElementById('q4-dl-ov');
+  if (ov) ov.classList.remove('open');
+  Q4_DL_MONTH = null;
+}
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') q4CloseDlBuilder();
+});
+
+var Q4_GRP_PAL = ['#00d4ff','#00ffb4','#fbbf24','#c084fc','#f87171','#38bdf8'];
+
+function q4Groups(month){
+  var d = q4Read();
+  var g = (d.rphGroups||{})[month];
+  if (g && g.length) return g;
+  // a sensible opening split: the QTS/Corgan book and everything else
+  return [
+    { name:'QTS & Corgan', pctHrs:42, rph:1133 },
+    { name:'All Other Work', pctHrs:58, rph:225 }
+  ];
+}
+function q4SetGroups(month, groups){
+  var d = q4Read();
+  d.rphGroups = d.rphGroups || {};
+  d.rphGroups[month] = groups;
+  q4Write(d);
+}
+
+function q4RphRevenue(month){
+  var hrs = q4DlHours(month);
+  return q4Groups(month).reduce(function(s,g){
+    return s + hrs * ((g.pctHrs||0)/100) * (g.rph||0);
+  }, 0);
+}
+
+// ── The builder ───────────────────────────────────────────────────────────
+var Q4_BUILD_MONTH = null;
+
+function q4OpenBuilder(month){
+  Q4_BUILD_MONTH = month;
+  q4RenderBuilder();
+}
+
+function q4RenderBuilder(){
+  var month = Q4_BUILD_MONTH;
+  if (!month) return;
+  var LB = {oct:'October', nov:'November', dec:'December'}[month];
+  var hrs = q4DlHours(month);
+  var groups = q4Groups(month);
+  var pctTot = groups.reduce(function(s,g){ return s + (g.pctHrs||0); }, 0);
+  var revTot = groups.reduce(function(s,g){
+    return s + hrs*((g.pctHrs||0)/100)*(g.rph||0); }, 0);
+  var blended = hrs ? revTot/hrs : 0;
+  var ok = Math.abs(pctTot - 100) < 0.05;
+
+  var rows = groups.map(function(g, i){
+    var gh  = hrs * ((g.pctHrs||0)/100);
+    var grv = gh * (g.rph||0);
+    var col = Q4_GRP_PAL[i % Q4_GRP_PAL.length];
+    return '<div class="qg-row" style="--c:'+col+';">'+
+      '<span class="qg-dot"></span>'+
+      '<input class="qg-nm" type="text" value="'+(g.name||'')+'" placeholder="Group name" '+
+        'onchange="q4EditGroup('+i+',\'name\',this.value)"/>'+
+      '<label class="qg-f"><input type="number" step="0.5" min="0" max="100" value="'+(g.pctHrs||0)+'" '+
+        'onchange="q4EditGroup('+i+',\'pctHrs\',parseFloat(this.value))"/><span>% hrs</span></label>'+
+      '<span class="qg-hrs">'+Math.round(gh).toLocaleString()+' h</span>'+
+      '<label class="qg-f"><span>$</span><input type="number" step="5" min="0" value="'+(g.rph||0)+'" '+
+        'onchange="q4EditGroup('+i+',\'rph\',parseFloat(this.value))"/><span>/hr</span></label>'+
+      '<span class="qg-rev">'+bgFmtM(grv)+'</span>'+
+      '<button class="qg-x" onclick="q4RemoveGroup('+i+')" title="Remove group">\u00d7</button>'+
+    '</div>';
+  }).join('');
+
+  // a stacked bar showing how the hours are split
+  var bar = groups.map(function(g, i){
+    var w = Math.max(0, Math.min(100, g.pctHrs||0));
+    if (!w) return '';
+    return '<div style="flex:'+w.toFixed(2)+' 0 0;background:'+Q4_GRP_PAL[i%Q4_GRP_PAL.length]+';'+
+      'display:flex;align-items:center;justify-content:center;font-family:var(--mono);'+
+      'font-size:9px;font-weight:800;color:#03131c;">'+(w>=8?Math.round(w)+'%':'')+'</div>';
+  }).join('') + (pctTot < 100
+      ? '<div style="flex:'+(100-pctTot).toFixed(2)+' 0 0;background:rgba(255,255,255,0.08);'+
+        'display:flex;align-items:center;justify-content:center;font-family:var(--mono);'+
+        'font-size:9px;color:rgba(255,255,255,0.4);">'+Math.round(100-pctTot)+'% unassigned</div>'
+      : '');
+
+  var ov = document.getElementById('q4-build-ov');
+  if (!ov){
+    ov = document.createElement('div');
+    ov.id = 'q4-build-ov';
+    ov.addEventListener('click', function(e){ if (e.target === ov) q4CloseBuilder(); });
+    document.body.appendChild(ov);
+  }
+  ov.innerHTML =
+    '<div class="qb-card">'+
+      '<button class="qb-x" onclick="q4CloseBuilder()">\u00d7</button>'+
+      '<div class="qb-title">Project Income \u00b7 RPH Build</div>'+
+      '<div class="qb-sub">'+LB+' 2026 \u00b7 revenue = share of DL hours \u00d7 revenue per hour</div>'+
+
+      '<div class="qb-hrs">'+
+        '<span class="qb-k">Direct labor hours this month</span>'+
+        '<label class="qg-f big"><input type="number" step="10" min="0" value="'+hrs+'" '+
+          'onchange="q4EditHours(parseFloat(this.value))"/><span>hrs</span></label>'+
+        '<span class="qb-note">Seeded from the EBITDA-WC model\u2019s monthly build; '+
+          'override here if the Direct Labor plan differs.</span>'+
+      '</div>'+
+
+      '<div class="qb-bar">'+bar+'</div>'+
+
+      '<div class="qg-head">'+
+        '<span></span><span>Group</span><span>Share</span><span>Hours</span>'+
+        '<span>Rev / Hour</span><span>Revenue</span><span></span>'+
+      '</div>'+
+      rows+
+      '<button class="qb-add" onclick="q4AddGroup()">+ Add group</button>'+
+
+      '<div class="qb-foot">'+
+        '<div class="qb-f'+(ok?'':' bad')+'">'+
+          '<span class="qb-fk">Hours allocated</span>'+
+          '<span class="qb-fv">'+pctTot.toFixed(1)+'%</span>'+
+          (ok?'':'<span class="qb-warn">must total 100%</span>')+
+        '</div>'+
+        '<div class="qb-f"><span class="qb-fk">Blended RPH</span>'+
+          '<span class="qb-fv">$'+Math.round(blended).toLocaleString()+'</span></div>'+
+        '<div class="qb-f hero"><span class="qb-fk">'+LB+' Project Income</span>'+
+          '<span class="qb-fv">'+bgFmtM(revTot)+'</span></div>'+
+      '</div>'+
+
+      '<div class="qb-actions">'+
+        '<button class="qb-apply" onclick="q4ApplyRph()">Apply to '+LB+'</button>'+
+        '<button class="qb-cancel" onclick="q4CloseBuilder()">Close</button>'+
+      '</div>'+
+    '</div>';
+  ov.classList.add('open');
+}
+
+function q4EditHours(v){ q4SetDlHours(Q4_BUILD_MONTH, Math.round(v||0)); q4RenderBuilder(); }
+
+function q4EditGroup(i, field, v){
+  var g = q4Groups(Q4_BUILD_MONTH).slice();
+  if (!g[i]) return;
+  g[i][field] = (field === 'name') ? v : (isNaN(v) ? 0 : v);
+  q4SetGroups(Q4_BUILD_MONTH, g);
+  q4RenderBuilder();
+}
+
+function q4AddGroup(){
+  var g = q4Groups(Q4_BUILD_MONTH).slice();
+  if (g.length >= 6) return;
+  var used = g.reduce(function(s,x){ return s + (x.pctHrs||0); }, 0);
+  g.push({ name:'New group', pctHrs: Math.max(0, Math.round((100-used)*10)/10), rph: 200 });
+  q4SetGroups(Q4_BUILD_MONTH, g);
+  q4RenderBuilder();
+}
+
+function q4RemoveGroup(i){
+  var g = q4Groups(Q4_BUILD_MONTH).slice();
+  g.splice(i,1);
+  q4SetGroups(Q4_BUILD_MONTH, g.length ? g : [{name:'All Work', pctHrs:100, rph:200}]);
+  q4RenderBuilder();
+}
+
+// Switching the month to the RPH method makes the groups the live source.
+function q4ApplyRph(){
+  q4SetMethod(Q4_BUILD_MONTH, 'rph');
+  q4CloseBuilder();
+  renderBudget();
+}
+
+function q4CloseBuilder(){
+  var ov = document.getElementById('q4-build-ov');
+  if (ov) ov.classList.remove('open');
+  Q4_BUILD_MONTH = null;
+}
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') q4CloseBuilder();
+});
+
+// Back to typing a figure in the cell
+function q4UseManual(month){
+  q4SetMethod(month, 'manual');
+  renderBudget();
+}
+
 function renderBudgetQ4(el) {
 
   // ── Persistent editable state (localStorage-backed) ──────────────────
@@ -3931,26 +4694,87 @@ function renderBudgetQ4(el) {
 
   // Row definitions — what the table shows
   var Q4_ROWS = [
-    {key:'rev',     label:'Project Income',         color:'#e8f0ff', rgb:'220,235,255', section:'INCOME',       bold:true,  isTotal:false},
-    {key:'cos_dl',  label:'Direct Labor',            color:'#ff6b6b', rgb:'255,107,107', section:'COST OF SALES',bold:false, isTotal:false},
-    {key:'cos_sub', label:'Direct Subcontractors',   color:'#ff6b6b', rgb:'255,107,107', section:null,           bold:false, isTotal:false},
-    {key:'cos_mat', label:'Direct Materials',        color:'#ff6b6b', rgb:'255,107,107', section:null,           bold:false, isTotal:false},
-    {key:'cos_oth', label:'Other Direct Costs',      color:'#ff6b6b', rgb:'255,107,107', section:null,           bold:false, isTotal:false},
-    {key:'cos_tot', label:'Total Cost of Sales',     color:'#ff9090', rgb:'255,144,144', section:null,           bold:true,  isTotal:true,  calcKeys:['cos_dl','cos_sub','cos_mat','cos_oth']},
-    {key:'gp',      label:'Gross Profit',            color:'#00e5ff', rgb:'0,229,255',   section:'GROSS PROFIT', bold:true,  isTotal:true,  calcKeys:['rev','cos_tot'], calcFn:'sub'},
-    {key:'gpm',     label:'Gross Margin %',          color:'#00c8e8', rgb:'0,200,232',   section:null,           bold:false, isTotal:true,  isPct:true},
-    {key:'exp',     label:'Operating Expenses',      color:'#ffd060', rgb:'255,208,96',  section:'EXPENSES',     bold:false, isTotal:false},
-    {key:'ebitda',  label:'EBITDA',                  color:'#d580ff', rgb:'213,128,255', section:'EBITDA',       bold:true,  isTotal:true,  calcKeys:['gp','exp'], calcFn:'sub'},
-    {key:'ebitdam', label:'EBITDA Margin %',         color:'#c070e8', rgb:'192,112,232', section:null,           bold:false, isTotal:true,  isPct:true},
+    {key:'a4000', label:"Project Income", color:'#e8f0ff', rgb:'220,235,255', kind:'detail', bdIdx:1},
+    {key:'t2', label:"Total Income", color:'#b8d4ff', rgb:'184,212,255', kind:'total', bold:true, sumOf:['a4000']},
+    {kind:'sub', label:"5000 \u00b7 COGS \u2013 Direct Costs"},
+    {key:'a5100', label:"Direct Labor", color:'#ff6b6b', rgb:'255,107,107', kind:'detail', bdIdx:5},
+    {key:'a5200', label:"Direct Subcontractor Costs", color:'#ff6b6b', rgb:'255,107,107', kind:'detail', bdIdx:6},
+    {key:'a5300', label:"Direct Materials/Supplies", color:'#ff6b6b', rgb:'255,107,107', kind:'detail', bdIdx:7},
+    {key:'a5400', label:"Other Direct Costs", color:'#ff6b6b', rgb:'255,107,107', kind:'detail', bdIdx:8},
+    {key:'t9', label:"Total \u2013 COGS Direct Costs", color:'#ff9090', rgb:'255,144,144', kind:'total', bold:true, sumOf:['a5100','a5200','a5300','a5400']},
+    {kind:'sub', label:"6000 \u00b7 COGS \u2013 Indirect Costs"},
+    {key:'a6100', label:"DL Overhead", color:'#ff6b6b', rgb:'255,107,107', kind:'detail', bdIdx:11},
+    {key:'a6110', label:"DL Sick/Vacation", color:'#ff6b6b', rgb:'255,107,107', kind:'detail', bdIdx:12},
+    {key:'a6116', label:"DL Bonus", color:'#ff6b6b', rgb:'255,107,107', kind:'detail', bdIdx:13},
+    {key:'a6117', label:"DL Defined Benefit", color:'#ff6b6b', rgb:'255,107,107', kind:'detail', bdIdx:14},
+    {key:'a6118', label:"DL Profit Sharing", color:'#ff6b6b', rgb:'255,107,107', kind:'detail', bdIdx:15},
+    {key:'a6200', label:"DL Health Insurance", color:'#ff6b6b', rgb:'255,107,107', kind:'detail', bdIdx:16},
+    {key:'a6300', label:"DL Life/Disability", color:'#ff6b6b', rgb:'255,107,107', kind:'detail', bdIdx:17},
+    {key:'a6400', label:"DL 401K Match", color:'#ff6b6b', rgb:'255,107,107', kind:'detail', bdIdx:18},
+    {key:'a6500', label:"DL Payroll Taxes", color:'#ff6b6b', rgb:'255,107,107', kind:'detail', bdIdx:19},
+    {key:'t20', label:"Total \u2013 COGS Indirect Costs", color:'#ff9090', rgb:'255,144,144', kind:'total', bold:true, sumOf:['a6100','a6110','a6116','a6117','a6118','a6200','a6300','a6400','a6500']},
+    {key:'t21', label:"Total Cost of Sales", color:'#ff9090', rgb:'255,144,144', kind:'total', bold:true, derive:'cos'},
+    {key:'t22', label:"GROSS PROFIT", color:'#00e5ff', rgb:'0,229,255', kind:'highlight', bold:true, derive:'gp'},
+    {key:'t23', label:"Gross Margin %", color:'#00e5ff', rgb:'0,229,255', kind:'highlight', bold:true, isPct:true, derive:'gpm'},
+    {kind:'sub', label:"7100 \u00b7 Admin. Wages/Benefits"},
+    {key:'a7105', label:"Admin. Labor", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:26},
+    {key:'a7106', label:"Admin. Bonus", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:27},
+    {key:'a7107', label:"Admin. Defined Benefit", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:28},
+    {key:'a7108', label:"Admin. Profit Sharing", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:29},
+    {key:'a7110', label:"Admin. Labor Sick/Vacation", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:30},
+    {key:'a7130', label:"Officer Labor Premium", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:31},
+    {key:'a7140', label:"Admin. Health Insurance", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:32},
+    {key:'a7150', label:"Admin. Life/Disability", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:33},
+    {key:'a7160', label:"Admin. 401k Match", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:34},
+    {key:'a7170', label:"Admin. Payroll Taxes", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:35},
+    {key:'t36', label:"Total \u2013 Admin. Wages/Benefits", color:'#ffe090', rgb:'255,224,144', kind:'total', bold:true, sumOf:['a7105','a7106','a7107','a7108','a7110','a7130','a7140','a7150','a7160','a7170']},
+    {kind:'sub', label:"7200 \u00b7 Facilities"},
+    {key:'a7210', label:"Rent & Lease", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:38},
+    {key:'a7220', label:"Repairs & Maint. \u2013 Metairie", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:39},
+    {key:'a7240', label:"Internet/Telephone", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:40},
+    {key:'a7250', label:"Utilities", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:41},
+    {key:'t42', label:"Total \u2013 Facilities", color:'#ffe090', rgb:'255,224,144', kind:'total', bold:true, sumOf:['a7210','a7220','a7240','a7250']},
+    {kind:'sub', label:"7300 \u00b7 Business Overhead"},
+    {key:'a7310', label:"Business Insurance", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:44},
+    {key:'a7312', label:"Officer Life Insurance", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:45},
+    {key:'a7320', label:"Legal & Professional Services", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:46},
+    {key:'a7330', label:"Software Subscriptions", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:47},
+    {key:'a7340', label:"Office Expenses", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:48},
+    {key:'a7350', label:"Advertising & Marketing", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:49},
+    {key:'a7360', label:"Meals & Meetings", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:50},
+    {key:'a7370', label:"Travel", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:51},
+    {key:'a7380', label:"Employee Mileage/Parking", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:52},
+    {key:'a7390', label:"Mobile Phones", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:53},
+    {key:'a7400', label:"Entertainment", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:54},
+    {key:'a7410', label:"Client Gifts", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:55},
+    {key:'a7420', label:"Charitable Contributions", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:56},
+    {key:'a7430', label:"Professional Development", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:57},
+    {key:'a7440', label:"Dues & Subscriptions", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:58},
+    {key:'a7450', label:"Permits & Licenses", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:59},
+    {key:'a7460', label:"Auto Repair & Maint.", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:60},
+    {key:'a7470', label:"Shipping & Postage", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:61},
+    {key:'a7480', label:"Bank Charges & Fees", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:62},
+    {key:'a7490', label:"Payroll Processing", color:'#ffd060', rgb:'255,208,96', kind:'detail', bdIdx:63},
+    {key:'t64', label:"Total \u2013 Business Overhead", color:'#ffe090', rgb:'255,224,144', kind:'total', bold:true, sumOf:['a7310','a7312','a7320','a7330','a7340','a7350','a7360','a7370','a7380','a7390','a7400','a7410','a7420','a7430','a7440','a7450','a7460','a7470','a7480','a7490']},
+    {key:'t65', label:"Total Expense", color:'#ffe090', rgb:'255,224,144', kind:'total', bold:true, derive:'exp'},
+    {key:'t66', label:"EBITDA", color:'#d580ff', rgb:'213,128,255', kind:'highlight', bold:true, derive:'ebitda'},
+    {key:'t67', label:"EBITDA %", color:'#d580ff', rgb:'213,128,255', kind:'highlight', bold:true, isPct:true, derive:'ebitdam'},
   ];
+
 
   // Default values from BUDGET_DATA for Oct/Nov/Dec (indices 3,4,5)
   function bdVal(rowIdx, mi) { return bgRowVals(BUDGET_DATA[rowIdx])[mi]||0; }
-  var DEFAULTS = {
-    oct: { rev:bdVal(2,3), cos_dl:bdVal(5,3), cos_sub:bdVal(6,3), cos_mat:bdVal(7,3), cos_oth:bdVal(8,3), exp:bdVal(65,3) },
-    nov: { rev:bdVal(2,4), cos_dl:bdVal(5,4), cos_sub:bdVal(6,4), cos_mat:bdVal(7,4), cos_oth:bdVal(8,4), exp:bdVal(65,4) },
-    dec: { rev:bdVal(2,5), cos_dl:bdVal(5,5), cos_sub:bdVal(6,5), cos_mat:bdVal(7,5), cos_oth:bdVal(8,5), exp:bdVal(65,5) },
-  };
+  // Every editable line seeds from its own P&L row for that month, so the
+  // forecast opens on the current plan rather than a handful of lines.
+  var MCOL = {oct:3, nov:4, dec:5};
+  var DEFAULTS = {};
+  ['oct','nov','dec'].forEach(function(m){
+    DEFAULTS[m] = {};
+    Q4_ROWS.forEach(function(r){
+      if (r.kind === 'detail') DEFAULTS[m][r.key] = bdVal(r.bdIdx, MCOL[m]) || 0;
+    });
+  });
+
 
   // Merge saved overrides with defaults
   var MONTHS = ['oct','nov','dec'];
@@ -3959,24 +4783,57 @@ function renderBudgetQ4(el) {
   var MRGBS   = {oct:'251,191,36',nov:'192,132,252',dec:'248,113,113'};
 
   function getVal(month, key) {
+    // Project income can be built from RPH groups rather than typed in; when
+    // that method is active the groups are the source of truth.
+    if (key === 'a4000' && q4Method(month) === 'rph') return q4RphRevenue(month);
+    // The direct labor build drives its cost line plus sick/vacation and
+    // overhead, since all three come off the same available-hours figure.
+    if (q4DlMethod(month) === 'build'){
+      var c = q4DlCalc(month);
+      if (key === 'a5100') return c.dl;
+      if (key === 'a6110') return c.vac;
+      if (key === 'a6100') return c.oh;
+    }
+    // lines that track revenue at a rate the user sets
+    if (Q4_PCT_LINES[key] && q4PctMethod(month, key) === 'pct')
+      return q4PctAmount(month, key);
     var saved = (Q4DATA[month]||{})[key];
     return (saved !== undefined) ? saved : (DEFAULTS[month][key]||0);
   }
 
   // Compute derived rows from base values
   function computeMonth(month) {
-    var rev     = getVal(month,'rev');
-    var cos_dl  = getVal(month,'cos_dl');
-    var cos_sub = getVal(month,'cos_sub');
-    var cos_mat = getVal(month,'cos_mat');
-    var cos_oth = getVal(month,'cos_oth');
-    var exp     = getVal(month,'exp');
-    var cos_tot = cos_dl + cos_sub + cos_mat + cos_oth;
-    var gp      = rev - cos_tot;
-    var gpm     = rev > 0 ? gp/rev : 0;
-    var ebitda  = gp - exp;
-    var ebitdam = rev > 0 ? ebitda/rev : 0;
-    return {rev,cos_dl,cos_sub,cos_mat,cos_oth,cos_tot,gp,gpm,ebitda,ebitdam,exp};
+    var v = {};
+    // details first, then subtotals, then the derived lines in order
+    Q4_ROWS.forEach(function(r){
+      if (r.kind === 'detail') v[r.key] = getVal(month, r.key);
+    });
+    Q4_ROWS.forEach(function(r){
+      if (r.sumOf) v[r.key] = r.sumOf.reduce(function(t,k){ return t + (v[k]||0); }, 0);
+    });
+    function byLabel(lbl){
+      var row = Q4_ROWS.filter(function(r){ return r.label === lbl; })[0];
+      return row ? (v[row.key]||0) : 0;
+    }
+    Q4_ROWS.forEach(function(r){
+      if (!r.derive) return;
+      var inc = byLabel('Total Income');
+      if (r.derive === 'cos')
+        v[r.key] = byLabel('Total \u2013 COGS Direct Costs') + byLabel('Total \u2013 COGS Indirect Costs');
+      else if (r.derive === 'gp')
+        v[r.key] = inc - (v[Q4_ROWS.filter(function(x){return x.derive==='cos';})[0].key]||0);
+      else if (r.derive === 'gpm')
+        v[r.key] = inc > 0 ? (v[Q4_ROWS.filter(function(x){return x.derive==='gp';})[0].key]||0)/inc : 0;
+      else if (r.derive === 'exp')
+        v[r.key] = byLabel('Total \u2013 Admin. Wages/Benefits') + byLabel('Total \u2013 Facilities') +
+                   byLabel('Total \u2013 Business Overhead');
+      else if (r.derive === 'ebitda')
+        v[r.key] = (v[Q4_ROWS.filter(function(x){return x.derive==='gp';})[0].key]||0) -
+                   (v[Q4_ROWS.filter(function(x){return x.derive==='exp';})[0].key]||0);
+      else if (r.derive === 'ebitdam')
+        v[r.key] = inc > 0 ? (v[Q4_ROWS.filter(function(x){return x.derive==='ebitda';})[0].key]||0)/inc : 0;
+    });
+    return v;
   }
 
   var computed = {};
@@ -3988,8 +4845,14 @@ function renderBudgetQ4(el) {
     if (r.isPct) return;
     totals[r.key] = MONTHS.reduce(function(s,m){ return s + (computed[m][r.key]||0); },0);
   });
-  totals.gpm   = totals.rev  > 0 ? totals.gp/totals.rev : 0;
-  totals.ebitdam = totals.rev > 0 ? totals.ebitda/totals.rev : 0;
+  (function(){
+    function kOf(d){ var r=Q4_ROWS.filter(function(x){return x.derive===d;})[0]; return r?r.key:null; }
+    var inc = Q4_ROWS.filter(function(x){return x.label==='Total Income';})[0];
+    var incT = inc ? (totals[inc.key]||0) : 0;
+    var gpK=kOf('gp'), ebK=kOf('ebitda'), gpmK=kOf('gpm'), ebmK=kOf('ebitdam');
+    if (gpmK) totals[gpmK] = incT>0 ? (totals[gpK]||0)/incT : 0;
+    if (ebmK) totals[ebmK] = incT>0 ? (totals[ebK]||0)/incT : 0;
+  })();
 
   // ── Note management ───────────────────────────────────────────────────
   function getNote(month, key) { return ((Q4DATA.notes||{})[month+'_'+key])||''; }
@@ -4118,12 +4981,26 @@ function renderBudgetQ4(el) {
   // ── Body rows ─────────────────────────────────────────────────────────
   var tbody = '';
   Q4_ROWS.forEach(function(row, ri) {
-    var isEditable = !row.isTotal && !row.isPct;
-    var isTotal    = row.isTotal;
-    var isPct      = row.isPct;
+    // subsection headings are structural, not data rows
+    if (row.kind === 'sub') {
+      tbody += '<tr><td colspan="'+(MONTHS.length+3)+'" '+
+        'style="padding:12px 18px 5px;font-family:var(--mono);font-size:8.5px;font-weight:800;'+
+        'letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);">'+
+        row.label+'</td></tr>';
+      return;
+    }
+    var isEditable = row.kind === 'detail';
+    var isTotal    = row.kind === 'total' || row.kind === 'highlight';
+    var isPct      = !!row.isPct;
 
     // Section header row
-    if (row.section) {
+    var secName = row.key === 'a4000' ? 'INCOME'
+                : row.key === 'a5100' ? 'COST OF SALES'
+                : row.key === 'a7105' ? 'EXPENSES'
+                : (row.derive === 'gp' ? 'GROSS PROFIT'
+                : (row.derive === 'ebitda' ? 'EBITDA' : null));
+    if (secName) {
+      row = Object.assign({}, row, {section:secName});
       var sc = SEC_CLR[row.section] || '#888';
       var sr = sc.replace('#','');
       var srgb = sc === '#00e5ff' ? '0,229,255' : sc === '#ff6b6b' ? '255,107,107' : sc === '#ffd060' ? '255,208,96' : sc === '#d580ff' ? '213,128,255' : '200,200,200';
@@ -4185,7 +5062,70 @@ function renderBudgetQ4(el) {
       var cellNote = getNote(month, noteKey);
       var glowStyle = isTotal ? 'text-shadow:0 0 10px rgba('+row.rgb+',0.5);' : '';
 
-      if (isEditable) {
+      if (isEditable && row.key === 'a4000') {
+        // Project income: either typed in, or built from RPH groups
+        var isRph = q4Method(month) === 'rph';
+        monthCells +=
+          '<td id="'+tdId+'" style="text-align:right;padding:8px 14px;'+topB+rowBg+
+            'position:relative;">'+
+            '<div style="font-family:var(--hud);font-size:'+numSz+';font-weight:'+numW+';'+
+              'color:'+row.color+';cursor:'+(isRph?'default':'pointer')+';" '+
+              (isRph ? 'title="Built from RPH groups"'
+                     : 'onclick="q4EditCell(\''+month+'\',\'rev\','+val+',\''+tdId+'\')"')+'>'+
+              fmtV(val)+'</div>'+
+            '<div class="q4-meth">'+
+              '<span class="q4-mb'+(isRph?'':' on')+'" onclick="q4UseManual(\''+month+'\')" '+
+                'title="Enter the amount directly">Manual</span>'+
+              '<span class="q4-mb'+(isRph?' on':'')+'" onclick="q4OpenBuilder(\''+month+'\')" '+
+                'title="Build from RPH groups">RPH</span>'+
+            '</div>'+
+            '<button onclick="event.stopPropagation();showNoteModal(\''+month+'\',\''+noteKey+'\',\''+row.label+'\',\''+MLABELS[month]+'\')" '+
+              'title="'+(cellNote?'Edit note: '+cellNote:'Add note')+'" '+
+              'style="position:absolute;top:4px;right:4px;background:none;border:none;cursor:pointer;'+
+              'font-size:8px;opacity:'+(cellNote?'0.8':'0.2')+';">'+(cellNote?'\ud83d\udcdd':'\uff0b')+'</button>'+
+          '</td>';
+      } else if (isEditable && Q4_PCT_LINES[row.key]) {
+        var isPctM = q4PctMethod(month, row.key) === 'pct';
+        var rate   = q4PctRate(month, row.key);
+        monthCells +=
+          '<td id="'+tdId+'" style="text-align:right;padding:8px 14px;'+topB+rowBg+
+            'position:relative;">'+
+            '<div style="font-family:var(--hud);font-size:'+numSz+';font-weight:'+numW+';'+
+              'color:'+row.color+';cursor:'+(isPctM?'default':'pointer')+';" '+
+              (isPctM ? 'title="'+rate+'% of Project Income"'
+                      : 'onclick="q4EditCell(\''+month+'\',\''+row.key+'\','+val+',\''+tdId+'\')"')+'>'+
+              fmtV(val)+'</div>'+
+            (isPctM
+              ? '<div class="q4-rate">'+
+                  '<input type="number" step="0.25" min="0" value="'+rate+'" '+
+                    'onchange="q4EditPctRate(\''+month+'\',\''+row.key+'\',this.value)"/>'+
+                  '<span>% of rev</span></div>'
+              : '')+
+            '<div class="q4-meth">'+
+              '<span class="q4-mb'+(isPctM?'':' on')+'" onclick="q4PctUseManual(\''+month+'\',\''+row.key+'\')" '+
+                'title="Enter the amount directly">Manual</span>'+
+              '<span class="q4-mb'+(isPctM?' on':'')+'" onclick="q4PctUseRate(\''+month+'\',\''+row.key+'\')" '+
+                'title="Calculate as a percent of revenue">% Rev</span>'+
+            '</div>'+
+          '</td>';
+      } else if (isEditable && ['a5100','a6110','a6100'].indexOf(row.key) >= 0) {
+        var isBuild = q4DlMethod(month) === 'build';
+        monthCells +=
+          '<td id="'+tdId+'" style="text-align:right;padding:8px 14px;'+topB+rowBg+
+            'position:relative;">'+
+            '<div style="font-family:var(--hud);font-size:'+numSz+';font-weight:'+numW+';'+
+              'color:'+row.color+';cursor:'+(isBuild?'default':'pointer')+';" '+
+              (isBuild ? 'title="From the Direct Labor build"'
+                       : 'onclick="q4EditCell(\''+month+'\',\''+row.key+'\','+val+',\''+tdId+'\')"')+'>'+
+              fmtV(val)+'</div>'+
+            '<div class="q4-meth">'+
+              '<span class="q4-mb'+(isBuild?'':' on')+'" onclick="q4DlUseManual(\''+month+'\')" '+
+                'title="Enter the amount directly">Manual</span>'+
+              '<span class="q4-mb'+(isBuild?' on':'')+'" onclick="q4OpenDlBuilder(\''+month+'\')" '+
+                'title="Build from headcount, workdays and rate">Build</span>'+
+            '</div>'+
+          '</td>';
+      } else if (isEditable) {
         monthCells +=
           '<td id="'+tdId+'" style="text-align:right;padding:8px 16px;'+topB+rowBg+
             'cursor:pointer;position:relative;transition:background 0.12s;" '+
@@ -11755,8 +12695,246 @@ function projArrowHover(btn, isEnter, dir) {
   }
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// ACTIVE PROJECTS — from the 2026 Project Master, status = Active.
+// Decimal sub-projects are rolled into their parent unless the sub bills to a
+// different customer, in which case it stands on its own. RPH is 2026 revenue
+// (July YTD + Aug) over 2026 direct labor hours.
+// UPDATE MONTHLY from the new project master.
+// ═══════════════════════════════════════════════════════════════════════════
+var AP_ASOF = 'August 2026';
+var AP_DATA = [
+  {num:"24-023",name:"QTS CDR East & West Campus (Stoney Meadows Laydown)",cust:"Quality Technology Services, LLC",pm:"Jonathan",type:"",contract:6197562,rev:5403532,backlog:794029,rev26:736279,hrs:1258.8,rph:584.91,parts:4},
+  {num:"25-086",name:"QTS - Turkey, TX - Phase 1",cust:"Quality Technology Services, LLC",pm:"Jed",type:"Phase 1",contract:4836910,rev:3979254,backlog:857656,rev26:3979254,hrs:5308.0,rph:749.67,parts:6},
+  {num:"23-044",name:"QTS - SLC1",cust:"Quality Technology Services, LLC",pm:"Jed",type:"",contract:2441347,rev:2250975,backlog:190372,rev26:2250975,hrs:0.0,rph:0.00,parts:1},
+  {num:"26-093.1",name:"SLC1 Expansion, SLC2 Phase 1, and SLC Phase 2 Offsite Infrastructure I",cust:"Quality Technology Services, LLC",pm:"Jed",type:"",contract:1578098,rev:326164,backlog:1251934,rev26:326164,hrs:119.2,rph:2736.27,parts:1},
+  {num:"6012-40",name:"JP Sewer Bond Program",cust:"Digital Engineering",pm:"Unclear",type:"TM",contract:1214624,rev:1214624,backlog:0,rev26:257071,hrs:2138.0,rph:120.24,parts:1},
+  {num:"26-093",name:"SLC2 Campus Plan - DC1-DC2 Civil Construction Drawings",cust:"Corgan",pm:"Jed",type:"",contract:1196440,rev:235200,backlog:961240,rev26:235200,hrs:341.2,rph:689.33,parts:1},
+  {num:"26-069",name:"QTS - DFW3 - Lancaster, TX",cust:"Corgan",pm:"Payton",type:"",contract:917044,rev:304442,backlog:612602,rev26:304442,hrs:577.8,rph:526.90,parts:1},
+  {num:"26-011",name:"Mason City, IA Data Center",cust:"Quality Technology Services, LLC",pm:"Jed",type:"Mason City IA - David",contract:857180,rev:207944,backlog:649236,rev26:207944,hrs:388.0,rph:535.94,parts:1},
+  {num:"25-105",name:"DAS114 (DC-5, DC-6, DC-7, and DC-8)",cust:"Corgan",pm:"Payton",type:"",contract:814190,rev:384825,backlog:429365,rev26:384825,hrs:1690.5,rph:227.64,parts:1},
+  {num:"26-070",name:"QII-Fort Bend Parkway, Houston, TX",cust:"Quality Infratech Intelligence, LLC (QII)",pm:"Jonathan",type:"",contract:569335,rev:45934,backlog:523401,rev26:45934,hrs:47.5,rph:967.03,parts:1},
+  {num:"24-067",name:"DFW2-DAS114",cust:"Corgan",pm:"Payton",type:"",contract:427580,rev:286794,backlog:140786,rev26:155052,hrs:3.0,rph:51684.00,parts:1},
+  {num:"24-042",name:"Tammany Trace Bridge #7",cust:"St. Tammany Parish Procurement",pm:"Daniel",type:"",contract:358766,rev:67335,backlog:291431,rev26:37078,hrs:175.0,rph:211.87,parts:1},
+  {num:"26-030",name:"Kinder Morgan TGP Compressor Station 530 Rev.1, MS",cust:"Waskey Bridges Inc.",pm:"Daniel",type:"",contract:338500,rev:287725,backlog:50775,rev26:287725,hrs:601.0,rph:478.74,parts:1},
+  {num:"26-091",name:"US Hwy 67, Johnson County, TX",cust:"Quality Technology Services, LLC",pm:"Jonathan",type:"",contract:299445,rev:0,backlog:299445,rev26:0,hrs:29.5,rph:0.00,parts:1},
+  {num:"25-075",name:"CarMax-Uxbridge, MA",cust:"CarMax",pm:"Payton",type:"",contract:283670,rev:69830,backlog:213840,rev26:37860,hrs:12.0,rph:3155.00,parts:1},
+  {num:"22-053",name:"POLC Shed 7 Replacement",cust:"Meyer & Associates, Inc.",pm:"Daniel",type:"TM",contract:273061,rev:231107,backlog:41953,rev26:32874,hrs:0.0,rph:0.00,parts:1},
+  {num:"26-018",name:"QTS-DFW2 Corner Site - Wilmer, TX",cust:"Corgan",pm:"Payton",type:"",contract:264725,rev:74355,backlog:190370,rev26:74355,hrs:312.8,rph:237.71,parts:1},
+  {num:"26-029",name:"QTS-SLC1 Expansion Campus Campus Planning Eagle Mountain, UT",cust:"Quality Technology Services, LLC",pm:"Jed",type:"",contract:243755,rev:239755,backlog:4000,rev26:239755,hrs:298.5,rph:803.20,parts:1},
+  {num:"24003",name:"Seven Oaks - US 90 Street Lighting",cust:"JP Department of PW",pm:"Daniel",type:"",contract:235979,rev:78653,backlog:157326,rev26:9500,hrs:105.0,rph:90.48,parts:1},
+  {num:"3011-01",name:"JP Harvey Blvd. Roadway Improvement",cust:"JP Department of PW",pm:"Unclear",type:"",contract:230371,rev:193424,backlog:36947,rev26:183078,hrs:200.0,rph:915.39,parts:1},
+  {num:"24-002",name:"Floor & Decor, Raleigh, NC (Capital Square)",cust:"Floor & Decor",pm:"Connor",type:"",contract:230109,rev:179714,backlog:50395,rev26:115325,hrs:974.5,rph:118.34,parts:6},
+  {num:"26-068",name:"Southern Star McNew Compressor Station",cust:"Basic Systems, Inc.",pm:"Daniel",type:"",contract:227370,rev:0,backlog:227370,rev26:0,hrs:0.0,rph:0.00,parts:1},
+  {num:"25-021",name:"QTS-DFW2-DC4 Wilmer, TX (DC-4)",cust:"Corgan",pm:"Payton",type:"",contract:226441,rev:181863,backlog:44578,rev26:133452,hrs:42.5,rph:3140.05,parts:1},
+  {num:"25-109",name:"EDGED Monroe Campus",cust:"MG2",pm:"Jonathan",type:"",contract:225735,rev:107829,backlog:117906,rev26:107829,hrs:0.0,rph:0.00,parts:1},
+  {num:"25-121",name:"Southern Star Viola Energy, Sumner KS",cust:"Basic Systems, Inc.",pm:"Daniel",type:"",contract:225030,rev:168772,backlog:56258,rev26:168772,hrs:384.0,rph:439.51,parts:1},
+  {num:"25-076",name:"Boat Dock Modifications - Plaquemines, LA",cust:"Venture Global Gator Express, LLC",pm:"Daniel",type:"",contract:211674,rev:175174,backlog:36500,rev26:175174,hrs:220.0,rph:796.25,parts:1},
+  {num:"26-015",name:"ARM Mustang Meter Station Platform",cust:"Waskey Bridges Inc.",pm:"Daniel",type:"",contract:210000,rev:178500,backlog:31500,rev26:178500,hrs:272.0,rph:656.25,parts:1},
+  {num:"24-068",name:"DFW2-DC2",cust:"Highland Associates",pm:"Payton",type:"",contract:204986,rev:190715,backlog:14271,rev26:108058,hrs:22.5,rph:4802.60,parts:1},
+  {num:"5008",name:"JP East Ames Blvd. Roadway",cust:"JP Department of PW",pm:"Michael",type:"",contract:201632,rev:132457,backlog:69175,rev26:95375,hrs:281.0,rph:339.41,parts:1},
+  {num:"26-118",name:"Pre Dev DD-Additional 380 Acres - Eagle Mountain",cust:"Quality Technology Services, LLC",pm:"Jed",type:"",contract:197940,rev:0,backlog:197940,rev26:0,hrs:0.0,rph:0.00,parts:1},
+  {num:"25-100",name:"Carmax Wayne, NJ expansion",cust:"CarMax",pm:"Payton",type:"",contract:180596,rev:86691,backlog:93905,rev26:70154,hrs:493.0,rph:142.30,parts:1},
+  {num:"22006",name:"LA Trace Subdivision Lot Study",cust:"J Caldarera Company",pm:"Michael",type:"",contract:170170,rev:69370,backlog:100800,rev26:69370,hrs:278.2,rph:249.35,parts:1},
+  {num:"26-031",name:"CarMax-Brownsville, TX",cust:"CarMax",pm:"Payton",type:"",contract:168715,rev:65540,backlog:103175,rev26:65540,hrs:567.0,rph:115.59,parts:1},
+  {num:"24-069",name:"DFW2-DC3",cust:"Highland Associates",pm:"Payton",type:"",contract:168420,rev:156325,backlog:12095,rev26:79608,hrs:34.5,rph:2307.46,parts:1},
+  {num:"25-093",name:"CarMax-Riverview,FL",cust:"CarMax",pm:"Payton",type:"",contract:166880,rev:35130,backlog:131750,rev26:16400,hrs:32.5,rph:504.62,parts:1},
+  {num:"25-110",name:"EDGED Mobile Campus (Pritchard)",cust:"MG2",pm:"Jonathan",type:"",contract:153885,rev:63670,backlog:90215,rev26:63670,hrs:0.0,rph:0.00,parts:1},
+  {num:"26-009",name:"Parish Line Pump Station Improvements Phase 2",cust:"Digital Engineering",pm:"Daniel",type:"",contract:152500,rev:19500,backlog:133000,rev26:19500,hrs:137.5,rph:141.82,parts:1},
+  {num:"24-078",name:"John H. Carter, Inc. - Manufacturing & Repair Facility",cust:"Duplantis Design group",pm:"Daniel",type:"",contract:147400,rev:144496,backlog:2904,rev26:24200,hrs:403.0,rph:60.05,parts:1},
+  {num:"20001",name:"JP Stumpf Blvd Lighting",cust:"JP Department of PW",pm:"",type:"TM",contract:123258,rev:72366,backlog:50892,rev26:45281,hrs:763.0,rph:59.35,parts:1},
+  {num:"25-106",name:"CPPJ Phase 3 Elliot Road Pump Station",cust:"Meyer & Associates, Inc.",pm:"Daniel",type:"TM",contract:122325,rev:122325,backlog:0,rev26:122325,hrs:382.0,rph:320.22,parts:1},
+  {num:"25-081",name:"National Golf Club of Louisiana",cust:"City of Westlake",pm:"Daniel",type:"TM",contract:113751,rev:46120,backlog:67631,rev26:46120,hrs:471.5,rph:97.82,parts:1},
+  {num:"25-078",name:"CarMax-Riverdale-UT Site Entitlements",cust:"CarMax",pm:"Payton",type:"",contract:103830,rev:37660,backlog:66170,rev26:37660,hrs:424.2,rph:88.78,parts:1},
+  {num:"25-040",name:"UPS New Orleans Expansion",cust:"Copeland and Johns",pm:"Connor",type:"",contract:100820,rev:87656,backlog:13164,rev26:19052,hrs:354.5,rph:53.74,parts:1},
+  {num:"26-095",name:"ABI01 \u2013 Entry Enhancement Civil Design",cust:"Oracle",pm:"Wes",type:"TM",contract:95000,rev:0,backlog:95000,rev26:0,hrs:43.8,rph:0.00,parts:1},
+  {num:"26-047",name:"Renovation of 5307 Toler - Laitram Harahan Campus",cust:"SCNZ Architects, LLC",pm:"Daniel",type:"",contract:89955,rev:42178,backlog:47778,rev26:42178,hrs:337.5,rph:124.97,parts:2},
+  {num:"24-098",name:"Carmax Waco,TX",cust:"POH+W Architects Ltd.",pm:"Payton",type:"",contract:84700,rev:44560,backlog:40140,rev26:44560,hrs:257.2,rph:173.25,parts:1},
+  {num:"24-004",name:"CarMax Lake Charles, LA",cust:"POH+W Architects Ltd.",pm:"Payton",type:"",contract:76680,rev:0,backlog:76680,rev26:0,hrs:0.0,rph:0.00,parts:1},
+  {num:"26-098",name:"Professional Civil Engineering Services QTS Prototype Standards Mainte",cust:"Corgan",pm:"Parker",type:"",contract:75000,rev:6250,backlog:68750,rev26:6250,hrs:5.2,rph:1201.92,parts:1},
+  {num:"25-043",name:"F&D Clearwater",cust:"SBLM",pm:"Connor",type:"",contract:59679,rev:44794,backlog:14885,rev26:15220,hrs:0.0,rph:0.00,parts:1},
+  {num:"26-063",name:"QTS - 201 Erie Rd., Eastlake, OH",cust:"Quality Technology Services, LLC",pm:"Jonathan",type:"",contract:56000,rev:0,backlog:56000,rev26:0,hrs:34.8,rph:0.00,parts:1},
+  {num:"26-038",name:"7 Brew - 3209 Johnson Street - Subwork",cust:"Blue Whale Development",pm:"Connor",type:"",contract:48000,rev:44610,backlog:3390,rev26:44610,hrs:223.8,rph:199.33,parts:2},
+  {num:"20006",name:"JP Fire Training Center",cust:"Watermark Design",pm:"Michael",type:"",contract:47580,rev:21827,backlog:25753,rev26:0,hrs:34.5,rph:0.00,parts:1},
+  {num:"25-044",name:"STPSO Training Facility",cust:"Woodward Design Group",pm:"Connor",type:"",contract:46235,rev:41570,backlog:4665,rev26:10482,hrs:73.5,rph:142.62,parts:1},
+  {num:"25-067",name:"Woodward Design Group - Canal Barge",cust:"Woodward Design Group",pm:"Connor",type:"",contract:45550,rev:8293,backlog:37257,rev26:8293,hrs:1.0,rph:8293.00,parts:1},
+  {num:"26-039",name:"7 Brew - Sulphur, LA - 212 S. Cities",cust:"Flavored Operations, LLC",pm:"Connor",type:"",contract:44385,rev:0,backlog:44385,rev26:0,hrs:1.0,rph:0.00,parts:1},
+  {num:"26-060",name:"Brookwood - Highway 44, Gonzales, LA",cust:"Rosehill Construction",pm:"Connor",type:"",contract:43321,rev:4040,backlog:39281,rev26:4040,hrs:58.8,rph:68.71,parts:1},
+  {num:"26-024",name:"Brookwood \u2013 Highway 22 \u2013 St. Tammany Parish",cust:"Rosehill Construction",pm:"Connor",type:"",contract:42852,rev:8520,backlog:34332,rev26:8520,hrs:194.0,rph:43.92,parts:1},
+  {num:"24002",name:"Redesign of the Shrine on Airline",cust:"Watermark Design",pm:"Daniel",type:"TM",contract:39916,rev:39916,backlog:0,rev26:18555,hrs:51.0,rph:363.83,parts:1},
+  {num:"26-058",name:"LBB Concrete Batch Plant",cust:"Meyer & Associates, Inc.",pm:"Daniel",type:"TM",contract:39518,rev:39518,backlog:0,rev26:39518,hrs:178.0,rph:222.01,parts:1},
+  {num:"25-097",name:"Parking Lot Expansion - Hoist & Crane Service",cust:"Hoist & Crane Service Group",pm:"Connor",type:"",contract:35380,rev:32580,backlog:2800,rev26:32580,hrs:117.2,rph:277.99,parts:1},
+  {num:"26-055",name:"Lift Station Improvements, Plaquemines Parish, LA",cust:"Trigon Associates",pm:"Daniel",type:"",contract:35100,rev:0,backlog:35100,rev26:0,hrs:0.0,rph:0.00,parts:1},
+  {num:"26-048",name:"7 Brew Pineville, LA",cust:"Flavored Operations, LLC",pm:"Connor",type:"",contract:32680,rev:0,backlog:32680,rev26:0,hrs:46.2,rph:0.00,parts:1},
+  {num:"26-049",name:"",cust:"Flavored Operations, LLC",pm:"Connor",type:"",contract:32680,rev:0,backlog:32680,rev26:0,hrs:8.5,rph:0.00,parts:1},
+  {num:"25002",name:"Harvey Volunteer Fire Station #64",cust:"Watermark Design",pm:"Michael",type:"",contract:29510,rev:10000,backlog:19510,rev26:10000,hrs:30.0,rph:333.33,parts:1},
+  {num:"26001",name:"700 Metairie Road Property",cust:"J Caldarera Company",pm:"Michael",type:"",contract:28788,rev:788,backlog:28001,rev26:788,hrs:4.0,rph:196.88,parts:1},
+  {num:"26-094",name:"FedEx Parking Lot Expansion",cust:"Diamond Z Engineering",pm:"Connor",type:"",contract:26880,rev:7180,backlog:19700,rev26:7180,hrs:128.8,rph:55.75,parts:1},
+  {num:"26-033",name:"QTS - Specifications Standards Maintenance",cust:"Quality Technology Services, LLC",pm:"Alicia",type:"",contract:25000,rev:10000,backlog:15000,rev26:10000,hrs:17.0,rph:588.24,parts:1},
+  {num:"24-073",name:"Rubicon Geismer Lab",cust:"Duplantis Design group",pm:"Daniel",type:"",contract:22135,rev:8858,backlog:13278,rev26:1058,hrs:4.0,rph:264.38,parts:1},
+  {num:"25-073",name:"Mars Compressor Platform Analysis & Evaluation",cust:"Kinetica Partners LLC",pm:"Daniel",type:"",contract:18920,rev:2838,backlog:16082,rev26:0,hrs:0.0,rph:0.00,parts:1},
+  {num:"26003",name:"Dickory Ave Multi-Use Path",cust:"JP Department of PW",pm:"Michael",type:"",contract:18500,rev:0,backlog:18500,rev26:0,hrs:0.0,rph:0.00,parts:1},
+  {num:"26-103",name:"Professional Civil Engineering and Land Surveying Services 5400 Jeffer",cust:"Laitram",pm:"Connor",type:"",contract:17690,rev:1930,backlog:15760,rev26:1930,hrs:38.5,rph:50.13,parts:1},
+  {num:"26-115",name:"Buzzi Substation Tap Structural/Civil Design Stockton, PA",cust:"Engenuity Global",pm:"Daniel",type:"",contract:16920,rev:0,backlog:16920,rev26:0,hrs:0.0,rph:0.00,parts:1},
+  {num:"26-010",name:"Tire Choice, Naples, FL",cust:"Monro, Inc.",pm:"Connor",type:"",contract:16140,rev:0,backlog:16140,rev26:0,hrs:0.5,rph:0.00,parts:1},
+  {num:"25-122",name:"DTE Bell River Mills Filter Separator Platform",cust:"Basic Systems, Inc.",pm:"Daniel",type:"",contract:13650,rev:12968,backlog:682,rev26:12968,hrs:587.0,rph:22.09,parts:1},
+  {num:"26-076",name:"Waterford 3 Chiller Foundations",cust:"Star Service",pm:"Daniel",type:"",contract:10990,rev:6784,backlog:4206,rev26:6784,hrs:33.0,rph:205.58,parts:1},
+  {num:"26-097",name:"Professional Engineering & Land Surveying 7 Brew Breaux Bridge, LA",cust:"Blue Whale Development",pm:"Connor",type:"",contract:10700,rev:3400,backlog:7300,rev26:3400,hrs:113.5,rph:29.96,parts:1},
+  {num:"26-112",name:"1544 & 1556 Tchoupitoulas Street New Orleans, LA 70130",cust:"Neo Infrastructure",pm:"Connor",type:"",contract:8960,rev:0,backlog:8960,rev26:0,hrs:0.0,rph:0.00,parts:1},
+  {num:"26-116",name:"Land Surveying services for the Seven Brew in Lafayette, LA.",cust:"Kohl's Department Stores",pm:"Connor",type:"",contract:6920,rev:0,backlog:6920,rev26:0,hrs:0.0,rph:0.00,parts:1},
+  {num:"22004-1",name:"JP Water Admin Building WB",cust:"Watermark Design",pm:"Michael",type:"",contract:6871,rev:226,backlog:6645,rev26:226,hrs:0.0,rph:0.00,parts:1},
+  {num:"26-107",name:"Professional Engineering Services FedEx MobiDock 310 James Drive St. R",cust:"Diamond Z Engineering",pm:"Connor",type:"",contract:6150,rev:1538,backlog:4612,rev26:1538,hrs:2.0,rph:768.75,parts:1},
+  {num:"26-096",name:"Brookwood - 11203 State Hwy 30, College Station, TX",cust:"Rosehill Construction",pm:"Connor",type:"",contract:5840,rev:5076,backlog:764,rev26:5076,hrs:71.8,rph:70.70,parts:1},
+  {num:"26-092",name:"TX Hwy 89, Sinton, TX",cust:"Quality Technology Services, LLC",pm:"Wes",type:"",contract:4500,rev:0,backlog:4500,rev26:0,hrs:15.5,rph:0.00,parts:1},
+  {num:"26-117",name:"I-44 & US Route 66, Villa Ridge, MO",cust:"Quality Infratech Intelligence, LLC (QII)",pm:"Jonathan",type:"",contract:4500,rev:0,backlog:4500,rev26:0,hrs:0.0,rph:0.00,parts:1},
+  {num:"24-002.128",name:"North Bergen, NJ Lease Exhibit",cust:"Floor & Decor",pm:"Connor",type:"",contract:1480,rev:0,backlog:1480,rev26:0,hrs:0.0,rph:0.00,parts:1},
+  {num:"24-002.149",name:"Newark, DE Lease Exhibit",cust:"",pm:"Connor",type:"",contract:1480,rev:0,backlog:1480,rev26:0,hrs:0.0,rph:0.00,parts:1},
+  {num:"24-002.161",name:"Bridgewater, NJ Lease Exhibit",cust:"Floor & Decor",pm:"Connor",type:"",contract:1480,rev:0,backlog:1480,rev26:0,hrs:0.0,rph:0.00,parts:1},
+  {num:"26-071",name:"7Brew \u2013 College Dr. \u2013 Baton Rouge, LA",cust:"Flavored Operations, LLC",pm:"Connor",type:"",contract:1000,rev:500,backlog:500,rev26:500,hrs:7.0,rph:71.43,parts:1},
+  {num:"26-088",name:"Merryville Replacement of LA 110 Sanitary Sewer Gravity Main Crossing ",cust:"Meyer & Associates, Inc.",pm:"Daniel",type:"TM",contract:700,rev:700,backlog:0,rev26:700,hrs:4.0,rph:175.00,parts:1},
+  {num:"25-003",name:"Brookwood - 11670 Airline Hwy",cust:"Rosehill Construction",pm:"Connor",type:"",contract:0,rev:0,backlog:0,rev26:0,hrs:1.5,rph:0.00,parts:1},
+  {num:"26-080",name:"Brookwood \u2013 Stumberg \u2013 St. George, LA",cust:"Rosehill Construction",pm:"Connor",type:"TM",contract:0,rev:0,backlog:0,rev26:0,hrs:7.5,rph:0.00,parts:1},
+  {num:"26-077",name:"Prien Lake Road Ped Crossing",cust:"Meyer & Associates, Inc.",pm:"Daniel",type:"TM",contract:0,rev:0,backlog:0,rev26:0,hrs:0.0,rph:0.00,parts:1},
+  {num:"26-093.2",name:"SLC1 Expansion Phase 1",cust:"Quality Technology Services, LLC",pm:"Jed",type:"",contract:0,rev:0,backlog:0,rev26:0,hrs:0.0,rph:0.00,parts:1},
+  {num:"26-114",name:"Merryville LA110 Sewer Main",cust:"Meyer & Associates, Inc.",pm:"Daniel",type:"TM",contract:0,rev:0,backlog:0,rev26:0,hrs:3.0,rph:0.00,parts:1}
+];
+
+// ── Active projects table ─────────────────────────────────────────────────
+var AP_SORT = { col:'contract', dir:-1 };
+var AP_SEL  = null;
+
+var AP_COLS = [
+  { key:'num',      label:'Project',   align:'left',  w:'90px'  },
+  { key:'name',     label:'Name',      align:'left',  w:'auto'  },
+  { key:'cust',     label:'Customer',  align:'left',  w:'200px' },
+  { key:'contract', label:'Contract',  align:'right', w:'112px', money:true },
+  { key:'rev',      label:'Total Revenue', align:'right', w:'116px', money:true },
+  { key:'backlog',  label:'Backlog',   align:'right', w:'112px', money:true },
+  { key:'hrs',      label:'DL Hours',  align:'right', w:'92px',  hours:true },
+  { key:'rph',      label:'RPH',       align:'right', w:'92px',  rate:true  }
+];
+
+function apSort(col){
+  if (AP_SORT.col === col) AP_SORT.dir *= -1;
+  else AP_SORT = { col:col, dir: (col==='num'||col==='name'||col==='cust') ? 1 : -1 };
+  renderProjMain();
+}
+
+function apRows(){
+  var r = AP_DATA.slice();
+  var c = AP_SORT.col, d = AP_SORT.dir;
+  r.sort(function(a,b){
+    var av = a[c], bv = b[c];
+    if (typeof av === 'number' && typeof bv === 'number') return (av-bv)*d;
+    return String(av||'').localeCompare(String(bv||''), undefined, {numeric:true})*d;
+  });
+  return r;
+}
+
+function apSelect(num){
+  AP_SEL = (AP_SEL === num) ? null : num;
+  renderProjMain();
+}
+
+function apMoney(v){
+  if (!v) return '<span class="ap-zero">\u2014</span>';
+  return '$' + Math.round(v).toLocaleString();
+}
+
+function apTable(){
+  var rows = apRows();
+  var tot = rows.reduce(function(t,r){
+    t.contract += r.contract; t.rev += r.rev; t.backlog += r.backlog; t.hrs += r.hrs;
+    t.rev26 += r.rev26; return t;
+  }, {contract:0, rev:0, backlog:0, hrs:0, rev26:0});
+  var totRph = tot.hrs > 0 ? tot.rev26/tot.hrs : 0;
+
+  var head = AP_COLS.map(function(c){
+    var on = AP_SORT.col === c.key;
+    var arrow = on ? (AP_SORT.dir === 1 ? '\u25b2' : '\u25bc')
+                   : '<i class="ap-idle">\u21c5</i>';
+    return '<th class="'+(c.align==='right'?'r':'')+(on?' on':'')+'" style="width:'+c.w+';" '+
+      'onclick="apSort(\''+c.key+'\')" title="Sort by '+c.label+'">'+
+      c.label+' <span class="ap-arw">'+arrow+'</span></th>';
+  }).join('');
+
+  var body = rows.map(function(r){
+    var sel = AP_SEL === r.num;
+    return '<tr class="'+(sel?'sel':'')+'" onclick="apSelect(\''+r.num+'\')">'+
+      '<td class="ap-num">'+r.num+
+        (r.parts>1?'<i class="ap-roll" title="'+r.parts+' sub-projects rolled up">+'+(r.parts-1)+'</i>':'')+
+      '</td>'+
+      '<td class="ap-nm">'+r.name+'</td>'+
+      '<td class="ap-cu">'+(r.cust||'\u2014')+'</td>'+
+      '<td class="r ap-mn">'+apMoney(r.contract)+'</td>'+
+      '<td class="r ap-mn">'+apMoney(r.rev)+'</td>'+
+      '<td class="r ap-bl">'+apMoney(r.backlog)+'</td>'+
+      '<td class="r ap-hr">'+(r.hrs ? Math.round(r.hrs).toLocaleString() : '<span class="ap-zero">\u2014</span>')+'</td>'+
+      '<td class="r ap-rp">'+(r.rph ? '$'+Math.round(r.rph).toLocaleString() : '<span class="ap-zero">\u2014</span>')+'</td>'+
+    '</tr>';
+  }).join('');
+
+  return '<div class="ap-wrap">'+
+    '<div class="ap-head">'+
+      '<div>'+
+        '<div class="ap-title">Active Projects</div>'+
+        '<div class="ap-sub">'+rows.length+' projects \u00b7 sub-projects rolled into their parent '+
+          'unless the customer differs \u00b7 as of '+AP_ASOF+'</div>'+
+      '</div>'+
+      '<div class="ap-kpis">'+
+        '<div class="ap-k"><span>Contract Value</span><b>'+bgFmtM(tot.contract)+'</b></div>'+
+        '<div class="ap-k"><span>Revenue Earned</span><b>'+bgFmtM(tot.rev)+'</b></div>'+
+        '<div class="ap-k gold"><span>Backlog</span><b>'+bgFmtM(tot.backlog)+'</b></div>'+
+        '<div class="ap-k"><span>DL Hours</span><b>'+Math.round(tot.hrs).toLocaleString()+'</b></div>'+
+        '<div class="ap-k cyan"><span>Blended RPH</span><b>$'+Math.round(totRph).toLocaleString()+'</b></div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="ap-scroll">'+
+      '<table class="ap-tbl"><thead><tr>'+head+'</tr></thead><tbody>'+body+'</tbody>'+
+      '<tfoot><tr>'+
+        '<td colspan="3">TOTAL \u00b7 '+rows.length+' projects</td>'+
+        '<td class="r">'+apMoney(tot.contract)+'</td>'+
+        '<td class="r">'+apMoney(tot.rev)+'</td>'+
+        '<td class="r ap-bl">'+apMoney(tot.backlog)+'</td>'+
+        '<td class="r">'+Math.round(tot.hrs).toLocaleString()+'</td>'+
+        '<td class="r ap-rp">$'+Math.round(totRph).toLocaleString()+'</td>'+
+      '</tr></tfoot></table>'+
+    '</div>'+
+  '</div>';
+}
+
+// The detail card. Contents are a placeholder until the fields are specified.
+function apCard(){
+  if (!AP_SEL) return '';
+  var r = AP_DATA.filter(function(x){ return x.num === AP_SEL; })[0];
+  if (!r) return '';
+  var pctComplete = r.contract > 0 ? Math.min(100, r.rev/r.contract*100) : 0;
+  function line(k, v, cls){
+    return '<div class="apc-l"><span>'+k+'</span><b class="'+(cls||'')+'">'+v+'</b></div>';
+  }
+  return '<div class="ap-card">'+
+    '<button class="apc-x" onclick="apSelect(null)">\u00d7</button>'+
+    '<div class="apc-num">'+r.num+'</div>'+
+    '<div class="apc-nm">'+r.name+'</div>'+
+    '<div class="apc-cu">'+(r.cust||'\u2014')+'</div>'+
+    '<div class="apc-bar"><div style="width:'+pctComplete.toFixed(1)+'%;"></div></div>'+
+    '<div class="apc-barl">'+pctComplete.toFixed(0)+'% of contract earned</div>'+
+    '<div class="apc-body">'+
+      line('Contract', apMoney(r.contract))+
+      line('Revenue earned', apMoney(r.rev))+
+      line('2026 revenue', apMoney(r.rev26))+
+      line('Backlog', apMoney(r.backlog), 'gold')+
+      line('DL hours (2026)', r.hrs ? Math.round(r.hrs).toLocaleString() : '\u2014')+
+      line('RPH', r.rph ? '$'+Math.round(r.rph).toLocaleString() : '\u2014', 'cyan')+
+      (r.pm   ? line('Project manager', r.pm) : '')+
+      (r.type ? line('Type', r.type) : '')+
+      (r.parts>1 ? line('Sub-projects', r.parts+' rolled up') : '')+
+    '</div>'+
+    '<div class="apc-note">More fields to come \u2014 tell me what belongs here.</div>'+
+  '</div>';
+}
+
 function renderProjMain() {
-  var ps  = getActiveProjects();
   var el  = document.getElementById('proj-main');
   var elC = document.getElementById('proj-by-customer');
   var elN = document.getElementById('proj-by-number');
@@ -11765,130 +12943,11 @@ function renderProjMain() {
   if (elN) elN.style.display = 'none';
   if (!el) return;
 
-  // Use all projects for revenue total (not just active backlog)
-  var allPs     = PROJECTS_DATA || [];
-  var totalBL   = ps.reduce(function(s,p){ return s+p.backlog;       },0);
-  var total2026 = allPs.reduce(function(s,p){ return s+p.rev2026;    },0);
-  var totalCon  = ps.reduce(function(s,p){ return s+p.totalContract; },0);
-  var top3Rev   = allPs.slice().sort(function(a,b){return b.rev2026-a.rev2026;}).slice(0,3);
-  var top3BL    = ps.slice().sort(function(a,b){return b.backlog-a.backlog;}).slice(0,3);
-
-  var SERIF = '"Georgia","Times New Roman",serif';
-  var SANS  = '"Helvetica Neue","Arial",sans-serif';
-  var GOLD  = '#c9a84c';
-  var CREAM = '#f0ead8';
-  var DIM   = 'rgba(240,234,216,0.38)';
-  var LINE  = 'rgba(201,168,76,0.18)';
-
-  var uploadBtn =
-    '<input type="file" id="proj-upload" accept=".xlsx" style="display:none;" onchange="handleProjUpload(this)"/>'+
-    '<button onclick="document.getElementById(\'proj-upload\').click()" '+
-      'style="font-family:'+SANS+';font-size:9px;letter-spacing:2px;text-transform:uppercase;'+
-      'background:transparent;border:1px solid rgba(201,168,76,0.35);border-radius:2px;'+
-      'color:rgba(201,168,76,0.6);padding:7px 16px;cursor:pointer;transition:all 0.2s;" '+
-      'onmouseenter="this.style.borderColor=\'rgba(201,168,76,0.8)\';this.style.color=\'#c9a84c\'" '+
-      'onmouseleave="this.style.borderColor=\'rgba(201,168,76,0.35)\';this.style.color=\'rgba(201,168,76,0.6)\'">'+
-      '↑ UPDATE XLSX</button>';
-
-  // ── Stat column ─────────────────────────────────────────────────────────────
-  function stat(num, label, sub) {
-    return '<div>'+
-      '<div style="font-family:'+SERIF+';font-size:48px;font-weight:400;color:'+CREAM+';line-height:0.95;letter-spacing:-1px;">'+num+'</div>'+
-      '<div style="width:28px;height:1px;background:'+GOLD+';margin:10px 0 8px;"></div>'+
-      '<div style="font-family:'+SANS+';font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:'+GOLD+';margin-bottom:4px;">'+label+'</div>'+
-      '<div style="font-family:'+SERIF+';font-size:12px;font-style:italic;color:'+DIM+';">'+sub+'</div>'+
-    '</div>';
-  }
-
-  // ── Project row ─────────────────────────────────────────────────────────────
-  function projRow(p, val, i) {
-    var NUMS = ['I','II','III'];
-    return '<div style="display:grid;grid-template-columns:28px 1fr auto;gap:14px;align-items:start;'+
-      'padding:14px 0;border-bottom:1px solid rgba(201,168,76,0.1);">'+
-      '<div style="font-family:'+SERIF+';font-size:11px;font-style:italic;color:rgba(201,168,76,0.5);padding-top:2px;">'+NUMS[i]+'</div>'+
-      '<div>'+
-        '<div style="font-family:'+SANS+';font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,0.55);margin-bottom:3px;">'+p.num+'</div>'+
-        '<div style="font-family:'+SERIF+';font-size:14px;color:'+CREAM+';line-height:1.35;margin-bottom:3px;">'+p.name.substring(0,36)+'</div>'+
-        '<div style="font-family:'+SANS+';font-size:10px;color:'+DIM+';font-style:normal;">'+p.customer.substring(0,30)+'</div>'+
-      '</div>'+
-      '<div style="font-family:'+SERIF+';font-size:20px;font-weight:400;color:'+GOLD+';white-space:nowrap;padding-top:2px;">'+fmtM(val)+'</div>'+
-    '</div>';
-  }
-
-  // ── Browse card ─────────────────────────────────────────────────────────────
-  function browseCard(mode, icon, title, sub) {
-    return '<div onclick="renderProjByMode(this.dataset.mode)" data-mode="'+mode+'" '+
-      'style="cursor:pointer;padding:20px 22px;border:1px solid rgba(201,168,76,0.2);border-radius:2px;'+
-      'background:rgba(201,168,76,0.03);transition:all 0.2s;position:relative;overflow:hidden;" '+
-      'onmouseenter="this.style.background=\'rgba(201,168,76,0.07)\';this.style.borderColor=\'rgba(201,168,76,0.45)\'" '+
-      'onmouseleave="this.style.background=\'rgba(201,168,76,0.03)\';this.style.borderColor=\'rgba(201,168,76,0.2)\'">'+
-      '<div style="position:absolute;top:0;left:0;width:3px;height:100%;background:'+GOLD+';opacity:0.5;"></div>'+
-      '<div style="font-size:24px;margin-bottom:10px;padding-left:10px;">'+icon+'</div>'+
-      '<div style="font-family:'+SANS+';font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:'+GOLD+';margin-bottom:6px;padding-left:10px;">'+title+'</div>'+
-      '<div style="font-family:'+SERIF+';font-size:12px;font-style:italic;color:'+DIM+';padding-left:10px;">'+sub+'</div>'+
-      '<div style="position:absolute;bottom:14px;right:16px;font-family:'+SERIF+';font-size:20px;color:rgba(201,168,76,0.3);">→</div>'+
-    '</div>';
-  }
-
+  // Table on the left, detail card pinned top-right when a row is selected.
   el.innerHTML =
-    '<div style="min-height:100vh;background:linear-gradient(160deg,#0d0b07 0%,#0a0804 40%,#0e0c08 100%);color:'+CREAM+';">'+
-
-    // ── Masthead ────────────────────────────────────────────────────────────
-    '<div style="padding:36px 48px 32px;border-bottom:1px solid '+LINE+';display:flex;align-items:flex-end;justify-content:space-between;">'+
-      '<div>'+
-        '<div style="font-family:'+SANS+';font-size:8px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:rgba(201,168,76,0.5);margin-bottom:12px;">Basin Engineering &amp; Surveying · Civil &amp; Structural</div>'+
-        '<div style="font-family:'+SERIF+';font-size:42px;font-weight:400;color:'+CREAM+';letter-spacing:-0.5px;line-height:1;">Active Project Portfolio</div>'+
-        '<div style="width:80px;height:1px;background:'+GOLD+';margin-top:16px;"></div>'+
-      '</div>'+
-      '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">'+
-        uploadBtn+
-        '<div style="font-family:'+SERIF+';font-size:11px;font-style:italic;color:'+DIM+';">As of July 2026</div>'+
-      '</div>'+
-    '</div>'+
-
-    // ── 4-stat strip ────────────────────────────────────────────────────────
-    '<div style="display:grid;grid-template-columns:1fr 1px 1fr 1px 1fr 1px 1fr;padding:40px 48px;'+
-      'border-bottom:1px solid '+LINE+';gap:0;">'+
-      stat(ps.length,        'Active Projects',  ps.length+' with open backlog')+
-      '<div style="height:64px;background:'+LINE+';align-self:center;"></div>'+
-      stat(fmtM(totalBL),   'Total Backlog',    'Remaining contracted work')+
-      '<div style="height:64px;background:'+LINE+';align-self:center;"></div>'+
-      stat(fmtM(total2026), '2026 Revenue',     'Jan\u2013Jul recognized')+
-      '<div style="height:64px;background:'+LINE+';align-self:center;"></div>'+
-      stat(fmtM(totalCon),  'Total Contract',   'Across all active projects')+
-    '</div>'+
-
-    // ── Rankings + navigation ───────────────────────────────────────────────
-    '<div style="display:grid;grid-template-columns:1fr 1fr 320px;gap:0;border-bottom:1px solid '+LINE+';">'+
-
-      // Top Backlog
-      '<div style="padding:36px 40px;border-right:1px solid '+LINE+';">'+
-        '<div style="font-family:'+SANS+';font-size:8px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(201,168,76,0.55);margin-bottom:4px;">Top Backlog</div>'+
-        '<div style="font-family:'+SERIF+';font-size:13px;font-style:italic;color:'+DIM+';margin-bottom:22px;">Remaining work value</div>'+
-        top3BL.map(function(p,i){ return projRow(p, p.backlog, i); }).join('')+
-      '</div>'+
-
-      // Top 2026 Revenue
-      '<div style="padding:36px 40px;border-right:1px solid '+LINE+';">'+
-        '<div style="font-family:'+SANS+';font-size:8px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(201,168,76,0.55);margin-bottom:4px;">Top 2026 Revenue</div>'+
-        '<div style="font-family:'+SERIF+';font-size:13px;font-style:italic;color:'+DIM+';margin-bottom:22px;">Jan\u2013Jul recognized</div>'+
-        top3Rev.map(function(p,i){ return projRow(p, p.rev2026, i); }).join('')+
-      '</div>'+
-
-      // Browse portal
-      '<div style="padding:36px 28px;display:flex;flex-direction:column;gap:14px;justify-content:center;">'+
-        '<div style="font-family:'+SANS+';font-size:8px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:'+DIM+';margin-bottom:6px;">Browse Portfolio</div>'+
-        browseCard('customer','🏢','By Client','Grouped by customer with backlog & RPH')+
-        browseCard('number','📋','By Project','All '+ps.length+' projects · financials')+
-      '</div>'+
-    '</div>'+
-
-    // ── Footer rule ─────────────────────────────────────────────────────────
-    '<div style="padding:18px 48px;display:flex;align-items:center;justify-content:space-between;">'+
-      '<div style="font-family:'+SERIF+';font-size:11px;font-style:italic;color:rgba(201,168,76,0.3);">Basin Engineering &amp; Surveying, LLC · Proprietary &amp; Confidential</div>'+
-      '<div style="font-family:'+SANS+';font-size:8px;letter-spacing:2px;color:rgba(201,168,76,0.2);text-transform:uppercase;">Project Intelligence Platform</div>'+
-    '</div>'+
-
+    '<div class="ap-layout'+(AP_SEL?' has-card':'')+'">'+
+      '<div class="ap-main">'+apTable()+'</div>'+
+      '<div class="ap-side">'+apCard()+'</div>'+
     '</div>';
 }
 
