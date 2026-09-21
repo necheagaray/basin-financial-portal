@@ -931,7 +931,7 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
   color:#6b8899;margin-top:9px;}
 /* the running total riding above the bars */
 .cf-line{position:absolute;left:0;right:0;width:100%;pointer-events:none;}
-.cf-foot{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px;
+.cf-foot{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:20px;
   padding-top:18px;border-top:1px solid rgba(20,60,80,0.12);}
 .cf-f{text-align:center;}
 .cf-fk{font-size:10px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#8aa8b8;}
@@ -1699,6 +1699,61 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 .apc-l b.gold{color:#fbbf24;} .apc-l b.cyan{color:#00d4ff;}
 .apc-note{margin-top:12px;font-family:var(--mono);font-size:8.5px;
   color:rgba(255,255,255,0.22);text-align:center;}
+
+/* ── Q4: admin labor build ────────────────────────────────────────────── */
+#q4-admin-ov{position:fixed;inset:0;z-index:950;display:none;align-items:center;
+  justify-content:center;padding:26px;background:rgba(2,8,14,0.75);backdrop-filter:blur(8px);}
+#q4-admin-ov.open{display:flex;}
+.adm-head,.adm-row{display:grid;grid-template-columns:1fr 168px 104px 176px 26px;gap:10px;
+  align-items:center;}
+.adm-head{padding:0 4px 7px;margin-top:18px;border-bottom:1px solid rgba(255,255,255,0.1);
+  margin-bottom:5px;}
+.adm-head span{font-family:var(--mono);font-size:8px;font-weight:800;letter-spacing:1.2px;
+  text-transform:uppercase;color:rgba(255,255,255,0.28);}
+.adm-head span:nth-child(2),.adm-head span:nth-child(3){text-align:right;}
+.adm-head span:nth-child(4){text-align:center;}
+.adm-row{padding:7px 4px;border-radius:9px;transition:opacity .15s,background .15s;}
+.adm-row:hover{background:rgba(255,255,255,0.03);}
+.adm-row.off{opacity:0.4;}
+.adm-nm{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:8px;
+  padding:6px 10px;color:#fff;font-family:var(--inter);font-size:12.5px;outline:none;width:100%;}
+.adm-nm:focus{border-color:#ffd060;}
+.adm-mo{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.45);text-align:right;}
+.adm-ms{display:flex;gap:4px;justify-content:center;}
+.adm-m{cursor:pointer;font-family:var(--mono);font-size:8.5px;font-weight:800;letter-spacing:0.8px;
+  text-transform:uppercase;padding:4px 9px;border-radius:7px;color:rgba(255,255,255,0.3);
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);transition:all .14s;}
+.adm-m:hover{color:rgba(255,255,255,0.8);}
+.adm-m.on{color:#03131c;background:#ffd060;border-color:#ffd060;}
+.adm-total{display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px 15px;
+  border-radius:12px;background:rgba(255,208,96,0.08);border:1px solid rgba(255,208,96,0.3);}
+.adm-tk{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:1.2px;
+  text-transform:uppercase;color:rgba(255,255,255,0.45);}
+.adm-tv{margin-left:auto;font-family:var(--hud);font-size:22px;font-weight:900;color:#ffd060;}
+.adm-splits{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:14px;}
+.adm-sp{padding:12px 14px;border-radius:12px;background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.11);border-left:3px solid var(--c);}
+.adm-spk{display:block;font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:7px;}
+.adm-spv{display:block;font-family:var(--hud);font-size:19px;font-weight:900;color:var(--c);
+  margin-top:7px;}
+.adm-chk{margin-top:11px;padding:9px 13px;border-radius:9px;font-family:var(--mono);font-size:9.5px;
+  color:rgba(255,255,255,0.45);background:rgba(74,222,128,0.08);
+  border:1px solid rgba(74,222,128,0.28);}
+.adm-chk b{color:#4ade80;}
+.adm-chk.bad{background:rgba(248,113,113,0.1);border-color:rgba(248,113,113,0.4);}
+.adm-chk.bad b{color:#f87171;}
+
+/* ── Capacity: top projects scroller ──────────────────────────────────── */
+.cap-top-scroll{overflow-y:auto;overflow-x:hidden;position:relative;padding-right:6px;
+  scrollbar-width:thin;scrollbar-color:rgba(0,212,255,0.35) transparent;
+  -webkit-mask-image:none;}
+.cap-top-scroll::-webkit-scrollbar{width:6px;}
+.cap-top-scroll::-webkit-scrollbar-thumb{background:rgba(0,212,255,0.35);border-radius:4px;}
+.cap-top-scroll::-webkit-scrollbar-thumb:hover{background:rgba(0,212,255,0.6);}
+/* fade the last visible row when more sit below, so it reads as a scroller */
+.cap-top-scroll.more{-webkit-mask-image:linear-gradient(180deg,#000 88%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 88%,transparent 100%);}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
@@ -4288,6 +4343,191 @@ function q4SetDlHours(month, hrs){
   q4Write(d);
 }
 
+// ── Q4: admin labor build ─────────────────────────────────────────────────
+// A roster of admin staff, each with an annual salary and the months of the
+// forecast window they are on payroll for. The month's total salary is then
+// split by percentage across Admin Labor (7105), Officer Labor Premium (7130)
+// and Admin Sick/Vacation (7110).
+var Q4_ADMIN_LINES = ['a7105','a7130','a7110'];
+
+function q4AdminRoster(){
+  var d = q4Read();
+  var r = d.adminRoster;
+  if (r && r.length) return r;
+  return [
+    { name:'Admin staff',  salary:520000, months:{oct:true, nov:true, dec:true} },
+    { name:'Officer',      salary:390000, months:{oct:true, nov:true, dec:true} }
+  ];
+}
+function q4SetAdminRoster(list){
+  var d = q4Read(); d.adminRoster = list; q4Write(d);
+}
+
+function q4AdminSplit(){
+  var d = q4Read();
+  var sp = d.adminSplit;
+  if (sp) return sp;
+  return { labor:78, officer:16, sick:6 };   // opens near the current plan
+}
+function q4SetAdminSplit(field, v){
+  var d = q4Read();
+  d.adminSplit = q4AdminSplit();
+  d.adminSplit[field] = isNaN(v) ? 0 : Math.max(0, v);
+  q4Write(d);
+}
+
+// what the roster costs in a given month
+function q4AdminCalc(month){
+  var roster = q4AdminRoster();
+  var sp = q4AdminSplit();
+  var monthly = roster.reduce(function(t, p){
+    return t + ((p.months && p.months[month]) ? (p.salary||0)/12 : 0);
+  }, 0);
+  var tot = (sp.labor||0) + (sp.officer||0) + (sp.sick||0);
+  return {
+    roster:roster, split:sp, monthly:monthly, pctTotal:tot,
+    labor:   monthly * ((sp.labor||0)/100),
+    officer: monthly * ((sp.officer||0)/100),
+    sick:    monthly * ((sp.sick||0)/100),
+    headcount: roster.filter(function(p){ return p.months && p.months[month]; }).length
+  };
+}
+
+function q4AdminMethod(month){
+  var d = q4Read();
+  return ((d.methods||{})[month+'_admin']) || 'manual';
+}
+function q4SetAdminMethod(month, m){
+  var d = q4Read();
+  d.methods = d.methods || {};
+  d.methods[month+'_admin'] = m;
+  q4Write(d);
+}
+function q4AdminUseManual(month){ q4SetAdminMethod(month,'manual'); renderBudget(); }
+
+// ── The builder ───────────────────────────────────────────────────────────
+var Q4_ADMIN_MONTH = null;
+
+function q4OpenAdminBuilder(month){ Q4_ADMIN_MONTH = month; q4RenderAdminBuilder(); }
+
+function q4RenderAdminBuilder(){
+  var month = Q4_ADMIN_MONTH;
+  if (!month) return;
+  var MLB = {oct:'October', nov:'November', dec:'December'};
+  var c = q4AdminCalc(month);
+  var ok = Math.abs(c.pctTotal - 100) < 0.05;
+
+  var rows = c.roster.map(function(p, i){
+    var chips = ['oct','nov','dec'].map(function(m){
+      var on = !!(p.months && p.months[m]);
+      return '<span class="adm-m'+(on?' on':'')+'" onclick="q4AdminToggleMonth('+i+',\''+m+'\')" '+
+        'title="'+MLB[m]+'">'+MLB[m].slice(0,3)+'</span>';
+    }).join('');
+    var inMonth = !!(p.months && p.months[month]);
+    return '<div class="adm-row'+(inMonth?'':' off')+'">'+
+      '<input class="adm-nm" type="text" value="'+(p.name||'')+'" placeholder="Name or role" '+
+        'onchange="q4AdminEdit('+i+',\'name\',this.value)"/>'+
+      '<label class="qg-f"><span>$</span><input type="number" step="1000" min="0" value="'+(p.salary||0)+'" '+
+        'onchange="q4AdminEdit('+i+',\'salary\',parseFloat(this.value))"/><span>/yr</span></label>'+
+      '<span class="adm-mo">'+((p.salary||0)/12).toLocaleString(undefined,{maximumFractionDigits:0})+' /mo</span>'+
+      '<span class="adm-ms">'+chips+'</span>'+
+      '<button class="qg-x" onclick="q4AdminRemove('+i+')" title="Remove">\u00d7</button>'+
+    '</div>';
+  }).join('');
+
+  function pctFld(label, field, color){
+    return '<div class="adm-sp" style="--c:'+color+';">'+
+      '<span class="adm-spk">'+label+'</span>'+
+      '<label class="qg-f"><input type="number" step="0.5" min="0" max="100" '+
+        'value="'+(c.split[field]||0)+'" '+
+        'onchange="q4AdminSetSplit(\''+field+'\',parseFloat(this.value))"/><span>%</span></label>'+
+      '<span class="adm-spv">'+bgFmtM(c.monthly*((c.split[field]||0)/100))+'</span>'+
+    '</div>';
+  }
+
+  var ov = document.getElementById('q4-admin-ov');
+  if (!ov){
+    ov = document.createElement('div');
+    ov.id = 'q4-admin-ov';
+    ov.addEventListener('click', function(e){ if (e.target === ov) q4CloseAdminBuilder(); });
+    document.body.appendChild(ov);
+  }
+  ov.innerHTML =
+    '<div class="qb-card">'+
+      '<button class="qb-x" onclick="q4CloseAdminBuilder()">\u00d7</button>'+
+      '<div class="qb-title">Admin Labor \u00b7 Build</div>'+
+      '<div class="qb-sub">'+MLB[month]+' 2026 \u00b7 annual salaries applied by month, then split '+
+        'across the three admin wage lines</div>'+
+
+      '<div class="adm-head">'+
+        '<span>Employee / role</span><span>Annual salary</span><span>Monthly</span>'+
+        '<span>On payroll</span><span></span>'+
+      '</div>'+
+      rows+
+      '<button class="qb-add" onclick="q4AdminAdd()">+ Add employee</button>'+
+
+      '<div class="adm-total">'+
+        '<span class="adm-tk">'+MLB[month]+' salary cost \u00b7 '+c.headcount+' on payroll</span>'+
+        '<span class="adm-tv">'+bgFmtM(c.monthly)+'</span>'+
+      '</div>'+
+
+      '<div class="adm-splits">'+
+        pctFld('7105 \u00b7 Admin. Labor','labor','#ffd060')+
+        pctFld('7130 \u00b7 Officer Labor Premium','officer','#c084fc')+
+        pctFld('7110 \u00b7 Admin. Sick/Vacation','sick','#7ed9ff')+
+      '</div>'+
+      '<div class="adm-chk'+(ok?'':' bad')+'">Allocated <b>'+c.pctTotal.toFixed(1)+'%</b>'+
+        (ok?'':' \u2014 the three shares should total 100%')+'</div>'+
+
+      '<div class="qb-actions">'+
+        '<button class="qb-apply" onclick="q4ApplyAdmin()">Apply to '+MLB[month]+'</button>'+
+        '<button class="qb-cancel" onclick="q4CloseAdminBuilder()">Close</button>'+
+      '</div>'+
+    '</div>';
+  ov.classList.add('open');
+}
+
+function q4AdminEdit(i, field, v){
+  var r = q4AdminRoster().slice();
+  if (!r[i]) return;
+  r[i] = Object.assign({}, r[i]);
+  r[i][field] = (field === 'name') ? v : (isNaN(v) ? 0 : v);
+  q4SetAdminRoster(r); q4RenderAdminBuilder();
+}
+function q4AdminToggleMonth(i, m){
+  var r = q4AdminRoster().map(function(p){ return Object.assign({}, p, {months:Object.assign({}, p.months)}); });
+  if (!r[i]) return;
+  r[i].months[m] = !r[i].months[m];
+  q4SetAdminRoster(r); q4RenderAdminBuilder();
+}
+function q4AdminAdd(){
+  var r = q4AdminRoster().slice();
+  if (r.length >= 12) return;
+  r.push({ name:'New role', salary:90000, months:{oct:true, nov:true, dec:true} });
+  q4SetAdminRoster(r); q4RenderAdminBuilder();
+}
+function q4AdminRemove(i){
+  var r = q4AdminRoster().slice();
+  r.splice(i,1);
+  q4SetAdminRoster(r.length ? r : [{name:'Admin staff', salary:0, months:{oct:true,nov:true,dec:true}}]);
+  q4RenderAdminBuilder();
+}
+function q4AdminSetSplit(field, v){ q4SetAdminSplit(field, v); q4RenderAdminBuilder(); }
+
+function q4ApplyAdmin(){
+  q4SetAdminMethod(Q4_ADMIN_MONTH, 'build');
+  q4CloseAdminBuilder();
+  renderBudget();
+}
+function q4CloseAdminBuilder(){
+  var ov = document.getElementById('q4-admin-ov');
+  if (ov) ov.classList.remove('open');
+  Q4_ADMIN_MONTH = null;
+}
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') q4CloseAdminBuilder();
+});
+
 // ── Q4: percent-of-revenue lines ──────────────────────────────────────────
 // Direct Subcontractor Costs track revenue, so the line is entered as a rate
 // and multiplied by whatever Project Income resolves to for that month --
@@ -4797,6 +5037,13 @@ function renderBudgetQ4(el) {
     // lines that track revenue at a rate the user sets
     if (Q4_PCT_LINES[key] && q4PctMethod(month, key) === 'pct')
       return q4PctAmount(month, key);
+    // the admin roster drives its three wage lines
+    if (Q4_ADMIN_LINES.indexOf(key) >= 0 && q4AdminMethod(month) === 'build'){
+      var a = q4AdminCalc(month);
+      if (key === 'a7105') return a.labor;
+      if (key === 'a7130') return a.officer;
+      if (key === 'a7110') return a.sick;
+    }
     var saved = (Q4DATA[month]||{})[key];
     return (saved !== undefined) ? saved : (DEFAULTS[month][key]||0);
   }
@@ -4911,6 +5158,7 @@ function renderBudgetQ4(el) {
   }
 
   // ── Inline edit for a cell ────────────────────────────────────────────
+  window.q4EditCell = q4EditCell;
   function q4EditCell(month, key, currentVal, tdId) {
     var td = document.getElementById(tdId);
     if (!td) return;
@@ -5106,6 +5354,23 @@ function renderBudgetQ4(el) {
                 'title="Enter the amount directly">Manual</span>'+
               '<span class="q4-mb'+(isPctM?' on':'')+'" onclick="q4PctUseRate(\''+month+'\',\''+row.key+'\')" '+
                 'title="Calculate as a percent of revenue">% Rev</span>'+
+            '</div>'+
+          '</td>';
+      } else if (isEditable && Q4_ADMIN_LINES.indexOf(row.key) >= 0) {
+        var isAdm = q4AdminMethod(month) === 'build';
+        monthCells +=
+          '<td id="'+tdId+'" style="text-align:right;padding:8px 14px;'+topB+rowBg+
+            'position:relative;">'+
+            '<div style="font-family:var(--hud);font-size:'+numSz+';font-weight:'+numW+';'+
+              'color:'+row.color+';cursor:'+(isAdm?'default':'pointer')+';" '+
+              (isAdm ? 'title="From the Admin Labor build"'
+                     : 'onclick="q4EditCell(\''+month+'\',\''+row.key+'\','+val+',\''+tdId+'\')"')+'>'+
+              fmtV(val)+'</div>'+
+            '<div class="q4-meth">'+
+              '<span class="q4-mb'+(isAdm?'':' on')+'" onclick="q4AdminUseManual(\''+month+'\')" '+
+                'title="Enter the amount directly">Manual</span>'+
+              '<span class="q4-mb'+(isAdm?' on':'')+'" onclick="q4OpenAdminBuilder(\''+month+'\')" '+
+                'title="Build from the admin salary roster">Build</span>'+
             '</div>'+
           '</td>';
       } else if (isEditable && ['a5100','a6110','a6100'].indexOf(row.key) >= 0) {
@@ -7050,9 +7315,7 @@ function openCashFlow(){
           '<div class="cf-fv">'+ytd$(avg)+'</div></div>'+
         '<div class="cf-f"><div class="cf-fk">Best Month</div>'+
           '<div class="cf-fv">'+(best>=0?MON[best]+' \u00b7 '+ytd$(peak):'\u2014')+'</div></div>'+
-        '<div class="cf-f"><div class="cf-fk">Outstanding</div>'+
-          '<div class="cf-fv" style="color:#8b6fd0;">'+
-          ytd$(Math.max(0,(D.revenue||0)-total))+'</div></div>'+
+
       '</div>'+
     '</div>';
   ov.classList.add('open');
@@ -7301,7 +7564,7 @@ function renderYTD(){
     '<div style="display:flex;align-items:baseline;gap:8px;">'+
       '<div class="sc-huge" style="font-size:34px;color:#7b57c8;">'+Math.round(lb.hours||0).toLocaleString()+'</div>'+
       '<div style="font-size:15px;font-weight:700;color:#9b7fd4;">hrs</div></div>'+
-    '<div class="sc-note" style="margin-top:6px;">'+lb.projectCount+' projects + shop overhead &middot; '+D.year+' YTD</div>'+
+    '<div class="sc-note" style="margin-top:6px;">'+lb.projectCount+' projects &middot; hours recorded to projects &middot; '+D.year+' YTD</div>'+
     '<div class="lb-chart">'+lbBars+'</div>'+ lhRows +
   '</div>';
 
@@ -9629,6 +9892,19 @@ function capWeekAvgDLRate(wk) {
 // Sub-projects normally roll into their parent. These stand alone because the
 // sub-project serves a different customer.
 var CAP_NO_ROLLUP = ['26-093', '26-093.1'];
+
+// Sub-projects whose parent is not the plain whole number. 26-093.2 is QTS
+// work, so it belongs with 26-093.1 (QTS) rather than 26-093 (Corgan).
+var CAP_ROLLUP_TO = { '26-093.2': '26-093.1' };
+
+// Where a project's hours should be counted.
+function capParentOf(num){
+  var n = String(num).trim();
+  if (CAP_ROLLUP_TO[n]) return CAP_ROLLUP_TO[n];
+  if (capNoRollup(n))   return n;
+  return n.replace(/\.\d+$/, '');
+}
+
 function capNoRollup(num){
   return CAP_NO_ROLLUP.indexOf(String(num).trim()) >= 0;
 }
@@ -11152,7 +11428,7 @@ function buildProjectBars(top10, rest, maxHrs, projEmpDataJson, totalCustHrs) {
     // Strip decimal suffix to find parent: "24-023.17" -> "24-023",
     // unless the sub-project bills to a different customer than its parent,
     // in which case merging them would file one customer's hours under another
-    var parent = capNoRollup(num) ? num : num.replace(/\.\d+$/, '');
+    var parent = capParentOf(num);
     if (!consolidated[parent]) {
       consolidated[parent] = {
         hours: 0, customer: d.customer||'', name: '', employees: {}
@@ -11170,10 +11446,11 @@ function buildProjectBars(top10, rest, maxHrs, projEmpDataJson, totalCustHrs) {
     });
   });
 
-  // Re-sort and take top 10
+  // Re-sort and take the top 20; the list scrolls within its existing space
+  var CAP_TOP_N = 20;
   var sorted = Object.entries(consolidated).sort(function(a,b){ return b[1].hours - a[1].hours; });
-  var displayTop = sorted.slice(0, 10);
-  var restItems  = sorted.slice(10);
+  var displayTop = sorted.slice(0, CAP_TOP_N);
+  var restItems  = sorted.slice(CAP_TOP_N);
   var restHrs    = restItems.reduce(function(s,kv){ return s+kv[1].hours; }, 0);
   var newMaxHrs  = displayTop.length ? displayTop[0][1].hours : 1;
 
@@ -11212,7 +11489,7 @@ function buildProjectBars(top10, rest, maxHrs, projEmpDataJson, totalCustHrs) {
   // ── Build rows ──────────────────────────────────────────────────────────────
   var rowsHTML = displayTop.map(function(kv, i) {
     var proj=kv[0], d=kv[1];
-    var color = ROW_COLORS[i][0], rgb = ROW_COLORS[i][1];
+    var color = ROW_COLORS[i % ROW_COLORS.length][0], rgb = ROW_COLORS[i % ROW_COLORS.length][1];
     var hrsPct = totalCustHrs>0 ? (d.hours/totalCustHrs*100).toFixed(1) : '0';
     var barPct = Math.min(100, d.hours/newMaxHrs*100);
 
@@ -11435,8 +11712,29 @@ function buildProjectBars(top10, rest, maxHrs, projEmpDataJson, totalCustHrs) {
       '</div>';
   }
 
-  return rowsHTML.join('') + restRow;
+  setTimeout(capSizeTopScroll, 0);
+  return '<div class="cap-top-scroll">'+rowsHTML.join('')+'</div>' + restRow;
 }
+
+// Size the scroller to exactly the first ten rows, so the panel keeps the
+// footprint it had and rows 11+ are reached by scrolling.
+function capSizeTopScroll(){
+  document.querySelectorAll('.cap-top-scroll').forEach(function(sc){
+    var kids = sc.children;
+    if (kids.length <= 10){ sc.style.maxHeight = 'none'; return; }
+    var top = kids[0].offsetTop;
+    var cut = kids[10].offsetTop;          // where the eleventh row starts
+    sc.style.maxHeight = (cut - top) + 'px';
+    sc.classList.toggle('more', sc.scrollTop + sc.clientHeight < sc.scrollHeight - 2);
+    if (!sc._wired){
+      sc._wired = true;
+      sc.addEventListener('scroll', function(){
+        sc.classList.toggle('more', sc.scrollTop + sc.clientHeight < sc.scrollHeight - 2);
+      });
+    }
+  });
+}
+window.addEventListener('resize', function(){ capSizeTopScroll(); });
 
 
 
