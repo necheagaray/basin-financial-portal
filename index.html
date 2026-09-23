@@ -1754,11 +1754,218 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 /* fade the last visible row when more sit below, so it reads as a scroller */
 .cap-top-scroll.more{-webkit-mask-image:linear-gradient(180deg,#000 88%,transparent 100%);
   mask-image:linear-gradient(180deg,#000 88%,transparent 100%);}
+
+/* ══ ACTIVE PROJECTS · NEON CONSOLE ═══════════════════════════════════════ */
+#active-projects{background:#07041A;}
+.ap2-root{position:relative;min-height:100%;background:#07041A;overflow:hidden;
+  font-family:'Chakra Petch','Segoe UI',sans-serif;color:#F2EEFF;}
+/* perspective floor */
+.ap2-floor{position:absolute;left:-200px;right:-200px;bottom:0;height:520px;
+  perspective:520px;perspective-origin:50% 0%;pointer-events:none;z-index:0;}
+.ap2-floor>div{position:absolute;inset:0;transform:rotateX(62deg);transform-origin:50% 0%;
+  background-image:linear-gradient(rgba(255,61,216,0.22) 1.5px,transparent 1.5px),
+    linear-gradient(90deg,rgba(255,61,216,0.22) 1.5px,transparent 1.5px);
+  background-size:72px 72px;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 45%);
+  mask-image:linear-gradient(to bottom,transparent 0%,#000 45%);}
+.ap2-horizon{position:absolute;left:0;right:0;bottom:520px;height:2px;background:#FF3DD8;
+  box-shadow:0 0 24px 6px rgba(255,61,216,0.45);opacity:0.55;z-index:0;pointer-events:none;}
+.ap2-content{position:relative;z-index:1;display:flex;flex-direction:column;gap:28px;
+  padding:24px 40px 48px;}
+
+/* top bar */
+.ap2-top{display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.ap2-brand{display:flex;align-items:center;gap:18px;}
+.ap2-mark{width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  border:1px dashed #6E5DB8;font-family:'JetBrains Mono',monospace;font-size:13px;
+  font-weight:700;color:#B4A8DE;letter-spacing:0.08em;}
+.ap2-kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.32em;color:#B4A8DE;}
+.ap2-h1{font-size:22px;font-weight:700;letter-spacing:0.24em;color:#3DE8FF;
+  text-shadow:0 0 14px rgba(61,232,255,0.45);}
+.ap2-actions{display:flex;align-items:center;gap:14px;}
+.ap2-link{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.1em;
+  text-decoration:none;padding:12px 6px;color:#3DE8FF;}
+.ap2-link:hover{color:#FF3DD8;}
+.ap2-upload{height:44px;padding:0 18px;display:flex;align-items:center;gap:8px;background:transparent;
+  border:1px solid #3DE8FF;box-shadow:0 0 14px rgba(61,232,255,0.45),inset 0 0 10px rgba(61,232,255,0.45);
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;cursor:pointer;color:#3DE8FF;}
+.ap2-upload:hover{background:rgba(61,232,255,0.1);}
+
+/* chamfered panel */
+.ap2-panel{filter:drop-shadow(0 0 12px rgba(255,61,216,0.35));}
+.ap2-panel>.ap2-in{clip-path:polygon(20px 0,100% 0,100% calc(100% - 20px),
+  calc(100% - 20px) 100%,0 100%,0 20px);background:#0E0A26;padding:24px 26px;height:100%;
+  box-sizing:border-box;}
+.ap2-panel.mag{position:relative;}
+.ap2-panel.mag:before{content:'';position:absolute;inset:0;
+  clip-path:polygon(20px 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%,0 20px);
+  background:linear-gradient(135deg,#8B7BD8,#FF3DD8);}
+.ap2-panel.mag>.ap2-in{position:relative;margin:1.5px;}
+
+.ap2-ptitle{font-size:15px;font-weight:700;letter-spacing:0.22em;}
+.ap2-pmeta{font-family:'JetBrains Mono',monospace;font-size:11px;color:#B4A8DE;}
+.ap2-prow{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;}
+
+/* hero */
+.ap2-hero{display:flex;gap:24px;align-items:stretch;}
+.ap2-cpbody{display:flex;align-items:center;gap:26px;}
+.ap2-ring{width:210px;height:210px;position:relative;flex-shrink:0;display:flex;
+  align-items:center;justify-content:center;}
+.ap2-ring svg{position:absolute;inset:0;overflow:visible;}
+.ap2-ringmid{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.ap2-ringk{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.26em;color:#B4A8DE;}
+.ap2-ringv{font-size:34px;font-weight:700;line-height:1;}
+.ap2-legend{flex:1;display:flex;flex-direction:column;gap:18px;}
+.ap2-lk{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:0.22em;color:#B4A8DE;margin-bottom:4px;}
+.ap2-sw{width:10px;height:10px;display:inline-block;}
+.ap2-lv{display:flex;align-items:baseline;gap:10px;}
+.ap2-lv span{font-size:30px;font-weight:700;}
+.ap2-lv em{font-family:'JetBrains Mono',monospace;font-size:13px;font-style:normal;}
+.ap2-hr{height:1px;background:#2A1F5C;}
+
+/* rate console */
+.ap2-rate{flex:1;min-width:0;display:flex;flex-direction:column;gap:16px;padding:22px 24px;
+  background:rgba(12,9,38,0.86);border:1px solid #2A1F5C;box-shadow:0 0 40px rgba(61,232,255,0.06);}
+.ap2-raterow{display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.ap2-ratehead{display:flex;align-items:baseline;gap:12px;}
+.ap2-blend{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;
+  padding:6px 10px;background:#140E33;border:1px solid #3A2C7A;color:#D9CFFF;}
+.ap2-blend strong{color:#F2EEFF;}
+.ap2-pods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
+.ap2-pod{filter:drop-shadow(0 0 10px var(--g));position:relative;}
+.ap2-pod:before{content:'';position:absolute;inset:0;background:var(--c);
+  clip-path:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px);}
+.ap2-podin{position:relative;margin:1.5px;
+  clip-path:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px);
+  background:#0C0A2A;padding:18px 20px;display:flex;flex-direction:column;gap:12px;}
+.ap2-podtop{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+.ap2-podlab{font-size:16px;font-weight:700;letter-spacing:0.2em;color:var(--c);}
+.ap2-podsub{font-size:11px;color:#B4A8DE;}
+.ap2-poddelta{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 6px;
+  background:rgba(255,255,255,0.06);color:#D9CFFF;white-space:nowrap;}
+.ap2-podrate{display:flex;align-items:baseline;gap:6px;}
+.ap2-podrate span{font-size:44px;font-weight:700;line-height:1;color:var(--c);
+  text-shadow:0 0 20px var(--g);}
+.ap2-podrate em{font-family:'JetBrains Mono',monospace;font-size:12px;font-style:normal;color:#B4A8DE;}
+.ap2-podfoot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;
+  padding-top:10px;border-top:1px solid #231A4E;}
+.ap2-fk{display:block;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#B4A8DE;}
+.ap2-fv{display:block;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;margin-top:3px;}
+.ap2-shares{display:flex;flex-direction:column;gap:10px;}
+.ap2-share{display:grid;grid-template-columns:160px minmax(0,1fr);gap:14px;align-items:center;}
+.ap2-sharek{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;color:#D9CFFF;}
+.ap2-sharebar{display:flex;height:26px;gap:2px;}
+.ap2-seg{min-width:34px;display:flex;align-items:center;justify-content:center;gap:6px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;overflow:hidden;white-space:nowrap;}
+.ap2-segn{color:#D9CFFF;}
+
+/* lower deck */
+.ap2-lower{display:flex;gap:28px;align-items:flex-start;}
+.ap2-lanes{flex:1;min-width:0;display:flex;flex-direction:column;background:rgba(12,9,38,0.86);
+  border:1px solid #2A1F5C;box-shadow:0 0 40px rgba(61,232,255,0.06);}
+.ap2-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:16px 20px;border-bottom:1px solid #2A1F5C;}
+.ap2-grid{display:grid;grid-template-columns:minmax(0,1fr) 104px 132px 160px 160px 84px 86px;
+  gap:12px;align-items:stretch;padding:0 20px;}
+.ap2-headrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;
+  color:#9C8FD0;border-bottom:1px solid #2A1F5C;}
+.ap2-th{padding:14px 0;cursor:pointer;user-select:none;transition:color .14s;white-space:nowrap;}
+.ap2-th:hover{color:#F2EEFF;}
+.ap2-th.on{color:#F2EEFF;}
+.ap2-th.r{text-align:right;}
+.ap2-th.band{display:flex;align-items:center;justify-content:flex-end;gap:6px;padding:10px 12px;
+  font-weight:700;font-size:11px;letter-spacing:0.2em;}
+.ap2-th.band.cy{background:rgba(61,232,255,0.08);border-top:2px solid #3DE8FF;color:#3DE8FF;
+  box-shadow:inset 0 10px 18px -10px #3DE8FF;text-shadow:0 0 10px rgba(61,232,255,0.45);}
+.ap2-th.band.mg{background:rgba(255,61,216,0.08);border-top:2px solid #FF3DD8;color:#FF3DD8;
+  box-shadow:inset 0 10px 18px -10px #FF3DD8;text-shadow:0 0 10px rgba(255,61,216,0.45);}
+
+.ap2-scroll{max-height:calc(100vh - 620px);min-height:320px;overflow-y:auto;
+  scrollbar-width:thin;scrollbar-color:rgba(255,61,216,0.4) transparent;}
+.ap2-scroll::-webkit-scrollbar{width:7px;}
+.ap2-scroll::-webkit-scrollbar-thumb{background:rgba(255,61,216,0.4);}
+.ap2-row{display:grid;grid-template-columns:minmax(0,1fr) 104px 132px 160px 160px 84px 86px;
+  gap:12px;align-items:center;padding:0 20px;min-height:76px;cursor:pointer;
+  border-bottom:1px solid #1E1648;transition:background .14s;}
+.ap2-row:hover{background:rgba(61,232,255,0.045);}
+.ap2-row.sel{background:linear-gradient(90deg,rgba(255,61,216,0.16),rgba(255,61,216,0.02) 60%);
+  box-shadow:inset 3px 0 0 #FF3DD8,0 0 22px rgba(255,61,216,0.12);}
+.ap2-c-proj{display:flex;flex-direction:column;gap:5px;min-width:0;padding:12px 0;}
+.ap2-idline{display:flex;align-items:center;gap:8px;}
+.ap2-id{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;}
+.ap2-sub{font-family:'JetBrains Mono',monospace;font-size:10px;padding:1px 6px;
+  border:1px solid #6E5DB8;color:#D9CFFF;}
+.ap2-name{font-size:14px;font-weight:600;line-height:1.25;color:#F2EEFF;}
+.ap2-cust{display:flex;align-items:center;gap:6px;font-size:12px;color:#B4A8DE;}
+.ap2-dot{width:6px;height:6px;flex-shrink:0;}
+.ap2-c-mut{font-family:'JetBrains Mono',monospace;font-size:12px;color:#B4A8DE;}
+.ap2-c-mut.r,.ap2-c-rph.r{text-align:right;}
+.ap2-c-rph{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;}
+.ap2-c-rev{display:flex;flex-direction:column;gap:5px;}
+.ap2-revline{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:#B4A8DE;}
+.ap2-revbar{height:4px;background:#231A4E;position:relative;}
+.ap2-revbar i{position:absolute;left:0;top:0;bottom:0;background:#8B7BD8;}
+.ap2-c-band{align-self:stretch;display:flex;flex-direction:column;justify-content:center;
+  align-items:flex-end;gap:7px;padding:0 12px;}
+.ap2-c-band.cy{background:rgba(61,232,255,0.08);border-left:1px solid rgba(61,232,255,0.38);
+  border-right:1px solid rgba(61,232,255,0.38);}
+.ap2-c-band.mg{background:rgba(255,61,216,0.08);border-left:1px solid rgba(255,61,216,0.38);
+  border-right:1px solid rgba(255,61,216,0.38);}
+.ap2-bignum{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;}
+.ap2-minib{width:100%;height:6px;position:relative;}
+.ap2-minib.cy{background:#0A1A33;}
+.ap2-minib.mg{background:#1E0A2A;}
+.ap2-minib i{position:absolute;right:0;top:0;bottom:0;}
+.ap2-minib.cy i{background:#3DE8FF;box-shadow:0 0 10px #3DE8FF;}
+.ap2-minib.mg i{background:#FF3DD8;box-shadow:0 0 10px #FF3DD8;}
+
+.ap2-totrow{background:#140E33;border-top:1px solid #3A2C7A;
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#D9CFFF;}
+.ap2-totrow>div{padding:18px 0;}
+.ap2-totrow .r{text-align:right;}
+.ap2-totk{letter-spacing:0.16em;color:#B4A8DE;font-size:11px;}
+.ap2-totband{display:flex;align-items:center;justify-content:flex-end;padding:0 12px !important;
+  font-size:15px;}
+.ap2-totband.cy{background:rgba(61,232,255,0.16);border-bottom:2px solid #3DE8FF;color:#3DE8FF;
+  box-shadow:inset 0 -10px 18px -10px #3DE8FF;text-shadow:0 0 12px rgba(61,232,255,0.45);}
+.ap2-totband.mg{background:rgba(255,61,216,0.16);border-bottom:2px solid #FF3DD8;color:#FF3DD8;
+  box-shadow:inset 0 -10px 18px -10px #FF3DD8;text-shadow:0 0 12px rgba(255,61,216,0.45);}
+
+/* detail pod */
+.ap2-pod-card{width:300px;flex-shrink:0;position:sticky;top:18px;}
+.ap2-panel.mag>.ap2-in.card{clip-path:polygon(22px 0,100% 0,100% calc(100% - 22px),
+  calc(100% - 22px) 100%,0 100%,0 22px);padding:24px 22px 26px;display:flex;flex-direction:column;gap:16px;}
+.ap2-panel.mag:has(.card):before{clip-path:polygon(22px 0,100% 0,100% calc(100% - 22px),
+  calc(100% - 22px) 100%,0 100%,0 22px);background:#FF3DD8;}
+.ap2-cx{position:absolute;top:14px;right:14px;width:26px;height:26px;background:transparent;
+  border:1px solid #6E5DB8;color:#B4A8DE;cursor:pointer;font-size:14px;line-height:1;}
+.ap2-cx:hover{background:#FF3DD8;color:#07041A;border-color:#FF3DD8;}
+.ap2-cid{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.14em;
+  color:#FF3DD8;}
+.ap2-cname{font-size:20px;font-weight:700;line-height:1.2;padding-right:24px;}
+.ap2-ccust{font-size:13px;color:#B4A8DE;}
+.ap2-cring{position:relative;width:200px;height:200px;align-self:center;display:flex;
+  align-items:center;justify-content:center;}
+.ap2-cring svg{position:absolute;inset:0;overflow:visible;}
+.ap2-cringmid{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;}
+.ap2-cpct{font-size:44px;font-weight:700;line-height:1;}
+.ap2-cpct span{font-size:20px;color:#B4A8DE;}
+.ap2-ck{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.24em;color:#B4A8DE;}
+.ap2-cfields{display:flex;flex-direction:column;}
+.ap2-cf{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;
+  border-bottom:1px solid #231A4E;}
+.ap2-cf span{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;color:#B4A8DE;}
+.ap2-cf b{font-size:16px;font-weight:700;}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 
 <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,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"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <div id="app">
@@ -1792,17 +1999,35 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
   </div>
 </div>
 <div id="active-projects" class="portal-section" style="display:none;">
-  <div class="sync-bar" style="display:flex;align-items:center;padding:0 24px;height:36px;">
-    <span style="font-family:var(--mono);font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:2px;">ACTIVE PROJECTS</span>
-    <label style="margin-left:auto;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.4);">
-      <span>Upload Master</span>
-      <input type="file" id="proj-upload" accept=".xlsx" style="display:none;" onchange="handleProjUpload(this)"/>
-      <button onclick="document.getElementById('proj-upload').click()" style="background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.25);border-radius:8px;color:var(--cyan);font-family:var(--mono);font-size:10px;padding:4px 12px;cursor:pointer;">&#8679; Upload XLSX</button>
-    </label>
+  <div class="ap2-root">
+    <!-- perspective floor -->
+    <div class="ap2-floor"><div></div></div>
+    <div class="ap2-horizon"></div>
+    <div class="ap2-content">
+      <header class="ap2-top">
+        <div class="ap2-brand">
+          <div class="ap2-mark">BE</div>
+          <div>
+            <div class="ap2-kicker">OPS // PORTFOLIO CONSOLE</div>
+            <div class="ap2-h1">ACTIVE PROJECTS</div>
+          </div>
+        </div>
+        <div class="ap2-actions">
+          <input type="file" id="proj-upload" accept=".xlsx" style="display:none;" onchange="handleProjUpload(this)"/>
+          <a href="#" class="ap2-link" onclick="document.getElementById('proj-upload').click();return false;">Upload Master</a>
+          <button type="button" class="ap2-upload" onclick="document.getElementById('proj-upload').click()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+            UPLOAD XLSX
+          </button>
+        </div>
+      </header>
+      <div id="ap2-body"></div>
+    </div>
   </div>
-  <div id="proj-main" style="display:block;"><!-- main view: metrics + view chooser --></div>
-  <div id="proj-by-customer" style="display:none;"><!-- customer list + project detail --></div>
-  <div id="proj-by-number" style="display:none;"><!-- project cards --></div>
+  <div id="proj-main" style="display:none;"></div>
+  <div id="proj-by-customer" style="display:none;"></div>
+  <div id="proj-by-number" style="display:none;"></div>
 </div>
 
 <div id="ytd-revenue" class="portal-section" style="display:none;">
@@ -7355,8 +7580,7 @@ function renderYTD(){
         '<span class="cash-cue">\u25f7 monthly</span></div>'+
       '<div class="cash-v">'+ytd$(D.cashCollected)+'</div>'+
       (D.revenue
-        ? '<div class="cash-sub">'+ytdPct(D.cashCollected / D.revenue, 1)+' of revenue'+
-            ' &middot; '+ytd$(Math.max(0, D.revenue - D.cashCollected))+' outstanding</div>'
+        ? '<div class="cash-sub">'+ytdPct(D.cashCollected / D.revenue, 1)+' of revenue</div>'
         : '')+
     '</div>'+
     '<div class="mg-box">'+
@@ -13232,21 +13456,302 @@ function apCard(){
   '</div>';
 }
 
-function renderProjMain() {
-  var el  = document.getElementById('proj-main');
-  var elC = document.getElementById('proj-by-customer');
-  var elN = document.getElementById('proj-by-number');
-  if (el)  el.style.display  = 'block';
-  if (elC) elC.style.display = 'none';
-  if (elN) elN.style.display = 'none';
-  if (!el) return;
+// ── Active Projects · neon console ────────────────────────────────────────
+// Layout, palette and calculations follow the redesign reference. Data is the
+// full active roster from the 2026 Project Master.
+var AP2 = {
+  cyan:'#3DE8FF', magenta:'#FF3DD8', lime:'#C6FF4D',
+  cyanGlow:'rgba(61,232,255,0.45)', magentaGlow:'rgba(255,61,216,0.45)',
+  limeGlow:'rgba(198,255,77,0.45)',
+  cyanBand:'rgba(61,232,255,0.08)', cyanBandStrong:'rgba(61,232,255,0.16)',
+  cyanEdge:'rgba(61,232,255,0.38)',
+  magentaBand:'rgba(255,61,216,0.08)', magentaBandStrong:'rgba(255,61,216,0.16)',
+  magentaEdge:'rgba(255,61,216,0.38)',
+  lavender:'#CFC4FF', dim:'#B4A8DE'
+};
 
-  // Table on the left, detail card pinned top-right when a row is selected.
-  el.innerHTML =
-    '<div class="ap-layout'+(AP_SEL?' has-card':'')+'">'+
-      '<div class="ap-main">'+apTable()+'</div>'+
-      '<div class="ap-side">'+apCard()+'</div>'+
+// QTS is the Quality Technology Services book; QII (Quality Infratech) is not.
+function ap2Group(cust){
+  var c = String(cust||'').trim();
+  if (/^quality technology services/i.test(c)) return 'qts';
+  if (/^corgan$/i.test(c)) return 'corgan';
+  return 'standard';
+}
+function ap2GroupColor(g){
+  return g === 'qts' ? AP2.cyan : g === 'corgan' ? AP2.magenta : AP2.lime;
+}
+
+function ap2Money(v){ return '$' + Math.round(v||0).toLocaleString(); }
+function ap2Short(v){
+  v = v||0;
+  if (Math.abs(v) >= 1e6) return '$' + (v/1e6).toFixed(2) + 'M';
+  if (Math.abs(v) >= 1e3) return '$' + Math.round(v/1e3) + 'k';
+  return '$' + Math.round(v);
+}
+
+function ap2Totals(){
+  return AP_DATA.reduce(function(t,r){
+    t.contract += r.contract; t.rev += r.rev; t.backlog += r.backlog;
+    t.hrs += r.hrs; t.rev26 += r.rev26; return t;
+  }, {contract:0, rev:0, backlog:0, hrs:0, rev26:0});
+}
+
+function ap2GroupStats(){
+  var g = { qts:{rev26:0,hrs:0}, corgan:{rev26:0,hrs:0}, standard:{rev26:0,hrs:0} };
+  AP_DATA.forEach(function(r){
+    var k = ap2Group(r.cust);
+    g[k].rev26 += r.rev26; g[k].hrs += r.hrs;
+  });
+  Object.keys(g).forEach(function(k){
+    g[k].rph = g[k].hrs > 0 ? g[k].rev26/g[k].hrs : 0;
+  });
+  return g;
+}
+
+// ── Contract position ─────────────────────────────────────────────────────
+function ap2ContractPanel(t){
+  var R = 84, C = 2*Math.PI*R;
+  var earnedPct  = t.contract > 0 ? t.rev/t.contract : 0;
+  var backlogPct = t.contract > 0 ? t.backlog/t.contract : 0;
+  var eDash = (earnedPct*C).toFixed(2) + ' ' + C.toFixed(2);
+  var bDash = (backlogPct*C).toFixed(2) + ' ' + C.toFixed(2);
+  return '<div class="ap2-panel mag" style="width:470px;flex-shrink:0;">'+
+    '<div class="ap2-in">'+
+      '<div class="ap2-prow">'+
+        '<div class="ap2-ptitle">CONTRACT POSITION</div>'+
+        '<div class="ap2-pmeta">'+AP_DATA.length+' projects \u00b7 '+AP_ASOF+'</div>'+
+      '</div>'+
+      '<div class="ap2-cpbody">'+
+        '<div class="ap2-ring">'+
+          '<svg width="210" height="210" viewBox="0 0 210 210">'+
+            '<circle cx="105" cy="105" r="100" fill="none" stroke="#3A2C7A" stroke-width="1" stroke-dasharray="2 6"/>'+
+            '<circle cx="105" cy="105" r="84" fill="none" stroke="'+AP2.lavender+'" stroke-width="18" '+
+              'stroke-dasharray="'+eDash+'" transform="rotate(-90 105 105)" opacity="0.85"/>'+
+            '<circle cx="105" cy="105" r="84" fill="none" stroke="'+AP2.magenta+'" stroke-width="18" '+
+              'stroke-dasharray="'+bDash+'" stroke-dashoffset="'+(-earnedPct*C).toFixed(2)+'" '+
+              'transform="rotate(-90 105 105)" style="filter:drop-shadow(0 0 10px '+AP2.magenta+');"/>'+
+            '<circle cx="105" cy="105" r="66" fill="none" stroke="#2A1F5C" stroke-width="1"/>'+
+          '</svg>'+
+          '<div class="ap2-ringmid">'+
+            '<div class="ap2-ringk">CONTRACT</div>'+
+            '<div class="ap2-ringv">'+ap2Short(t.contract)+'</div>'+
+          '</div>'+
+        '</div>'+
+        '<div class="ap2-legend">'+
+          '<div>'+
+            '<div class="ap2-lk"><span class="ap2-sw" style="background:'+AP2.lavender+';"></span>REVENUE EARNED</div>'+
+            '<div class="ap2-lv"><span>'+ap2Short(t.rev)+'</span>'+
+              '<em style="color:'+AP2.lavender+';">'+(earnedPct*100).toFixed(1)+'%</em></div>'+
+          '</div>'+
+          '<div class="ap2-hr"></div>'+
+          '<div>'+
+            '<div class="ap2-lk" style="color:'+AP2.magenta+';">'+
+              '<span class="ap2-sw" style="background:'+AP2.magenta+';box-shadow:0 0 8px '+AP2.magenta+';"></span>BACKLOG</div>'+
+            '<div class="ap2-lv"><span style="color:'+AP2.magenta+';text-shadow:0 0 16px '+AP2.magentaGlow+';">'+
+              ap2Short(t.backlog)+'</span>'+
+              '<em style="color:'+AP2.magenta+';">'+(backlogPct*100).toFixed(1)+'%</em></div>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+    '</div></div>';
+}
+
+// ── Rate console ──────────────────────────────────────────────────────────
+function ap2RatePanel(t){
+  var g = ap2GroupStats();
+  var blended = t.hrs > 0 ? t.rev26/t.hrs : 0;
+  var defs = [
+    {k:'qts',      label:'QTS',      sub:'Quality Technology Services', color:AP2.cyan,    glow:AP2.cyanGlow},
+    {k:'corgan',   label:'CORGAN',   sub:'Corgan',                      color:AP2.magenta, glow:AP2.magentaGlow},
+    {k:'standard', label:'STANDARD', sub:'All other customers',         color:AP2.lime,    glow:AP2.limeGlow}
+  ];
+  var pods = defs.map(function(d){
+    var s = g[d.k];
+    var delta = s.rph - blended;
+    var sign = delta >= 0 ? '+' : '\u2212';
+    return '<div class="ap2-pod" style="--c:'+d.color+';--g:'+d.glow+';">'+
+      '<div class="ap2-podin">'+
+        '<div class="ap2-podtop">'+
+          '<div><div class="ap2-podlab">'+d.label+'</div><div class="ap2-podsub">'+d.sub+'</div></div>'+
+          '<div class="ap2-poddelta">'+sign+'$'+Math.abs(Math.round(delta)).toLocaleString()+' VS BLENDED</div>'+
+        '</div>'+
+        '<div class="ap2-podrate"><span>$'+Math.round(s.rph).toLocaleString()+'</span><em>/ HR</em></div>'+
+        '<div class="ap2-podfoot">'+
+          '<div><span class="ap2-fk">2026 REV</span><span class="ap2-fv">'+ap2Short(s.rev26)+'</span></div>'+
+          '<div><span class="ap2-fk">DL HOURS</span><span class="ap2-fv">'+Math.round(s.hrs).toLocaleString()+'</span></div>'+
+        '</div>'+
+      '</div></div>';
+  }).join('');
+
+  function shareBar(label, pick){
+    var tot = defs.reduce(function(a,d){ return a + pick(g[d.k]); }, 0) || 1;
+    var segs = defs.map(function(d){
+      var v = pick(g[d.k]), pct = v/tot*100;
+      if (pct <= 0) return '';
+      return '<div class="ap2-seg" style="width:'+pct.toFixed(2)+'%;background:'+
+        (d.k==='qts'?AP2.cyanBand:d.k==='corgan'?AP2.magentaBand:'rgba(198,255,77,0.08)')+';'+
+        'border-top:2px solid '+d.color+';">'+
+        '<span style="color:'+d.color+';font-weight:700;">'+pct.toFixed(0)+'%</span>'+
+        '<span class="ap2-segn">'+d.label+'</span></div>';
+    }).join('');
+    return '<div class="ap2-share"><div class="ap2-sharek">'+label+'</div>'+
+      '<div class="ap2-sharebar">'+segs+'</div></div>';
+  }
+
+  return '<div class="ap2-rate">'+
+    '<div class="ap2-raterow">'+
+      '<div class="ap2-ratehead">'+
+        '<div class="ap2-ptitle">RATE CONSOLE</div>'+
+        '<div class="ap2-pmeta">2026 revenue \u00f7 2026 DL hours</div>'+
+      '</div>'+
+      '<span class="ap2-blend">BLENDED <strong>$'+Math.round(blended).toLocaleString()+'</strong></span>'+
+    '</div>'+
+    '<div class="ap2-pods">'+pods+'</div>'+
+    '<div class="ap2-shares">'+
+      shareBar('SHARE OF 2026 REVENUE', function(s){ return s.rev26; })+
+      shareBar('SHARE OF DL HOURS',     function(s){ return s.hrs;   })+
+    '</div>'+
+  '</div>';
+}
+
+// ── Project lanes ─────────────────────────────────────────────────────────
+function ap2Table(t){
+  var rows = apRows();
+  var max26 = Math.max.apply(null, rows.map(function(r){ return r.rev26; }).concat([1]));
+  var maxBl = Math.max.apply(null, rows.map(function(r){ return r.backlog; }).concat([1]));
+
+  var cols = [
+    {key:'num',      label:'PROJECT'},
+    {key:'contract', label:'CONTRACT', r:true},
+    {key:'rev',      label:'TOTAL REV'},
+    {key:'rev26',    label:'2026 REV',  band:'cyan'},
+    {key:'backlog',  label:'BACKLOG',   band:'magenta'},
+    {key:'hrs',      label:'DL HRS', r:true},
+    {key:'rph',      label:'RPH',    r:true}
+  ];
+  var head = cols.map(function(c){
+    var on = AP_SORT.col === c.key;
+    var arw = on ? (AP_SORT.dir === 1 ? ' \u25b2' : ' \u25bc') : '';
+    if (c.band === 'cyan')
+      return '<div class="ap2-th band cy'+(on?' on':'')+'" onclick="apSort(\'rev26\')">'+
+        '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" '+
+        'stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>'+
+        c.label+arw+'</div>';
+    if (c.band === 'magenta')
+      return '<div class="ap2-th band mg'+(on?' on':'')+'" onclick="apSort(\'backlog\')">'+
+        '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" '+
+        'stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1"/>'+
+        '<path d="M3 10h18"/><path d="M8 15h5"/></svg>'+c.label+arw+'</div>';
+    return '<div class="ap2-th'+(c.r?' r':'')+(on?' on':'')+'" onclick="apSort(\''+c.key+'\')">'+
+      c.label+arw+'</div>';
+  }).join('');
+
+  var body = rows.map(function(r){
+    var g = ap2Group(r.cust), gc = ap2GroupColor(g);
+    var sel = AP_SEL === r.num;
+    var pct = r.contract > 0 ? Math.min(100, r.rev/r.contract*100) : 0;
+    return '<div class="ap2-row'+(sel?' sel':'')+'" onclick="apSelect(\''+r.num+'\')">'+
+      '<div class="ap2-c-proj">'+
+        '<div class="ap2-idline"><span class="ap2-id" style="color:'+gc+';">'+r.num+'</span>'+
+          (r.parts>1?'<span class="ap2-sub">+'+(r.parts-1)+'</span>':'')+'</div>'+
+        '<div class="ap2-name">'+r.name+'</div>'+
+        '<div class="ap2-cust"><span class="ap2-dot" style="background:'+gc+';box-shadow:0 0 6px '+gc+';"></span>'+
+          (r.cust||'\u2014')+'</div>'+
+      '</div>'+
+      '<div class="ap2-c-mut r">'+ap2Short(r.contract)+'</div>'+
+      '<div class="ap2-c-rev">'+
+        '<div class="ap2-revline"><span>'+ap2Short(r.rev)+'</span><span>'+pct.toFixed(0)+'%</span></div>'+
+        '<div class="ap2-revbar"><i style="width:'+pct.toFixed(1)+'%;"></i></div>'+
+      '</div>'+
+      '<div class="ap2-c-band cy">'+
+        '<div class="ap2-bignum" style="color:'+(r.rev26?AP2.cyan:'#4A3F7A')+';'+
+          (r.rev26?'text-shadow:0 0 12px '+AP2.cyanGlow+';':'')+'">'+
+          (r.rev26?ap2Short(r.rev26):'\u2014')+'</div>'+
+        '<div class="ap2-minib cy"><i style="width:'+(r.rev26/max26*100).toFixed(1)+'%;"></i></div>'+
+      '</div>'+
+      '<div class="ap2-c-band mg">'+
+        '<div class="ap2-bignum" style="color:'+(r.backlog?AP2.magenta:'#4A3F7A')+';'+
+          (r.backlog?'text-shadow:0 0 12px '+AP2.magentaGlow+';':'')+'">'+
+          (r.backlog?ap2Short(r.backlog):'\u2014')+'</div>'+
+        '<div class="ap2-minib mg"><i style="width:'+(r.backlog/maxBl*100).toFixed(1)+'%;"></i></div>'+
+      '</div>'+
+      '<div class="ap2-c-mut r">'+(r.hrs?Math.round(r.hrs).toLocaleString():'\u2014')+'</div>'+
+      '<div class="ap2-c-rph r" style="color:'+(r.rph?gc:'#4A3F7A')+';">'+
+        (r.rph?'$'+Math.round(r.rph).toLocaleString():'\u2014')+'</div>'+
     '</div>';
+  }).join('');
+
+  var blended = t.hrs > 0 ? t.rev26/t.hrs : 0;
+  return '<div class="ap2-lanes">'+
+    '<div class="ap2-toolbar">'+
+      '<div><div class="ap2-ptitle">PROJECT LANES</div>'+
+        '<div class="ap2-pmeta">'+rows.length+' projects \u00b7 sub-projects rolled into parent '+
+          'unless customer differs</div></div>'+
+      '<div class="ap2-pmeta">click any column to sort</div>'+
+    '</div>'+
+    '<div class="ap2-grid ap2-headrow">'+head+'</div>'+
+    '<div class="ap2-scroll">'+body+'</div>'+
+    '<div class="ap2-grid ap2-totrow">'+
+      '<div class="ap2-totk">TOTAL \u00b7 '+rows.length+' PROJECTS</div>'+
+      '<div class="r">'+ap2Money(t.contract)+'</div>'+
+      '<div>'+ap2Money(t.rev)+'</div>'+
+      '<div class="ap2-totband cy">'+ap2Money(t.rev26)+'</div>'+
+      '<div class="ap2-totband mg">'+ap2Money(t.backlog)+'</div>'+
+      '<div class="r">'+Math.round(t.hrs).toLocaleString()+'</div>'+
+      '<div class="r">$'+Math.round(blended).toLocaleString()+'</div>'+
+    '</div>'+
+  '</div>';
+}
+
+// ── Detail pod ────────────────────────────────────────────────────────────
+function ap2Card(){
+  if (!AP_SEL) return '';
+  var r = AP_DATA.filter(function(x){ return x.num === AP_SEL; })[0];
+  if (!r) return '';
+  var g = ap2Group(r.cust), gc = ap2GroupColor(g);
+  var pct = r.contract > 0 ? Math.min(100, r.rev/r.contract*100) : 0;
+  var R = 78, C = 2*Math.PI*R;
+  var fields = [
+    {k:'CONTRACT',    v:ap2Money(r.contract),  c:'#F2EEFF'},
+    {k:'REVENUE',     v:ap2Money(r.rev),       c:'#F2EEFF'},
+    {k:'2026 REVENUE',v:ap2Money(r.rev26),     c:AP2.cyan},
+    {k:'BACKLOG',     v:ap2Money(r.backlog),   c:AP2.magenta},
+    {k:'DL HOURS',    v:r.hrs?Math.round(r.hrs).toLocaleString():'\u2014', c:'#F2EEFF'},
+    {k:'RPH',         v:r.rph?'$'+Math.round(r.rph).toLocaleString():'\u2014', c:gc}
+  ];
+  if (r.pm)   fields.push({k:'PM', v:r.pm, c:'#F2EEFF'});
+  if (r.type) fields.push({k:'TYPE', v:r.type, c:'#F2EEFF'});
+  if (r.parts>1) fields.push({k:'SUB-PROJECTS', v:r.parts+' rolled up', c:AP2.lime});
+
+  return '<aside class="ap2-pod-card"><div class="ap2-panel mag"><div class="ap2-in card">'+
+    '<button class="ap2-cx" onclick="apSelect(null)">\u00d7</button>'+
+    '<div class="ap2-cid">'+r.num+' \u00b7 LOCKED ON</div>'+
+    '<div class="ap2-cname">'+r.name+'</div>'+
+    '<div class="ap2-ccust">'+(r.cust||'\u2014')+'</div>'+
+    '<div class="ap2-cring">'+
+      '<svg width="200" height="200" viewBox="0 0 200 200">'+
+        '<circle cx="100" cy="100" r="92" fill="none" stroke="#3A2C7A" stroke-width="1" stroke-dasharray="2 6"/>'+
+        '<circle cx="100" cy="100" r="78" fill="none" stroke="rgba(255,61,216,0.22)" stroke-width="12"/>'+
+        '<circle cx="100" cy="100" r="78" fill="none" stroke="'+AP2.cyan+'" stroke-width="12" '+
+          'stroke-dasharray="'+((pct/100)*C).toFixed(2)+' '+C.toFixed(2)+'" transform="rotate(-90 100 100)" '+
+          'style="filter:drop-shadow(0 0 8px '+AP2.cyan+');"/>'+
+      '</svg>'+
+      '<div class="ap2-cringmid"><div class="ap2-cpct">'+pct.toFixed(0)+'<span>%</span></div>'+
+        '<div class="ap2-ck">OF CONTRACT</div></div>'+
+    '</div>'+
+    '<div class="ap2-cfields">'+fields.map(function(f){
+      return '<div class="ap2-cf"><span>'+f.k+'</span><b style="color:'+f.c+';">'+f.v+'</b></div>';
+    }).join('')+'</div>'+
+  '</div></div></aside>';
+}
+
+function renderProjMain() {
+  var el = document.getElementById('ap2-body');
+  if (!el) return;
+  var t = ap2Totals();
+  el.innerHTML =
+    '<section class="ap2-hero">'+ap2ContractPanel(t)+ap2RatePanel(t)+'</section>'+
+    '<section class="ap2-lower'+(AP_SEL?' has-card':'')+'">'+ap2Table(t)+ap2Card()+'</section>';
 }
 
 
