@@ -1994,6 +1994,95 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 .fy-cmp-d em{font-style:normal;font-weight:600;color:rgba(255,255,255,0.28);letter-spacing:0.6px;}
 .fy-cmp-d.up{color:#5eeb96;}
 .fy-cmp-d.down{color:#ff8a8a;}
+
+/* ── Pending Contracts ────────────────────────────────────────────────── */
+.pc-btn{position:relative;display:flex;align-items:center;gap:12px;height:56px;padding:0 20px 0 14px;
+  cursor:pointer;background:linear-gradient(135deg,rgba(255,61,216,0.12),rgba(61,232,255,0.06));
+  border:1px solid rgba(255,61,216,0.5);
+  clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px);
+  box-shadow:0 0 18px rgba(255,61,216,0.28),inset 0 0 14px rgba(255,61,216,0.1);
+  transition:box-shadow .2s,background .2s;}
+.pc-btn:hover{background:linear-gradient(135deg,rgba(255,61,216,0.22),rgba(61,232,255,0.1));
+  box-shadow:0 0 30px rgba(255,61,216,0.5),inset 0 0 18px rgba(255,61,216,0.16);}
+/* the quill, drawn in CSS so the button carries it without extra markup */
+.pc-btn-quill{width:34px;height:34px;flex-shrink:0;position:relative;}
+.pc-btn-quill:before{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,#7DF9FF 0%,#3DE8FF 55%,#8B7BD8 100%);
+  clip-path:polygon(88% 8%,62% 24%,40% 46%,24% 70%,18% 88%,30% 74%,56% 60%,76% 38%,86% 20%);
+  filter:drop-shadow(0 0 7px rgba(61,232,255,0.7));}
+.pc-btn-quill:after{content:'';position:absolute;left:12%;bottom:6%;width:12%;height:12%;
+  background:#FF3DD8;clip-path:polygon(60% 0,0 100%,100% 62%);
+  box-shadow:0 0 8px #FF3DD8;}
+.pc-btn:hover .pc-btn-quill:before{animation:pcSign 1.1s ease-in-out infinite;}
+@keyframes pcSign{0%,100%{transform:translate(0,0) rotate(0);}50%{transform:translate(-2px,2px) rotate(-5deg);}}
+.pc-btn-txt{display:flex;flex-direction:column;align-items:flex-start;gap:3px;}
+.pc-btn-k{font-family:'Chakra Petch',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:0.2em;
+  color:#FF3DD8;text-shadow:0 0 10px rgba(255,61,216,0.5);}
+.pc-btn-v{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.08em;color:#B4A8DE;}
+.pc-btn-v b{color:#F2EEFF;font-size:11px;}
+.pc-btn-v i{font-style:normal;color:#3DE8FF;}
+
+#pc-ov{position:fixed;inset:0;z-index:960;display:none;align-items:center;justify-content:center;
+  padding:26px;background:rgba(4,2,14,0.8);backdrop-filter:blur(9px);}
+#pc-ov.open{display:flex;}
+.pc-card{width:min(1180px,97vw);max-height:90vh;display:flex;flex-direction:column;position:relative;
+  background:#0E0A26;border:1.5px solid rgba(255,61,216,0.55);
+  clip-path:polygon(26px 0,100% 0,100% calc(100% - 26px),calc(100% - 26px) 100%,0 100%,0 26px);
+  box-shadow:0 0 60px rgba(255,61,216,0.25);
+  font-family:'Chakra Petch',sans-serif;color:#F2EEFF;
+  animation:cfIn .22s cubic-bezier(.2,.8,.3,1);}
+.pc-x{position:absolute;top:18px;right:20px;width:30px;height:30px;background:transparent;
+  border:1px solid #6E5DB8;color:#B4A8DE;cursor:pointer;font-size:15px;z-index:3;}
+.pc-x:hover{background:#FF3DD8;color:#07041A;border-color:#FF3DD8;}
+.pc-head{display:flex;align-items:center;gap:18px;padding:24px 28px 20px;
+  border-bottom:1px solid #2A1F5C;
+  background:linear-gradient(135deg,rgba(255,61,216,0.09),transparent 60%);}
+.pc-quill{flex-shrink:0;filter:drop-shadow(0 0 10px rgba(61,232,255,0.45));}
+.pc-title{font-size:17px;font-weight:700;letter-spacing:0.24em;color:#FF3DD8;
+  text-shadow:0 0 16px rgba(255,61,216,0.5);}
+.pc-sub{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#B4A8DE;margin-top:5px;}
+.pc-stat{margin-left:auto;text-align:right;padding-right:40px;}
+.pc-sk{display:block;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.22em;
+  color:#B4A8DE;}
+.pc-sv{display:block;font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;
+  color:#3DE8FF;text-shadow:0 0 18px rgba(61,232,255,0.5);margin-top:3px;}
+.pc-cols,.pc-row{display:grid;
+  grid-template-columns:96px 128px minmax(0,1.4fr) minmax(0,1fr) 112px minmax(0,1.2fr) minmax(0,0.9fr) 32px;
+  gap:9px;align-items:center;padding:0 24px;}
+.pc-cols{padding-top:14px;padding-bottom:10px;border-bottom:1px solid #2A1F5C;
+  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.18em;color:#9C8FD0;}
+.pc-cols .r{text-align:right;}
+.pc-scroll{overflow-y:auto;flex:1;min-height:170px;padding:8px 0 4px;
+  scrollbar-width:thin;scrollbar-color:rgba(255,61,216,0.4) transparent;}
+.pc-scroll::-webkit-scrollbar{width:7px;}
+.pc-scroll::-webkit-scrollbar-thumb{background:rgba(255,61,216,0.4);}
+.pc-row{padding-top:6px;padding-bottom:6px;border-bottom:1px solid #1A1340;transition:background .14s;}
+.pc-row:hover{background:rgba(255,61,216,0.05);}
+.pc-row input{width:100%;background:rgba(255,255,255,0.035);border:1px solid #2A1F5C;
+  border-radius:0;padding:8px 10px;color:#F2EEFF;font-family:'Chakra Petch',sans-serif;
+  font-size:13px;outline:none;transition:border-color .14s,background .14s;}
+.pc-row input:focus{border-color:#3DE8FF;background:rgba(61,232,255,0.07);
+  box-shadow:0 0 12px rgba(61,232,255,0.2);}
+.pc-row input.mono{font-family:'JetBrains Mono',monospace;font-size:12px;}
+.pc-row input.amt{text-align:right;color:#3DE8FF;font-weight:700;}
+.pc-row input::placeholder{color:#5A4E8C;}
+.pc-del{background:transparent;border:1px solid rgba(255,61,216,0.3);color:#FF3DD8;cursor:pointer;
+  width:28px;height:28px;font-size:15px;line-height:1;}
+.pc-del:hover{background:#FF3DD8;color:#07041A;}
+.pc-empty{padding:46px 28px;text-align:center;display:flex;flex-direction:column;
+  align-items:center;gap:12px;}
+.pc-ek{font-size:13px;font-weight:700;letter-spacing:0.2em;color:#B4A8DE;}
+.pc-en{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#7A6DB0;max-width:420px;
+  line-height:1.6;}
+.pc-foot{display:flex;align-items:center;gap:16px;padding:16px 28px 20px;
+  border-top:1px solid #2A1F5C;background:rgba(12,9,38,0.7);}
+.pc-add{display:flex;align-items:center;gap:8px;padding:11px 18px;cursor:pointer;
+  background:transparent;border:1px solid #3DE8FF;color:#3DE8FF;
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;
+  box-shadow:0 0 14px rgba(61,232,255,0.3),inset 0 0 10px rgba(61,232,255,0.1);}
+.pc-add:hover{background:rgba(61,232,255,0.14);}
+.pc-note{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#7A6DB0;margin-left:auto;
+  text-align:right;}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
@@ -2049,6 +2138,13 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
           </div>
         </div>
         <div class="ap2-actions">
+          <button type="button" class="pc-btn" onclick="pcOpen()" title="Projects awaiting signed contracts">
+            <span class="pc-btn-quill"></span>
+            <span class="pc-btn-txt">
+              <span class="pc-btn-k">PENDING CONTRACTS</span>
+              <span class="pc-btn-v"><b id="pc-count">0</b> awaiting <i id="pc-value">&mdash;</i></span>
+            </span>
+          </button>
           <input type="file" id="proj-upload" accept=".xlsx" style="display:none;" onchange="handleProjUpload(this)"/>
           <a href="#" class="ap2-link" onclick="document.getElementById('proj-upload').click();return false;">Upload Master</a>
           <button type="button" class="ap2-upload" onclick="document.getElementById('proj-upload').click()">
@@ -4500,18 +4596,24 @@ function renderBudgetDetailed(el) {
                    isTot ? '#dde8ff' : '#b0c4e0';
 
     // Number size/weight: HL=biggest, tot=medium, detail=normal
-    var numSize   = isHL ? '17' : isTot ? '15' : '14';
-    var numWeight = isHL ? 900 : isTot ? 800 : 600;
-    var labelSize = isHL ? '13' : isTot ? '12' : '12';
-    var labelW    = isHL ? 800 : isTot ? 700 : 400;
+    // Major lines are the ones a reader navigates by, so they sit clearly
+    // above the detail: larger, heavier, uppercase, and banded.
+    var isMajor   = (isTot || isHL) && !isPct;
+    var numSize   = isHL ? '19' : isTot ? '17' : '13';
+    var numWeight = isHL ? 900 : isTot ? 900 : 500;
+    var labelSize = isHL ? '13.5' : isTot ? '12.5' : '11.5';
+    var labelW    = isHL ? 900 : isTot ? 800 : 400;
 
-    var topBorder = (isTot||isHL) ? 'border-top:1px solid rgba(255,255,255,0.07);' : '';
+    var topBorder = isMajor
+      ? 'border-top:1px solid rgba('+curSectionRgb+',0.6);'+
+        'border-bottom:1px solid rgba('+curSectionRgb+',0.3);'
+      : '';
     // Section color tint — stronger for HL/total rows, subtle for detail rows
     var rowBg     = isHL
-      ? 'background:linear-gradient(90deg,rgba('+curSectionRgb+',0.20) 0%,rgba('+curSectionRgb+',0.10) 100%);'
+      ? 'background:linear-gradient(90deg,rgba('+curSectionRgb+',0.32) 0%,rgba('+curSectionRgb+',0.14) 60%,rgba('+curSectionRgb+',0.06) 100%);'
       : isTot
-        ? 'background:linear-gradient(90deg,rgba('+curSectionRgb+',0.15) 0%,rgba('+curSectionRgb+',0.08) 100%);'
-        : 'background:rgba('+curSectionRgb+',0.075);';
+        ? 'background:linear-gradient(90deg,rgba('+curSectionRgb+',0.24) 0%,rgba('+curSectionRgb+',0.11) 60%,rgba('+curSectionRgb+',0.04) 100%);'
+        : 'background:rgba('+curSectionRgb+',0.045);';
     var glowStyle = isHL ? 'text-shadow:0 0 20px '+baseColor+',0 0 8px '+baseColor+'cc;' : isTot ? 'text-shadow:0 0 8px '+baseColor+'66;' : '';
 
     // Actuals column (v[0])
@@ -4535,8 +4637,10 @@ function renderBudgetDetailed(el) {
       '<tr class="bgdet-row" data-sec="'+curSectionIdx+'" style="'+rowBg+'border-bottom:1px solid rgba(255,255,255,0.025);">'+
         '<td style="padding:8px 20px;'+topBorder+
           'font-family:'+(isHL?'\'Helvetica Neue\',Arial,sans-serif':'var(--inter)')+';'+
-          'font-size:'+labelSize+'px;font-weight:'+labelW+';color:'+baseColor+';opacity:'+(isHL?'1':isTot?'0.85':'0.75')+';'+
-          (isHL?'letter-spacing:0.5px;text-shadow:0 0 10px '+baseColor+'66;':'')+'">'+
+          'font-size:'+labelSize+'px;font-weight:'+labelW+';color:'+baseColor+';opacity:'+(isMajor?'1':'0.68')+';'+
+          (isMajor?'letter-spacing:1.5px;text-transform:uppercase;'+
+                   'text-shadow:0 0 12px '+baseColor+'88;'+
+                   'box-shadow:inset 4px 0 0 '+baseColor+';':'padding-left:30px;')+'">'+
           (isHL?'<strong>'+labelClean+'</strong>':labelClean)+
         '</td>'+cells+
       '</tr>';
@@ -5496,20 +5600,30 @@ function renderBudgetQ4(el) {
   // Month headers
   MONTHS.forEach(function(m) {
     var col = MCOLS[m]; var rgb = MRGBS[m];
+    var hi = MONTHS.indexOf(m);
     headerCells +=
-      '<th style="text-align:right;padding:10px 16px;min-width:'+COL_W+';position:relative;cursor:default;">'+
-        '<div style="font-family:\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:'+col+';text-shadow:0 0 8px rgba('+rgb+',0.4);">'+MLABELS[m]+'</div>'+
-        '<div style="font-size:8px;font-family:var(--mono);color:rgba('+rgb+',0.5);margin-top:2px;">◎ Editable Forecast</div>'+
-        '<div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,'+col+',transparent);"></div>'+
+      '<th style="text-align:right;padding:12px 16px;min-width:'+COL_W+';position:relative;cursor:default;'+
+        'background:linear-gradient(180deg,rgba('+rgb+',0.14),rgba('+rgb+',0.03));'+
+        'border-left:1px solid rgba('+rgb+','+(hi>0?'0.35':'0.16')+');'+
+        'box-shadow:inset 0 2px 0 '+col+';">'+
+        '<div style="font-family:\'Helvetica Neue\',Arial,sans-serif;font-size:12px;font-weight:900;'+
+          'letter-spacing:2px;text-transform:uppercase;color:'+col+';'+
+          'text-shadow:0 0 12px rgba('+rgb+',0.65);">'+MLABELS[m]+'</div>'+
+        '<div style="font-size:8px;font-family:var(--mono);color:rgba('+rgb+',0.6);margin-top:3px;">\u25ce Editable Forecast</div>'+
       '</th>';
   });
 
-  // Total header
+  // Total header — the quarter's headline, set well apart from the months
   headerCells +=
-    '<th style="text-align:right;padding:10px 16px;min-width:'+COL_W+';position:relative;border-left:2px solid rgba(251,191,36,0.25);background:rgba(251,191,36,0.04);">'+
-      '<div style="font-family:\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#fbbf24;text-shadow:0 0 8px rgba(251,191,36,0.4);">Q4 Total</div>'+
-      '<div style="font-size:8px;font-family:var(--mono);color:rgba(251,191,36,0.4);margin-top:2px;">Oct – Dec 2026</div>'+
-      '<div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#fbbf24,transparent);"></div>'+
+    '<th style="text-align:right;padding:12px 20px;min-width:186px;position:relative;'+
+      'border-left:3px solid rgba(251,191,36,0.8);border-right:1px solid rgba(251,191,36,0.3);'+
+      'background:linear-gradient(180deg,rgba(251,191,36,0.24),rgba(251,191,36,0.07));'+
+      'box-shadow:inset 0 3px 0 #fbbf24, inset 10px 0 26px -16px #fbbf24;">'+
+      '<div style="font-family:\'Helvetica Neue\',Arial,sans-serif;font-size:15px;font-weight:900;'+
+        'letter-spacing:3px;text-transform:uppercase;color:#ffd76a;'+
+        'text-shadow:0 0 20px rgba(251,191,36,0.85);">Q4 Total</div>'+
+      '<div style="font-size:8.5px;font-family:var(--mono);letter-spacing:1.2px;'+
+        'color:rgba(251,191,36,0.65);margin-top:4px;">OCT \u2013 DEC 2026</div>'+
     '</th>';
 
   // Calc method header
@@ -5556,12 +5670,18 @@ function renderBudgetQ4(el) {
         '</tr>';
     }
 
-    var rowBg   = isTotal ? 'background:rgba('+curSecRgb+',0.04);' :
-                  isPct   ? '' :
+    // The P&L's structural lines read as bands: a tinted row, a lit left edge,
+    // rules above and below, and larger brighter figures than the detail.
+    var isMajor = isTotal && !isPct;
+    var rowBg   = isMajor ? 'background:linear-gradient(90deg,rgba('+curSecRgb+',0.20),rgba('+curSecRgb+',0.07) 55%,rgba('+curSecRgb+',0.03));'+
+                            'box-shadow:inset 4px 0 0 '+curSecClr+', inset 0 0 26px -12px '+curSecClr+';' :
+                  isPct   ? 'background:rgba('+curSecRgb+',0.03);' :
                             'background:rgba('+curSecRgb+',0.02);';
-    var topB    = (isTotal||isPct) ? 'border-top:1px solid rgba('+curSecRgb+',0.1);' : '';
-    var numSz   = isTotal ? '15px' : isPct ? '12px' : '14px';
-    var numW    = isTotal ? 800 : isPct ? 600 : 600;
+    var topB    = isMajor ? 'border-top:1px solid rgba('+curSecRgb+',0.55);'+
+                            'border-bottom:1px solid rgba('+curSecRgb+',0.28);' :
+                  isPct   ? 'border-top:1px solid rgba('+curSecRgb+',0.1);' : '';
+    var numSz   = isMajor ? '17px' : isPct ? '12px' : '13.5px';
+    var numW    = isMajor ? 900 : isPct ? 600 : 600;
     var fmtV    = function(v) {
       if (isPct) return (v*100).toFixed(1)+'%';
       if (!v) return '<span style="color:rgba(255,255,255,0.15);">—</span>';
@@ -5577,9 +5697,10 @@ function renderBudgetQ4(el) {
     var labelCell =
       '<td style="padding:8px 16px;'+topB+rowBg+
         'font-family:\'Helvetica Neue\',Arial,sans-serif;'+
-        'font-size:'+(isTotal?'12':isPct?'11':'12')+'px;'+
-        'font-weight:'+(isTotal?700:isPct?400:500)+';'+
-        'color:'+row.color+';opacity:'+(isTotal?'0.9':isPct?'0.6':'0.8')+';">'+
+        'font-size:'+(isMajor?'13':isPct?'11':'12')+'px;'+
+        'font-weight:'+(isMajor?900:isPct?400:500)+';'+
+        (isMajor?'letter-spacing:1.4px;text-transform:uppercase;text-shadow:0 0 14px rgba('+curSecRgb+',0.6);':'')+
+        'color:'+row.color+';opacity:'+(isMajor?'1':isPct?'0.6':'0.78')+';">'+
         '<div style="display:flex;align-items:center;gap:6px;">'+
           '<span>'+(isPct?'  ↳ ':'')+row.label+'</span>'+
           // Row note icon
@@ -5602,6 +5723,12 @@ function renderBudgetQ4(el) {
       var colC   = MCOLS[month];
       var cellNote = getNote(month, noteKey);
       var glowStyle = isTotal ? 'text-shadow:0 0 10px rgba('+row.rgb+',0.5);' : '';
+      // a faint wash per month plus a divider on its left edge, so the three
+      // columns read as separate periods rather than one block of figures
+      var mi   = MONTHS.indexOf(month);
+      var lane = 'background-image:linear-gradient(180deg,rgba('+colR+',0.055),rgba('+colR+',0.015));'+
+                 (mi > 0 ? 'border-left:1px solid rgba('+colR+',0.30);' : 'border-left:1px solid rgba(255,255,255,0.10);');
+      rowBg = rowBg + lane;
 
       if (isEditable && row.key === 'a4000') {
         // Project income: either typed in, or built from RPH groups
@@ -5715,11 +5842,17 @@ function renderBudgetQ4(el) {
     var totVal = totals[row.key];
     var totGlow = isTotal ? 'text-shadow:0 0 14px rgba('+row.rgb+',0.6);' : '';
     var totCell =
-      '<td style="text-align:right;padding:8px 16px;'+topB+
-        'background:rgba(251,191,36,'+(isTotal?'0.07':'0.03')+');'+
-        'border-left:2px solid rgba(251,191,36,'+(isTotal?'0.25':'0.1')+');">'+
-        '<div style="font-family:var(--hud);font-size:'+(isTotal?'16':'14')+'px;font-weight:'+(isTotal?900:600)+';'+
-          'color:'+(isTotal?'#fbbf24':row.color)+';'+totGlow+'">'+fmtV(totVal)+'</div>'+
+      '<td style="text-align:right;padding:10px 20px;'+topB+
+        'background:linear-gradient(180deg,rgba(251,191,36,'+(isTotal?'0.16':'0.065')+'),'+
+          'rgba(251,191,36,'+(isTotal?'0.07':'0.025')+'));'+
+        'border-left:3px solid rgba(251,191,36,'+(isTotal?'0.75':'0.4')+');'+
+        'border-right:1px solid rgba(251,191,36,0.28);'+
+        'box-shadow:inset 8px 0 22px -14px #fbbf24'+(isTotal?', inset 0 0 30px -16px #fbbf24':'')+';">'+
+        '<div style="font-family:var(--hud);font-size:'+(isTotal?'21':'15.5')+'px;'+
+          'font-weight:'+(isTotal?900:700)+';letter-spacing:-0.4px;'+
+          'color:'+(isTotal?'#ffd76a':row.color)+';'+
+          (isTotal?'text-shadow:0 0 18px rgba(251,191,36,0.75);':totGlow)+'">'+
+          fmtV(totVal)+'</div>'+
       '</td>';
 
     // Calc method cell — placeholder for now, styled to receive content later
@@ -8221,7 +8354,8 @@ async function syncToGitHub(silent){
   if(!weeks.length){ if(!silent) toast('No uploaded weeks to publish yet','error'); return; }
   function readKey(k){ try{ return JSON.parse(localStorage.getItem(k)||'null'); }catch(e){ return null; } }
   var payload={generated:new Date().toISOString(),laborWeeks:weeks,
-    q4:readKey('basin_q4_forecast_v1'),budgetActuals:readKey('basin_budget_actuals')};
+    q4:readKey('basin_q4_forecast_v1'),budgetActuals:readKey('basin_budget_actuals'),
+    pendingContracts:readKey('basin_pending_contracts')};
   var dot=document.getElementById('sync-dot'); if(dot)dot.className='sync-dot pending';
   var msg=document.getElementById('sync-msg'); if(msg)msg.textContent='Publishing '+weeks.length+' week(s)...';
   try{
@@ -13524,6 +13658,213 @@ function apCard(){
   '</div>';
 }
 
+// ── Pending Contracts ─────────────────────────────────────────────────────
+// Work won but not yet papered. Held in local storage and carried in the
+// published portal-data.json, so a publish shares the list with everyone.
+var PC_KEY = 'basin_pending_contracts';
+var PC_SEEDED_KEY = 'basin_pc_seeded';
+var PC_PUBLISHED = null;
+
+// Opening list, from the QTS pending-contract log. Written once on first load
+// so rows stay deleted once removed rather than reappearing.
+var PC_SEED = [
+  { id:'pcs1', num:'',         prop:'',              name:'Cedar Rapids change order',
+    cust:'Quality Technology Services, LLC', amount:0,
+    notes:'Cedar Rapids \u00b7 change order to PO 034740 (East Campus) coming soon per Jonathan Catanzano \u00b7 6/2/26',
+    contact:'Jonathan Catanzano' },
+  { id:'pcs2', num:'25-086.1', prop:'25M-214 \u00b7 SO 592',
+    name:'Prof Civil Eng Serv \u2014 QTS-WTX1-CAMPUS, Hall County TX (Turkey) Ph 1',
+    cust:'Quality Technology Services, LLC', amount:2348200,
+    notes:'Turkey, TX \u00b7 no PO yet', contact:'Meghan Thomas' },
+  { id:'pcs3', num:'26-028',   prop:'',              name:'Change order for Diamond split plat',
+    cust:'Quality Technology Services, LLC', amount:0,
+    notes:'Eagle Mountain \u00b7 no PO yet', contact:'' },
+  { id:'pcs4', num:'26-063',   prop:'SO 645',        name:'Test fit \u2014 Eastlake, OH',
+    cust:'Quality Technology Services, LLC', amount:4500,
+    notes:'Eastlake, OH \u00b7 no PO yet', contact:'David Lawrence / Michele Visconti' },
+  { id:'pcs5', num:'26-093.1', prop:'26M-150 \u00b7 SO 708', name:'SLC Offsite Improvements',
+    cust:'Quality Technology Services, LLC', amount:1578098,
+    notes:'Salt Lake City \u00b7 no PO yet', contact:'' },
+  { id:'pcs6', num:'26-093.1', prop:'Change order \u00b7 SO 748', name:'Fire flow test',
+    cust:'Quality Technology Services, LLC', amount:1800,
+    notes:'Salt Lake City \u00b7 no PO yet', contact:'Jack Hayes' },
+  { id:'pcs7', num:'',         prop:'26M-148 \u00b7 SO 742',
+    name:'Pre-Development \u2014 Eagle Mountain add\u2019l 380 acres',
+    cust:'Quality Technology Services, LLC', amount:197940,
+    notes:'Salt Lake City / Eagle Mountain \u00b7 no PO yet', contact:'Jack Hayes' },
+  { id:'pcs8', num:'26-093.2', prop:'26M-192 \u00b7 SO 755', name:'SLC Expansion Phase 1',
+    cust:'Quality Technology Services, LLC', amount:701735,
+    notes:'Salt Lake City / Eagle Mountain', contact:'Jack Hayes' }
+];
+
+function pcRead(){
+  try {
+    var v = JSON.parse(localStorage.getItem(PC_KEY) || 'null');
+    if (Array.isArray(v)) return v;
+  } catch(e){}
+  if (Array.isArray(PC_PUBLISHED)) return PC_PUBLISHED;
+  // first run on this browser: lay down the opening list, once
+  try {
+    if (!localStorage.getItem(PC_SEEDED_KEY)) {
+      localStorage.setItem(PC_SEEDED_KEY, '1');
+      localStorage.setItem(PC_KEY, JSON.stringify(PC_SEED));
+      return PC_SEED.slice();
+    }
+  } catch(e){ return PC_SEED.slice(); }
+  return [];
+}
+function pcWrite(list){
+  try { localStorage.setItem(PC_KEY, JSON.stringify(list)); } catch(e){}
+  pcUpdateBadge();
+}
+function pcTotal(){
+  return pcRead().reduce(function(t,r){ return t + (parseFloat(r.amount)||0); }, 0);
+}
+function pcUpdateBadge(){
+  var n = document.getElementById('pc-count'), v = document.getElementById('pc-value');
+  var list = pcRead();
+  if (n) n.textContent = list.length;
+  if (v) v.textContent = list.length ? ap2Short(pcTotal()) : '\u2014';
+}
+
+function pcAdd(){
+  var l = pcRead().slice();
+  l.unshift({ id:'pc'+Date.now(), num:'', prop:'', name:'', cust:'', amount:0, notes:'', contact:'' });
+  pcWrite(l); pcRender(); 
+  setTimeout(function(){
+    var f = document.querySelector('#pc-list .pc-row input');
+    if (f) f.focus();
+  }, 30);
+}
+function pcEdit(id, field, val){
+  var l = pcRead().map(function(r){
+    if (r.id !== id) return r;
+    var c = Object.assign({}, r);
+    c[field] = (field === 'amount') ? (parseFloat(String(val).replace(/[^0-9.\-]/g,'')) || 0) : val;
+    return c;
+  });
+  pcWrite(l);
+  var tot = document.getElementById('pc-total');
+  if (tot) tot.textContent = ap2Money(pcTotal());
+}
+function pcRemove(id){
+  pcWrite(pcRead().filter(function(r){ return r.id !== id; }));
+  pcRender();
+}
+
+function pcOpen(){
+  var ov = document.getElementById('pc-ov');
+  if (!ov){
+    ov = document.createElement('div');
+    ov.id = 'pc-ov';
+    ov.addEventListener('click', function(e){ if (e.target === ov) pcClose(); });
+    document.body.appendChild(ov);
+  }
+  ov.innerHTML =
+    '<div class="pc-card">'+
+      '<button class="pc-x" onclick="pcClose()">\u00d7</button>'+
+      '<div class="pc-head">'+
+        pcQuill(46)+
+        '<div>'+
+          '<div class="pc-title">PENDING CONTRACTS</div>'+
+          '<div class="pc-sub">Awaiting signature from the customer \u00b7 '+
+            'edits publish with the portal</div>'+
+        '</div>'+
+        '<div class="pc-stat">'+
+          '<span class="pc-sk">AWAITING</span>'+
+          '<span class="pc-sv" id="pc-total">'+ap2Money(pcTotal())+'</span>'+
+        '</div>'+
+      '</div>'+
+      '<div class="pc-cols">'+
+        '<span>PROJECT #</span><span>PROPOSAL / SO #</span><span>PROJECT NAME</span>'+
+        '<span>CUSTOMER</span><span class="r">AMOUNT</span><span>NOTES</span>'+
+        '<span>CONTACT</span><span></span>'+
+      '</div>'+
+      '<div class="pc-scroll" id="pc-list"></div>'+
+      '<div class="pc-foot">'+
+        '<button class="pc-add" onclick="pcAdd()">'+
+          '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" '+
+          'stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>'+
+          'ADD PROJECT</button>'+
+        '<div class="pc-note">Saved on this device. Publish from Capacity to share '+
+          'the list with everyone.</div>'+
+      '</div>'+
+    '</div>';
+  pcRender();
+  ov.classList.add('open');
+}
+
+function pcRender(){
+  var box = document.getElementById('pc-list');
+  if (!box) return;
+  var list = pcRead();
+  if (!list.length){
+    box.innerHTML = '<div class="pc-empty">'+pcQuill(64)+
+      '<div class="pc-ek">NOTHING AWAITING SIGNATURE</div>'+
+      '<div class="pc-en">Add a project when a proposal goes out and you are '+
+        'waiting on paper to come back.</div></div>';
+  } else {
+    box.innerHTML = list.map(function(r){
+      return '<div class="pc-row">'+
+        '<input value="'+(r.num||'').replace(/"/g,'&quot;')+'" placeholder="26-xxx" class="mono" '+
+          'onchange="pcEdit(\''+r.id+'\',\'num\',this.value)"/>'+
+        '<input value="'+(r.prop||'').replace(/"/g,'&quot;')+'" placeholder="P-0000 / SO-000" class="mono" '+
+          'onchange="pcEdit(\''+r.id+'\',\'prop\',this.value)"/>'+
+        '<input value="'+(r.name||'').replace(/"/g,'&quot;')+'" placeholder="Project name" '+
+          'onchange="pcEdit(\''+r.id+'\',\'name\',this.value)"/>'+
+        '<input value="'+(r.cust||'').replace(/"/g,'&quot;')+'" placeholder="Customer" '+
+          'onchange="pcEdit(\''+r.id+'\',\'cust\',this.value)"/>'+
+        '<input value="'+(r.amount||'')+'" placeholder="0" class="mono amt" type="number" step="1000" '+
+          'onchange="pcEdit(\''+r.id+'\',\'amount\',this.value)"/>'+
+        '<input value="'+(r.notes||'').replace(/"/g,'&quot;')+'" placeholder="Waiting on\u2026" '+
+          'onchange="pcEdit(\''+r.id+'\',\'notes\',this.value)"/>'+
+        '<input value="'+(r.contact||'').replace(/"/g,'&quot;')+'" placeholder="Who to chase" '+
+          'onchange="pcEdit(\''+r.id+'\',\'contact\',this.value)"/>'+
+        '<button class="pc-del" onclick="pcRemove(\''+r.id+'\')" title="Remove">\u00d7</button>'+
+      '</div>';
+    }).join('');
+  }
+  var tot = document.getElementById('pc-total');
+  if (tot) tot.textContent = ap2Money(pcTotal());
+  pcUpdateBadge();
+}
+
+function pcClose(){
+  var ov = document.getElementById('pc-ov');
+  if (ov) ov.classList.remove('open');
+}
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') pcClose();
+});
+
+// The quill: nib, shaft and barbs, with a drawn signature line beneath.
+function pcQuill(size){
+  return '<svg class="pc-quill" width="'+size+'" height="'+size+'" viewBox="0 0 64 64" fill="none">'+
+    '<defs>'+
+      '<linearGradient id="pcFeather" x1="0" y1="0" x2="1" y2="1">'+
+        '<stop offset="0%" stop-color="#7DF9FF"/><stop offset="55%" stop-color="#3DE8FF"/>'+
+        '<stop offset="100%" stop-color="#8B7BD8"/></linearGradient>'+
+      '<linearGradient id="pcInk" x1="0" y1="0" x2="1" y2="0">'+
+        '<stop offset="0%" stop-color="#FF3DD8"/><stop offset="100%" stop-color="rgba(255,61,216,0)"/>'+
+      '</linearGradient>'+
+    '</defs>'+
+    // the plume
+    '<path d="M52 8 C40 10 28 20 21 33 C18 39 16 44 15 49 L23 41 '+
+      'C31 40 42 33 47 24 C50 18 52 13 52 8 Z" fill="url(#pcFeather)" opacity="0.92"/>'+
+    // rachis
+    '<path d="M50 10 C38 20 26 34 16 48" stroke="#0E0A26" stroke-width="1.6" '+
+      'stroke-linecap="round" opacity="0.55"/>'+
+    // barbs
+    '<path d="M44 14 L47 19 M38 20 L42 25 M32 27 L36 32 M26 35 L31 39" '+
+      'stroke="#0E0A26" stroke-width="1" stroke-linecap="round" opacity="0.35"/>'+
+    // nib
+    '<path d="M15 49 L11 55 L17 53 Z" fill="#FF3DD8"/>'+
+    // signature stroke
+    '<path d="M6 58 C14 54 20 60 27 57 C33 54.5 37 58 44 55.5" stroke="url(#pcInk)" '+
+      'stroke-width="2" stroke-linecap="round" fill="none"/>'+
+  '</svg>';
+}
+
 // ── Active Projects · neon console ────────────────────────────────────────
 // Layout, palette and calculations follow the redesign reference. Data is the
 // full active roster from the 2026 Project Master.
@@ -13816,6 +14157,7 @@ function ap2Card(){
 function renderProjMain() {
   var el = document.getElementById('ap2-body');
   if (!el) return;
+  pcUpdateBadge();
   var t = ap2Totals();
   el.innerHTML =
     '<section class="ap2-hero">'+ap2ContractPanel(t)+ap2RatePanel(t)+'</section>'+
@@ -14431,6 +14773,16 @@ function loadPublishedData() {
       }
       if (j.budgetActuals && !localStorage.getItem('basin_budget_actuals')) {
         try { localStorage.setItem('basin_budget_actuals', JSON.stringify(j.budgetActuals)); } catch(e){}
+      }
+      // The published list is the shared copy; a local edit that has not been
+      // published yet stays on top until it is.
+      if (j.pendingContracts) {
+        PC_PUBLISHED = j.pendingContracts;
+        if (!localStorage.getItem('basin_pending_contracts')) {
+          try { localStorage.setItem('basin_pending_contracts', JSON.stringify(j.pendingContracts)); } catch(e){}
+        }
+        if (document.getElementById('pc-ov')) pcRender();
+        pcUpdateBadge();
       }
       initCapacity();
       var sec = document.getElementById('capacity');
