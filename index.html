@@ -2231,6 +2231,31 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 .qg-f.tight{padding:4px 7px;}
 .qg-f.tight input{width:66px;font-size:12px;}
 .q3-sub{font-family:var(--hud);font-size:12px;font-weight:800;margin-top:4px;}
+
+/* collapse-to-totals control on the detailed tab */
+.bg-collapse{display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+  padding:9px 16px;border-radius:9px;font-family:var(--mono);font-size:10px;font-weight:800;
+  letter-spacing:1.5px;text-transform:uppercase;color:#00d4ff;
+  background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.35);
+  box-shadow:0 0 14px rgba(0,212,255,0.14);transition:all .15s;}
+.bg-collapse:hover{background:rgba(0,212,255,0.2);border-color:rgba(0,212,255,0.8);
+  box-shadow:0 0 22px rgba(0,212,255,0.35);}
+.bgc-ic{font-size:9px;}
+
+/* customer filter on the project lanes */
+.ap2-filter{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.ap2-fk{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:1.6px;
+  text-transform:uppercase;color:#9C8FD0;}
+.ap2-sel{min-width:260px;padding:9px 12px;cursor:pointer;
+  background:rgba(61,232,255,0.07);border:1px solid rgba(61,232,255,0.38);
+  color:#3DE8FF;font-family:'Chakra Petch',sans-serif;font-size:12.5px;outline:none;
+  box-shadow:0 0 12px rgba(61,232,255,0.14);transition:all .15s;}
+.ap2-sel:hover,.ap2-sel:focus{border-color:#3DE8FF;background:rgba(61,232,255,0.14);
+  box-shadow:0 0 20px rgba(61,232,255,0.3);}
+.ap2-sel option{background:#0E0A26;color:#F2EEFF;}
+.ap2-clear{cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.8px;
+  color:#FF3DD8;padding:7px 11px;border:1px solid rgba(255,61,216,0.35);}
+.ap2-clear:hover{background:rgba(255,61,216,0.18);color:#fff;}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
@@ -3626,9 +3651,14 @@ function thCell(label, sub, color, minW, extraStyle) {
     'transition:background 0.15s;" '+
     'onmouseenter="this.style.background=\'rgba(255,255,255,0.04)\'" '+
     'onmouseleave="this.style.background=\'\'">'+
-    '<div style="font-family:\'Helvetica Neue\',Arial,sans-serif;font-size:10px;font-weight:800;'+
-      'letter-spacing:2px;text-transform:uppercase;color:'+color+';margin-bottom:4px;">'+label+'</div>'+
-    (sub ? '<div style="font-size:8px;font-family:var(--mono);color:'+color+';opacity:0.55;letter-spacing:0.5px;">'+sub+'</div>' : '')+
+    '<div style="font-family:\'Helvetica Neue\',Arial,sans-serif;font-size:15px;font-weight:900;'+
+      'letter-spacing:2.6px;text-transform:uppercase;color:'+color+';margin-bottom:7px;'+
+      'text-shadow:0 0 14px '+color+'70;">'+label+'</div>'+
+    (sub ? '<div style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;'+
+        'border-radius:20px;font-family:var(--mono);font-size:9.5px;font-weight:800;'+
+        'letter-spacing:1.4px;text-transform:uppercase;'+
+        'color:'+color+';background:'+color+'1f;border:1px solid '+color+'66;">'+
+        sub.replace(/^[\u25cf\u25ce]\s*/,'')+'</div>' : '')+
     '<div style="position:absolute;bottom:0;left:0;right:0;height:2px;'+
       'background:linear-gradient(90deg,transparent,'+color+'88,'+color+','+color+'88,transparent);"></div>'+
   '</th>';
@@ -4658,6 +4688,33 @@ function bgToggleSection(el, si) {
   if (arrow) arrow.textContent = collapsed ? '▼' : '▶';
 }
 
+// Collapsing folds the detail lines away and leaves each group's total, which
+// turns the statement into a summary without changing any figure.
+var BG_DETAIL_COLLAPSED = false;
+
+function bgToggleAllDetail(){
+  BG_DETAIL_COLLAPSED = !BG_DETAIL_COLLAPSED;
+  document.querySelectorAll('.bgdet-detail').forEach(function(r){
+    r.style.display = BG_DETAIL_COLLAPSED ? 'none' : '';
+  });
+  // a section collapsed on its own is reopened so the two do not fight
+  document.querySelectorAll('tr.bgdet-sec-header').forEach(function(h){
+    h.setAttribute('data-collapsed','0');
+    var a = h.querySelector('.bgdet-toggle');
+    if (a) a.textContent = '\u25bc';
+  });
+  if (!BG_DETAIL_COLLAPSED){
+    document.querySelectorAll('.bgdet-row').forEach(function(r){ r.style.display = ''; });
+  }
+  var b = document.getElementById('bg-collapse-btn');
+  if (b) b.innerHTML = bgCollapseLabel();
+}
+function bgCollapseLabel(){
+  return BG_DETAIL_COLLAPSED
+    ? '<span class="bgc-ic">\u25bc</span> EXPAND ALL LINES'
+    : '<span class="bgc-ic">\u25b6</span> COLLAPSE TO TOTALS';
+}
+
 function renderBudgetDetailed(el) {
   var isActual = BG_IS_ACTUAL.slice();
   BG_MONTHS.forEach(function(mk,i){ if (Object.keys(BUDGET_ACTUALS[mk]||{}).length>0) isActual[i]=true; });
@@ -4730,7 +4787,7 @@ function renderBudgetDetailed(el) {
     // Subsection
     if (isSub) {
       tbody +=
-        '<tr class="bgdet-row" data-sec="'+curSectionIdx+'" style="background:rgba('+curSectionRgb+',0.11);">'+
+        '<tr class="bgdet-row bgdet-detail" data-sec="'+curSectionIdx+'" style="background:rgba('+curSectionRgb+',0.11);">'+
           '<td colspan="8" style="padding:6px 20px 3px;'+
             'font-family:var(--mono);font-size:8px;letter-spacing:2.5px;text-transform:uppercase;'+
             'color:rgba('+curSectionRgb+',0.45);border-top:1px solid rgba('+curSectionRgb+',0.08);">'+
@@ -4787,7 +4844,7 @@ function renderBudgetDetailed(el) {
         'border-left:2px solid rgba(251,191,36,0.5);background:rgba(251,191,36,0.08);font-size:'+(isHL?'18':isTot?'16':'14')+'px;font-weight:'+(isHL?900:isTot?800:700)+';'+(isHL?'text-shadow:0 0 18px '+baseColor+',0 0 6px '+baseColor+'cc;':isTot?'text-shadow:0 0 10px rgba(251,191,36,0.6);':''));
 
     tbody +=
-      '<tr class="bgdet-row" data-sec="'+curSectionIdx+'" style="'+rowBg+'border-bottom:1px solid rgba(255,255,255,0.025);">'+
+      '<tr class="bgdet-row'+(isMajor?'':' bgdet-detail')+'" data-sec="'+curSectionIdx+'" style="'+rowBg+'border-bottom:1px solid rgba(255,255,255,0.025);">'+
         '<td style="padding:8px 20px;'+topBorder+
           'font-family:'+(isHL?'\'Helvetica Neue\',Arial,sans-serif':'var(--inter)')+';'+
           'font-size:'+labelSize+'px;font-weight:'+labelW+';color:'+baseColor+';opacity:'+(isMajor?'1':'0.68')+';'+
@@ -4813,6 +4870,11 @@ function renderBudgetDetailed(el) {
       // ── UFO cruising through the middle of the page ──
       '<div class="ufo-lane">'+bgUFO(bgEbitdaKPI())+'</div>'+
 
+      '<div style="display:flex;justify-content:flex-end;padding:0 4px 10px;">'+
+        '<button id="bg-collapse-btn" class="bg-collapse" onclick="bgToggleAllDetail()" '+
+          'title="Fold the detail lines away and leave each group total">'+
+          bgCollapseLabel()+'</button>'+
+      '</div>'+
       '<div style="overflow:auto;max-height:calc(100vh - 200px);">'+
         '<table class="bgdet" style="width:100%;border-collapse:collapse;min-width:900px;">'+
           '<thead>'+
@@ -13818,6 +13880,30 @@ var AP_DATA = [
 // ── Active projects table ─────────────────────────────────────────────────
 var AP_SORT = { col:'contract', dir:-1 };
 var AP_SEL  = null;
+var AP_CUST = '';       // '' means every customer
+
+// The filter governs the table, the KPI strip and the totals row together, so
+// the figures always describe what is on screen.
+function apFiltered(){
+  if (!AP_CUST) return AP_DATA;
+  return AP_DATA.filter(function(r){ return (r.cust||'') === AP_CUST; });
+}
+function apCustomers(){
+  var seen = {};
+  AP_DATA.forEach(function(r){
+    var c = r.cust || '';
+    if (!c) return;
+    if (!seen[c]) seen[c] = { n:0, backlog:0 };
+    seen[c].n++; seen[c].backlog += r.backlog;
+  });
+  return Object.keys(seen).sort(function(a,b){ return seen[b].n - seen[a].n || a.localeCompare(b); })
+    .map(function(c){ return { cust:c, n:seen[c].n }; });
+}
+function apSetCust(v){
+  AP_CUST = v || '';
+  if (AP_SEL && !apFiltered().some(function(r){ return r.num === AP_SEL; })) AP_SEL = null;
+  renderProjMain();
+}
 
 var AP_COLS = [
   { key:'num',      label:'Project',   align:'left',  w:'90px'  },
@@ -13837,7 +13923,7 @@ function apSort(col){
 }
 
 function apRows(){
-  var r = AP_DATA.slice();
+  var r = apFiltered().slice();
   var c = AP_SORT.col, d = AP_SORT.dir;
   r.sort(function(a,b){
     var av = a[c], bv = b[c];
@@ -14259,7 +14345,7 @@ function ap2Short(v){
 }
 
 function ap2Totals(){
-  return AP_DATA.reduce(function(t,r){
+  return apFiltered().reduce(function(t,r){
     t.contract += r.contract; t.rev += r.rev; t.backlog += r.backlog;
     t.hrs += r.hrs; t.rev26 += r.rev26; return t;
   }, {contract:0, rev:0, backlog:0, hrs:0, rev26:0});
@@ -14267,7 +14353,7 @@ function ap2Totals(){
 
 function ap2GroupStats(){
   var g = { qts:{rev26:0,hrs:0}, corgan:{rev26:0,hrs:0}, standard:{rev26:0,hrs:0} };
-  AP_DATA.forEach(function(r){
+  apFiltered().forEach(function(r){
     var k = ap2Group(r.cust);
     g[k].rev26 += r.rev26; g[k].hrs += r.hrs;
   });
@@ -14288,7 +14374,9 @@ function ap2ContractPanel(t){
     '<div class="ap2-in">'+
       '<div class="ap2-prow">'+
         '<div class="ap2-ptitle">CONTRACT POSITION</div>'+
-        '<div class="ap2-pmeta">'+AP_DATA.length+' projects \u00b7 '+AP_ASOF+'</div>'+
+        '<div class="ap2-pmeta">'+apFiltered().length+' project'+
+          (apFiltered().length===1?'':'s')+
+          (AP_CUST ? ' \u00b7 '+AP_CUST : '')+' \u00b7 '+AP_ASOF+'</div>'+
       '</div>'+
       '<div class="ap2-cpbody">'+
         '<div class="ap2-ring">'+
@@ -14454,9 +14542,20 @@ function ap2Table(t){
   return '<div class="ap2-lanes">'+
     '<div class="ap2-toolbar">'+
       '<div><div class="ap2-ptitle">PROJECT LANES</div>'+
-        '<div class="ap2-pmeta">'+rows.length+' projects \u00b7 sub-projects rolled into parent '+
-          'unless customer differs</div></div>'+
-      '<div class="ap2-pmeta">click any column to sort</div>'+
+        '<div class="ap2-pmeta">'+rows.length+
+          (AP_CUST ? ' of '+AP_DATA.length+' projects \u00b7 filtered' : ' projects')+
+          ' \u00b7 sub-projects rolled into parent unless customer differs</div></div>'+
+      '<div class="ap2-filter">'+
+        '<span class="ap2-fk">Customer</span>'+
+        '<select class="ap2-sel" onchange="apSetCust(this.value)">'+
+          '<option value=""'+(AP_CUST?'':' selected')+'>All customers \u00b7 '+AP_DATA.length+'</option>'+
+          apCustomers().map(function(c){
+            return '<option value="'+c.cust.replace(/"/g,'&quot;')+'"'+
+              (AP_CUST===c.cust?' selected':'')+'>'+c.cust+' \u00b7 '+c.n+'</option>';
+          }).join('')+
+        '</select>'+
+        (AP_CUST ? '<span class="ap2-clear" onclick="apSetCust(\'\')">\u00d7 clear</span>' : '')+
+      '</div>'+
     '</div>'+
     '<div class="ap2-grid ap2-headrow">'+head+'</div>'+
     '<div class="ap2-scroll">'+body+'</div>'+
