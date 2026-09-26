@@ -1775,13 +1775,23 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 
 /* top bar */
 .ap2-top{display:flex;align-items:center;justify-content:space-between;gap:24px;}
-.ap2-brand{display:flex;align-items:center;gap:18px;}
-.ap2-mark{width:44px;height:44px;display:flex;align-items:center;justify-content:center;
-  border:1px dashed #6E5DB8;font-family:'JetBrains Mono',monospace;font-size:13px;
-  font-weight:700;color:#B4A8DE;letter-spacing:0.08em;}
-.ap2-kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.32em;color:#B4A8DE;}
-.ap2-h1{font-size:22px;font-weight:700;letter-spacing:0.24em;color:#3DE8FF;
-  text-shadow:0 0 14px rgba(61,232,255,0.45);}
+.ap2-brand{display:flex;align-items:center;gap:16px;}
+/* a lit rule standing in for the old badge */
+.ap2-rule{width:4px;height:34px;flex-shrink:0;
+  background:linear-gradient(180deg,#3DE8FF,#FF3DD8);
+  box-shadow:0 0 16px rgba(61,232,255,0.7);}
+.ap2-h1{margin:0;font-family:'Chakra Petch',sans-serif;font-size:30px;font-weight:700;
+  letter-spacing:0.2em;line-height:1;color:#F2EEFF;display:flex;align-items:baseline;gap:0.42em;}
+.ap2-h1 em{font-style:normal;font-weight:700;color:#3DE8FF;
+  text-shadow:0 0 22px rgba(61,232,255,0.6);}
+.ap2-h1sub{margin-top:7px;display:flex;align-items:center;gap:9px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;color:#8C80B8;}
+.ap2-h1sub b{color:#F2EEFF;font-weight:700;}
+.ap2-h1sub i{font-style:normal;color:#3B3168;}
+.ap2-h1sub .live{display:inline-flex;align-items:center;gap:6px;color:#C6FF4D;}
+.ap2-h1sub .live:before{content:'';width:6px;height:6px;border-radius:50%;background:#C6FF4D;
+  box-shadow:0 0 8px #C6FF4D;animation:apLive 2.4s ease-in-out infinite;}
+@keyframes apLive{0%,100%{opacity:1;}50%{opacity:0.3;}}
 .ap2-actions{display:flex;align-items:center;gap:14px;}
 .ap2-link{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.1em;
   text-decoration:none;padding:12px 6px;color:#3DE8FF;}
@@ -2065,39 +2075,62 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 .pc-sv{display:block;font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;
   color:#3DE8FF;text-shadow:0 0 18px rgba(61,232,255,0.5);margin-top:3px;}
 .pc-cols,.pc-row{display:grid;
-  grid-template-columns:92px 122px minmax(0,1.05fr) minmax(0,0.82fr) 104px minmax(0,1.9fr) minmax(0,0.78fr) 30px;
-  gap:9px;align-items:center;padding:0 22px;}
+  grid-template-columns:88px 124px minmax(0,1.35fr) 124px minmax(0,1.45fr) 150px 26px;
+  gap:14px;align-items:center;padding:0 26px;}
+.pc-cols{padding-top:15px;padding-bottom:11px;border-bottom:1px solid #241B52;
+  font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.2em;color:#7A6DB0;}
+.pc-cols .r{text-align:right;}
 .pc-sortable{cursor:pointer;user-select:none;transition:color .14s;}
 .pc-sortable:hover{color:#F2EEFF;}
 .pc-sortable.on{color:#3DE8FF;}
 .pc-sortable i{font-style:normal;opacity:0.3;}
-.pc-notes{width:100%;background:rgba(255,255,255,0.035);border:1px solid #2A1F5C;
-  padding:7px 10px;color:#F2EEFF;font-family:'Chakra Petch',sans-serif;font-size:12.5px;
-  line-height:1.45;outline:none;resize:vertical;min-height:46px;
-  transition:border-color .14s,background .14s;}
-.pc-notes:focus{border-color:#3DE8FF;background:rgba(61,232,255,0.07);
-  box-shadow:0 0 12px rgba(61,232,255,0.2);}
-.pc-notes::placeholder{color:#5A4E8C;}
-.pc-cols{padding-top:14px;padding-bottom:10px;border-bottom:1px solid #2A1F5C;
-  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.18em;color:#9C8FD0;}
-.pc-cols .r{text-align:right;}
-.pc-scroll{overflow-y:auto;flex:1;min-height:170px;padding:8px 0 4px;
-  scrollbar-width:thin;scrollbar-color:rgba(255,61,216,0.4) transparent;}
-.pc-scroll::-webkit-scrollbar{width:7px;}
-.pc-scroll::-webkit-scrollbar-thumb{background:rgba(255,61,216,0.4);}
-.pc-row{padding-top:6px;padding-bottom:6px;border-bottom:1px solid #1A1340;transition:background .14s;}
-.pc-row:hover{background:rgba(255,61,216,0.05);}
-.pc-row input{width:100%;background:rgba(255,255,255,0.035);border:1px solid #2A1F5C;
-  border-radius:0;padding:8px 10px;color:#F2EEFF;font-family:'Chakra Petch',sans-serif;
-  font-size:13px;outline:none;transition:border-color .14s,background .14s;}
-.pc-row input:focus{border-color:#3DE8FF;background:rgba(61,232,255,0.07);
-  box-shadow:0 0 12px rgba(61,232,255,0.2);}
-.pc-row input.mono{font-family:'JetBrains Mono',monospace;font-size:12px;}
-.pc-row input.amt{text-align:right;color:#3DE8FF;font-weight:700;}
-.pc-row input::placeholder{color:#5A4E8C;}
-.pc-del{background:transparent;border:1px solid rgba(255,61,216,0.3);color:#FF3DD8;cursor:pointer;
-  width:28px;height:28px;font-size:15px;line-height:1;}
-.pc-del:hover{background:#FF3DD8;color:#07041A;}
+
+/* rows read as lanes, not cells: a magenta rail, no boxes */
+.pc-row{position:relative;padding-top:13px;padding-bottom:13px;
+  border-bottom:1px solid #18123A;transition:background .16s;}
+.pc-row:before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:#FF3DD8;opacity:0;transition:opacity .16s;}
+.pc-row:hover{background:rgba(255,61,216,0.045);}
+.pc-row:hover:before{opacity:0.85;}
+.pc-cell{min-width:0;}
+.pc-row input,.pc-row textarea{width:100%;background:transparent;border:none;outline:none;
+  border-bottom:1px solid transparent;padding:3px 0;color:#F2EEFF;
+  font-family:'Chakra Petch',sans-serif;transition:border-color .14s,color .14s;}
+.pc-row input:hover,.pc-row textarea:hover{border-bottom-color:rgba(255,255,255,0.14);}
+.pc-row input:focus,.pc-row textarea:focus{border-bottom-color:#3DE8FF;color:#fff;}
+.pc-row input::placeholder,.pc-row textarea::placeholder{color:#4B3F7E;}
+
+/* project number: the loudest small thing in the row */
+.pc-cell.id input{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:800;
+  color:#FF3DD8;letter-spacing:0.02em;}
+/* proposal reference: quiet */
+.pc-cell.ref input{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9C8FD0;}
+/* name is the anchor, with the customer tucked beneath it */
+.pc-cell.nm input{font-size:14px;font-weight:600;}
+.pc-cust{display:flex;align-items:center;gap:7px;margin-top:3px;}
+.pc-cdot{width:5px;height:5px;background:#3DE8FF;box-shadow:0 0 6px #3DE8FF;flex-shrink:0;}
+.pc-cust input{font-size:11px;color:#8C80B8;}
+/* amount carries the weight */
+.pc-cell.amt{display:block;}
+.pc-cell.amt input{width:100%;text-align:right;font-family:'Chakra Petch',sans-serif;
+  font-size:19px;font-weight:700;color:#3DE8FF;text-shadow:0 0 14px rgba(61,232,255,0.35);}
+.pc-cell.amt input::-webkit-outer-spin-button,
+.pc-cell.amt input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+/* notes sit on a faint slab so the block of text reads as one thing */
+.pc-cell.note{background:rgba(255,255,255,0.028);border-left:2px solid rgba(61,232,255,0.22);
+  padding:5px 10px;}
+.pc-notes{min-height:34px;max-height:82px;resize:vertical;overflow:auto;
+  font-size:12px !important;line-height:1.5;color:#D9CFFF !important;}
+/* contact with an initial */
+.pc-cell.who{display:flex;align-items:center;gap:9px;}
+.pc-av{width:24px;height:24px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;color:#07041A;
+  background:linear-gradient(135deg,#7DF9FF,#3DE8FF);border-radius:50%;}
+.pc-av.empty{background:rgba(255,255,255,0.07);color:#4B3F7E;}
+.pc-cell.who input{font-size:12px;}
+.pc-del{background:transparent;border:none;color:#4B3F7E;cursor:pointer;
+  width:24px;height:24px;font-size:16px;line-height:1;transition:color .14s,transform .14s;}
+.pc-del:hover{color:#FF3DD8;transform:scale(1.2);}
 .pc-empty{padding:46px 28px;text-align:center;display:flex;flex-direction:column;
   align-items:center;gap:12px;}
 .pc-ek{font-size:13px;font-weight:700;letter-spacing:0.2em;color:#B4A8DE;}
@@ -2119,72 +2152,201 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
   box-shadow:0 0 14px rgba(255,61,216,0.3),inset 0 0 10px rgba(255,61,216,0.1);}
 .pc-save:hover{background:rgba(255,61,216,0.22);}
 
-/* ── the projected image itself ───────────────────────────────────────── */
-/* Unlit fabric shows as a margin; the lit rectangle sits inside it. */
-.scr-surface{padding:26px 30px 32px;}
-.scr-image{position:relative;z-index:3;overflow:hidden;border-radius:2px;
+/* ── Cinema screen ────────────────────────────────────────────────────── */
+/* A lit silver screen inside black masking, throwing light into a dark room. */
+.scr-surface{padding:0;overflow:visible;background:none;border:none;box-shadow:none;}
+.scr-surface:before{content:'';position:absolute;inset:-70px -50px -60px;pointer-events:none;
+  z-index:0;border-radius:50%;
+  background:radial-gradient(62% 58% at 50% 45%, rgba(205,232,255,0.34) 0%,
+             rgba(160,205,255,0.15) 38%, transparent 74%);
+  filter:blur(30px);}
+
+/* black masking that frames the picture, as in a cinema */
+.scr-image{position:relative;z-index:3;overflow:hidden;
+  border:14px solid #05060b;border-radius:3px;
   background:
-    radial-gradient(84% 130% at 24% -14%, rgba(255,247,222,0.22) 0%,
-                    rgba(255,247,222,0.085) 32%, transparent 68%),
-    linear-gradient(118deg, rgba(255,250,232,0.09) 0%, rgba(255,250,232,0.03) 30%,
-                    transparent 58%),
-    linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.022) 55%,
-                    rgba(0,0,0,0.16));
+    radial-gradient(88% 126% at 24% -12%, rgba(255,255,255,0.30) 0%,
+                    rgba(230,243,255,0.15) 34%, transparent 72%),
+    linear-gradient(118deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.055) 32%,
+                    transparent 60%),
+    linear-gradient(180deg, #2b3557 0%, #1e2748 44%, #141b34 100%);
   box-shadow:
-    inset 0 0 0 1px rgba(255,240,205,0.22),
-    inset 0 0 90px -20px rgba(255,240,205,0.42),
-    0 0 60px -4px rgba(255,238,200,0.16),
-    0 0 0 1px rgba(0,0,0,0.5);
+    0 0 0 1px rgba(226,240,255,0.7),
+    0 0 40px 4px rgba(180,215,255,0.45),
+    0 0 140px 28px rgba(140,195,255,0.26),
+    inset 0 0 150px -24px rgba(235,246,255,0.8);
   animation:scrFlicker 5.2s ease-in-out infinite;}
-/* the lamp is never perfectly steady */
 @keyframes scrFlicker{
   0%,100%{filter:brightness(1);}
-  42%{filter:brightness(1.022);}
-  47%{filter:brightness(0.986);}
-  70%{filter:brightness(1.01);}}
-/* hotspot where the cone strikes, falling off across the sheet */
+  42%{filter:brightness(1.03);}
+  47%{filter:brightness(0.982);}
+  70%{filter:brightness(1.014);}}
+
+/* the bright patch where the lamp hits, falling away to the corners */
 .scr-hot{position:absolute;inset:0;pointer-events:none;z-index:0;
   background:
-    radial-gradient(46% 70% at 20% 4%, rgba(255,246,216,0.26) 0%,
-                    rgba(255,246,216,0.08) 40%, transparent 72%),
-    radial-gradient(120% 96% at 50% 50%, transparent 52%, rgba(0,0,0,0.42) 100%);}
-/* a slow bright band rolling down, as on a projected frame */
-.scr-roll{position:absolute;left:0;right:0;height:130px;pointer-events:none;z-index:1;
-  background:linear-gradient(180deg,transparent,rgba(255,252,240,0.045) 45%,transparent);
+    radial-gradient(52% 74% at 22% 6%, rgba(255,255,255,0.22) 0%,
+                    rgba(226,240,255,0.08) 42%, transparent 74%),
+    radial-gradient(128% 100% at 50% 50%, transparent 46%, rgba(2,4,12,0.55) 100%);}
+.scr-roll{position:absolute;left:0;right:0;height:150px;pointer-events:none;z-index:1;
+  background:linear-gradient(180deg,transparent,rgba(255,255,255,0.055) 45%,transparent);
   animation:scrRoll 9s linear infinite;}
-@keyframes scrRoll{0%{top:-140px;}100%{top:100%;}}
-/* dust drifting through the beam */
-.scr-motes{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:0.5;
+@keyframes scrRoll{0%{top:-160px;}100%{top:100%;}}
+.scr-motes{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:0.55;
   background-image:
-    radial-gradient(1.5px 1.5px at 18% 22%, rgba(255,248,224,0.75), transparent),
-    radial-gradient(1px 1px at 34% 62%, rgba(255,248,224,0.55), transparent),
-    radial-gradient(1.5px 1.5px at 52% 18%, rgba(255,248,224,0.5), transparent),
-    radial-gradient(1px 1px at 66% 74%, rgba(255,248,224,0.6), transparent),
-    radial-gradient(1.5px 1.5px at 81% 36%, rgba(255,248,224,0.45), transparent),
-    radial-gradient(1px 1px at 12% 80%, rgba(255,248,224,0.5), transparent);
+    radial-gradient(1.5px 1.5px at 18% 22%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 34% 62%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 52% 18%, rgba(255,255,255,0.55), transparent),
+    radial-gradient(1px 1px at 66% 74%, rgba(255,255,255,0.65), transparent),
+    radial-gradient(1.5px 1.5px at 81% 36%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 12% 80%, rgba(255,255,255,0.55), transparent);
   animation:scrMotes 17s ease-in-out infinite alternate;}
 @keyframes scrMotes{0%{transform:translate3d(0,0,0);}100%{transform:translate3d(14px,-18px,0);}}
-.scr-body{position:relative;z-index:2;padding:6px 4px 12px;}
+.scr-body{position:relative;z-index:2;padding:16px 18px 20px;}
 
-/* everything on the sheet is light, so it blooms a little */
+/* everything on a lit screen carries a little bloom */
 .scr-image .fy-name,.scr-image .fy-cv,.scr-image .fy-ck{
-  text-shadow:0 0 18px rgba(255,255,255,0.14);}
-.scr-image .fy-cell.tot .fy-cv{text-shadow:0 0 26px currentColor,0 0 9px rgba(255,255,255,0.35);}
-/* the fabric beyond the image stays dark */
-.scr-surface:before{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
-  background:linear-gradient(180deg,rgba(0,0,0,0.5),transparent 10%,transparent 90%,rgba(0,0,0,0.55));}
+  text-shadow:0 0 20px rgba(255,255,255,0.3);}
+.scr-image .fy-cell.tot .fy-cv{text-shadow:0 0 30px currentColor,0 0 12px rgba(255,255,255,0.5);}
+.scr-image .fy-cell.act{background:rgba(255,255,255,0.13);
+  border-color:rgba(255,255,255,0.34);}
+.scr-image .fy-cell.act .fy-ck{color:rgba(255,255,255,0.72);}
+.scr-image .fy-cmp{background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.16);}
+.scr-image .fy-cmp-v,.scr-image .fy-leg b{color:#fff;}
 
-/* source switch on the RPH builder's hours field */
-.hsrc{display:flex;gap:5px;}
-.hsrc-b{cursor:pointer;font-family:var(--mono);font-size:8.5px;font-weight:800;letter-spacing:0.9px;
-  text-transform:uppercase;padding:5px 11px;border-radius:20px;color:rgba(255,255,255,0.34);
-  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);transition:all .14s;}
-.hsrc-b:hover{color:rgba(255,255,255,0.85);background:rgba(255,255,255,0.1);}
-.hsrc-b.on{color:#03131c;background:#00d4ff;border-color:#00d4ff;
-  box-shadow:0 0 12px rgba(0,212,255,0.5);}
-.qg-f.big.locked{background:rgba(0,212,255,0.09);border-color:rgba(0,212,255,0.4);}
-.qg-f.big.locked input{color:#7ef0ff;cursor:default;}
-.qb-note b{color:#00d4ff;font-weight:700;}
+/* the room around the screen sits dark so the picture dominates */
+.scr-rig{position:relative;padding:18px 0 30px;margin-bottom:26px;
+  background:radial-gradient(70% 90% at 50% 40%, rgba(90,140,210,0.10), transparent 70%);}
+.scr-live{position:absolute;bottom:14px;left:26px;z-index:4;display:flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:7.5px;font-weight:800;letter-spacing:2px;
+  color:rgba(200,225,255,0.55);}
+.scr-live i{width:5px;height:5px;border-radius:50%;background:#bfe0ff;
+  box-shadow:0 0 8px #bfe0ff;animation:scrBlink 2.6s ease-in-out infinite;}
+@keyframes scrBlink{0%,100%{opacity:1;}50%{opacity:0.25;}}
+.scr-corner{display:none;}
+
+/* ── Portfolio panel ──────────────────────────────────────────────────── */
+.ap2-portfolio{display:grid;grid-template-columns:250px minmax(0,1fr);gap:20px;align-items:start;}
+.ap2-lead{padding:16px 18px;border-radius:2px;position:relative;
+  background:linear-gradient(160deg,rgba(61,232,255,0.10),rgba(61,232,255,0.02));
+  border:1px solid rgba(61,232,255,0.34);
+  clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px);}
+.ap2-lead.filt{background:linear-gradient(160deg,rgba(255,61,216,0.12),rgba(255,61,216,0.02));
+  border-color:rgba(255,61,216,0.45);}
+.ap2-lead-k{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:1.6px;
+  text-transform:uppercase;color:#B4A8DE;line-height:1.4;}
+.ap2-lead-v{font-family:'Chakra Petch',sans-serif;font-size:52px;font-weight:700;line-height:1;
+  color:#3DE8FF;text-shadow:0 0 22px rgba(61,232,255,0.5);margin-top:8px;}
+.ap2-lead.filt .ap2-lead-v{color:#FF3DD8;text-shadow:0 0 22px rgba(255,61,216,0.5);font-size:42px;}
+.ap2-lead-s{font-family:'JetBrains Mono',monospace;font-size:10px;color:#8C80B8;margin-top:9px;
+  line-height:1.5;}
+.ap2-bk-k{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:1.6px;
+  text-transform:uppercase;color:#9C8FD0;margin-bottom:9px;}
+.ap2-bk-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;}
+.ap2-bk{display:flex;gap:10px;padding:12px 13px;cursor:pointer;position:relative;
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);
+  border-left:3px solid var(--c);transition:background .15s,transform .15s;}
+.ap2-bk:hover{background:rgba(255,255,255,0.07);transform:translateY(-2px);}
+.ap2-bk-rank{font-family:'Chakra Petch',sans-serif;font-size:22px;font-weight:700;color:var(--c);
+  opacity:0.5;line-height:1;flex-shrink:0;}
+.ap2-bk-body{flex:1;min-width:0;}
+.ap2-bk-top{display:flex;align-items:baseline;gap:8px;}
+.ap2-bk-id{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;color:var(--c);}
+.ap2-bk-pc{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:8.5px;color:#8C80B8;}
+.ap2-bk-nm{font-size:12.5px;font-weight:600;color:#F2EEFF;margin-top:4px;line-height:1.3;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ap2-bk-cu{font-size:10.5px;color:#8C80B8;margin-top:2px;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;}
+.ap2-bk-v{font-family:'Chakra Petch',sans-serif;font-size:21px;font-weight:700;color:var(--c);
+  margin-top:7px;text-shadow:0 0 14px var(--c);}
+.ap2-bk-bar{height:4px;margin-top:7px;background:rgba(255,255,255,0.07);}
+.ap2-bk-bar i{display:block;height:100%;background:var(--c);box-shadow:0 0 8px var(--c);}
+.ap2-bk-empty{font-family:'JetBrains Mono',monospace;font-size:11px;color:#6E62A0;padding:18px 0;}
+
+/* the picker */
+.ap2-pick{margin-left:auto;display:flex;align-items:center;gap:0;position:relative;
+  background:linear-gradient(135deg,rgba(61,232,255,0.14),rgba(255,61,216,0.06));
+  border:1px solid rgba(61,232,255,0.5);
+  clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
+  box-shadow:0 0 16px rgba(61,232,255,0.22);transition:box-shadow .16s;}
+.ap2-pick:hover{box-shadow:0 0 26px rgba(61,232,255,0.45);}
+.ap2-pick-ic{display:flex;align-items:center;padding:0 4px 0 13px;color:#3DE8FF;}
+.ap2-pick select{appearance:none;-webkit-appearance:none;min-width:280px;
+  padding:11px 34px 11px 10px;background:transparent;border:none;outline:none;cursor:pointer;
+  color:#3DE8FF;font-family:'Chakra Petch',sans-serif;font-size:13px;font-weight:600;
+  letter-spacing:0.4px;}
+.ap2-pick select option{background:#0E0A26;color:#F2EEFF;}
+.ap2-pick-cv{position:absolute;right:13px;pointer-events:none;color:#3DE8FF;font-size:11px;}
+
+/* ── Backlog by PM ────────────────────────────────────────────────────── */
+.ap2-pmwrap{margin-top:18px;padding-top:16px;border-top:1px solid #241B52;}
+.ap2-pm-head{display:flex;align-items:baseline;gap:12px;margin-bottom:11px;}
+.ap2-pm-meta{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:9px;color:#6E62A0;}
+.ap2-pm-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;}
+.ap2-pm{padding:11px 12px;background:rgba(255,255,255,0.028);
+  border:1px solid rgba(255,255,255,0.08);border-top:2px solid var(--c);
+  transition:background .15s,transform .15s;}
+.ap2-pm:hover{background:rgba(255,255,255,0.06);transform:translateY(-2px);}
+.ap2-pm-top{display:flex;align-items:center;gap:7px;}
+.ap2-pm-av{width:21px;height:21px;flex-shrink:0;display:flex;align-items:center;
+  justify-content:center;border-radius:50%;background:var(--c);color:#07041A;
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:800;}
+.ap2-pm-nm{flex:1;min-width:0;font-size:12.5px;font-weight:600;color:#F2EEFF;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ap2-pm-n{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:800;color:#B4A8DE;
+  background:rgba(255,255,255,0.07);padding:2px 7px;border-radius:20px;flex-shrink:0;}
+.ap2-pm-bl{font-family:'Chakra Petch',sans-serif;font-size:22px;font-weight:700;color:var(--c);
+  margin-top:8px;line-height:1;text-shadow:0 0 14px var(--c);}
+.ap2-pm-bar{height:4px;margin-top:7px;background:rgba(255,255,255,0.07);}
+.ap2-pm-bar i{display:block;height:100%;background:var(--c);box-shadow:0 0 8px var(--c);}
+.ap2-pm-foot{display:flex;justify-content:space-between;gap:8px;margin-top:7px;
+  font-family:'JetBrains Mono',monospace;font-size:8.5px;color:#8C80B8;}
+
+/* Q4 toolbar buttons */
+.q4-tool{cursor:pointer;padding:7px 13px;border-radius:8px;font-family:var(--mono);
+  font-size:9.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;
+  color:#00d4ff;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.32);
+  transition:all .15s;white-space:nowrap;}
+.q4-tool:hover{background:rgba(0,212,255,0.2);border-color:rgba(0,212,255,0.75);}
+.q4-tool.on{color:#03131c;background:#00d4ff;border-color:#00d4ff;
+  box-shadow:0 0 14px rgba(0,212,255,0.5);}
+/* the YTD pace line under a Q4 total */
+.q4-cmp{display:flex;align-items:baseline;justify-content:flex-end;gap:7px;margin-top:4px;
+  padding-top:4px;border-top:1px dashed rgba(251,191,36,0.28);}
+.q4-cmp-a{font-family:var(--mono);font-size:9.5px;color:rgba(255,255,255,0.42);}
+.q4-cmp-a em{font-style:normal;font-size:8px;color:rgba(255,255,255,0.28);margin-left:2px;}
+.q4-cmp-d{font-family:var(--hud);font-size:10.5px;font-weight:800;}
+.q4-cmp-d.up{color:#4ade80;} .q4-cmp-d.down{color:#ff8a8a;}
+
+/* Q4 cells: controls pinned left, the figure in its normal right position */
+.q4-cell{text-align:right;}
+.q4-cellrow{position:relative;display:block;width:100%;min-height:30px;}
+.q4-cellrow .q4-meth,.q4-cellrow .q4-ctl{position:absolute;left:0;top:50%;
+  transform:translateY(-50%);margin-top:0;z-index:2;}
+.q4-ctl{display:flex;flex-direction:column;gap:4px;align-items:flex-start;}
+.q4-ctl .q4-rate{margin-top:0;justify-content:flex-start;}
+.q4-val{text-align:right;font-family:var(--hud);white-space:nowrap;
+  display:block;line-height:1.5;}
+
+/* per-line notes */
+.q4-note{width:100%;min-height:26px;max-height:96px;resize:none;overflow:hidden;
+  background:transparent !important;border:1px solid transparent;border-radius:6px;
+  padding:4px 7px;color:rgba(255,255,255,0.72) !important;
+  font-family:var(--inter);font-size:11.5px;line-height:1.45;outline:none;
+  transition:background .14s,border-color .14s;}
+.q4-note:hover{background:rgba(255,255,255,0.05) !important;border-color:rgba(255,255,255,0.12);}
+.q4-note:focus{background:rgba(0,212,255,0.08) !important;border-color:rgba(0,212,255,0.5);
+  color:#fff !important;box-shadow:0 0 12px rgba(0,212,255,0.2);}
+.q4-note::placeholder{color:rgba(255,255,255,0.16);}
+
+/* collapse-to-totals control on the detailed tab */
+.bg-collapse{display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+  padding:9px 16px;border-radius:9px;font-family:var(--mono);font-size:10px;font-weight:800;
+  letter-spacing:1.5px;text-transform:uppercase;color:#00d4ff;
+  background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.35);
+  box-shadow:0 0 14px rgba(0,212,255,0.14);transition:all .15s;}
+.bg-collapse:hover{background:rgba(0,212,255,0.2);border-color:rgba(0,212,255,0.8);}
+.bgc-ic{font-size:9px;}
 
 /* ── Q4 builders: three months side by side ───────────────────────────── */
 .qb-card.wide{width:min(1120px,97vw);}
@@ -2225,37 +2387,79 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 .q3-chk .q3-c.bad{color:#f87171;}
 .hsrc.mini{justify-content:center;margin-top:5px;}
 .hsrc.mini .hsrc-b{font-size:7px;padding:3px 7px;letter-spacing:0.6px;}
-
 .q3-staff .q3-k{display:flex;align-items:center;gap:7px;width:330px;}
 .q3-staff .q3-nm{flex:1;min-width:0;}
 .qg-f.tight{padding:4px 7px;}
 .qg-f.tight input{width:66px;font-size:12px;}
 .q3-sub{font-family:var(--hud);font-size:12px;font-weight:800;margin-top:4px;}
 
-/* collapse-to-totals control on the detailed tab */
-.bg-collapse{display:inline-flex;align-items:center;gap:8px;cursor:pointer;
-  padding:9px 16px;border-radius:9px;font-family:var(--mono);font-size:10px;font-weight:800;
-  letter-spacing:1.5px;text-transform:uppercase;color:#00d4ff;
-  background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.35);
-  box-shadow:0 0 14px rgba(0,212,255,0.14);transition:all .15s;}
-.bg-collapse:hover{background:rgba(0,212,255,0.2);border-color:rgba(0,212,255,0.8);
-  box-shadow:0 0 22px rgba(0,212,255,0.35);}
-.bgc-ic{font-size:9px;}
+/* ── Q4 forecast versions: one compact rail ───────────────────────────── */
+.q4v-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  margin-bottom:14px;padding:8px 12px;border-radius:10px;
+  background:linear-gradient(90deg,rgba(251,191,36,0.10),rgba(255,255,255,0.015) 60%);
+  border:1px solid rgba(251,191,36,0.22);}
+.q4v-k{font-family:var(--mono);font-size:9px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;color:#fbbf24;flex-shrink:0;}
+.q4v-state{font-family:var(--mono);font-size:9.5px;color:rgba(255,255,255,0.3);
+  padding:3px 9px;border-radius:20px;background:rgba(255,255,255,0.05);flex-shrink:0;}
+.q4v-state.live{color:#ffd76a;background:rgba(251,191,36,0.14);
+  border:1px solid rgba(251,191,36,0.4);}
+.q4v-state b{color:#fff;font-weight:700;}
+.q4v-list{display:flex;gap:7px;flex-wrap:wrap;flex:1;min-width:0;}
+.q4v-empty{font-family:var(--mono);font-size:9.5px;color:rgba(255,255,255,0.22);
+  align-self:center;}
 
-/* customer filter on the project lanes */
-.ap2-filter{margin-left:auto;display:flex;align-items:center;gap:10px;}
-.ap2-fk{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:1.6px;
-  text-transform:uppercase;color:#9C8FD0;}
-.ap2-sel{min-width:260px;padding:9px 12px;cursor:pointer;
-  background:rgba(61,232,255,0.07);border:1px solid rgba(61,232,255,0.38);
-  color:#3DE8FF;font-family:'Chakra Petch',sans-serif;font-size:12.5px;outline:none;
-  box-shadow:0 0 12px rgba(61,232,255,0.14);transition:all .15s;}
-.ap2-sel:hover,.ap2-sel:focus{border-color:#3DE8FF;background:rgba(61,232,255,0.14);
-  box-shadow:0 0 20px rgba(61,232,255,0.3);}
-.ap2-sel option{background:#0E0A26;color:#F2EEFF;}
-.ap2-clear{cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.8px;
-  color:#FF3DD8;padding:7px 11px;border:1px solid rgba(255,61,216,0.35);}
-.ap2-clear:hover{background:rgba(255,61,216,0.18);color:#fff;}
+/* a version pill */
+.q4v{display:flex;align-items:center;gap:7px;padding:4px 8px 4px 7px;border-radius:20px;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);
+  transition:all .15s;max-width:210px;}
+.q4v:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.24);}
+.q4v.on{background:rgba(251,191,36,0.16);border-color:rgba(251,191,36,0.65);
+  box-shadow:0 0 14px -3px rgba(251,191,36,0.6);}
+.q4v-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;cursor:pointer;
+  background:transparent;border:1.5px solid rgba(255,255,255,0.3);transition:all .15s;}
+.q4v-dot:hover{border-color:#fbbf24;}
+.q4v.on .q4v-dot{background:#fbbf24;border-color:#fbbf24;box-shadow:0 0 9px #fbbf24;}
+.q4v-nm{flex:1;min-width:40px;max-width:112px;background:transparent;border:none;outline:none;
+  color:rgba(255,255,255,0.82);font-family:var(--inter);font-size:11.5px;font-weight:600;
+  padding:0;text-overflow:ellipsis;}
+.q4v.on .q4v-nm{color:#fff;}
+.q4v-nm:focus{color:#fff;}
+.q4v-when{font-family:var(--mono);font-size:8.5px;color:rgba(255,255,255,0.25);flex-shrink:0;}
+.q4v-tools{display:flex;gap:3px;opacity:0;transition:opacity .15s;flex-shrink:0;}
+.q4v:hover .q4v-tools{opacity:1;}
+.q4v-t{cursor:pointer;width:16px;height:16px;display:flex;align-items:center;
+  justify-content:center;border-radius:50%;font-size:11px;line-height:1;
+  color:rgba(255,255,255,0.45);}
+.q4v-t:hover{background:rgba(255,255,255,0.16);color:#fff;}
+.q4v-t.del:hover{background:#f87171;color:#0a0a12;}
+
+.q4v-save{display:flex;align-items:center;gap:6px;cursor:pointer;flex-shrink:0;
+  padding:6px 13px;border-radius:20px;font-family:var(--mono);font-size:9px;font-weight:800;
+  letter-spacing:1.4px;color:#fbbf24;background:rgba(251,191,36,0.1);
+  border:1px solid rgba(251,191,36,0.45);transition:all .15s;}
+.q4v-save:hover{background:#fbbf24;color:#0a0a12;border-color:#fbbf24;
+  box-shadow:0 0 16px rgba(251,191,36,0.5);}
+
+/* ── Q4: pick out the row under the cursor ───────────────────────────── */
+.q4-row{transition:background .12s ease, box-shadow .12s ease;}
+/* a wash across the whole row, plus a lit rail at the left edge */
+.q4-row:hover > td{background-image:linear-gradient(90deg,
+  rgba(0,212,255,0.13),rgba(0,212,255,0.055) 55%,rgba(0,212,255,0.02)) !important;}
+.q4-row:hover > td:first-child{box-shadow:inset 3px 0 0 #00d4ff;}
+.q4-row:hover > td:last-child{box-shadow:inset -1px 0 0 rgba(0,212,255,0.3);}
+/* the figures lift out of the background while hovered */
+.q4-row:hover .q4-val,
+.q4-row:hover td > div[style*="var(--hud)"]{filter:brightness(1.25);}
+/* structural rows keep their own band but still respond */
+.q4-row.major:hover > td{background-image:linear-gradient(90deg,
+  rgba(0,212,255,0.2),rgba(0,212,255,0.08) 60%,rgba(0,212,255,0.03)) !important;}
+/* the method pills come forward so they are easy to hit */
+.q4-row:hover .q4-mb{border-color:rgba(255,255,255,0.3);}
+.q4-row:hover .q4-mb.on{box-shadow:0 0 12px rgba(0,212,255,0.6);}
+/* the note cell invites a click */
+.q4-row:hover .q4-note{background:rgba(255,255,255,0.05) !important;
+  border-color:rgba(255,255,255,0.12);}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
@@ -2304,10 +2508,10 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
     <div class="ap2-content">
       <header class="ap2-top">
         <div class="ap2-brand">
-          <div class="ap2-mark">BE</div>
+          <span class="ap2-rule"></span>
           <div>
-            <div class="ap2-kicker">OPS // PORTFOLIO CONSOLE</div>
-            <div class="ap2-h1">ACTIVE PROJECTS</div>
+            <h1 class="ap2-h1">ACTIVE<em>PROJECTS</em></h1>
+            <div class="ap2-h1sub" id="ap2-hsub"></div>
           </div>
         </div>
         <div class="ap2-actions">
@@ -2809,6 +3013,16 @@ function bgRowVals(row) {
       v[i] = BUDGET_ACTUALS[mk][row.label];
     }
   });
+  // An adopted Q4 forecast replaces the plan for those three months, unless a
+  // real actual has already been uploaded for one of them.
+  if (typeof q4vValueFor === 'function') {
+    [3,4,5].forEach(function(i){
+      var mk = BG_MONTHS[i];
+      if (BUDGET_ACTUALS[mk] && BUDGET_ACTUALS[mk][row.label] !== undefined) return;
+      var q = q4vValueFor(row.label, i);
+      if (q !== undefined) v[i] = q;
+    });
+  }
   // Recalc FY total as sum of all months (col 6 = sum of cols 0-5)
   // Jan-Jul is a single block, Aug-Dec are individual months
   var sum = 0;
@@ -4734,7 +4948,11 @@ function renderBudgetDetailed(el) {
       var isAct = isActual[i+1];
       var label = ['Aug','Sep','Oct','Nov','Dec'][i];
       var col = isAct ? ACTUALS_COLOR : PROJ_COLOR;
-      return thCell(label, isAct?'● Actual':'◎ Projected', col, '90');
+      var adopted = !isAct && i >= 2 &&
+        (typeof q4vActive === 'function') && !!q4vActive();
+      return thCell(label,
+        isAct ? '● Actual' : (adopted ? '◆ Q4 Forecast' : '◎ Projected'),
+        adopted ? '#fbbf24' : col, '90');
     }).join('')+
     thCell('FY 2026', 'Full Year', FY_COLOR, '120',
       'border-left:2px solid rgba(251,191,36,0.4);background:rgba(251,191,36,0.06);box-shadow:inset -1px 0 0 rgba(251,191,36,0.08);');
@@ -5175,10 +5393,196 @@ document.addEventListener('keydown', function(e){
   if (e.key === 'Escape') q4CloseAdminBuilder();
 });
 
+// ── Q4: collapse to totals, and the YTD pace comparison ───────────────────
+var Q4_COLLAPSED = false;
+var Q4_COMPARE   = false;
+
+function q4ToggleCollapse(){
+  Q4_COLLAPSED = !Q4_COLLAPSED;
+  document.querySelectorAll('#budget-forecast tr.q4-detail').forEach(function(r){
+    r.style.display = Q4_COLLAPSED ? 'none' : '';
+  });
+  var b = document.getElementById('q4-collapse-btn');
+  if (b) b.innerHTML = q4CollapseLabel();
+}
+function q4CollapseLabel(){
+  return Q4_COLLAPSED ? '\u25bc EXPAND ALL LINES' : '\u25b6 COLLAPSE TO TOTALS';
+}
+function q4ToggleCompare(){
+  Q4_COMPARE = !Q4_COMPARE;
+  renderBudget();
+}
+
+// How many months of the year are closed, and what each line averaged over
+// them. Reads the same budget rows the projection uses.
+function q4ActualMonths(){
+  var n = 0;
+  BG_IS_ACTUAL.forEach(function(on,i){ if (on) n += (i===0 ? 7 : 1); });
+  return n || 8;
+}
+function q4YtdAvgFor(label){
+  var row = BUDGET_DATA.filter(function(r){ return r.label === label; })[0];
+  if (!row) return null;
+  var v = bgRowVals(row), tot = 0;
+  for (var i=0;i<6;i++) if (BG_IS_ACTUAL[i]) tot += (v[i]||0);
+  var mo = q4ActualMonths();
+  return mo ? tot/mo : null;
+}
+
+// ── Q4 forecast versions ──────────────────────────────────────────────────
+// A version is a snapshot of the whole Q4 working state. Marking one active
+// feeds its Oct/Nov/Dec figures into the projection, where those columns then
+// read "Q4 Forecast" rather than "Projected".
+var Q4V_KEY = 'basin_q4_versions';
+
+function q4vRead(){
+  try {
+    var v = JSON.parse(localStorage.getItem(Q4V_KEY) || 'null');
+    if (v && Array.isArray(v.list)) return v;
+  } catch(e){}
+  return { list:[], activeId:null };
+}
+function q4vWrite(v){
+  try { localStorage.setItem(Q4V_KEY, JSON.stringify(v)); } catch(e){}
+}
+function q4vActive(){
+  var v = q4vRead();
+  if (!v.activeId) return null;
+  return v.list.filter(function(x){ return x.id === v.activeId; })[0] || null;
+}
+
+// A version stores the figures each line resolves to, not the inputs, so the
+// projection is stable even if the builders are edited afterwards.
+function q4vSnapshot(){
+  var out = {};
+  if (typeof Q4_SNAPSHOT_FN === 'function') out = Q4_SNAPSHOT_FN();
+  return out;
+}
+var Q4_SNAPSHOT_FN = null;      // set by the Q4 renderer, which owns computeMonth
+
+function q4vSave(name){
+  var v = q4vRead();
+  var snap = q4vSnapshot();
+  if (!snap || !snap.oct){ toast('Open the Q4 tab before saving a version.','error'); return; }
+  var id = 'v'+Date.now();
+  v.list.unshift({
+    id:id, name:name || ('Version '+(v.list.length+1)),
+    created:new Date().toISOString(),
+    inputs:q4Read(),            // so the version can be reopened and edited
+    values:snap                 // what the projection consumes
+  });
+  if (v.list.length > 12) v.list = v.list.slice(0,12);
+  q4vWrite(v);
+  renderBudget();
+  toast('Version saved','success');
+}
+function q4vSetActive(id){
+  var v = q4vRead();
+  v.activeId = (v.activeId === id) ? null : id;
+  q4vWrite(v);
+  renderBudget();
+}
+function q4vDelete(id){
+  var v = q4vRead();
+  v.list = v.list.filter(function(x){ return x.id !== id; });
+  if (v.activeId === id) v.activeId = null;
+  q4vWrite(v);
+  renderBudget();
+}
+function q4vLoad(id){
+  var v = q4vRead();
+  var ver = v.list.filter(function(x){ return x.id === id; })[0];
+  if (!ver || !ver.inputs) return;
+  try { localStorage.setItem(Q4_KEY_SHARED, JSON.stringify(ver.inputs)); } catch(e){}
+  renderBudget();
+  toast('Loaded \u201c'+ver.name+'\u201d into the working forecast','success');
+}
+function q4vRename(id, name){
+  var v = q4vRead();
+  v.list.forEach(function(x){ if (x.id === id) x.name = name; });
+  q4vWrite(v);
+}
+
+// What the projection should show for a given P&L row and month.
+// Returns undefined when no version is active or the row is not covered.
+var Q4V_ROW_MAP = null;         // label -> key, filled by the Q4 renderer
+function q4vValueFor(label, monthIdx){
+  var act = q4vActive();
+  if (!act || !act.values) return undefined;
+  var m = ({3:'oct', 4:'nov', 5:'dec'})[monthIdx];
+  if (!m || !act.values[m]) return undefined;
+  var key = (Q4V_ROW_MAP||{})[label];
+  if (!key) return undefined;
+  var val = act.values[m][key];
+  return (typeof val === 'number') ? val : undefined;
+}
+
+// The version bar: save the current build, then adopt one into the projection.
+function q4vBar(){
+  var v = q4vRead();
+  var act = q4vActive();
+
+  // Versions read as a row of pills: name, date, and a dot that lights when
+  // adopted. Everything sits on one line, with the actions on hover.
+  var chips = v.list.map(function(x){
+    var on = v.activeId === x.id;
+    var w = new Date(x.created);
+    var stamp = (w.getMonth()+1)+'/'+w.getDate();
+    return '<div class="q4v'+(on?' on':'')+'" title="Saved '+w.toLocaleString()+'">'+
+      '<span class="q4v-dot" onclick="q4vSetActive(\''+x.id+'\')" '+
+        'title="'+(on?'Adopted \u2014 click to release':'Adopt this version')+'"></span>'+
+      '<input class="q4v-nm" value="'+String(x.name).replace(/"/g,'&quot;')+'" '+
+        'onchange="q4vRename(\''+x.id+'\',this.value)"/>'+
+      '<span class="q4v-when">'+stamp+'</span>'+
+      '<span class="q4v-tools">'+
+        '<span class="q4v-t" onclick="q4vLoad(\''+x.id+'\')" title="Load into the working forecast">\u21bb</span>'+
+        '<span class="q4v-t del" onclick="q4vDelete(\''+x.id+'\')" title="Delete">\u00d7</span>'+
+      '</span>'+
+    '</div>';
+  }).join('');
+
+  return '<div class="q4v-bar">'+
+    '<span class="q4v-k">Versions</span>'+
+    '<span class="q4v-state'+(act?' live':'')+'">'+
+      (act ? '<b>'+act.name+'</b> adopted' : 'using the plan')+'</span>'+
+    '<div class="q4v-list">'+
+      (v.list.length ? chips : '<span class="q4v-empty">none saved yet</span>')+
+    '</div>'+
+    '<button class="q4v-save" onclick="q4vSavePrompt()" title="Snapshot the current build">'+
+      '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" '+
+      'stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">'+
+      '<path d="M12 5v14M5 12h14"/></svg> SAVE</button>'+
+  '</div>';
+}
+
+function q4vSavePrompt(){
+  var n = prompt('Name this version', 'Q4 v'+(q4vRead().list.length+1));
+  if (n === null) return;
+  q4vSave(n.trim() || null);
+}
+
 // ── Q4: percent-of-revenue lines ──────────────────────────────────────────
 // Direct Subcontractor Costs track revenue, so the line is entered as a rate
 // and multiplied by whatever Project Income resolves to for that month --
 // manual figure or RPH build alike.
+// One note per P&L line, kept with the rest of the forecast.
+function q4LineNote(key){
+  var d = q4Read();
+  return (d.lineNotes||{})[key] || '';
+}
+function q4SetLineNote(key, txt){
+  var d = q4Read();
+  d.lineNotes = d.lineNotes || {};
+  if (txt && txt.trim()) d.lineNotes[key] = txt.trim();
+  else delete d.lineNotes[key];
+  q4Write(d);
+}
+// notes grow to fit what is typed rather than scrolling in a one-line box
+function q4AutoGrow(el){
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 96) + 'px';
+}
+
 var Q4_PCT_LINES = { a5200: { label:'Direct Subcontractor Costs', def:6 } };
 
 function q4PctMethod(month, key){
@@ -5833,6 +6237,28 @@ function renderBudgetQ4(el) {
   var computed = {};
   MONTHS.forEach(function(m){ computed[m] = computeMonth(m); });
 
+  // expose what a saved version needs: the resolved figures and the map from
+  // P&L label to the key those figures are stored under
+  Q4_SNAPSHOT_FN = function(){
+    var snap = {};
+    MONTHS.forEach(function(m){ snap[m] = computeMonth(m); });
+    return snap;
+  };
+  Q4V_ROW_MAP = (function(){
+    var map = {};
+    Q4_ROWS.forEach(function(r){
+      if (!r.key || r.kind === 'sub') return;
+      var bd = (r.bdIdx !== undefined) ? BUDGET_DATA[r.bdIdx] : null;
+      if (bd) map[bd.label] = r.key;
+      else {
+        // totals carry their own label straight through
+        var hit = BUDGET_DATA.filter(function(x){ return x.label === r.label; })[0];
+        if (hit) map[hit.label] = r.key;
+      }
+    });
+    return map;
+  })();
+
   // Q4 totals
   var totals = {};
   Q4_ROWS.forEach(function(r){
@@ -5979,8 +6405,9 @@ function renderBudgetQ4(el) {
   // Calc method header
   headerCells +=
     '<th style="text-align:left;padding:10px 16px;min-width:180px;border-left:1px solid rgba(255,255,255,0.06);">'+
-      '<div style="font-family:\'Helvetica Neue\',Arial,sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);">Calc Method</div>'+
-      '<div style="font-size:8px;font-family:var(--mono);color:rgba(255,255,255,0.12);margin-top:2px;">How this is projected</div>'+
+      '<div style="font-family:\'Helvetica Neue\',Arial,sans-serif;font-size:12px;font-weight:800;'+
+        'letter-spacing:1.8px;text-transform:uppercase;color:rgba(255,255,255,0.42);">Notes</div>'+
+      '<div style="font-size:8px;font-family:var(--mono);color:rgba(255,255,255,0.22);margin-top:3px;">Click a cell to write</div>'+
     '</th>';
 
   // ── Body rows ─────────────────────────────────────────────────────────
@@ -5988,7 +6415,7 @@ function renderBudgetQ4(el) {
   Q4_ROWS.forEach(function(row, ri) {
     // subsection headings are structural, not data rows
     if (row.kind === 'sub') {
-      tbody += '<tr><td colspan="'+(MONTHS.length+3)+'" '+
+      tbody += '<tr class="q4-detail"><td colspan="'+(MONTHS.length+3)+'" '+
         'style="padding:12px 18px 5px;font-family:var(--mono);font-size:8.5px;font-weight:800;'+
         'letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);">'+
         row.label+'</td></tr>';
@@ -6045,7 +6472,7 @@ function renderBudgetQ4(el) {
     var rowNoteId = 'row_'+noteKey;
     var hasRowNote = getNote('row', noteKey);
     var labelCell =
-      '<td style="padding:8px 16px;'+topB+rowBg+
+      '<td style="padding:8px 16px;border-right:2px solid rgba(255,255,255,0.12);'+topB+rowBg+
         'font-family:\'Helvetica Neue\',Arial,sans-serif;'+
         'font-size:'+(isMajor?'13':isPct?'11':'12')+'px;'+
         'font-weight:'+(isMajor?900:isPct?400:500)+';'+
@@ -6076,26 +6503,33 @@ function renderBudgetQ4(el) {
       // a faint wash per month plus a divider on its left edge, so the three
       // columns read as separate periods rather than one block of figures
       var mi   = MONTHS.indexOf(month);
-      var lane = 'background-image:linear-gradient(180deg,rgba('+colR+',0.055),rgba('+colR+',0.015));'+
-                 (mi > 0 ? 'border-left:1px solid rgba('+colR+',0.30);' : 'border-left:1px solid rgba(255,255,255,0.10);');
+      // alternate the wash depth so adjacent months never read the same, and
+      // separate them with a real divider rather than a hairline
+      var deep = (mi % 2 === 1);
+      var lane = 'background-image:linear-gradient(180deg,rgba('+colR+','+(deep?'0.16':'0.075')+'),'+
+                   'rgba('+colR+','+(deep?'0.07':'0.025')+'));'+
+                 'border-left:2px solid rgba('+colR+',0.55);'+
+                 'box-shadow:inset 9px 0 18px -14px rgba('+colR+',0.9);';
       rowBg = rowBg + lane;
 
       if (isEditable && row.key === 'a4000') {
         // Project income: either typed in, or built from RPH groups
         var isRph = q4Method(month) === 'rph';
         monthCells +=
-          '<td id="'+tdId+'" style="text-align:right;padding:8px 14px;'+topB+rowBg+
+          '<td id="'+tdId+'" class="q4-cell" style="padding:8px 14px;'+topB+rowBg+
             'position:relative;">'+
-            '<div style="font-family:var(--hud);font-size:'+numSz+';font-weight:'+numW+';'+
-              'color:'+row.color+';cursor:'+(isRph?'default':'pointer')+';" '+
-              (isRph ? 'title="Built from RPH groups"'
-                     : 'onclick="q4EditCell(\''+month+'\',\'rev\','+val+',\''+tdId+'\')"')+'>'+
-              fmtV(val)+'</div>'+
+            '<div class="q4-cellrow">'+
             '<div class="q4-meth">'+
               '<span class="q4-mb'+(isRph?'':' on')+'" onclick="q4UseManual(\''+month+'\')" '+
                 'title="Enter the amount directly">Manual</span>'+
               '<span class="q4-mb'+(isRph?' on':'')+'" onclick="q4OpenBuilder(\''+month+'\')" '+
                 'title="Build from RPH groups">RPH</span>'+
+            '</div>'+
+            '<div class="q4-val" style="font-size:'+numSz+';font-weight:'+numW+';'+
+              'color:'+row.color+';cursor:'+(isRph?'default':'pointer')+';" '+
+              (isRph ? 'title="Built from RPH groups"'
+                     : 'onclick="q4EditCell(\''+month+'\',\'rev\','+val+',\''+tdId+'\')"')+'>'+
+              fmtV(val)+'</div>'+
             '</div>'+
             '<button onclick="event.stopPropagation();showNoteModal(\''+month+'\',\''+noteKey+'\',\''+row.label+'\',\''+MLABELS[month]+'\')" '+
               'title="'+(cellNote?'Edit note: '+cellNote:'Add note')+'" '+
@@ -6106,13 +6540,10 @@ function renderBudgetQ4(el) {
         var isPctM = q4PctMethod(month, row.key) === 'pct';
         var rate   = q4PctRate(month, row.key);
         monthCells +=
-          '<td id="'+tdId+'" style="text-align:right;padding:8px 14px;'+topB+rowBg+
+          '<td id="'+tdId+'" class="q4-cell" style="padding:8px 14px;'+topB+rowBg+
             'position:relative;">'+
-            '<div style="font-family:var(--hud);font-size:'+numSz+';font-weight:'+numW+';'+
-              'color:'+row.color+';cursor:'+(isPctM?'default':'pointer')+';" '+
-              (isPctM ? 'title="'+rate+'% of Project Income"'
-                      : 'onclick="q4EditCell(\''+month+'\',\''+row.key+'\','+val+',\''+tdId+'\')"')+'>'+
-              fmtV(val)+'</div>'+
+            '<div class="q4-cellrow">'+
+            '<div class="q4-ctl">'+
             (isPctM
               ? '<div class="q4-rate">'+
                   '<input type="number" step="0.25" min="0" value="'+rate+'" '+
@@ -6124,40 +6555,50 @@ function renderBudgetQ4(el) {
                 'title="Enter the amount directly">Manual</span>'+
               '<span class="q4-mb'+(isPctM?' on':'')+'" onclick="q4PctUseRate(\''+month+'\',\''+row.key+'\')" '+
                 'title="Calculate as a percent of revenue">% Rev</span>'+
+            '</div></div>'+
+            '<div class="q4-val" style="font-size:'+numSz+';font-weight:'+numW+';'+
+              'color:'+row.color+';cursor:'+(isPctM?'default':'pointer')+';" '+
+              (isPctM ? 'title="'+rate+'% of Project Income"'
+                      : 'onclick="q4EditCell(\''+month+'\',\''+row.key+'\','+val+',\''+tdId+'\')"')+'>'+
+              fmtV(val)+'</div>'+
             '</div>'+
           '</td>';
       } else if (isEditable && Q4_ADMIN_LINES.indexOf(row.key) >= 0) {
         var isAdm = q4AdminMethod(month) === 'build';
         monthCells +=
-          '<td id="'+tdId+'" style="text-align:right;padding:8px 14px;'+topB+rowBg+
+          '<td id="'+tdId+'" class="q4-cell" style="padding:8px 14px;'+topB+rowBg+
             'position:relative;">'+
-            '<div style="font-family:var(--hud);font-size:'+numSz+';font-weight:'+numW+';'+
-              'color:'+row.color+';cursor:'+(isAdm?'default':'pointer')+';" '+
-              (isAdm ? 'title="From the Admin Labor build"'
-                     : 'onclick="q4EditCell(\''+month+'\',\''+row.key+'\','+val+',\''+tdId+'\')"')+'>'+
-              fmtV(val)+'</div>'+
+            '<div class="q4-cellrow">'+
             '<div class="q4-meth">'+
               '<span class="q4-mb'+(isAdm?'':' on')+'" onclick="q4AdminUseManual(\''+month+'\')" '+
                 'title="Enter the amount directly">Manual</span>'+
               '<span class="q4-mb'+(isAdm?' on':'')+'" onclick="q4OpenAdminBuilder(\''+month+'\')" '+
                 'title="Build from the admin salary roster">Build</span>'+
             '</div>'+
+            '<div class="q4-val" style="font-size:'+numSz+';font-weight:'+numW+';'+
+              'color:'+row.color+';cursor:'+(isAdm?'default':'pointer')+';" '+
+              (isAdm ? 'title="From the Admin Labor build"'
+                  : 'onclick="q4EditCell(\''+month+'\',\''+row.key+'\','+val+',\''+tdId+'\')"')+'>'+
+              fmtV(val)+'</div>'+
+            '</div>'+
           '</td>';
       } else if (isEditable && ['a5100','a6110','a6100'].indexOf(row.key) >= 0) {
         var isBuild = q4DlMethod(month) === 'build';
         monthCells +=
-          '<td id="'+tdId+'" style="text-align:right;padding:8px 14px;'+topB+rowBg+
+          '<td id="'+tdId+'" class="q4-cell" style="padding:8px 14px;'+topB+rowBg+
             'position:relative;">'+
-            '<div style="font-family:var(--hud);font-size:'+numSz+';font-weight:'+numW+';'+
-              'color:'+row.color+';cursor:'+(isBuild?'default':'pointer')+';" '+
-              (isBuild ? 'title="From the Direct Labor build"'
-                       : 'onclick="q4EditCell(\''+month+'\',\''+row.key+'\','+val+',\''+tdId+'\')"')+'>'+
-              fmtV(val)+'</div>'+
+            '<div class="q4-cellrow">'+
             '<div class="q4-meth">'+
               '<span class="q4-mb'+(isBuild?'':' on')+'" onclick="q4DlUseManual(\''+month+'\')" '+
                 'title="Enter the amount directly">Manual</span>'+
               '<span class="q4-mb'+(isBuild?' on':'')+'" onclick="q4OpenDlBuilder(\''+month+'\')" '+
                 'title="Build from headcount, workdays and rate">Build</span>'+
+            '</div>'+
+            '<div class="q4-val" style="font-size:'+numSz+';font-weight:'+numW+';'+
+              'color:'+row.color+';cursor:'+(isBuild?'default':'pointer')+';" '+
+              (isBuild ? 'title="From the Direct Labor build"'
+                  : 'onclick="q4EditCell(\''+month+'\',\''+row.key+'\','+val+',\''+tdId+'\')"')+'>'+
+              fmtV(val)+'</div>'+
             '</div>'+
           '</td>';
       } else if (isEditable) {
@@ -6203,22 +6644,38 @@ function renderBudgetQ4(el) {
           'color:'+(isTotal?'#ffd76a':row.color)+';'+
           (isTotal?'text-shadow:0 0 18px rgba(251,191,36,0.75);':totGlow)+'">'+
           fmtV(totVal)+'</div>'+
+        (function(){
+          if (!Q4_COMPARE || isPct) return '';
+          var bdLabel = (row.bdIdx !== undefined && BUDGET_DATA[row.bdIdx])
+            ? BUDGET_DATA[row.bdIdx].label : row.label;
+          var avg = q4YtdAvgFor(bdLabel);
+          if (avg === null || !isFinite(avg)) return '';
+          var q4mo = (totVal||0)/MONTHS.length;
+          var d = avg ? (q4mo - avg)/Math.abs(avg)*100 : 0;
+          var up = d >= 0;
+          return '<div class="q4-cmp">'+
+            '<span class="q4-cmp-a">'+fmtV(avg)+'<em>/mo YTD</em></span>'+
+            '<span class="q4-cmp-d '+(up?'up':'down')+'">'+(up?'\u25b2':'\u25bc')+' '+
+              Math.abs(d).toFixed(0)+'%</span>'+
+          '</div>';
+        })()+
       '</td>';
 
     // Calc method cell — placeholder for now, styled to receive content later
+    // Notes: one free-text note per line, saved with the forecast
+    var lineNote = q4LineNote(row.key);
     var calcCell =
-      '<td style="padding:8px 16px;'+topB+
-        'border-left:1px solid rgba(255,255,255,0.04);'+
-        'background:rgba(255,255,255,0.01);">'+
-        '<div style="font-family:\'Helvetica Neue\',Arial,sans-serif;font-size:9px;font-weight:400;'+
-          'color:rgba(255,255,255,0.18);font-style:italic;line-height:1.4;">'+
-          (isTotal ? '<span style="color:rgba('+row.rgb+',0.35);font-style:normal;">Σ calculated</span>' :
-           isPct   ? '<span style="color:rgba('+row.rgb+',0.35);font-style:normal;">÷ derived</span>' :
-                     'Pending…')+
-        '</div>'+
+      '<td style="padding:6px 12px;'+topB+
+        'border-left:1px solid rgba(255,255,255,0.07);'+
+        'background:rgba(255,255,255,0.015);">'+
+        '<textarea class="q4-note" rows="1" placeholder="\u2014" '+
+          'oninput="q4AutoGrow(this)" '+
+          'onchange="q4SetLineNote(\''+row.key+'\',this.value)">'+
+          String(lineNote||'').replace(/</g,'&lt;')+'</textarea>'+
       '</td>';
 
-    tbody += '<tr style="border-bottom:1px solid rgba(255,255,255,0.03);">'+
+    tbody += '<tr class="q4-row'+(isMajor?' major':' q4-detail')+'" '+
+      'style="border-bottom:1px solid rgba(255,255,255,0.03);">'+
       labelCell + monthCells + totCell + calcCell +
     '</tr>';
   });
@@ -6251,13 +6708,21 @@ function renderBudgetQ4(el) {
             '<div style="font-family:\'Helvetica Neue\',Arial,sans-serif;font-size:11px;color:rgba(255,255,255,0.3);">'+
               'Click any value cell to edit · Click ✎ or 📝 to annotate</div>'+
           '</div>'+
-          '<div style="display:flex;gap:8px;">'+
+          '<div style="display:flex;gap:8px;align-items:center;">'+
+            '<button id="q4-collapse-btn" class="q4-tool" onclick="q4ToggleCollapse()" '+
+              'title="Fold the detail lines away and leave each group total">'+
+              q4CollapseLabel()+'</button>'+
+            '<button class="q4-tool'+(Q4_COMPARE?' on':'')+'" onclick="q4ToggleCompare()" '+
+              'title="Show each line\u2019s monthly average across the closed months">'+
+              '\u2696 COMPARE WITH YTD MONTHLY AVG</button>'+
             '<button id="'+resetId+'" style="font-family:\'Helvetica Neue\',Arial,sans-serif;font-size:10px;font-weight:700;'+
               'padding:7px 14px;border-radius:8px;cursor:pointer;'+
               'background:rgba(255,80,80,0.06);border:1px solid rgba(255,80,80,0.2);color:rgba(255,100,100,0.7);">'+
               '↺ Reset to Defaults</button>'+
           '</div>'+
         '</div>'+
+
+        q4vBar()+
 
         // Table
         '<div style="overflow:auto;border-radius:14px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.01);">'+
@@ -7758,7 +8223,9 @@ document.addEventListener('keydown', function(e){
   if (e.key === 'Escape') closeLowRph();
 });
 
-var UB_PAL = ['#b07d16','#e0a83a','#f0c368','#8a5f0c','#d4913f','#c9a86b'];
+// Distinct hues, so a slice can be matched to its row at a glance. Kept warm
+// enough to sit in the gold palette the card already uses.
+var UB_PAL = ['#b07d16','#2f7d9e','#3f9c6d','#c4562f','#7a5ca8','#c9a227'];
 
 function ytdUnbilledBar(D){
   var u = D.unbilled;
@@ -7795,18 +8262,49 @@ function openUnbilled(){
   var rows = u.items.slice().sort(function(a,b){ return b.amt - a.amt; });
   var total = rows.reduce(function(s,r){ return s+r.amt; }, 0);
 
-  // donut, drawn as stroked arcs so each slice can be lit on hover
-  var R = 78, C = 2*Math.PI*R, off = 0;
-  var arcs = rows.map(function(r, i){
+  // Each slice is an arc with a leader line out to its own label, so the ring
+  // reads on its own without cross-referencing the list.
+  var CX = 190, CY = 190, R = 108, TH = 46;
+  var C = 2*Math.PI*R, off = 0;
+  var arcs = '', leaders = '', labels = '';
+  var lastLeft = -999, lastRight = -999;
+
+  rows.forEach(function(r, i){
     var frac = r.amt/total;
-    var seg = '<circle class="ub-slice" data-ub="'+i+'" cx="110" cy="110" r="'+R+'" fill="none" '+
-      'stroke="'+UB_PAL[i%UB_PAL.length]+'" stroke-width="42" '+
-      'stroke-dasharray="'+(frac*C).toFixed(2)+' '+C.toFixed(2)+'" '+
+    var col  = UB_PAL[i % UB_PAL.length];
+    arcs += '<circle class="ub-slice" data-ub="'+i+'" cx="'+CX+'" cy="'+CY+'" r="'+R+'" fill="none" '+
+      'stroke="'+col+'" stroke-width="'+TH+'" '+
+      'stroke-dasharray="'+Math.max(0,(frac*C)-2).toFixed(2)+' '+C.toFixed(2)+'" '+
       'stroke-dashoffset="'+(-off*C).toFixed(2)+'" '+
-      'transform="rotate(-90 110 110)"><title>'+r.num+' \u00b7 '+ytd$(r.amt)+'</title></circle>';
+      'transform="rotate(-90 '+CX+' '+CY+')"><title>'+r.num+' \u00b7 '+ytd$(r.amt)+'</title></circle>';
+
+    // leader from the middle of the slice out to a label
+    var mid = (off + frac/2) * 2*Math.PI - Math.PI/2;
+    var right = Math.cos(mid) >= 0;
+    var x1 = CX + Math.cos(mid)*(R + TH/2 - 4), y1 = CY + Math.sin(mid)*(R + TH/2 - 4);
+    var x2 = CX + Math.cos(mid)*(R + TH/2 + 16), y2 = CY + Math.sin(mid)*(R + TH/2 + 16);
+    // keep labels from colliding when slices are thin
+    var track = right ? lastRight : lastLeft;
+    if (y2 - track < 30 && track > -900) y2 = track + 30;
+    if (right) lastRight = y2; else lastLeft = y2;
+    var x3 = right ? CX + R + TH/2 + 34 : CX - R - TH/2 - 34;
+
+    leaders += '<path class="ub-lead" data-ub="'+i+'" d="M'+x1.toFixed(1)+','+y1.toFixed(1)+
+      ' L'+x2.toFixed(1)+','+y2.toFixed(1)+' L'+x3.toFixed(1)+','+y2.toFixed(1)+'" '+
+      'fill="none" stroke="'+col+'" stroke-width="1.4" opacity="0.75"/>'+
+      '<circle cx="'+x3.toFixed(1)+'" cy="'+y2.toFixed(1)+'" r="2.4" fill="'+col+'"/>';
+
+    labels += '<text class="ub-lab" data-ub="'+i+'" x="'+(right?x3+7:x3-7).toFixed(1)+'" '+
+      'y="'+(y2-2).toFixed(1)+'" text-anchor="'+(right?'start':'end')+'" '+
+      'font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="800" '+
+      'fill="'+col+'">'+r.num+'</text>'+
+      '<text class="ub-lab2" data-ub="'+i+'" x="'+(right?x3+7:x3-7).toFixed(1)+'" '+
+      'y="'+(y2+11).toFixed(1)+'" text-anchor="'+(right?'start':'end')+'" '+
+      'font-family="Helvetica,Arial" font-size="11" font-weight="700" '+
+      'fill="#8a6a2a">'+(frac*100).toFixed(1)+'% \u00b7 '+ytdShort(r.amt)+'</text>';
+
     off += frac;
-    return seg;
-  }).join('');
+  });
 
   var legend = rows.map(function(r, i){
     return '<div class="ub-row" data-ub="'+i+'">'+
@@ -7833,13 +8331,14 @@ function openUnbilled(){
       '<div class="ub-sub">'+rows.length+' projects \u00b7 work performed, not yet invoiced \u00b7 as of '+
         (u.asOf||'')+'</div>'+
       '<div class="ub-body">'+
-        '<svg viewBox="0 0 220 220" style="width:220px;height:220px;flex-shrink:0;">'+
-          '<circle cx="110" cy="110" r="'+R+'" fill="none" stroke="rgba(176,125,22,0.10)" stroke-width="42"/>'+
-          arcs+
-          '<text x="110" y="104" text-anchor="middle" font-family="Helvetica,Arial" font-size="20" '+
-            'font-weight="800" fill="#a8720f">'+ytdShort(total)+'</text>'+
-          '<text x="110" y="122" text-anchor="middle" font-family="monospace" font-size="8.5" '+
-            'letter-spacing="1" fill="#a58a55">UNBILLED</text>'+
+        '<svg viewBox="-92 8 564 364" style="width:min(560px,56vw);height:auto;flex-shrink:0;">'+
+          '<circle cx="'+CX+'" cy="'+CY+'" r="'+R+'" fill="none" '+
+            'stroke="rgba(176,125,22,0.10)" stroke-width="'+TH+'"/>'+
+          arcs + leaders + labels +
+          '<text x="'+CX+'" y="'+(CY-4)+'" text-anchor="middle" font-family="Helvetica,Arial" '+
+            'font-size="27" font-weight="800" fill="#a8720f">'+ytdShort(total)+'</text>'+
+          '<text x="'+CX+'" y="'+(CY+15)+'" text-anchor="middle" font-family="monospace" '+
+            'font-size="9.5" letter-spacing="1.6" fill="#a58a55">UNBILLED</text>'+
         '</svg>'+
         '<div class="ub-legend">'+legend+'</div>'+
       '</div>'+
@@ -7852,13 +8351,20 @@ function openUnbilled(){
 function wireUnbilled(){
   var slices = document.querySelectorAll('#unbilled-ov .ub-slice');
   var legend = document.querySelectorAll('#unbilled-ov .ub-row');
+  var marks  = document.querySelectorAll('#unbilled-ov .ub-lead, #unbilled-ov .ub-lab, #unbilled-ov .ub-lab2');
   function focus(k){
     slices.forEach(function(sl){
       sl.classList.toggle('lit', sl.dataset.ub === k);
       sl.classList.toggle('dim', sl.dataset.ub !== k);
     });
+    marks.forEach(function(m){ m.classList.toggle('dim', m.dataset.ub !== k); });
+    legend.forEach(function(rw){ rw.classList.toggle('dim', rw.dataset.ub !== k); });
   }
-  function clear(){ slices.forEach(function(sl){ sl.classList.remove('lit','dim'); }); }
+  function clear(){
+    slices.forEach(function(sl){ sl.classList.remove('lit','dim'); });
+    marks.forEach(function(m){ m.classList.remove('dim'); });
+    legend.forEach(function(rw){ rw.classList.remove('dim'); });
+  }
   legend.forEach(function(rw){
     rw.addEventListener('mouseenter', function(){ focus(rw.dataset.ub); });
     rw.addEventListener('mouseleave', clear);
@@ -14198,10 +14704,9 @@ function pcOpen(){
 
 function pcColsHTML(){
   var cols = [
-    {k:'num',    label:'PROJECT #',       sort:true},
-    {k:null,     label:'PROPOSAL / SO #'},
-    {k:null,     label:'PROJECT NAME'},
-    {k:'cust',   label:'CUSTOMER',        sort:true},
+    {k:'num',    label:'PROJECT',         sort:true},
+    {k:null,     label:'PROPOSAL / SO'},
+    {k:'cust',   label:'PROJECT \u00b7 CUSTOMER', sort:true},
     {k:'amount', label:'AMOUNT',          sort:true, r:true},
     {k:null,     label:'NOTES'},
     {k:'contact',label:'CONTACT',         sort:true},
@@ -14229,22 +14734,31 @@ function pcRender(){
         'waiting on paper to come back.</div></div>';
   } else {
     box.innerHTML = list.map(function(r){
+      var initial = (r.contact||'').trim().charAt(0).toUpperCase();
       return '<div class="pc-row">'+
-        '<input value="'+(r.num||'').replace(/"/g,'&quot;')+'" placeholder="26-xxx" class="mono" '+
-          'onchange="pcEdit(\''+r.id+'\',\'num\',this.value)"/>'+
-        '<input value="'+(r.prop||'').replace(/"/g,'&quot;')+'" placeholder="P-0000 / SO-000" class="mono" '+
-          'onchange="pcEdit(\''+r.id+'\',\'prop\',this.value)"/>'+
-        '<input value="'+(r.name||'').replace(/"/g,'&quot;')+'" placeholder="Project name" '+
-          'onchange="pcEdit(\''+r.id+'\',\'name\',this.value)"/>'+
-        '<input value="'+(r.cust||'').replace(/"/g,'&quot;')+'" placeholder="Customer" '+
-          'onchange="pcEdit(\''+r.id+'\',\'cust\',this.value)"/>'+
-        '<input value="'+(r.amount||'')+'" placeholder="0" class="mono amt" type="number" step="1000" '+
-          'onchange="pcEdit(\''+r.id+'\',\'amount\',this.value)"/>'+
-        '<textarea class="pc-notes" placeholder="Waiting on\u2026" rows="2" '+
-          'onchange="pcEdit(\''+r.id+'\',\'notes\',this.value)">'+
-          (r.notes||'').replace(/</g,'&lt;')+'</textarea>'+
-        '<input value="'+(r.contact||'').replace(/"/g,'&quot;')+'" placeholder="Who to chase" '+
-          'onchange="pcEdit(\''+r.id+'\',\'contact\',this.value)"/>'+
+        '<div class="pc-cell id">'+
+          '<input value="'+(r.num||'').replace(/"/g,'&quot;')+'" placeholder="26-xxx" '+
+            'onchange="pcEdit(\''+r.id+'\',\'num\',this.value)"/></div>'+
+        '<div class="pc-cell ref">'+
+          '<input value="'+(r.prop||'').replace(/"/g,'&quot;')+'" placeholder="P-0000 / SO-000" '+
+            'onchange="pcEdit(\''+r.id+'\',\'prop\',this.value)"/></div>'+
+        '<div class="pc-cell nm">'+
+          '<input value="'+(r.name||'').replace(/"/g,'&quot;')+'" placeholder="Project name" '+
+            'onchange="pcEdit(\''+r.id+'\',\'name\',this.value)"/>'+
+          '<div class="pc-cust"><span class="pc-cdot"></span>'+
+            '<input value="'+(r.cust||'').replace(/"/g,'&quot;')+'" placeholder="Customer" '+
+              'onchange="pcEdit(\''+r.id+'\',\'cust\',this.value)"/></div></div>'+
+        '<div class="pc-cell amt">'+
+          '<input value="'+(r.amount||'')+'" placeholder="0" type="number" step="1000" '+
+            'onchange="pcEdit(\''+r.id+'\',\'amount\',this.value)"/></div>'+
+        '<div class="pc-cell note">'+
+          '<textarea class="pc-notes" placeholder="Waiting on\u2026" rows="2" '+
+            'onchange="pcEdit(\''+r.id+'\',\'notes\',this.value)">'+
+            (r.notes||'').replace(/</g,'&lt;')+'</textarea></div>'+
+        '<div class="pc-cell who">'+
+          '<span class="pc-av'+(initial?'':' empty')+'">'+(initial||'\u00b7')+'</span>'+
+          '<input value="'+(r.contact||'').replace(/"/g,'&quot;')+'" placeholder="Who to chase" '+
+            'onchange="pcEdit(\''+r.id+'\',\'contact\',this.value)"/></div>'+
         '<button class="pc-del" onclick="pcRemove(\''+r.id+'\')" title="Remove">\u00d7</button>'+
       '</div>';
     }).join('');
@@ -14414,60 +14928,140 @@ function ap2ContractPanel(t){
 }
 
 // ── Rate console ──────────────────────────────────────────────────────────
-function ap2RatePanel(t){
-  var g = ap2GroupStats();
-  var blended = t.hrs > 0 ? t.rev26/t.hrs : 0;
-  var defs = [
-    {k:'qts',      label:'QTS',      sub:'Quality Technology Services', color:AP2.cyan,    glow:AP2.cyanGlow},
-    {k:'corgan',   label:'CORGAN',   sub:'Corgan',                      color:AP2.magenta, glow:AP2.magentaGlow},
-    {k:'standard', label:'STANDARD', sub:'All other customers',         color:AP2.lime,    glow:AP2.limeGlow}
-  ];
-  var pods = defs.map(function(d){
-    var s = g[d.k];
-    var delta = s.rph - blended;
-    var sign = delta >= 0 ? '+' : '\u2212';
-    return '<div class="ap2-pod" style="--c:'+d.color+';--g:'+d.glow+';">'+
-      '<div class="ap2-podin">'+
-        '<div class="ap2-podtop">'+
-          '<div><div class="ap2-podlab">'+d.label+'</div><div class="ap2-podsub">'+d.sub+'</div></div>'+
-          '<div class="ap2-poddelta">'+sign+'$'+Math.abs(Math.round(delta)).toLocaleString()+' VS BLENDED</div>'+
-        '</div>'+
-        '<div class="ap2-podrate"><span>$'+Math.round(s.rph).toLocaleString()+'</span><em>/ HR</em></div>'+
-        '<div class="ap2-podfoot">'+
-          '<div><span class="ap2-fk">2026 REV</span><span class="ap2-fv">'+ap2Short(s.rev26)+'</span></div>'+
-          '<div><span class="ap2-fk">DL HOURS</span><span class="ap2-fv">'+Math.round(s.hrs).toLocaleString()+'</span></div>'+
-        '</div>'+
-      '</div></div>';
+// Backlog, revenue and project count per project manager.
+function ap2PmStats(){
+  var by = {};
+  apFiltered().forEach(function(r){
+    var pm = (r.pm||'').trim();
+    if (!pm || /^unclear$/i.test(pm)) pm = 'Unassigned';
+    if (!by[pm]) by[pm] = { pm:pm, n:0, backlog:0, rev26:0, contract:0 };
+    by[pm].n++; by[pm].backlog += r.backlog;
+    by[pm].rev26 += r.rev26; by[pm].contract += r.contract;
+  });
+  return Object.keys(by).map(function(k){ return by[k]; })
+    .sort(function(a,b){ return b.backlog - a.backlog || b.n - a.n; });
+}
+
+function ap2PmPanel(){
+  var pms = ap2PmStats();
+  if (!pms.length) return '';
+  var maxBl = Math.max.apply(null, pms.map(function(p){ return p.backlog; }).concat([1]));
+  var totBl = pms.reduce(function(t,p){ return t + p.backlog; }, 0);
+  var pal = ['#FF3DD8','#3DE8FF','#C6FF4D','#A78BFA','#FFB454','#4ADE80'];
+
+  var cards = pms.map(function(p, i){
+    var col = pal[i % pal.length];
+    var initial = p.pm.charAt(0).toUpperCase();
+    return '<div class="ap2-pm" style="--c:'+col+';">'+
+      '<div class="ap2-pm-top">'+
+        '<span class="ap2-pm-av">'+initial+'</span>'+
+        '<span class="ap2-pm-nm">'+p.pm+'</span>'+
+        '<span class="ap2-pm-n">'+p.n+'</span>'+
+      '</div>'+
+      '<div class="ap2-pm-bl">'+ap2Short(p.backlog)+'</div>'+
+      '<div class="ap2-pm-bar"><i style="width:'+
+        Math.max(2,(p.backlog/maxBl)*100).toFixed(1)+'%;"></i></div>'+
+      '<div class="ap2-pm-foot">'+
+        '<span>'+ap2Short(p.rev26)+' rev</span>'+
+        '<span>'+(totBl ? (p.backlog/totBl*100).toFixed(0) : 0)+'% of backlog</span>'+
+      '</div>'+
+    '</div>';
   }).join('');
 
-  function shareBar(label, pick){
-    var tot = defs.reduce(function(a,d){ return a + pick(g[d.k]); }, 0) || 1;
-    var segs = defs.map(function(d){
-      var v = pick(g[d.k]), pct = v/tot*100;
-      if (pct <= 0) return '';
-      return '<div class="ap2-seg" style="width:'+pct.toFixed(2)+'%;background:'+
-        (d.k==='qts'?AP2.cyanBand:d.k==='corgan'?AP2.magentaBand:'rgba(198,255,77,0.08)')+';'+
-        'border-top:2px solid '+d.color+';">'+
-        '<span style="color:'+d.color+';font-weight:700;">'+pct.toFixed(0)+'%</span>'+
-        '<span class="ap2-segn">'+d.label+'</span></div>';
-    }).join('');
-    return '<div class="ap2-share"><div class="ap2-sharek">'+label+'</div>'+
-      '<div class="ap2-sharebar">'+segs+'</div></div>';
-  }
+  return '<div class="ap2-pmwrap">'+
+    '<div class="ap2-pm-head">'+
+      '<span class="ap2-bk-k">Backlog by project manager</span>'+
+      '<span class="ap2-pm-meta">'+pms.length+' PMs \u00b7 projects \u00b7 2026 revenue \u00b7 backlog</span>'+
+    '</div>'+
+    '<div class="ap2-pm-list">'+cards+'</div>'+
+  '</div>';
+}
+
+// ── Portfolio panel ───────────────────────────────────────────────────────
+// Who the active work is for, and where the backlog is concentrated. The
+// customer picker lives here and governs the whole page.
+function ap2RatePanel(t){
+  var rows = apFiltered();
+  var custCount = (function(){
+    var seen = {};
+    rows.forEach(function(r){ if (r.cust) seen[r.cust] = 1; });
+    return Object.keys(seen).length;
+  })();
+  var top3 = rows.slice().sort(function(a,b){ return b.backlog - a.backlog; })
+                 .filter(function(r){ return r.backlog > 0; }).slice(0,3);
+  var blTotal = t.backlog || 1;
+
+  // the picker, built as a chamfered console control
+  var opts = apCustomers().map(function(c){
+    return '<option value="'+c.cust.replace(/"/g,'&quot;')+'"'+
+      (AP_CUST===c.cust?' selected':'')+'>'+c.cust+'  \u00b7  '+c.n+'</option>';
+  }).join('');
+  var picker = '<div class="ap2-pick">'+
+    '<span class="ap2-pick-ic">'+
+      '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" '+
+      'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+
+      '<path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg></span>'+
+    '<select onchange="apSetCust(this.value)">'+
+      '<option value=""'+(AP_CUST?'':' selected')+'>All customers  \u00b7  '+AP_DATA.length+'</option>'+
+      opts+
+    '</select>'+
+    '<span class="ap2-pick-cv">\u25be</span>'+
+  '</div>';
+
+  // headline tile: a count when open, that customer's backlog when filtered
+  var lead = AP_CUST
+    ? '<div class="ap2-lead filt">'+
+        '<div class="ap2-lead-k">Backlog \u00b7 '+AP_CUST+'</div>'+
+        '<div class="ap2-lead-v">'+ap2Short(t.backlog)+'</div>'+
+        '<div class="ap2-lead-s">'+rows.length+' active project'+(rows.length===1?'':'s')+
+          ' \u00b7 '+ap2Short(t.rev26)+' booked in 2026</div>'+
+      '</div>'
+    : '<div class="ap2-lead">'+
+        '<div class="ap2-lead-k">Customers represented</div>'+
+        '<div class="ap2-lead-v">'+custCount+'</div>'+
+        '<div class="ap2-lead-s">across '+rows.length+' active projects \u00b7 '+
+          ap2Short(t.backlog)+' of backlog</div>'+
+      '</div>';
+
+  var pal = ['#FF3DD8','#3DE8FF','#C6FF4D'];
+  var pods = top3.length
+    ? top3.map(function(r, i){
+        var col = pal[i % pal.length];
+        var share = r.backlog/blTotal*100;
+        var nm = r.name.length > 34 ? r.name.slice(0,33)+'\u2026' : r.name;
+        return '<div class="ap2-bk" style="--c:'+col+';" onclick="apSelect(\''+r.num+'\')">'+
+          '<div class="ap2-bk-rank">'+(i+1)+'</div>'+
+          '<div class="ap2-bk-body">'+
+            '<div class="ap2-bk-top">'+
+              '<span class="ap2-bk-id">'+r.num+'</span>'+
+              '<span class="ap2-bk-pc">'+share.toFixed(0)+'% of backlog</span>'+
+            '</div>'+
+            '<div class="ap2-bk-nm">'+nm+'</div>'+
+            '<div class="ap2-bk-cu">'+(r.cust||'\u2014')+'</div>'+
+            '<div class="ap2-bk-v">'+ap2Short(r.backlog)+'</div>'+
+            '<div class="ap2-bk-bar"><i style="width:'+Math.min(100,share).toFixed(1)+'%;"></i></div>'+
+          '</div>'+
+        '</div>';
+      }).join('')
+    : '<div class="ap2-bk-empty">No backlog on the selected work.</div>';
 
   return '<div class="ap2-rate">'+
     '<div class="ap2-raterow">'+
       '<div class="ap2-ratehead">'+
-        '<div class="ap2-ptitle">RATE CONSOLE</div>'+
-        '<div class="ap2-pmeta">2026 revenue \u00f7 2026 DL hours</div>'+
+        '<div class="ap2-ptitle">PORTFOLIO</div>'+
+        '<div class="ap2-pmeta">active work by customer</div>'+
       '</div>'+
-      '<span class="ap2-blend">BLENDED <strong>$'+Math.round(blended).toLocaleString()+'</strong></span>'+
+      picker+
+      (AP_CUST ? '<span class="ap2-clear" onclick="apSetCust(\'\')">\u00d7 clear</span>' : '')+
     '</div>'+
-    '<div class="ap2-pods">'+pods+'</div>'+
-    '<div class="ap2-shares">'+
-      shareBar('SHARE OF 2026 REVENUE', function(s){ return s.rev26; })+
-      shareBar('SHARE OF DL HOURS',     function(s){ return s.hrs;   })+
+    '<div class="ap2-portfolio">'+
+      lead+
+      '<div class="ap2-bk-wrap">'+
+        '<div class="ap2-bk-k">Top 3 project backlogs'+(AP_CUST?' \u00b7 this customer':'')+'</div>'+
+        '<div class="ap2-bk-list">'+pods+'</div>'+
+      '</div>'+
     '</div>'+
+    ap2PmPanel()+
   '</div>';
 }
 
@@ -14545,17 +15139,7 @@ function ap2Table(t){
         '<div class="ap2-pmeta">'+rows.length+
           (AP_CUST ? ' of '+AP_DATA.length+' projects \u00b7 filtered' : ' projects')+
           ' \u00b7 sub-projects rolled into parent unless customer differs</div></div>'+
-      '<div class="ap2-filter">'+
-        '<span class="ap2-fk">Customer</span>'+
-        '<select class="ap2-sel" onchange="apSetCust(this.value)">'+
-          '<option value=""'+(AP_CUST?'':' selected')+'>All customers \u00b7 '+AP_DATA.length+'</option>'+
-          apCustomers().map(function(c){
-            return '<option value="'+c.cust.replace(/"/g,'&quot;')+'"'+
-              (AP_CUST===c.cust?' selected':'')+'>'+c.cust+' \u00b7 '+c.n+'</option>';
-          }).join('')+
-        '</select>'+
-        (AP_CUST ? '<span class="ap2-clear" onclick="apSetCust(\'\')">\u00d7 clear</span>' : '')+
-      '</div>'+
+      '<div class="ap2-pmeta">click any column to sort</div>'+
     '</div>'+
     '<div class="ap2-grid ap2-headrow">'+head+'</div>'+
     '<div class="ap2-scroll">'+body+'</div>'+
@@ -14617,6 +15201,17 @@ function renderProjMain() {
   var el = document.getElementById('ap2-body');
   if (!el) return;
   pcUpdateBadge();
+
+  // a quiet status line under the title
+  var hs = document.getElementById('ap2-hsub');
+  if (hs){
+    var ht = ap2Totals();
+    hs.innerHTML = '<span class="live">LIVE</span><i>/</i>'+
+      '<span><b>'+apFiltered().length+'</b> active projects</span><i>/</i>'+
+      '<span><b>'+ap2Short(ht.backlog)+'</b> backlog</span><i>/</i>'+
+      '<span>as of '+AP_ASOF+'</span>'+
+      (AP_CUST ? '<i>/</i><span style="color:#FF3DD8;">filtered \u00b7 '+AP_CUST+'</span>' : '');
+  }
   var t = ap2Totals();
   el.innerHTML =
     '<section class="ap2-hero">'+ap2ContractPanel(t)+ap2RatePanel(t)+'</section>'+
