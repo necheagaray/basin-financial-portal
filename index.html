@@ -47,7 +47,18 @@ html,body{height:100%;background:var(--bg);color:var(--text1);font-family:var(--
 .ext-label{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:800;letter-spacing:3.5px;text-transform:uppercase;color:rgba(232,244,255,0.95);text-align:center;text-shadow:0 0 18px rgba(120,200,255,0.35);}
 .ext-arrow{position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:16px;color:rgba(180,195,215,0.5);transition:all 0.25s;}
 .ext-btn:hover .ext-arrow{color:rgba(220,235,255,0.9);transform:translate(3px,calc(-50% - 3px));}
-.portal-section{display:none;min-height:100vh;}#workforce{background:linear-gradient(160deg,#030d0d 0%,#040f10 25%,#061412 50%,#050c0e 100%);}#capacity{background:linear-gradient(160deg,#06050f 0%,#0a0614 30%,#080518 60%,#05040f 100%);}#budget-forecast{background:linear-gradient(160deg,#07040f 0%,#090612 30%,#060414 60%,#08050f 100%);}#active-projects{background:linear-gradient(145deg,#05080f 0%,#080d18 30%,#060b1a 65%,#04070e 100%);}
+.portal-section{display:none;min-height:100vh;}
+#op-ex{background:radial-gradient(ellipse at 20% 0%,rgba(255,138,61,0.12),transparent 55%),linear-gradient(160deg,#0c0706 0%,#100908 40%,#0a0606 100%);}
+.opx-root{max-width:1100px;margin:0 auto;padding:56px 32px;}
+.opx-hero{display:flex;align-items:center;gap:26px;padding-bottom:28px;border-bottom:1px solid rgba(255,138,61,0.2);}
+.opx-icon{width:112px;height:112px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:24px;
+  background:rgba(255,138,61,0.07);border:1px solid rgba(255,138,61,0.3);box-shadow:0 0 40px -8px rgba(255,138,61,0.55);}
+.opx-title{font-family:'Helvetica Neue',Arial,sans-serif;font-size:44px;font-weight:800;letter-spacing:1px;color:#FF8A3D;
+  text-shadow:0 0 24px rgba(255,138,61,0.45);line-height:1;}
+.opx-sub{font-family:'Helvetica Neue',Arial,sans-serif;font-size:16px;color:rgba(255,255,255,0.6);margin-top:10px;}
+.opx-empty{margin-top:32px;padding:28px;border:1px dashed rgba(255,138,61,0.3);border-radius:14px;
+  font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:1.6;color:rgba(255,255,255,0.5);}
+.opx-empty b{display:block;color:rgba(255,255,255,0.85);font-size:15px;margin-bottom:4px;}#workforce{background:linear-gradient(160deg,#030d0d 0%,#040f10 25%,#061412 50%,#050c0e 100%);}#capacity{background:linear-gradient(160deg,#06050f 0%,#0a0614 30%,#080518 60%,#05040f 100%);}#budget-forecast{background:linear-gradient(160deg,#07040f 0%,#090612 30%,#060414 60%,#08050f 100%);}#active-projects{background:linear-gradient(145deg,#05080f 0%,#080d18 30%,#060b1a 65%,#04070e 100%);}
 .wf-tab-bar{display:flex;align-items:center;padding:0 24px;background:rgba(3,12,12,0.94);border-bottom:1px solid rgba(0,200,140,0.12);position:sticky;top:52px;z-index:100;backdrop-filter:blur(12px);}
 .wf-tab{position:relative;display:flex;align-items:center;gap:9px;
   margin:9px 7px 11px 0;padding:10px 22px 10px 18px;cursor:pointer;
@@ -1884,6 +1895,12 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 .ap2-th:hover{color:#F2EEFF;}
 .ap2-th.on{color:#F2EEFF;}
 .ap2-th.r{text-align:right;}
+/* year-scoped headers: the year sits above the measure in the display face */
+.ap2-th.yr{display:flex;flex-direction:column;justify-content:center;align-items:flex-end;
+  gap:2px;padding:8px 0;}
+.ap2-th-yr{font-family:'Chakra Petch',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.04em;
+  line-height:1;color:#C6FF4D;text-shadow:0 0 10px rgba(198,255,77,0.45);}
+.ap2-th-lb{line-height:1;}
 .ap2-th.band{display:flex;align-items:center;justify-content:flex-end;gap:6px;padding:10px 12px;
   font-weight:700;font-size:11px;letter-spacing:0.2em;}
 .ap2-th.band.cy{background:rgba(61,232,255,0.08);border-top:2px solid #3DE8FF;color:#3DE8FF;
@@ -2278,6 +2295,135 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 .ap2-pick select option{background:#0E0A26;color:#F2EEFF;}
 .ap2-pick-cv{position:absolute;right:13px;pointer-events:none;color:#3DE8FF;font-size:11px;}
 
+/* ── Locked-on card tabs + Recent direct labor portal ─────────────────── */
+.ap2-pod-card.wide{width:468px;}
+.ap2-ctabs{display:flex;gap:0;border-bottom:1px solid #2A1F5C;margin:2px 0 0;}
+.ap2-ctabs button{flex:1 1 auto;white-space:nowrap;background:none;border:none;border-bottom:2px solid transparent;
+  padding:9px 6px 8px;margin-bottom:-1px;cursor:pointer;color:#8E82C4;
+  font-family:'Chakra Petch',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:0.02em;}
+.ap2-ctabs button:hover{color:#F2EEFF;}
+.ap2-ctabs button.on{color:#3DE8FF;border-bottom-color:#3DE8FF;
+  text-shadow:0 0 10px rgba(61,232,255,0.5);}
+.ap2-ctabs button:focus-visible,.dl-chips button:focus-visible,.dl-more:focus-visible{
+  outline:2px solid #3DE8FF;outline-offset:2px;}
+.dl-winrow{display:flex;justify-content:flex-end;}
+.dl-chips{display:flex;gap:4px;}
+.dl-chips button{background:rgba(255,255,255,0.03);border:1px solid #2F2466;color:#B4A8DE;
+  font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 9px;cursor:pointer;}
+.dl-chips button:hover{border-color:#6E5DB8;color:#F2EEFF;}
+.dl-chips button.on{background:rgba(61,232,255,0.14);border-color:#3DE8FF;color:#3DE8FF;}
+.dl-kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.dl-k{padding:11px 12px 10px;background:rgba(255,255,255,0.025);border:1px solid #241B52;
+  border-top:2px solid #6E5DB8;display:flex;flex-direction:column;gap:3px;min-width:0;}
+.dl-k.cy{border-top-color:#3DE8FF;background:linear-gradient(180deg,rgba(61,232,255,0.09),transparent);}
+.dl-k.mg{border-top-color:#FF3DD8;background:linear-gradient(180deg,rgba(255,61,216,0.09),transparent);}
+.dl-k.lm{border-top-color:#C6FF4D;}
+.dl-k span{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.08em;color:#B4A8DE;}
+.dl-k b{font-family:'Chakra Petch',sans-serif;font-size:23px;font-weight:700;line-height:1.05;color:#F2EEFF;
+  white-space:nowrap;}
+.dl-k b i{font-style:normal;font-size:12px;color:#8E82C4;font-weight:600;}
+.dl-k.cy b{color:#3DE8FF;text-shadow:0 0 14px rgba(61,232,255,0.45);}
+.dl-k.mg b{color:#FF3DD8;text-shadow:0 0 14px rgba(255,61,216,0.45);}
+.dl-k em{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:10px;color:#8E82C4;}
+.dl-k em.up{color:#C6FF4D;} .dl-k em.dn{color:#FFB454;}
+.dl-chart,.dl-crew{padding:12px 12px 10px;background:rgba(7,4,26,0.55);border:1px solid #241B52;}
+.dl-chead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
+.dl-ttl{font-size:12.5px;font-weight:700;color:#F2EEFF;}
+.dl-leg{display:flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#8E82C4;}
+.dl-leg i{display:inline-block;width:9px;height:9px;margin-left:6px;}
+.dl-leg i.h{background:#3DE8FF;} .dl-leg i.c{height:2px;background:#FF3DD8;box-shadow:0 0 4px #FF3DD8;}
+.dl-read{display:flex;gap:12px;align-items:baseline;min-height:17px;margin-bottom:4px;
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#B4A8DE;}
+.dl-read b{color:#F2EEFF;font-weight:600;} .dl-read .h{color:#3DE8FF;} .dl-read .c{color:#FF3DD8;}
+.dl-svg{display:block;height:150px;overflow:visible;}
+.dl-bar{fill:rgba(61,232,255,0.42);transition:fill .12s;}
+.dl-bar.last{fill:#3DE8FF;filter:drop-shadow(0 0 5px rgba(61,232,255,0.8));}
+.dl-bar.hot{fill:#F2EEFF;}
+.dl-line{fill:none;stroke:#FF3DD8;stroke-width:2;filter:drop-shadow(0 0 4px rgba(255,61,216,0.7));
+  vector-effect:non-scaling-stroke;}
+.dl-dot{fill:#07041A;stroke:#FF3DD8;stroke-width:1.6;vector-effect:non-scaling-stroke;}
+.dl-base{stroke:#3A2C7A;stroke-width:1;} .dl-grid{stroke:#241B52;stroke-dasharray:2 4;}
+.dl-svg text{font-family:'JetBrains Mono',monospace;font-size:9px;fill:#6E62A0;}
+.dl-hit{fill:transparent;cursor:crosshair;}
+.dl-p{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid #1E1646;}
+.dl-p:last-of-type{border-bottom:none;}
+.dl-av{width:28px;height:28px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  border:1.5px solid var(--c);color:var(--c);font-family:'JetBrains Mono',monospace;font-size:10px;
+  font-weight:800;box-shadow:0 0 10px -2px var(--c),inset 0 0 8px -3px var(--c);
+  clip-path:polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px);}
+.dl-pm{flex:1;min-width:0;}
+.dl-pt{display:flex;align-items:baseline;gap:8px;}
+.dl-pn{flex:1;min-width:0;font-size:13px;font-weight:600;color:#F2EEFF;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;}
+.dl-ph{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--c);}
+.dl-pc{font-family:'JetBrains Mono',monospace;font-size:11px;color:#D9CFFF;min-width:62px;text-align:right;}
+.dl-pb{height:4px;margin:6px 0 5px;background:rgba(255,255,255,0.06);}
+.dl-pb b{display:block;height:100%;background:var(--c);box-shadow:0 0 8px var(--c);}
+.dl-pf{display:flex;justify-content:space-between;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#8E82C4;}
+.dl-strip{display:flex;gap:2px;}
+.dl-strip i{width:7px;height:9px;background:rgba(255,255,255,0.07);display:block;}
+.dl-more{margin-top:8px;width:100%;background:none;border:1px dashed #3A2C7A;color:#B4A8DE;
+  font-family:'JetBrains Mono',monospace;font-size:10px;padding:7px;cursor:pointer;}
+.dl-more:hover{border-color:#3DE8FF;color:#3DE8FF;}
+.dl-src{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#6E62A0;text-align:right;}
+.dl-empty{display:flex;flex-direction:column;gap:8px;padding:18px 16px;font-size:13px;line-height:1.5;
+  color:#B4A8DE;background:rgba(7,4,26,0.55);border:1px dashed #3A2C7A;}
+.dl-empty b{color:#F2EEFF;}
+.dl-empty button{align-self:flex-start;margin-top:4px;background:rgba(61,232,255,0.1);
+  border:1px solid #3DE8FF;color:#3DE8FF;font-family:'JetBrains Mono',monospace;font-size:10.5px;
+  padding:7px 12px;cursor:pointer;}
+
+/* ── Scope dock: the customer filter and its rails ───────────────────── */
+#ap2-body{position:relative;}
+#ap2-body .ap2-lower{margin-top:34px;}
+.ap2-panel.cp>.ap2-in{display:flex;flex-direction:column;}
+.ap2-scope{margin-top:auto;padding:16px 16px 14px;position:relative;
+  background:linear-gradient(180deg,rgba(61,232,255,0.07),rgba(61,232,255,0.02));
+  border:1px solid rgba(61,232,255,0.22);border-left:3px solid rgba(61,232,255,0.55);}
+.ap2-scope.on{border-color:rgba(61,232,255,0.5);border-left-color:#3DE8FF;
+  box-shadow:0 0 22px rgba(61,232,255,0.18),inset 0 0 18px rgba(61,232,255,0.06);}
+.ap2-scope-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.ap2-scope-k{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.24em;color:#3DE8FF;}
+.ap2-scope-st{font-family:'JetBrains Mono',monospace;font-size:10px;color:#6E62A0;}
+.ap2-scope .ap2-pick{margin-left:0;width:100%;}
+.ap2-scope .ap2-pick select{min-width:0;width:100%;}
+.ap2-scope .ap2-clear{margin:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:0.1em;color:#FF3DD8;padding:2px 8px;border:1px solid rgba(255,61,216,0.4);}
+.ap2-scope .ap2-clear:hover{background:#FF3DD8;color:#07041A;}
+.ap2-scope-note{display:flex;gap:18px;margin-top:10px;font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:0.08em;color:#B4A8DE;}
+.ap2-scope-note b{color:#3DE8FF;font-weight:700;margin-right:4px;}
+.ap2-scope.on .ap2-scope-note{color:#D9CFFF;}
+.ap2-scope-svg{position:absolute;left:0;top:0;pointer-events:none;overflow:visible;z-index:3;}
+.ap2-rail{fill:none;stroke-width:1.6;stroke-dasharray:5 5;}
+.ap2-rail.on{stroke-width:2;stroke-dasharray:none;}
+.ap2-rail-glow{fill:none;stroke-width:7;opacity:0.14;}
+.ap2-rail-run{fill:none;stroke:#F2EEFF;stroke-width:3;stroke-linecap:round;
+  stroke-dasharray:8 100;stroke-dashoffset:8;filter:drop-shadow(0 0 6px #3DE8FF);
+  animation:ap2Run .75s ease-out forwards;}
+@keyframes ap2Run{to{stroke-dashoffset:-100;}}
+/* sections the filter drives */
+.ap2-scoped{position:relative;}
+.ap2-pmwrap.ap2-scoped{padding-left:14px;border-left:2px solid rgba(61,232,255,0.22);}
+.ap2-pmwrap.ap2-scoped.on{border-left-color:#3DE8FF;
+  box-shadow:inset 14px 0 22px -18px rgba(61,232,255,0.7);}
+.ap2-lanes.ap2-scoped{border-top:2px solid rgba(61,232,255,0.3);}
+.ap2-lanes.ap2-scoped.on{border-top-color:#3DE8FF;
+  box-shadow:0 0 40px rgba(61,232,255,0.1),inset 0 12px 24px -20px rgba(61,232,255,0.8);}
+.ap2-stag{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.04em;
+  color:#8E82C4;background:rgba(61,232,255,0.05);border:1px solid rgba(61,232,255,0.2);
+  text-transform:none;white-space:nowrap;max-width:260px;overflow:hidden;text-overflow:ellipsis;}
+.ap2-stag i{width:6px;height:6px;flex-shrink:0;background:rgba(61,232,255,0.45);}
+.ap2-stag.on{color:#3DE8FF;background:rgba(61,232,255,0.12);border-color:rgba(61,232,255,0.6);
+  box-shadow:0 0 12px rgba(61,232,255,0.25);}
+.ap2-stag.on i{background:#3DE8FF;box-shadow:0 0 6px #3DE8FF;}
+.ap2-scoped.pulse{animation:ap2Pulse .9s ease-out;}
+@keyframes ap2Pulse{0%{box-shadow:0 0 0 rgba(61,232,255,0);}
+  30%{box-shadow:0 0 34px rgba(61,232,255,0.45);}100%{}}
+@media (prefers-reduced-motion:reduce){.ap2-rail-run,.ap2-scoped.pulse{animation:none;}}
+
 /* ── Backlog by PM ────────────────────────────────────────────────────── */
 .ap2-pmwrap{margin-top:18px;padding-top:16px;border-top:1px solid #241B52;}
 .ap2-pm-head{display:flex;align-items:baseline;gap:12px;margin-bottom:11px;}
@@ -2287,6 +2433,23 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
   border:1px solid rgba(255,255,255,0.08);border-top:2px solid var(--c);
   transition:background .15s,transform .15s;}
 .ap2-pm:hover{background:rgba(255,255,255,0.06);transform:translateY(-2px);}
+.ap2-pm{cursor:pointer;position:relative;}
+.ap2-pm:focus-visible{outline:2px solid var(--c);outline-offset:2px;}
+.ap2-pm.sel{background:linear-gradient(180deg,color-mix(in srgb,var(--c) 22%,transparent),rgba(255,255,255,0.03));
+  border-color:var(--c);border-top-width:3px;
+  box-shadow:0 0 22px -4px var(--c),inset 0 0 16px -8px var(--c);}
+.ap2-pm.dim{opacity:0.42;}
+.ap2-pm.dim:hover{opacity:0.85;}
+.ap2-pm-on{position:absolute;top:-9px;right:8px;padding:1px 6px;background:var(--c);color:#07041A;
+  font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:800;letter-spacing:0.12em;}
+.ap2-pm-clr{cursor:pointer;color:#FF3DD8;border:1px solid rgba(255,61,216,0.4);padding:2px 7px;}
+.ap2-pm-clr:hover{background:#FF3DD8;color:#07041A;}
+.ap2-pmtag{display:inline-flex;align-items:center;gap:7px;padding:3px 6px 3px 9px;cursor:pointer;
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.04em;
+  color:var(--c);border:1px solid var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);
+  box-shadow:0 0 12px -3px var(--c);white-space:nowrap;}
+.ap2-pmtag b{font-size:12px;line-height:1;padding:0 3px;}
+.ap2-pmtag:hover{background:var(--c);color:#07041A;}
 .ap2-pm-top{display:flex;align-items:center;gap:7px;}
 .ap2-pm-av{width:21px;height:21px;flex-shrink:0;display:flex;align-items:center;
   justify-content:center;border-radius:50%;background:var(--c);color:#07041A;
@@ -2460,6 +2623,95 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 /* the note cell invites a click */
 .q4-row:hover .q4-note{background:rgba(255,255,255,0.05) !important;
   border-color:rgba(255,255,255,0.12);}
+
+/* ── Theatre ──────────────────────────────────────────────────────────── */
+.thr{position:relative;margin-bottom:10px;}
+.thr-house{position:relative;padding:40px 94px 16px;border-radius:6px 6px 0 0;
+  background:
+    radial-gradient(70% 70% at 50% 45%, rgba(120,165,235,0.16), transparent 72%),
+    linear-gradient(180deg,#0b0710 0%,#07050b 100%);
+  box-shadow:inset 0 0 80px rgba(0,0,0,0.9);}
+.thr-curtain{position:absolute;top:0;bottom:0;width:106px;z-index:4;pointer-events:none;
+  filter:drop-shadow(0 0 18px rgba(0,0,0,0.8));}
+.thr-curtain.l{left:0;}
+.thr-curtain.r{right:0;transform:scaleX(-1);}
+.thr-tie{position:absolute;left:36%;top:61%;width:20px;height:9px;border-radius:5px;
+  background:linear-gradient(180deg,#f3cf6b,#a8741c);box-shadow:0 0 8px rgba(243,207,107,0.6);}
+.thr-tie:after{content:'';position:absolute;left:50%;top:7px;width:6px;height:22px;
+  transform:translateX(-50%);border-radius:0 0 4px 4px;
+  background:repeating-linear-gradient(90deg,#e8bf55 0 1px,#9d6a18 1px 2px);}
+.thr-valance{position:absolute;left:0;right:0;top:0;height:50px;z-index:5;pointer-events:none;
+  filter:drop-shadow(0 6px 10px rgba(0,0,0,0.7));}
+.thr-stage{position:relative;z-index:2;}
+/* the picture: dark, crisp, lit from the booth; masking border as in a cinema */
+.thr-screen{position:relative;overflow:hidden;border-radius:2px;
+  border:10px solid #020204;
+  background:
+    radial-gradient(90% 60% at 50% 0%, rgba(150,190,255,0.10), transparent 70%),
+    linear-gradient(180deg,#101830 0%,#0b1124 55%,#080c1a 100%);
+  box-shadow:
+    0 0 0 1px rgba(200,225,255,0.55),
+    0 0 36px 4px rgba(140,190,255,0.30),
+    0 0 110px 20px rgba(110,160,255,0.16);}
+.thr-lamp{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 50%, transparent 60%, rgba(0,0,0,0.35) 100%);}
+.thr-body{position:relative;z-index:1;padding:16px 18px 18px;}
+/* stage lip under the screen */
+.thr-lip{position:relative;z-index:3;height:12px;margin:14px -94px 0;
+  background:linear-gradient(180deg,#2a1a10,#120a06);
+  border-top:2px solid #c8973a;box-shadow:0 -6px 18px rgba(140,190,255,0.12);}
+.thr-seats{position:relative;height:118px;margin-top:-2px;overflow:hidden;border-radius:0 0 6px 6px;
+  background:linear-gradient(180deg,#0a0610,#030205);}
+.thr-seats:after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,0.65));}
+
+/* figures on the screen stay bright and legible */
+.thr-body .fy-name{color:#E8EEFF;}
+.thr-body .fy-cell.act{background:rgba(255,255,255,0.09);border-color:rgba(255,255,255,0.26);}
+.thr-body .fy-cell.act .fy-cv{color:#FFFFFF;}
+.thr-body .fy-cell.prj .fy-cv{color:rgba(225,232,255,0.72);}
+.thr-body .fy-ck{color:rgba(215,225,255,0.66);}
+.thr-body .fy-cell.tot .fy-cv{text-shadow:0 0 22px currentColor;}
+.thr-body .fy-cmp{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.14);}
+.thr-body .fy-cmp-v,.thr-body .fy-leg b{color:#fff;}
+/* narrower windows: draw the curtains in so the screen keeps its room */
+@media (max-width:1500px){.thr-house{padding:38px 48px 14px;} .thr-curtain{width:58px;}
+  .thr-lip{margin:14px -48px 0;} .thr-body{padding:14px 12px 16px;}}
+@media (max-width:1100px){.thr-house{padding:34px 30px 12px;} .thr-curtain{width:38px;}
+  .thr-lip{margin:14px -30px 0;} .thr-tie{display:none;}}
+
+/* ── Full-year ledger: one header for the columns ────────────────────── */
+.fy-row{grid-template-columns:minmax(0,1fr) 262px;}
+.fy-hdr{padding-top:4px;padding-bottom:12px;margin-bottom:6px;border-radius:0;
+  border-bottom:1px solid rgba(255,255,255,0.12);background:none !important;transform:none !important;}
+.fy-hdr:before{display:none;}
+.fy-hdr .fy-cells{margin:0;align-items:flex-end;}
+.fy-hdr .fy-op{visibility:hidden;}
+.fy-hc{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;padding:0 11px;}
+.fy-hc b{display:flex;align-items:center;font-family:var(--mono);font-size:11px;font-weight:800;
+  letter-spacing:1.8px;text-transform:uppercase;color:#fff;}
+.fy-hc span{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:0.8px;
+  color:rgba(215,225,255,0.6);}
+.fy-hc.act{border-bottom:2px solid #5eeb96;padding-bottom:6px;}
+.fy-hc.prj{border-bottom:2px dashed #f7b32b;padding-bottom:6px;}
+.fy-hc.prj b{color:#ffd9a0;}
+.fy-hc.tot{border-bottom:2px solid rgba(255,255,255,0.75);padding-bottom:6px;}
+.fy-hc.cmp{padding:0 2px 6px;border-bottom:2px solid rgba(255,255,255,0.25);}
+/* figures only in the cells now */
+.fy-cells{margin:8px 0 9px;}
+.fy-cell{padding:9px 12px;justify-content:center;}
+/* monthly box: three monthly figures and the pace comparison */
+.fy-cmp{padding:10px 12px 9px;}
+.fy-cmp-row{grid-template-columns:62px minmax(0,1fr) 50px;margin-top:5px;}
+.fy-cmp-row:first-child{margin-top:0;}
+.fy-cmp-lb{font-size:8.5px;letter-spacing:0.6px;text-transform:uppercase;color:rgba(215,225,255,0.62);}
+.fy-cmp-row.f .fy-cmp-lb{color:#fff;}
+.fy-cmp-row.f .fy-cmp-v{color:#fff;}
+.fy-cmp-row.f{padding-top:5px;border-top:1px dashed rgba(255,255,255,0.12);}
+.fy-cmp-v{font-size:11.5px;color:rgba(255,255,255,0.85);}
+.fy-cmp-d{display:flex;align-items:baseline;gap:7px;font-family:var(--mono);font-size:9px;}
+.fy-cmp-d b{font-size:11px;font-weight:800;white-space:nowrap;}
+.fy-cmp-d span{color:rgba(215,225,255,0.62);font-weight:600;letter-spacing:0.3px;line-height:1.35;}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
@@ -2491,7 +2743,7 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
     <div class="home-sub">Business Intelligence Portal</div>
   </div>
   <div class="home-panels">
-<div class="panel-btn" style="--panel-color:rgba(255,60,80,0.75);--sd:0s;" onclick="goSection('ytd-revenue')"><div class="panel-icon-wrap">💵</div><div class="panel-label">YTD Revenue &amp; Project Performance</div><div class="panel-desc">Revenue tracking &amp; margin analysis.</div></div><div class="panel-btn" style="--panel-color:rgba(0,212,255,0.75);--sd:0.6s;" onclick="goSection('active-projects')"><div class="panel-icon-wrap">🔨</div><div class="panel-label">Active Projects</div><div class="panel-desc">Backlog, PM efficiency &amp; labor.</div></div><div class="panel-btn" style="--panel-color:rgba(0,220,130,0.75);--sd:1.2s;" onclick="goSection('workforce')"><div class="panel-icon-wrap">👤</div><div class="panel-label">Workforce</div><div class="panel-desc">Employees, wages &amp; benefits.</div></div><div class="panel-btn" style="--panel-color:rgba(255,190,0,0.75);--sd:1.8s;" onclick="goSection('capacity')"><div class="panel-icon-wrap">⚡</div><div class="panel-label">Capacity Utilization</div><div class="panel-desc">Staffing &amp; resource allocation.</div></div><div class="panel-btn" style="--panel-color:rgba(160,100,255,0.75);--sd:2.4s;" onclick="goSection('budget-forecast')"><div class="panel-icon-wrap">🔮</div><div class="panel-label">Budgeting &amp; Forecasting</div><div class="panel-desc">Budgets &amp; projections.</div></div>
+<div class="panel-btn" style="--panel-color:rgba(255,60,80,0.75);--sd:0s;" onclick="goSection('ytd-revenue')"><div class="panel-icon-wrap">💵</div><div class="panel-label">YTD Revenue &amp; Project Performance</div><div class="panel-desc">Revenue tracking &amp; margin analysis.</div></div><div class="panel-btn" style="--panel-color:rgba(0,212,255,0.75);--sd:0.6s;" onclick="goSection('active-projects')"><div class="panel-icon-wrap">🔨</div><div class="panel-label">Active Projects</div><div class="panel-desc">Backlog, PM efficiency &amp; labor.</div></div><div class="panel-btn" style="--panel-color:rgba(0,220,130,0.75);--sd:1.2s;" onclick="goSection('workforce')"><div class="panel-icon-wrap">👤</div><div class="panel-label">Workforce</div><div class="panel-desc">Employees, wages &amp; benefits.</div></div><div class="panel-btn" style="--panel-color:rgba(255,190,0,0.75);--sd:1.8s;" onclick="goSection('capacity')"><div class="panel-icon-wrap">⚡</div><div class="panel-label">Capacity Utilization</div><div class="panel-desc">Staffing &amp; resource allocation.</div></div><div class="panel-btn" style="--panel-color:rgba(160,100,255,0.75);--sd:2.4s;" onclick="goSection('budget-forecast')"><div class="panel-icon-wrap">🔮</div><div class="panel-label">Budgeting &amp; Forecasting</div><div class="panel-desc">Budgets &amp; projections.</div></div><div class="panel-btn" style="--panel-color:rgba(255,138,61,0.75);--sd:3.0s;" onclick="goSection('op-ex')"><div class="panel-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" aria-hidden="true" viewBox="0 0 40 40" fill="none"> <line x1="1.5" y1="7" x2="38.5" y2="7" stroke="#E8ECF4" stroke-width="1.8" stroke-linecap="round"/> <rect x="3" y="1.5" width="3.6" height="11" rx="1" fill="#FF8A3D"/> <rect x="7.2" y="3.2" width="2.4" height="7.6" rx="0.8" fill="#FFB27A"/> <rect x="33.4" y="1.5" width="3.6" height="11" rx="1" fill="#FF8A3D"/> <rect x="30.4" y="3.2" width="2.4" height="7.6" rx="0.8" fill="#FFB27A"/> <path d="M13.2 7.6 L12.4 20 L13.8 32" stroke="#E8ECF4" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M26.8 7.6 L27.6 20 L26.2 32" stroke="#E8ECF4" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/> <circle cx="13.2" cy="7.2" r="2" fill="#E8ECF4"/> <circle cx="26.8" cy="7.2" r="2" fill="#E8ECF4"/> <circle cx="20" cy="24.2" r="4.2" fill="#E8ECF4"/> <path d="M8.5 40 C9 33.5 12 30.5 15 30 C17 31.8 23 31.8 25 30 C28 30.5 31 33.5 31.5 40 Z" fill="#E8ECF4"/> </svg></div><div class="panel-label">OP EX</div><div class="panel-desc">Non-labor overhead analysis.</div></div>
   </div>
   <div class="home-ext-area">
     <div class="home-ext-label">Basin Ecosystem &mdash; External Platforms</div>
@@ -2643,6 +2895,21 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 
 <div id="budget-forecast" class="portal-section" style="display:none;">
   <div id="budget-main" style="min-height:100vh;"></div>
+</div>
+<div id="op-ex" class="portal-section" style="display:none;">
+  <div class="opx-root">
+    <div class="opx-hero">
+      <div class="opx-icon"><svg xmlns="http://www.w3.org/2000/svg" width="84" height="84" aria-hidden="true" viewBox="0 0 40 40" fill="none"> <line x1="1.5" y1="7" x2="38.5" y2="7" stroke="#E8ECF4" stroke-width="1.8" stroke-linecap="round"/> <rect x="3" y="1.5" width="3.6" height="11" rx="1" fill="#FF8A3D"/> <rect x="7.2" y="3.2" width="2.4" height="7.6" rx="0.8" fill="#FFB27A"/> <rect x="33.4" y="1.5" width="3.6" height="11" rx="1" fill="#FF8A3D"/> <rect x="30.4" y="3.2" width="2.4" height="7.6" rx="0.8" fill="#FFB27A"/> <path d="M13.2 7.6 L12.4 20 L13.8 32" stroke="#E8ECF4" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M26.8 7.6 L27.6 20 L26.2 32" stroke="#E8ECF4" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/> <circle cx="13.2" cy="7.2" r="2" fill="#E8ECF4"/> <circle cx="26.8" cy="7.2" r="2" fill="#E8ECF4"/> <circle cx="20" cy="24.2" r="4.2" fill="#E8ECF4"/> <path d="M8.5 40 C9 33.5 12 30.5 15 30 C17 31.8 23 31.8 25 30 C28 30.5 31 33.5 31.5 40 Z" fill="#E8ECF4"/> </svg></div>
+      <div>
+        <div class="opx-title">OP EX</div>
+        <div class="opx-sub">Non-labor overhead analysis</div>
+      </div>
+    </div>
+    <div class="opx-empty">
+      <b>This section is set up and ready to build.</b>
+      Non-labor overhead reporting will live here.
+    </div>
+  </div>
 </div>
 <div id="capacity" class="portal-section" style="display:none;">
   <div style="display:flex;height:calc(100vh - 52px);">
@@ -3071,6 +3338,19 @@ function bgRowColor(row) {
 // ── Budget tab state ──────────────────────────────────────────────────────
 var BUDGET_TAB = 'summary'; // 'summary' | 'detailed' | 'q4'
 
+// 2026 Working Capital: placeholder until the build-out.
+function renderBudgetWC26(el){
+  el.innerHTML = bgHeader() +
+    '<div style="max-width:1100px;margin:40px auto;padding:0 28px;">'+
+      '<div style="padding:28px;border:1px dashed rgba(251,191,36,0.3);border-radius:14px;'+
+        'font-family:\'Helvetica Neue\',Arial,sans-serif;font-size:14px;line-height:1.6;color:rgba(255,255,255,0.5);">'+
+        '<b style="display:block;color:rgba(255,255,255,0.85);font-size:15px;margin-bottom:4px;">'+
+          'This tab is set up and ready to build.</b>'+
+        '2026 working capital analysis will live here.'+
+      '</div>'+
+    '</div>';
+}
+
 function renderBudget() {
   var el = document.getElementById('budget-main');
   if (!el) return;
@@ -3079,6 +3359,7 @@ function renderBudget() {
   if      (BUDGET_TAB === 'summary')  renderBudgetSummary(el);
   else if (BUDGET_TAB === 'wc')       renderBudgetWCTab(el);
   else if (BUDGET_TAB === 'detailed') renderBudgetDetailed(el);
+  else if (BUDGET_TAB === 'wc26')     renderBudgetWC26(el);
   else                                renderBudgetQ4(el);
 }
 
@@ -3108,9 +3389,10 @@ function bgHeader() {
   // The Q4 tab is its own thing, so the headline and strapline follow it
   var isQ4      = BUDGET_TAB === 'q4';
   var isWC      = BUDGET_TAB === 'wc';
-  var titleLead = isQ4 ? 'Q4&nbsp;' : isWC ? 'EBITDA&nbsp;&amp;&nbsp;WC&nbsp;' : '2026&nbsp;';
-  var titleWord = isQ4 ? 'Forecast' : isWC ? 'Model' : 'Projection';
-  var strapline = isQ4
+  var isWC26    = BUDGET_TAB === 'wc26';
+  var titleLead = isQ4 ? 'Q4&nbsp;' : isWC ? 'EBITDA&nbsp;&amp;&nbsp;WC&nbsp;' : isWC26 ? '2026&nbsp;Working&nbsp;' : '2026&nbsp;';
+  var titleWord = isQ4 ? 'Forecast' : isWC ? 'Model' : isWC26 ? 'Capital' : 'Projection';
+  var strapline = isWC26 ? 'Working capital for FY 2026' : isQ4
     ? 'Oct\u2013Dec editable forecast &nbsp;·&nbsp; Click any value cell to edit'
     : isWC
       ? bgSpanLabel(true)+' actuals live from Budget &nbsp;\u00b7&nbsp; '+bgSpanLabel(false)+
@@ -3197,6 +3479,7 @@ function bgHeader() {
       '<div style="display:flex;align-items:center;gap:8px;">'+
         tab('summary','Summary')+
         tab('detailed','Detailed')+
+        tab('wc26','2026 Working Capital')+
         tab('q4','Q4 Forecast')+
         tab('wc','EBITDA-WC Model')+
         '<div style="width:1px;height:24px;background:rgba(255,255,255,0.1);margin:0 4px;"></div>'+
@@ -3242,6 +3525,111 @@ function wheelSVG(cx) {
 // projected image. All geometry is measured live, so it stays aligned at any
 // window size.
 // ═══════════════════════════════════════════════════════════════════════════
+// ── Theatre pieces ─────────────────────────────────────────────────────────
+// Velvet: alternating light and shadow stops read as vertical folds.
+function thrVelvet(id, folds, x1, x2){
+  var st = '';
+  for (var i = 0; i <= folds*2; i++){
+    var o = (i/(folds*2)*100).toFixed(2);
+    var c = i % 2 ? '#a3182a' : '#3c050d';
+    st += '<stop offset="'+o+'%" stop-color="'+c+'"/>';
+  }
+  return '<linearGradient id="'+id+'" x1="'+x1+'" y1="0" x2="'+x2+'" y2="0">'+st+'</linearGradient>';
+}
+function thrCurtain(side){
+  var id = 'thrv-'+side;
+  // gathered by a tie-back about two-thirds down, then falling out again
+  var d = 'M0 0 H100 C98 160 70 300 46 380 C62 440 84 520 98 600 H0 Z';
+  var rim = 'M100 0 C98 160 70 300 46 380 C62 440 84 520 98 600';
+  return '<div class="thr-curtain '+side+'">'+
+    '<svg viewBox="0 0 100 600" preserveAspectRatio="none" width="100%" height="100%" aria-hidden="true">'+
+      '<defs>'+thrVelvet(id, 5, '0', '1')+
+        '<linearGradient id="'+id+'-sh" x1="0" y1="0" x2="0" y2="1">'+
+          '<stop offset="0" stop-color="#000" stop-opacity="0.55"/>'+
+          '<stop offset="0.35" stop-color="#000" stop-opacity="0.05"/>'+
+          '<stop offset="1" stop-color="#000" stop-opacity="0.45"/></linearGradient>'+
+        '<linearGradient id="'+id+'-edge" x1="0" y1="0" x2="1" y2="0">'+
+          '<stop offset="0.55" stop-color="#000" stop-opacity="0.55"/>'+
+          '<stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>'+
+      '</defs>'+
+      '<path d="'+d+'" fill="url(#'+id+')"/>'+
+      '<path d="'+d+'" fill="url(#'+id+'-sh)"/>'+
+      '<path d="'+d+'" fill="url(#'+id+'-edge)"/>'+
+      '<path d="'+rim+'" fill="none" stroke="rgba(170,205,255,0.55)" stroke-width="1.6" '+
+        'vector-effect="non-scaling-stroke"/>'+
+    '</svg>'+
+    '<span class="thr-tie"></span>'+
+  '</div>';
+}
+function thrValance(){
+  var n = 7, w = 1200/n, d = 'M0 0 H1200 V18';
+  for (var i = n; i > 0; i--){
+    var x0 = i*w, x1 = (i-1)*w;
+    d += ' Q'+(x0 - w/2).toFixed(1)+' 58 '+x1.toFixed(1)+' 18';
+  }
+  d += ' Z';
+  var fringe = 'M1200 18';
+  for (var j = n; j > 0; j--){
+    var a = j*w, b = (j-1)*w;
+    fringe += ' Q'+(a - w/2).toFixed(1)+' 58 '+b.toFixed(1)+' 18';
+  }
+  return '<svg viewBox="0 0 1200 48" preserveAspectRatio="none" width="100%" height="100%" aria-hidden="true">'+
+    '<defs>'+thrVelvet('thrv-top', 22, '0', '1')+
+      '<linearGradient id="thrv-top-sh" x1="0" y1="0" x2="0" y2="1">'+
+        '<stop offset="0" stop-color="#000" stop-opacity="0.5"/>'+
+        '<stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient></defs>'+
+    '<path d="'+d+'" fill="url(#thrv-top)"/>'+
+    '<path d="'+d+'" fill="url(#thrv-top-sh)"/>'+
+    '<path d="'+fringe+'" fill="none" stroke="#e0b24a" stroke-width="2.5" vector-effect="non-scaling-stroke"/>'+
+    '<path d="'+fringe+'" fill="none" stroke="rgba(224,178,74,0.45)" stroke-width="6" '+
+      'stroke-dasharray="1 3" vector-effect="non-scaling-stroke" transform="translate(0 3)"/>'+
+  '</svg>';
+}
+// Two rows of seats, silhouetted by the light coming off the screen, with a
+// few of the audience already in their seats.
+function thrSeats(){
+  var out = '';
+  function seat(x, y, w, h, fill){
+    var r = w*0.22;
+    var p = 'M'+(x+w*0.08)+' '+(y+h)+' L'+(x+w*0.05)+' '+(y+r)+
+      ' Q'+(x+w*0.05)+' '+y+' '+(x+r+w*0.05)+' '+y+
+      ' H'+(x+w-r-w*0.05)+' Q'+(x+w*0.95)+' '+y+' '+(x+w*0.95)+' '+(y+r)+
+      ' L'+(x+w*0.92)+' '+(y+h)+' Z';
+    var rim = 'M'+(x+w*0.05)+' '+(y+r)+' Q'+(x+w*0.05)+' '+y+' '+(x+r+w*0.05)+' '+y+
+      ' H'+(x+w-r-w*0.05)+' Q'+(x+w*0.95)+' '+y+' '+(x+w*0.95)+' '+(y+r);
+    return '<path d="'+p+'" fill="'+fill+'"/>'+
+      '<path d="'+rim+'" fill="none" stroke="rgba(170,205,255,0.5)" stroke-width="1.4"/>';
+  }
+  function head(cx, y, s){
+    // a silhouette a shade lighter than the room, rim-lit along the top only
+    var r = 11*s;
+    return '<g fill="#1b1220">'+
+      '<path d="M'+(cx-22*s)+' '+(y+30*s)+' Q'+(cx-20*s)+' '+(y+14*s)+' '+cx+' '+(y+13*s)+
+        ' Q'+(cx+20*s)+' '+(y+14*s)+' '+(cx+22*s)+' '+(y+30*s)+' Z"/>'+
+      '<ellipse cx="'+cx+'" cy="'+y+'" rx="'+(r*0.92)+'" ry="'+r+'"/></g>'+
+      '<path d="M'+(cx-r*0.8)+' '+(y-r*0.45)+' A'+r+' '+r+' 0 0 1 '+(cx+r*0.8)+' '+(y-r*0.45)+'" '+
+        'fill="none" stroke="rgba(170,205,255,0.6)" stroke-width="1.4" stroke-linecap="round"/>';
+  }
+  // far row, with a few people already watching (drawn first so the seat
+  // backs hide their shoulders)
+  var w1 = 62, g1 = 8, n1 = Math.ceil(1200/(w1+g1)) + 1;
+  [3, 7, 12, 15].forEach(function(k){ out += head(k*(w1+g1) - 18 + w1/2, 27, 1.35); });
+  for (var i = 0; i < n1; i++) out += seat(i*(w1+g1) - 18, 40, w1, 60, 'url(#thr-seat-far)');
+  // near row, larger and darker
+  var w2 = 92, g2 = 10, n2 = Math.ceil(1200/(w2+g2)) + 1;
+  for (var j = 0; j < n2; j++) out += seat(j*(w2+g2) - 50, 76, w2, 70, 'url(#thr-seat-near)');
+  return '<svg viewBox="0 0 1200 140" preserveAspectRatio="xMidYMin slice" width="100%" height="100%" aria-hidden="true">'+
+    '<defs>'+
+      '<linearGradient id="thr-seat-far" x1="0" y1="0" x2="0" y2="1">'+
+        '<stop offset="0" stop-color="#3a1320"/><stop offset="0.5" stop-color="#1a0810"/>'+
+        '<stop offset="1" stop-color="#0a0409"/></linearGradient>'+
+      '<linearGradient id="thr-seat-near" x1="0" y1="0" x2="0" y2="1">'+
+        '<stop offset="0" stop-color="#26101a"/><stop offset="0.4" stop-color="#0c050a"/>'+
+        '<stop offset="1" stop-color="#040205"/></linearGradient>'+
+    '</defs>'+ out +
+  '</svg>';
+}
+
 function bgDrawProjection() {
   var ov  = document.getElementById('proj-overlay'),
       len = document.getElementById('proj-lens'),
@@ -3370,7 +3758,9 @@ function bgDrawProjection() {
           '<stop offset="100%" stop-color="#000"/>' +
         '</linearGradient>' +
         '<mask id="pj-feather"><rect x="0" y="0" width="' + W + '" height="' + H +
-          '" fill="url(#pj-featherG)"/></mask>' +
+          '" fill="url(#pj-featherG)"/>' +
+          '<rect x="' + (sb.left - ob.left) + '" y="' + (sb.top - ob.top) + '" width="' + sb.width +
+          '" height="' + sb.height + '" fill="#000"/></mask>' +
       '</defs>' +
 
       // Whole beam flickers very slightly, like a real projector lamp
@@ -3387,20 +3777,6 @@ function bgDrawProjection() {
             motes +
           '</g>' +
         '</g>' +
-
-        // Light landing on the screen surface
-        '<rect x="' + sx1 + '" y="' + sy1 + '" width="' + sb.width + '" height="' + sb.height +
-          '" rx="14" fill="url(#pj-core)" opacity="0.11"/>' +
-        '<rect x="' + sx1 + '" y="' + sy1 + '" width="' + sb.width + '" height="' + sb.height +
-          '" rx="14" fill="none" stroke="rgba(251,191,36,0.30)" stroke-width="1"/>' +
-        bracket(sx1, sy1, 1, 1) + bracket(sx2, sy1, -1, 1) +
-        bracket(sx1, sy2, 1, -1) + bracket(sx2, sy2, -1, -1) +
-
-        // Scan line sweeping down the projected image
-        '<rect x="' + sx1 + '" y="' + sy1 + '" width="' + sb.width + '" height="2.5" fill="rgba(255,240,190,0.22)">' +
-          '<animate attributeName="y" values="' + sy1 + ';' + sy2 + ';' + sy1 + '" dur="7s" repeatCount="indefinite"/>' +
-          '<animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.1;0.9;1" dur="7s" repeatCount="indefinite"/>' +
-        '</rect>' +
 
         // ── LENS ASSEMBLY at the end of the word "Projection" ────────────
         '<circle cx="' + ox.toFixed(1) + '" cy="' + oy.toFixed(1) + '" r="26" fill="rgba(251,191,36,0.16)" filter="url(#pj-blurS)"/>' +
@@ -4484,7 +4860,13 @@ function renderBudgetSummary(el) {
     '</svg>';
 
   // ── Sun ────────────────────────────────────────────────────────────────────
-  var sunSize = 110;
+  var sunSize = 138;
+  // Month the actuals run through, e.g. "AUG YTD ACTUALS"; moves on as each
+  // monthly actuals file is uploaded.
+  var MON3 = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  var ytdLabel = actualMonths > 0
+    ? MON3[Math.min(actualMonths,12)-1] + ' YTD ACTUALS'
+    : 'NO ACTUALS YET';
   var sunHTML =
     '<div style="position:absolute;left:'+cx+'px;top:'+cy+'px;transform:translate(-50%,-50%);z-index:5;">'+
       // Outer corona
@@ -4497,12 +4879,12 @@ function renderBudgetSummary(el) {
         'display:flex;flex-direction:column;align-items:center;justify-content:center;'+
         'border:1.5px solid rgba(251,191,36,0.5);'+
         'box-shadow:inset -15px -10px 30px rgba(120,50,0,0.5);cursor:default;">'+
-        '<div style="font-family:\'Helvetica Neue\',Arial,sans-serif;font-size:10px;font-weight:800;'+
-          'letter-spacing:3px;color:rgba(0,0,0,0.7);text-transform:uppercase;line-height:1.2;">2026</div>'+
-        '<div style="font-family:\'Helvetica Neue\',Arial,sans-serif;font-size:13px;font-weight:900;'+
-          'color:rgba(0,0,0,0.8);letter-spacing:0.5px;line-height:1.3;">Projection</div>'+
-        '<div style="font-family:\'Helvetica Neue\',Arial,sans-serif;font-size:9px;font-weight:600;'+
-          'color:rgba(0,0,0,0.55);margin-top:5px;letter-spacing:1px;">'+actualMonths+'/12 actual</div>'+
+        '<div style="font-family:\'Helvetica Neue\',Arial,sans-serif;font-size:12px;font-weight:800;'+
+          'letter-spacing:3.5px;color:rgba(0,0,0,0.7);text-transform:uppercase;line-height:1.2;">2026</div>'+
+        '<div style="font-family:\'Helvetica Neue\',Arial,sans-serif;font-size:17px;font-weight:900;'+
+          'color:rgba(0,0,0,0.82);letter-spacing:0.5px;line-height:1.3;">Projection</div>'+
+        '<div style="font-family:\'Helvetica Neue\',Arial,sans-serif;font-size:9.5px;font-weight:800;'+
+          'color:rgba(0,0,0,0.62);margin-top:6px;letter-spacing:1.4px;white-space:nowrap;">'+ytdLabel+'</div>'+
       '</div>'+
     '</div>';
 
@@ -4716,30 +5098,37 @@ function renderBudgetSummary(el) {
   var PROJ_MO = Math.max(1, 12 - ACT_MO);
 
   function fyCompare(a, p, color, rgb, invert){
-    var am = a / ACT_MO, pm = p / PROJ_MO;
-    var mx = Math.max(am, pm, 1);
+    var am = a / ACT_MO, pm = p / PROJ_MO, fm = (a + p) / 12;
+    var mx = Math.max(am, pm, fm, 1);
     var delta = am > 0 ? (pm - am) / am * 100 : 0;
     // for cost lines a lighter projected month is the good direction
     var good = invert ? delta <= 0 : delta >= 0;
     var arrow = delta >= 0 ? '\u25b2' : '\u25bc';
+    var word  = Math.abs(delta) < 0.5 ? 'in line with' : (delta > 0 ? 'above' : 'below');
+    var actShare = (a + p) > 0 ? a / (a + p) * 100 : 0;
+    function row(lb, cls, v, style){
+      return '<div class="fy-cmp-row '+cls+'">'+
+        '<span class="fy-cmp-lb">'+lb+'</span>'+
+        '<div class="fy-cmp-track"><i style="width:'+((v/mx)*100).toFixed(1)+'%;'+style+'"></i></div>'+
+        '<span class="fy-cmp-v">'+bgFmtM(v)+'</span>'+
+      '</div>';
+    }
     return '<div class="fy-cmp">'+
-      '<div class="fy-cmp-k">Monthly run rate</div>'+
-      '<div class="fy-cmp-row">'+
-        '<span class="fy-cmp-lb">ACT</span>'+
-        '<div class="fy-cmp-track"><i style="width:'+((am/mx)*100).toFixed(1)+'%;'+
-          'background:linear-gradient(90deg,rgba('+rgb+',0.45),rgba('+rgb+',0.95));'+
-          'box-shadow:0 0 10px rgba('+rgb+',0.5);"></i></div>'+
-        '<span class="fy-cmp-v">'+bgFmtM(am)+'</span>'+
+      row('Actual', 'a', am,
+        'background:linear-gradient(90deg,rgba('+rgb+',0.45),rgba('+rgb+',0.95));'+
+        'box-shadow:0 0 10px rgba('+rgb+',0.5);')+
+      row('Projected', 'p', pm,
+        'background:repeating-linear-gradient(115deg,rgba('+rgb+',0.55) 0 5px,rgba('+rgb+',0.14) 5px 10px);')+
+      // the full-year month is a blend of the two, drawn that way: the solid
+      // part is the actual months' share of the year, the hatched part the rest
+      row('Full year', 'f', fm,
+        'background:linear-gradient(90deg,rgba('+rgb+',0.95) 0 '+actShare.toFixed(1)+'%,'+
+        'rgba('+rgb+',0.35) '+actShare.toFixed(1)+'% 100%);'+
+        'box-shadow:0 0 0 1px rgba(255,255,255,0.35);')+
+      '<div class="fy-cmp-d '+(good?'up':'down')+'">'+
+        '<b>'+arrow+' '+Math.abs(delta).toFixed(0)+'%</b>'+
+        '<span>Projected monthly '+word+' actual monthly</span>'+
       '</div>'+
-      '<div class="fy-cmp-row">'+
-        '<span class="fy-cmp-lb">PRJ</span>'+
-        '<div class="fy-cmp-track"><i class="hatch" style="width:'+((pm/mx)*100).toFixed(1)+'%;'+
-          'background:repeating-linear-gradient(115deg,rgba('+rgb+',0.5) 0 5px,'+
-          'rgba('+rgb+',0.14) 5px 10px);"></i></div>'+
-        '<span class="fy-cmp-v">'+bgFmtM(pm)+'</span>'+
-      '</div>'+
-      '<div class="fy-cmp-d '+(good?'up':'down')+'">'+arrow+' '+
-        Math.abs(delta).toFixed(0)+'% <em>vs actual pace</em></div>'+
     '</div>';
   }
 
@@ -4758,15 +5147,12 @@ function renderBudgetSummary(el) {
         '</div>'+
         '<div class="fy-cells">'+
           '<div class="fy-cell act">'+
-            '<span class="fy-ck"><i class="fy-mk solid"></i>Actual \u00b7 '+bgSpanLabel(true)+'</span>'+
             '<span class="fy-cv">'+bgFmtM(a)+'</span></div>'+
           '<span class="fy-op">+</span>'+
           '<div class="fy-cell prj">'+
-            '<span class="fy-ck"><i class="fy-mk open"></i>Projected \u00b7 '+bgSpanLabel(false)+'</span>'+
             '<span class="fy-cv">'+bgFmtM(p)+'</span></div>'+
           '<span class="fy-op">=</span>'+
           '<div class="fy-cell tot">'+
-            '<span class="fy-ck">Full Year</span>'+
             '<span class="fy-cv"'+(big?' style="color:'+color+';text-shadow:0 0 24px rgba('+rgb+',0.7);"'
                                      :' style="color:'+color+';"')+'>'+bgFmtM(t)+'</span></div>'+
         '</div>'+
@@ -4787,11 +5173,19 @@ function renderBudgetSummary(el) {
 
   var summaryTable =
     '<div class="fy-panel">'+
-      '<div class="fy-colhead">'+
-        '<span class="fy-ch"><i class="fy-dot" style="background:#5eeb96;"></i>Actual \u00b7 '+
-          bgSpanLabel(true)+' \u00b7 '+ACT_MO+' mo</span>'+
-        '<span class="fy-ch"><i class="fy-dot hatch" style="border-color:#f7b32b;"></i>Projected \u00b7 '+
-          bgSpanLabel(false)+' \u00b7 '+PROJ_MO+' mo</span>'+
+      // column headers, laid out on the same grid as the rows below
+      '<div class="fy-row fy-hdr">'+
+        '<div class="fy-main"><div class="fy-cells">'+
+          '<div class="fy-hc act"><b><i class="fy-mk solid"></i>Actual</b>'+
+            '<span>'+bgSpanLabel(true)+' \u00b7 '+ACT_MO+' mo</span></div>'+
+          '<span class="fy-op">+</span>'+
+          '<div class="fy-hc prj"><b><i class="fy-mk open"></i>Projected</b>'+
+            '<span>'+bgSpanLabel(false)+' \u00b7 '+PROJ_MO+' mo</span></div>'+
+          '<span class="fy-op">=</span>'+
+          '<div class="fy-hc tot"><b>Full year</b><span>2026 \u00b7 12 mo</span></div>'+
+        '</div></div>'+
+        '<div class="fy-hc cmp"><b>Monthly average</b>'+
+          '<span>Actual + projected = full year</span></div>'+
       '</div>'+
       fyRow('Revenue',            rev_a, rev_p, rev_t, '#7dd3ff','125,211,255',{hero:true})+
       fyRow('Cost of Sales',      cos_a, cos_p, cos_t, '#ff7b7b','255,123,123',{pctOf:rev_t,invert:true})+
@@ -4842,25 +5236,21 @@ function renderBudgetSummary(el) {
         // The panel is built as a pull-down projection screen: a roller
         // housing above, the hanging surface carrying the projected figures,
         // and a weighted bar below.
-        '<div class="scr-rig">'+
-          '<div class="scr-roller"><span class="scr-cap l"></span>'+
-            '<span class="scr-slot"></span><span class="scr-cap r"></span></div>'+
-          '<div id="proj-screen" class="scr-surface">'+
-            '<div class="scr-grain"></div>'+
-            '<div class="scr-wash"></div>'+
-            '<div class="scr-scan"></div>'+
-            '<div class="scr-vig"></div>'+
-            '<div class="scr-corner tl"></div><div class="scr-corner tr"></div>'+
-            '<div class="scr-corner bl"></div><div class="scr-corner br"></div>'+
-            '<div class="scr-live"><i></i>PROJECTING</div>'+
-            '<div class="scr-image">'+
-              '<div class="scr-hot"></div>'+
-              '<div class="scr-roll"></div>'+
-              '<div class="scr-motes"></div>'+
-              '<div class="scr-body">'+summaryTable+'</div>'+
+        // A movie theatre: valance across the top, velvet curtains tied back
+        // at the sides, the lit screen in the middle and the seats in front.
+        '<div class="thr">'+
+          '<div class="thr-house">'+
+            thrCurtain('l')+thrCurtain('r')+
+            '<div class="thr-valance">'+thrValance()+'</div>'+
+            '<div class="thr-stage">'+
+              '<div id="proj-screen" class="thr-screen">'+
+                '<div class="thr-lamp"></div>'+
+                '<div class="thr-body">'+summaryTable+'</div>'+
+              '</div>'+
             '</div>'+
+            '<div class="thr-lip"></div>'+
           '</div>'+
-          '<div class="scr-bar"><span class="scr-pull"></span></div>'+
+          '<div class="thr-seats">'+thrSeats()+'</div>'+
         '</div>'+
         // Progress bar
         '<div style="margin-top:16px;display:flex;align-items:center;gap:10px;">'+
@@ -5394,7 +5784,7 @@ document.addEventListener('keydown', function(e){
 });
 
 // ── Q4: collapse to totals, and the YTD pace comparison ───────────────────
-var Q4_COLLAPSED = false;
+var Q4_COLLAPSED = true;    // opens collapsed to totals; the button expands it
 var Q4_COMPARE   = false;
 
 function q4ToggleCollapse(){
@@ -6415,7 +6805,7 @@ function renderBudgetQ4(el) {
   Q4_ROWS.forEach(function(row, ri) {
     // subsection headings are structural, not data rows
     if (row.kind === 'sub') {
-      tbody += '<tr class="q4-detail"><td colspan="'+(MONTHS.length+3)+'" '+
+      tbody += '<tr class="q4-detail"'+(Q4_COLLAPSED?' style="display:none;"':'')+'><td colspan="'+(MONTHS.length+3)+'" '+
         'style="padding:12px 18px 5px;font-family:var(--mono);font-size:8.5px;font-weight:800;'+
         'letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);">'+
         row.label+'</td></tr>';
@@ -6675,7 +7065,8 @@ function renderBudgetQ4(el) {
       '</td>';
 
     tbody += '<tr class="q4-row'+(isMajor?' major':' q4-detail')+'" '+
-      'style="border-bottom:1px solid rgba(255,255,255,0.03);">'+
+      'style="border-bottom:1px solid rgba(255,255,255,0.03);'+
+        (!isMajor && Q4_COLLAPSED ? 'display:none;' : '')+'">'+
       labelCell + monthCells + totCell + calcCell +
     '</tr>';
   });
@@ -8884,7 +9275,7 @@ function goSection(id) {
   var sec = document.getElementById(id);
   if(sec) sec.style.display = 'block';
   document.getElementById('topbar').style.display = 'flex';
-  var names = {'ytd-revenue':'YTD REVENUE & PROJECT PERFORMANCE','workforce':'WORKFORCE','capacity':'CAPACITY UTILIZATION','active-projects':'ACTIVE PROJECTS','budget-forecast':'BUDGET & FORECASTING'};
+  var names = {'ytd-revenue':'YTD REVENUE & PROJECT PERFORMANCE','workforce':'WORKFORCE','capacity':'CAPACITY UTILIZATION','active-projects':'ACTIVE PROJECTS','budget-forecast':'BUDGET & FORECASTING','op-ex':'OP EX'};
   document.getElementById('tb-section-name').textContent = names[id] || id.toUpperCase();
   document.body.classList.toggle('sky-mode', id === 'ytd-revenue');
   if(id === 'ytd-revenue') { renderYTD(); }
@@ -14405,10 +14796,30 @@ function apCustomers(){
   return Object.keys(seen).sort(function(a,b){ return seen[b].n - seen[a].n || a.localeCompare(b); })
     .map(function(c){ return { cust:c, n:seen[c].n }; });
 }
+var AP_PULSE = false;
+// PM filter: narrows Project Lanes only. The PM tiles themselves keep showing
+// every PM under the customer filter so another one is always a click away.
+var AP_PM = '';
+var AP_PM_PULSE = false;
+function apPmOf(r){
+  var pm = (r.pm||'').trim();
+  return (!pm || /^unclear$/i.test(pm)) ? 'Unassigned' : pm;
+}
+function apSetPm(pm){
+  AP_PM = (AP_PM === pm) ? '' : (pm || '');
+  if (AP_SEL && !apRows().some(function(r){ return r.num === AP_SEL; })) AP_SEL = null;
+  AP_PM_PULSE = true;
+  renderProjMain();
+  AP_PM_PULSE = false;
+}
 function apSetCust(v){
   AP_CUST = v || '';
-  if (AP_SEL && !apFiltered().some(function(r){ return r.num === AP_SEL; })) AP_SEL = null;
+  // drop the PM filter if that PM has nothing under the new customer
+  if (AP_PM && !apFiltered().some(function(r){ return apPmOf(r) === AP_PM; })) AP_PM = '';
+  if (AP_SEL && !apRows().some(function(r){ return r.num === AP_SEL; })) AP_SEL = null;
+  AP_PULSE = true;
   renderProjMain();
+  AP_PULSE = false;
 }
 
 var AP_COLS = [
@@ -14429,7 +14840,7 @@ function apSort(col){
 }
 
 function apRows(){
-  var r = apFiltered().slice();
+  var r = apFiltered().filter(function(x){ return !AP_PM || apPmOf(x) === AP_PM; });
   var c = AP_SORT.col, d = AP_SORT.dir;
   r.sort(function(a,b){
     var av = a[c], bv = b[c];
@@ -14884,7 +15295,7 @@ function ap2ContractPanel(t){
   var backlogPct = t.contract > 0 ? t.backlog/t.contract : 0;
   var eDash = (earnedPct*C).toFixed(2) + ' ' + C.toFixed(2);
   var bDash = (backlogPct*C).toFixed(2) + ' ' + C.toFixed(2);
-  return '<div class="ap2-panel mag" style="width:470px;flex-shrink:0;">'+
+  return '<div class="ap2-panel mag cp" id="ap2-cp" style="width:470px;flex-shrink:0;">'+
     '<div class="ap2-in">'+
       '<div class="ap2-prow">'+
         '<div class="ap2-ptitle">CONTRACT POSITION</div>'+
@@ -14924,16 +15335,103 @@ function ap2ContractPanel(t){
           '</div>'+
         '</div>'+
       '</div>'+
+      ap2ScopeDock()+
     '</div></div>';
 }
+
+// ── Scope dock ────────────────────────────────────────────────────────────
+// The customer filter, parked at the foot of Contract Position. Connector
+// rails (drawn by ap2DrawScope) run from it into the PM backlog beside it and
+// the project lanes below, so it reads as the control for both.
+function ap2ScopeDock(){
+  var on = !!AP_CUST;
+  return '<div class="ap2-scope'+(on?' on':'')+'" id="ap2-scope">'+
+    '<div class="ap2-scope-top">'+
+      '<span class="ap2-scope-k">CUSTOMER FILTER</span>'+
+      (on ? '<span class="ap2-clear" onclick="apSetCust(\'\')">\u00d7 clear</span>'
+          : '<span class="ap2-scope-st">showing everyone</span>')+
+    '</div>'+
+    ap2Picker()+
+    '<div class="ap2-scope-note">'+
+      '<span><b>\u2192</b> PM backlog</span>'+
+      '<span><b>\u2193</b> Project lanes</span>'+
+    '</div>'+
+  '</div>';
+}
+
+// Small tag each filtered section wears, matching the dock.
+function ap2ScopeTag(){
+  return AP_CUST
+    ? '<span class="ap2-stag on"><i></i>'+AP_CUST+'</span>'
+    : '<span class="ap2-stag"><i></i>All customers</span>';
+}
+
+// Draws the rails from the dock to the PM backlog and the project lanes.
+// Positions are measured after render so the lines land wherever the layout
+// puts those sections.
+function ap2DrawScope(pulse){
+  var body = document.getElementById('ap2-body');
+  var dock = document.getElementById('ap2-scope');
+  var cp   = document.getElementById('ap2-cp');
+  var pm   = document.getElementById('ap2-pm-target');
+  var ln   = document.getElementById('ap2-lanes-target');
+  var old  = document.getElementById('ap2-scope-svg');
+  if (old) old.remove();
+  if (!body || !dock || !cp || body.offsetParent === null) return;
+  var B = body.getBoundingClientRect(), D = dock.getBoundingClientRect(),
+      C = cp.getBoundingClientRect();
+  var on = !!AP_CUST;
+  var paths = [], ports = [];
+  function X(v){ return (v - B.left).toFixed(1); }
+  function Y(v){ return (v - B.top).toFixed(1); }
+
+  if (pm) {
+    var P = pm.getBoundingClientRect();
+    // only draw across when the two sit side by side
+    if (P.left > C.right - 4) {
+      var y0 = D.top + D.height/2;
+      var y1 = Math.min(Math.max(y0, P.top + 22), P.bottom - 22);
+      var xm = C.right + (P.left - C.right)/2;
+      paths.push('M'+X(D.right)+' '+Y(y0)+' H'+X(xm)+' V'+Y(y1)+' H'+X(P.left - 2));
+      ports.push([X(P.left - 2), Y(y1)]);
+    }
+  }
+  if (ln) {
+    var L = ln.getBoundingClientRect();
+    if (L.top > C.bottom - 4) {
+      var x0 = D.left + 34;
+      paths.push('M'+X(x0)+' '+Y(D.bottom)+' V'+Y(L.top + 1));
+      ports.push([X(x0), Y(L.top + 1)]);
+    }
+  }
+  if (!paths.length) return;
+
+  var col = on ? '#3DE8FF' : 'rgba(61,232,255,0.42)';
+  var svg = '<svg id="ap2-scope-svg" class="ap2-scope-svg'+(pulse?' pulse':'')+'" '+
+    'width="'+B.width.toFixed(0)+'" height="'+B.height.toFixed(0)+'">'+
+    paths.map(function(d){
+      return '<path class="ap2-rail-glow" d="'+d+'" stroke="'+col+'"/>'+
+             '<path class="ap2-rail'+(on?' on':'')+'" d="'+d+'" stroke="'+col+'"/>'+
+             (pulse ? '<path class="ap2-rail-run" d="'+d+'" pathLength="100"/>' : '');
+    }).join('')+
+    ports.map(function(p){
+      return '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="4.5" fill="#07041A" stroke="'+col+'" stroke-width="2"/>'+
+             '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="1.8" fill="'+col+'"/>';
+    }).join('')+
+  '</svg>';
+  body.insertAdjacentHTML('beforeend', svg);
+}
+window.addEventListener('resize', function(){
+  clearTimeout(ap2DrawScope._t);
+  ap2DrawScope._t = setTimeout(function(){ ap2DrawScope(false); }, 120);
+});
 
 // ── Rate console ──────────────────────────────────────────────────────────
 // Backlog, revenue and project count per project manager.
 function ap2PmStats(){
   var by = {};
   apFiltered().forEach(function(r){
-    var pm = (r.pm||'').trim();
-    if (!pm || /^unclear$/i.test(pm)) pm = 'Unassigned';
+    var pm = apPmOf(r);
     if (!by[pm]) by[pm] = { pm:pm, n:0, backlog:0, rev26:0, contract:0 };
     by[pm].n++; by[pm].backlog += r.backlog;
     by[pm].rev26 += r.rev26; by[pm].contract += r.contract;
@@ -14952,7 +15450,14 @@ function ap2PmPanel(){
   var cards = pms.map(function(p, i){
     var col = pal[i % pal.length];
     var initial = p.pm.charAt(0).toUpperCase();
-    return '<div class="ap2-pm" style="--c:'+col+';">'+
+    var sel = AP_PM === p.pm, dim = AP_PM && !sel;
+    var js = p.pm.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;');
+    return '<div class="ap2-pm'+(sel?' sel':'')+(dim?' dim':'')+'" style="--c:'+col+';" '+
+      'role="button" tabindex="0" aria-pressed="'+sel+'" '+
+      'title="'+(sel?'Show every PM in Project Lanes':'Show only '+p.pm.replace(/"/g,'&quot;')+'\u2019s projects in Project Lanes')+'" '+
+      'onclick="apSetPm(\''+js+'\')" '+
+      'onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();apSetPm(\''+js+'\');}">'+
+      (sel ? '<span class="ap2-pm-on">FILTERING LANES</span>' : '')+
       '<div class="ap2-pm-top">'+
         '<span class="ap2-pm-av">'+initial+'</span>'+
         '<span class="ap2-pm-nm">'+p.pm+'</span>'+
@@ -14968,10 +15473,13 @@ function ap2PmPanel(){
     '</div>';
   }).join('');
 
-  return '<div class="ap2-pmwrap">'+
+  return '<div class="ap2-pmwrap ap2-scoped'+(AP_CUST?' on':'')+(AP_PULSE?' pulse':'')+'" id="ap2-pm-target">'+
     '<div class="ap2-pm-head">'+
       '<span class="ap2-bk-k">Backlog by project manager</span>'+
-      '<span class="ap2-pm-meta">'+pms.length+' PMs \u00b7 projects \u00b7 2026 revenue \u00b7 backlog</span>'+
+      ap2ScopeTag()+
+      '<span class="ap2-pm-meta">'+(AP_PM
+        ? '<span class="ap2-pm-clr" onclick="apSetPm(\'\')">\u00d7 show all PMs</span>'
+        : 'click a PM to filter project lanes')+'</span>'+
     '</div>'+
     '<div class="ap2-pm-list">'+cards+'</div>'+
   '</div>';
@@ -14991,7 +15499,12 @@ function ap2RatePanel(t){
                  .filter(function(r){ return r.backlog > 0; }).slice(0,3);
   var blTotal = t.backlog || 1;
 
-  // the picker, built as a chamfered console control
+  return ap2RatePanelBody(rows, custCount, t, top3, blTotal);
+}
+
+// The customer picker, built as a chamfered console control. It lives in the
+// scope dock at the foot of Contract Position.
+function ap2Picker(){
   var opts = apCustomers().map(function(c){
     return '<option value="'+c.cust.replace(/"/g,'&quot;')+'"'+
       (AP_CUST===c.cust?' selected':'')+'>'+c.cust+'  \u00b7  '+c.n+'</option>';
@@ -15007,7 +15520,10 @@ function ap2RatePanel(t){
     '</select>'+
     '<span class="ap2-pick-cv">\u25be</span>'+
   '</div>';
+  return picker;
+}
 
+function ap2RatePanelBody(rows, custCount, t, top3, blTotal){
   // headline tile: a count when open, that customer's backlog when filtered
   var lead = AP_CUST
     ? '<div class="ap2-lead filt">'+
@@ -15051,8 +15567,6 @@ function ap2RatePanel(t){
         '<div class="ap2-ptitle">PORTFOLIO</div>'+
         '<div class="ap2-pmeta">active work by customer</div>'+
       '</div>'+
-      picker+
-      (AP_CUST ? '<span class="ap2-clear" onclick="apSetCust(\'\')">\u00d7 clear</span>' : '')+
     '</div>'+
     '<div class="ap2-portfolio">'+
       lead+
@@ -15077,8 +15591,8 @@ function ap2Table(t){
     {key:'rev',      label:'TOTAL REV'},
     {key:'rev26',    label:'2026 REV',  band:'cyan'},
     {key:'backlog',  label:'BACKLOG',   band:'magenta'},
-    {key:'hrs',      label:'DL HRS', r:true},
-    {key:'rph',      label:'RPH',    r:true}
+    {key:'hrs',      label:'DL HOURS', r:true, yr:'2026'},
+    {key:'rph',      label:'RPH',      r:true, yr:'2026'}
   ];
   var head = cols.map(function(c){
     var on = AP_SORT.col === c.key;
@@ -15093,6 +15607,10 @@ function ap2Table(t){
         '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" '+
         'stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1"/>'+
         '<path d="M3 10h18"/><path d="M8 15h5"/></svg>'+c.label+arw+'</div>';
+    if (c.yr)
+      return '<div class="ap2-th yr'+(c.r?' r':'')+(on?' on':'')+'" onclick="apSort(\''+c.key+'\')">'+
+        '<span class="ap2-th-yr">'+c.yr+'</span>'+
+        '<span class="ap2-th-lb">'+c.label+arw+'</span></div>';
     return '<div class="ap2-th'+(c.r?' r':'')+(on?' on':'')+'" onclick="apSort(\''+c.key+'\')">'+
       c.label+arw+'</div>';
   }).join('');
@@ -15132,12 +15650,25 @@ function ap2Table(t){
     '</div>';
   }).join('');
 
+  if (AP_PM) t = rows.reduce(function(a,r){
+    a.contract += r.contract; a.rev += r.rev; a.backlog += r.backlog;
+    a.hrs += r.hrs; a.rev26 += r.rev26; return a;
+  }, {contract:0, rev:0, backlog:0, hrs:0, rev26:0});
+  var pmCol = '#C6FF4D';
+  if (AP_PM) {
+    var pal = ['#FF3DD8','#3DE8FF','#C6FF4D','#A78BFA','#FFB454','#4ADE80'];
+    ap2PmStats().forEach(function(p, i){ if (p.pm === AP_PM) pmCol = pal[i % pal.length]; });
+  }
+  var pmTag = AP_PM
+    ? '<span class="ap2-pmtag" style="--c:'+pmCol+';" onclick="apSetPm(\'\')" title="Clear PM filter">'+
+        'PM \u00b7 '+AP_PM+'<b>\u00d7</b></span>'
+    : '';
   var blended = t.hrs > 0 ? t.rev26/t.hrs : 0;
-  return '<div class="ap2-lanes">'+
+  return '<div class="ap2-lanes ap2-scoped'+(AP_CUST?' on':'')+((AP_PULSE||AP_PM_PULSE)?' pulse':'')+'" id="ap2-lanes-target">'+
     '<div class="ap2-toolbar">'+
-      '<div><div class="ap2-ptitle">PROJECT LANES</div>'+
+      '<div><div class="ap2-ptitle" style="display:flex;align-items:center;gap:12px;">PROJECT LANES'+ap2ScopeTag()+pmTag+'</div>'+
         '<div class="ap2-pmeta">'+rows.length+
-          (AP_CUST ? ' of '+AP_DATA.length+' projects \u00b7 filtered' : ' projects')+
+          ((AP_CUST||AP_PM) ? ' of '+AP_DATA.length+' projects \u00b7 filtered' : ' projects')+
           ' \u00b7 sub-projects rolled into parent unless customer differs</div></div>'+
       '<div class="ap2-pmeta">click any column to sort</div>'+
     '</div>'+
@@ -15168,18 +15699,30 @@ function ap2Card(){
     {k:'REVENUE',     v:ap2Money(r.rev),       c:'#F2EEFF'},
     {k:'2026 REVENUE',v:ap2Money(r.rev26),     c:AP2.cyan},
     {k:'BACKLOG',     v:ap2Money(r.backlog),   c:AP2.magenta},
-    {k:'DL HOURS',    v:r.hrs?Math.round(r.hrs).toLocaleString():'\u2014', c:'#F2EEFF'},
-    {k:'RPH',         v:r.rph?'$'+Math.round(r.rph).toLocaleString():'\u2014', c:gc}
+    {k:'2026 DL HOURS', v:r.hrs?Math.round(r.hrs).toLocaleString():'\u2014', c:'#F2EEFF'},
+    {k:'2026 RPH',    v:r.rph?'$'+Math.round(r.rph).toLocaleString():'\u2014', c:gc}
   ];
   if (r.pm)   fields.push({k:'PM', v:r.pm, c:'#F2EEFF'});
   if (r.type) fields.push({k:'TYPE', v:r.type, c:'#F2EEFF'});
   if (r.parts>1) fields.push({k:'SUB-PROJECTS', v:r.parts+' rolled up', c:AP2.lime});
 
-  return '<aside class="ap2-pod-card"><div class="ap2-panel mag"><div class="ap2-in card">'+
-    '<button class="ap2-cx" onclick="apSelect(null)">\u00d7</button>'+
+  var labor = AP_CARD_TAB === 'labor';
+  var tabs = '<div class="ap2-ctabs" role="tablist">'+
+    '<button role="tab" class="'+(labor?'':'on')+'" onclick="apCardTab(\'overview\')">Overview</button>'+
+    '<button role="tab" class="'+(labor?'on':'')+'" onclick="apCardTab(\'labor\')">Recent direct labor</button>'+
+  '</div>';
+  var head = '<button class="ap2-cx" onclick="apSelect(null)">\u00d7</button>'+
     '<div class="ap2-cid">'+r.num+' \u00b7 LOCKED ON</div>'+
     '<div class="ap2-cname">'+r.name+'</div>'+
     '<div class="ap2-ccust">'+(r.cust||'\u2014')+'</div>'+
+    tabs;
+  if (labor)
+    return '<aside class="ap2-pod-card wide"><div class="ap2-panel mag"><div class="ap2-in card">'+
+      head + ap2LaborPortal(r) +
+    '</div></div></aside>';
+
+  return '<aside class="ap2-pod-card"><div class="ap2-panel mag"><div class="ap2-in card">'+
+    head+
     '<div class="ap2-cring">'+
       '<svg width="200" height="200" viewBox="0 0 200 200">'+
         '<circle cx="100" cy="100" r="92" fill="none" stroke="#3A2C7A" stroke-width="1" stroke-dasharray="2 6"/>'+
@@ -15195,6 +15738,215 @@ function ap2Card(){
       return '<div class="ap2-cf"><span>'+f.k+'</span><b style="color:'+f.c+';">'+f.v+'</b></div>';
     }).join('')+'</div>'+
   '</div></div></aside>';
+}
+
+// ── Recent direct labor ───────────────────────────────────────────────────
+// Built from the weekly capacity utilization reports stored on the site. Each
+// report lists hours by employee by project; sub-project hours roll into the
+// parent the same way the capacity page does (capParentOf), and cost uses the
+// same per-employee weekly rate as the DL wage table (capEffRate), so the
+// numbers here reconcile with Capacity Utilization.
+var AP_CARD_TAB = 'overview';
+var AP_DL_WIN   = 8;          // weeks shown; 0 = every stored report
+var AP_DL_ALL   = false;      // show every employee rather than the top few
+
+function apCardTab(t){ AP_CARD_TAB = t; renderProjMain(); }
+function apDlWin(n){ AP_DL_WIN = n; renderProjMain(); }
+function apDlAll(){ AP_DL_ALL = !AP_DL_ALL; renderProjMain(); }
+
+function ap2WeekLabel(w){
+  var d = String(w.weekDate || w.weekKey || '');
+  return d.length >= 10 ? d.slice(5,10) : d.slice(-5);
+}
+function ap2PersonName(n){
+  var p = String(n).split(',');
+  return p.length > 1 ? p[1].trim() + ' ' + p[0].trim() : String(n);
+}
+
+function ap2LaborFor(num){
+  var weeks = (WF_DATA.laborWeeks || []).slice().sort(capWeekAsc);   // oldest first
+  return weeks.map(function(wk){
+    var hmap = capWeekHoursMap(wk);
+    var out = { wk:wk, label:ap2WeekLabel(wk), hrs:0, cost:0, emps:{} };
+    var projs = wk.projects || {};
+    Object.keys(projs).forEach(function(k){
+      if (capParentOf(k) !== num) return;
+      var em = projs[k].employees || {};
+      Object.keys(em).forEach(function(n){
+        var h = em[n] || 0;
+        if (!h) return;
+        var key = capNormName(n);
+        var wkHrs = hmap[n] || hmap[key] || 0;
+        var c = capEffRate(n, wkHrs) * h;
+        out.hrs += h; out.cost += c;
+        if (!out.emps[key]) out.emps[key] = { hrs:0, cost:0 };
+        out.emps[key].hrs += h; out.emps[key].cost += c;
+      });
+    });
+    return out;
+  });
+}
+
+function ap2Hrs(v){ return (Math.round(v*10)/10).toLocaleString(undefined,{maximumFractionDigits:1}); }
+function ap2Usd(v){ return '$' + Math.round(v).toLocaleString(); }
+
+function ap2LaborPortal(r){
+  var all = ap2LaborFor(r.num);
+  if (!all.length)
+    return '<div class="dl-empty"><b>No capacity reports on the site yet.</b>'+
+      'Upload weekly reports on Capacity Utilization and this project\u2019s recent labor fills in here.'+
+      '<button onclick="goSection(\'capacity\')">Open Capacity Utilization</button></div>';
+
+  var win = AP_DL_WIN && AP_DL_WIN < all.length ? all.slice(-AP_DL_WIN) : all.slice();
+  var first = all[0].label, last = all[all.length-1].label;
+  var showAll = !AP_DL_WIN || AP_DL_WIN >= all.length;
+  var chips = [4, 8, 13, 0].filter(function(n){ return n === 0 || n < all.length; })
+    .map(function(n){
+      var on = n === 0 ? showAll : (!showAll && AP_DL_WIN === n);
+      return '<button class="'+(on?'on':'')+'" onclick="apDlWin('+n+')">'+(n ? n+' wks' : 'All '+all.length)+'</button>';
+    }).join('');
+  var src = '<div class="dl-src">'+all.length+' capacity report'+(all.length===1?'':'s')+
+    ' on file \u00b7 '+(all.length > 1 ? first+' \u2192 '+last : 'week ending '+last)+'</div>';
+
+  var tHrs = 0, tCost = 0, people = {};
+  win.forEach(function(w){
+    tHrs += w.hrs; tCost += w.cost;
+    Object.keys(w.emps).forEach(function(k){
+      if (!people[k]) people[k] = { name:k, hrs:0, cost:0, weeks:{} };
+      people[k].hrs += w.emps[k].hrs; people[k].cost += w.emps[k].cost;
+      people[k].weeks[w.label] = w.emps[k].hrs;
+    });
+  });
+
+  if (tHrs <= 0) {
+    var allHrs = all.reduce(function(t,w){ return t + w.hrs; }, 0);
+    return '<div class="dl-winrow"><div class="dl-chips">'+chips+'</div></div>'+
+      '<div class="dl-empty"><b>No direct labor in '+(win.length===all.length?'the stored reports':'the last '+win.length+' weeks')+'.</b>'+
+      (allHrs > 0 ? 'Earlier reports do carry hours on this project. Widen the window to see them.'
+                  : 'None of the uploaded capacity reports have hours booked to '+r.num+' or its sub-projects.')+
+      '</div>'+src;
+  }
+
+  var latest = win[win.length-1];
+  var prior  = win.slice(0, -1);
+  var priorAvg = prior.length ? prior.reduce(function(t,w){ return t + w.hrs; }, 0) / prior.length : 0;
+  var delta = priorAvg > 0 ? (latest.hrs - priorAvg) / priorAvg * 100 : null;
+  var avgRate = tHrs > 0 ? tCost / tHrs : 0;
+  var team = Object.keys(people).length;
+  var activeWks = win.filter(function(w){ return w.hrs > 0; }).length;
+
+  var kpis = '<div class="dl-kpis">'+
+    '<div class="dl-k cy"><span>DL hours</span><b>'+ap2Hrs(tHrs)+'</b>'+
+      '<em>'+ap2Hrs(tHrs / win.length)+' / wk avg</em></div>'+
+    '<div class="dl-k mg"><span>Labor cost</span><b>'+ap2Usd(tCost)+'</b>'+
+      '<em>'+ap2Usd(avgRate)+' / hr blended</em></div>'+
+    '<div class="dl-k"><span>Week ending '+latest.label+'</span><b>'+ap2Hrs(latest.hrs)+'<i> hrs</i></b>'+
+      (delta === null ? '<em>'+ap2Usd(latest.cost)+'</em>'
+        : '<em class="'+(delta >= 0 ? 'up' : 'dn')+'">'+(delta >= 0 ? '\u25b2 ' : '\u25bc ')+
+          Math.abs(delta).toFixed(0)+'% vs prior avg</em>')+'</div>'+
+    '<div class="dl-k lm"><span>Crew</span><b>'+team+'<i> people</i></b>'+
+      '<em>active '+activeWks+' of '+win.length+' wks</em></div>'+
+  '</div>';
+
+  // weekly chart: hours as bars, cost as a line on its own scale
+  var W = 404, H = 150, padL = 4, padR = 4, padT = 14, padB = 22;
+  var n = win.length, slot = (W - padL - padR) / n;
+  var maxH = Math.max.apply(null, win.map(function(w){ return w.hrs; }).concat([1]));
+  var maxC = Math.max.apply(null, win.map(function(w){ return w.cost; }).concat([1]));
+  var ch = H - padT - padB;
+  var bw = Math.max(3, Math.min(26, slot * 0.56));
+  var step = n > 13 ? Math.ceil(n / 8) : 1;
+  var bars = '', pts = [], labs = '', hits = '';
+  win.forEach(function(w, i){
+    var cx = padL + slot*i + slot/2;
+    var bh = w.hrs / maxH * ch;
+    var y  = padT + ch - bh;
+    var isLast = i === n - 1;
+    bars += '<rect class="dl-bar'+(isLast?' last':'')+'" x="'+(cx-bw/2).toFixed(1)+'" y="'+y.toFixed(1)+
+      '" width="'+bw.toFixed(1)+'" height="'+Math.max(bh, w.hrs > 0 ? 2 : 0).toFixed(1)+'"/>';
+    pts.push([cx, padT + ch - (w.cost / maxC * ch * 0.92)]);
+    if (i % step === 0 || isLast)
+      labs += '<text x="'+cx.toFixed(1)+'" y="'+(H-6)+'" text-anchor="middle">'+w.label+'</text>';
+    hits += '<rect class="dl-hit" x="'+(padL+slot*i).toFixed(1)+'" y="0" width="'+slot.toFixed(1)+'" height="'+H+'" '+
+      'onmouseenter="ap2DlRead('+i+',this)" onmouseleave="ap2DlRead(-1,this)"/>';
+  });
+  var line = pts.map(function(p, i){ return (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join(' ');
+  var dots = pts.map(function(p, i){
+    return '<circle class="dl-dot" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+(i===n-1?3.6:2.4)+'"/>';
+  }).join('');
+  ap2DlRead._data = win.map(function(w){ return { l:w.label, h:w.hrs, c:w.cost }; });
+
+  var chart = '<div class="dl-chart">'+
+    '<div class="dl-chead"><span class="dl-ttl">Hours and cost by week</span>'+
+      '<span class="dl-leg"><i class="h"></i>hours<i class="c"></i>cost</span></div>'+
+    '<div class="dl-read" id="dl-read">'+ap2DlReadText(win.length-1)+'</div>'+
+    '<svg viewBox="0 0 '+W+' '+H+'" width="100%" preserveAspectRatio="none" class="dl-svg">'+
+      '<line x1="0" x2="'+W+'" y1="'+(padT+ch)+'" y2="'+(padT+ch)+'" class="dl-base"/>'+
+      '<line x1="0" x2="'+W+'" y1="'+(padT+ch/2)+'" y2="'+(padT+ch/2)+'" class="dl-grid"/>'+
+      bars+
+      (n > 1 ? '<path class="dl-line" d="'+line+'"/>' : '')+dots+labs+hits+
+    '</svg></div>';
+
+  // who has been on it
+  var ranked = Object.keys(people).map(function(k){ return people[k]; })
+    .sort(function(a,b){ return b.hrs - a.hrs; });
+  var show = AP_DL_ALL ? ranked : ranked.slice(0, 6);
+  var pal = ['#3DE8FF','#FF3DD8','#C6FF4D','#A78BFA','#FFB454','#4ADE80'];
+  var topHrs = ranked.length ? ranked[0].hrs : 1;
+  var crew = show.map(function(p, i){
+    var col = pal[i % pal.length];
+    var nm = ap2PersonName(p.name);
+    var ini = nm.split(' ').map(function(x){ return x.charAt(0); }).join('').slice(0,2).toUpperCase();
+    var share = tHrs > 0 ? p.hrs / tHrs * 100 : 0;
+    var maxWk = 0; win.forEach(function(w){ maxWk = Math.max(maxWk, p.weeks[w.label] || 0); });
+    var strip = win.map(function(w){
+      var h = p.weeks[w.label] || 0;
+      var a = h > 0 ? (0.25 + 0.75 * h / (maxWk || 1)) : 0;
+      return '<i title="'+w.label+': '+ap2Hrs(h)+' hrs" style="'+
+        (h > 0 ? 'background:'+col+';opacity:'+a.toFixed(2)+';' : '')+'"></i>';
+    }).join('');
+    return '<div class="dl-p" style="--c:'+col+';">'+
+      '<span class="dl-av">'+ini+'</span>'+
+      '<div class="dl-pm">'+
+        '<div class="dl-pt"><span class="dl-pn">'+nm+'</span>'+
+          '<span class="dl-ph">'+ap2Hrs(p.hrs)+' hrs</span>'+
+          '<span class="dl-pc">'+ap2Usd(p.cost)+'</span></div>'+
+        '<div class="dl-pb"><b style="width:'+Math.max(2, p.hrs/topHrs*100).toFixed(1)+'%;"></b></div>'+
+        '<div class="dl-pf"><span>'+share.toFixed(0)+'% of hours \u00b7 '+ap2Usd(p.hrs ? p.cost/p.hrs : 0)+'/hr</span>'+
+          '<span class="dl-strip">'+strip+'</span></div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+  var more = ranked.length > 6
+    ? '<button class="dl-more" onclick="apDlAll()">'+(AP_DL_ALL ? 'Show top 6' : 'Show all '+ranked.length+' people')+'</button>'
+    : '';
+
+  return '<div class="dl-winrow"><div class="dl-chips">'+chips+'</div></div>'+
+    kpis + chart +
+    '<div class="dl-crew">'+
+      '<div class="dl-chead"><span class="dl-ttl">Top people on this project</span>'+
+        '<span class="dl-leg">hours \u00b7 cost \u00b7 weeks worked</span></div>'+
+      crew + more +
+    '</div>' + src;
+}
+
+function ap2DlReadText(i){
+  var d = (ap2DlRead._data || [])[i];
+  if (!d) return '';
+  return '<b>Week ending '+d.l+'</b><span class="h">'+ap2Hrs(d.h)+' hrs</span>'+
+    '<span class="c">'+ap2Usd(d.c)+'</span>'+
+    '<span>'+(d.h ? ap2Usd(d.c/d.h)+'/hr' : '\u2014')+'</span>';
+}
+function ap2DlRead(i, el){
+  var box = document.getElementById('dl-read');
+  var data = ap2DlRead._data || [];
+  if (!box) return;
+  var svg = el && el.ownerSVGElement;
+  if (svg) {
+    var bars = svg.querySelectorAll('.dl-bar');
+    bars.forEach(function(b, j){ b.classList.toggle('hot', j === i); });
+  }
+  box.innerHTML = ap2DlReadText(i < 0 ? data.length - 1 : i);
 }
 
 function renderProjMain() {
@@ -15216,6 +15968,10 @@ function renderProjMain() {
   el.innerHTML =
     '<section class="ap2-hero">'+ap2ContractPanel(t)+ap2RatePanel(t)+'</section>'+
     '<section class="ap2-lower'+(AP_SEL?' has-card':'')+'">'+ap2Table(t)+ap2Card()+'</section>';
+  var pulse = AP_PULSE;
+  ap2DrawScope(pulse);
+  // fonts and the card can shift the layout a beat after render
+  setTimeout(function(){ ap2DrawScope(false); }, 260);
 }
 
 
@@ -15909,9 +16665,32 @@ function capLoadStoredWeeks() {
   } catch(e) { return []; }
 }
 
+// Weeks are kept without limit. A browser gives each site roughly 5 MB, which
+// holds a few hundred weekly reports. If that ever fills, the only weeks taken
+// out of this browser's copy are ones already published in portal-data.json,
+// so they still load for everyone from the published file. Nothing unpublished
+// is ever dropped; the uploader is told to publish instead.
 function capSaveWeeks(weeks) {
-  try { localStorage.setItem(CAP_WEEKS_KEY, JSON.stringify(weeks)); } catch(e) {}
-  capUnmarkDeleted((weeks||[]).map(function(w){ return w.weekKey; }));
+  weeks = weeks || [];
+  function tryWrite(list){
+    try { localStorage.setItem(CAP_WEEKS_KEY, JSON.stringify(list)); return true; }
+    catch(e) { return false; }
+  }
+  if (!tryWrite(weeks)) {
+    var pubKeys = {};
+    capPublishedWeeks().forEach(function(w){ pubKeys[w.weekKey] = 1; });
+    // oldest published weeks go first
+    var local = weeks.slice().sort(function(a,b){ return capWeekAsc(b,a); });
+    var ok = false;
+    for (var i = local.length - 1; i >= 0 && !ok; i--) {
+      if (!pubKeys[local[i].weekKey]) continue;
+      local.splice(i, 1);
+      ok = tryWrite(local);
+    }
+    if (!ok && typeof toast === 'function')
+      toast('Browser storage is full. Publish to GitHub so every uploaded week is kept.', 'error');
+  }
+  capUnmarkDeleted(weeks.map(function(w){ return w.weekKey; }));
 }
 
 var CAP_NAME_ALIASES = {
@@ -15983,8 +16762,8 @@ function handleCapUpload(input) {
           // Deduplicate by weekKey
           stored = stored.filter(function(w){ return w.weekKey !== week.weekKey; });
           stored.unshift(week);
-          // Keep max 52 weeks
-          if (stored.length > 52) stored = stored.slice(0, 52);
+          // No fixed cap: every uploaded week is kept. capSaveWeeks makes room
+          // safely if the browser's storage ever fills up.
           capSaveWeeks(stored);
           // Merge into WF_DATA.laborWeeks for this session
           if (!WF_DATA.laborWeeks) WF_DATA.laborWeeks = [];
