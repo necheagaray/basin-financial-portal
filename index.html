@@ -48,17 +48,6 @@ html,body{height:100%;background:var(--bg);color:var(--text1);font-family:var(--
 .ext-arrow{position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:16px;color:rgba(180,195,215,0.5);transition:all 0.25s;}
 .ext-btn:hover .ext-arrow{color:rgba(220,235,255,0.9);transform:translate(3px,calc(-50% - 3px));}
 .portal-section{display:none;min-height:100vh;}
-#op-ex{background:radial-gradient(ellipse at 20% 0%,rgba(255,138,61,0.12),transparent 55%),linear-gradient(160deg,#0c0706 0%,#100908 40%,#0a0606 100%);}
-.opx-root{max-width:1100px;margin:0 auto;padding:56px 32px;}
-.opx-hero{display:flex;align-items:center;gap:26px;padding-bottom:28px;border-bottom:1px solid rgba(255,138,61,0.2);}
-.opx-icon{width:112px;height:112px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:24px;
-  background:rgba(255,138,61,0.07);border:1px solid rgba(255,138,61,0.3);box-shadow:0 0 40px -8px rgba(255,138,61,0.55);}
-.opx-title{font-family:'Helvetica Neue',Arial,sans-serif;font-size:44px;font-weight:800;letter-spacing:1px;color:#FF8A3D;
-  text-shadow:0 0 24px rgba(255,138,61,0.45);line-height:1;}
-.opx-sub{font-family:'Helvetica Neue',Arial,sans-serif;font-size:16px;color:rgba(255,255,255,0.6);margin-top:10px;}
-.opx-empty{margin-top:32px;padding:28px;border:1px dashed rgba(255,138,61,0.3);border-radius:14px;
-  font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:1.6;color:rgba(255,255,255,0.5);}
-.opx-empty b{display:block;color:rgba(255,255,255,0.85);font-size:15px;margin-bottom:4px;}#workforce{background:linear-gradient(160deg,#030d0d 0%,#040f10 25%,#061412 50%,#050c0e 100%);}#capacity{background:linear-gradient(160deg,#06050f 0%,#0a0614 30%,#080518 60%,#05040f 100%);}#budget-forecast{background:linear-gradient(160deg,#07040f 0%,#090612 30%,#060414 60%,#08050f 100%);}#active-projects{background:linear-gradient(145deg,#05080f 0%,#080d18 30%,#060b1a 65%,#04070e 100%);}
 .wf-tab-bar{display:flex;align-items:center;padding:0 24px;background:rgba(3,12,12,0.94);border-bottom:1px solid rgba(0,200,140,0.12);position:sticky;top:52px;z-index:100;backdrop-filter:blur(12px);}
 .wf-tab{position:relative;display:flex;align-items:center;gap:9px;
   margin:9px 7px 11px 0;padding:10px 22px 10px 18px;cursor:pointer;
@@ -2859,6 +2848,251 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
   font-size:9px;font-weight:800;letter-spacing:0.4px;}
 .q4-avgd.up{color:#34d399;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.35);}
 .q4-avgd.down{color:#ff8a8a;background:rgba(255,138,138,0.1);border:1px solid rgba(255,138,138,0.35);}
+
+/* ── Projection summary ledger (open figures on a column grid) ───────── */
+.fz-panel{position:relative;}
+.fz-row{grid-template-columns:minmax(0,1fr) 262px;align-items:stretch;padding:0 !important;margin:0 !important;gap:0 18px;
+  background:none !important;border-radius:0 !important;transform:none !important;
+  border-bottom:1px solid rgba(255,255,255,0.07);}
+.fz-row:before{display:none !important;}
+.fz-row .fy-cmp{margin:12px 0;}
+.fz-grid{display:grid;grid-template-columns:minmax(150px,1fr) minmax(0,1fr) 22px minmax(0,1fr) 22px minmax(0,1.6fr);
+  align-items:center;min-height:86px;}
+.fz-row.hero .fz-grid{min-height:98px;}
+.fz-name{display:flex;flex-direction:column;align-items:flex-start;gap:7px;padding:0 12px 0 16px;
+  border-left:3px solid var(--c);align-self:stretch;justify-content:center;}
+.fz-row:not(.hero) .fz-name{border-left-color:rgba(var(--rgb),0.45);}
+.fz-name b{font-family:var(--mono);font-size:12.5px;font-weight:800;letter-spacing:2.6px;text-transform:uppercase;
+  text-shadow:0 0 12px rgba(var(--rgb),0.45);}
+.fz-row:not(.hero) .fz-name b{font-size:11.5px;}
+.fz-chip{font-family:var(--mono);font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:10px;border:1px solid;
+  background:rgba(255,255,255,0.03);}
+/* the figures sit in lanes that run the full height of the ledger */
+.fz-v{align-self:stretch;display:flex;align-items:center;justify-content:flex-end;padding:0 16px;
+  font-family:var(--hud);font-variant-numeric:tabular-nums;letter-spacing:-0.5px;white-space:nowrap;}
+.fz-v.act{font-size:24px;font-weight:800;color:#fff;background:rgba(94,235,150,0.035);
+  border-left:1px solid rgba(94,235,150,0.22);}
+.fz-row:not(.hero) .fz-v.act{font-size:20px;}
+.fz-v.prj{font-size:22px;font-weight:600;font-style:italic;
+  background:repeating-linear-gradient(135deg,rgba(247,179,43,0.035) 0 6px,transparent 6px 12px);
+  border-left:1px dashed rgba(247,179,43,0.35);}
+.fz-row:not(.hero) .fz-v.prj{font-size:18.5px;}
+.fz-v.tot{gap:12px;padding-right:12px;justify-content:flex-end;background:linear-gradient(90deg,rgba(var(--rgb),0.04),rgba(var(--rgb),0.11));
+  border-left:2px solid rgba(var(--rgb),0.55);}
+.fz-tv{font-size:31px;font-weight:900;}
+.fz-row:not(.hero) .fz-tv{font-size:24px;}
+.fz-rw{display:flex;flex-direction:column;align-items:center;gap:1px;}
+.fz-rw em{font-style:normal;font-family:var(--mono);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;
+  color:rgba(215,225,255,0.55);}
+.fz-ring{width:44px;height:44px;}
+.fz-ring text{font-family:var(--mono);font-size:10px;font-weight:800;fill:#fff;}
+.fz-op{align-self:stretch;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:16px;font-weight:800;color:rgba(215,225,255,0.35);}
+/* header */
+.fz-hdr{border-bottom:2px solid rgba(255,255,255,0.18);}
+.fz-hdr .fz-grid{min-height:0;align-items:end;}
+.fz-name.hd{border-left:none;justify-content:flex-end;padding-bottom:12px;}
+.fz-name.hd span{font-family:var(--mono);font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:rgba(215,225,255,0.45);}
+.fz-h{display:flex;flex-direction:column;align-items:flex-end;gap:4px;padding:6px 16px 12px;}
+.fz-h .k{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9.5px;font-weight:800;
+  letter-spacing:2.2px;text-transform:uppercase;}
+.fz-h .k i{width:8px;height:8px;border-radius:50%;}
+.fz-h b{font-family:var(--hud);font-size:22px;font-weight:900;letter-spacing:0.5px;color:#fff;line-height:1;white-space:nowrap;}
+.fz-h.act .k{color:#5eeb96;} .fz-h.act .k i{background:#5eeb96;box-shadow:0 0 8px #5eeb96;}
+.fz-h.act{border-top:3px solid #5eeb96;background:linear-gradient(180deg,rgba(94,235,150,0.12),transparent);}
+.fz-h.prj .k{color:#f7b32b;} .fz-h.prj .k i{border:1.5px dashed #f7b32b;}
+.fz-h.prj{border-top:3px dashed #f7b32b;background:linear-gradient(180deg,rgba(247,179,43,0.1),transparent);}
+.fz-h.prj b{color:#ffd9a0;font-style:italic;}
+.fz-h.tot .k{color:#fff;}
+.fz-h.tot{border-top:3px solid #fff;background:linear-gradient(180deg,rgba(255,255,255,0.1),transparent);}
+.fz-h.tot b{font-size:26px;}
+.fz-h.cmp{align-items:flex-start;padding-left:14px;border-top:3px solid rgba(255,255,255,0.25);align-self:end;}
+.fz-hdr .fz-h{align-self:stretch;justify-content:flex-end;}
+.fz-h.cmp .k{color:rgba(215,225,255,0.7);}
+.fz-h.cmp b{font-size:13px;color:rgba(215,225,255,0.85);letter-spacing:0.3px;}
+/* month frames: a strip of film under each period */
+.fz-film{display:flex;gap:2px;padding:3px 4px;margin-top:3px;background:#05060c;border-radius:2px;
+  box-shadow:inset 0 2px 0 rgba(255,255,255,0.08),inset 0 -2px 0 rgba(255,255,255,0.08);}
+.fz-film i{width:7px;height:9px;border-radius:1px;background:rgba(255,255,255,0.07);}
+.fz-film i.a{background:#5eeb96;box-shadow:0 0 5px rgba(94,235,150,0.7);}
+.fz-film i.p{background:transparent;border:1px dashed #f7b32b;}
+.fz-film i.f{background:rgba(255,255,255,0.8);}
+@media (max-width:1500px){
+  .fz-grid{grid-template-columns:minmax(0,1fr) 18px minmax(0,1fr) 18px minmax(0,1.3fr);}
+  .fz-name{grid-column:1/-1;flex-direction:row;align-items:center;justify-content:flex-start;padding:10px 12px 6px;align-self:auto;}
+  .fz-name.hd{display:none;}
+  .fz-v{padding:6px 10px 12px;}
+  .fz-v.act{font-size:19px;} .fz-v.prj{font-size:17px;} .fz-tv{font-size:24px;}
+  .fz-row:not(.hero) .fz-tv{font-size:21px;}
+  .fz-h{padding:6px 10px 10px;} .fz-h b{font-size:18px;} .fz-h.tot b{font-size:21px;}
+  .fz-film i{width:5px;}
+  .fz-hdr .fz-h.cmp{padding-left:10px;}
+  .fz-hdr .fz-h.cmp b{font-size:11px;}
+}
+@media (max-width:1380px){
+  /* the monthly-average box drops under its line rather than beside it */
+  .fz-row{grid-template-columns:minmax(0,1fr);}
+  .fz-row .fy-cmp{margin:0 0 14px;}
+  .fz-h.cmp{display:none;}
+}
+
+/* ── OP EX dashboard ──────────────────────────────────────────────────── */
+#op-ex{background:
+  radial-gradient(120% 60% at 70% 110%, rgba(255,138,61,0.35), transparent 60%),
+  radial-gradient(90% 60% at 10% 0%, rgba(120,70,200,0.35), transparent 60%),
+  linear-gradient(180deg,#140b2a 0%,#1d1038 45%,#2a1236 75%,#3a1a2e 100%);}
+.opx-page{position:relative;max-width:1500px;margin:0 auto;padding:26px 28px 60px;font-family:'Helvetica Neue',Arial,sans-serif;color:#ece6ff;}
+.opx-page:after{content:'';position:fixed;left:0;right:0;bottom:0;height:180px;pointer-events:none;z-index:0;opacity:0.55;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 180' preserveAspectRatio='none'><path d='M0 180V120H40V90H70V130H110V70H130V50H150V70H170V110H210V84H250V130H290V60H310V30H320V60H340V120H380V96H420V140H460V80H500V110H540V70H560V100H600V130H640V88H680V118H720V64H740V40H752V64H770V124H810V92H850V136H890V76H930V104H970V58H990V104H1030V126H1070V86H1110V120H1150V96H1200V180Z' fill='%23090514'/></svg>") bottom/100% 100% no-repeat;}
+.opx-page > *{position:relative;z-index:1;}
+.opx-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:20px;}
+.opx-ey{font-family:var(--mono);font-size:10.5px;letter-spacing:2.6px;text-transform:uppercase;color:#ff9a3d;}
+.opx-ttl h1{margin:6px 0 6px;font-size:38px;font-weight:900;letter-spacing:-0.5px;color:#fff;}
+.opx-ttl h1 em{font-style:normal;color:#ff9a3d;text-shadow:0 0 22px rgba(255,154,61,0.55);}
+.opx-ttl p{margin:0;font-size:14px;color:#b9aede;max-width:640px;}
+.opx-ctl{display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+.opx-chips{display:flex;align-items:center;gap:4px;flex-wrap:wrap;justify-content:flex-end;}
+.opx-chips span{font-family:var(--mono);font-size:9.5px;letter-spacing:1.6px;text-transform:uppercase;color:#9d91c8;margin-right:6px;}
+.opx-chips button{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);color:#cfc5f0;
+  font-family:var(--mono);font-size:11px;padding:5px 9px;border-radius:6px;cursor:pointer;}
+.opx-chips button:hover{border-color:#ff9a3d;color:#fff;}
+.opx-chips button.on{background:#ff9a3d;border-color:#ff9a3d;color:#1a0d02;font-weight:800;}
+.opx-up{background:rgba(255,154,61,0.1);border:1px solid rgba(255,154,61,0.6);color:#ff9a3d;font-family:var(--mono);
+  font-size:11px;font-weight:700;letter-spacing:1px;padding:8px 14px;border-radius:8px;cursor:pointer;}
+.opx-up:hover{background:#ff9a3d;color:#1a0d02;}
+.opx-card{background:rgba(16,10,34,0.72);border:1px solid rgba(190,160,255,0.18);border-radius:14px;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:18px 20px;box-shadow:0 20px 50px -30px rgba(0,0,0,0.9);}
+.opx-ch{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:12px;}
+.opx-ch h3{margin:0;font-size:17px;font-weight:800;color:#fff;}
+.opx-ch p{margin:4px 0 0;font-size:12px;color:#9d91c8;}
+.opx-ch a{color:#ff9a3d;cursor:pointer;}
+/* heroes */
+.opx-heroes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:18px;}
+.opx-hero{position:relative;border-radius:14px;overflow:hidden;border:1px solid rgba(190,160,255,0.22);
+  box-shadow:0 20px 50px -28px rgba(0,0,0,0.9);background:#120a26;}
+.opx-art{line-height:0;}
+.opx-ill{display:block;width:100%;height:auto;}
+.opx-ill .bag{font-family:var(--mono);font-size:7px;font-weight:800;letter-spacing:0.8px;fill:#10072a;}
+.opx-ill .bagv{font-family:'Helvetica Neue',Arial,sans-serif;font-size:9.5px;font-weight:900;fill:#10072a;}
+.opx-ill .sign{font-family:var(--mono);font-size:8px;font-weight:800;letter-spacing:1px;fill:#ffd24a;}
+.opx-ill .signv{font-family:'Helvetica Neue',Arial,sans-serif;font-size:19px;font-weight:900;fill:#ffd24a;}
+.opx-ill .signs{font-family:var(--mono);font-size:7.5px;fill:#b9aede;}
+.opx-ill .crk{font-family:'Helvetica Neue',Arial,sans-serif;font-size:22px;font-weight:900;fill:#ff9a3d;}
+.opx-ill .crl{font-family:var(--mono);font-size:7.5px;letter-spacing:1.4px;fill:#ffd9b0;}
+.opx-hk{padding:12px 18px 14px;background:rgba(8,4,20,0.92);border-top:1px solid rgba(190,160,255,0.2);
+  display:flex;flex-direction:column;}
+.opx-hk span{font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#ffd24a;}
+.opx-hk em{font-style:normal;font-size:11px;color:#9d91c8;}
+.opx-hk b{font-size:30px;font-weight:900;color:#fff;letter-spacing:-0.5px;line-height:1.1;margin-top:2px;}
+.opx-hk i{font-style:normal;font-size:12px;color:#cfc5f0;}
+.opx-h-lifter.hot .opx-hk i{color:#ff9a3d;} .opx-h-lifter.cool .opx-hk i{color:#2ee6c5;}
+.opx-h-crane .opx-hk b{color:#ff9a3d;text-shadow:0 0 20px rgba(255,154,61,0.5);}
+.opx-h-attendant .opx-hk b{color:#ffd24a;text-shadow:0 0 20px rgba(255,210,74,0.45);}
+/* the two groups */
+.opx-grps{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;}
+.opx-grp{border-top:3px solid var(--gc);}
+.opx-gh{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;}
+.opx-gk{font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gc);}
+.opx-gv{font-size:32px;font-weight:900;color:#fff;letter-spacing:-0.5px;margin-top:2px;}
+.opx-gv span{font-size:11px;font-weight:600;color:#9d91c8;margin-left:8px;letter-spacing:0;}
+.opx-gm{display:flex;gap:10px;}
+.opx-gm > div{padding:7px 12px;border-radius:9px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);text-align:right;}
+.opx-gm span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:#9d91c8;}
+.opx-gm b{font-size:18px;font-weight:900;color:#fff;}
+.opx-gm .fx{border-color:rgba(255,154,61,0.55);background:rgba(255,154,61,0.1);}
+.opx-gm .fx span{color:#ff9a3d;}
+.opx-gm em{display:block;font-style:normal;font-family:var(--mono);font-size:10px;font-weight:800;}
+.opx-gm em.up{color:#ff8a8a;} .opx-gm em.dn{color:#2ee6c5;}
+.opx-trend{display:block;width:100%;height:auto;margin:10px 0 4px;}
+.opx-trend .base{stroke:rgba(255,255,255,0.2);}
+.opx-trend .avg{stroke-width:1.5;stroke-dasharray:5 4;}
+.opx-trend .al{font-family:var(--mono);font-size:10px;font-weight:700;}
+.opx-trend .v{font-family:var(--mono);font-size:9.5px;fill:#cfc5f0;}
+.opx-trend .m{font-family:var(--mono);font-size:10px;fill:#9d91c8;}
+.opx-col{cursor:pointer;}
+.opx-col:hover rect{filter:brightness(1.3);}
+.opx-col.on .v{fill:#ff9a3d;font-weight:800;} .opx-col.on .m{fill:#ff9a3d;font-weight:800;}
+.opx-blh,.opx-bl{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1.4fr) 62px 62px;gap:12px;align-items:center;}
+.opx-blh{padding:8px 6px 6px;border-bottom:1px solid rgba(255,255,255,0.12);font-family:var(--mono);font-size:9px;
+  letter-spacing:1.2px;text-transform:uppercase;color:#9d91c8;}
+.opx-blh .lg{display:flex;align-items:center;gap:5px;text-transform:none;letter-spacing:0;}
+.opx-blh .lg i{display:inline-block;width:12px;height:6px;border-radius:3px;margin-left:6px;}
+.opx-blh .lg i.f{width:3px;height:12px;background:#ff9a3d;border-radius:1px;}
+.opx-blh .y,.opx-blh .f,.opx-bl .y,.opx-bl .f{text-align:right;}
+.opx-blh .f{color:#ff9a3d;}
+.opx-bl{padding:7px 6px;border-bottom:1px solid rgba(255,255,255,0.05);cursor:pointer;border-radius:6px;}
+.opx-bl:hover{background:rgba(255,255,255,0.05);}
+.opx-bl.sel{background:rgba(var(--grgb),0.14);box-shadow:inset 3px 0 0 var(--gc);}
+.opx-bl.rest{cursor:default;opacity:0.7;}
+.opx-bl .nm{font-size:12.5px;color:#ece6ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.opx-bl .nm i{font-style:normal;font-family:var(--mono);font-size:9.5px;color:#9d91c8;margin-left:7px;}
+.opx-bl .tr{position:relative;height:12px;border-radius:6px;background:rgba(255,255,255,0.05);}
+.opx-bl .tr .avg{position:absolute;left:0;top:2px;bottom:2px;border-radius:4px;opacity:0.75;}
+.opx-bl .tr .mk{position:absolute;top:-3px;width:3px;height:18px;margin-left:-1.5px;background:#ff9a3d;border-radius:1px;
+  box-shadow:0 0 8px #ff9a3d;}
+.opx-bl .y{font-size:12.5px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums;}
+.opx-bl .f{font-size:12.5px;font-weight:700;color:#ffc58f;font-variant-numeric:tabular-nums;}
+.opx-bl .f.hot{color:#ff8a8a;} .opx-bl .f.cool{color:#2ee6c5;}
+/* treemap + insights */
+.opx-row2{display:grid;grid-template-columns:1.7fr 1fr;gap:16px;margin-bottom:18px;}
+.opx-tmap{position:relative;height:430px;border-radius:10px;overflow:hidden;background:rgba(0,0,0,0.25);}
+.opx-tile{position:absolute;box-sizing:border-box;border:2px solid rgba(12,6,28,0.9);cursor:pointer;overflow:hidden;
+  transition:filter .15s;}
+.opx-tile:hover{filter:brightness(1.2);}
+.opx-tile.sel{outline:3px solid #ff9a3d;outline-offset:-3px;z-index:2;}
+.opx-tile .in{position:absolute;left:8px;top:6px;right:8px;display:flex;flex-direction:column;}
+.opx-tile .n{font-size:11.5px;font-weight:700;color:#0d0620;line-height:1.2;}
+.opx-tile b{font-size:15px;font-weight:900;color:#0d0620;}
+.opx-tile .p{font-family:var(--mono);font-size:9.5px;color:rgba(13,6,32,0.7);}
+.opx-tile.big .n{font-size:14px;} .opx-tile.big b{font-size:24px;}
+.opx-tile.tiny .in{display:none;}
+.opx-tile.sm .in{left:5px;top:4px;right:4px;}
+.opx-tile.sm .n{font-size:9.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.opx-tile.sm b{font-size:11px;} .opx-tile.sm .p{display:none;}
+.opx-tile .n{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.opx-tile em{position:absolute;right:6px;bottom:5px;font-style:normal;font-family:var(--mono);font-size:10px;font-weight:800;
+  padding:1px 6px;border-radius:8px;background:rgba(13,6,32,0.78);}
+.opx-tile em.up{color:#ff9a3d;} .opx-tile em.dn{color:#2ee6c5;}
+.opx-tmlg{display:flex;flex-wrap:wrap;gap:16px;margin-top:10px;font-size:11.5px;color:#cfc5f0;}
+.opx-tmlg i{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:6px;vertical-align:-1px;}
+.opx-tmlg .t{color:#9d91c8;} .opx-tmlg em{font-style:normal;} .opx-tmlg em.up{color:#ff9a3d;} .opx-tmlg em.dn{color:#2ee6c5;}
+.opx-ins-l{display:flex;flex-direction:column;gap:10px;}
+.opx-in{display:flex;gap:12px;padding:11px 12px;border-radius:10px;background:rgba(255,255,255,0.035);border:1px solid rgba(255,255,255,0.08);}
+.opx-in .ic{flex-shrink:0;width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,154,61,0.14);color:#ff9a3d;font-size:14px;}
+.opx-in b{display:block;font-size:13px;color:#fff;line-height:1.3;}
+.opx-in p{margin:3px 0 0;font-size:12px;color:#b9aede;line-height:1.45;}
+/* drivers */
+.opx-drv{border-top:3px solid var(--gc);margin-bottom:14px;}
+.opx-drv h3{font-size:22px;}
+.opx-drv-g{display:grid;grid-template-columns:1fr 1fr;gap:26px;}
+.opx-drv-g.tx{margin-top:22px;padding-top:16px;border-top:1px dashed rgba(255,255,255,0.12);}
+.opx-sh{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:6px;margin-bottom:4px;
+  border-bottom:1px solid rgba(255,255,255,0.12);}
+.opx-sh b{font-size:13px;color:#fff;} .opx-sh span{font-family:var(--mono);font-size:9.5px;color:#9d91c8;}
+.opx-vr{display:grid;grid-template-columns:20px minmax(0,1.5fr) minmax(0,1fr) 70px 80px;gap:10px;align-items:center;
+  padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.opx-vr.cur{grid-template-columns:20px minmax(0,1.5fr) minmax(0,1fr) 96px 64px;}
+.opx-vr .rk{font-family:var(--mono);font-size:10px;color:#9d91c8;text-align:right;}
+.opx-vr .nm{font-size:12.5px;color:#ece6ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.opx-vr .nm i{display:block;font-style:normal;font-family:var(--mono);font-size:9px;color:#9d91c8;overflow:hidden;text-overflow:ellipsis;}
+.opx-vr .br{height:8px;border-radius:4px;background:rgba(255,255,255,0.05);overflow:hidden;}
+.opx-vr .br i{display:block;height:100%;border-radius:4px;}
+.opx-sp{width:70px;height:22px;}
+.opx-vr .v{text-align:right;font-size:12.5px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums;}
+.opx-vr .v em{display:block;font-style:normal;font-family:var(--mono);font-size:9px;font-weight:600;color:#9d91c8;}
+.opx-vr .tg{font-family:var(--mono);font-size:9.5px;font-weight:700;color:#9d91c8;text-align:right;white-space:nowrap;}
+.opx-vr .tg.up{color:#ff8a8a;} .opx-vr .tg.dn{color:#2ee6c5;} .opx-vr .tg.new{color:#ffd24a;}
+.opx-tx{display:grid;grid-template-columns:44px minmax(0,1fr) 90px;gap:10px;align-items:center;padding:6px 0;
+  border-bottom:1px solid rgba(255,255,255,0.05);}
+.opx-tx .d{font-family:var(--mono);font-size:10.5px;color:#ff9a3d;}
+.opx-tx .nm{font-size:12.5px;color:#ece6ff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.opx-tx .nm i{font-style:normal;font-family:var(--mono);font-size:9px;color:#9d91c8;margin-left:8px;}
+.opx-tx .v{text-align:right;font-weight:800;font-size:12.5px;color:#fff;font-variant-numeric:tabular-nums;}
+.opx-none{padding:14px 0;font-size:12px;color:#9d91c8;}
+.opx-foot{font-family:var(--mono);font-size:10px;color:#8a7fb8;text-align:center;margin-top:8px;}
+.opx-empty{padding:60px;text-align:center;color:#b9aede;}
+@media (max-width:1250px){.opx-heroes{grid-template-columns:1fr 1fr;} .opx-grps,.opx-row2,.opx-drv-g{grid-template-columns:1fr;}}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
@@ -3044,19 +3278,7 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
   <div id="budget-main" style="min-height:100vh;"></div>
 </div>
 <div id="op-ex" class="portal-section" style="display:none;">
-  <div class="opx-root">
-    <div class="opx-hero">
-      <div class="opx-icon"><svg xmlns="http://www.w3.org/2000/svg" width="84" height="84" aria-hidden="true" viewBox="0 0 40 40" fill="none"> <line x1="1.5" y1="7" x2="38.5" y2="7" stroke="#E8ECF4" stroke-width="1.8" stroke-linecap="round"/> <rect x="3" y="1.5" width="3.6" height="11" rx="1" fill="#FF8A3D"/> <rect x="7.2" y="3.2" width="2.4" height="7.6" rx="0.8" fill="#FFB27A"/> <rect x="33.4" y="1.5" width="3.6" height="11" rx="1" fill="#FF8A3D"/> <rect x="30.4" y="3.2" width="2.4" height="7.6" rx="0.8" fill="#FFB27A"/> <path d="M13.2 7.6 L12.4 20 L13.8 32" stroke="#E8ECF4" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M26.8 7.6 L27.6 20 L26.2 32" stroke="#E8ECF4" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/> <circle cx="13.2" cy="7.2" r="2" fill="#E8ECF4"/> <circle cx="26.8" cy="7.2" r="2" fill="#E8ECF4"/> <circle cx="20" cy="24.2" r="4.2" fill="#E8ECF4"/> <path d="M8.5 40 C9 33.5 12 30.5 15 30 C17 31.8 23 31.8 25 30 C28 30.5 31 33.5 31.5 40 Z" fill="#E8ECF4"/> </svg></div>
-      <div>
-        <div class="opx-title">OP EX</div>
-        <div class="opx-sub">Non-labor overhead analysis</div>
-      </div>
-    </div>
-    <div class="opx-empty">
-      <b>This section is set up and ready to build.</b>
-      Non-labor overhead reporting will live here.
-    </div>
-  </div>
+  <div id="opx-main" class="opx-page"></div>
 </div>
 <div id="capacity" class="portal-section" style="display:none;">
   <div style="display:flex;height:calc(100vh - 52px);">
@@ -4111,6 +4333,609 @@ function wcBridge(title, span, steps, growth, ebitda, foot){
     detail+
     '<div class="wc-br-f">'+foot+'</div>'+
   '</div>';
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// OP EX — non-labor overhead analysis
+// Facilities (7200s) and Business Overhead (7300–7490), built from the
+// NetSuite Income Statement Detail so every figure traces to a transaction.
+// ══════════════════════════════════════════════════════════════════════════
+var OPX_SEED = {"names":["John Basin Properties LLC","Worx BHM","Regus","Minimall Storage","(Prepaid amortization)","Parsons Lee & Juliano, PC","Swan Development, LLC","Minute Key","ASAP Moving & Delivery","First Horizon","PODS","Wesley Eustis","Paratech","Toggle Design","Rev Tucker","WillPower Construction","Surgi's Heating and Air","ServPro of Metairie","Uniti GulfCo LLC","Cox Communications","Level 3 Communications. LLC (Lumen)","Entergy","Jefferson Parish Water","(Refund / deposit)","CNA Insurance","Arthur J Gallagher Insurance","Rigby Financial Group","Anchor Group LLC","Galloway Law Firm","Deutsch Kerrigan, L.L.P.","Wimbush & Associates, Inc.","Retirement Strategies Group","Impact Recruitment LLC","Talent Staffing Solutions Inc.","Metairie Country Club","The Personnel Consulting Group, LLC","Cash Balance Actuaries, LLC","Lease Services","Autodesk","Microsoft","Ensoft, Inc","ATG USA, Inc.","Vertical Aspect, LLC","Network Solutions","Netsuite","Trimble","Service Channel","Illustrator","Adobe","Remarkable OPS","Softdraft LLC","Kahua","Open AI/ChatGPT","Mailchimp","Smartnet","Paddle.net","SmartSheet","Carlson Software","Anthropic","Dropbox","Canva","LinkedIn","Virtuosity","Netlify","Zipby","Satellite","SquareSpace","GumRoad","Quickbooks","Transoft Solutions","Amazon","Allfax","office Depot","Zoom Meetings","Amy Love","Wholefoods","Restaurants","Lowe's","Exxon Station","Walgreens","Edward Jurczak","Joe's Cafe","U.S. Copy","Trader Joe's","Lenovo","Upscale Coffee","Jura, Inc.","DKI Office Furniture","Audible","BYLR - calendar","Walmart","Haag & Trammell","Joel Meariman","Sam's Club","Jefferson Parish Clerk of Court","Atomic Coffee","Blanca Estela Madrid","G360, LLC","Tax1099","Home Depot","River Birch Renewable","Circulation The AdvoBaton Rouge","West Marine","The New Stand","Amain.com","Where Traveler","Seville Classics","RTI London","Rouses","Best Buy","CVS Pharmacy","Terminix","MPress","Jedidiah Hellmich","Heather Cina","Beetronics","Vari","Alicia Martinez","Absolutely Unique","Dollar General","Robert Fresh Market","Alex Heaton","Keepsake Frames","EDCO Awards","Instacart","Shell Station","Vistaprint","OfficeSupply.com","Shark Ninja","Rylon Johnson","Moo Inc","Jonathan  C Catanzano","Dell Financial Services LLC","Air Essentials","Costco","Congregation Coffee","PaperPlaneNOLA","Tchefuncte Ace Hardware","VXB Bearings","Academy Sports","Target","Wuiliam Perez","STXND","Evolve Coffee","Country Day School","Coreworks","Delta Airlines","Adam Massey","Carrollton Boosters","Tasc Performance, Inc.","University of New Orleans","Tatiana Pavlyukova","Wesley (Reese) Ryland","Toni Dumas","Enrique McDonald","Gary Rendano","Shadman Sakib","Aleph Kennedy","Meraux Tackle Box","John Taylor","Brooke Harris","Uber","United Airlines","CheapOAir","Hotels","Travel Guard","The Hertz Corporation","Southwest Airlines","Spirit Airlines","American Airlines","Garrett Alvero","Lyft","Allianz Insurance","Expedia","Enterprise Rental Car","IDENTOGO","Hampton Inn","Priceline","Clearme.com","Payless Car Rental","Hyatt Hotel","Avis","American Express","Budget","23 Duplantis Design group","JetBlue","Breeze Airways","Louis Armstrong Airport","Gas","Parking","Premium Parking","Chevron","Circle K","3501 N. Causeway Associates, LLC","Jetgo","RaceTrac","SP+Parking","Connor Glennon","Warakorn Tiyapattanaputi","Kirk Henry","48 Meyer & Associates, Inc.","Payton McNeil","Sunoco","Max Torrealba","Riley Knepper","Marathon","Craig Cuccia","Kevin Beaupierre","Tuan Le","Verizon Wireless","Friends of WWOZ New Orleans","The Exchange Pickleball","Marsh & Bayou","Antoine's Bakery","Ulta","I'm On Vacation","Chef Michael King","Acquistapace's","Total Wine & More","Neiman Marcus","Sneaux-LA","Campo's Marina","The Monogram Shoppe","City Park Conservancy","Feats4Funds","St. George's Episcopal School","Michael Pedalino","The Peak Coach Inc.","Vistage Worldwide","SurvMap Education","ACEC of Louisiana","Women's Energy Network","American Concrete Institute - LA","Jane Faia Mentz","LCPA","Louisiana Engineering Society of NO","NCTCOG RPA Training","American Society of Civil Engineers","Solomon Group Productions, LLC","William Chauvin","Tilt up","Louisiana Economic Alliance for Development","Dun & Bradstreet","Alabama State Gov","ASCE Purchasing","LSPS","LA Secretary of State","Accuris","Joseph P. Lopinto, III - Sheriff and Ex-Officio Tax Collector","Utah City Govt.","Corporate Filings","Institute of Transportation Engineers","American Concrete Institution","LAPELS","PE Stamps","Louisiana Interactive","Oklahoma State Board","South Carolina Licensing","NCEES Firm Licensure","NC Board of Examiners","Texas Board of Professional Engineers and Land Surveyors","LLR - Board of Engineers and Surveyors","St. Tammany Parish Clerk of Courts","New Mexico State Board of Licensure for Professional Engineers and Surveyors","Harbor Point","Banner Ford","Pelican Pointe Car Wash","Rich's","Greater New Orleans","O'Reillys Auto Parts","SunPass","OMV","Lexus of NO","Mavis Tire","Mossy Motors","Ford","USPS","Fedex","UPS","Gulf Coast Bank & Trust","(Journal entry)"],"rows":[[7210,"2026-01-02",0,10938.11,"B"],[7210,"2026-01-26",1,2670.0,"B"],[7210,"2026-02-02",0,10938.11,"B"],[7210,"2026-02-22",1,2670.0,"B"],[7210,"2026-03-02",0,10938.11,"B"],[7210,"2026-03-25",1,2670.0,"B"],[7210,"2026-04-06",0,10938.11,"B"],[7210,"2026-04-22",2,546.33,"C"],[7210,"2026-04-24",1,2670.0,"B"],[7210,"2026-04-29",3,82.96,"C"],[7210,"2026-05-04",0,10938.11,"B"],[7210,"2026-05-25",1,2670.0,"B"],[7210,"2026-05-29",3,143.72,"C"],[7210,"2026-06-01",0,10938.11,"B"],[7210,"2026-06-26",1,877.8,"B"],[7210,"2026-06-26",3,175.64,"C"],[7210,"2026-07-01",0,10938.11,"B"],[7210,"2026-07-17",2,1025.42,"C"],[7210,"2026-07-24",3,175.64,"C"],[7210,"2026-07-31",4,500.0,"J"],[7210,"2026-08-01",0,10938.11,"K"],[7210,"2026-08-01",5,5300.0,"K"],[7210,"2026-08-21",3,175.64,"C"],[7210,"2026-08-31",4,500.0,"J"],[7220,"2026-01-06",6,92821.09,"B"],[7220,"2026-01-10",7,118.53,"C"],[7220,"2026-01-10",7,118.53,"C"],[7220,"2026-01-12",8,8500.0,"B"],[7220,"2026-01-12",9,800.0,"K"],[7220,"2026-01-12",9,800.0,"K"],[7220,"2026-01-13",10,53.01,"C"],[7220,"2026-01-14",10,53.01,"C"],[7220,"2026-01-15",6,27322.77,"B"],[7220,"2026-01-19",11,400.0,"E"],[7220,"2026-01-20",12,9671.05,"B"],[7220,"2026-01-20",12,11407.26,"B"],[7220,"2026-01-21",13,525.0,"B"],[7220,"2026-01-23",14,240.0,"B"],[7220,"2026-02-19",6,13508.0,"B"],[7220,"2026-03-09",14,200.0,"B"],[7220,"2026-03-25",15,225.0,"B"],[7220,"2026-04-01",6,7029.28,"B"],[7220,"2026-04-30",15,3350.0,"B"],[7220,"2026-05-18",16,372.0,"C"],[7220,"2026-05-28",14,160.0,"B"],[7220,"2026-06-03",15,300.0,"B"],[7220,"2026-06-25",6,11278.78,"B"],[7220,"2026-08-27",17,2500.0,"K"],[7240,"2026-01-01",18,1429.75,"B"],[7240,"2026-01-20",19,996.4,"K"],[7240,"2026-02-01",18,997.5,"B"],[7240,"2026-02-20",19,532.06,"K"],[7240,"2026-03-01",18,997.5,"B"],[7240,"2026-03-01",12,839.23,"B"],[7240,"2026-03-23",19,178.86,"K"],[7240,"2026-04-01",12,898.13,"B"],[7240,"2026-04-01",18,997.5,"B"],[7240,"2026-05-01",12,898.13,"B"],[7240,"2026-05-01",18,997.5,"B"],[7240,"2026-06-01",18,997.5,"B"],[7240,"2026-06-01",12,898.13,"B"],[7240,"2026-07-01",20,1374.93,"B"],[7240,"2026-07-01",12,902.31,"B"],[7240,"2026-07-01",18,997.5,"B"],[7240,"2026-08-01",12,990.22,"B"],[7240,"2026-08-01",18,997.5,"B"],[7240,"2026-08-01",20,1085.47,"B"],[7240,"2026-08-31",12,990.22,"B"],[7250,"2026-01-22",21,308.24,"B"],[7250,"2026-02-18",21,754.16,"B"],[7250,"2026-03-01",22,97.02,"B"],[7250,"2026-03-19",21,694.35,"B"],[7250,"2026-04-17",21,653.87,"B"],[7250,"2026-04-23",22,140.61,"B"],[7250,"2026-05-18",21,724.01,"B"],[7250,"2026-06-17",21,870.03,"B"],[7250,"2026-06-17",22,140.61,"B"],[7250,"2026-07-17",21,847.02,"B"],[7250,"2026-08-10",22,122.3,"B"],[7250,"2026-08-15",21,997.02,"B"],[7310,"2026-02-03",23,-910.1,"D"],[7310,"2026-03-09",24,562.88,"B"],[7310,"2026-03-18",24,3823.07,"K"],[7310,"2026-03-31",4,580.64,"J"],[7310,"2026-04-17",25,61.5,"B"],[7310,"2026-04-30",4,580.64,"J"],[7310,"2026-05-01",23,-1815.81,"D"],[7310,"2026-05-25",24,3371.07,"B"],[7310,"2026-05-31",4,2568.31,"J"],[7310,"2026-05-31",4,580.64,"J"],[7310,"2026-06-08",24,545.82,"B"],[7310,"2026-06-30",4,467.33,"J"],[7310,"2026-06-30",4,580.64,"J"],[7310,"2026-06-30",4,2568.31,"J"],[7310,"2026-07-31",4,467.33,"J"],[7310,"2026-07-31",4,580.64,"J"],[7310,"2026-07-31",4,923.01,"J"],[7310,"2026-07-31",4,2568.31,"J"],[7310,"2026-08-31",4,580.64,"J"],[7310,"2026-08-31",4,209.33,"J"],[7310,"2026-08-31",4,2568.31,"J"],[7310,"2026-08-31",4,467.33,"J"],[7310,"2026-08-31",4,923.01,"J"],[7312,"2026-02-28",4,1135.42,"J"],[7312,"2026-02-28",4,793.75,"J"],[7312,"2026-03-31",4,1135.42,"J"],[7312,"2026-03-31",4,793.75,"J"],[7312,"2026-04-30",4,1135.42,"J"],[7312,"2026-04-30",4,531.11,"J"],[7312,"2026-04-30",4,793.75,"J"],[7312,"2026-05-31",4,531.11,"J"],[7312,"2026-05-31",4,793.75,"J"],[7312,"2026-05-31",4,1135.42,"J"],[7312,"2026-06-30",4,1135.42,"J"],[7312,"2026-06-30",4,531.11,"J"],[7312,"2026-06-30",4,793.75,"J"],[7312,"2026-07-31",4,793.75,"J"],[7312,"2026-07-31",4,1135.42,"J"],[7312,"2026-07-31",4,531.11,"J"],[7312,"2026-08-31",4,531.11,"J"],[7312,"2026-08-31",4,1135.42,"J"],[7312,"2026-08-31",4,793.75,"J"],[7320,"2026-01-06",26,2000.0,"B"],[7320,"2026-01-07",26,14300.0,"B"],[7320,"2026-01-12",27,6150.0,"B"],[7320,"2026-01-23",26,1750.0,"K"],[7320,"2026-01-30",28,877.5,"B"],[7320,"2026-02-03",27,7636.25,"B"],[7320,"2026-02-05",26,3200.0,"B"],[7320,"2026-02-23",26,1750.0,"K"],[7320,"2026-03-04",26,9180.0,"B"],[7320,"2026-03-05",27,4663.75,"B"],[7320,"2026-03-19",28,1300.0,"B"],[7320,"2026-03-20",29,3729.39,"B"],[7320,"2026-03-23",26,1750.0,"K"],[7320,"2026-03-30",30,6000.0,"B"],[7320,"2026-03-30",30,7000.0,"B"],[7320,"2026-03-31",31,1442.0,"B"],[7320,"2026-04-01",27,7123.75,"B"],[7320,"2026-04-09",26,10500.0,"B"],[7320,"2026-04-13",32,21325.0,"B"],[7320,"2026-04-20",33,22500.0,"B"],[7320,"2026-04-21",28,357.5,"B"],[7320,"2026-04-23",26,1750.0,"K"],[7320,"2026-04-27",28,2117.5,"B"],[7320,"2026-05-06",26,6910.0,"B"],[7320,"2026-05-12",28,110.0,"B"],[7320,"2026-05-12",27,5176.25,"B"],[7320,"2026-05-20",28,747.5,"B"],[7320,"2026-05-23",26,1750.0,"K"],[7320,"2026-05-26",29,2650.36,"B"],[7320,"2026-06-02",27,6201.25,"B"],[7320,"2026-06-04",26,6500.0,"B"],[7320,"2026-06-18",28,617.5,"B"],[7320,"2026-06-23",26,1750.0,"K"],[7320,"2026-06-25",34,2242.05,"B"],[7320,"2026-07-01",35,45000.0,"B"],[7320,"2026-07-01",36,3500.0,"B"],[7320,"2026-07-01",31,1036.0,"B"],[7320,"2026-07-02",27,8200.0,"B"],[7320,"2026-07-10",26,9147.5,"B"],[7320,"2026-07-21",28,845.0,"B"],[7320,"2026-07-22",28,97.5,"B"],[7320,"2026-07-23",26,1750.0,"K"],[7320,"2026-08-01",30,7000.0,"B"],[7320,"2026-08-01",30,7000.0,"B"],[7320,"2026-08-04",27,8610.0,"B"],[7320,"2026-08-07",26,12245.0,"B"],[7320,"2026-08-10",28,650.0,"B"],[7320,"2026-08-23",26,1750.0,"K"],[7320,"2026-08-31",27,10403.75,"B"],[7330,"2026-01-05",37,1244.47,"K"],[7330,"2026-01-07",38,126.5,"C"],[7330,"2026-01-11",39,36.96,"C"],[7330,"2026-01-14",38,385.13,"C"],[7330,"2026-01-14",38,674.06,"C"],[7330,"2026-01-14",40,65.0,"C"],[7330,"2026-01-14",38,-385.13,"R"],[7330,"2026-01-15",41,121.0,"K"],[7330,"2026-01-19",39,2128.16,"C"],[7330,"2026-01-21",42,3395.43,"B"],[7330,"2026-01-22",41,1331.0,"K"],[7330,"2026-01-22",39,1.06,"C"],[7330,"2026-01-24",43,17.99,"C"],[7330,"2026-01-24",39,5.36,"C"],[7330,"2026-01-28",44,1169.59,"B"],[7330,"2026-01-28",38,1012.0,"C"],[7330,"2026-01-28",39,22.0,"C"],[7330,"2026-01-29",39,17.6,"C"],[7330,"2026-02-05",37,1244.47,"K"],[7330,"2026-02-05",44,341.55,"C"],[7330,"2026-02-05",44,211.76,"C"],[7330,"2026-02-06",41,363.0,"K"],[7330,"2026-02-06",45,6853.0,"C"],[7330,"2026-02-07",38,126.5,"C"],[7330,"2026-02-08",44,2095.8,"B"],[7330,"2026-02-09",44,341.55,"B"],[7330,"2026-02-09",46,4.2,"K"],[7330,"2026-02-11",39,46.2,"C"],[7330,"2026-02-13",47,290.27,"C"],[7330,"2026-02-16",38,3157.0,"C"],[7330,"2026-02-19",39,2128.16,"C"],[7330,"2026-02-20",39,21.95,"C"],[7330,"2026-02-21",43,17.99,"C"],[7330,"2026-02-24",48,37.94,"C"],[7330,"2026-02-28",49,3.29,"C"],[7330,"2026-02-28",39,22.0,"C"],[7330,"2026-02-28",38,1012.0,"C"],[7330,"2026-02-28",4,1080.0,"J"],[7330,"2026-03-01",39,18.48,"C"],[7330,"2026-03-03",23,-21253.86,"D"],[7330,"2026-03-04",50,395.0,"C"],[7330,"2026-03-04",51,1490.0,"C"],[7330,"2026-03-06",45,-6853.0,"X"],[7330,"2026-03-07",38,126.5,"C"],[7330,"2026-03-11",39,46.2,"C"],[7330,"2026-03-19",39,2128.16,"C"],[7330,"2026-03-19",48,32.99,"C"],[7330,"2026-03-21",43,17.99,"C"],[7330,"2026-03-21",52,21.95,"C"],[7330,"2026-03-22",38,594.0,"C"],[7330,"2026-03-24",41,60.36,"B"],[7330,"2026-03-24",48,37.94,"C"],[7330,"2026-03-25",38,3157.0,"C"],[7330,"2026-03-25",39,11.65,"C"],[7330,"2026-03-28",52,22.0,"C"],[7330,"2026-03-28",38,1012.0,"C"],[7330,"2026-03-29",39,18.48,"C"],[7330,"2026-03-30",53,49.39,"C"],[7330,"2026-03-31",4,4168.08,"J"],[7330,"2026-03-31",4,1080.0,"J"],[7330,"2026-03-31",4,474.21,"J"],[7330,"2026-04-01",39,8.38,"C"],[7330,"2026-04-01",54,2730.0,"C"],[7330,"2026-04-06",44,-923.1,"X"],[7330,"2026-04-06",44,-341.55,"X"],[7330,"2026-04-06",44,-1810.19,"X"],[7330,"2026-04-07",38,126.5,"C"],[7330,"2026-04-09",55,1.99,"C"],[7330,"2026-04-09",39,139.93,"C"],[7330,"2026-04-12",39,46.2,"C"],[7330,"2026-04-18",43,19.99,"C"],[7330,"2026-04-19",39,2576.85,"C"],[7330,"2026-04-19",48,32.99,"C"],[7330,"2026-04-21",52,21.95,"C"],[7330,"2026-04-24",48,37.94,"C"],[7330,"2026-04-28",38,1012.0,"C"],[7330,"2026-04-28",52,22.0,"C"],[7330,"2026-04-29",39,18.48,"C"],[7330,"2026-04-30",53,49.39,"C"],[7330,"2026-04-30",4,4168.08,"J"],[7330,"2026-04-30",4,474.21,"J"],[7330,"2026-04-30",4,1080.0,"J"],[7330,"2026-05-05",56,118.8,"C"],[7330,"2026-05-06",57,385.0,"C"],[7330,"2026-05-07",38,126.5,"C"],[7330,"2026-05-08",39,10.58,"C"],[7330,"2026-05-11",39,46.2,"C"],[7330,"2026-05-11",52,54.88,"C"],[7330,"2026-05-16",43,19.99,"C"],[7330,"2026-05-16",39,2.15,"C"],[7330,"2026-05-19",41,1086.53,"K"],[7330,"2026-05-19",38,2497.22,"C"],[7330,"2026-05-19",58,137.19,"C"],[7330,"2026-05-19",38,3154.51,"C"],[7330,"2026-05-19",48,32.99,"C"],[7330,"2026-05-19",39,2620.2,"C"],[7330,"2026-05-21",52,21.95,"C"],[7330,"2026-05-22",39,12.32,"C"],[7330,"2026-05-24",48,37.94,"C"],[7330,"2026-05-28",52,22.0,"C"],[7330,"2026-05-28",38,1012.0,"C"],[7330,"2026-05-29",39,18.48,"C"],[7330,"2026-05-31",4,1080.0,"J"],[7330,"2026-05-31",4,753.5,"J"],[7330,"2026-05-31",4,474.21,"J"],[7330,"2026-05-31",4,4168.08,"J"],[7330,"2026-05-31",4,1114.66,"J"],[7330,"2026-06-06",38,2304.5,"C"],[7330,"2026-06-07",38,126.5,"C"],[7330,"2026-06-11",52,54.88,"C"],[7330,"2026-06-11",39,46.2,"C"],[7330,"2026-06-13",43,19.99,"C"],[7330,"2026-06-14",59,199.0,"C"],[7330,"2026-06-18",49,4.38,"C"],[7330,"2026-06-19",39,2634.65,"C"],[7330,"2026-06-19",48,32.99,"C"],[7330,"2026-06-19",58,137.19,"C"],[7330,"2026-06-21",52,21.95,"C"],[7330,"2026-06-22",60,18.0,"C"],[7330,"2026-06-24",48,37.94,"C"],[7330,"2026-06-27",61,76.99,"C"],[7330,"2026-06-28",52,22.0,"C"],[7330,"2026-06-28",38,1012.0,"C"],[7330,"2026-06-29",41,663.99,"B"],[7330,"2026-06-29",49,4.39,"C"],[7330,"2026-06-29",39,18.48,"C"],[7330,"2026-06-30",53,49.39,"C"],[7330,"2026-06-30",4,1080.0,"J"],[7330,"2026-06-30",4,753.5,"J"],[7330,"2026-06-30",4,558.89,"J"],[7330,"2026-06-30",4,474.21,"J"],[7330,"2026-06-30",4,1114.66,"J"],[7330,"2026-06-30",4,4168.08,"J"],[7330,"2026-07-01",62,6706.7,"C"],[7330,"2026-07-03",58,21.95,"C"],[7330,"2026-07-07",38,126.5,"C"],[7330,"2026-07-09",58,21.95,"C"],[7330,"2026-07-10",59,199.0,"C"],[7330,"2026-07-11",39,46.2,"C"],[7330,"2026-07-11",52,54.88,"C"],[7330,"2026-07-11",43,19.99,"C"],[7330,"2026-07-17",63,10.0,"C"],[7330,"2026-07-18",64,38.0,"C"],[7330,"2026-07-19",39,2649.1,"C"],[7330,"2026-07-19",48,32.99,"C"],[7330,"2026-07-19",58,137.19,"C"],[7330,"2026-07-19",65,2.06,"C"],[7330,"2026-07-20",63,10.0,"C"],[7330,"2026-07-20",58,49.39,"C"],[7330,"2026-07-20",66,39.51,"C"],[7330,"2026-07-21",39,12.74,"C"],[7330,"2026-07-21",52,21.95,"C"],[7330,"2026-07-22",60,18.0,"C"],[7330,"2026-07-22",67,7.68,"C"],[7330,"2026-07-24",48,37.94,"C"],[7330,"2026-07-26",58,21.95,"C"],[7330,"2026-07-28",52,22.0,"C"],[7330,"2026-07-28",38,1012.0,"C"],[7330,"2026-07-29",39,18.48,"C"],[7330,"2026-07-29",58,49.39,"C"],[7330,"2026-07-30",39,3.57,"C"],[7330,"2026-07-30",53,49.39,"C"],[7330,"2026-07-31",4,1080.0,"J"],[7330,"2026-07-31",4,558.89,"J"],[7330,"2026-07-31",4,474.21,"J"],[7330,"2026-07-31",4,307.45,"J"],[7330,"2026-07-31",4,1114.66,"J"],[7330,"2026-07-31",4,4168.08,"J"],[7330,"2026-07-31",4,365.83,"J"],[7330,"2026-07-31",4,753.5,"J"],[7330,"2026-07-31",4,519.94,"J"],[7330,"2026-08-03",58,21.95,"C"],[7330,"2026-08-03",63,10.0,"C"],[7330,"2026-08-06",49,876.9,"C"],[7330,"2026-08-07",49,4.39,"C"],[7330,"2026-08-07",38,126.5,"C"],[7330,"2026-08-08",43,19.99,"C"],[7330,"2026-08-09",58,21.95,"C"],[7330,"2026-08-09",63,9.0,"C"],[7330,"2026-08-10",49,4.39,"C"],[7330,"2026-08-11",52,54.88,"C"],[7330,"2026-08-11",39,55.44,"C"],[7330,"2026-08-14",39,3.12,"C"],[7330,"2026-08-15",58,49.39,"C"],[7330,"2026-08-16",58,12.82,"C"],[7330,"2026-08-16",58,11.25,"C"],[7330,"2026-08-16",58,11.34,"C"],[7330,"2026-08-17",68,46.1,"C"],[7330,"2026-08-18",49,4.38,"C"],[7330,"2026-08-19",69,1031.65,"B"],[7330,"2026-08-19",39,2678.0,"C"],[7330,"2026-08-19",48,32.99,"C"],[7330,"2026-08-19",58,137.19,"C"],[7330,"2026-08-21",58,11.12,"C"],[7330,"2026-08-21",52,21.95,"C"],[7330,"2026-08-21",58,12.12,"C"],[7330,"2026-08-22",58,11.07,"C"],[7330,"2026-08-22",60,18.0,"C"],[7330,"2026-08-22",58,11.02,"C"],[7330,"2026-08-24",48,37.94,"C"],[7330,"2026-08-24",58,11.04,"C"],[7330,"2026-08-24",58,11.52,"C"],[7330,"2026-08-25",44,813.82,"B"],[7330,"2026-08-25",58,109.15,"C"],[7330,"2026-08-28",52,22.0,"C"],[7330,"2026-08-28",39,10.26,"C"],[7330,"2026-08-28",38,1012.0,"C"],[7330,"2026-08-29",39,18.48,"C"],[7330,"2026-08-29",49,4.39,"C"],[7330,"2026-08-30",53,49.39,"C"],[7330,"2026-08-31",4,365.83,"J"],[7330,"2026-08-31",4,1080.0,"J"],[7330,"2026-08-31",4,558.89,"J"],[7330,"2026-08-31",4,519.94,"J"],[7330,"2026-08-31",4,356.74,"J"],[7330,"2026-08-31",4,1114.66,"J"],[7330,"2026-08-31",4,753.5,"J"],[7330,"2026-08-31",4,4168.08,"J"],[7330,"2026-08-31",4,474.21,"J"],[7330,"2026-08-31",4,307.45,"J"],[7340,"2026-01-01",12,261.8,"B"],[7340,"2026-01-03",70,818.36,"C"],[7340,"2026-01-03",71,100.46,"C"],[7340,"2026-01-03",72,523.58,"C"],[7340,"2026-01-03",72,-248.04,"R"],[7340,"2026-01-03",72,-236.49,"R"],[7340,"2026-01-05",73,175.9,"C"],[7340,"2026-01-05",74,71.5,"E"],[7340,"2026-01-06",75,19.73,"C"],[7340,"2026-01-06",70,980.07,"C"],[7340,"2026-01-07",72,43.99,"C"],[7340,"2026-01-07",72,5.94,"C"],[7340,"2026-01-07",72,38.49,"C"],[7340,"2026-01-07",72,76.98,"C"],[7340,"2026-01-07",70,362.16,"C"],[7340,"2026-01-07",70,-140.67,"R"],[7340,"2026-01-08",75,12.83,"C"],[7340,"2026-01-08",76,32.76,"C"],[7340,"2026-01-09",72,76.42,"C"],[7340,"2026-01-09",77,502.89,"C"],[7340,"2026-01-09",72,25.27,"C"],[7340,"2026-01-10",76,19.11,"C"],[7340,"2026-01-10",77,458.73,"C"],[7340,"2026-01-12",70,1316.96,"C"],[7340,"2026-01-12",78,6.99,"C"],[7340,"2026-01-12",77,169.81,"C"],[7340,"2026-01-12",79,18.11,"C"],[7340,"2026-01-12",80,44.92,"E"],[7340,"2026-01-13",81,39.59,"C"],[7340,"2026-01-13",70,47.73,"C"],[7340,"2026-01-13",72,1241.42,"C"],[7340,"2026-01-13",70,235.08,"C"],[7340,"2026-01-14",82,20.94,"B"],[7340,"2026-01-14",83,8.78,"C"],[7340,"2026-01-14",84,374.29,"C"],[7340,"2026-01-14",85,4648.52,"C"],[7340,"2026-01-15",70,108.66,"C"],[7340,"2026-01-15",86,1067.81,"C"],[7340,"2026-01-16",87,820.93,"B"],[7340,"2026-01-16",70,-108.66,"R"],[7340,"2026-01-17",88,16.41,"C"],[7340,"2026-01-17",89,78.5,"C"],[7340,"2026-01-19",90,5.36,"C"],[7340,"2026-01-19",84,640.4,"C"],[7340,"2026-01-20",91,41.16,"C"],[7340,"2026-01-20",92,176.46,"E"],[7340,"2026-01-21",72,23.77,"C"],[7340,"2026-01-21",2,1031.18,"C"],[7340,"2026-01-21",66,39.51,"C"],[7340,"2026-01-22",93,55.71,"C"],[7340,"2026-01-23",90,183.37,"C"],[7340,"2026-01-23",70,126.02,"C"],[7340,"2026-01-23",90,18.92,"C"],[7340,"2026-01-23",91,76.83,"C"],[7340,"2026-01-24",72,862.97,"C"],[7340,"2026-01-24",77,88.72,"C"],[7340,"2026-01-25",94,-5.25,"R"],[7340,"2026-01-26",92,560.0,"B"],[7340,"2026-01-27",84,2451.16,"C"],[7340,"2026-01-27",95,73.1,"C"],[7340,"2026-01-28",93,27.1,"C"],[7340,"2026-01-28",70,21.94,"C"],[7340,"2026-01-29",90,66.93,"C"],[7340,"2026-01-29",92,37.6,"E"],[7340,"2026-01-30",96,280.0,"B"],[7340,"2026-01-30",72,15.82,"C"],[7340,"2026-02-01",12,261.8,"B"],[7340,"2026-02-02",97,222.38,"B"],[7340,"2026-02-02",82,20.94,"B"],[7340,"2026-02-02",98,103.35,"C"],[7340,"2026-02-02",98,6.89,"C"],[7340,"2026-02-02",98,22.65,"C"],[7340,"2026-02-02",93,8.82,"C"],[7340,"2026-02-02",23,-45.0,"D"],[7340,"2026-02-04",70,27.49,"C"],[7340,"2026-02-04",77,21.59,"C"],[7340,"2026-02-05",96,280.0,"B"],[7340,"2026-02-05",99,60.73,"C"],[7340,"2026-02-05",71,89.96,"C"],[7340,"2026-02-06",70,196.45,"C"],[7340,"2026-02-06",100,14.0,"C"],[7340,"2026-02-06",70,77.92,"C"],[7340,"2026-02-06",23,-0.12,"D"],[7340,"2026-02-08",70,19.17,"C"],[7340,"2026-02-09",93,4.41,"C"],[7340,"2026-02-09",101,78.18,"C"],[7340,"2026-02-10",82,-13.46,"X"],[7340,"2026-02-10",72,14.26,"C"],[7340,"2026-02-10",70,22.67,"C"],[7340,"2026-02-11",96,280.0,"B"],[7340,"2026-02-12",75,28.1,"C"],[7340,"2026-02-12",99,117.43,"C"],[7340,"2026-02-12",49,3.29,"C"],[7340,"2026-02-13",90,135.95,"C"],[7340,"2026-02-14",102,93.47,"C"],[7340,"2026-02-17",88,16.41,"C"],[7340,"2026-02-19",96,280.0,"B"],[7340,"2026-02-20",95,73.1,"C"],[7340,"2026-02-20",66,39.51,"C"],[7340,"2026-02-24",91,91.36,"C"],[7340,"2026-02-24",70,59.91,"C"],[7340,"2026-02-24",103,15.65,"C"],[7340,"2026-02-24",75,19.14,"C"],[7340,"2026-02-24",92,125.1,"E"],[7340,"2026-02-25",79,7.64,"C"],[7340,"2026-02-25",104,215.5,"C"],[7340,"2026-02-26",96,280.0,"B"],[7340,"2026-02-27",75,66.73,"C"],[7340,"2026-03-01",12,261.8,"B"],[7340,"2026-03-02",82,20.1,"B"],[7340,"2026-03-03",90,23.79,"C"],[7340,"2026-03-03",105,3.9,"C"],[7340,"2026-03-04",106,189.99,"C"],[7340,"2026-03-04",70,12.05,"C"],[7340,"2026-03-04",90,16.43,"C"],[7340,"2026-03-04",92,21.55,"E"],[7340,"2026-03-04",92,101.93,"E"],[7340,"2026-03-05",96,280.0,"B"],[7340,"2026-03-05",71,84.31,"C"],[7340,"2026-03-05",70,52.76,"C"],[7340,"2026-03-05",76,9.61,"C"],[7340,"2026-03-06",49,3.29,"C"],[7340,"2026-03-06",79,54.99,"C"],[7340,"2026-03-10",93,71.92,"C"],[7340,"2026-03-10",49,3.29,"C"],[7340,"2026-03-10",70,32.66,"C"],[7340,"2026-03-10",70,14.78,"C"],[7340,"2026-03-11",70,15.84,"C"],[7340,"2026-03-12",96,280.0,"B"],[7340,"2026-03-12",107,200.81,"C"],[7340,"2026-03-12",84,1815.43,"C"],[7340,"2026-03-14",84,17.45,"C"],[7340,"2026-03-15",93,39.49,"C"],[7340,"2026-03-16",93,8.21,"C"],[7340,"2026-03-17",96,280.0,"B"],[7340,"2026-03-17",88,16.41,"C"],[7340,"2026-03-17",108,23.94,"C"],[7340,"2026-03-17",93,-4.41,"R"],[7340,"2026-03-18",108,5.16,"C"],[7340,"2026-03-18",49,3.28,"C"],[7340,"2026-03-19",109,117.42,"C"],[7340,"2026-03-19",70,66.4,"C"],[7340,"2026-03-20",95,73.1,"C"],[7340,"2026-03-20",99,52.27,"C"],[7340,"2026-03-20",66,39.51,"C"],[7340,"2026-03-21",93,216.45,"C"],[7340,"2026-03-24",75,43.75,"C"],[7340,"2026-03-24",108,25.48,"C"],[7340,"2026-03-25",96,280.0,"B"],[7340,"2026-03-25",84,2020.59,"C"],[7340,"2026-03-25",84,270.93,"C"],[7340,"2026-03-25",70,794.88,"C"],[7340,"2026-03-25",70,190.83,"C"],[7340,"2026-03-25",70,426.92,"C"],[7340,"2026-03-26",75,18.39,"C"],[7340,"2026-03-26",70,14.89,"C"],[7340,"2026-03-26",70,215.99,"C"],[7340,"2026-03-26",84,379.49,"C"],[7340,"2026-03-27",70,219.49,"C"],[7340,"2026-03-29",49,3.29,"C"],[7340,"2026-03-31",108,23.05,"C"],[7340,"2026-04-01",82,30.6,"B"],[7340,"2026-04-01",96,280.0,"B"],[7340,"2026-04-01",12,349.8,"B"],[7340,"2026-04-01",110,36.76,"C"],[7340,"2026-04-03",71,125.53,"C"],[7340,"2026-04-06",111,229.0,"B"],[7340,"2026-04-06",96,280.0,"B"],[7340,"2026-04-07",112,149.96,"C"],[7340,"2026-04-07",70,43.85,"C"],[7340,"2026-04-07",109,64.94,"C"],[7340,"2026-04-07",49,3.29,"C"],[7340,"2026-04-08",90,44.43,"C"],[7340,"2026-04-08",108,8.53,"C"],[7340,"2026-04-08",92,18.8,"E"],[7340,"2026-04-08",113,27.43,"E"],[7340,"2026-04-09",70,130.08,"C"],[7340,"2026-04-10",49,3.29,"C"],[7340,"2026-04-11",99,59.17,"C"],[7340,"2026-04-13",95,73.1,"C"],[7340,"2026-04-13",72,131.69,"C"],[7340,"2026-04-13",114,48.7,"E"],[7340,"2026-04-14",75,76.14,"C"],[7340,"2026-04-14",115,634.0,"C"],[7340,"2026-04-14",70,38.15,"C"],[7340,"2026-04-15",116,547.65,"C"],[7340,"2026-04-16",96,280.0,"B"],[7340,"2026-04-16",70,153.66,"C"],[7340,"2026-04-16",90,65.71,"C"],[7340,"2026-04-17",88,16.41,"C"],[7340,"2026-04-18",49,4.38,"C"],[7340,"2026-04-18",84,313.86,"C"],[7340,"2026-04-18",72,91.07,"C"],[7340,"2026-04-19",70,18.64,"C"],[7340,"2026-04-20",70,109.72,"C"],[7340,"2026-04-20",66,39.51,"C"],[7340,"2026-04-20",93,85.55,"C"],[7340,"2026-04-20",117,207.8,"E"],[7340,"2026-04-21",96,280.0,"B"],[7340,"2026-04-21",76,12.06,"C"],[7340,"2026-04-21",108,12.6,"C"],[7340,"2026-04-21",70,32.01,"C"],[7340,"2026-04-21",70,13.06,"C"],[7340,"2026-04-21",70,408.27,"C"],[7340,"2026-04-22",103,8.1,"C"],[7340,"2026-04-22",70,62.25,"C"],[7340,"2026-04-23",70,29.62,"C"],[7340,"2026-04-23",75,31.63,"C"],[7340,"2026-04-23",70,8.22,"C"],[7340,"2026-04-23",70,20.6,"C"],[7340,"2026-04-23",70,73.37,"C"],[7340,"2026-04-24",109,109.49,"C"],[7340,"2026-04-24",93,174.32,"C"],[7340,"2026-04-24",110,27.62,"C"],[7340,"2026-04-25",70,156.66,"C"],[7340,"2026-04-25",72,59.53,"C"],[7340,"2026-04-25",72,7.0,"C"],[7340,"2026-04-26",70,469.53,"C"],[7340,"2026-04-27",95,73.1,"C"],[7340,"2026-04-29",96,280.0,"B"],[7340,"2026-04-29",70,45.68,"C"],[7340,"2026-04-29",49,4.39,"C"],[7340,"2026-04-30",118,349.98,"B"],[7340,"2026-04-30",70,125.1,"C"],[7340,"2026-04-30",70,46.7,"C"],[7340,"2026-04-30",108,65.21,"C"],[7340,"2026-04-30",108,2.47,"C"],[7340,"2026-04-30",70,41.39,"C"],[7340,"2026-05-01",12,349.8,"B"],[7340,"2026-05-01",82,34.36,"B"],[7340,"2026-05-01",12,6358.75,"B"],[7340,"2026-05-01",70,814.34,"C"],[7340,"2026-05-01",70,193.92,"C"],[7340,"2026-05-03",93,226.74,"C"],[7340,"2026-05-05",96,280.0,"B"],[7340,"2026-05-05",71,117.85,"C"],[7340,"2026-05-05",70,69.13,"C"],[7340,"2026-05-05",119,7.3,"C"],[7340,"2026-05-06",120,19.43,"C"],[7340,"2026-05-06",70,47.18,"C"],[7340,"2026-05-06",70,197.44,"C"],[7340,"2026-05-07",8,1250.0,"B"],[7340,"2026-05-07",70,31.04,"C"],[7340,"2026-05-07",49,4.39,"C"],[7340,"2026-05-07",70,10.96,"C"],[7340,"2026-05-07",70,69.69,"C"],[7340,"2026-05-08",70,9.0,"C"],[7340,"2026-05-10",49,4.39,"C"],[7340,"2026-05-11",95,73.1,"C"],[7340,"2026-05-12",121,1403.95,"E"],[7340,"2026-05-14",96,280.0,"B"],[7340,"2026-05-14",75,18.81,"C"],[7340,"2026-05-15",70,51.14,"C"],[7340,"2026-05-16",93,212.74,"C"],[7340,"2026-05-17",88,16.41,"C"],[7340,"2026-05-18",49,4.38,"C"],[7340,"2026-05-18",70,20.82,"C"],[7340,"2026-05-19",120,25.48,"C"],[7340,"2026-05-19",72,77.62,"C"],[7340,"2026-05-19",122,37.32,"C"],[7340,"2026-05-20",96,280.0,"B"],[7340,"2026-05-20",66,39.51,"C"],[7340,"2026-05-20",70,208.46,"C"],[7340,"2026-05-21",123,151.46,"C"],[7340,"2026-05-22",60,19.8,"C"],[7340,"2026-05-25",95,73.1,"C"],[7340,"2026-05-27",96,280.0,"B"],[7340,"2026-05-27",75,15.92,"C"],[7340,"2026-05-27",93,266.22,"C"],[7340,"2026-05-29",124,37.78,"C"],[7340,"2026-05-29",90,125.06,"C"],[7340,"2026-05-29",49,4.39,"C"],[7340,"2026-05-29",90,169.11,"C"],[7340,"2026-05-29",90,11.98,"C"],[7340,"2026-05-29",124,100.34,"C"],[7340,"2026-05-30",90,8.78,"C"],[7340,"2026-05-30",53,49.39,"C"],[7340,"2026-05-30",90,5.56,"C"],[7340,"2026-05-30",90,16.5,"C"],[7340,"2026-05-31",70,207.43,"C"],[7340,"2026-06-01",12,300.0,"B"],[7340,"2026-06-01",12,49.5,"B"],[7340,"2026-06-01",82,38.13,"B"],[7340,"2026-06-02",70,76.58,"C"],[7340,"2026-06-03",125,4.57,"C"],[7340,"2026-06-04",96,280.0,"B"],[7340,"2026-06-04",108,9.77,"C"],[7340,"2026-06-04",70,77.11,"C"],[7340,"2026-06-04",90,14.21,"C"],[7340,"2026-06-05",12,-6358.75,"X"],[7340,"2026-06-05",70,64.72,"C"],[7340,"2026-06-05",93,173.11,"C"],[7340,"2026-06-05",71,110.72,"C"],[7340,"2026-06-05",90,-14.21,"R"],[7340,"2026-06-06",70,21.99,"C"],[7340,"2026-06-07",49,4.39,"C"],[7340,"2026-06-08",95,73.1,"C"],[7340,"2026-06-09",70,24.11,"C"],[7340,"2026-06-09",70,82.57,"C"],[7340,"2026-06-09",108,9.98,"C"],[7340,"2026-06-10",96,280.0,"B"],[7340,"2026-06-10",49,4.39,"C"],[7340,"2026-06-10",70,19.38,"C"],[7340,"2026-06-11",93,86.59,"C"],[7340,"2026-06-14",70,217.03,"C"],[7340,"2026-06-14",70,273.86,"C"],[7340,"2026-06-15",12,675.0,"B"],[7340,"2026-06-15",12,45.0,"B"],[7340,"2026-06-15",70,68.42,"C"],[7340,"2026-06-15",126,108.6,"C"],[7340,"2026-06-16",70,21.82,"C"],[7340,"2026-06-16",127,961.18,"C"],[7340,"2026-06-17",96,280.0,"B"],[7340,"2026-06-17",99,273.28,"C"],[7340,"2026-06-17",88,16.41,"C"],[7340,"2026-06-17",70,840.68,"C"],[7340,"2026-06-17",128,659.99,"C"],[7340,"2026-06-18",72,177.26,"C"],[7340,"2026-06-18",70,98.82,"C"],[7340,"2026-06-18",90,127.23,"C"],[7340,"2026-06-19",93,47.91,"C"],[7340,"2026-06-19",129,89.83,"E"],[7340,"2026-06-20",66,39.51,"C"],[7340,"2026-06-20",90,87.18,"C"],[7340,"2026-06-21",93,241.75,"C"],[7340,"2026-06-21",70,1016.54,"C"],[7340,"2026-06-21",70,45.4,"C"],[7340,"2026-06-22",91,61.46,"C"],[7340,"2026-06-22",95,73.1,"C"],[7340,"2026-06-22",93,-24.4,"R"],[7340,"2026-06-23",39,12.52,"C"],[7340,"2026-06-23",84,2542.37,"C"],[7340,"2026-06-23",90,37.53,"C"],[7340,"2026-06-24",96,280.0,"B"],[7340,"2026-06-26",70,43.89,"C"],[7340,"2026-06-26",130,379.17,"C"],[7340,"2026-06-26",130,26.96,"C"],[7340,"2026-06-28",70,108.94,"C"],[7340,"2026-06-29",70,306.85,"C"],[7340,"2026-06-29",103,67.02,"C"],[7340,"2026-06-29",70,14.99,"C"],[7340,"2026-06-29",70,226.05,"C"],[7340,"2026-06-29",131,254.72,"E"],[7340,"2026-06-30",70,16.77,"C"],[7340,"2026-06-30",70,66.79,"C"],[7340,"2026-06-30",70,108.03,"C"],[7340,"2026-06-30",90,90.3,"C"],[7340,"2026-06-30",70,52.66,"C"],[7340,"2026-07-01",82,14.65,"B"],[7340,"2026-07-01",96,280.0,"B"],[7340,"2026-07-01",12,150.0,"B"],[7340,"2026-07-01",12,600.6,"B"],[7340,"2026-07-01",93,132.43,"C"],[7340,"2026-07-03",77,48.62,"C"],[7340,"2026-07-03",71,137.71,"C"],[7340,"2026-07-04",90,14.21,"C"],[7340,"2026-07-05",90,-14.21,"R"],[7340,"2026-07-06",109,23.8,"C"],[7340,"2026-07-06",95,73.1,"C"],[7340,"2026-07-07",96,280.0,"B"],[7340,"2026-07-07",70,20.69,"C"],[7340,"2026-07-07",49,4.39,"C"],[7340,"2026-07-08",70,20.69,"C"],[7340,"2026-07-08",70,70.48,"C"],[7340,"2026-07-09",70,254.54,"C"],[7340,"2026-07-09",70,14.97,"C"],[7340,"2026-07-09",90,24.58,"C"],[7340,"2026-07-09",70,80.34,"C"],[7340,"2026-07-09",70,9.33,"C"],[7340,"2026-07-10",70,49.46,"C"],[7340,"2026-07-10",120,89.62,"C"],[7340,"2026-07-10",49,4.39,"C"],[7340,"2026-07-10",108,85.59,"C"],[7340,"2026-07-10",90,21.93,"C"],[7340,"2026-07-11",99,54.41,"C"],[7340,"2026-07-11",76,37.33,"C"],[7340,"2026-07-11",90,238.71,"C"],[7340,"2026-07-14",96,280.0,"B"],[7340,"2026-07-14",102,6.57,"C"],[7340,"2026-07-15",12,1350.0,"B"],[7340,"2026-07-15",70,59.93,"C"],[7340,"2026-07-15",70,17.36,"C"],[7340,"2026-07-15",124,23.17,"C"],[7340,"2026-07-15",132,87.79,"C"],[7340,"2026-07-16",70,12.69,"C"],[7340,"2026-07-16",70,31.04,"C"],[7340,"2026-07-16",90,79.05,"C"],[7340,"2026-07-16",95,73.1,"C"],[7340,"2026-07-17",70,19.48,"C"],[7340,"2026-07-17",88,16.41,"C"],[7340,"2026-07-17",99,110.21,"C"],[7340,"2026-07-17",70,23.59,"C"],[7340,"2026-07-17",70,54.28,"C"],[7340,"2026-07-17",133,4.64,"C"],[7340,"2026-07-18",70,40.09,"C"],[7340,"2026-07-18",99,9.53,"C"],[7340,"2026-07-18",49,4.38,"C"],[7340,"2026-07-18",99,-65.72,"R"],[7340,"2026-07-19",70,20.64,"C"],[7340,"2026-07-20",70,28.13,"C"],[7340,"2026-07-20",95,73.1,"C"],[7340,"2026-07-21",96,280.0,"B"],[7340,"2026-07-21",70,48.6,"C"],[7340,"2026-07-21",70,30.73,"C"],[7340,"2026-07-21",70,67.5,"C"],[7340,"2026-07-21",70,322.36,"C"],[7340,"2026-07-21",70,658.48,"C"],[7340,"2026-07-21",70,219.49,"C"],[7340,"2026-07-21",91,38.41,"C"],[7340,"2026-07-21",70,96.16,"C"],[7340,"2026-07-22",70,709.77,"C"],[7340,"2026-07-22",70,45.76,"C"],[7340,"2026-07-22",70,325.47,"C"],[7340,"2026-07-22",90,47.14,"C"],[7340,"2026-07-22",70,21.63,"C"],[7340,"2026-07-22",70,71.74,"C"],[7340,"2026-07-23",70,58.06,"C"],[7340,"2026-07-24",90,76.62,"C"],[7340,"2026-07-24",134,123.9,"C"],[7340,"2026-07-27",135,8.75,"C"],[7340,"2026-07-27",70,578.03,"C"],[7340,"2026-07-28",96,280.0,"B"],[7340,"2026-07-28",90,63.13,"C"],[7340,"2026-07-28",70,27.65,"C"],[7340,"2026-07-28",70,115.72,"C"],[7340,"2026-07-29",70,10.11,"C"],[7340,"2026-07-29",70,21.94,"C"],[7340,"2026-07-29",70,17.55,"C"],[7340,"2026-07-29",70,64.19,"C"],[7340,"2026-07-29",84,306.1,"C"],[7340,"2026-07-29",70,21.71,"C"],[7340,"2026-07-29",49,4.39,"C"],[7340,"2026-07-29",70,177.08,"C"],[7340,"2026-07-29",70,126.83,"C"],[7340,"2026-07-29",70,43.41,"C"],[7340,"2026-07-29",70,53.1,"C"],[7340,"2026-07-30",136,290.0,"C"],[7340,"2026-07-31",70,18.65,"C"],[7340,"2026-08-01",12,2481.12,"B"],[7340,"2026-08-01",12,345.3,"B"],[7340,"2026-08-01",137,34.95,"C"],[7340,"2026-08-03",82,61.78,"B"],[7340,"2026-08-03",70,9.71,"C"],[7340,"2026-08-03",70,10.95,"C"],[7340,"2026-08-03",95,73.1,"C"],[7340,"2026-08-04",70,104.08,"C"],[7340,"2026-08-04",70,72.0,"C"],[7340,"2026-08-04",11,120.0,"E"],[7340,"2026-08-05",96,280.0,"B"],[7340,"2026-08-05",70,18.69,"C"],[7340,"2026-08-05",71,124.7,"C"],[7340,"2026-08-05",70,37.3,"C"],[7340,"2026-08-05",70,79.19,"C"],[7340,"2026-08-05",70,-322.36,"R"],[7340,"2026-08-06",70,31.48,"C"],[7340,"2026-08-06",95,73.1,"C"],[7340,"2026-08-06",138,132.28,"C"],[7340,"2026-08-06",70,10.74,"C"],[7340,"2026-08-07",70,31.27,"C"],[7340,"2026-08-07",70,-79.19,"R"],[7340,"2026-08-09",139,65.99,"C"],[7340,"2026-08-10",90,15.4,"C"],[7340,"2026-08-10",88,2.92,"C"],[7340,"2026-08-11",96,280.0,"B"],[7340,"2026-08-11",90,88.21,"C"],[7340,"2026-08-11",70,8.25,"C"],[7340,"2026-08-11",70,111.44,"C"],[7340,"2026-08-11",70,96.42,"C"],[7340,"2026-08-15",12,225.0,"B"],[7340,"2026-08-15",134,210.95,"C"],[7340,"2026-08-16",95,73.1,"C"],[7340,"2026-08-17",88,16.41,"C"],[7340,"2026-08-17",121,44.25,"E"],[7340,"2026-08-18",96,280.0,"B"],[7340,"2026-08-18",140,6.42,"C"],[7340,"2026-08-19",90,120.4,"C"],[7340,"2026-08-19",70,127.99,"C"],[7340,"2026-08-20",66,42.8,"C"],[7340,"2026-08-20",90,59.34,"C"],[7340,"2026-08-21",141,60.0,"K"],[7340,"2026-08-21",70,158.05,"C"],[7340,"2026-08-21",90,50.17,"C"],[7340,"2026-08-21",76,208.49,"C"],[7340,"2026-08-24",96,280.0,"B"],[7340,"2026-08-24",90,78.11,"C"],[7340,"2026-08-25",72,672.71,"C"],[7340,"2026-08-25",90,155.7,"C"],[7340,"2026-08-26",90,140.7,"C"],[7340,"2026-08-27",95,73.1,"C"],[7340,"2026-08-28",70,42.1,"C"],[7340,"2026-08-28",70,80.83,"C"],[7340,"2026-08-28",70,164.38,"C"],[7340,"2026-08-29",110,11.03,"C"],[7340,"2026-08-29",70,56.72,"C"],[7340,"2026-08-29",70,2.84,"C"],[7340,"2026-08-29",70,73.86,"C"],[7340,"2026-08-29",142,100.0,"C"],[7340,"2026-08-31",12,825.0,"B"],[7340,"2026-08-31",12,345.3,"B"],[7340,"2026-08-31",95,73.1,"C"],[7340,"2026-08-31",143,14.28,"C"],[7340,"2026-08-31",131,240.17,"E"],[7350,"2026-01-07",144,5200.0,"C"],[7350,"2026-01-10",145,297.0,"B"],[7350,"2026-01-16",146,776.99,"C"],[7350,"2026-02-23",147,2500.0,"B"],[7350,"2026-04-21",145,297.0,"B"],[7350,"2026-05-06",148,300.0,"C"],[7350,"2026-07-15",145,297.0,"B"],[7350,"2026-08-14",149,2550.0,"B"],[7350,"2026-08-14",149,6540.6,"B"],[7350,"2026-08-20",150,750.0,"C"],[7360,"2026-01-05",76,42.0,"C"],[7360,"2026-01-07",11,896.06,"E"],[7360,"2026-01-08",76,68.04,"C"],[7360,"2026-01-09",76,78.41,"C"],[7360,"2026-01-11",76,40.76,"C"],[7360,"2026-01-12",76,51.9,"C"],[7360,"2026-01-12",76,43.48,"C"],[7360,"2026-01-12",76,23.63,"C"],[7360,"2026-01-12",80,150.77,"E"],[7360,"2026-01-13",76,51.37,"C"],[7360,"2026-01-13",76,77.34,"C"],[7360,"2026-01-13",76,59.4,"C"],[7360,"2026-01-13",76,24.92,"C"],[7360,"2026-01-13",76,21.4,"C"],[7360,"2026-01-13",76,30.16,"C"],[7360,"2026-01-14",76,16.71,"C"],[7360,"2026-01-14",76,85.17,"C"],[7360,"2026-01-14",76,22.79,"C"],[7360,"2026-01-14",76,11.77,"C"],[7360,"2026-01-14",76,87.98,"C"],[7360,"2026-01-17",76,19.86,"C"],[7360,"2026-01-20",76,20.98,"C"],[7360,"2026-01-21",76,12.83,"C"],[7360,"2026-01-23",76,55.88,"C"],[7360,"2026-01-24",76,43.12,"C"],[7360,"2026-01-27",76,43.67,"C"],[7360,"2026-01-27",76,10.0,"C"],[7360,"2026-02-05",76,26.02,"C"],[7360,"2026-02-07",76,35.14,"C"],[7360,"2026-02-10",76,13.03,"C"],[7360,"2026-02-10",76,45.22,"C"],[7360,"2026-02-20",76,48.15,"C"],[7360,"2026-02-24",76,46.2,"C"],[7360,"2026-02-24",76,39.73,"C"],[7360,"2026-02-24",76,12.23,"C"],[7360,"2026-02-25",76,74.38,"C"],[7360,"2026-02-26",76,48.43,"C"],[7360,"2026-02-26",76,65.98,"C"],[7360,"2026-02-26",76,11.95,"C"],[7360,"2026-02-26",151,86.06,"E"],[7360,"2026-02-27",76,69.24,"C"],[7360,"2026-02-28",76,27.4,"C"],[7360,"2026-03-03",76,13.28,"C"],[7360,"2026-03-03",76,48.28,"C"],[7360,"2026-03-03",76,24.98,"C"],[7360,"2026-03-03",76,10.79,"C"],[7360,"2026-03-03",76,23.0,"C"],[7360,"2026-03-03",76,23.0,"C"],[7360,"2026-03-04",76,8.74,"C"],[7360,"2026-03-04",76,85.43,"C"],[7360,"2026-03-04",76,18.07,"C"],[7360,"2026-03-04",76,20.8,"C"],[7360,"2026-03-05",76,42.84,"C"],[7360,"2026-03-05",76,83.28,"C"],[7360,"2026-03-05",76,7.81,"C"],[7360,"2026-03-06",76,129.94,"C"],[7360,"2026-03-06",76,359.25,"C"],[7360,"2026-03-07",76,124.64,"C"],[7360,"2026-03-10",76,39.13,"C"],[7360,"2026-03-12",76,86.88,"C"],[7360,"2026-03-13",76,45.58,"C"],[7360,"2026-03-13",117,33.15,"E"],[7360,"2026-03-16",76,6.48,"C"],[7360,"2026-03-18",76,25.72,"C"],[7360,"2026-03-19",76,12.83,"C"],[7360,"2026-03-19",76,5.25,"C"],[7360,"2026-03-20",76,65.73,"C"],[7360,"2026-03-24",76,63.68,"C"],[7360,"2026-03-27",76,75.14,"C"],[7360,"2026-04-07",76,65.51,"C"],[7360,"2026-04-07",76,43.93,"C"],[7360,"2026-04-08",76,64.58,"C"],[7360,"2026-04-08",76,3.8,"C"],[7360,"2026-04-08",76,3.8,"C"],[7360,"2026-04-11",76,467.81,"C"],[7360,"2026-04-14",76,31.17,"C"],[7360,"2026-04-16",76,78.69,"C"],[7360,"2026-04-17",76,69.91,"C"],[7360,"2026-04-17",76,42.0,"C"],[7360,"2026-04-21",76,112.22,"C"],[7360,"2026-04-21",76,117.51,"C"],[7360,"2026-04-23",76,24.68,"C"],[7360,"2026-04-23",76,34.49,"C"],[7360,"2026-04-24",76,46.61,"C"],[7360,"2026-04-24",121,40.56,"E"],[7360,"2026-04-29",152,22.0,"E"],[7360,"2026-04-30",76,9.85,"C"],[7360,"2026-04-30",76,41.17,"C"],[7360,"2026-04-30",76,6.48,"C"],[7360,"2026-04-30",114,22.0,"E"],[7360,"2026-04-30",153,22.0,"E"],[7360,"2026-04-30",117,22.0,"E"],[7360,"2026-04-30",154,22.0,"E"],[7360,"2026-05-01",76,106.63,"C"],[7360,"2026-05-01",155,22.0,"E"],[7360,"2026-05-01",156,22.0,"E"],[7360,"2026-05-02",76,116.4,"C"],[7360,"2026-05-02",76,26.62,"C"],[7360,"2026-05-02",76,25.69,"C"],[7360,"2026-05-02",76,29.54,"C"],[7360,"2026-05-02",76,25.25,"C"],[7360,"2026-05-02",76,29.79,"C"],[7360,"2026-05-03",76,146.99,"C"],[7360,"2026-05-03",76,32.4,"C"],[7360,"2026-05-03",76,35.65,"C"],[7360,"2026-05-03",76,133.31,"C"],[7360,"2026-05-03",76,19.69,"C"],[7360,"2026-05-05",76,40.28,"C"],[7360,"2026-05-07",76,114.94,"C"],[7360,"2026-05-08",76,8.15,"C"],[7360,"2026-05-08",76,59.82,"C"],[7360,"2026-05-09",76,128.75,"C"],[7360,"2026-05-11",113,22.0,"E"],[7360,"2026-05-11",157,22.0,"E"],[7360,"2026-05-12",34,1096.12,"B"],[7360,"2026-05-12",76,35.88,"C"],[7360,"2026-05-14",76,12.6,"C"],[7360,"2026-05-15",76,41.55,"C"],[7360,"2026-05-18",76,53.21,"C"],[7360,"2026-05-21",76,59.93,"C"],[7360,"2026-05-22",76,140.58,"C"],[7360,"2026-05-27",76,231.61,"C"],[7360,"2026-05-28",76,5.25,"C"],[7360,"2026-05-29",76,43.47,"C"],[7360,"2026-06-02",117,47.64,"E"],[7360,"2026-06-06",76,79.0,"C"],[7360,"2026-06-09",76,228.66,"C"],[7360,"2026-06-11",76,220.73,"C"],[7360,"2026-06-11",76,139.26,"C"],[7360,"2026-06-11",76,155.31,"C"],[7360,"2026-06-11",76,13.58,"C"],[7360,"2026-06-12",76,105.6,"C"],[7360,"2026-06-12",76,260.31,"C"],[7360,"2026-06-15",158,119.47,"C"],[7360,"2026-06-16",76,120.93,"C"],[7360,"2026-06-19",76,44.39,"C"],[7360,"2026-06-22",159,54.14,"E"],[7360,"2026-06-24",76,178.65,"C"],[7360,"2026-06-27",76,41.43,"C"],[7360,"2026-06-30",76,15.31,"C"],[7360,"2026-06-30",76,6.37,"C"],[7360,"2026-07-07",76,48.96,"C"],[7360,"2026-07-07",76,13.86,"C"],[7360,"2026-07-07",76,21.0,"C"],[7360,"2026-07-08",76,106.49,"C"],[7360,"2026-07-08",76,158.23,"C"],[7360,"2026-07-08",76,7.34,"C"],[7360,"2026-07-08",76,60.0,"C"],[7360,"2026-07-08",76,173.52,"C"],[7360,"2026-07-09",76,104.38,"C"],[7360,"2026-07-09",76,21.26,"C"],[7360,"2026-07-09",76,44.06,"C"],[7360,"2026-07-09",76,57.78,"C"],[7360,"2026-07-15",76,39.86,"C"],[7360,"2026-07-16",76,16.35,"C"],[7360,"2026-07-16",76,36.68,"C"],[7360,"2026-07-16",76,91.69,"C"],[7360,"2026-07-17",76,26.03,"C"],[7360,"2026-07-17",76,6.75,"C"],[7360,"2026-07-17",76,103.76,"C"],[7360,"2026-07-17",76,13.16,"C"],[7360,"2026-07-17",76,17.3,"C"],[7360,"2026-07-17",76,8.05,"C"],[7360,"2026-07-17",76,20.27,"C"],[7360,"2026-07-17",76,122.45,"C"],[7360,"2026-07-18",76,242.19,"C"],[7360,"2026-07-21",76,55.02,"C"],[7360,"2026-07-21",160,42.08,"E"],[7360,"2026-07-23",76,54.0,"C"],[7360,"2026-07-25",76,117.9,"C"],[7360,"2026-07-30",76,79.82,"C"],[7360,"2026-07-30",76,62.17,"C"],[7360,"2026-08-07",76,53.16,"C"],[7360,"2026-08-07",76,36.7,"C"],[7360,"2026-08-08",76,62.01,"C"],[7360,"2026-08-11",76,64.12,"C"],[7360,"2026-08-12",76,30.94,"C"],[7360,"2026-08-12",76,30.63,"C"],[7360,"2026-08-12",76,81.5,"C"],[7360,"2026-08-13",76,37.36,"C"],[7360,"2026-08-13",76,45.37,"C"],[7360,"2026-08-13",76,83.06,"C"],[7360,"2026-08-14",76,24.82,"C"],[7360,"2026-08-14",76,81.43,"C"],[7360,"2026-08-14",76,28.26,"C"],[7360,"2026-08-14",76,9.99,"C"],[7360,"2026-08-14",76,53.15,"C"],[7360,"2026-08-15",76,162.92,"C"],[7360,"2026-08-25",76,19.12,"C"],[7360,"2026-08-25",76,108.56,"C"],[7360,"2026-08-26",76,38.63,"C"],[7360,"2026-08-26",76,29.55,"C"],[7360,"2026-08-27",76,29.09,"C"],[7360,"2026-08-27",76,20.0,"C"],[7360,"2026-08-27",76,5.69,"C"],[7360,"2026-08-28",76,42.48,"C"],[7360,"2026-08-29",76,71.62,"C"],[7360,"2026-08-29",76,54.79,"C"],[7370,"2026-01-02",161,3.0,"C"],[7370,"2026-01-02",161,97.28,"C"],[7370,"2026-01-03",162,16.11,"C"],[7370,"2026-01-03",162,740.59,"C"],[7370,"2026-01-03",163,42.75,"C"],[7370,"2026-01-05",164,695.65,"C"],[7370,"2026-01-05",165,28.0,"C"],[7370,"2026-01-05",164,458.54,"C"],[7370,"2026-01-06",146,583.49,"C"],[7370,"2026-01-06",162,102.5,"C"],[7370,"2026-01-06",166,86.08,"C"],[7370,"2026-01-06",167,51.0,"C"],[7370,"2026-01-06",167,459.29,"C"],[7370,"2026-01-06",167,51.0,"C"],[7370,"2026-01-06",166,109.09,"C"],[7370,"2026-01-06",162,102.5,"C"],[7370,"2026-01-06",167,128.48,"C"],[7370,"2026-01-06",167,128.48,"C"],[7370,"2026-01-06",166,23.01,"C"],[7370,"2026-01-06",166,191.32,"C"],[7370,"2026-01-07",168,257.19,"C"],[7370,"2026-01-07",164,298.34,"C"],[7370,"2026-01-07",164,-23.17,"R"],[7370,"2026-01-07",164,-342.69,"R"],[7370,"2026-01-07",121,23.4,"E"],[7370,"2026-01-08",166,-16.03,"R"],[7370,"2026-01-09",164,145.45,"C"],[7370,"2026-01-12",80,77.22,"E"],[7370,"2026-01-13",164,263.94,"C"],[7370,"2026-01-13",162,8.0,"C"],[7370,"2026-01-13",166,48.17,"C"],[7370,"2026-01-15",164,149.77,"C"],[7370,"2026-01-15",164,149.77,"C"],[7370,"2026-01-22",169,957.57,"B"],[7370,"2026-01-22",170,168.16,"E"],[7370,"2026-01-23",167,29.0,"C"],[7370,"2026-01-23",167,246.48,"C"],[7370,"2026-01-23",169,246.48,"C"],[7370,"2026-01-23",169,27.12,"C"],[7370,"2026-01-23",167,-29.0,"R"],[7370,"2026-01-23",167,-246.48,"R"],[7370,"2026-01-23",117,280.09,"E"],[7370,"2026-01-25",166,45.32,"C"],[7370,"2026-01-25",169,-27.12,"R"],[7370,"2026-01-25",169,-246.48,"R"],[7370,"2026-01-27",166,155.66,"C"],[7370,"2026-01-27",162,790.98,"C"],[7370,"2026-02-04",171,10.98,"C"],[7370,"2026-02-04",164,108.15,"C"],[7370,"2026-02-04",171,29.91,"C"],[7370,"2026-02-05",171,34.96,"C"],[7370,"2026-02-14",146,1026.81,"C"],[7370,"2026-02-14",172,66.74,"C"],[7370,"2026-02-14",146,1026.81,"C"],[7370,"2026-02-14",172,66.74,"C"],[7370,"2026-02-20",173,445.96,"C"],[7370,"2026-02-23",169,105.78,"C"],[7370,"2026-02-23",172,51.73,"C"],[7370,"2026-02-23",169,756.4,"C"],[7370,"2026-02-24",173,16.0,"C"],[7370,"2026-02-26",174,270.18,"C"],[7370,"2026-02-26",151,189.91,"E"],[7370,"2026-02-27",164,327.69,"C"],[7370,"2026-02-27",173,563.4,"C"],[7370,"2026-02-27",175,116.0,"C"],[7370,"2026-02-27",173,374.2,"C"],[7370,"2026-03-04",164,237.67,"C"],[7370,"2026-03-05",174,247.49,"C"],[7370,"2026-03-05",176,349.28,"C"],[7370,"2026-03-06",164,319.2,"C"],[7370,"2026-03-06",164,254.2,"C"],[7370,"2026-03-06",164,304.3,"C"],[7370,"2026-03-11",169,24.64,"C"],[7370,"2026-03-11",169,24.64,"C"],[7370,"2026-03-11",169,615.05,"C"],[7370,"2026-03-11",169,615.05,"C"],[7370,"2026-03-13",167,1046.8,"C"],[7370,"2026-03-13",176,117.83,"C"],[7370,"2026-03-14",161,42.99,"C"],[7370,"2026-03-17",166,224.16,"C"],[7370,"2026-03-17",146,19.99,"C"],[7370,"2026-03-17",161,32.98,"C"],[7370,"2026-03-17",164,245.11,"C"],[7370,"2026-03-17",146,19.99,"C"],[7370,"2026-03-17",161,34.69,"C"],[7370,"2026-03-17",146,1156.8,"C"],[7370,"2026-03-18",161,35.99,"C"],[7370,"2026-03-18",161,42.52,"C"],[7370,"2026-03-18",164,46.15,"C"],[7370,"2026-03-18",161,39.88,"C"],[7370,"2026-03-19",164,209.63,"C"],[7370,"2026-03-19",164,209.63,"C"],[7370,"2026-03-26",170,379.2,"E"],[7370,"2026-03-27",166,111.92,"C"],[7370,"2026-03-27",170,23.65,"E"],[7370,"2026-03-31",164,490.0,"C"],[7370,"2026-03-31",177,79.56,"C"],[7370,"2026-04-01",178,199.0,"C"],[7370,"2026-04-01",166,217.75,"C"],[7370,"2026-04-01",177,298.4,"C"],[7370,"2026-04-01",177,29.16,"C"],[7370,"2026-04-01",177,198.4,"C"],[7370,"2026-04-01",70,148.11,"C"],[7370,"2026-04-01",177,29.16,"C"],[7370,"2026-04-01",177,31.15,"C"],[7370,"2026-04-01",177,298.4,"C"],[7370,"2026-04-01",177,31.15,"C"],[7370,"2026-04-01",177,198.4,"C"],[7370,"2026-04-04",176,263.94,"C"],[7370,"2026-04-14",162,240.2,"C"],[7370,"2026-04-14",164,487.44,"C"],[7370,"2026-04-14",166,140.99,"C"],[7370,"2026-04-14",146,24.99,"C"],[7370,"2026-04-14",146,1256.79,"C"],[7370,"2026-04-14",167,340.2,"C"],[7370,"2026-04-15",166,15.35,"C"],[7370,"2026-04-15",164,15.53,"C"],[7370,"2026-04-15",146,344.0,"C"],[7370,"2026-04-16",166,118.69,"C"],[7370,"2026-04-16",164,1590.86,"C"],[7370,"2026-04-16",164,18.12,"C"],[7370,"2026-04-17",166,90.32,"C"],[7370,"2026-04-18",166,144.23,"C"],[7370,"2026-04-22",179,190.69,"C"],[7370,"2026-04-22",164,267.63,"C"],[7370,"2026-04-22",166,66.97,"C"],[7370,"2026-04-22",155,318.39,"E"],[7370,"2026-04-22",155,5000.0,"E"],[7370,"2026-04-23",180,249.73,"C"],[7370,"2026-04-23",162,50.0,"C"],[7370,"2026-04-23",179,83.63,"C"],[7370,"2026-04-23",180,258.39,"C"],[7370,"2026-04-24",162,8.0,"C"],[7370,"2026-04-24",121,748.82,"E"],[7370,"2026-04-27",162,50.0,"C"],[7370,"2026-04-27",162,60.0,"C"],[7370,"2026-04-28",162,8.0,"C"],[7370,"2026-05-03",161,19.99,"C"],[7370,"2026-05-03",161,30.98,"C"],[7370,"2026-05-03",161,65.97,"C"],[7370,"2026-05-09",169,897.39,"C"],[7370,"2026-05-09",169,81.97,"C"],[7370,"2026-05-11",169,-21.99,"R"],[7370,"2026-05-11",169,-16.0,"R"],[7370,"2026-05-11",169,-22.99,"R"],[7370,"2026-05-11",169,-20.99,"R"],[7370,"2026-05-12",177,511.47,"C"],[7370,"2026-05-12",172,80.72,"C"],[7370,"2026-05-13",177,469.5,"C"],[7370,"2026-05-13",146,1241.8,"C"],[7370,"2026-05-13",181,694.51,"C"],[7370,"2026-05-13",177,24.0,"C"],[7370,"2026-05-16",146,1878.41,"C"],[7370,"2026-05-16",146,1878.41,"C"],[7370,"2026-05-20",177,195.36,"C"],[7370,"2026-05-20",173,188.18,"C"],[7370,"2026-05-20",177,-24.0,"R"],[7370,"2026-05-21",173,310.08,"C"],[7370,"2026-05-21",173,38.83,"C"],[7370,"2026-05-21",173,310.08,"C"],[7370,"2026-05-21",173,452.6,"C"],[7370,"2026-05-21",173,44.23,"C"],[7370,"2026-05-21",173,452.6,"C"],[7370,"2026-05-21",156,124.0,"E"],[7370,"2026-05-23",167,656.4,"C"],[7370,"2026-05-27",161,36.94,"C"],[7370,"2026-05-28",170,132.14,"E"],[7370,"2026-06-02",117,98.51,"E"],[7370,"2026-06-04",164,126.13,"C"],[7370,"2026-06-05",169,284.28,"C"],[7370,"2026-06-05",169,133.92,"C"],[7370,"2026-06-09",164,521.88,"C"],[7370,"2026-06-14",167,878.41,"C"],[7370,"2026-06-16",177,345.84,"C"],[7370,"2026-06-22",177,1050.6,"C"],[7370,"2026-06-24",164,153.77,"C"],[7370,"2026-06-24",164,153.77,"C"],[7370,"2026-06-25",162,10.0,"C"],[7370,"2026-06-25",164,14.33,"C"],[7370,"2026-06-26",182,986.8,"C"],[7370,"2026-06-28",146,118.25,"C"],[7370,"2026-06-29",164,96.32,"C"],[7370,"2026-06-29",170,148.38,"E"],[7370,"2026-06-30",167,482.79,"C"],[7370,"2026-06-30",164,204.0,"C"],[7370,"2026-06-30",167,482.79,"C"],[7370,"2026-07-01",166,299.84,"C"],[7370,"2026-07-01",162,814.8,"C"],[7370,"2026-07-01",183,171.2,"C"],[7370,"2026-07-01",166,182.72,"C"],[7370,"2026-07-06",121,235.67,"E"],[7370,"2026-07-07",177,575.98,"C"],[7370,"2026-07-07",177,818.4,"C"],[7370,"2026-07-07",177,-0.02,"R"],[7370,"2026-07-08",169,806.8,"C"],[7370,"2026-07-08",169,20.0,"C"],[7370,"2026-07-08",172,45.47,"C"],[7370,"2026-07-09",166,144.06,"C"],[7370,"2026-07-09",172,51.63,"C"],[7370,"2026-07-09",164,738.72,"C"],[7370,"2026-07-09",169,938.81,"C"],[7370,"2026-07-15",178,219.0,"C"],[7370,"2026-07-16",166,66.77,"C"],[7370,"2026-07-17",181,158.22,"C"],[7370,"2026-07-17",117,72.14,"E"],[7370,"2026-07-22",169,18.96,"C"],[7370,"2026-07-22",169,12.16,"C"],[7370,"2026-07-22",167,688.81,"C"],[7370,"2026-07-22",169,26.44,"C"],[7370,"2026-07-22",169,26.44,"C"],[7370,"2026-07-26",166,4.32,"C"],[7370,"2026-07-31",184,-1774.17,"I"],[7370,"2026-08-11",177,321.42,"C"],[7370,"2026-08-11",177,1166.8,"C"],[7370,"2026-08-13",164,314.36,"C"],[7370,"2026-08-14",146,836.79,"C"],[7370,"2026-08-14",146,836.79,"C"],[7370,"2026-08-18",146,768.8,"C"],[7370,"2026-08-18",146,768.8,"C"],[7370,"2026-08-20",175,42.5,"C"],[7370,"2026-08-27",169,1150.2,"C"],[7370,"2026-08-27",164,310.94,"C"],[7370,"2026-08-27",166,58.56,"C"],[7370,"2026-08-27",185,376.8,"C"],[7370,"2026-08-27",186,467.97,"C"],[7370,"2026-08-27",166,67.45,"C"],[7370,"2026-08-27",187,51.0,"C"],[7370,"2026-08-28",166,68.26,"C"],[7380,"2026-01-04",78,27.31,"C"],[7380,"2026-01-05",74,2.83,"E"],[7380,"2026-01-06",188,54.54,"C"],[7380,"2026-01-06",74,17.55,"E"],[7380,"2026-01-07",189,2.75,"C"],[7380,"2026-01-07",188,96.89,"C"],[7380,"2026-01-07",121,514.0,"E"],[7380,"2026-01-08",74,3.05,"E"],[7380,"2026-01-08",74,3.05,"E"],[7380,"2026-01-09",190,16.89,"C"],[7380,"2026-01-10",191,57.98,"C"],[7380,"2026-01-10",78,48.66,"C"],[7380,"2026-01-10",192,46.97,"C"],[7380,"2026-01-11",125,85.73,"C"],[7380,"2026-01-11",191,22.19,"C"],[7380,"2026-01-12",78,50.83,"C"],[7380,"2026-01-12",188,22.18,"C"],[7380,"2026-01-12",188,30.23,"C"],[7380,"2026-01-12",80,78.1,"E"],[7380,"2026-01-13",188,35.82,"C"],[7380,"2026-01-13",188,45.46,"C"],[7380,"2026-01-13",191,40.0,"C"],[7380,"2026-01-17",188,33.19,"C"],[7380,"2026-01-18",78,16.06,"C"],[7380,"2026-01-18",78,52.13,"C"],[7380,"2026-01-19",193,3050.0,"B"],[7380,"2026-01-19",78,69.19,"C"],[7380,"2026-01-20",191,6.91,"C"],[7380,"2026-01-20",125,56.27,"C"],[7380,"2026-01-21",189,5.0,"C"],[7380,"2026-01-21",188,17.62,"C"],[7380,"2026-01-22",78,31.81,"C"],[7380,"2026-01-22",189,22.7,"C"],[7380,"2026-01-22",170,52.0,"E"],[7380,"2026-01-24",78,35.0,"C"],[7380,"2026-01-25",125,75.95,"C"],[7380,"2026-01-27",188,46.04,"C"],[7380,"2026-01-27",189,17.0,"C"],[7380,"2026-01-28",131,506.78,"E"],[7380,"2026-01-29",189,42.0,"C"],[7380,"2026-01-30",78,41.37,"C"],[7380,"2026-01-31",194,76.33,"C"],[7380,"2026-01-31",188,52.09,"C"],[7380,"2026-02-04",187,26.35,"C"],[7380,"2026-02-04",188,45.07,"C"],[7380,"2026-02-04",160,217.5,"E"],[7380,"2026-02-05",191,52.5,"C"],[7380,"2026-02-06",78,40.01,"C"],[7380,"2026-02-06",78,3.7,"C"],[7380,"2026-02-10",188,13.41,"C"],[7380,"2026-02-11",78,49.84,"C"],[7380,"2026-02-12",188,52.5,"C"],[7380,"2026-02-15",194,73.07,"C"],[7380,"2026-02-16",188,38.56,"C"],[7380,"2026-02-19",188,40.32,"C"],[7380,"2026-02-20",125,60.24,"C"],[7380,"2026-02-23",188,-45.07,"R"],[7380,"2026-02-23",131,508.95,"E"],[7380,"2026-02-25",195,39.0,"C"],[7380,"2026-02-25",191,16.8,"C"],[7380,"2026-02-25",170,61.0,"E"],[7380,"2026-02-26",187,49.0,"C"],[7380,"2026-02-26",151,26.0,"E"],[7380,"2026-02-27",188,46.56,"C"],[7380,"2026-02-27",125,63.03,"C"],[7380,"2026-02-28",196,6.75,"C"],[7380,"2026-02-28",191,5.25,"C"],[7380,"2026-03-01",194,65.99,"C"],[7380,"2026-03-02",188,4.73,"C"],[7380,"2026-03-02",197,90.63,"E"],[7380,"2026-03-03",188,8.41,"C"],[7380,"2026-03-03",191,3.63,"C"],[7380,"2026-03-03",191,5.25,"C"],[7380,"2026-03-03",191,40.01,"C"],[7380,"2026-03-03",191,30.04,"C"],[7380,"2026-03-04",191,14.79,"C"],[7380,"2026-03-04",188,11.23,"C"],[7380,"2026-03-05",188,44.24,"C"],[7380,"2026-03-05",78,68.76,"C"],[7380,"2026-03-05",188,80.07,"C"],[7380,"2026-03-05",187,40.0,"C"],[7380,"2026-03-05",198,555.71,"E"],[7380,"2026-03-06",78,51.19,"C"],[7380,"2026-03-07",188,51.23,"C"],[7380,"2026-03-09",131,388.6,"E"],[7380,"2026-03-10",192,63.35,"C"],[7380,"2026-03-11",192,5.73,"C"],[7380,"2026-03-11",188,89.82,"C"],[7380,"2026-03-12",125,65.0,"C"],[7380,"2026-03-12",187,42.0,"C"],[7380,"2026-03-13",188,74.43,"C"],[7380,"2026-03-13",117,230.55,"E"],[7380,"2026-03-14",188,44.56,"C"],[7380,"2026-03-15",192,65.37,"C"],[7380,"2026-03-16",78,4.55,"C"],[7380,"2026-03-17",117,192.85,"E"],[7380,"2026-03-18",188,5.14,"C"],[7380,"2026-03-18",188,8.32,"C"],[7380,"2026-03-19",189,37.48,"C"],[7380,"2026-03-20",188,61.73,"C"],[7380,"2026-03-21",78,75.31,"C"],[7380,"2026-03-21",191,52.45,"C"],[7380,"2026-03-23",131,487.93,"E"],[7380,"2026-03-25",192,34.02,"C"],[7380,"2026-03-25",194,96.71,"C"],[7380,"2026-03-26",170,76.0,"E"],[7380,"2026-03-27",192,45.67,"C"],[7380,"2026-03-29",78,52.04,"C"],[7380,"2026-03-29",125,106.27,"C"],[7380,"2026-03-29",188,72.21,"C"],[7380,"2026-03-30",194,100.0,"C"],[7380,"2026-03-31",189,16.1,"C"],[7380,"2026-03-31",188,60.3,"C"],[7380,"2026-04-01",188,57.35,"C"],[7380,"2026-04-02",189,20.13,"C"],[7380,"2026-04-02",199,293.63,"E"],[7380,"2026-04-06",188,78.37,"C"],[7380,"2026-04-08",191,7.97,"C"],[7380,"2026-04-08",187,40.0,"C"],[7380,"2026-04-08",189,10.0,"C"],[7380,"2026-04-11",188,70.19,"C"],[7380,"2026-04-13",194,100.0,"C"],[7380,"2026-04-15",188,61.03,"C"],[7380,"2026-04-15",78,61.44,"C"],[7380,"2026-04-16",187,52.0,"C"],[7380,"2026-04-16",188,73.64,"C"],[7380,"2026-04-17",154,301.6,"E"],[7380,"2026-04-18",188,55.4,"C"],[7380,"2026-04-21",189,59.13,"C"],[7380,"2026-04-22",187,37.76,"C"],[7380,"2026-04-22",188,6.05,"C"],[7380,"2026-04-23",189,25.8,"C"],[7380,"2026-04-23",189,51.0,"C"],[7380,"2026-04-24",121,46.59,"E"],[7380,"2026-04-25",188,55.33,"C"],[7380,"2026-04-28",192,56.57,"C"],[7380,"2026-04-29",189,4.75,"C"],[7380,"2026-04-29",192,4.19,"C"],[7380,"2026-04-29",154,42.05,"E"],[7380,"2026-04-30",189,4.25,"C"],[7380,"2026-04-30",194,100.0,"C"],[7380,"2026-04-30",200,-293.63,"I"],[7380,"2026-05-01",199,108.46,"E"],[7380,"2026-05-03",125,81.18,"C"],[7380,"2026-05-05",188,83.72,"C"],[7380,"2026-05-07",197,98.6,"E"],[7380,"2026-05-08",188,67.81,"C"],[7380,"2026-05-11",125,77.32,"C"],[7380,"2026-05-12",191,66.4,"C"],[7380,"2026-05-14",78,48.5,"C"],[7380,"2026-05-14",201,206.99,"E"],[7380,"2026-05-15",194,100.0,"C"],[7380,"2026-05-17",191,62.33,"C"],[7380,"2026-05-19",78,83.16,"C"],[7380,"2026-05-20",188,83.58,"C"],[7380,"2026-05-22",188,75.69,"C"],[7380,"2026-05-22",188,73.75,"C"],[7380,"2026-05-22",189,14.0,"C"],[7380,"2026-05-22",117,21.75,"E"],[7380,"2026-05-25",194,100.0,"C"],[7380,"2026-05-27",202,64.28,"C"],[7380,"2026-05-28",125,53.63,"C"],[7380,"2026-05-28",170,52.0,"E"],[7380,"2026-05-29",188,30.0,"C"],[7380,"2026-05-30",125,55.22,"C"],[7380,"2026-05-30",166,105.0,"C"],[7380,"2026-06-02",117,40.0,"E"],[7380,"2026-06-03",125,76.79,"C"],[7380,"2026-06-03",203,14.5,"E"],[7380,"2026-06-05",78,132.15,"C"],[7380,"2026-06-05",194,100.0,"C"],[7380,"2026-06-07",188,65.53,"C"],[7380,"2026-06-10",125,70.01,"C"],[7380,"2026-06-13",188,60.25,"C"],[7380,"2026-06-14",204,463.06,"E"],[7380,"2026-06-16",197,9.43,"E"],[7380,"2026-06-17",125,67.67,"C"],[7380,"2026-06-18",125,76.81,"C"],[7380,"2026-06-18",203,11.6,"E"],[7380,"2026-06-19",129,216.05,"E"],[7380,"2026-06-20",125,58.78,"C"],[7380,"2026-06-22",188,23.39,"C"],[7380,"2026-06-22",159,512.87,"E"],[7380,"2026-06-23",195,6.66,"C"],[7380,"2026-06-23",191,72.98,"C"],[7380,"2026-06-24",188,25.06,"C"],[7380,"2026-06-25",125,57.37,"C"],[7380,"2026-06-25",125,39.74,"C"],[7380,"2026-06-25",125,67.04,"C"],[7380,"2026-06-25",191,7.55,"C"],[7380,"2026-06-28",194,100.0,"C"],[7380,"2026-06-28",204,248.02,"E"],[7380,"2026-06-29",189,41.75,"C"],[7380,"2026-06-29",170,36.0,"E"],[7380,"2026-06-29",131,508.95,"E"],[7380,"2026-06-29",198,530.7,"E"],[7380,"2026-06-30",125,77.86,"C"],[7380,"2026-06-30",192,8.82,"C"],[7380,"2026-06-30",205,7.88,"C"],[7380,"2026-06-30",187,44.0,"C"],[7380,"2026-06-30",206,56.55,"E"],[7380,"2026-06-30",203,11.6,"E"],[7380,"2026-07-01",188,72.71,"C"],[7380,"2026-07-01",125,46.8,"C"],[7380,"2026-07-02",154,42.92,"E"],[7380,"2026-07-02",207,10.44,"E"],[7380,"2026-07-02",201,94.25,"E"],[7380,"2026-07-03",204,215.98,"E"],[7380,"2026-07-04",125,64.59,"C"],[7380,"2026-07-05",187,122.0,"C"],[7380,"2026-07-06",121,55.37,"E"],[7380,"2026-07-06",197,90.63,"E"],[7380,"2026-07-07",78,68.47,"C"],[7380,"2026-07-08",191,19.75,"C"],[7380,"2026-07-08",125,77.19,"C"],[7380,"2026-07-09",188,50.0,"C"],[7380,"2026-07-09",205,11.73,"C"],[7380,"2026-07-09",188,54.76,"C"],[7380,"2026-07-09",189,48.0,"C"],[7380,"2026-07-09",129,23.93,"E"],[7380,"2026-07-09",197,9.43,"E"],[7380,"2026-07-10",192,74.92,"C"],[7380,"2026-07-11",195,50.91,"C"],[7380,"2026-07-14",125,44.0,"C"],[7380,"2026-07-14",187,28.0,"C"],[7380,"2026-07-15",125,86.87,"C"],[7380,"2026-07-15",203,11.6,"E"],[7380,"2026-07-16",188,18.24,"C"],[7380,"2026-07-16",125,72.1,"C"],[7380,"2026-07-16",194,97.8,"C"],[7380,"2026-07-17",187,22.0,"C"],[7380,"2026-07-17",78,44.48,"C"],[7380,"2026-07-17",189,4.24,"C"],[7380,"2026-07-17",125,10.26,"C"],[7380,"2026-07-17",187,26.0,"C"],[7380,"2026-07-17",188,21.92,"C"],[7380,"2026-07-17",117,28.0,"E"],[7380,"2026-07-19",188,61.35,"C"],[7380,"2026-07-20",131,508.95,"E"],[7380,"2026-07-22",78,64.37,"C"],[7380,"2026-07-22",195,7.22,"C"],[7380,"2026-07-23",189,6.55,"C"],[7380,"2026-07-23",192,62.38,"C"],[7380,"2026-07-24",189,6.58,"C"],[7380,"2026-07-24",188,67.42,"C"],[7380,"2026-07-26",204,643.03,"E"],[7380,"2026-07-27",187,100.0,"C"],[7380,"2026-07-29",191,71.17,"C"],[7380,"2026-07-29",125,81.35,"C"],[7380,"2026-07-29",78,104.31,"C"],[7380,"2026-08-01",188,72.77,"C"],[7380,"2026-08-02",204,227.37,"E"],[7380,"2026-08-06",191,71.98,"C"],[7380,"2026-08-06",125,75.81,"C"],[7380,"2026-08-07",125,112.01,"K"],[7380,"2026-08-08",125,45.19,"C"],[7380,"2026-08-11",125,83.45,"C"],[7380,"2026-08-13",188,67.89,"C"],[7380,"2026-08-14",129,8.7,"E"],[7380,"2026-08-16",78,20.01,"C"],[7380,"2026-08-16",188,47.82,"C"],[7380,"2026-08-18",78,12.94,"C"],[7380,"2026-08-18",191,42.04,"C"],[7380,"2026-08-18",78,10.01,"C"],[7380,"2026-08-18",191,8.24,"C"],[7380,"2026-08-18",125,129.46,"C"],[7380,"2026-08-19",191,52.57,"C"],[7380,"2026-08-19",208,123.25,"E"],[7380,"2026-08-20",78,107.02,"C"],[7380,"2026-08-20",191,7.11,"C"],[7380,"2026-08-20",191,73.72,"C"],[7380,"2026-08-20",201,193.94,"E"],[7380,"2026-08-21",191,36.82,"C"],[7380,"2026-08-22",188,6.34,"C"],[7380,"2026-08-22",188,11.59,"C"],[7380,"2026-08-22",188,54.61,"C"],[7380,"2026-08-26",188,13.83,"C"],[7380,"2026-08-26",125,153.12,"C"],[7380,"2026-08-27",188,63.28,"C"],[7380,"2026-08-27",192,47.36,"C"],[7380,"2026-08-29",125,102.3,"C"],[7380,"2026-08-29",195,16.85,"C"],[7380,"2026-08-29",188,131.47,"C"],[7380,"2026-08-29",188,4.59,"C"],[7380,"2026-08-29",188,3.52,"C"],[7390,"2026-01-07",209,606.95,"K"],[7390,"2026-01-27",209,498.07,"K"],[7390,"2026-02-09",209,604.14,"K"],[7390,"2026-02-27",209,503.07,"K"],[7390,"2026-03-05",160,63.75,"E"],[7390,"2026-03-06",209,604.14,"K"],[7390,"2026-03-27",209,498.05,"K"],[7390,"2026-04-07",209,604.14,"K"],[7390,"2026-04-14",160,63.75,"E"],[7390,"2026-04-21",209,307.84,"C"],[7390,"2026-04-24",209,120.7,"C"],[7390,"2026-04-27",209,538.27,"K"],[7390,"2026-05-06",209,603.62,"K"],[7390,"2026-05-23",209,524.44,"C"],[7390,"2026-05-27",209,578.16,"K"],[7390,"2026-06-05",209,529.13,"K"],[7390,"2026-06-29",209,578.18,"B"],[7390,"2026-07-07",209,650.12,"K"],[7390,"2026-07-25",209,650.48,"C"],[7390,"2026-07-28",209,578.41,"K"],[7390,"2026-08-03",160,255.0,"E"],[7390,"2026-08-07",209,593.07,"K"],[7390,"2026-08-27",209,579.91,"K"],[7390,"2026-08-31",160,63.75,"E"],[7400,"2026-01-09",210,2400.0,"C"],[7400,"2026-04-30",92,5000.0,"B"],[7400,"2026-05-02",158,215.86,"C"],[7400,"2026-06-02",211,6650.32,"C"],[7400,"2026-06-19",212,1135.34,"C"],[7400,"2026-06-23",213,320.52,"C"],[7400,"2026-06-24",211,4526.97,"C"],[7400,"2026-06-27",212,471.93,"C"],[7400,"2026-06-28",211,463.5,"C"],[7400,"2026-06-29",214,108.9,"C"],[7400,"2026-07-07",215,7500.0,"B"],[7400,"2026-07-08",161,21.98,"C"],[7400,"2026-07-08",216,4928.5,"C"],[7400,"2026-07-08",161,18.98,"C"],[7400,"2026-07-08",161,83.76,"C"],[7400,"2026-07-09",9,300.0,"K"],[7400,"2026-07-09",161,15.98,"C"],[7400,"2026-07-09",161,11.97,"C"],[7400,"2026-07-09",161,2.0,"C"],[7400,"2026-07-09",161,54.99,"C"],[7400,"2026-07-09",161,13.99,"C"],[7400,"2026-07-09",161,26.99,"C"],[7400,"2026-07-09",161,25.58,"C"],[7400,"2026-07-09",217,840.41,"C"],[7400,"2026-07-10",218,282.32,"C"],[7400,"2026-07-11",161,19.98,"C"],[7400,"2026-07-12",158,113.66,"C"],[7400,"2026-07-12",161,58.99,"C"],[7400,"2026-07-12",219,218.5,"C"],[7400,"2026-07-13",164,3478.04,"C"],[7400,"2026-07-21",220,474.78,"C"],[7400,"2026-08-22",221,220.0,"K"],[7410,"2026-03-06",222,1111.81,"C"],[7420,"2026-03-03",223,3150.0,"C"],[7420,"2026-03-21",224,1259.14,"C"],[7420,"2026-05-20",225,1000.0,"B"],[7420,"2026-07-06",226,500.0,"C"],[7430,"2026-01-12",227,14000.0,"B"],[7430,"2026-01-22",228,1855.0,"C"],[7430,"2026-01-22",228,875.0,"C"],[7430,"2026-02-22",228,875.0,"C"],[7430,"2026-02-22",228,1855.0,"C"],[7430,"2026-02-25",229,1200.0,"C"],[7430,"2026-03-11",230,1350.0,"B"],[7430,"2026-03-21",228,1855.0,"C"],[7430,"2026-03-22",228,875.0,"C"],[7430,"2026-04-13",227,14000.0,"B"],[7430,"2026-04-21",228,1855.0,"C"],[7430,"2026-04-22",228,875.0,"C"],[7430,"2026-04-22",231,180.25,"C"],[7430,"2026-04-23",232,160.0,"C"],[7430,"2026-05-07",233,1307.18,"B"],[7430,"2026-05-07",234,210.0,"C"],[7430,"2026-05-07",234,159.0,"C"],[7430,"2026-05-14",235,35.0,"C"],[7430,"2026-05-17",236,50.0,"C"],[7430,"2026-05-22",228,1855.0,"C"],[7430,"2026-05-22",228,875.0,"C"],[7430,"2026-05-24",237,2227.5,"C"],[7430,"2026-06-09",238,4600.0,"B"],[7430,"2026-06-22",227,14000.0,"B"],[7430,"2026-06-24",228,1855.0,"C"],[7430,"2026-06-25",228,875.0,"C"],[7430,"2026-07-06",227,14000.0,"B"],[7430,"2026-07-22",228,1855.0,"C"],[7430,"2026-07-23",228,875.0,"C"],[7430,"2026-07-26",164,2179.56,"C"],[7430,"2026-08-06",239,3564.07,"B"],[7430,"2026-08-10",136,320.0,"C"],[7430,"2026-08-11",230,47.25,"C"],[7430,"2026-08-18",240,2580.0,"C"],[7430,"2026-08-22",228,1855.0,"C"],[7430,"2026-08-23",228,875.0,"C"],[7430,"2026-08-28",241,525.0,"C"],[7440,"2026-01-09",182,-95.0,"R"],[7440,"2026-01-10",242,42.9,"C"],[7440,"2026-01-12",101,78.18,"C"],[7440,"2026-01-16",61,43.99,"C"],[7440,"2026-01-16",182,95.0,"C"],[7440,"2026-01-16",182,95.0,"C"],[7440,"2026-01-27",61,38.49,"C"],[7440,"2026-02-10",242,42.9,"C"],[7440,"2026-02-16",61,43.99,"C"],[7440,"2026-02-21",61,43.89,"C"],[7440,"2026-02-27",61,38.49,"C"],[7440,"2026-03-09",101,74.77,"C"],[7440,"2026-03-10",242,42.9,"C"],[7440,"2026-03-16",61,43.99,"C"],[7440,"2026-03-21",61,43.89,"C"],[7440,"2026-03-27",61,76.99,"C"],[7440,"2026-04-01",230,739.25,"C"],[7440,"2026-04-06",101,81.31,"C"],[7440,"2026-04-07",240,595.0,"C"],[7440,"2026-04-10",242,42.9,"C"],[7440,"2026-04-16",182,95.0,"C"],[7440,"2026-04-16",61,43.99,"C"],[7440,"2026-04-21",61,43.89,"C"],[7440,"2026-04-27",61,76.99,"C"],[7440,"2026-05-04",101,81.31,"C"],[7440,"2026-05-10",242,42.9,"C"],[7440,"2026-05-16",61,43.99,"C"],[7440,"2026-05-21",61,109.99,"C"],[7440,"2026-05-21",61,43.89,"C"],[7440,"2026-05-27",61,76.99,"C"],[7440,"2026-06-01",101,77.6,"C"],[7440,"2026-06-10",242,42.9,"C"],[7440,"2026-06-16",61,43.99,"C"],[7440,"2026-06-21",61,109.99,"C"],[7440,"2026-06-21",61,43.89,"C"],[7440,"2026-06-29",101,84.14,"C"],[7440,"2026-06-30",101,9.98,"C"],[7440,"2026-07-10",242,42.9,"C"],[7440,"2026-07-16",61,43.99,"C"],[7440,"2026-07-17",182,95.0,"C"],[7440,"2026-07-17",182,375.0,"C"],[7440,"2026-07-17",182,95.0,"C"],[7440,"2026-07-17",182,95.0,"C"],[7440,"2026-07-21",61,109.99,"C"],[7440,"2026-07-21",61,43.89,"C"],[7440,"2026-07-27",61,76.99,"C"],[7440,"2026-07-27",101,84.14,"C"],[7440,"2026-08-10",242,42.9,"C"],[7440,"2026-08-16",61,43.99,"C"],[7440,"2026-08-21",61,109.99,"C"],[7440,"2026-08-21",61,43.89,"C"],[7440,"2026-08-24",101,77.6,"C"],[7440,"2026-08-27",61,76.99,"C"],[7450,"2026-01-01",243,100.0,"C"],[7450,"2026-01-01",243,200.0,"C"],[7450,"2026-01-05",230,45.0,"C"],[7450,"2026-01-08",244,306.0,"C"],[7450,"2026-01-09",245,60.0,"C"],[7450,"2026-01-11",246,30.0,"C"],[7450,"2026-01-11",246,30.0,"C"],[7450,"2026-01-21",247,481.78,"C"],[7450,"2026-01-22",248,438.21,"B"],[7450,"2026-01-22",248,2000.0,"B"],[7450,"2026-01-23",49,31.9,"C"],[7450,"2026-01-28",249,124.0,"C"],[7450,"2026-01-29",49,3.29,"C"],[7450,"2026-02-06",230,739.25,"C"],[7450,"2026-02-08",250,239.0,"C"],[7450,"2026-02-08",251,1445.0,"C"],[7450,"2026-02-10",252,200.0,"C"],[7450,"2026-02-12",253,5.05,"C"],[7450,"2026-02-12",253,120.0,"C"],[7450,"2026-02-16",250,49.0,"C"],[7450,"2026-02-18",246,25.0,"C"],[7450,"2026-02-19",253,125.05,"C"],[7450,"2026-02-19",253,125.05,"C"],[7450,"2026-02-19",248,51.95,"C"],[7450,"2026-02-19",248,51.95,"C"],[7450,"2026-02-19",253,125.05,"C"],[7450,"2026-02-20",246,25.0,"C"],[7450,"2026-02-20",246,25.0,"C"],[7450,"2026-02-25",254,40.0,"C"],[7450,"2026-02-26",253,120.0,"C"],[7450,"2026-02-26",255,5.05,"C"],[7450,"2026-03-03",230,45.0,"C"],[7450,"2026-03-18",253,125.05,"C"],[7450,"2026-04-21",235,35.0,"C"],[7450,"2026-05-01",256,78.0,"C"],[7450,"2026-05-01",257,70.0,"C"],[7450,"2026-05-04",199,180.0,"E"],[7450,"2026-05-08",250,49.0,"C"],[7450,"2026-05-28",258,100.0,"C"],[7450,"2026-05-28",234,275.0,"C"],[7450,"2026-06-01",256,254.0,"K"],[7450,"2026-06-05",259,75.0,"C"],[7450,"2026-06-11",260,300.0,"C"],[7450,"2026-06-16",117,150.0,"E"],[7450,"2026-06-24",256,204.0,"K"],[7450,"2026-06-24",117,70.0,"E"],[7450,"2026-06-27",246,35.0,"C"],[7450,"2026-07-08",117,154.0,"E"],[7450,"2026-07-15",258,100.0,"C"],[7450,"2026-07-31",261,60.0,"K"],[7450,"2026-07-31",256,91.0,"K"],[7450,"2026-08-01",262,4.0,"C"],[7450,"2026-08-03",254,10.0,"C"],[7450,"2026-08-04",253,145.55,"C"],[7450,"2026-08-04",260,50.0,"C"],[7450,"2026-08-07",230,796.16,"C"],[7450,"2026-08-11",253,3.55,"C"],[7450,"2026-08-11",258,100.0,"C"],[7450,"2026-08-11",253,60.0,"C"],[7450,"2026-08-12",253,145.55,"C"],[7450,"2026-08-12",253,145.55,"C"],[7450,"2026-08-18",253,145.55,"C"],[7450,"2026-08-24",263,220.0,"K"],[7460,"2026-01-09",264,36.95,"C"],[7460,"2026-01-12",265,102.34,"C"],[7460,"2026-01-20",266,24.72,"C"],[7460,"2026-01-23",267,39.95,"C"],[7460,"2026-01-24",264,47.44,"C"],[7460,"2026-01-24",268,100.0,"C"],[7460,"2026-02-09",264,36.95,"C"],[7460,"2026-02-09",269,12.05,"C"],[7460,"2026-02-18",268,100.0,"C"],[7460,"2026-02-23",267,39.95,"C"],[7460,"2026-03-05",270,104.95,"C"],[7460,"2026-03-09",264,36.95,"C"],[7460,"2026-03-10",271,115.0,"C"],[7460,"2026-03-15",268,100.0,"C"],[7460,"2026-03-23",267,39.95,"C"],[7460,"2026-04-07",265,102.34,"C"],[7460,"2026-04-08",268,100.0,"C"],[7460,"2026-04-09",264,36.95,"C"],[7460,"2026-04-10",268,6.18,"C"],[7460,"2026-04-11",268,6.18,"C"],[7460,"2026-04-14",272,1581.23,"C"],[7460,"2026-04-14",268,6.18,"C"],[7460,"2026-04-20",264,84.82,"C"],[7460,"2026-04-27",264,68.74,"C"],[7460,"2026-05-09",264,36.95,"C"],[7460,"2026-05-13",268,100.0,"C"],[7460,"2026-05-18",268,100.0,"C"],[7460,"2026-05-18",268,-100.0,"R"],[7460,"2026-05-25",269,17.54,"C"],[7460,"2026-06-09",264,36.95,"C"],[7460,"2026-06-10",268,100.0,"C"],[7460,"2026-06-26",273,32.76,"C"],[7460,"2026-06-27",274,971.95,"C"],[7460,"2026-07-09",264,36.95,"C"],[7460,"2026-07-10",268,100.0,"C"],[7460,"2026-07-18",268,100.0,"C"],[7460,"2026-07-25",266,24.72,"C"],[7460,"2026-07-30",273,25.0,"C"],[7460,"2026-07-30",266,24.72,"C"],[7460,"2026-07-31",273,1624.77,"C"],[7460,"2026-08-06",268,100.0,"C"],[7460,"2026-08-09",264,36.95,"C"],[7460,"2026-08-10",266,24.72,"K"],[7460,"2026-08-26",268,100.0,"C"],[7460,"2026-08-27",275,156.35,"C"],[7470,"2026-01-09",276,1.25,"C"],[7470,"2026-01-09",276,1.25,"C"],[7470,"2026-01-09",277,26.47,"C"],[7470,"2026-01-30",277,44.22,"C"],[7470,"2026-02-04",277,43.99,"C"],[7470,"2026-02-10",277,35.68,"C"],[7470,"2026-03-06",276,15.6,"C"],[7470,"2026-03-10",277,38.01,"C"],[7470,"2026-03-31",277,28.75,"C"],[7470,"2026-03-31",277,29.77,"C"],[7470,"2026-04-10",276,15.6,"C"],[7470,"2026-04-16",277,45.69,"C"],[7470,"2026-04-21",277,14.75,"C"],[7470,"2026-04-21",277,61.0,"C"],[7470,"2026-04-22",277,557.19,"C"],[7470,"2026-04-23",277,51.9,"C"],[7470,"2026-04-29",277,11.0,"C"],[7470,"2026-05-01",277,14.75,"C"],[7470,"2026-05-01",277,15.95,"C"],[7470,"2026-05-02",278,20.43,"C"],[7470,"2026-05-02",277,22.71,"C"],[7470,"2026-05-06",277,15.8,"C"],[7470,"2026-05-16",276,15.6,"C"],[7470,"2026-06-06",277,41.15,"C"],[7470,"2026-06-10",277,14.75,"C"],[7470,"2026-06-10",277,61.76,"C"],[7470,"2026-06-17",276,398.0,"C"],[7470,"2026-06-27",276,15.6,"C"],[7470,"2026-06-30",277,20.05,"C"],[7470,"2026-07-04",277,47.55,"C"],[7470,"2026-07-09",277,204.7,"C"],[7470,"2026-07-21",277,20.05,"C"],[7470,"2026-07-22",277,7.34,"C"],[7470,"2026-07-24",277,116.5,"C"],[7470,"2026-07-25",277,111.88,"C"],[7470,"2026-07-29",277,8.16,"C"],[7470,"2026-08-01",276,16.4,"C"],[7470,"2026-08-04",277,68.58,"C"],[7470,"2026-08-12",277,27.25,"C"],[7470,"2026-08-15",277,168.6,"C"],[7470,"2026-08-21",277,19.2,"C"],[7470,"2026-08-25",277,14.75,"C"],[7470,"2026-08-28",277,47.3,"C"],[7470,"2026-08-28",277,14.75,"C"],[7470,"2026-08-29",277,74.6,"C"],[7480,"2026-01-20",9,150.19,"K"],[7480,"2026-01-30",279,20.0,"K"],[7480,"2026-02-19",9,146.24,"K"],[7480,"2026-02-27",279,20.0,"K"],[7480,"2026-03-19",9,148.14,"K"],[7480,"2026-03-31",279,20.0,"K"],[7480,"2026-04-15",279,25.0,"K"],[7480,"2026-04-20",9,147.94,"K"],[7480,"2026-04-30",279,20.0,"K"],[7480,"2026-05-19",9,152.64,"K"],[7480,"2026-05-29",279,20.0,"K"],[7480,"2026-06-22",9,149.64,"K"],[7480,"2026-06-30",279,20.0,"K"],[7480,"2026-07-20",9,149.18,"K"],[7480,"2026-07-31",279,20.0,"K"],[7480,"2026-08-19",9,284.32,"K"],[7490,"2026-06-30",280,7326.25,"J"],[7490,"2026-07-08",280,119.74,"J"],[7490,"2026-07-08",280,1184.0,"J"],[7490,"2026-07-22",280,23.47,"J"],[7490,"2026-08-05",280,1184.0,"J"],[7490,"2026-08-05",280,96.0,"J"]],"accts":{"7210":"Rent & Lease","7220":"Repairs & Maint. - Metairie","7240":"Internet/Telephone","7250":"Utilities","7310":"Business Insurance","7312":"Officer Life Insurance","7320":"Legal & Professional Services","7330":"Software Subscriptions","7340":"Office Expenses","7350":"Advertising & Marketing","7360":"Meals & Meetings","7370":"Travel","7380":"Employee Mileage/Parking","7390":"Mobile Phones","7400":"Entertainment","7410":"Client Gifts","7420":"Charitable Contributions","7430":"Professional Dev.","7440":"Dues & Subscriptions","7450":"Permits & Licenses","7460":"Auto Repair & Maint.","7470":"Shipping & Postage","7480":"Bank Charges & Fees","7490":"Payroll Processing"},"src":"IncomeStatementDetail Jan–Aug 2026"};
+var OPX_KEY  = 'basin_opex_detail_v1';
+var OPX_FOCUS = null;      // 'YYYY-MM' month in focus; defaults to the latest
+var OPX_CAT   = null;      // selected account (number) or null for all
+var OPX_GRP   = { fac:{ label:'Facilities', c:'#2ee6c5', rgb:'46,230,197' },
+                  bo: { label:'Business Overhead', c:'#b18cff', rgb:'177,140,255' } };
+var OPX_FOCUS_C = '#ff9a3d', OPX_FOCUS_RGB = '255,154,61';
+var OPX_MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+function opxGrpOf(a){ return a < 7300 ? 'fac' : 'bo'; }
+function opxM(v){
+  var a = Math.abs(v), sg = v < 0 ? '\u2212' : '';
+  if (a >= 1e6) return sg + '$' + (a/1e6).toFixed(2) + 'M';
+  if (a >= 1e4) return sg + '$' + Math.round(a/1e3) + 'k';
+  if (a >= 1e3) return sg + '$' + (a/1e3).toFixed(1) + 'k';
+  return sg + '$' + Math.round(a);
+}
+function opxFull(v){ return (v < 0 ? '\u2212$' : '$') + Math.round(Math.abs(v)).toLocaleString(); }
+function opxMonLbl(k){ return OPX_MON[+k.slice(5,7)-1]; }
+function opxEsc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+
+// Sources, oldest first; a later source replaces whole months it covers.
+function opxSources(){
+  var list = [OPX_SEED];
+  if (PUBLISHED && PUBLISHED.opex) list = list.concat(PUBLISHED.opex);
+  try { list = list.concat(JSON.parse(localStorage.getItem(OPX_KEY) || '[]')); } catch(e){}
+  return list;
+}
+function opxModel(){
+  var byMonth = {}, accts = {};
+  opxSources().forEach(function(src){
+    if (!src || !src.rows) return;
+    Object.keys(src.accts || {}).forEach(function(k){ accts[k] = src.accts[k]; });
+    var mine = {};
+    src.rows.forEach(function(r){ mine[r[1].slice(0,7)] = 1; });
+    Object.keys(mine).forEach(function(m){ byMonth[m] = []; });
+    src.rows.forEach(function(r){
+      byMonth[r[1].slice(0,7)].push({ a:r[0], d:r[1], v:src.names[r[2]], amt:r[3], t:r[4] });
+    });
+  });
+  var months = Object.keys(byMonth).sort();
+  // keep to the latest fiscal year on file
+  if (months.length) {
+    var yr = months[months.length-1].slice(0,4);
+    months = months.filter(function(m){ return m.slice(0,4) === yr; });
+  }
+  var tx = [];
+  months.forEach(function(m){ tx = tx.concat(byMonth[m]); });
+  var n = months.length, mi = {};
+  months.forEach(function(m,i){ mi[m] = i; });
+  function zeros(){ var z = []; for (var i=0;i<n;i++) z.push(0); return z; }
+  var acc = {}, grp = { fac:zeros(), bo:zeros() }, vend = {};
+  tx.forEach(function(t){
+    var i = mi[t.d.slice(0,7)], g = opxGrpOf(t.a);
+    if (!acc[t.a]) acc[t.a] = { a:t.a, name:accts[t.a] || String(t.a), g:g, m:zeros(), v:{} };
+    acc[t.a].m[i] += t.amt;
+    grp[g][i] += t.amt;
+    if (!acc[t.a].v[t.v]) acc[t.a].v[t.v] = zeros();
+    acc[t.a].v[t.v][i] += t.amt;
+    var vk = t.v;
+    if (!vend[vk]) vend[vk] = { name:vk, m:zeros(), accts:{} };
+    vend[vk].m[i] += t.amt;
+    vend[vk].accts[t.a] = (vend[vk].accts[t.a] || 0) + t.amt;
+  });
+  return { months:months, tx:tx, acc:acc, grp:grp, vend:vend, mi:mi };
+}
+function opxSum(a){ return a.reduce(function(s,v){ return s + v; }, 0); }
+
+// Revenue from the P&L already on the site, for "% of revenue".
+function opxRevenue(){
+  var row = (BUDGET_DATA||[]).filter(function(r){ return /^Total Income$/i.test(r.label); })[0];
+  if (!row) return null;
+  var v = bgRowVals(row), ytd = 0, byMonth = {};
+  BG_IS_ACTUAL.forEach(function(on,i){
+    if (!on && !(i > 0 && Object.keys(BUDGET_ACTUALS[BG_MONTHS[i]]||{}).length)) return;
+    ytd += v[i] || 0;
+    if (i > 0) byMonth[7 + i] = v[i];         // Aug = 8 …
+  });
+  return { ytd:ytd, byMonth:byMonth };
+}
+
+// ── Upload: NetSuite "Income Statement Detail" export ──────────────────
+function opxPickFile(){ var i = document.getElementById('opx-file'); if (i){ i.value=''; i.click(); } }
+function opxHandleFile(inp){
+  var f = inp.files && inp.files[0];
+  if (!f) return;
+  var rd = new FileReader();
+  rd.onload = function(ev){
+    try {
+      var wb = XLSX.read(new Uint8Array(ev.target.result), { type:'array', cellDates:true });
+      var ws = wb.Sheets[wb.SheetNames[0]];
+      var rows = XLSX.utils.sheet_to_json(ws, { header:1, blankrows:false, defval:'' });
+      var src = opxParseDetail(rows);
+      if (!src || !src.rows.length) { toast('No facilities or business overhead lines found \u2014 expected a NetSuite Income Statement Detail export','error'); return; }
+      var list = [];
+      try { list = JSON.parse(localStorage.getItem(OPX_KEY) || '[]'); } catch(e){}
+      list.push(src);
+      try { localStorage.setItem(OPX_KEY, JSON.stringify(list)); }
+      catch(e){ toast('Browser storage is full \u2014 publish to keep this upload','error'); }
+      var ms = {}; src.rows.forEach(function(r){ ms[r[1].slice(0,7)] = 1; });
+      var mk = Object.keys(ms).sort();
+      toast('Op Ex detail loaded: ' + mk.map(opxMonLbl).join(', ') + ' \u2014 ' + src.rows.length + ' lines', 'success');
+      OPX_FOCUS = null;
+      if (typeof GH_CONFIG !== 'undefined' && GH_CONFIG && GH_CONFIG.token) syncToGitHub(true);
+      renderOpex();
+    } catch(err){ toast('Could not read that file: ' + err.message, 'error'); }
+  };
+  rd.readAsArrayBuffer(f);
+}
+function opxParseDetail(rows){
+  var acct = null, names = [], idx = {}, out = [], accts = {};
+  var T = {'Credit Card Charge':'C','Bill':'B','Expense Report':'E','Journal':'J','Check':'K',
+           'Credit Card Refund':'R','Bill Credit':'X','Deposit':'D','Invoice':'I'};
+  rows.forEach(function(r){
+    var a = String(r[0]||'').trim();
+    var m = a.match(/^(\d{4})\s*-\s*(.+)$/);
+    if (m) { var n = +m[1]; acct = (n >= 7200 && n < 7500) ? n : null; if (acct) accts[n] = m[2].trim(); return; }
+    if (/^Total/.test(a)) return;
+    if (!acct || !r[1] || !(r[2] instanceof Date)) return;
+    var d = r[2], iso = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    var nm = String(r[4]||'').trim();
+    if (!nm) {
+      var sp = String(r[6]||'');
+      nm = /^270/.test(sp) ? '(Prepaid amortization)' : (r[1] === 'Deposit' ? '(Refund / deposit)' : '(Journal entry)');
+    }
+    if (!(nm in idx)) { idx[nm] = names.length; names.push(nm); }
+    out.push([acct, iso, idx[nm], Math.round((+r[7]||0)*100)/100, T[r[1]] || '?']);
+  });
+  return { names:names, rows:out, accts:accts, src:'upload', at:new Date().toISOString() };
+}
+function opxPublishList(){
+  var list = [];
+  if (PUBLISHED && PUBLISHED.opex) list = list.concat(PUBLISHED.opex);
+  try { list = list.concat(JSON.parse(localStorage.getItem(OPX_KEY) || '[]')); } catch(e){}
+  return list;
+}
+
+function opxSetFocus(m){ OPX_FOCUS = m; renderOpex(); }
+function opxSetCat(a){ OPX_CAT = (OPX_CAT === a) ? null : a; renderOpex(); var el = document.getElementById('opx-drivers'); if (el && OPX_CAT) el.scrollIntoView({behavior:'smooth', block:'start'}); }
+
+// ── Page ────────────────────────────────────────────────────────────────
+function renderOpex(){
+  var root = document.getElementById('opx-main');
+  if (!root) return;
+  var M = opxModel();
+  if (!M.months.length) { root.innerHTML = '<div class="opx-empty">No overhead detail on file yet.</div>'; return; }
+  var fi = OPX_FOCUS && M.mi[OPX_FOCUS] !== undefined ? M.mi[OPX_FOCUS] : M.months.length - 1;
+  var fk = M.months[fi], fl = opxMonLbl(fk);
+  var yr = fk.slice(0,4);
+  var span = opxMonLbl(M.months[0]) + '\u2013' + opxMonLbl(M.months[M.months.length-1]) + ' ' + yr;
+  var n = M.months.length;
+
+  var facY = opxSum(M.grp.fac), boY = opxSum(M.grp.bo), totY = facY + boY;
+  var facF = M.grp.fac[fi], boF = M.grp.bo[fi], totF = facF + boF;
+  var avg = totY / n;
+  var dF = avg ? (totF - avg) / avg * 100 : 0;
+  var rev = opxRevenue();
+  var pctY = rev && rev.ytd ? totY / rev.ytd * 100 : null;
+  var fmNo = +fk.slice(5,7);
+  var pctF = rev && rev.byMonth[fmNo] ? totF / rev.byMonth[fmNo] * 100 : null;
+
+  var chips = M.months.map(function(m, i){
+    return '<button class="'+(i === fi ? 'on' : '')+'" onclick="opxSetFocus(\''+m+'\')">'+opxMonLbl(m)+'</button>';
+  }).join('');
+
+  root.innerHTML =
+    '<input type="file" id="opx-file" accept=".xlsx,.xls" style="display:none" onchange="opxHandleFile(this)">'+
+    opxLogoDefs()+
+    '<div class="opx-top">'+
+      '<div class="opx-ttl"><div class="opx-ey">Basin Engineering &amp; Surveying \u00b7 '+span+'</div>'+
+        '<h1>Where the <em>overhead</em> dollars go</h1>'+
+        '<p>Non-labor operating expense \u2014 Facilities and Business Overhead \u2014 traced from category to vendor to transaction.</p></div>'+
+      '<div class="opx-ctl">'+
+        '<div class="opx-chips"><span>Month in focus</span>'+chips+'</div>'+
+        '<button class="opx-up" onclick="opxPickFile()">\u2191 Upload P&amp;L detail</button>'+
+      '</div>'+
+    '</div>'+
+
+    // the overhead heroes, each carrying a headline number
+    '<div class="opx-heroes">'+
+      opxHeroCard('attendant', 'Overhead stowed', span,
+        opxFull(totY), 'Facilities '+opxM(facY)+' \u00b7 Business OH '+opxM(boY), opxAttendant(totY, facY, boY))+
+      opxHeroCard('lifter', fl+' lift', 'vs '+yr+' monthly average',
+        opxFull(totF), (dF >= 0 ? '\u25b2 ' : '\u25bc ')+Math.abs(dF).toFixed(0)+'% vs '+opxM(avg)+' avg / month',
+        opxLifter(totF, avg, fl), dF >= 0 ? 'hot' : 'cool')+
+      opxHeroCard('crane', 'Overhead load on revenue', span,
+        (pctY != null ? pctY.toFixed(1)+'%' : '\u2014'),
+        (pctF != null ? fl+' '+pctF.toFixed(1)+'% of revenue' : 'of revenue, year to date'),
+        opxCrane(pctY, pctF, fl))+
+    '</div>'+
+
+    '<div class="opx-grps">'+
+      opxGroupPanel(M, 'fac', fi)+
+      opxGroupPanel(M, 'bo', fi)+
+    '</div>'+
+
+    '<div class="opx-row2">'+
+      '<section class="opx-card opx-tm"><div class="opx-ch"><div><h3>Every overhead dollar, '+span+'</h3>'+
+        '<p>Tile size is year-to-date spend. The corner tag compares '+fl+' with that category\u2019s monthly average. Click a tile to trace its vendors.</p></div></div>'+
+        opxTreemap(M, fi)+'</section>'+
+      '<section class="opx-card opx-ins"><div class="opx-ch"><div><h3>What moved the needle</h3>'+
+        '<p>Read automatically from the detail.</p></div></div>'+opxInsights(M, fi)+'</section>'+
+    '</div>'+
+
+    opxDrivers(M, fi)+
+    '<div class="opx-foot">Source: NetSuite Income Statement Detail, accounts 7200\u20137490 \u00b7 '+M.tx.length.toLocaleString()+' transactions \u00b7 '+span+'</div>';
+}
+
+function opxHeroCard(kind, k, sub, big, note, art, tone){
+  return '<div class="opx-hero opx-h-'+kind+(tone ? ' '+tone : '')+'">'+
+    '<div class="opx-art">'+art+'</div>'+
+    '<div class="opx-hk"><span>'+k+'</span><em>'+sub+'</em><b>'+big+'</b><i>'+note+'</i></div>'+
+  '</div>';
+}
+
+// ── Group panel: trend, then categories as bullets (bar = monthly
+//    average, marker = the month in focus) ────────────────────────────────
+function opxGroupPanel(M, g, fi){
+  var G = OPX_GRP[g], ser = M.grp[g], n = ser.length;
+  var ytd = opxSum(ser), avg = ytd / n, cur = ser[fi];
+  var d = avg ? (cur - avg) / avg * 100 : 0;
+  var fl = opxMonLbl(M.months[fi]);
+  // trend columns
+  var W = 520, H = 170, pad = 26, bw = (W - pad*2) / n;
+  var mx = Math.max.apply(null, ser.concat([avg, 1]));
+  var sc = (H - 44) / mx;
+  var cols = ser.map(function(v, i){
+    var h = Math.max(v, 0) * sc, x = pad + bw*i + bw*0.18, w = bw*0.64, y = H - 22 - h;
+    var on = i === fi;
+    return '<g class="opx-col'+(on ? ' on' : '')+'" onclick="opxSetFocus(\''+M.months[i]+'\')">'+
+      '<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+h.toFixed(1)+'" rx="3" '+
+        'fill="'+(on ? OPX_FOCUS_C : 'rgba('+G.rgb+',0.55)')+'"/>'+
+      '<text x="'+(x+w/2).toFixed(1)+'" y="'+(y-5).toFixed(1)+'" text-anchor="middle" class="v">'+opxM(v)+'</text>'+
+      '<text x="'+(x+w/2).toFixed(1)+'" y="'+(H-6)+'" text-anchor="middle" class="m">'+opxMonLbl(M.months[i])+'</text>'+
+    '</g>';
+  }).join('');
+  var ay = H - 22 - avg*sc;
+  var trend = '<svg viewBox="0 0 '+W+' '+H+'" class="opx-trend">'+
+    '<line x1="'+pad+'" x2="'+(W-pad)+'" y1="'+(H-22)+'" y2="'+(H-22)+'" class="base"/>'+cols+
+    '<line x1="'+pad+'" x2="'+(W-pad)+'" y1="'+ay.toFixed(1)+'" y2="'+ay.toFixed(1)+'" class="avg" stroke="'+G.c+'"/>'+
+    '<rect x="'+(pad-2)+'" y="'+(ay-16).toFixed(1)+'" width="66" height="13" rx="3" fill="rgba(12,6,28,0.85)"/>'+
+    '<text x="'+pad+'" y="'+(ay-6).toFixed(1)+'" class="al" fill="'+G.c+'">avg '+opxM(avg)+'</text>'+
+  '</svg>';
+
+  // categories
+  var cats = Object.keys(M.acc).map(function(k){ return M.acc[k]; })
+    .filter(function(a){ return a.g === g; })
+    .map(function(a){ var y = opxSum(a.m); return { a:a.a, name:a.name, ytd:y, avg:y/n, cur:a.m[fi] }; })
+    .filter(function(c){ return Math.abs(c.ytd) > 0.5 || Math.abs(c.cur) > 0.5; })
+    .sort(function(x,y){ return y.ytd - x.ytd; });
+  var cmax = Math.max.apply(null, cats.map(function(c){ return Math.max(c.avg, c.cur); }).concat([1]));
+  var shown = g === 'bo' ? cats.slice(0, 10) : cats;
+  var rest = cats.slice(shown.length);
+  var bullets = shown.map(function(c){
+    var wA = Math.max(0, c.avg) / cmax * 100, wF = Math.max(0, c.cur) / cmax * 100;
+    var dd = c.avg ? (c.cur - c.avg) / Math.abs(c.avg) * 100 : 0;
+    var hot = dd > 25, cool = dd < -25;
+    return '<div class="opx-bl'+(OPX_CAT === c.a ? ' sel' : '')+'" onclick="opxSetCat('+c.a+')" title="'+opxEsc(c.name)+'">'+
+      '<span class="nm">'+opxEsc(c.name)+'<i>'+(ytd ? (c.ytd/ytd*100).toFixed(0) : 0)+'%</i></span>'+
+      '<span class="tr"><i class="avg" style="width:'+wA.toFixed(1)+'%;background:'+G.c+';"></i>'+
+        '<i class="mk" style="left:'+Math.min(wF, 100).toFixed(1)+'%;"></i></span>'+
+      '<span class="y">'+opxM(c.ytd)+'</span>'+
+      '<span class="f'+(hot ? ' hot' : cool ? ' cool' : '')+'">'+opxM(c.cur)+'</span>'+
+    '</div>';
+  }).join('');
+  if (rest.length) {
+    var ry = opxSum(rest.map(function(c){ return c.ytd; })), rf = opxSum(rest.map(function(c){ return c.cur; }));
+    bullets += '<div class="opx-bl rest"><span class="nm">'+rest.length+' smaller categories</span><span class="tr"></span>'+
+      '<span class="y">'+opxM(ry)+'</span><span class="f">'+opxM(rf)+'</span></div>';
+  }
+
+  return '<section class="opx-card opx-grp" style="--gc:'+G.c+';--grgb:'+G.rgb+';">'+
+    '<div class="opx-gh">'+
+      '<div><div class="opx-gk">'+(g === 'fac' ? '7200' : '7300')+' \u00b7 '+G.label+'</div>'+
+        '<div class="opx-gv">'+opxFull(ytd)+'<span>year to date</span></div></div>'+
+      '<div class="opx-gm"><div><span>Avg / month</span><b>'+opxM(avg)+'</b></div>'+
+        '<div class="fx"><span>'+fl+'</span><b>'+opxM(cur)+'</b>'+
+          '<em class="'+(d > 0 ? 'up' : 'dn')+'">'+(d >= 0 ? '\u25b2 ' : '\u25bc ')+Math.abs(d).toFixed(0)+'%</em></div></div>'+
+    '</div>'+
+    trend+
+    '<div class="opx-blh"><span>Category</span><span class="lg"><i class="a" style="background:'+G.c+';"></i>monthly avg '+
+      '<i class="f"></i>'+fl+'</span><span class="y">YTD</span><span class="f">'+fl+'</span></div>'+
+    bullets+
+  '</section>';
+}
+
+// ── Treemap (squarified) ────────────────────────────────────────────────
+function opxTreemap(M, fi){
+  var n = M.months.length;
+  var items = Object.keys(M.acc).map(function(k){
+    var a = M.acc[k], y = opxSum(a.m);
+    return { a:a.a, name:a.name, g:a.g, v:Math.max(y, 0), avg:y/n, cur:a.m[fi] };
+  }).filter(function(x){ return x.v > 0; }).sort(function(x,y){ return y.v - x.v; });
+  var W = 100, H = 100, total = opxSum(items.map(function(x){ return x.v; }));
+  var rects = [];
+  (function squarify(list, x, y, w, h){
+    if (!list.length) return;
+    var sum = opxSum(list.map(function(i){ return i.v; }));
+    var area = w * h / sum;
+    var row = [], best = Infinity, i = 0, side = Math.min(w, h);
+    function worst(r){
+      var s = opxSum(r.map(function(t){ return t.v * area; }));
+      var mx = Math.max.apply(null, r.map(function(t){ return t.v * area; }));
+      var mn = Math.min.apply(null, r.map(function(t){ return t.v * area; }));
+      return Math.max(side*side*mx/(s*s), (s*s)/(side*side*mn));
+    }
+    while (i < list.length) {
+      var t = row.concat([list[i]]), wv = worst(t);
+      if (row.length && wv > best) break;
+      row = t; best = wv; i++;
+    }
+    var rs = opxSum(row.map(function(t){ return t.v * area; }));
+    if (w >= h) {
+      var cw = rs / h, cy = y;
+      row.forEach(function(t){ var hh = t.v*area/cw; rects.push({ it:t, x:x, y:cy, w:cw, h:hh }); cy += hh; });
+      squarify(list.slice(i), x + cw, y, w - cw, h);
+    } else {
+      var ch = rs / w, cx = x;
+      row.forEach(function(t){ var ww = t.v*area/ch; rects.push({ it:t, x:cx, y:y, w:ww, h:ch }); cx += ww; });
+      squarify(list.slice(i), x, y + ch, w, h - ch);
+    }
+  })(items, 0, 0, W, H);
+
+  return '<div class="opx-tmap">'+rects.map(function(r){
+    var t = r.it, G = OPX_GRP[t.g];
+    var dd = t.avg ? (t.cur - t.avg) / Math.abs(t.avg) * 100 : 0;
+    // the map is roughly 820 x 430 px; judge text by that footprint
+    var pw = r.w * 8.2, ph = r.h * 4.3;
+    var big = pw > 220 && ph > 120, tiny = pw < 58 || ph < 30, sm = !tiny && (pw < 120 || ph < 70);
+    var shade = 0.35 + 0.55 * Math.min(1, t.v / items[0].v);
+    return '<div class="opx-tile'+(OPX_CAT === t.a ? ' sel' : '')+(big ? ' big' : '')+(tiny ? ' tiny' : '')+(sm ? ' sm' : '')+'" '+
+      'onclick="opxSetCat('+t.a+')" title="'+opxEsc(t.name)+' \u00b7 '+opxFull(t.v)+'" '+
+      'style="left:'+r.x.toFixed(3)+'%;top:'+r.y.toFixed(3)+'%;width:'+r.w.toFixed(3)+'%;height:'+r.h.toFixed(3)+'%;'+
+        'background:linear-gradient(145deg,rgba('+G.rgb+','+shade.toFixed(2)+'),rgba('+G.rgb+','+(shade*0.55).toFixed(2)+'));">'+
+      '<div class="in"><span class="n">'+opxEsc(t.name)+'</span><b>'+opxM(t.v)+'</b>'+
+        '<span class="p">'+(t.v/total*100).toFixed(1)+'%</span></div>'+
+      (Math.abs(dd) >= 1 && !tiny && !sm ? '<em class="'+(dd > 0 ? 'up' : 'dn')+'">'+(dd > 0 ? '\u25b2' : '\u25bc')+Math.abs(dd).toFixed(0)+'%</em>' : '')+
+    '</div>';
+  }).join('')+'</div>'+
+  '<div class="opx-tmlg"><span><i style="background:'+OPX_GRP.fac.c+'"></i>Facilities</span>'+
+    '<span><i style="background:'+OPX_GRP.bo.c+'"></i>Business Overhead</span>'+
+    '<span class="t"><em class="up">\u25b2</em> above / <em class="dn">\u25bc</em> below its monthly average in '+opxMonLbl(M.months[fi])+'</span></div>';
+}
+
+// ── Automatic read-outs ─────────────────────────────────────────────────
+function opxInsights(M, fi){
+  var n = M.months.length, fl = opxMonLbl(M.months[fi]);
+  var cats = Object.keys(M.acc).map(function(k){
+    var a = M.acc[k], y = opxSum(a.m); return { a:a.a, name:a.name, g:a.g, ytd:y, avg:y/n, cur:a.m[fi] };
+  });
+  var tot = opxSum(cats.map(function(c){ return c.ytd; }));
+  var top = cats.slice().sort(function(x,y){ return y.ytd - x.ytd; })[0];
+  var up = cats.slice().sort(function(x,y){ return (y.cur - y.avg) - (x.cur - x.avg); })[0];
+  var dn = cats.slice().sort(function(x,y){ return (x.cur - x.avg) - (y.cur - y.avg); })[0];
+  var vends = Object.keys(M.vend).map(function(k){ return M.vend[k]; })
+    .filter(function(v){ return v.name.charAt(0) !== '('; })
+    .map(function(v){ return { name:v.name, ytd:opxSum(v.m), cur:v.m[fi] }; });
+  var tv = vends.slice().sort(function(x,y){ return y.ytd - x.ytd; });
+  var top5 = opxSum(tv.slice(0,5).map(function(v){ return v.ytd; }));
+  var big = M.tx.slice().sort(function(x,y){ return y.amt - x.amt; })[0];
+  var fv = vends.slice().sort(function(x,y){ return y.cur - x.cur; })[0];
+  function ins(ic, h, b){ return '<div class="opx-in"><span class="ic">'+ic+'</span><div><b>'+h+'</b><p>'+b+'</p></div></div>'; }
+  return '<div class="opx-ins-l">'+
+    ins('\u25a3', opxEsc(top.name)+' is the heaviest bag in the bin',
+      opxFull(top.ytd)+', or '+(top.ytd/tot*100).toFixed(0)+'% of all non-labor overhead this year.')+
+    ins('\u25b2', 'Biggest jump in '+fl+': '+opxEsc(up.name),
+      opxFull(up.cur)+' against a '+opxM(up.avg)+' monthly average ('+(up.cur - up.avg >= 0 ? '+' : '\u2212')+opxM(Math.abs(up.cur - up.avg)).replace('\u2212','')+').')+
+    ins('\u25bc', 'Lightest against its average: '+opxEsc(dn.name),
+      opxFull(dn.cur)+' in '+fl+' against '+opxM(dn.avg)+' a month.')+
+    ins('\u2691', 'Five vendors carry '+(top5/tot*100).toFixed(0)+'% of the load',
+      tv.slice(0,5).map(function(v){ return opxEsc(v.name); }).join(', ').replace(/\.?$/, '.'))+
+    ins('\u26a0', 'Largest single charge: '+opxFull(big.amt),
+      opxEsc(big.v)+' \u00b7 '+opxEsc(M.acc[big.a].name)+' \u00b7 '+(+big.d.slice(5,7))+'/'+(+big.d.slice(8,10))+'.')+
+    (fv ? ins('\u2605', 'Top vendor in '+fl+': '+opxEsc(fv.name), opxFull(fv.cur)+' in the month.') : '')+
+  '</div>';
+}
+
+// ── Vendor drivers ──────────────────────────────────────────────────────
+function opxDrivers(M, fi){
+  var n = M.months.length, fl = opxMonLbl(M.months[fi]);
+  var sel = OPX_CAT ? M.acc[OPX_CAT] : null;
+  var pool;
+  if (sel) pool = Object.keys(sel.v).map(function(k){ return { name:k, m:sel.v[k], accts:null }; });
+  else pool = Object.keys(M.vend).map(function(k){ return { name:k, m:M.vend[k].m, accts:M.vend[k].accts }; });
+  pool.forEach(function(p){ p.ytd = opxSum(p.m); p.cur = p.m[fi]; });
+  var poolTot = opxSum(pool.map(function(p){ return p.ytd; }));
+  var poolCur = opxSum(pool.map(function(p){ return p.cur; }));
+  var ytdTop = pool.slice().sort(function(a,b){ return b.ytd - a.ytd; }).slice(0, 12);
+  var curTop = pool.filter(function(p){ return Math.abs(p.cur) > 0.5; }).sort(function(a,b){ return b.cur - a.cur; }).slice(0, 12);
+  var mxY = ytdTop.length ? Math.max(ytdTop[0].ytd, 1) : 1;
+  var mxC = curTop.length ? Math.max(curTop[0].cur, 1) : 1;
+  var gc = sel ? OPX_GRP[sel.g].c : '#ffd24a';
+  function spark(m){
+    var mx = Math.max.apply(null, m.concat([1])), w = 70, h = 20, st = w / Math.max(m.length - 1, 1);
+    var pts = m.map(function(v,i){ return (i*st).toFixed(1)+','+(h - Math.max(v,0)/mx*h).toFixed(1); }).join(' ');
+    return '<svg class="opx-sp" viewBox="0 0 '+w+' '+(h+2)+'"><polyline points="'+pts+'" fill="none" stroke="'+gc+'" stroke-width="1.6"/>'+
+      '<circle cx="'+(fi*st).toFixed(1)+'" cy="'+(h - Math.max(m[fi],0)/mx*h).toFixed(1)+'" r="2.6" fill="'+OPX_FOCUS_C+'"/></svg>';
+  }
+  function acctOf(p){
+    if (!p.accts) return '';
+    var k = Object.keys(p.accts).sort(function(a,b){ return p.accts[b] - p.accts[a]; })[0];
+    return M.acc[k] ? M.acc[k].name : '';
+  }
+  var yrows = ytdTop.map(function(p, i){
+    return '<div class="opx-vr"><span class="rk">'+(i+1)+'</span>'+
+      '<span class="nm">'+opxEsc(p.name)+(p.accts ? '<i>'+opxEsc(acctOf(p))+'</i>' : '')+'</span>'+
+      '<span class="br"><i style="width:'+(Math.max(p.ytd,0)/mxY*100).toFixed(1)+'%;background:'+gc+';"></i></span>'+
+      spark(p.m)+
+      '<span class="v">'+opxM(p.ytd)+'<em>'+(poolTot ? (p.ytd/poolTot*100).toFixed(0) : 0)+'%</em></span></div>';
+  }).join('');
+  var crows = curTop.map(function(p, i){
+    var a = p.ytd / n, dd = a ? (p.cur - a) / Math.abs(a) * 100 : 0;
+    var once = p.m.filter(function(v){ return Math.abs(v) > 0.5; }).length === 1;
+    return '<div class="opx-vr cur"><span class="rk">'+(i+1)+'</span>'+
+      '<span class="nm">'+opxEsc(p.name)+(p.accts ? '<i>'+opxEsc(acctOf(p))+'</i>' : '')+'</span>'+
+      '<span class="br"><i style="width:'+(Math.max(p.cur,0)/mxC*100).toFixed(1)+'%;background:'+OPX_FOCUS_C+';"></i></span>'+
+      '<span class="tg'+(once ? ' new' : dd > 25 ? ' up' : dd < -25 ? ' dn' : '')+'">'+
+        (once ? 'only in '+fl : (dd >= 0 ? '\u25b2' : '\u25bc')+Math.abs(dd).toFixed(0)+'% vs avg')+'</span>'+
+      '<span class="v">'+opxM(p.cur)+'</span></div>';
+  }).join('');
+
+  // biggest single charges for the selection
+  var tx = M.tx.filter(function(t){ return !OPX_CAT || t.a === OPX_CAT; });
+  var bigY = tx.slice().sort(function(a,b){ return b.amt - a.amt; }).slice(0, 8);
+  var bigF = tx.filter(function(t){ return t.d.slice(0,7) === M.months[fi]; }).sort(function(a,b){ return b.amt - a.amt; }).slice(0, 8);
+  function txRow(t){
+    return '<div class="opx-tx"><span class="d">'+(+t.d.slice(5,7))+'/'+(+t.d.slice(8,10))+'</span>'+
+      '<span class="nm">'+opxEsc(t.v)+'<i>'+opxEsc(M.acc[t.a].name)+'</i></span><span class="v">'+opxFull(t.amt)+'</span></div>';
+  }
+
+  var title = sel ? opxEsc(sel.name) : 'All non-labor overhead';
+  return '<section class="opx-card opx-drv" id="opx-drivers" style="--gc:'+gc+';">'+
+    '<div class="opx-ch"><div><div class="opx-gk">Vendors driving</div><h3>'+title+'</h3>'+
+      '<p>'+opxFull(poolTot)+' year to date \u00b7 '+opxFull(poolCur)+' in '+fl+
+        (sel ? ' \u00b7 <a onclick="opxSetCat('+sel.a+')">\u2715 show all overhead</a>' : ' \u00b7 pick a category above to narrow this down')+'</p></div></div>'+
+    '<div class="opx-drv-g">'+
+      '<div><div class="opx-sh"><b>Year to date</b><span>spend by month \u00b7 share</span></div>'+yrows+'</div>'+
+      '<div><div class="opx-sh"><b>'+fl+'</b><span>vs that vendor\u2019s monthly average</span></div>'+(crows || '<div class="opx-none">No spend in '+fl+'.</div>')+'</div>'+
+    '</div>'+
+    '<div class="opx-drv-g tx">'+
+      '<div><div class="opx-sh"><b>Largest single charges \u00b7 year to date</b></div>'+bigY.map(txRow).join('')+'</div>'+
+      '<div><div class="opx-sh"><b>Largest single charges \u00b7 '+fl+'</b></div>'+(bigF.map(txRow).join('') || '<div class="opx-none">None.</div>')+'</div>'+
+    '</div>'+
+  '</section>';
+}
+
+// ── Illustrations ───────────────────────────────────────────────────────
+// The Basin mark: an E-frame holding a B.
+function opxLogoDefs(){
+  return '<svg width="0" height="0" style="position:absolute"><defs>'+
+    '<symbol id="opx-be" viewBox="0 0 40 40">'+
+      '<path d="M5 4H33Q36 4 36 7V11H31V9H10V31H31V29H36V33Q36 36 33 36H5Z" fill="currentColor"/>'+
+      '<path fill-rule="evenodd" fill="currentColor" d="M14 12H25Q30 12 30 16.5Q30 19 28 20Q31 21.2 31 24Q31 28 26 28H14Z'+
+        'M18 15.5V18.5H24.5Q26 18.5 26 17T24.5 15.5ZM18 21.5V24.5H25.5Q27 24.5 27 23T25.5 21.5Z"/>'+
+    '</symbol></defs></svg>';
+}
+function opxAttendant(tot, fac, bo){
+  return '<svg viewBox="0 0 360 250" class="opx-ill">'+
+    '<defs><linearGradient id="opx-cab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2150"/><stop offset="1" stop-color="#140f2c"/></linearGradient></defs>'+
+    '<rect width="360" height="250" fill="url(#opx-cab)"/>'+
+    // cabin ceiling and bins
+    '<path d="M0 0H360V18Q180 34 0 18Z" fill="#3a3070"/>'+
+    '<rect x="0" y="22" width="360" height="62" fill="#e9e6f5"/>'+
+    '<rect x="0" y="80" width="360" height="6" fill="#bdb7d8"/>'+
+    '<line x1="120" x2="120" y1="22" y2="84" stroke="#bdb7d8" stroke-width="2"/>'+
+    '<line x1="330" x2="330" y1="22" y2="84" stroke="#bdb7d8" stroke-width="2"/>'+
+    // the open bin, with the door swung up
+    '<rect x="124" y="26" width="202" height="54" fill="#0b0820"/>'+
+    '<path d="M124 22L140 2H310L326 22Z" fill="#d8d3ee" stroke="#bdb7d8"/>'+
+    // bags already stowed
+    '<rect x="132" y="44" width="70" height="34" rx="5" fill="#2ee6c5"/>'+
+    '<rect x="158" y="38" width="18" height="7" rx="3" fill="none" stroke="#1a8f7a" stroke-width="3"/>'+
+    '<text x="167" y="65" text-anchor="middle" class="bag">FACILITIES</text>'+
+    '<text x="167" y="74" text-anchor="middle" class="bagv">'+opxM(fac)+'</text>'+
+    // bag going in
+    '<g transform="rotate(-6 250 58)"><rect x="208" y="40" width="96" height="40" rx="6" fill="#b18cff"/>'+
+      '<rect x="244" y="33" width="22" height="8" rx="3" fill="none" stroke="#7b5cc4" stroke-width="3"/>'+
+      '<use href="#opx-be" x="212" y="46" width="18" height="18" color="#2a1a5a"/>'+
+      '<text x="266" y="61" text-anchor="middle" class="bag">BUSINESS OH</text>'+
+      '<text x="266" y="72" text-anchor="middle" class="bagv">'+opxM(bo)+'</text></g>'+
+    // attendant, arms up guiding the bag in
+    '<g class="fa">'+
+      '<path d="M268 150Q262 118 262 92" stroke="#f0c8a8" stroke-width="9" stroke-linecap="round" fill="none"/>'+
+      '<path d="M298 150Q306 118 300 90" stroke="#f0c8a8" stroke-width="9" stroke-linecap="round" fill="none"/>'+
+      '<path d="M268 150Q263 124 264 108" stroke="#1d2f5e" stroke-width="12" stroke-linecap="round" fill="none"/>'+
+      '<path d="M298 150Q304 124 301 106" stroke="#1d2f5e" stroke-width="12" stroke-linecap="round" fill="none"/>'+
+      '<circle cx="262" cy="88" r="6" fill="#f0c8a8"/><circle cx="300" cy="86" r="6" fill="#f0c8a8"/>'+
+      // legs
+      '<rect x="272" y="212" width="8" height="30" fill="#f0c8a8"/><rect x="286" y="212" width="8" height="30" fill="#f0c8a8"/>'+
+      '<path d="M268 242H282V247H266Z M284 242H298V247H286Z" fill="#12183a"/>'+
+      // skirt and jacket
+      '<path d="M266 186H300L304 216H262Z" fill="#162552"/>'+
+      '<path d="M264 144Q283 136 302 144L306 190H260Z" fill="#1d2f5e"/>'+
+      '<path d="M283 142L276 190M283 142L290 190" stroke="#0f1a3d" stroke-width="1.5"/>'+
+      '<circle cx="283" cy="160" r="1.8" fill="#ffd24a"/><circle cx="283" cy="172" r="1.8" fill="#ffd24a"/>'+
+      '<use href="#opx-be" x="291" y="150" width="11" height="11" color="#ffd24a"/>'+
+      // scarf
+      '<path d="M274 142Q283 150 292 142L288 154L283 149L278 154Z" fill="#e63946"/>'+
+      // head, hair, cap
+      '<rect x="279" y="128" width="8" height="10" fill="#f0c8a8"/>'+
+      '<circle cx="283" cy="118" r="13" fill="#f0c8a8"/>'+
+      '<path d="M270 118Q270 102 283 102Q296 102 296 118Q292 108 283 108Q274 108 270 118Z" fill="#4a2c1a"/>'+
+      '<circle cx="296" cy="124" r="6" fill="#4a2c1a"/>'+
+      '<path d="M272 104H294L292 96H274Z" fill="#1d2f5e"/><rect x="271" y="103" width="24" height="3" fill="#ffd24a"/>'+
+      '<use href="#opx-be" x="279" y="95" width="8" height="8" color="#ffd24a"/>'+
+      '<circle cx="279" cy="119" r="1.3" fill="#2a1a10"/><circle cx="288" cy="119" r="1.3" fill="#2a1a10"/>'+
+      '<path d="M280 125Q283.5 127.5 287 125" stroke="#b5533c" stroke-width="1.4" fill="none"/>'+
+    '</g>'+
+    // headrests down the aisle
+    '<g fill="#3b2f73"><rect x="12" y="176" width="54" height="76" rx="14"/><rect x="84" y="186" width="54" height="66" rx="14"/>'+
+      '<rect x="156" y="196" width="54" height="56" rx="14"/></g>'+
+    '<g fill="#e9e6f5" opacity="0.8"><rect x="22" y="182" width="34" height="8" rx="3"/><rect x="94" y="192" width="34" height="8" rx="3"/>'+
+      '<rect x="166" y="202" width="34" height="8" rx="3"/></g>'+
+    // cabin sign
+    '<rect x="16" y="96" width="112" height="46" rx="6" fill="#0b0820" stroke="#ffd24a" stroke-width="1.2"/>'+
+    '<text x="72" y="110" text-anchor="middle" class="sign">OVERHEAD STOWED</text>'+
+    '<text x="72" y="133" text-anchor="middle" class="signv">'+opxM(tot)+'</text>'+
+  '</svg>';
+}
+function opxLifter(cur, avg, fl){
+  var up = cur >= avg;
+  return '<svg viewBox="0 0 360 250" class="opx-ill">'+
+    '<defs><radialGradient id="opx-spot" cx="0.5" cy="0.2" r="0.8"><stop offset="0" stop-color="#3b2466"/><stop offset="1" stop-color="#120a26"/></radialGradient></defs>'+
+    '<rect width="360" height="250" fill="url(#opx-spot)"/>'+
+    '<path d="M150 0L90 250H270L210 0Z" fill="rgba(255,200,120,0.07)"/>'+
+    // platform
+    '<rect x="70" y="228" width="220" height="22" fill="#5a3a22"/><rect x="70" y="226" width="220" height="4" fill="#8a5a34"/>'+
+    '<use href="#opx-be" x="166" y="231" width="28" height="18" color="#c9a26a"/>'+
+    // barbell
+    '<rect x="40" y="46" width="280" height="5" rx="2.5" fill="#d9dde6"/>'+
+    '<g>'+
+      '<ellipse cx="72" cy="48.5" rx="11" ry="36" fill="#1d2f5e" stroke="#4a78a8" stroke-width="2"/>'+
+      '<ellipse cx="90" cy="48.5" rx="8" ry="28" fill="#e63946"/>'+
+      '<use href="#opx-be" x="63" y="38" width="18" height="21" color="#cfe3ff"/>'+
+      '<ellipse cx="288" cy="48.5" rx="11" ry="36" fill="#1d2f5e" stroke="#4a78a8" stroke-width="2"/>'+
+      '<ellipse cx="270" cy="48.5" rx="8" ry="28" fill="#e63946"/>'+
+      '<use href="#opx-be" x="279" y="38" width="18" height="21" color="#cfe3ff"/>'+
+    '</g>'+
+    // lifter
+    '<g class="lf">'+
+      '<path d="M146 52L150 110M214 52L210 110" stroke="#c98c63" stroke-width="12" stroke-linecap="round"/>'+
+      '<circle cx="146" cy="50" r="7" fill="#c98c63"/><circle cx="214" cy="50" r="7" fill="#c98c63"/>'+
+      '<circle cx="180" cy="100" r="15" fill="#c98c63"/>'+
+      '<path d="M165 96Q166 82 180 82Q194 82 195 96Q188 88 180 88Q172 88 165 96Z" fill="#2a1a10"/>'+
+      '<rect x="164" y="93" width="32" height="4" fill="#e63946"/>'+
+      '<path d="M174 104Q180 108 186 104" stroke="#6b3a24" stroke-width="1.6" fill="none"/>'+
+      '<path d="M150 116Q180 108 210 116L206 170H154Z" fill="#1d2f5e"/>'+
+      '<path d="M150 116Q180 108 210 116" stroke="#c98c63" stroke-width="8" fill="none" stroke-linecap="round"/>'+
+      '<use href="#opx-be" x="168" y="128" width="24" height="24" color="#ffd24a"/>'+
+      '<rect x="152" y="166" width="56" height="10" fill="#e63946"/>'+
+      '<path d="M156 176L146 226H162L176 184H184L198 226H214L204 176Z" fill="#1d2f5e"/>'+
+      '<rect x="142" y="222" width="22" height="7" rx="2" fill="#f1f1f1"/><rect x="196" y="222" width="22" height="7" rx="2" fill="#f1f1f1"/>'+
+    '</g>'+
+    // the scoreboard
+    '<rect x="14" y="150" width="104" height="62" rx="6" fill="#07040f" stroke="'+(up ? '#ff9a3d' : '#2ee6c5')+'" stroke-width="1.4"/>'+
+    '<text x="66" y="166" text-anchor="middle" class="sign">'+String(fl).toUpperCase()+' LIFT</text>'+
+    '<text x="66" y="189" text-anchor="middle" class="signv" fill="'+(up ? '#ff9a3d' : '#2ee6c5')+'">'+opxM(cur)+'</text>'+
+    '<text x="66" y="204" text-anchor="middle" class="signs">avg '+opxM(avg)+' / mo</text>'+
+    // chalk dust and effort marks
+    '<g stroke="'+(up ? '#ff9a3d' : '#2ee6c5')+'" stroke-width="2" stroke-linecap="round" opacity="0.8">'+
+      '<path d="M122 60l-10-6M120 72l-12 0M238 60l10-6M240 72l12 0"/></g>'+
+  '</svg>';
+}
+function opxCrane(pctY, pctF, fl){
+  var lat = '';
+  for (var y = 60; y < 236; y += 16) lat += 'M244 '+y+'L262 '+(y+16)+'M262 '+y+'L244 '+(y+16);
+  var jl = '';
+  for (var x = 60; x < 330; x += 18) jl += 'M'+x+' 44L'+(x+9)+' 30L'+(x+18)+' 44';
+  return '<svg viewBox="0 0 360 250" class="opx-ill">'+
+    '<defs><linearGradient id="opx-dusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b1655"/>'+
+      '<stop offset="0.65" stop-color="#8a3a6a"/><stop offset="1" stop-color="#f08a4b"/></linearGradient></defs>'+
+    '<rect width="360" height="250" fill="url(#opx-dusk)"/>'+
+    // skyline
+    '<path d="M0 250V200H22V184H40V206H58V170H76V192H96V160H110V150H118V160H132V196H150V178H170V214H190V190H214V250Z" fill="#150c2e"/>'+
+    '<path d="M290 250V206H306V192H322V214H340V198H360V250Z" fill="#150c2e"/>'+
+    // mast
+    '<path d="M244 44V236M262 44V236" stroke="#ffd24a" stroke-width="3"/><path d="'+lat+'" stroke="#ffd24a" stroke-width="1.4"/>'+
+    '<rect x="236" y="236" width="34" height="14" fill="#6b5a2a"/>'+
+    // jib + counter-jib
+    '<path d="M50 44H340M60 30H330" stroke="#ffd24a" stroke-width="3"/><path d="'+jl+'" stroke="#ffd24a" stroke-width="1.3" fill="none"/>'+
+    '<path d="M253 44L253 10M253 10L60 30M253 10L330 30" stroke="#ffd24a" stroke-width="1.6"/>'+
+    '<rect x="300" y="46" width="34" height="20" fill="#5a6a80"/>'+
+    '<rect x="238" y="46" width="30" height="20" rx="2" fill="#1d2f5e"/><rect x="242" y="50" width="22" height="10" fill="#8fd3ff" opacity="0.7"/>'+
+    // trolley, cable, hook, load
+    '<rect x="112" y="44" width="22" height="7" fill="#e9e6f5"/>'+
+    '<path d="M118 51V120M128 51V120" stroke="#cfd6e6" stroke-width="1.4"/>'+
+    '<path d="M123 120v6q0 6 -5 6" stroke="#e9e6f5" stroke-width="3" fill="none"/>'+
+    '<path d="M123 126L78 142M123 126L168 142" stroke="#cfd6e6" stroke-width="1.4"/>'+
+    '<rect x="68" y="142" width="110" height="62" rx="4" fill="#ff9a3d"/>'+
+    '<rect x="68" y="142" width="110" height="62" rx="4" fill="none" stroke="#7a3f10" stroke-width="2"/>'+
+    '<path d="M68 142L178 204M178 142L68 204" stroke="#c96a20" stroke-width="1.2" opacity="0.5"/>'+
+    '<rect x="76" y="150" width="94" height="46" rx="3" fill="#1a0f06" opacity="0.88"/>'+
+    '<text x="123" y="176" text-anchor="middle" class="crk">'+(pctY != null ? pctY.toFixed(1)+'%' : '\u2014')+'</text>'+
+    '<text x="123" y="189" text-anchor="middle" class="crl">OF REVENUE</text>'+
+    '<use href="#opx-be" x="150" y="152" width="16" height="16" color="#ffd24a"/>'+
+  '</svg>';
 }
 
 function renderBudget() {
@@ -5897,60 +6722,69 @@ function renderBudgetSummary(el) {
     '</div>';
   }
 
+  // One line of the ledger: the line name, then actual + projected = full
+  // year as open figures on a shared column grid, and a "booked" ring on the
+  // full-year figure showing how much of the year is already in the books.
+  function fyRing(share, color, rgb){
+    var R = 17, C = 2 * Math.PI * R, on = C * share / 100;
+    return '<svg class="fz-ring" viewBox="0 0 44 44" aria-hidden="true">'+
+      '<circle cx="22" cy="22" r="'+R+'" fill="none" stroke="rgba('+rgb+',0.22)" stroke-width="4.5" '+
+        'stroke-dasharray="2.2 2.4"/>'+
+      '<circle cx="22" cy="22" r="'+R+'" fill="none" stroke="'+color+'" stroke-width="4.5" '+
+        'stroke-dasharray="'+on.toFixed(2)+' '+C.toFixed(2)+'" transform="rotate(-90 22 22)" '+
+        'style="filter:drop-shadow(0 0 4px rgba('+rgb+',0.8));"/>'+
+      '<text x="22" y="25.5" text-anchor="middle">'+Math.round(share)+'%</text>'+
+    '</svg>';
+  }
   function fyRow(label, a, p, t, color, rgb, opts){
     opts = opts || {};
     var big = !!opts.hero;
     var chip = opts.pctOf
-      ? '<span class="fy-chip" style="color:'+color+';background:rgba('+rgb+',0.13);'+
-          'border:1px solid rgba('+rgb+',0.4);">'+pct(t, opts.pctOf)+' of rev</span>'
+      ? '<span class="fz-chip" style="color:'+color+';border-color:rgba('+rgb+',0.45);">'+pct(t, opts.pctOf)+' of rev</span>'
       : '';
     var share = t > 0 ? Math.max(0, Math.min(100, a/t*100)) : 0;
-    return '<div class="fy-row'+(big?' hero':'')+'" style="--c:'+color+';--rgb:'+rgb+';">'+
-      '<div class="fy-main">'+
-        '<div class="fy-head">'+
-          '<span class="fy-name"'+(big?' style="color:'+color+';"':'')+'>'+label+'</span>'+chip+
-        '</div>'+
-        '<div class="fy-cells">'+
-          '<div class="fy-cell act">'+
-            '<span class="fy-cv">'+bgFmtM(a)+'</span></div>'+
-          '<span class="fy-op">+</span>'+
-          '<div class="fy-cell prj">'+
-            '<span class="fy-cv">'+bgFmtM(p)+'</span></div>'+
-          '<span class="fy-op">=</span>'+
-          '<div class="fy-cell tot">'+
-            '<span class="fy-cv"'+(big?' style="color:'+color+';text-shadow:0 0 24px rgba('+rgb+',0.7);"'
-                                     :' style="color:'+color+';"')+'>'+bgFmtM(t)+'</span></div>'+
-        '</div>'+
-        '<div class="fy-track">'+
-          '<div class="fy-act" style="width:'+share.toFixed(1)+'%;background:'+
-            'linear-gradient(90deg,rgba('+rgb+',0.5),rgba('+rgb+',0.95));'+
-            'box-shadow:0 0 16px rgba('+rgb+',0.5);"></div>'+
-          '<div class="fy-proj" style="left:'+share.toFixed(1)+'%;'+
-            'background:repeating-linear-gradient(115deg,rgba('+rgb+',0.34) 0 6px,'+
-            'rgba('+rgb+',0.09) 6px 12px);"></div>'+
-          '<div class="fy-split" style="left:'+share.toFixed(1)+'%;background:'+color+';'+
-            'box-shadow:0 0 12px '+color+';"></div>'+
+    var word = opts.invert ? 'incurred' : 'booked';
+    return '<div class="fy-row fz-row'+(big?' hero':'')+'" style="--c:'+color+';--rgb:'+rgb+';">'+
+      '<div class="fz-grid">'+
+        '<div class="fz-name"><b style="color:'+color+';">'+label+'</b>'+chip+'</div>'+
+        '<div class="fz-v act">'+bgFmtM(a)+'</div>'+
+        '<div class="fz-op">+</div>'+
+        '<div class="fz-v prj" style="color:rgba('+rgb+',0.85);">'+bgFmtM(p)+'</div>'+
+        '<div class="fz-op">=</div>'+
+        '<div class="fz-v tot">'+
+          '<span class="fz-tv" style="color:'+color+';text-shadow:0 0 '+(big?26:16)+'px rgba('+rgb+','+(big?0.7:0.5)+');">'+bgFmtM(t)+'</span>'+
+          '<span class="fz-rw">'+fyRing(share, color, rgb)+'<em>'+word+'</em></span>'+
         '</div>'+
       '</div>'+
       fyCompare(a, p, color, rgb, opts.invert)+
     '</div>';
   }
 
+  // film frames for the header: one per month, lit for the months covered
+  function fyFrames(from, to, cls){
+    var out = '';
+    for (var m = 1; m <= 12; m++)
+      out += '<i class="'+(m >= from && m <= to ? cls : '')+'"></i>';
+    return '<span class="fz-film">'+out+'</span>';
+  }
+
   var summaryTable =
-    '<div class="fy-panel">'+
-      // column headers, laid out on the same grid as the rows below
-      '<div class="fy-row fy-hdr">'+
-        '<div class="fy-main"><div class="fy-cells">'+
-          '<div class="fy-hc act"><b><i class="fy-mk solid"></i>Actual</b>'+
-            '<span>'+bgSpanLabel(true)+' \u00b7 '+ACT_MO+' mo</span></div>'+
-          '<span class="fy-op">+</span>'+
-          '<div class="fy-hc prj"><b><i class="fy-mk open"></i>Projected</b>'+
-            '<span>'+bgSpanLabel(false)+' \u00b7 '+PROJ_MO+' mo</span></div>'+
-          '<span class="fy-op">=</span>'+
-          '<div class="fy-hc tot"><b>Full year</b><span>2026 \u00b7 12 mo</span></div>'+
-        '</div></div>'+
-        '<div class="fy-hc cmp"><b>Monthly average</b>'+
-          '<span>Actual + projected = full year</span></div>'+
+    '<div class="fy-panel fz-panel">'+
+      // column headers on the same grid as the rows
+      '<div class="fy-row fz-row fz-hdr">'+
+        '<div class="fz-grid">'+
+          '<div class="fz-name hd"><span>Line</span></div>'+
+          '<div class="fz-h act"><span class="k"><i></i>Actual</span>'+
+            '<b>'+bgSpanLabel(true)+'</b>'+fyFrames(1, ACT_MO, 'a')+'</div>'+
+          '<div class="fz-op"></div>'+
+          '<div class="fz-h prj"><span class="k"><i></i>Projected</span>'+
+            '<b>'+bgSpanLabel(false)+'</b>'+fyFrames(ACT_MO+1, 12, 'p')+'</div>'+
+          '<div class="fz-op"></div>'+
+          '<div class="fz-h tot"><span class="k">Full year</span>'+
+            '<b>2026</b>'+fyFrames(1, 12, 'f')+'</div>'+
+        '</div>'+
+        '<div class="fz-h cmp"><span class="k">Monthly average</span>'+
+          '<b>Actual \u00b7 Projected \u00b7 Year</b></div>'+
       '</div>'+
       fyRow('Revenue',            rev_a, rev_p, rev_t, '#7dd3ff','125,211,255',{hero:true})+
       fyRow('Cost of Sales',      cos_a, cos_p, cos_t, '#ff7b7b','255,123,123',{pctOf:rev_t,invert:true})+
@@ -10106,6 +10940,7 @@ function goSection(id) {
   }
   if(id === 'capacity') { initCapacity(); }
   if(id === 'active-projects') { renderProjMain(); }
+  if(id === 'op-ex') { renderOpex(); }
   if(id === 'budget-forecast') { BUDGET_TAB = 'summary'; renderBudget(); }
   document.body.classList.toggle('wf-locked', id === 'workforce');
   setTimeout(wfScrollPos, 80);
@@ -10422,7 +11257,7 @@ async function syncToGitHub(silent){
   function readKey(k){ try{ return JSON.parse(localStorage.getItem(k)||'null'); }catch(e){ return null; } }
   var payload={generated:new Date().toISOString(),laborWeeks:weeks,
     q4:readKey('basin_q4_forecast_v1'),budgetActuals:readKey('basin_budget_actuals'),
-    pendingContracts:readKey('basin_pending_contracts'),wcSnapshots:wcPublishList()};
+    pendingContracts:readKey('basin_pending_contracts'),wcSnapshots:wcPublishList(),opex:opxPublishList()};
   var dot=document.getElementById('sync-dot'); if(dot)dot.className='sync-dot pending';
   var msg=document.getElementById('sync-msg'); if(msg)msg.textContent='Publishing '+weeks.length+' week(s)...';
   try{
@@ -17415,6 +18250,7 @@ function loadPublishedData() {
         pcUpdateBadge();
       }
       initCapacity();
+      if (j.opex && document.getElementById('op-ex') && document.getElementById('op-ex').style.display !== 'none') renderOpex();
       if (j.wcSnapshots && typeof BUDGET_TAB !== 'undefined' && BUDGET_TAB === 'wc26' &&
           document.getElementById('budget-forecast') && document.getElementById('budget-forecast').style.display !== 'none')
         renderBudget();
@@ -17454,7 +18290,8 @@ function capDownloadData() {
     q4: readKey('basin_q4_forecast_v1'),
     budgetActuals: readKey('basin_budget_actuals'),
     pendingContracts: readKey('basin_pending_contracts'),
-    wcSnapshots: wcPublishList()
+    wcSnapshots: wcPublishList(),
+    opex: opxPublishList()
   };
   var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
   var a = document.createElement('a');
