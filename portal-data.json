@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-29T21:18:59.406Z",
+  "generated": "2026-09-29T21:32:42.828Z",
   "laborWeeks": [
     {
       "weekKey": "09-26",
@@ -6283,6 +6283,16 @@
   },
   "budgetActuals": null,
   "pendingContracts": [
+    {
+      "id": "pc1790717513740",
+      "num": "",
+      "prop": "26M-092B",
+      "name": "Test Fit Proposal",
+      "cust": "QII",
+      "amount": 0,
+      "notes": "9/29 - Joel emailed Jack and Kyle",
+      "contact": ""
+    },
     {
       "id": "pcs1",
       "num": "24-023",
