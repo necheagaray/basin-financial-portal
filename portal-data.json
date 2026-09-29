@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-28T20:57:43.143Z",
+  "generated": "2026-09-29T21:18:59.406Z",
   "laborWeeks": [
     {
       "weekKey": "09-26",
@@ -6330,7 +6330,7 @@
       "name": "SLC Offsite Improvements",
       "cust": "Quality Technology Services, LLC",
       "amount": 1578098,
-      "notes": "9/14 emailed Jack",
+      "notes": "9/29 emailed Jack",
       "contact": "Jack Hayes"
     },
     {
@@ -6340,7 +6340,7 @@
       "name": "Fire flow test",
       "cust": "Quality Technology Services, LLC",
       "amount": 1800,
-      "notes": "9/3 emailed Jack to process CO",
+      "notes": "9/29 emailed jack",
       "contact": "Jack Hayes"
     },
     {
@@ -6365,5 +6365,88 @@
     }
   ],
   "wcSnapshots": [],
-  "opex": []
+  "opex": [],
+  "payrollRuns": [
+    {
+      "payDate": "2026-06-10",
+      "range": "5/24/26-6/6/26",
+      "headcount": 37,
+      "cashNeed": 158752.92,
+      "erTax": 11496.34,
+      "totalEarnings": 161523.16,
+      "cashPerHead": 4290.62
+    },
+    {
+      "payDate": "2026-06-24",
+      "range": "6/7/26-6/20/26",
+      "headcount": 37,
+      "cashNeed": 159218.43,
+      "erTax": 11576.24,
+      "totalEarnings": 163151.02,
+      "cashPerHead": 4303.2
+    },
+    {
+      "payDate": "2026-07-08",
+      "range": "6/21/26-7/4/26",
+      "headcount": 38,
+      "cashNeed": 166276.89,
+      "erTax": 10700.1,
+      "totalEarnings": 170509.01,
+      "cashPerHead": 4375.71
+    },
+    {
+      "payDate": "2026-07-22",
+      "range": "7/5/26-7/18/26",
+      "headcount": 38,
+      "cashNeed": 174349.98,
+      "erTax": 11055.03,
+      "totalEarnings": 179504.14,
+      "cashPerHead": 4588.16
+    },
+    {
+      "payDate": "2026-08-05",
+      "range": "7/19/26-8/1/26",
+      "headcount": 38,
+      "cashNeed": 162599.35,
+      "erTax": 10224.31,
+      "totalEarnings": 167327.7,
+      "cashPerHead": 4278.93
+    },
+    {
+      "payDate": "2026-08-19",
+      "range": "8/2/26-8/15/26",
+      "headcount": 38,
+      "cashNeed": 164453.29,
+      "erTax": 10472.72,
+      "totalEarnings": 170199.17,
+      "cashPerHead": 4327.72
+    },
+    {
+      "payDate": "2026-09-02",
+      "range": "8/16/26-8/29/26",
+      "headcount": 37,
+      "cashNeed": 169823.99,
+      "erTax": 10213.79,
+      "totalEarnings": 173766.17,
+      "cashPerHead": 4589.84
+    },
+    {
+      "payDate": "2026-09-16",
+      "range": "8/30/26-9/12/26",
+      "headcount": 34,
+      "cashNeed": 157768.15,
+      "erTax": 9924.78,
+      "totalEarnings": 163151.34,
+      "cashPerHead": 4640.24
+    },
+    {
+      "payDate": "2026-09-30",
+      "range": "9/13/26-9/26/26",
+      "headcount": 35,
+      "cashNeed": 162445.14,
+      "erTax": 10409.55,
+      "totalEarnings": 167349.33,
+      "cashPerHead": 4641.29
+    }
+  ]
 }
