@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-29T21:32:42.828Z",
+  "generated": "2026-09-30T16:33:45.082Z",
   "laborWeeks": [
     {
       "weekKey": "09-26",
@@ -6229,31 +6229,31 @@
     },
     "dlBuild": {
       "oct": {
-        "headcount": 31,
+        "headcount": 32,
         "workdays": 22,
         "hoursPerDay": 8,
-        "utilPct": 89,
+        "utilPct": 87,
         "costPerHr": 51,
-        "vacPct": 3,
+        "vacPct": 5,
         "ohPct": 8
       },
       "nov": {
-        "headcount": 33,
+        "headcount": 35,
         "workdays": 21,
         "hoursPerDay": 8,
         "utilPct": 83,
-        "costPerHr": 52,
-        "vacPct": 5,
-        "ohPct": 12
+        "costPerHr": 51,
+        "vacPct": 7,
+        "ohPct": 10
       },
       "dec": {
-        "headcount": 35,
+        "headcount": 36,
         "workdays": 23,
         "hoursPerDay": 8,
-        "utilPct": 79,
-        "costPerHr": 52,
-        "vacPct": 7,
-        "ohPct": 14
+        "utilPct": 81,
+        "costPerHr": 51,
+        "vacPct": 9,
+        "ohPct": 10
       }
     },
     "pctRates": {
@@ -6270,19 +6270,40 @@
     "oct": {
       "a6116": 44000,
       "a6117": 3100,
-      "a6118": 10200
+      "a6118": 10200,
+      "a5300": 3000,
+      "a5400": 3000
     },
     "nov": {
       "a6117": 3100,
-      "a6118": 10200
+      "a6118": 10200,
+      "a5300": 3000,
+      "a5400": 3000
     },
     "dec": {
       "a6117": 3100,
-      "a6118": 10200
+      "a6118": 10200,
+      "a5300": 3000,
+      "a5400": 3000
+    },
+    "lineNotes": {
+      "a5200": "4.3% of Rev - Jan - Aug",
+      "a5100": "Oct - 32 ; Nov - +3 (Morgan and 2 jr engineer) ; Dec - +1 (jr engineer)",
+      "a7105": "+1 admin assist around $27 per hour"
     }
   },
   "budgetActuals": null,
   "pendingContracts": [
+    {
+      "id": "pc1790785853161",
+      "num": "24-067",
+      "prop": "so718 - MUD Drainage co",
+      "name": "DFW2-DAS114",
+      "cust": "Corgan",
+      "amount": 10650,
+      "notes": "9/29- joel emailed chase for update",
+      "contact": "Chase"
+    },
     {
       "id": "pc1790717513740",
       "num": "",
