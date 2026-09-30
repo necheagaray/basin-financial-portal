@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-30T16:33:45.082Z",
+  "generated": "2026-09-30T16:40:47.239Z",
   "laborWeeks": [
     {
       "weekKey": "09-26",
@@ -6294,6 +6294,16 @@
   },
   "budgetActuals": null,
   "pendingContracts": [
+    {
+      "id": "pc1790786392383",
+      "num": "25-105",
+      "prop": "so744",
+      "name": "DAS114",
+      "cust": "Corgan",
+      "amount": 5000,
+      "notes": "9/21-joel emailed chase, and said could be a month",
+      "contact": "Chase"
+    },
     {
       "id": "pc1790785853161",
       "num": "24-067",
