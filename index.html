@@ -2059,6 +2059,25 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 #pc-ov{position:fixed;inset:0;z-index:960;display:none;align-items:center;justify-content:center;
   padding:26px;background:rgba(4,2,14,0.8);backdrop-filter:blur(9px);}
 #pc-ov.open{display:flex;}
+/* the list scrolls inside the card so the footer (Add / Save) always shows */
+.pc-scroll{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;
+  scrollbar-width:thin;scrollbar-color:#FF3DD8 rgba(255,255,255,0.05);}
+.pc-scroll::-webkit-scrollbar{width:9px;}
+.pc-scroll::-webkit-scrollbar-thumb{background:rgba(255,61,216,0.6);border-radius:5px;}
+.pc-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,0.04);}
+.pc-head,.pc-cols,.pc-foot{flex-shrink:0;}
+#pc-ov .pc-card{height:calc(100vh - 52px);max-height:calc(100vh - 52px);}
+.pc-bar{padding:12px 28px 12px !important;border-top:none !important;border-bottom:1px solid #241B52;}
+.pc-xls{display:flex;align-items:center;gap:8px;padding:11px 18px;cursor:pointer;
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;letter-spacing:1.5px;
+  color:#5eeb96;background:rgba(94,235,150,0.08);border:1px solid rgba(94,235,150,0.55);}
+.pc-xls:hover{background:rgba(94,235,150,0.2);}
+.pc-row.new{animation:pcNew 1.6s ease-out;}
+@keyframes pcNew{0%{background:rgba(255,61,216,0.28);}100%{background:transparent;}}
+.pc-addtop{margin-left:18px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:800;letter-spacing:1px;
+  padding:8px 12px;color:#FF3DD8;background:rgba(255,61,216,0.1);border:1px solid rgba(255,61,216,0.55);}
+.pc-addtop:hover{background:#FF3DD8;color:#07041A;}
 .pc-card{width:min(1180px,97vw);max-height:90vh;display:flex;flex-direction:column;position:relative;
   background:#0E0A26;border:1.5px solid rgba(255,61,216,0.55);
   clip-path:polygon(26px 0,100% 0,100% calc(100% - 26px),calc(100% - 26px) 100%,0 100%,0 26px);
@@ -16802,10 +16821,17 @@ function pcUpdateBadge(){
 
 function pcAdd(){
   var l = pcRead().slice();
-  l.unshift({ id:'pc'+Date.now(), num:'', prop:'', name:'', cust:'', amount:0, notes:'', contact:'' });
-  pcWrite(l); pcRender(); 
+  var id = 'pc'+Date.now();
+  l.unshift({ id:id, num:'', prop:'', name:'', cust:'', amount:0, notes:'', contact:'' });
+  // a new row belongs at the top, so drop any column sort that would bury it
+  PC_SORT = { col:null, dir:1 };
+  pcWrite(l); pcRender();
   setTimeout(function(){
-    var f = document.querySelector('#pc-list .pc-row input');
+    var box = document.getElementById('pc-list');
+    if (box) box.scrollTop = 0;
+    var row = box && box.querySelector('.pc-row');
+    if (row) row.classList.add('new');
+    var f = row && row.querySelector('.pc-cell.nm input');
     if (f) f.focus();
   }, 30);
 }
@@ -16848,9 +16874,7 @@ function pcOpen(){
           '<span class="pc-sv" id="pc-total">'+ap2Money(pcTotal())+'</span>'+
         '</div>'+
       '</div>'+
-      '<div class="pc-cols" id="pc-cols"></div>'+
-      '<div class="pc-scroll" id="pc-list"></div>'+
-      '<div class="pc-foot">'+
+      '<div class="pc-foot pc-bar">'+
         '<button class="pc-add" onclick="pcAdd()">'+
           '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" '+
           'stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>'+
@@ -16861,9 +16885,16 @@ function pcOpen(){
           '<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>'+
           '<path d="M17 21v-8H7v8M7 3v5h8"/></svg>'+
           'SAVE TO SITE</button>'+
+        '<button class="pc-xls" onclick="pcExportExcel()">'+
+          '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" '+
+          'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">'+
+          '<path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>'+
+          'EXPORT TO EXCEL</button>'+
         '<div class="pc-note" id="pc-savenote">Edits are kept on this device until '+
           'they are saved to the site.</div>'+
       '</div>'+
+      '<div class="pc-cols" id="pc-cols"></div>'+
+      '<div class="pc-scroll" id="pc-list"></div>'+
     '</div>';
   pcRender();
   ov.classList.add('open');
@@ -16954,6 +16985,46 @@ function pcPublish(){
     if (note){ note.textContent = 'Could not save \u2014 check the GitHub setup.';
                note.style.color = '#ff8a8a'; }
   }
+}
+
+// Excel copy of the list, as it stands right now, for the record.
+function pcExportExcel(){
+  if (typeof XLSX === 'undefined') { toast('Excel export needs the spreadsheet library \u2014 check your connection','error'); return; }
+  var list = pcSorted();
+  var now = new Date();
+  var stamp = (now.getMonth()+1)+'/'+now.getDate()+'/'+now.getFullYear();
+  var aoa = [
+    ['Basin Engineering & Surveying'],
+    ['Pending Contracts \u2014 awaiting signature from the customer'],
+    ['As of ' + stamp + ' \u00b7 ' + list.length + ' project' + (list.length === 1 ? '' : 's')],
+    [],
+    ['Project #','Proposal / SO','Project','Customer','Amount','Notes','Contact']
+  ];
+  list.forEach(function(r){
+    aoa.push([r.num||'', r.prop||'', r.name||'', r.cust||'', parseFloat(r.amount)||0, r.notes||'', r.contact||'']);
+  });
+  var first = 6, last = 5 + list.length;
+  aoa.push([]);
+  aoa.push(['Total awaiting','','','', list.length ? { f:'SUM(E'+first+':E'+last+')' } : 0,'','']);
+  var ws = XLSX.utils.aoa_to_sheet(aoa);
+  // the total also carries its value so it reads right before Excel recalculates
+  var totRow = last + 2;
+  var tc = ws['E'+totRow];
+  if (tc && tc.f) { tc.v = pcTotal(); tc.t = 'n'; }
+  for (var i = first; i <= totRow; i++) {
+    var c = ws['E'+i];
+    if (c && c.t === 'n') c.z = '$#,##0';
+  }
+  ws['!cols'] = [{wch:12},{wch:24},{wch:46},{wch:34},{wch:14},{wch:60},{wch:26}];
+  ws['!merges'] = [{s:{r:0,c:0},e:{r:0,c:6}},{s:{r:1,c:0},e:{r:1,c:6}},{s:{r:2,c:0},e:{r:2,c:6}}];
+  ws['!autofilter'] = { ref:'A5:G'+Math.max(5, last) };
+  var wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Pending Contracts');
+  var fn = 'Basin_Pending_Contracts_' + now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') +
+    '-' + String(now.getDate()).padStart(2,'0') + '.xlsx';
+  XLSX.writeFile(wb, fn);
+  var note = document.getElementById('pc-savenote');
+  if (note) { note.textContent = 'Exported ' + fn; note.style.color = '#5eeb96'; }
 }
 
 function pcClose(){
