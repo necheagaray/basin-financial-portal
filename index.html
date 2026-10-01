@@ -5109,7 +5109,7 @@ function bgHeader() {
         '</label>'+
         '<button onclick="bgExportCSV()" style="font-family:\'Helvetica Neue\',Arial,sans-serif;font-size:9px;font-weight:700;'+
           'background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.25);border-radius:10px;'+
-          'color:rgba(74,222,128,0.8);padding:8px 14px;cursor:pointer;">↓ Export CSV</button>'+
+          'color:rgba(74,222,128,0.8);padding:8px 14px;cursor:pointer;">'+(BUDGET_TAB === 'q4' ? '↓ Export Excel' : '↓ Export CSV')+'</button>'+
       '</div>'+
 
     '</div>'+
@@ -7504,6 +7504,7 @@ function q4vSnapshot(){
   return out;
 }
 var Q4_SNAPSHOT_FN = null;      // set by the Q4 renderer, which owns computeMonth
+var Q4_EXPORT_FN   = null;      // set by the Q4 renderer: rows + resolved figures
 
 function q4vSave(name){
   var v = q4vRead();
@@ -8303,6 +8304,12 @@ function renderBudgetQ4(el) {
     return map;
   })();
 
+  Q4_EXPORT_FN = function(){
+    var c = {};
+    MONTHS.forEach(function(m){ c[m] = computeMonth(m); });
+    return { rows:Q4_ROWS, computed:c, months:MONTHS };
+  };
+
   // Q4 totals
   var totals = {};
   Q4_ROWS.forEach(function(r){
@@ -8321,10 +8328,12 @@ function renderBudgetQ4(el) {
   // ── Note management ───────────────────────────────────────────────────
   function getNote(month, key) { return ((Q4DATA.notes||{})[month+'_'+key])||''; }
   function setNote(month, key, txt) {
-    if (!Q4DATA.notes) Q4DATA.notes = {};
-    if (txt) Q4DATA.notes[month+'_'+key] = txt;
-    else delete Q4DATA.notes[month+'_'+key];
-    q4Save(Q4DATA);
+    var fresh = q4Load();                 // never write back a stale copy
+    if (!fresh.notes) fresh.notes = {};
+    if (txt) fresh.notes[month+'_'+key] = txt;
+    else delete fresh.notes[month+'_'+key];
+    q4Save(fresh);
+    Q4DATA = fresh;
   }
   function showNoteModal(month, key, label, colLabel) {
     var existing = document.getElementById('q4-note-modal');
@@ -8394,9 +8403,13 @@ function renderBudgetQ4(el) {
       var num = raw.match(/^([\d.]+)\s*([mkMK]?)$/) ?
         parseFloat(raw) * ({'m':1e6,'k':1e3,'M':1e6,'K':1e3,'':1}[raw.replace(/[\d.]/g,'')]||1) :
         parseFloat(raw)||0;
-      if (!Q4DATA[month]) Q4DATA[month] = {};
-      Q4DATA[month][key] = num;
-      q4Save(Q4DATA);
+      // Start from what is stored now: the copy loaded when the table drew
+      // doesn't have notes typed since, and saving it would erase them.
+      var fresh = q4Load();
+      if (!fresh[month]) fresh[month] = {};
+      fresh[month][key] = num;
+      q4Save(fresh);
+      Q4DATA = fresh;
       renderBudget();
     }
     inp.addEventListener('blur', commit);
@@ -8751,7 +8764,7 @@ function renderBudgetQ4(el) {
         'border-left:1px solid rgba(255,255,255,0.07);'+
         'background:rgba(255,255,255,0.015);">'+
         '<textarea class="q4-note" rows="1" placeholder="\u2014" '+
-          'oninput="q4AutoGrow(this)" '+
+          'oninput="q4AutoGrow(this);q4SetLineNote(\''+row.key+'\',this.value)" '+
           'onchange="q4SetLineNote(\''+row.key+'\',this.value)">'+
           String(lineNote||'').replace(/</g,'&lt;')+'</textarea>'+
       '</td>';
@@ -8884,7 +8897,69 @@ function bgUploadActuals(input) {
 // ─────────────────────────────────────────────────────────────────────────────
 // EXPORT
 // ─────────────────────────────────────────────────────────────────────────────
+// Q4 Forecast to Excel: every line, Oct–Dec and the quarter, with the line
+// notes and any month notes written against a cell.
+function q4ExportExcel(){
+  if (typeof XLSX === 'undefined') { toast('Excel export needs the spreadsheet library \u2014 check your connection','error'); return; }
+  if (!Q4_EXPORT_FN) { renderBudget(); }
+  var X = Q4_EXPORT_FN();
+  var store = q4Read();
+  var lineNotes = store.lineNotes || {}, cellNotes = store.notes || {};
+  var MN = {oct:'Oct', nov:'Nov', dec:'Dec'};
+  var now = new Date();
+  var stamp = (now.getMonth()+1)+'/'+now.getDate()+'/'+now.getFullYear();
+  var ver = (typeof q4vActive === 'function' && q4vActive()) ? q4vActive() : null;
+  var aoa = [
+    ['Basin Engineering & Surveying'],
+    ['Q4 2026 Forecast \u2014 October to December'],
+    ['Exported ' + stamp + (ver && ver.name ? ' \u00b7 version: ' + ver.name : '')],
+    [],
+    ['Line item','October','November','December','Q4 Total','Notes','Month notes']
+  ];
+  var fmtRows = [];      // [rowIndex, isPct]
+  X.rows.forEach(function(r){
+    if (r.kind === 'sub') { aoa.push([r.label]); return; }
+    var v = X.months.map(function(m){ return X.computed[m][r.key] || 0; });
+    var tot;
+    if (r.isPct) {
+      // margin rows: the quarter's margin, not a sum of three margins
+      var inc = X.rows.filter(function(x){ return x.label === 'Total Income'; })[0];
+      var base = X.rows.filter(function(x){ return x.derive === (r.derive === 'gpm' ? 'gp' : 'ebitda'); })[0];
+      var it = inc ? X.months.reduce(function(a,m){ return a + (X.computed[m][inc.key]||0); }, 0) : 0;
+      var bt = base ? X.months.reduce(function(a,m){ return a + (X.computed[m][base.key]||0); }, 0) : 0;
+      tot = it ? bt / it : 0;
+    } else tot = v[0] + v[1] + v[2];
+    var mnotes = X.months.map(function(m){
+      var t = cellNotes[m + '_' + r.key];
+      return t ? MN[m] + ': ' + t : '';
+    }).filter(Boolean).join('\n');
+    aoa.push([r.label, v[0], v[1], v[2], tot, lineNotes[r.key] || '', mnotes]);
+    fmtRows.push([aoa.length, !!r.isPct, r.kind === 'total' || !!r.derive]);
+  });
+  var ws = XLSX.utils.aoa_to_sheet(aoa);
+  fmtRows.forEach(function(f){
+    ['B','C','D','E'].forEach(function(col){
+      var c = ws[col + f[0]];
+      if (c && c.t === 'n') c.z = f[1] ? '0.0%' : '$#,##0;($#,##0)';
+    });
+    ['F','G'].forEach(function(col){
+      var c = ws[col + f[0]];
+      if (c && c.v) c.s = { alignment:{ wrapText:true, vertical:'top' } };
+    });
+  });
+  ws['!cols'] = [{wch:38},{wch:14},{wch:14},{wch:14},{wch:15},{wch:60},{wch:50}];
+  ws['!merges'] = [{s:{r:0,c:0},e:{r:0,c:6}},{s:{r:1,c:0},e:{r:1,c:6}},{s:{r:2,c:0},e:{r:2,c:6}}];
+  var wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Q4 Forecast');
+  var fn = 'Basin_Q4_2026_Forecast_' + now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') +
+    '-' + String(now.getDate()).padStart(2,'0') + '.xlsx';
+  XLSX.writeFile(wb, fn);
+  var n = Object.keys(lineNotes).length + Object.keys(cellNotes).length;
+  toast('Exported ' + fn + (n ? ' with ' + n + ' note' + (n === 1 ? '' : 's') : ''), 'success');
+}
+
 function bgExportCSV() {
+  if (BUDGET_TAB === 'q4') { q4ExportExcel(); return; }
   var lines = [['Line Item','Jan-Jul','Aug','Sep','Oct','Nov','Dec','FY2026'].join(',')];
   BUDGET_DATA.forEach(function(row) {
     if (row.type==='section'||row.type==='subsection') {
