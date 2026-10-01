@@ -7227,9 +7227,10 @@ function q4SetDlHours(month, hrs){
 // ── Q4: admin labor build ─────────────────────────────────────────────────
 // A roster of admin staff, each with an annual salary and the months of the
 // forecast window they are on payroll for. The month's total salary is then
-// split by percentage across Admin Labor (7105), Officer Labor Premium (7130)
-// and Admin Sick/Vacation (7110).
-var Q4_ADMIN_LINES = ['a7105','a7130','a7110'];
+// split by percentage across Admin Labor (7105) and Admin Sick/Vacation
+// (7110). Officer Labor Premium (7130) is not part of the build; it is
+// entered by hand like any other line.
+var Q4_ADMIN_LINES = ['a7105','a7110'];
 
 function q4AdminRoster(){
   var d = q4Read();
@@ -7247,14 +7248,24 @@ function q4SetAdminRoster(list){
 function q4AdminSplit(month){
   var d = q4Read();
   var byM = d.adminSplitM || {};
-  if (byM[month]) return byM[month];
-  if (d.adminSplit) return d.adminSplit;        // carry an older single split
-  return { labor:78, officer:16, sick:6 };      // opens near the current plan
+  var sp = byM[month] || d.adminSplit || { labor:93, sick:7 };
+  // A split saved before officer premium left the build still carries an
+  // officer share; spread the salary across the two remaining lines in the
+  // same proportion so the build still allocates 100%.
+  if (sp.officer) {
+    var two = (sp.labor||0) + (sp.sick||0);
+    if (two > 0) {
+      var lab = Math.round((sp.labor||0) / two * 1000) / 10;
+      return { labor:lab, sick:Math.round((100 - lab) * 10) / 10 };
+    }
+    return { labor:93, sick:7 };
+  }
+  return { labor:sp.labor||0, sick:sp.sick||0 };
 }
 function q4SetAdminSplit(month, field, v){
   var d = q4Read();
   d.adminSplitM = d.adminSplitM || {};
-  d.adminSplitM[month] = Object.assign({}, q4AdminSplit(month));
+  d.adminSplitM[month] = Object.assign({}, q4AdminSplit(month));   // officer share dropped
   d.adminSplitM[month][field] = isNaN(v) ? 0 : Math.max(0, v);
   q4Write(d);
 }
@@ -7266,11 +7277,10 @@ function q4AdminCalc(month){
   var monthly = roster.reduce(function(t, p){
     return t + ((p.months && p.months[month]) ? (p.salary||0)/12 : 0);
   }, 0);
-  var tot = (sp.labor||0) + (sp.officer||0) + (sp.sick||0);
+  var tot = (sp.labor||0) + (sp.sick||0);
   return {
     roster:roster, split:sp, monthly:monthly, pctTotal:tot,
     labor:   monthly * ((sp.labor||0)/100),
-    officer: monthly * ((sp.officer||0)/100),
     sick:    monthly * ((sp.sick||0)/100),
     headcount: roster.filter(function(p){ return p.months && p.months[month]; }).length
   };
@@ -7300,9 +7310,9 @@ function q4RenderAdminBuilder(){
   var calc = {}; MONTHS_Q4.forEach(function(m){ calc[m] = q4AdminCalc(m); });
   var tot = MONTHS_Q4.reduce(function(t,m){
     var c = calc[m];
-    t.monthly += c.monthly; t.labor += c.labor; t.officer += c.officer; t.sick += c.sick;
+    t.monthly += c.monthly; t.labor += c.labor; t.sick += c.sick;
     return t;
-  }, {monthly:0, labor:0, officer:0, sick:0});
+  }, {monthly:0, labor:0, sick:0});
 
   var head = '<tr><td class="q3-k"></td>'+
     MONTHS_Q4.map(function(m){
@@ -7360,7 +7370,8 @@ function q4RenderAdminBuilder(){
       '<button class="qb-x" onclick="q4CloseAdminBuilder()">\u00d7</button>'+
       '<div class="qb-title">Admin Labor \u00b7 Build</div>'+
       '<div class="qb-sub">All three months \u00b7 annual salaries applied by month, then split '+
-        'across the three admin wage lines</div>'+
+        'across Admin Labor and Admin Sick/Vac. Officer Labor Premium (7130) is not built here \u2014 '+
+        'enter it directly on the forecast.</div>'+
       '<table class="q3">'+
         '<thead>'+head+'</thead>'+
         '<tbody>'+
@@ -7373,7 +7384,6 @@ function q4RenderAdminBuilder(){
             '<td class="q3-t">'+bgFmtM(tot.monthly)+'</td></tr>'+
           '<tr class="q3-sec"><td colspan="5">Split across the wage lines</td></tr>'+
           splitRow('7105 \u00b7 Admin. Labor','labor','#ffd060','labor')+
-          splitRow('7130 \u00b7 Officer Premium','officer','#c084fc','officer')+
           splitRow('7110 \u00b7 Admin. Sick/Vac','sick','#7ed9ff','sick')+
           checkRow+
         '</tbody>'+
@@ -8227,7 +8237,6 @@ function renderBudgetQ4(el) {
     if (Q4_ADMIN_LINES.indexOf(key) >= 0 && q4AdminMethod(month) === 'build'){
       var a = q4AdminCalc(month);
       if (key === 'a7105') return a.labor;
-      if (key === 'a7130') return a.officer;
       if (key === 'a7110') return a.sick;
     }
     var saved = (Q4DATA[month]||{})[key];
