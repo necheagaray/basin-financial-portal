@@ -3122,6 +3122,12 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 .pr-up button{cursor:pointer;white-space:nowrap;font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:1px;
   padding:8px 12px;border-radius:9px;color:#00d4ff;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.5);}
 .pr-up button:hover{background:#00d4ff;color:#04121a;}
+.q4v .q4v-nm{max-width:170px;field-sizing:content;min-width:60px;}
+.q4v-act{flex-shrink:0;cursor:pointer;font-family:var(--mono);font-size:8.5px;font-weight:800;letter-spacing:0.6px;
+  padding:3px 8px;border-radius:10px;color:#fbbf24;background:transparent;border:1px solid rgba(251,191,36,0.45);}
+.q4v-act:hover{background:rgba(251,191,36,0.18);}
+.q4v-act.on{background:#fbbf24;color:#1a1000;border-color:#fbbf24;}
+.q4v-state.live b{color:#fbbf24;}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
@@ -5016,7 +5022,11 @@ function bgHeader() {
       ? bgSpanLabel(true)+' actuals live from Budget &nbsp;\u00b7&nbsp; '+bgSpanLabel(false)+
         ' driven by your assumptions &nbsp;\u00b7&nbsp; Save scenarios to revisit'
       : bgSpanLabel(true)+' actuals &nbsp;\u00b7&nbsp; '+bgSpanLabel(false)+
-        ' projected &nbsp;\u00b7&nbsp; Upload monthlies to update';
+        ' projected &nbsp;\u00b7&nbsp; '+
+        (function(){ var a = (typeof q4vActive === 'function') ? q4vActive() : null;
+          return a ? '<span style="color:#fbbf24;">Oct\u2013Dec from Q4 Forecast \u201c'+
+                       String(a.name).replace(/</g,'&lt;')+'\u201d</span>'
+                   : 'Oct\u2013Dec from the plan (no active Q4 version)'; })();
 
   function tab(id, label) {
     var active = BUDGET_TAB === id;
@@ -7515,7 +7525,8 @@ function q4vSave(name){
     id:id, name:name || ('Version '+(v.list.length+1)),
     created:new Date().toISOString(),
     inputs:q4Read(),            // so the version can be reopened and edited
-    values:snap                 // what the projection consumes
+    values:snap,                // what the projection consumes
+    rowMap:Q4V_ROW_MAP || q4vStoredMap()   // P&L label -> key for those values
   });
   if (v.list.length > 12) v.list = v.list.slice(0,12);
   q4vWrite(v);
@@ -7525,7 +7536,12 @@ function q4vSave(name){
 function q4vSetActive(id){
   var v = q4vRead();
   v.activeId = (v.activeId === id) ? null : id;
+  v.activeAt = new Date().toISOString();
   q4vWrite(v);
+  var act = q4vActive();
+  toast(act ? '\u201c'+act.name+'\u201d is now the active Q4 forecast \u2014 Oct\u2013Dec on Summary and Detailed use it'
+            : 'No active Q4 version \u2014 Summary and Detailed are back on the plan for Oct\u2013Dec', 'success');
+  if (typeof GH_CONFIG !== 'undefined' && GH_CONFIG && GH_CONFIG.token) syncToGitHub(true);
   renderBudget();
 }
 function q4vDelete(id){
@@ -7552,12 +7568,17 @@ function q4vRename(id, name){
 // What the projection should show for a given P&L row and month.
 // Returns undefined when no version is active or the row is not covered.
 var Q4V_ROW_MAP = null;         // label -> key, filled by the Q4 renderer
+var Q4V_MAP_KEY = 'basin_q4_rowmap';
+function q4vStoredMap(){
+  try { return JSON.parse(localStorage.getItem(Q4V_MAP_KEY) || 'null'); } catch(e){ return null; }
+}
 function q4vValueFor(label, monthIdx){
   var act = q4vActive();
   if (!act || !act.values) return undefined;
   var m = ({3:'oct', 4:'nov', 5:'dec'})[monthIdx];
   if (!m || !act.values[m]) return undefined;
-  var key = (Q4V_ROW_MAP||{})[label];
+  var map = act.rowMap || Q4V_ROW_MAP || q4vStoredMap() || {};
+  var key = map[label];
   if (!key) return undefined;
   var val = act.values[m][key];
   return (typeof val === 'number') ? val : undefined;
@@ -7580,6 +7601,9 @@ function q4vBar(){
       '<input class="q4v-nm" value="'+String(x.name).replace(/"/g,'&quot;')+'" '+
         'onchange="q4vRename(\''+x.id+'\',this.value)"/>'+
       '<span class="q4v-when">'+stamp+'</span>'+
+      '<button class="q4v-act'+(on?' on':'')+'" onclick="q4vSetActive(\''+x.id+'\')" '+
+        'title="'+(on?'Active \u2014 click to go back to the plan':'Use this version on Summary and Detailed')+'">'+
+        (on ? '\u2713 Active' : 'Set active')+'</button>'+
       '<span class="q4v-tools">'+
         '<span class="q4v-t" onclick="q4vLoad(\''+x.id+'\')" title="Load into the working forecast">\u21bb</span>'+
         '<span class="q4v-t del" onclick="q4vDelete(\''+x.id+'\')" title="Delete">\u00d7</span>'+
@@ -7590,7 +7614,8 @@ function q4vBar(){
   return '<div class="q4v-bar">'+
     '<span class="q4v-k">Versions</span>'+
     '<span class="q4v-state'+(act?' live':'')+'">'+
-      (act ? '<b>'+act.name+'</b> adopted' : 'using the plan')+'</span>'+
+      (act ? '<b>'+act.name+'</b> is active \u00b7 feeding Summary &amp; Detailed'
+           : 'no active version \u00b7 Summary &amp; Detailed use the plan')+'</span>'+
     '<div class="q4v-list">'+
       (v.list.length ? chips : '<span class="q4v-empty">none saved yet</span>')+
     '</div>'+
@@ -8315,6 +8340,13 @@ function renderBudgetQ4(el) {
       }
     });
     return map;
+  })();
+  // keep the map, and give it to any version saved before versions carried one
+  try { localStorage.setItem(Q4V_MAP_KEY, JSON.stringify(Q4V_ROW_MAP)); } catch(e){}
+  (function(){
+    var vv = q4vRead(), fixed = false;
+    vv.list.forEach(function(x){ if (!x.rowMap) { x.rowMap = Q4V_ROW_MAP; fixed = true; } });
+    if (fixed) q4vWrite(vv);
   })();
 
   Q4_EXPORT_FN = function(){
@@ -11382,7 +11414,7 @@ async function syncToGitHub(silent){
   if(!weeks.length){ if(!silent) toast('No uploaded weeks to publish yet','error'); return; }
   function readKey(k){ try{ return JSON.parse(localStorage.getItem(k)||'null'); }catch(e){ return null; } }
   var payload={generated:new Date().toISOString(),laborWeeks:weeks,
-    q4:readKey('basin_q4_forecast_v1'),budgetActuals:readKey('basin_budget_actuals'),
+    q4:readKey('basin_q4_forecast_v1'),q4Versions:readKey('basin_q4_versions'),budgetActuals:readKey('basin_budget_actuals'),
     pendingContracts:readKey('basin_pending_contracts'),wcSnapshots:wcPublishList(),opex:opxPublishList(),payrollRuns:PAYROLL_RUNS};
   var dot=document.getElementById('sync-dot'); if(dot)dot.className='sync-dot pending';
   var msg=document.getElementById('sync-msg'); if(msg)msg.textContent='Publishing '+weeks.length+' week(s)...';
@@ -18502,6 +18534,21 @@ function loadPublishedData() {
     .then(function(j){
       if (!j) return;
       PUBLISHED = j;
+      // Q4 versions: add any published version this device lacks, and take
+      // the published active choice when it is newer than the local one.
+      if (j.q4Versions && Array.isArray(j.q4Versions.list)) {
+        var lv = q4vRead(), have = {};
+        lv.list.forEach(function(x){ have[x.id] = 1; });
+        j.q4Versions.list.forEach(function(x){ if (!have[x.id]) lv.list.push(x); });
+        lv.list.sort(function(a,b){ return String(b.created).localeCompare(String(a.created)); });
+        var pubAt = j.q4Versions.activeAt || '', locAt = lv.activeAt || '';
+        if (!localStorage.getItem('basin_q4_versions') || pubAt > locAt) {
+          lv.activeId = j.q4Versions.activeId || null; lv.activeAt = pubAt;
+        }
+        q4vWrite(lv);
+        if (typeof BUDGET_TAB !== 'undefined' && document.getElementById('budget-forecast') &&
+            document.getElementById('budget-forecast').style.display !== 'none') renderBudget();
+      }
       if (j.q4 && !localStorage.getItem('basin_q4_forecast_v1')) {
         try { localStorage.setItem('basin_q4_forecast_v1', JSON.stringify(j.q4)); } catch(e){}
       }
@@ -18558,6 +18605,7 @@ function capDownloadData() {
     generated: new Date().toISOString(),
     laborWeeks: weeks,
     q4: readKey('basin_q4_forecast_v1'),
+    q4Versions: readKey('basin_q4_versions'),
     budgetActuals: readKey('basin_budget_actuals'),
     pendingContracts: readKey('basin_pending_contracts'),
     wcSnapshots: wcPublishList(),
