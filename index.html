@@ -8128,6 +8128,19 @@ function renderBudgetQ4(el) {
     try { localStorage.setItem(Q4_KEY, JSON.stringify(data)); } catch(e){}
   }
   var Q4DATA = q4Load();
+  // Manual Project Income used to be saved under 'rev', a key nothing reads,
+  // so typed revenue never showed. Carry any such entry onto 'a4000'.
+  (function(){
+    var moved = false;
+    ['oct','nov','dec'].forEach(function(m){
+      var r = Q4DATA[m];
+      if (r && r.rev !== undefined) {
+        if (r.a4000 === undefined) r.a4000 = r.rev;
+        delete r.rev; moved = true;
+      }
+    });
+    if (moved) q4Save(Q4DATA);
+  })();
 
   // Row definitions — what the table shows
   var Q4_ROWS = [
@@ -8599,7 +8612,7 @@ function renderBudgetQ4(el) {
             '<div class="q4-val" style="font-size:'+numSz+';font-weight:'+numW+';'+
               'color:'+row.color+';cursor:'+(isRph?'default':'pointer')+';" '+
               (isRph ? 'title="Built from RPH groups"'
-                     : 'onclick="q4EditCell(\''+month+'\',\'rev\','+val+',\''+tdId+'\')"')+'>'+
+                     : 'onclick="q4EditCell(\''+month+'\',\'a4000\','+val+',\''+tdId+'\')"')+'>'+
               fmtV(val)+'</div>'+
             '</div>'+
             '<button onclick="event.stopPropagation();showNoteModal(\''+month+'\',\''+noteKey+'\',\''+row.label+'\',\''+MLABELS[month]+'\')" '+
