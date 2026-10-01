@@ -5427,27 +5427,24 @@ function bgDrawProjection() {
    its hull display. Pass an object to change the readout:
        bgUFO({ label:'GROSS MARGIN', value:'77.3%', sub:'FY 2026' })
    ═══════════════════════════════════════════════════════════════════════ */
-// The UFO carries the year's projected EBITDA. Read from BUDGET_DATA so a new
-// monthly upload flows through without touching this code.
+// The UFO carries the year's projected EBITDA. It reads each line through
+// bgRowVals -- uploaded actuals, the active Q4 Forecast version, then the plan
+// -- the same way the Summary and Detailed tabs do, so all three agree.
 function bgEbitdaKPI(){
-  var row = (BUDGET_DATA||[]).find(function(r){
-    return String(r.label||'').trim().toUpperCase() === 'EBITDA';
-  });
+  function find(lbl){
+    return (BUDGET_DATA||[]).find(function(r){ return String(r.label||'').trim().toUpperCase() === lbl; });
+  }
+  var row = find('EBITDA');
   if (!row || !row.vals || !row.vals.length) return null;
-  var fy = row.vals[row.vals.length - 1];          // last column is the FY total
+  var fy = bgRowVals(row)[6];                       // FY 2026 = Jan–Jul + Aug–Dec
   if (!fy) return null;
-  var pctRow = (BUDGET_DATA||[]).find(function(r){
-    return String(r.label||'').trim().toUpperCase() === 'EBITDA %';
-  });
-  var inc = (BUDGET_DATA||[]).find(function(r){
-    return String(r.label||'').trim().toUpperCase() === 'TOTAL INCOME';
-  });
-  var margin = (inc && inc.vals && inc.vals[inc.vals.length-1])
-    ? fy / inc.vals[inc.vals.length-1] * 100 : 0;
+  var inc = find('TOTAL INCOME');
+  var rev = inc ? bgRowVals(inc)[6] : 0;
+  var margin = rev ? fy / rev * 100 : 0;
   return {
     label: '2026 PROJECTED EBITDA',
-    value: '$' + (fy/1e6).toFixed(1) + 'M',
-    sub:   margin ? margin.toFixed(0) + '% margin \u00b7 FY 2026' : 'FY 2026'
+    value: bgFmtM(fy),
+    sub:   margin ? margin.toFixed(1) + '% margin \u00b7 FY 2026' : 'FY 2026'
   };
 }
 
