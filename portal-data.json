@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-01T16:20:55.913Z",
+  "generated": "2026-10-01T20:02:49.596Z",
   "laborWeeks": [
     {
       "weekKey": "09-26",
@@ -7632,10 +7632,20 @@
       }
     ],
     "activeId": "v1790871640698",
-    "activeAt": "2026-10-01T16:20:55.912Z"
+    "activeAt": "2026-10-01T16:21:07.994Z"
   },
   "budgetActuals": null,
   "pendingContracts": [
+    {
+      "id": "pc1790884891400",
+      "num": "25-109",
+      "prop": "",
+      "name": "EDGED Monroe Campus",
+      "cust": "MG2",
+      "amount": 125115,
+      "notes": "Gina with MG2 says waiting on contract with customer",
+      "contact": "Gina Crosby"
+    },
     {
       "id": "pc1790787279973",
       "num": "26-069",
@@ -7693,7 +7703,7 @@
       "name": "Prof Civil Eng Serv — QTS-WTX1-CAMPUS, Hall County TX (Turkey) Ph 1",
       "cust": "Quality Technology Services, LLC",
       "amount": 2348200,
-      "notes": "David said PO coming first week of Oct",
+      "notes": "Service Agreement received 10/1",
       "contact": "Meghan Thomas & David C"
     },
     {
