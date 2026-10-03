@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-03T13:46:24.527Z",
+  "generated": "2026-10-03T13:52:07.381Z",
   "laborWeeks": [
     {
       "weekKey": "09-26",
@@ -7636,6 +7636,16 @@
   },
   "budgetActuals": null,
   "pendingContracts": [
+    {
+      "id": "pc1791035439953",
+      "num": "26-093",
+      "prop": "",
+      "name": "SLC2 Campus Plan",
+      "cust": "Corgan",
+      "amount": 1413380,
+      "notes": "get on top of this one as big revenue in sept ",
+      "contact": ""
+    },
     {
       "id": "pc1791035104197",
       "num": "26-119",
