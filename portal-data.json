@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-03T13:52:07.381Z",
+  "generated": "2026-10-05T16:56:10.830Z",
   "laborWeeks": [
     {
       "weekKey": "09-26",
@@ -7653,8 +7653,8 @@
       "name": "Salco Road",
       "cust": "QII",
       "amount": 562650,
-      "notes": "get on top of this one as big revenue expected in october",
-      "contact": ""
+      "notes": "10/5 - Joel emailed Jake",
+      "contact": "Jake"
     },
     {
       "id": "pc1790884891400",
@@ -7663,7 +7663,7 @@
       "name": "EDGED Monroe Campus",
       "cust": "MG2",
       "amount": 125115,
-      "notes": "Gina with MG2 says waiting on contract with customer",
+      "notes": "Gina with MG2 says waiting on contract with customer;\nGina left MG2 ; need new",
       "contact": "Gina Crosby"
     },
     {
