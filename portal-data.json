@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-05T16:56:10.830Z",
+  "generated": "2026-10-05T17:00:44.963Z",
   "laborWeeks": [
     {
       "weekKey": "09-26",
@@ -7637,6 +7637,16 @@
   "budgetActuals": null,
   "pendingContracts": [
     {
+      "id": "pc1791219505222",
+      "num": "25-109",
+      "prop": "",
+      "name": "Edged Monroe",
+      "cust": "MG2",
+      "amount": 125000,
+      "notes": "Gina at MG2 gone; Liz advised on 10/5 that still no contract with Edge; Reach out to Katie Johnson in early November for update",
+      "contact": "Katie Johnson"
+    },
+    {
       "id": "pc1791035439953",
       "num": "26-093",
       "prop": "",
@@ -7655,16 +7665,6 @@
       "amount": 562650,
       "notes": "10/5 - Joel emailed Jake",
       "contact": "Jake"
-    },
-    {
-      "id": "pc1790884891400",
-      "num": "25-109",
-      "prop": "",
-      "name": "EDGED Monroe Campus",
-      "cust": "MG2",
-      "amount": 125115,
-      "notes": "Gina with MG2 says waiting on contract with customer;\nGina left MG2 ; need new",
-      "contact": "Gina Crosby"
     },
     {
       "id": "pc1790787279973",
