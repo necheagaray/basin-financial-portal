@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-05T21:39:13.023Z",
+  "generated": "2026-10-08T21:45:18.846Z",
   "laborWeeks": [
     {
       "weekKey": "10-03",
@@ -8493,6 +8493,26 @@
   "budgetActuals": null,
   "pendingContracts": [
     {
+      "id": "pc1791495835077",
+      "num": "26-125",
+      "prop": "so765",
+      "name": "MV UPS BESS Standard",
+      "cust": "Corgan",
+      "amount": 142355,
+      "notes": "",
+      "contact": "Valerie"
+    },
+    {
+      "id": "pc1791388450009",
+      "num": "26-091",
+      "prop": "",
+      "name": "",
+      "cust": "QTS",
+      "amount": 9445,
+      "notes": "10/7 - johnny c to reach out to qts to get reimbursable added for hydraulic analysis fee to mountain peak",
+      "contact": "John Catanzano"
+    },
+    {
       "id": "pc1791219505222",
       "num": "25-109",
       "prop": "so482",
@@ -8508,9 +8528,9 @@
       "prop": "",
       "name": "SLC2 Campus Plan",
       "cust": "Corgan",
-      "amount": 1413380,
-      "notes": "get on top of this one as big revenue in sept ",
-      "contact": ""
+      "amount": 1648580,
+      "notes": "August invoice rejected and needs to be resubmitted when sergey says okay to invoice; rest of revenue being put in unbilled; 10-7 - joel emailed with sergey",
+      "contact": "Sergey"
     },
     {
       "id": "pc1791035104197",
