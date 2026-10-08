@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-08T21:45:18.846Z",
+  "generated": "2026-10-08T22:46:06.780Z",
   "laborWeeks": [
     {
       "weekKey": "10-03",
@@ -8492,6 +8492,16 @@
   },
   "budgetActuals": null,
   "pendingContracts": [
+    {
+      "id": "pc1791499505512",
+      "num": "26-124",
+      "prop": "26M-200",
+      "name": "SLC1 Day 2 civil design",
+      "cust": "QTS",
+      "amount": 60160,
+      "notes": "",
+      "contact": "Ryan Carman"
+    },
     {
       "id": "pc1791495835077",
       "num": "26-125",
