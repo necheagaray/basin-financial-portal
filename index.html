@@ -1224,6 +1224,32 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 .ub-sub{font-size:12px;color:#a58a55;margin-top:4px;}
 .ub-body{display:flex;gap:28px;align-items:center;margin-top:20px;flex-wrap:wrap;}
 .ub-legend{flex:1;min-width:280px;display:flex;flex-direction:column;gap:3px;}
+/* one centred column: header, ring, then the list that names the ring */
+.ub-card{width:min(660px,96vw);padding:30px 34px 22px;}
+.ub-head{text-align:center;}
+.ub-title{letter-spacing:3px;}
+.ub-total{font-size:46px;}
+.ub-orn{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:14px;}
+.ub-orn i{width:70px;height:1px;background:linear-gradient(90deg,transparent,rgba(176,125,22,0.55));}
+.ub-orn i:last-child{background:linear-gradient(90deg,rgba(176,125,22,0.55),transparent);}
+.ub-orn b{width:7px;height:7px;transform:rotate(45deg);background:#b07d16;}
+.ub-body{flex-direction:column;align-items:center;gap:18px;margin-top:14px;}
+.ub-ring{width:min(330px,70vw) !important;}
+.ub-legend{width:100%;min-width:0;flex:none;padding:10px 12px 6px;border-radius:16px;
+  background:rgba(255,255,255,0.55);border:1px solid rgba(176,125,22,0.16);}
+#unbilled-ov .ub-lh,#unbilled-ov .ub-row{display:grid;grid-template-columns:12px auto minmax(0,1fr) 110px 96px 44px;gap:11px;align-items:center;}
+.ub-lh{padding:2px 10px 8px 13px;border-bottom:1px solid rgba(176,125,22,0.18);margin-bottom:4px;
+  font-family:ui-monospace,Menlo,monospace;font-size:9px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:#a58a55;}
+.ub-lh span:first-child{grid-column:1/4;}
+.ub-lh span:nth-child(3){text-align:right;}
+#unbilled-ov .ub-row{padding:8px 10px;}
+#unbilled-ov .ub-row:hover{transform:none;}
+.ub-nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ub-share{height:7px;border-radius:4px;background:rgba(176,125,22,0.12);overflow:hidden;}
+.ub-share i{display:block;height:100%;border-radius:4px;}
+.ub-amt{text-align:right;}
+.ub-hint{text-align:center;font-size:10.5px;color:#b9a074;padding:8px 0 2px;}
+@media (max-width:560px){#unbilled-ov .ub-lh,#unbilled-ov .ub-row{grid-template-columns:12px auto minmax(0,1fr) 84px 40px;} .ub-share,.ub-lh span:nth-child(2){display:none;}}
 .ub-row{display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:10px;
   transition:background .18s ease,transform .18s ease;}
 .ub-row:hover{background:rgba(176,125,22,0.10);transform:translateX(3px);}
@@ -1233,9 +1259,20 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 .ub-nm{flex:1;font-size:12.5px;font-weight:600;color:#4a3d22;}
 .ub-amt{font-size:15px;font-weight:800;color:#a8720f;white-space:nowrap;}
 .ub-pct{font-size:10.5px;color:#a58a55;width:42px;text-align:right;}
-.ub-slice{transition:stroke-width .18s ease, opacity .18s ease;}
-.ub-slice.dim{opacity:0.3;}
-.ub-slice.lit{stroke-width:48;}
+.ub-slice{transition:stroke-width .22s ease;}
+.ub-g{transition:transform .25s cubic-bezier(.2,.8,.2,1), opacity .2s ease, filter .2s ease;cursor:pointer;}
+.ub-g.dim{opacity:0.22;filter:saturate(0.4);}
+.ub-g.lit{transform:translate(var(--dx),var(--dy));filter:drop-shadow(0 0 10px var(--c)) drop-shadow(0 4px 8px rgba(80,50,0,0.35));}
+.ub-g.lit .ub-slice{stroke-width:62;}
+.ub-pin{opacity:0;transition:opacity .2s ease;pointer-events:none;}
+.ub-g.lit .ub-pin{opacity:1;}
+.ub-pulse{transform-box:fill-box;transform-origin:center;animation:ubPulse 1.2s ease-out infinite;}
+@keyframes ubPulse{from{transform:scale(0.6);opacity:0.7;}to{transform:scale(2.1);opacity:0;}}
+.ub-row{border-left:3px solid transparent;}
+.ub-row.lit{background:color-mix(in srgb,var(--c) 16%,transparent);border-left-color:var(--c);transform:translateX(4px);}
+.ub-row.lit .ub-sw{box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 30%,transparent),0 0 10px var(--c);}
+.ub-row.dim{opacity:0.5;}
+@media (prefers-reduced-motion:reduce){.ub-g{transition:none;}}
 
 /* the unbilled note inside a concentration row */
 .conc-ub{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;font-weight:700;
@@ -2936,23 +2973,41 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 .fz-film i.a{background:#5eeb96;box-shadow:0 0 5px rgba(94,235,150,0.7);}
 .fz-film i.p{background:transparent;border:1px dashed #f7b32b;}
 .fz-film i.f{background:rgba(255,255,255,0.8);}
-@media (max-width:1500px){
-  .fz-grid{grid-template-columns:minmax(0,1fr) 18px minmax(0,1fr) 18px minmax(0,1.3fr);}
+/* The ledger sizes itself to the room it actually has on the screen (which
+   depends on the window, the side panel and the curtains), not to the
+   window width, so the figures never collide. */
+.fz-panel{container-type:inline-size;container-name:fz;}
+.fz-v,.fz-h b,.fz-tv{overflow:hidden;text-overflow:clip;}
+@container fz (max-width: 1000px){
+  .fz-grid{grid-template-columns:minmax(0,1fr) 18px minmax(0,1fr) 18px minmax(0,1.35fr);}
   .fz-name{grid-column:1/-1;flex-direction:row;align-items:center;justify-content:flex-start;padding:10px 12px 6px;align-self:auto;}
   .fz-name.hd{display:none;}
   .fz-v{padding:6px 10px 12px;}
-  .fz-v.act{font-size:19px;} .fz-v.prj{font-size:17px;} .fz-tv{font-size:24px;}
-  .fz-row:not(.hero) .fz-tv{font-size:21px;}
-  .fz-h{padding:6px 10px 10px;} .fz-h b{font-size:18px;} .fz-h.tot b{font-size:21px;}
-  .fz-film i{width:5px;}
+  .fz-v.act{font-size:clamp(15px,2.6cqw,20px);} .fz-v.prj{font-size:clamp(14px,2.4cqw,18px);}
+  .fz-tv,.fz-row:not(.hero) .fz-tv{font-size:clamp(17px,3cqw,24px);}
+  .fz-row:not(.hero) .fz-v.act{font-size:clamp(14px,2.3cqw,18px);}
+  .fz-row:not(.hero) .fz-v.prj{font-size:clamp(13px,2.1cqw,16px);}
+  .fz-ring{width:36px;height:36px;}
+  .fz-v.tot{gap:8px;}
+  .fz-h{padding:6px 10px 10px;} .fz-h b{font-size:clamp(14px,2.4cqw,18px);} .fz-h.tot b{font-size:clamp(16px,2.8cqw,21px);}
+  .fz-h .k{font-size:8.5px;letter-spacing:1.4px;}
+  .fz-film i{width:4px;}
   .fz-hdr .fz-h.cmp{padding-left:10px;}
   .fz-hdr .fz-h.cmp b{font-size:11px;}
 }
-@media (max-width:1380px){
+@container fz (max-width: 760px){
   /* the monthly-average box drops under its line rather than beside it */
   .fz-row{grid-template-columns:minmax(0,1fr);}
   .fz-row .fy-cmp{margin:0 0 14px;}
   .fz-h.cmp{display:none;}
+  .fz-v.act{font-size:clamp(15px,3.4cqw,20px);} .fz-v.prj{font-size:clamp(14px,3.1cqw,18px);}
+  .fz-tv,.fz-row:not(.hero) .fz-tv{font-size:clamp(17px,4cqw,24px);}
+  .fz-h b{font-size:clamp(14px,3.2cqw,18px);}
+}
+@container fz (max-width: 520px){
+  .fz-rw em{display:none;}
+  .fz-ring{width:30px;height:30px;}
+  .fz-film{display:none;}
 }
 
 /* ── OP EX dashboard ──────────────────────────────────────────────────── */
@@ -3128,6 +3183,9 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 .q4v-act:hover{background:rgba(251,191,36,0.18);}
 .q4v-act.on{background:#fbbf24;color:#1a1000;border-color:#fbbf24;}
 .q4v-state.live b{color:#fbbf24;}
+.ytd-pill.live{background:rgba(23,160,111,0.12);color:#0f7a54;border-color:rgba(23,160,111,0.45);
+  display:inline-flex;align-items:center;gap:8px;letter-spacing:1.2px;}
+.ytd-pill.live i{width:8px;height:8px;border-radius:50%;background:#17a06f;box-shadow:0 0 0 3px rgba(23,160,111,0.2);}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
@@ -3477,7 +3535,7 @@ function getRPH(customer, asOf){
   }
   return RPH_DATA['_nonQTS']||null;
 }
-var BUDGET_DATA = [{"label":"Income","type":"section","vals":[null,null,null,null,null,null,null]},{"label":"4000 \u00b7 Project Income","type":"detail","vals":[17371195.07,3030810.27,1861493.76,1919665.44,1930745.76,1939056.0,28052966.3]},{"label":"Total Income","type":"total","vals":[17371195.07,3030810.27,1861493.76,1919665.44,1930745.76,1939056.0,28052966.3]},{"label":"Cost of Sales","type":"section","vals":[null,null,null,null,null,null,null]},{"label":"5000 \u00b7 COGS \u2013 Direct Costs","type":"subsection","vals":[0.0,0.0,null,null,null,null,0]},{"label":"5100 \u00b7 Direct Labor","type":"detail","vals":[1511112.1,216259.1,247121.79,262540.56,270863.52,277820.7,2785717.77]},{"label":"5200 \u00b7 Direct Subcontractor Costs","type":"detail","vals":[721971.98,168657.69,84067.62,84538.88,84469.47,84399.65,1228105.29]},{"label":"5300 \u00b7 Direct Materials/Supplies","type":"detail","vals":[13585.74,0.0,4483.61,4508.74,4505.04,4501.31,31584.44]},{"label":"5400 \u00b7 Other Direct Costs","type":"detail","vals":[17696.16,3201.54,4483.61,4508.74,4505.04,4501.31,38896.4]},{"label":"Total \u2013 COGS Direct Costs","type":"total","vals":[2264365.98,388118.33,340156.63,356096.92,364343.07,371222.97,4084303.9]},{"label":"6000 \u00b7 COGS \u2013 Indirect Costs","type":"subsection","vals":[0.0,0.0,null,null,null,null,0]},{"label":"6100 \u00b7 DL Overhead","type":"detail","vals":[159612.18,24617.8,18593.6,19643.6,15031.14,16031.14,253529.46]},{"label":"6110 \u00b7 DL Sick/Vacation","type":"detail","vals":[127690.17,16526.17,26562.29,28062.29,45093.43,57712.12,301646.47]},{"label":"6116 \u00b7 DL Bonus","type":"detail","vals":[311387.0,43208.0,44483.82,44483.82,44483.82,44483.82,532530.28]},{"label":"6117 \u00b7 DL Defined Benefit","type":"detail","vals":[25326.0,3058.0,3617.67,3617.67,3617.67,3617.67,42854.68]},{"label":"6118 \u00b7 DL Profit Sharing","type":"detail","vals":[48799.8,10191.0,6971.4,6971.4,6971.4,6971.4,86876.4]},{"label":"6200 \u00b7 DL Health Insurance","type":"detail","vals":[168805.54,27780.35,26012.34,26012.34,27939.18,29866.03,306415.78]},{"label":"6300 \u00b7 DL Life/Disability","type":"detail","vals":[19262.83,2769.05,2980.17,2980.17,3200.92,3421.67,34614.81]},{"label":"6400 \u00b7 DL 401K Match","type":"detail","vals":[42375.55,6538.52,6754.93,6754.93,6754.93,6754.93,75933.79]},{"label":"6500 \u00b7 DL Payroll Taxes","type":"detail","vals":[132093.64,18122.86,19071.56,19994.06,21224.06,22454.06,232960.24]},{"label":"Total \u2013 COGS Indirect Costs","type":"total","vals":[1035352.71,152811.75,155047.78,158520.28,174316.55,191312.84,1867361.91]},{"label":"Total Cost of Sales","type":"total","vals":[3299718.69,540930.08,495204.41,514617.2,538659.62,562535.81,5951665.81]},{"label":"GROSS PROFIT","type":"highlight","vals":[14071476.38,2489880.19,1366289.35,1405048.24,1392086.14,1376520.19,22101300.49]},{"label":"Gross Margin %","type":"highlight","vals":[0.81,0.8215,0.734,0.7319,0.721,0.7099,0.7878]},{"label":"Expense","type":"section","vals":[null,null,null,null,null,null,null]},{"label":"7100 \u00b7 Admin. Wages/Benefits","type":"subsection","vals":[0.0,0.0,null,null,null,null,0]},{"label":"7105 \u00b7 Admin. Labor","type":"detail","vals":[415441.06,67736.23,72406.25,72406.25,74790.63,73386.25,776166.67]},{"label":"7106 \u00b7 Admin. Bonus","type":"detail","vals":[27709.0,3894.0,4156.25,4156.25,4156.25,4156.25,48228.0]},{"label":"7107 \u00b7 Admin. Defined Benefit","type":"detail","vals":[184506.0,25894.0,27676.25,27676.25,27676.25,27676.25,321105.0]},{"label":"7108 \u00b7 Admin. Profit Sharing","type":"detail","vals":[49540.24,8513.0,7431.04,7431.04,7431.04,7431.04,87777.4]},{"label":"7110 \u00b7 Admin. Labor Sick/Vacation","type":"detail","vals":[15294.46,2936.31,4156.25,4156.25,7021.88,8426.25,41991.4]},{"label":"7130 \u00b7 Officer Labor Premium","type":"detail","vals":[233846.15,30692.34,33250.0,33250.0,33250.0,33250.0,397538.49]},{"label":"7140 \u00b7 Admin. Health Insurance","type":"detail","vals":[29547.39,6704.36,7965.03,7965.03,7965.03,9871.95,70018.79]},{"label":"7150 \u00b7 Admin. Life/Disability","type":"detail","vals":[3827.86,595.34,739.56,739.56,739.56,854.01,7495.89]},{"label":"7160 \u00b7 Admin. 401k Match","type":"detail","vals":[22007.68,2875.38,3115.0,3115.0,3115.0,3115.0,37343.06]},{"label":"7170 \u00b7 Admin. Payroll Taxes","type":"detail","vals":[42789.57,3585.04,7009.08,7009.08,7331.95,7331.95,75056.67]},{"label":"Total \u2013 Admin. Wages/Benefits","type":"total","vals":[1024509.41,153426.0,167904.71,167904.71,173477.59,175498.95,1862721.37]},{"label":"7200 \u00b7 Facilities","type":"subsection","vals":[0.0,0.0,null,null,null,null,0]},{"label":"7210 \u00b7 Rent & Lease","type":"detail","vals":[93444.28,16913.75,17758.65,18808.65,17758.65,17758.65,182442.63]},{"label":"7220 \u00b7 Repairs & Maint. \u2013 Metairie","type":"detail","vals":[189253.31,2500.0,630.0,11130.0,630.0,630.0,204773.31]},{"label":"7240 \u00b7 Internet/Telephone","type":"detail","vals":[14932.93,4063.41,3150.0,3150.0,3150.0,3150.0,31596.34]},{"label":"7250 \u00b7 Utilities","type":"detail","vals":[5229.92,1119.32,945.0,1093.05,945.0,1093.05,10425.34]},{"label":"Total \u2013 Facilities","type":"total","vals":[302860.44,24596.48,22483.65,34181.7,22483.65,22631.7,429237.62]},{"label":"7300 \u00b7 Business Overhead","type":"subsection","vals":[0.0,0.0,null,null,null,null,0]},{"label":"7310 \u00b7 Business Insurance","type":"detail","vals":[18104.23,4748.62,6615.0,6615.0,6615.0,22365.0,65062.85]},{"label":"7312 \u00b7 Officer Life Insurance","type":"detail","vals":[13699.46,2460.28,2583.0,2583.0,2583.0,2583.0,26491.74]},{"label":"7320 \u00b7 Legal & Professional Services","type":"detail","vals":[242633.55,47658.75,23625.0,18375.0,18375.0,18375.0,369042.3]},{"label":"7330 \u00b7 Software Subscriptions","type":"detail","vals":[82540.06,17108.19,25620.0,25620.0,25620.0,25620.0,202128.25]},{"label":"7340 \u00b7 Office Expenses","type":"detail","vals":[73416.38,9512.12,8400.0,8400.0,8400.0,8400.0,116528.5]},{"label":"7350 \u00b7 Advertising & Marketing","type":"detail","vals":[9667.99,9840.6,1260.0,1260.0,1260.0,1260.0,24548.59]},{"label":"7360 \u00b7 Meals & Meetings","type":"detail","vals":[12329.32,1304.95,1890.0,1890.0,1890.0,1890.0,21194.27]},{"label":"7370 \u00b7 Travel","type":"detail","vals":[57220.15,7607.44,8400.0,8400.0,8400.0,8400.0,98427.59]},{"label":"7380 \u00b7 Employee Mileage/Parking","type":"detail","vals":[21767.54,2238.98,3150.0,3150.0,3150.0,3150.0,36606.52]},{"label":"7390 \u00b7 Mobile Phones","type":"detail","vals":[9705.41,1491.73,1890.0,1890.0,1890.0,1890.0,18757.14]},{"label":"7400 \u00b7 Entertainment","type":"detail","vals":[39784.74,220.0,525.0,525.0,525.0,21525.0,63104.74]},{"label":"7410 \u00b7 Client Gifts","type":"detail","vals":[1111.81,0.0,525.0,525.0,525.0,26775.0,29461.81]},{"label":"7420 \u00b7 Charitable Contributions","type":"detail","vals":[5909.14,0.0,840.0,840.0,840.0,840.0,9269.14]},{"label":"7430 \u00b7 Professional Development","type":"detail","vals":[88768.49,9766.32,3391.5,18091.5,3391.5,3391.5,126800.81]},{"label":"7440 \u00b7 Dues & Subscriptions","type":"detail","vals":[4342.16,395.36,630.0,630.0,630.0,630.0,7257.52]},{"label":"7450 \u00b7 Permits & Licenses","type":"detail","vals":[9816.63,1825.91,840.0,840.0,840.0,840.0,15002.54]},{"label":"7460 \u00b7 Auto Repair & Maint.","type":"detail","vals":[6162.13,418.02,840.0,840.0,840.0,840.0,9940.15]},{"label":"7470 \u00b7 Shipping & Postage","type":"detail","vals":[2194.85,451.43,315.0,315.0,315.0,315.0,3906.28]},{"label":"7480 \u00b7 Bank Charges & Fees","type":"detail","vals":[1208.97,284.32,157.5,157.5,157.5,157.5,2123.29]},{"label":"7490 \u00b7 Payroll Processing","type":"detail","vals":[8653.46,1280.0,1365.0,1365.0,1365.0,1365.0,15393.46]},{"label":"Total \u2013 Business Overhead","type":"total","vals":[709036.47,118613.02,92862.0,102312.0,87612.0,150612.0,1261047.49]},{"label":"Total Expense","type":"total","vals":[2036406.32,296635.5,283250.36,304398.41,283573.24,348742.65,3553006.48]},{"label":"EBITDA","type":"highlight","vals":[12035070.06,2193244.69,1083038.99,1100649.83,1108512.9,1027777.54,18548294.01]},{"label":"EBITDA %","type":"highlight","vals":[0.6928,0.7236,0.5818,0.5734,0.5741,0.53,0.6612]}];
+var BUDGET_DATA = [{"label":"Income","type":"section","vals":[null,null,null,null,null,null,null]},{"label":"4000 \u00b7 Project Income","type":"detail","vals":[17371195.07,3030810.27,2967223.79,1919665.44,1930745.76,1939056.0,29158696.33]},{"label":"Total Income","type":"total","vals":[17371195.07,3030810.27,2967223.79,1919665.44,1930745.76,1939056.0,29158696.33]},{"label":"Cost of Sales","type":"section","vals":[null,null,null,null,null,null,null]},{"label":"5000 \u00b7 COGS \u2013 Direct Costs","type":"subsection","vals":[0.0,0.0,null,null,null,null,0]},{"label":"5100 \u00b7 Direct Labor","type":"detail","vals":[1511112.1,216259.1,207922.56,262540.56,270863.52,277820.7,2746518.54]},{"label":"5200 \u00b7 Direct Subcontractor Costs","type":"detail","vals":[721971.98,168657.69,156625.81,84538.88,84469.47,84399.65,1300663.48]},{"label":"5300 \u00b7 Direct Materials/Supplies","type":"detail","vals":[13585.74,0.0,0.0,4508.74,4505.04,4501.31,27100.83]},{"label":"5400 \u00b7 Other Direct Costs","type":"detail","vals":[17696.16,3201.54,4853.53,4508.74,4505.04,4501.31,39266.32]},{"label":"Total \u2013 COGS Direct Costs","type":"total","vals":[2264365.98,388118.33,369401.9,356096.92,364343.07,371222.97,4113549.17]},{"label":"6000 \u00b7 COGS \u2013 Indirect Costs","type":"subsection","vals":[0.0,0.0,null,null,null,null,0]},{"label":"6100 \u00b7 DL Overhead","type":"detail","vals":[159612.18,24617.8,30896.51,19643.6,15031.14,16031.14,265832.37]},{"label":"6110 \u00b7 DL Sick/Vacation","type":"detail","vals":[127690.17,16526.17,16500.98,28062.29,45093.43,57712.12,291585.16]},{"label":"6116 \u00b7 DL Bonus","type":"detail","vals":[311387.0,43208.0,43208.0,44483.82,44483.82,44483.82,531254.46]},{"label":"6117 \u00b7 DL Defined Benefit","type":"detail","vals":[25326.0,3058.0,3059.0,3617.67,3617.67,3617.67,42296.01]},{"label":"6118 \u00b7 DL Profit Sharing","type":"detail","vals":[48799.8,10191.0,33638.0,6971.4,6971.4,6971.4,113543.0]},{"label":"6200 \u00b7 DL Health Insurance","type":"detail","vals":[168805.54,27780.35,18586.65,26012.34,27939.18,29866.03,298990.09]},{"label":"6300 \u00b7 DL Life/Disability","type":"detail","vals":[19262.83,2769.05,3119.73,2980.17,3200.92,3421.67,34754.37]},{"label":"6400 \u00b7 DL 401K Match","type":"detail","vals":[42375.55,6538.52,6726.07,6754.93,6754.93,6754.93,75904.93]},{"label":"6500 \u00b7 DL Payroll Taxes","type":"detail","vals":[132093.64,18122.86,18680.09,19994.06,21224.06,22454.06,232568.77]},{"label":"Total \u2013 COGS Indirect Costs","type":"total","vals":[1035352.71,152811.75,174415.03,158520.28,174316.55,191312.84,1886729.16]},{"label":"Total Cost of Sales","type":"total","vals":[3299718.69,540930.08,543816.93,514617.2,538659.62,562535.81,6000278.33]},{"label":"GROSS PROFIT","type":"highlight","vals":[14071476.38,2489880.19,2423406.86,1405048.24,1392086.14,1376520.19,23158418.0]},{"label":"Gross Margin %","type":"highlight","vals":[0.81,0.8215,0.8167,0.7319,0.721,0.7099,0.7942]},{"label":"Expense","type":"section","vals":[null,null,null,null,null,null,null]},{"label":"7100 \u00b7 Admin. Wages/Benefits","type":"subsection","vals":[0.0,0.0,null,null,null,null,0]},{"label":"7105 \u00b7 Admin. Labor","type":"detail","vals":[415441.06,67736.23,71537.62,72406.25,74790.63,73386.25,775298.04]},{"label":"7106 \u00b7 Admin. Bonus","type":"detail","vals":[27709.0,3894.0,3894.0,4156.25,4156.25,4156.25,47965.75]},{"label":"7107 \u00b7 Admin. Defined Benefit","type":"detail","vals":[184506.0,25894.0,25893.0,27676.25,27676.25,27676.25,319321.75]},{"label":"7108 \u00b7 Admin. Profit Sharing","type":"detail","vals":[49540.24,8513.0,10965.0,7431.04,7431.04,7431.04,91311.36]},{"label":"7110 \u00b7 Admin. Labor Sick/Vacation","type":"detail","vals":[15294.46,2936.31,2501.34,4156.25,7021.88,8426.25,40336.49]},{"label":"7130 \u00b7 Officer Labor Premium","type":"detail","vals":[233846.15,30692.34,32153.88,33250.0,33250.0,33250.0,396442.37]},{"label":"7140 \u00b7 Admin. Health Insurance","type":"detail","vals":[29547.39,6704.36,6452.74,7965.03,7965.03,9871.95,68506.5]},{"label":"7150 \u00b7 Admin. Life/Disability","type":"detail","vals":[3827.86,595.34,938.5,739.56,739.56,854.01,7694.83]},{"label":"7160 \u00b7 Admin. 401k Match","type":"detail","vals":[22007.68,2875.38,3012.24,3115.0,3115.0,3115.0,37240.3]},{"label":"7170 \u00b7 Admin. Payroll Taxes","type":"detail","vals":[42789.57,3585.04,3755.72,7009.08,7331.95,7331.95,71803.31]},{"label":"Total \u2013 Admin. Wages/Benefits","type":"total","vals":[1024509.41,153426.0,161104.04,167904.71,173477.59,175498.95,1855920.7]},{"label":"7200 \u00b7 Facilities","type":"subsection","vals":[0.0,0.0,null,null,null,null,0]},{"label":"7210 \u00b7 Rent & Lease","type":"detail","vals":[93444.28,16913.75,16913.75,18808.65,17758.65,17758.65,181597.73]},{"label":"7220 \u00b7 Repairs & Maint. \u2013 Metairie","type":"detail","vals":[189253.31,2500.0,8561.4,11130.0,630.0,630.0,212704.71]},{"label":"7240 \u00b7 Internet/Telephone","type":"detail","vals":[14932.93,4063.41,3078.83,3150.0,3150.0,3150.0,31525.17]},{"label":"7250 \u00b7 Utilities","type":"detail","vals":[5229.92,1119.32,1072.52,1093.05,945.0,1093.05,10552.86]},{"label":"Total \u2013 Facilities","type":"total","vals":[302860.44,24596.48,29626.5,34181.7,22483.65,22631.7,436380.47]},{"label":"7300 \u00b7 Business Overhead","type":"subsection","vals":[0.0,0.0,null,null,null,null,0]},{"label":"7310 \u00b7 Business Insurance","type":"detail","vals":[18104.23,4748.62,18830.57,6615.0,6615.0,22365.0,77278.42]},{"label":"7312 \u00b7 Officer Life Insurance","type":"detail","vals":[13699.46,2460.28,4568.61,2583.0,2583.0,2583.0,28477.35]},{"label":"7320 \u00b7 Legal & Professional Services","type":"detail","vals":[242633.55,47658.75,49943.98,18375.0,18375.0,18375.0,395361.28]},{"label":"7330 \u00b7 Software Subscriptions","type":"detail","vals":[82540.06,17108.19,32396.75,25620.0,25620.0,25620.0,208905.0]},{"label":"7340 \u00b7 Office Expenses","type":"detail","vals":[73416.38,9512.12,8657.82,8400.0,8400.0,8400.0,116786.32]},{"label":"7350 \u00b7 Advertising & Marketing","type":"detail","vals":[9667.99,9840.6,29440.0,1260.0,1260.0,1260.0,52728.59]},{"label":"7360 \u00b7 Meals & Meetings","type":"detail","vals":[12329.32,1304.95,1130.57,1890.0,1890.0,1890.0,20434.84]},{"label":"7370 \u00b7 Travel","type":"detail","vals":[57220.15,7607.44,8572.7,8400.0,8400.0,8400.0,98600.29]},{"label":"7380 \u00b7 Employee Mileage/Parking","type":"detail","vals":[21767.54,2238.98,1533.45,3150.0,3150.0,3150.0,34989.97]},{"label":"7390 \u00b7 Mobile Phones","type":"detail","vals":[9705.41,1491.73,1941.5,1890.0,1890.0,1890.0,18808.64]},{"label":"7400 \u00b7 Entertainment","type":"detail","vals":[39784.74,220.0,10851.04,525.0,525.0,21525.0,73430.78]},{"label":"7410 \u00b7 Client Gifts","type":"detail","vals":[1111.81,0.0,304.95,525.0,525.0,26775.0,29241.76]},{"label":"7420 \u00b7 Charitable Contributions","type":"detail","vals":[5909.14,0.0,4000.0,840.0,840.0,840.0,12429.14]},{"label":"7430 \u00b7 Professional Development","type":"detail","vals":[88768.49,9766.32,10539.54,18091.5,3391.5,3391.5,133948.85]},{"label":"7440 \u00b7 Dues & Subscriptions","type":"detail","vals":[4342.16,395.36,1617.91,630.0,630.0,630.0,8245.43]},{"label":"7450 \u00b7 Permits & Licenses","type":"detail","vals":[9816.63,1825.91,568.1,840.0,840.0,840.0,14730.64]},{"label":"7460 \u00b7 Auto Repair & Maint.","type":"detail","vals":[6162.13,418.02,2728.41,840.0,840.0,840.0,11828.56]},{"label":"7470 \u00b7 Shipping & Postage","type":"detail","vals":[2194.85,451.43,142.53,315.0,315.0,315.0,3733.81]},{"label":"7480 \u00b7 Bank Charges & Fees","type":"detail","vals":[1208.97,284.32,237.71,157.5,157.5,157.5,2203.5]},{"label":"7490 \u00b7 Payroll Processing","type":"detail","vals":[8653.46,1280.0,1152.0,1365.0,1365.0,1365.0,15180.46]},{"label":"Total \u2013 Business Overhead","type":"total","vals":[709036.47,118613.02,189158.14,102312.0,87612.0,150612.0,1357343.63]},{"label":"Total Expense","type":"total","vals":[2036406.32,296635.5,379888.68,304398.41,283573.24,348742.65,3649644.8]},{"label":"EBITDA","type":"highlight","vals":[12035070.06,2193244.69,2043518.18,1100649.83,1108512.9,1027777.54,19508773.2]},{"label":"EBITDA %","type":"highlight","vals":[0.6928,0.7236,0.6887,0.5734,0.5741,0.53,0.6691]}];
 
 var WF_DATA=(function(){
   try{
@@ -3674,7 +3732,7 @@ try { BUDGET_ACTUALS = JSON.parse(localStorage.getItem('basin_budget_actuals')||
 
 var BG_MONTHS  = ['jan_jul','aug','sep','oct','nov','dec'];
 var BG_LABELS  = ['Jan – Jul','Aug','Sep','Oct','Nov','Dec'];
-var BG_IS_ACTUAL = [true, true, false, false, false, false]; // updated by uploads
+var BG_IS_ACTUAL = [true, true, true, false, false, false]; // Jan–Jul, Aug, Sep closed (Sep P&L: IncomeStatement663)
 
 // Merge actuals overrides into a row's values array (indices 0-5, plus index 6 = FY total)
 function bgRowVals(row) {
@@ -9056,62 +9114,66 @@ function bgPostForecast() {
 var YTD_DATA = {
   year: 2026,
   isPlaceholder: false,
-  asOf: 'August 2026',          // UPDATE MONTHLY with the new P&L
+  asOf: 'September 2026',       // UPDATE MONTHLY with the new P&L
+  asOfDate: 'September 30, 2026',
+  source: 'Basin_Project_Data_Sep2026YTD \u00b7 2026ReceivablesActivitySeptYTD \u00b7 2026ProjectMaster',
 
   // ── Every figure below is zeroed out, waiting on real data. Project and
   //    customer names are the live ones from the weekly timesheet uploads.
-  revenue:        20402005,     // 4000 - Project Income, Jan-Aug 2026
-  cashCollected:  9449022,      // UPDATE MONTHLY: cash actually collected YTD
-  projectCount:   184,          // projects contributing revenue
+  revenue:        23365324.13,  // 4000 - Project Income, Jan-Sep 2026 (Sep project data tie-out)
+  cashCollected:  15235375.52,  // customer payments Jan-Sep 2026 (Receivables Activity)
+  projectCount:   193,          // projects contributing revenue, Jan-Sep
   // (revenue - 5000 COGS Direct Costs) / revenue. Indirect costs are
   // deliberately excluded: this is project-level profitability.
-  marginYTD:      0.870,
-  directCosts:    2652484,      // 5000 - COGS Direct Costs, Jan-Aug 2026
+  // Jan-Sep: direct labor at effective rates, subcontractors, materials and
+  // other direct (Sep project data workbook, project profit $20,423,451).
+  marginYTD:      0.874,
+  directCosts:    2941873,      // direct costs, Jan-Sep 2026
   marginMin:      0.67,         // minimum target: a 3x bill rate
   marginTarget:   0.67,
 
   // cash receipts by month, feeding the total above
   cashMonthly: [167565.50, 700526.46, 633345.43, 1316202.70,
                 1243262.10, 2170117.97, 732856.97, 2485145.62,
-                0, 0, 0, 0],
+                5786352.77, 0, 0, 0],
 
-  projection:     28000000,     // 2026 full-year revenue projection
+  projection:     28000000,     // fallback only; ytdProjection() reads Budgeting & Forecasting
 
-  pace2025:       7333425,      // 2025 through Aug, straight-lined (8/12 of full year)
+  pace2025:       8250104,      // 2025 through Sep, straight-lined (9/12 of full year)
   paceIsEstimate: true,         // flip to false once real Jan-Aug 2025 is loaded
   fullYear2025:   11000138,     // 2025 full-year revenue
 
   // Jan -> Dec. Leave a month at 0 until it closes; the "avg/mo" figure and
   // the dashed mean line only count closed months.
-  // Jan-Jul carried at the average for those months; August actual.
-  monthly: [2480000,2480000,2480000,2480000,2480000,2480000,2480000,3030000,0,0,0,0],
+  // Jan-Jul carried at the average for those months; August and September actual.
+  monthly: [2481041,2481041,2481041,2481041,2481041,2481041,2481041,3030810,2967224,0,0,0],
 
   // revenue concentration — top projects by revenue
   // Top projects by YTD Aug revenue, from the Project Breakdown tab.
   // The card derives "All others" from total revenue, so only the top slice
   // is listed here.
   projects: [
-    { name:"25-086 \u00b7 QTS Turkey, TX", rev:4655779 },
+    { name:"25-086 \u00b7 QTS Turkey, TX", rev:4787647 },
     { name:"25-119 \u00b7 QTS State Highway 349, Midland, TX", rev:4173458 },
-    { name:"23-044 \u00b7 QTS SLC1", rev:2250975 },
-    { name:"24-023 \u00b7 QTS CDR East & West Campus", rev:810279 },
-    { name:"25-105 \u00b7 DAS114", rev:632655 },
-    { name:"26-041 \u00b7 SLC1/SLC2 Offsite Road Improvements", rev:350428 },
-    { name:"26-093.1 \u00b7 SLC1 Expansion, SLC2 Phase 1, and SLC Pha\u2026", rev:326164 },
-    { name:"26-028 \u00b7 QTS SLC2 Campus Campus Planning Eagle Mou\u2026", rev:317050 },
-    { name:"26-069 \u00b7 QTS DFW3 - Lancaster, TX", rev:304442 },
-    { name:"26-030 \u00b7 Kinder Morgan TGP Compressor Station 530\u2026", rev:287725 }
+    { name:"23-044 \u00b7 QTS SLC1", rev:2275066 },
+    { name:"26-093 \u00b7 SLC2 Campus Plan - DC1-DC2 Civil Constructi\u2026", rev:1124633 },
+    { name:"24-023 \u00b7 QTS CDR East & West Campus (Stoney Meadows\u2026", rev:944971 },
+    { name:"26-093.1 \u00b7 SLC1 Expansion, SLC2 Phase 1, and SLC Phase\u2026", rev:914781 },
+    { name:"25-105 \u00b7 DAS114 (DC-5, DC-6, DC-7, and DC-8)", rev:665195 },
+    { name:"26-069 \u00b7 QTS DFW3 - Lancaster, TX", rev:423492 },
+    { name:"26-011 \u00b7 Mason City, IA Data Center", rev:351901 },
+    { name:"26-041 \u00b7 SLC1/SLC2 Offsite Road Improvements (1600 W\u2026", rev:350428 }
   ],
 
 
-  // ── Revenue per hour, Aug 2026 YTD (Summary by Customer YTD) ──────────
+  // ── Revenue per hour, Jan–Sep 2026 YTD (Summary by Customer YTD, Sep workbook)
   rph: {
-    blended:  606.50,           // all customers
-    rev:      20175808,
-    hours:    33265.8,
-    qts:      { rph:1273.05, rev:14437062, hours:11340.5 },
-    nonQts:   { rph:261.74, rev:5738746, hours:21925.3 },
-    customerCount: 55,
+    blended:  619.25,           // all customers, company total
+    rev:      23365324,
+    hours:    37731.58,
+    qts:      { rph:1242.64, rev:15882787, hours:12781.5 },
+    nonQts:   { rph:299.90, rev:7482537, hours:24950.08 },
+    customerCount: 56,
     // A 3x bill rate on roughly $50/hr of direct labor puts the floor at
     // $150/hr. Customers under it are flagged; the revenue threshold keeps
     // one-off jobs with a handful of hours out of the list.
@@ -9122,72 +9184,73 @@ var YTD_DATA = {
     // keeps a few-hour job from topping the list on a meaningless rate.
     topMinHours: 250,
     top: [
-      { cust:"Corgan",                              rph:  575.42, hrs:   2831.8, rev:1629488 },
-      { cust:"Waskey Bridges Inc.",                 rph:  505.40, hrs:    941.0, rev:475585 },
-      { cust:"Edged",                               rph:  363.66, hrs:    829.8, rev:301745 },
-      { cust:"Quality Infratech Intelligence, LLC (QII)", rph:  315.97, hrs:    354.2, rev:111934 },
-      { cust:"Floor & Decor",                       rph:  290.09, hrs:    974.5, rev:282690 },
-      { cust:"J Caldarera Company",                 rph:  248.57, hrs:    282.2, rev:70158 },
-      { cust:"JP Department of PW",                 rph:  243.24, hrs:   1370.0, rev:333234 },
-      { cust:"Meyer & Associates, Inc.",            rph:  226.49, hrs:   1625.5, rev:368166 },
-      { cust:"Basic Systems, Inc.",                 rph:  187.17, hrs:    971.0, rev:181740 },
-      { cust:"POH+W Architects Ltd.",               rph:  169.59, hrs:    262.8, rev:44560 }
+      { cust:"Corgan", rph:  804.26, hrs:   3456.8, rev:2780187 },
+      { cust:"Waskey Bridges Inc.", rph:  510.20, hrs:    998.5, rev:509435 },
+      { cust:"Edged", rph:  342.41, hrs:    881.2, rev:301745 },
+      { cust:"Quality Infratech Intelligence, LLC (QII)", rph:  335.66, hrs:    465.8, rev:156334 },
+      { cust:"Floor & Decor", rph:  283.02, hrs:   1088.0, rev:307923 },
+      { cust:"J Caldarera Company", rph:  240.06, hrs:    292.2, rev:70158 },
+      { cust:"Meyer & Associates, Inc.", rph:  234.24, hrs:   1686.0, rev:394933 },
+      { cust:"JP Department of PW", rph:  218.03, hrs:   1659.0, rev:361709 },
+      { cust:"Basic Systems, Inc.", rph:  178.44, hrs:   1150.5, rev:205300 },
+      { cust:"CarMax", rph:  159.34, hrs:   1795.8, rev:286126 }
     ],
 
     // every customer with hours, for the breakdown overlay
     all: [
-      { cust:"Quality Technology Services, LLC", rph:1273.05, hrs:11340.5, rev:14437062 },
-      { cust:"Corgan", rph:575.42, hrs:2831.8, rev:1629488 },
-      { cust:"Waskey Bridges Inc.", rph:505.40, hrs:941.0, rev:475585 },
-      { cust:"Meyer & Associates, Inc.", rph:226.49, hrs:1625.5, rev:368166 },
-      { cust:"JP Department of PW", rph:243.24, hrs:1370.0, rev:333234 },
-      { cust:"Edged", rph:363.66, hrs:829.8, rev:301745 },
-      { cust:"Digital Engineering", rph:105.95, hrs:2671.5, rev:283035 },
-      { cust:"Floor & Decor", rph:290.09, hrs:974.5, rev:282690 },
-      { cust:"CarMax", rph:162.36, hrs:1531.8, rev:248698 },
+      { cust:"Quality Technology Services, LLC", rph:1242.64, hrs:12781.5, rev:15882787 },
+      { cust:"Corgan", rph:804.26, hrs:3456.8, rev:2780187 },
+      { cust:"Waskey Bridges Inc.", rph:510.20, hrs:998.5, rev:509435 },
+      { cust:"Meyer & Associates, Inc.", rph:234.24, hrs:1686.0, rev:394933 },
+      { cust:"JP Department of PW", rph:218.03, hrs:1659.0, rev:361709 },
+      { cust:"Digital Engineering", rph:108.75, hrs:3085.5, rev:335562 },
+      { cust:"Floor & Decor", rph:283.02, hrs:1088.0, rev:307923 },
+      { cust:"Edged", rph:342.41, hrs:881.2, rev:301745 },
+      { cust:"CarMax", rph:159.34, hrs:1795.8, rev:286126 },
       { cust:"Suffolk", rph:13367.63, hrs:17.5, rev:233934 },
-      { cust:"Highland Associates", rph:3292.39, hrs:57.0, rev:187666 },
-      { cust:"Basic Systems, Inc.", rph:187.17, hrs:971.0, rev:181740 },
+      { cust:"Basic Systems, Inc.", rph:178.44, hrs:1150.5, rev:205300 },
+      { cust:"Highland Associates", rph:3207.97, hrs:58.5, rev:187666 },
       { cust:"Venture Global Gator Express, LLC", rph:796.25, hrs:220.0, rev:175174 },
-      { cust:"Rosehill Construction", rph:75.17, hrs:2174.2, rev:163445 },
-      { cust:"Quality Infratech Intelligence, LLC (QII)", rph:315.97, hrs:354.2, rev:111934 },
-      { cust:"J Caldarera Company", rph:248.57, hrs:282.2, rev:70158 },
+      { cust:"Rosehill Construction", rph:72.90, hrs:2295.5, rev:167344 },
+      { cust:"Quality Infratech Intelligence, LLC (QII)", rph:335.66, hrs:465.8, rev:156334 },
+      { cust:"J Caldarera Company", rph:240.06, hrs:292.2, rev:70158 },
+      { cust:"St. Tammany Parish Procurement", rph:341.12, hrs:175.0, rev:59696 },
+      { cust:"Blue Whale Development", rph:144.70, hrs:386.5, rev:55925 },
       { cust:"Long Law Firm", rph:263.12, hrs:211.5, rev:55650 },
-      { cust:"Duplantis Design group", rph:58.67, hrs:927.5, rev:54418 },
-      { cust:"Blue Whale Development", rph:142.36, hrs:337.2, rev:48010 },
+      { cust:"Duplantis Design group", rph:54.52, hrs:1017.5, rev:55475 },
+      { cust:"SCNZ Architects, LLC", rph:128.17, hrs:366.5, rev:46975 },
       { cust:"City of Westlake", rph:97.82, hrs:471.5, rev:46120 },
+      { cust:"POH+W Architects Ltd.", rph:146.02, hrs:312.8, rev:45669 },
       { cust:"Layton - LF Driscoll", rph:488.50, hrs:92.0, rev:44942 },
-      { cust:"POH+W Architects Ltd.", rph:169.59, hrs:262.8, rev:44560 },
-      { cust:"SCNZ Architects, LLC", rph:126.13, hrs:339.0, rev:42758 },
-      { cust:"St. Tammany Parish Procurement", rph:211.87, hrs:175.0, rev:37078 },
-      { cust:"Hoist & Crane Service Group", rph:277.87, hrs:117.2, rev:32580 },
-      { cust:"Watermark Design", rph:242.88, hrs:118.5, rev:28781 },
+      { cust:"Watermark Design", rph:285.56, hrs:146.5, rev:41834 },
+      { cust:"Hoist & Crane Service Group", rph:293.00, hrs:120.8, rev:35380 },
+      { cust:"Diamond Z Engineering, Inc.", rph:192.76, hrs:136.8, rev:26360 },
       { cust:"Outlyr", rph:395.86, hrs:55.5, rev:21970 },
-      { cust:"Copeland and Johns", rph:56.71, hrs:354.5, rev:20102 },
-      { cust:"Woodward Design Group", rph:166.88, hrs:119.5, rev:19942 },
-      { cust:"Frischhertz", rph:166.42, hrs:119.5, rev:19888 },
+      { cust:"Copeland and Johns", rph:57.61, hrs:374.0, rev:21546 },
+      { cust:"Woodward Design Group", rph:158.90, hrs:125.5, rev:19942 },
+      { cust:"Frischhertz", rph:303.63, hrs:65.5, rev:19888 },
       { cust:"Enbridge", rph:585.00, hrs:32.0, rev:18720 },
-      { cust:"Diamond Z Engineering", rph:107.06, hrs:130.8, rev:13998 },
       { cust:"Little", rph:311.98, hrs:40.5, rev:12635 },
-      { cust:"Star Service, Inc. A Fidelity Company", rph:338.91, hrs:33.0, rev:11184 },
+      { cust:"Star Service, Inc. A Fidelity Company", rph:307.56, hrs:40.5, rev:12456 },
       { cust:"Harbor Towing and Fleeting, LLC", rph:21120.00, hrs:0.5, rev:10560 },
+      { cust:"Flavored Operations, LLC", rph:23.46, hrs:431.0, rev:10112 },
       { cust:"Traffic Commander", rph:248.96, hrs:38.5, rev:9585 },
       { cust:"O'Connor Capital Partners", rph:448.78, hrs:20.5, rev:9200 },
       { cust:"SeaLevel Inc.", rph:121.14, hrs:72.5, rev:8782 },
-      { cust:"Cycle Construction", rph:126.85, hrs:67.5, rev:8563 },
       { cust:"A/C Electric Service, Inc.", rph:117.19, hrs:73.0, rev:8555 },
       { cust:"Hutton", rph:1705.00, hrs:5.0, rev:8525 },
       { cust:"The Kitchen Guys", rph:2500.00, hrs:3.0, rev:7500 },
-      { cust:"NOLA Dentures and General Dentistry", rph:51.90, hrs:134.5, rev:6980 },
-      { cust:"M.R. Pittman Group, LLC", rph:67.24, hrs:101.5, rev:6825 },
-      { cust:"New Orleans Center for Aesthetics and Plastic Surgery", rph:77.01, hrs:87.0, rev:6700 },
-      { cust:"Flavored Operations, LLC", rph:19.67, hrs:330.5, rev:6500 },
+      { cust:"NOLA Dentures and General Dentistry", rph:53.73, hrs:139.5, rev:7495 },
+      { cust:"Neo Infrastructure", rph:140.75, hrs:53.0, rev:7460 },
+      { cust:"Frischhertz Barnes JV", rph:130.00, hrs:54.0, rev:7020 },
+      { cust:"New Orleans Center for Aesthetics and Plastic Surgery", rph:75.28, hrs:89.0, rev:6700 },
       { cust:"Madison Capital Group", rph:146.56, hrs:32.0, rev:4690 },
-      { cust:"Arnett Construction Company", rph:189.50, hrs:20.0, rev:3790 },
+      { cust:"Kohl's Department Stores, Inc.", rph:180.00, hrs:25.5, rev:4590 },
+      { cust:"Laitram", rph:43.39, hrs:91.5, rev:3970 },
+      { cust:"Arnett Construction Company", rph:114.85, hrs:33.0, rev:3790 },
       { cust:"Centerpoint Integrated Solutions", rph:203.60, hrs:12.5, rev:2545 },
       { cust:"Build Commercial Construction", rph:33.90, hrs:59.0, rev:2000 },
-      { cust:"Laitram", rph:50.13, hrs:38.5, rev:1930 },
-      { cust:"Mile High Sliders, LLC", rph:54.41, hrs:27.8, rev:1510 },
+      { cust:"Mile High Sliders, LLC", rph:52.52, hrs:28.8, rev:1510 },
       { cust:"Jos. R. Labadot", rph:750.00, hrs:2.0, rev:1500 },
       { cust:"Arthur W. Landry", rph:250.00, hrs:5.0, rev:1250 },
       { cust:"Studio Kiro", rph:246.00, hrs:5.0, rev:1230 }
@@ -9210,19 +9273,31 @@ var YTD_DATA = {
   // ── Unbilled revenue ──────────────────────────────────────────────────
   // From the Unbilled QTS Rev worksheet in the project master; the end-of-month
   // balance per project. UPDATE MONTHLY from the new project master.
+  // 9/30: $2,499,932.70 at 8/31, nothing billed out, $2,051,595.50 added.
   unbilled: {
-    total: 2499932.7,
-    asOf: 'August 2026',
+    total: 4551528.2,
+    asOf: 'September 2026',
     items: [
-      { num:"25-086.1", name:"Turkey P1",             amt:2055060.0 },
-      { num:"26-093.1", name:"SLC",                   amt:326163.7 },
-      { num:"3011",     name:"JP-Harvey Lighting",    amt:13053.0 },
-      { num:"5008",     name:"JP-Ames",               amt:60375.0 },
-      { num:"20001",    name:"JP-Stumpf",             amt:45281.0 }
+      { num:"25-086.1", name:"Turkey P1", cust:"Quality Technology Services, LLC", amt:2091309.5 },
+      { num:"26-093.1", name:"SLC", cust:"Quality Technology Services, LLC", amt:914780.7 },
+      { num:"26-093", name:"SLC2 Campus Plan", cust:"Corgan", amt:889433.0 },
+      { num:"26-093.2", name:"SLC1 Expansion P1", cust:"Quality Technology Services, LLC", amt:328164.0 },
+      { num:"26-069", name:"DFW3 - Lancaster", cust:"Corgan", amt:119050.0 },
+      { num:"5008", name:"JP-Ames", cust:"JP Department of PW", amt:72155.0 },
+      { num:"20001", name:"JP-Stumpf", cust:"JP Department of PW", amt:53238.0 },
+      { num:"3011", name:"JP-Harvey Lighting", cust:"JP Department of PW", amt:21791.0 },
+      { num:"26-118", name:"Eagle Mountain Pre Dev DD", cust:"Quality Technology Services, LLC", amt:16695.0 },
+      { num:"20006", name:"JP Fire Training Center", cust:"Watermark Design", amt:13053.0 },
+      { num:"24-067", name:"DFW2-DAS114", cust:"Corgan", amt:10650.0 },
+      { num:"25-109", name:"EDGED Monroe Campus", cust:"MG2", amt:7209.0 },
+      { num:"25-105", name:"DAS114 (DC5,6,7,8)", cust:"Corgan", amt:5000.0 },
+      { num:"26-092", name:"TX Hwy 89", cust:"QII", amt:4500.0 },
+      { num:"26-117", name:"I-44 & US Route 66, Villa Ridge", cust:"QII", amt:4500.0 }
     ]
   },
 
   backlog: {
+    asOf: 'August 2026',          // not yet refreshed for September
     total: 10134339,
     projectCount: 81,
     // Top jobs, shown as badges on the sash. Decimal sub-projects are rolled
@@ -9326,295 +9401,354 @@ var YTD_DATA = {
   },
 
   labor: {
-    // Hours come from the Summary by Customer YTD tab, which is the
-    // authoritative total. Work logged without a project number is carried as
-    // its own row so the project list ties to the same figure.
-    hours: 33386.6,
-    projectCount: 181,
+    // Jan-Sep direct labor hours from the Sep project data workbook (Jan-Aug
+    // restated to 33,489.58 on the September method, plus 4,242.0 in Sep).
+    // Sub-projects roll into their parent; 26-093, 26-093.1 and 26-093.2
+    // stay separate.
+    hours: 37731.58,
+    projectCount: 219,
     items: [
-      { name:"QTS Turkey, TX",                    hrs: 5308.0, num:"25-086",   cust:"Quality Technology Services, LLC", rev:4655779 },
-      { name:"JP Sewer Bond Program",             hrs: 2138.0, num:"6012-40",  cust:"Digital Engineering", rev:193400 },
-      { name:"DAS114",                            hrs: 1690.5, num:"25-105",   cust:"Corgan", rev:632655 },
-      { name:"QTS CDR East & West Campus",        hrs: 1258.8, num:"24-023",   cust:"Quality Technology Services, LLC", rev:810279 },
-      { name:"QTS State Highway 349, Midland,\u2026", hrs: 1233.5, num:"25-119",   cust:"Quality Technology Services, LLC", rev:4173458 },
-      { name:"Salt Lake City - Eagle Mountain",   hrs: 1224.2, num:"25-064",   cust:"Quality Technology Services, LLC", rev:5357 },
-      { name:"Floor & Decor, Raleigh, NC",        hrs:  974.5, num:"24-002",   cust:"Floor & Decor", rev:282690 },
-      { name:"JP Stumpf Blvd Lighting",           hrs:  763.0, num:"20001",    cust:"JP Department of PW", rev:45281 },
-      { name:"Kinder Morgan TGP Compressor St\u2026", hrs:  601.0, num:"26-030",   cust:"Waskey Bridges Inc.", rev:287725 },
-      { name:"DTE Bell River Mills Filter Sep\u2026", hrs:  587.0, num:"25-122",   cust:"Basic Systems, Inc.", rev:12968 }
+      { name:"QTS Turkey, TX", hrs: 5885.2, num:"25-086", cust:"Quality Technology Services, LLC", rev:4787647 },
+      { name:"JP Sewer Bond Program", hrs: 2791.0, num:"6012", cust:"Digital Engineering", rev:283598 },
+      { name:"DAS114 (DC-5, DC-6, DC-7, and D\u2026", hrs: 1779.0, num:"25-105", cust:"Corgan", rev:665195 },
+      { name:"QTS CDR East & West Campus (Sto\u2026", hrs: 1357.2, num:"24-023", cust:"Quality Technology Services, LLC", rev:944971 },
+      { name:"QTS SLC1", hrs: 1279.8, num:"23-044", cust:"Quality Technology Services, LLC", rev:2275066 },
+      { name:"QTS State Highway 349, Midland,\u2026", hrs: 1233.5, num:"25-119", cust:"Quality Technology Services, LLC", rev:4173458 },
+      { name:"Floor & Decor, Raleigh, NC (Cap\u2026", hrs: 1088.0, num:"24-002", cust:"Floor & Decor", rev:307923 },
+      { name:"JP Stumpf Blvd Lighting", hrs:  924.5, num:"20001", cust:"JP Department of PW", rev:53238 },
+      { name:"QTS DFW3 - Lancaster, TX", hrs:  743.3, num:"26-069", cust:"Corgan", rev:423492 },
+      { name:"CarMax-Brownsville, TX", hrs:  684.0, num:"26-031", cust:"CarMax", rev:80745 }
     ],
     byCustomer: [
-      { cust:"Quality Technology Services, LLC", hrs:11340.5 },
-      { cust:"Corgan", hrs:2831.8 },
-      { cust:"Digital Engineering", hrs:2671.5 },
-      { cust:"Rosehill Construction", hrs:2174.2 },
-      { cust:"Meyer & Associates, Inc.", hrs:1625.5 },
-      { cust:"CarMax", hrs:1531.8 },
-      { cust:"JP Department of PW", hrs:1370.0 },
-      { cust:"Floor & Decor", hrs:974.5 },
-      { cust:"Basic Systems, Inc.", hrs:971.0 },
-      { cust:"Waskey Bridges Inc.", hrs:941.0 },
-      { cust:"Duplantis Design group", hrs:927.5 },
-      { cust:"Edged", hrs:829.8 },
+      { cust:"Quality Technology Services, LLC", hrs:12781.5 },
+      { cust:"Corgan", hrs:3456.8 },
+      { cust:"Digital Engineering", hrs:3085.5 },
+      { cust:"Rosehill Construction", hrs:2295.5 },
+      { cust:"CarMax", hrs:1795.8 },
+      { cust:"Meyer & Associates, Inc.", hrs:1686.0 },
+      { cust:"JP Department of PW", hrs:1659.0 },
+      { cust:"Basic Systems, Inc.", hrs:1150.5 },
+      { cust:"Floor & Decor", hrs:1088.0 },
+      { cust:"Duplantis Design group", hrs:1017.5 },
+      { cust:"Waskey Bridges Inc.", hrs:998.5 },
+      { cust:"Edged", hrs:881.2 },
       { cust:"City of Westlake", hrs:471.5 },
-      { cust:"Copeland and Johns", hrs:354.5 },
-      { cust:"Quality Infratech Intelligence, LLC (QII)", hrs:354.2 },
-      { cust:"SCNZ Architects, LLC", hrs:339.0 },
-      { cust:"Blue Whale Development", hrs:337.2 },
-      { cust:"Flavored Operations, LLC", hrs:330.5 },
-      { cust:"J Caldarera Company", hrs:282.2 },
-      { cust:"POH+W Architects Ltd.", hrs:262.8 },
+      { cust:"Quality Infratech Intelligence, LLC (QII)", hrs:465.8 },
+      { cust:"Flavored Operations, LLC", hrs:431.0 },
+      { cust:"Blue Whale Development", hrs:386.5 },
+      { cust:"Copeland and Johns", hrs:374.0 },
+      { cust:"SCNZ Architects, LLC", hrs:366.5 },
+      { cust:"POH+W Architects Ltd.", hrs:312.8 },
+      { cust:"J Caldarera Company", hrs:292.2 },
       { cust:"Venture Global Gator Express, LLC", hrs:220.0 },
       { cust:"Long Law Firm", hrs:211.5 },
       { cust:"St. Tammany Parish Procurement", hrs:175.0 },
-      { cust:"NOLA Dentures and General Dentistry", hrs:134.5 },
-      { cust:"Diamond Z Engineering", hrs:130.8 },
-      { cust:"Woodward Design Group", hrs:119.5 },
-      { cust:"Frischhertz", hrs:119.5 },
-      { cust:"Watermark Design", hrs:118.5 },
-      { cust:"Hoist & Crane Service Group", hrs:117.2 },
-      { cust:"M.R. Pittman Group, LLC", hrs:101.5 },
+      { cust:"Watermark Design", hrs:146.5 },
+      { cust:"NOLA Dentures and General Dentistry", hrs:139.5 },
+      { cust:"Diamond Z Engineering, Inc.", hrs:136.8 },
+      { cust:"Woodward Design Group", hrs:125.5 },
+      { cust:"Hoist & Crane Service Group", hrs:120.8 },
+      { cust:"M R Pittman Group", hrs:101.5 },
       { cust:"Layton - LF Driscoll", hrs:92.0 },
-      { cust:"New Orleans Center for Aesthetics and Plastic Surgery", hrs:87.0 },
+      { cust:"Laitram", hrs:91.5 },
+      { cust:"New Orleans Center for Aesthetics and Plastic Surgery", hrs:89.0 },
       { cust:"A/C Electric Service, Inc.", hrs:73.0 },
       { cust:"SeaLevel Inc.", hrs:72.5 },
-      { cust:"Cycle Construction", hrs:67.5 },
+      { cust:"Oracle", hrs:69.2 },
+      { cust:"Cycle Construction Company", hrs:67.5 },
+      { cust:"Frischhertz", hrs:65.5 },
       { cust:"Build Commercial Construction", hrs:59.0 },
-      { cust:"Highland Associates", hrs:57.0 },
+      { cust:"Highland Associates", hrs:58.5 },
       { cust:"Outlyr", hrs:55.5 },
+      { cust:"Frischhertz Barnes JV", hrs:54.0 },
+      { cust:"Neo Infrastructure", hrs:53.0 },
       { cust:"Galloway Johnson Tompkins Burr & Smith", hrs:49.0 },
-      { cust:"Oracle", hrs:43.8 },
       { cust:"Little", hrs:40.5 },
+      { cust:"Star Service, Inc. A Fidelity Company", hrs:40.5 },
       { cust:"Traffic Commander", hrs:38.5 },
-      { cust:"Laitram", hrs:38.5 },
-      { cust:"Star Service, Inc. A Fidelity Company", hrs:33.0 },
+      { cust:"Arnett Construction Company", hrs:33.0 },
       { cust:"Enbridge", hrs:32.0 },
       { cust:"Madison Capital Group", hrs:32.0 },
-      { cust:"Mile High Sliders, LLC", hrs:27.8 },
+      { cust:"Mile High Sliders, LLC", hrs:28.8 },
+      { cust:"Kohl's Department Stores, Inc.", hrs:25.5 },
       { cust:"O'Connor Capital Partners", hrs:20.5 },
-      { cust:"Arnett Construction Company", hrs:20.0 },
+      { cust:"Trigon Associates", hrs:18.0 },
       { cust:"Suffolk", hrs:17.5 },
       { cust:"7 Brew Drive Thru Coffee", hrs:16.0 },
+      { cust:"City Park Conservancy", hrs:13.0 },
       { cust:"Centerpoint Integrated Solutions", hrs:12.5 },
       { cust:"Arrowhead Contracting, Inc.", hrs:9.0 },
       { cust:"Hutton", hrs:5.0 },
       { cust:"Arthur W. Landry", hrs:5.0 },
       { cust:"Studio Kiro", hrs:5.0 },
+      { cust:"Thoth Construction, LLC", hrs:5.0 },
+      { cust:"Enginuity Global", hrs:4.0 },
       { cust:"The Kitchen Guys", hrs:3.0 },
       { cust:"Jos. R. Labadot", hrs:2.0 },
-      { cust:"Diamond Z Engineering, Inc.", hrs:1.0 },
       { cust:"Harbor Towing and Fleeting, LLC", hrs:0.5 },
+      { cust:"Lucky Dog Lodge", hrs:0.5 },
       { cust:"CK Associates", hrs:0.5 },
-      { cust:"Zeeco, Inc.", hrs:0.5 },
+      { cust:"Randall-Paulson Architects", hrs:0.5 },
       { cust:"Monro, Inc.", hrs:0.5 },
-      { cust:"Randall-Paulson Architects", hrs:0.5 }
+      { cust:"Zeeco, Inc.", hrs:0.5 }
     ],
     all: [
-      { num:"25-086", name:"QTS - Turkey, TX", cust:"Quality Technology Services, LLC", hrs:5308.0, rev:4655779 },
-      { num:"6012-40", name:"JP Sewer Bond Program", cust:"Digital Engineering", hrs:2138.0, rev:193400 },
-      { num:"25-105", name:"DAS114 (DC-5, DC-6, DC-7, and DC-8)", cust:"Corgan", hrs:1690.5, rev:632655 },
-      { num:"24-023", name:"QTS CDR East & West Campus (Stoney Meadows Laydown)", cust:"Quality Technology Services, LLC", hrs:1258.8, rev:810279 },
+      { num:"25-086", name:"QTS - Turkey, TX", cust:"Quality Technology Services, LLC", hrs:5885.2, rev:4787647 },
+      { num:"6012", name:"JP Sewer Bond Program", cust:"Digital Engineering", hrs:2791.0, rev:283598 },
+      { num:"25-105", name:"DAS114 (DC-5, DC-6, DC-7, and DC-8)", cust:"Corgan", hrs:1779.0, rev:665195 },
+      { num:"24-023", name:"QTS CDR East & West Campus (Stoney Meadows Laydown)", cust:"Quality Technology Services, LLC", hrs:1357.2, rev:944971 },
+      { num:"23-044", name:"QTS - SLC1", cust:"Quality Technology Services, LLC", hrs:1279.8, rev:2275066 },
       { num:"25-119", name:"QTS - State Highway 349, Midland, TX", cust:"Quality Technology Services, LLC", hrs:1233.5, rev:4173458 },
-      { num:"25-064", name:"Salt Lake City - Eagle Mountain", cust:"Quality Technology Services, LLC", hrs:1224.2, rev:5357 },
-      { num:"24-002", name:"Floor & Decor, Raleigh, NC (Capital Square)", cust:"Floor & Decor", hrs:974.5, rev:282690 },
-      { num:"20001", name:"JP Stumpf Blvd Lighting", cust:"JP Department of PW", hrs:763.0, rev:45281 },
-      { num:"26-030", name:"Kinder Morgan TGP Compressor Station 530 Rev.1, MS", cust:"Waskey Bridges Inc.", hrs:601.0, rev:287725 },
-      { num:"25-122", name:"DTE Bell River Mills Filter Separator Platform", cust:"Basic Systems, Inc.", hrs:587.0, rev:12968 },
-      { num:"26-069", name:"QTS - DFW3 - Lancaster, TX", cust:"Corgan", hrs:577.8, rev:304442 },
-      { num:"26-031", name:"CarMax-Brownsville, TX", cust:"CarMax", hrs:567.0, rev:65540 },
-      { num:"26-003", name:"BESS Building, Wadley, GA", cust:"Duplantis Design group", hrs:517.0, rev:29160 },
-      { num:"25-100", name:"Carmax Wayne, NJ expansion", cust:"CarMax", hrs:493.0, rev:70154 },
+      { num:"24-002", name:"Floor & Decor, Raleigh, NC (Capital Square)", cust:"Floor & Decor", hrs:1088.0, rev:307923 },
+      { num:"20001", name:"JP Stumpf Blvd Lighting", cust:"JP Department of PW", hrs:924.5, rev:53238 },
+      { num:"26-069", name:"QTS - DFW3 - Lancaster, TX", cust:"Corgan", hrs:743.3, rev:423492 },
+      { num:"26-031", name:"CarMax-Brownsville, TX", cust:"CarMax", hrs:684.0, rev:80745 },
+      { num:"26-093", name:"SLC2 Campus Plan - DC1-DC2 Civil Construction Drawings", cust:"Corgan", hrs:683.8, rev:1124633 },
+      { num:"26-030", name:"Kinder Morgan TGP Compressor Station 530 Rev.1, MS", cust:"Waskey Bridges Inc.", hrs:657.0, rev:321575 },
+      { num:"25-122", name:"DTE Bell River Mills Filter Separator Platform", cust:"Basic Systems, Inc.", hrs:587.0, rev:13650 },
+      { num:"25-121", name:"Southern Star Viola Energy, Sumner KS", cust:"Basic Systems, Inc.", hrs:563.5, rev:191276 },
+      { num:"26-003", name:"BESS Building, Wadley, GA", cust:"Duplantis Design group", hrs:548.0, rev:29160 },
+      { num:"25-100", name:"Carmax Wayne, NJ expansion", cust:"CarMax", hrs:524.0, rev:70154 },
+      { num:"26-011", name:"Mason City, IA Data Center", cust:"Quality Technology Services, LLC", hrs:523.0, rev:351901 },
       { num:"25-081", name:"National Golf Club of Louisiana", cust:"City of Westlake", hrs:471.5, rev:46120 },
-      { num:"\u2014", name:"No project number assigned", cust:"Rosehill Construction", hrs:445.2, rev:0 },
-      { num:"25-115", name:"Calcasieu Waterworks District No.1 Treatment Plant", cust:"Meyer & Associates, Inc.", hrs:436.5, rev:45000 },
+      { num:"25-096", name:"Mobile, AL Data Center (Prichard)", cust:"Edged", hrs:464.8, rev:127063 },
+      { num:"25-078", name:"CarMax-Riverdale-UT", cust:"CarMax", hrs:457.2, rev:45180 },
+      { num:"25-115", name:"Calcasieu Waterworks District No.1 Treatment Plant", cust:"Meyer & Associates, Inc.", hrs:438.5, rev:45000 },
+      { num:"24-078", name:"John H. Carter, Inc. - Manufacturing & Repair Facility", cust:"Duplantis Design group", hrs:437.5, rev:24200 },
       { num:"26-028", name:"QTS-SLC2 Campus Campus Planning Eagle Mountain, UT", cust:"Quality Technology Services, LLC", hrs:434.2, rev:317050 },
-      { num:"25-096", name:"Mobile, AL Data Center (Prichard)", cust:"Edged", hrs:432.8, rev:127063 },
-      { num:"25-078", name:"CarMax-Riverdale-UT", cust:"CarMax", hrs:424.2, rev:45180 },
-      { num:"25-054", name:"POLC New Grain Terminal at Industrial Canal", cust:"Meyer & Associates, Inc.", hrs:419.5, rev:73850 },
-      { num:"24-078", name:"John H. Carter, Inc. - Manufacturing & Repair Facility", cust:"Duplantis Design group", hrs:403.0, rev:24200 },
-      { num:"25-085", name:"Monroe Data Center Campus", cust:"Edged", hrs:397.0, rev:174682 },
-      { num:"26-011", name:"Mason City, IA Data Center", cust:"Quality Technology Services, LLC", hrs:388.0, rev:207944 },
-      { num:"25-121", name:"Southern Star Viola Energy, Sumner KS", cust:"Basic Systems, Inc.", hrs:384.0, rev:168772 },
+      { num:"25-054", name:"POLC New Grain Terminal at Industrial Canal", cust:"Meyer & Associates, Inc.", hrs:427.0, rev:75162 },
+      { num:"25-085", name:"Monroe Data Center Campus", cust:"Edged", hrs:416.5, rev:174682 },
+      { num:"26-093.1", name:"SLC1 Expansion, SLC2 Phase 1, and SLC Phase 2 Offsite Inf\u2026", cust:"Quality Technology Services, LLC", hrs:410.2, rev:914781 },
+      { num:"26-034", name:"Brookwood \u2013 Highway 59 \u2013 St. Tammany", cust:"Rosehill Construction", hrs:393.2, rev:10480 },
       { num:"25-106", name:"CPPJ Phase 3 Elliot Road Pump Station", cust:"Meyer & Associates, Inc.", hrs:382.0, rev:122325 },
-      { num:"26-034", name:"Brookwood \u2013 Highway 59 \u2013 St. Tammany", cust:"Rosehill Construction", hrs:359.8, rev:9820 },
-      { num:"25-040", name:"UPS New Orleans Expansion", cust:"Copeland and Johns", hrs:354.5, rev:20102 },
-      { num:"26-093", name:"SLC2 Campus Plan - DC1-DC2 Civil Construction Drawings", cust:"Corgan", hrs:341.2, rev:235200 },
-      { num:"26-047", name:"Renovation of 5307 Toler - Laitram Harahan Campus", cust:"SCNZ Architects, LLC", hrs:337.5, rev:42178 },
-      { num:"6012", name:"JP Sewer Bond Program", cust:"Digital Engineering", hrs:336.0, rev:63671 },
-      { num:"26-029", name:"QTS-SLC1 Expansion Campus Campus Planning Eagle Mountain, ", cust:"Quality Technology Services, LLC", hrs:298.5, rev:239755 },
-      { num:"24-101", name:"Brookwood - Hillcroft Ave. - Houston, TX", cust:"Rosehill Construction", hrs:296.8, rev:0 },
-      { num:"25-023", name:"Brookwood - Ambassador Caffery Pkwy", cust:"Rosehill Construction", hrs:291.2, rev:39700 },
-      { num:"5008", name:"JP East Ames Blvd. Roadway", cust:"JP Department of PW", hrs:281.0, rev:95375 },
-      { num:"22006", name:"LA Trace Subdivision Lot Study", cust:"J Caldarera Company", hrs:278.2, rev:69370 },
-      { num:"26-015", name:"ARM Mustang Meter Station Platform", cust:"Waskey Bridges Inc.", hrs:272.0, rev:178500 },
+      { num:"25-040", name:"UPS New Orleans Expansion", cust:"Copeland and Johns", hrs:374.0, rev:21546 },
+      { num:"26-047", name:"Renovation of 5307 Toler - Laitram Harahan Campus", cust:"SCNZ Architects, LLC", hrs:365.0, rev:46395 },
+      { num:"5008", name:"JP East Ames Blvd. Roadway", cust:"JP Department of PW", hrs:361.0, rev:107155 },
+      { num:"24-101", name:"Brookwood - Hillcroft Ave. - Houston, TX", cust:"Rosehill Construction", hrs:324.8, rev:0 },
+      { num:"26-018", name:"QTS-DFW2 Corner Site - Wilmer, TX", cust:"Corgan / QTS", hrs:319.8, rev:241245 },
+      { num:"25-023", name:"Brookwood - Ambassador Caffery Pkwy", cust:"Rosehill Construction", hrs:302.8, rev:39700 },
+      { num:"26-029", name:"QTS-SLC1 Expansion Campus Campus Planning Eagle Mountain,\u2026", cust:"Quality Technology Services, LLC", hrs:298.5, rev:239755 },
+      { num:"22006", name:"LA Trace Subdivision Lot Study", cust:"J Caldarera Company", hrs:288.2, rev:69370 },
+      { num:"24-098", name:"Carmax Waco,TX", cust:"POH+W Architects Ltd.", hrs:285.8, rev:46560 },
+      { num:"26-015", name:"ARM Mustang Meter Station Platform", cust:"Waskey Bridges Inc.", hrs:273.5, rev:178500 },
       { num:"26-044", name:"QTS Rapid AI Standards Development", cust:"Quality Technology Services, LLC", hrs:268.0, rev:183375 },
-      { num:"26-018.4", name:"DFW2 Corner - Temporary Construction Parking, Wilmer, TX", cust:"Quality Technology Services, LLC", hrs:262.2, rev:91740 },
-      { num:"24-098", name:"Carmax Waco,TX", cust:"POH+W Architects Ltd.", hrs:257.2, rev:44560 },
-      { num:"26-038", name:"7 Brew - 3209 Johnson Street - Subwork", cust:"Blue Whale Development", hrs:223.8, rev:44610 },
+      { num:"26-038", name:"7 Brew - 3209 Johnson Street - Subwork", cust:"Blue Whale Development", hrs:267.0, rev:45225 },
+      { num:"3011", name:"JP Harvey Blvd. Roadway Improvement", cust:"JP Department of PW", hrs:261.5, rev:191816 },
+      { num:"26-009", name:"Parish Line Pump Station Improvements Phase 2", cust:"Digital Engineering", hrs:234.5, rev:45500 },
       { num:"25-076", name:"Boat Dock Modifications - Plaquemines, LA", cust:"Venture Global Gator Express, LLC", hrs:220.0, rev:175174 },
       { num:"25-098", name:"Allied World v Morphy Makofsky", cust:"Long Law Firm", hrs:211.5, rev:55650 },
-      { num:"3011-01", name:"JP Harvey Blvd. Roadway Improvement", cust:"JP Department of PW", hrs:200.0, rev:170025 },
       { num:"26-024", name:"Brookwood \u2013 Highway 22 \u2013 St. Tammany Parish", cust:"Rosehill Construction", hrs:194.0, rev:8520 },
+      { num:"26-091", name:"US Hwy 67, Johnson County, TX", cust:"Quality Technology Services, LLC", hrs:185.8, rev:161432 },
       { num:"26-058", name:"LBB Concrete Batch Plant", cust:"Meyer & Associates, Inc.", hrs:178.0, rev:39518 },
-      { num:"24-042", name:"Tammany Trace Bridge #7", cust:"St. Tammany Parish Procurement", hrs:175.0, rev:37078 },
-      { num:"25-031", name:"Brookwood - Pearl, MS", cust:"Rosehill Construction", hrs:138.8, rev:42895 },
-      { num:"26-009", name:"Parish Line Pump Station Improvements Phase 2", cust:"Digital Engineering", hrs:137.5, rev:19500 },
-      { num:"25-118", name:"Schafer Dentistry - Pearl River, LA", cust:"NOLA Dentures and General Dentistry", hrs:134.5, rev:6980 },
+      { num:"24-042", name:"Tammany Trace Bridge #7", cust:"St. Tammany Parish Procurement", hrs:175.0, rev:59696 },
+      { num:"25-118", name:"Schafer Dentistry - Pearl River, LA", cust:"NOLA Dentures and General Dentistry", hrs:139.5, rev:7495 },
+      { num:"25-031", name:"Brookwood - Pearl, MS", cust:"Rosehill Construction", hrs:139.0, rev:42895 },
+      { num:"26-094", name:"FedEx Parking Lot Expansion", cust:"Diamond Z Engineering", hrs:132.2, rev:14930 },
       { num:"25-035", name:"Brookwood - Highway 42 Prairerville, LA", cust:"Rosehill Construction", hrs:130.5, rev:20685 },
-      { num:"26-094", name:"FedEx Parking Lot Expansion", cust:"Diamond Z Engineering", hrs:128.8, rev:7180 },
-      { num:"\u2014", name:"No project number assigned", cust:"Quality Technology Services, LLC", hrs:126.0, rev:0 },
-      { num:"26-093.1", name:"SLC1 Expansion, SLC2 Phase 1, and SLC Phase 2 Offsite Infr", cust:"Quality Technology Services, LLC", hrs:119.2, rev:326164 },
+      { num:"25-003", name:"Brookwood - 11670 Airline Hwy", cust:"Rosehill Construction", hrs:129.5, rev:0 },
+      { num:"25-002", name:"25-002", cust:"(see time report)", hrs:127.5, rev:0 },
+      { num:"25-097", name:"Parking Lot Expansion - Hoist & Crane Service", cust:"Hoist & Crane Service Group", hrs:120.8, rev:35380 },
+      { num:"26-097", name:"Professional Engineering & Land Surveying 7 Brew Breaux B\u2026", cust:"Blue Whale Development", hrs:119.5, rev:10700 },
       { num:"25-084", name:"LC + Standards DD Development", cust:"Quality Technology Services, LLC", hrs:117.8, rev:124140 },
-      { num:"25-097", name:"Parking Lot Expansion - Hoist & Crane Service", cust:"Hoist & Crane Service Group", hrs:117.2, rev:32580 },
-      { num:"26-097", name:"Professional Engineering & Land Surveying 7 Brew Breaux Br", cust:"Blue Whale Development", hrs:113.5, rev:3400 },
+      { num:"25-093", name:"CarMax-Riverview,FL", cust:"CarMax", hrs:109.0, rev:30678 },
       { num:"26-019", name:"7Brew \u2013 Johnston \u2013 Lafayette, LA", cust:"Flavored Operations, LLC", hrs:108.2, rev:500 },
       { num:"24003", name:"Seven Oaks - US 90 Street Lighting", cust:"JP Department of PW", hrs:105.0, rev:9500 },
       { num:"26-022", name:"SELA Urban Flood Control Project. Orleans, Parish", cust:"M.R. Pittman Group, LLC", hrs:101.5, rev:6825 },
       { num:"25-111", name:"DFW2-Jones, Wilmer, TX", cust:"Quality Technology Services, LLC", hrs:100.5, rev:180175 },
+      { num:"24-009", name:"QTS DFW2 DAS 100 (DC-1)", cust:"Corgan", hrs:98.0, rev:11712 },
+      { num:"25-017", name:"25-017", cust:"(see time report)", hrs:94.5, rev:0 },
+      { num:"26-060", name:"Brookwood - Highway 44, Gonzales, LA", cust:"Rosehill Construction", hrs:92.2, rev:6515 },
       { num:"26-013", name:"CDR1 Laydown Area North of 68th Ave., Cedar Rapids, IA", cust:"Layton - LF Driscoll", hrs:92.0, rev:44942 },
-      { num:"24-009", name:"QTS DFW2 DAS 100 (DC-1)", cust:"Corgan", hrs:89.5, rev:11712 },
-      { num:"26-012", name:"3100 Metairie Road", cust:"New Orleans Center for Aesthetics and Plastic Surgery", hrs:87.0, rev:6700 },
+      { num:"26-103", name:"Professional Civil Engineering and Land Surveying Service\u2026", cust:"Laitram", hrs:91.5, rev:3970 },
+      { num:"26-012", name:"3100 Metairie Road", cust:"New Orleans Center for Aesthetics and Plastic Surgery", hrs:89.0, rev:6700 },
+      { num:"25-058", name:"25-058", cust:"(see time report)", hrs:88.0, rev:0 },
+      { num:"26-039", name:"7 Brew - Sulphur, LA - 212 S. Cities", cust:"Flavored Operations, LLC", hrs:82.2, rev:3112 },
+      { num:"26-096", name:"Brookwood - 11203 State Hwy 30, College Station, TX", cust:"Rosehill Construction", hrs:79.2, rev:5840 },
+      { num:"22-070", name:"22-070", cust:"(see time report)", hrs:76.5, rev:0 },
       { num:"26-025", name:"Brookwood - N 3rd Street - Baton Rouge, LA", cust:"Rosehill Construction", hrs:76.0, rev:3900 },
+      { num:"26-104", name:"Salco Road, Chunchula, AL", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:75.0, rev:4500 },
       { num:"25-044", name:"STPSO Training Facility", cust:"Woodward Design Group", hrs:73.5, rev:10482 },
       { num:"26-065", name:"1106 LeBeau Roof Assessment", cust:"A/C Electric Service, Inc.", hrs:73.0, rev:8555 },
-      { num:"26-096", name:"Brookwood - 11203 State Hwy 30, College Station, TX", cust:"Rosehill Construction", hrs:71.8, rev:5076 },
-      { num:"26-064", name:"QII Cedar Port, Houston, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:68.8, rev:4500 },
+      { num:"26-093.2", name:"SLC1 Expansion Phase 1 scope", cust:"Quality Technology Services, LLC", hrs:72.0, rev:328164 },
+      { num:"26-095", name:"ABI01 \u2013 Entry Enhancement Civil Design", cust:"Oracle", hrs:69.2, rev:0 },
+      { num:"26-064", name:"QII Cedar Port, Houston, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:68.8, rev:39900 },
       { num:"26-021", name:"Duke ERE North Carolina Sump Review", cust:"Waskey Bridges Inc.", hrs:68.0, rev:9360 },
-      { num:"24-104", name:"Basin 2 Sea Level Rise Mitigation & Resilience Improvement", cust:"Cycle Construction", hrs:67.5, rev:8563 },
+      { num:"24-104", name:"Basin 2 Sea Level Rise Mitigation & Resilience Improvemen\u2026", cust:"Cycle Construction", hrs:67.5, rev:8563 },
       { num:"26-042", name:"Frischhertz Dow Lab Racks", cust:"Frischhertz", hrs:65.0, rev:18400 },
+      { num:"25-095", name:"West Calcasieu Community Center - Stall Barn Improvement", cust:"Meyer & Associates, Inc.", hrs:62.5, rev:11025 },
+      { num:"20006", name:"JP Fire Training Center", cust:"Watermark Design", hrs:60.5, rev:13053 },
       { num:"26-079", name:"WSLP Hurricane and Storm Risk Reduction Project", cust:"SeaLevel Inc.", hrs:60.5, rev:7020 },
-      { num:"26-060", name:"Brookwood - Highway 44, Gonzales, LA", cust:"Rosehill Construction", hrs:58.8, rev:4040 },
       { num:"25-102", name:"LIV Golf Ops Center", cust:"Outlyr", hrs:55.5, rev:21970 },
-      { num:"25-112", name:"Mobile Predevelopment DD - Mobile and Washington County, A", cust:"Quality Technology Services, LLC", hrs:54.8, rev:270127 },
+      { num:"26-050", name:"WCCH Booster Station", cust:"Meyer & Associates, Inc.", hrs:55.0, rev:9625 },
+      { num:"25-112", name:"Mobile Predevelopment DD - Mobile and Washington County,\u2026", cust:"Quality Technology Services, LLC", hrs:54.8, rev:270127 },
       { num:"25-011", name:"S&WB Power", cust:"Frischhertz", hrs:54.0, rev:0 },
-      { num:"24002", name:"Redesign of the Shrine on Airline", cust:"Watermark Design", hrs:51.0, rev:18555 },
-      { num:"26-018", name:"QTS-DFW2 Corner Site - Wilmer, TX", cust:"Corgan", hrs:50.5, rev:74355 },
-      { num:"\u2014", name:"No project number assigned", cust:"Galloway Johnson Tompkins Burr & Smith", hrs:49.0, rev:0 },
-      { num:"26-050", name:"WCCH Booster Station", cust:"Meyer & Associates, Inc.", hrs:48.5, rev:8225 },
+      { num:"24002", name:"Redesign of the Shrine on Airline", cust:"Watermark Design", hrs:53.0, rev:18555 },
+      { num:"26-112", name:"1544 & 1556 Tchoupitoulas Street New Orleans, LA 70130", cust:"Neo Infrastructure", hrs:53.0, rev:7460 },
+      { num:"26-085", name:"Hockley Business Park, Harris County, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:52.0, rev:4500 },
+      { num:"24-100", name:"Branch Pilots - Venice, LA", cust:"Woodward Design Group", hrs:51.0, rev:1166 },
+      { num:"26-072", name:"7Brew \u2013 Airline Hwy.", cust:"Flavored Operations, LLC", hrs:50.5, rev:500 },
+      { num:"26-048", name:"7 Brew Pineville, LA", cust:"Flavored Operations, LLC", hrs:47.8, rev:500 },
       { num:"26-070", name:"QII-Fort Bend Parkway, Houston, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:47.5, rev:45934 },
-      { num:"26-048", name:"7 Brew Pineville, LA", cust:"Flavored Operations, LLC", hrs:46.2, rev:500 },
-      { num:"24-100", name:"Branch Pilots - Venice, LA", cust:"Woodward Design Group", hrs:45.0, rev:1166 },
       { num:"25-089", name:"Harvey Canal GuideWall Repairs", cust:"Digital Engineering", hrs:44.0, rev:6464 },
-      { num:"26-085", name:"Hockley Business Park, Harris County, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:44.0, rev:4500 },
-      { num:"26-095", name:"ABI01 \u2013 Entry Enhancement Civil Design", cust:"Oracle", hrs:43.8, rev:0 },
-      { num:"25-021", name:"QTS-DFW2-DC4 Wilmer, TX (DC-4)", cust:"Corgan", hrs:42.5, rev:133452 },
-      { num:"26-072", name:"7Brew \u2013 Airline Hwy.", cust:"Flavored Operations, LLC", hrs:42.5, rev:500 },
-      { num:"\u2014", name:"No project number assigned", cust:"Build Commercial Construction", hrs:41.5, rev:0 },
+      { num:"26-017", name:"QTS-DFW2 Marine - Mason Rd. Wilmer, TX", cust:"Quality Technology Services, LLC", hrs:43.0, rev:149879 },
+      { num:"26-056", name:"Brookwood - Union Chapel - Bastrop, TX", cust:"Rosehill Construction", hrs:43.0, rev:5840 },
+      { num:"25-021", name:"QTS-DFW2-DC4 Wilmer, TX (DC-4)", cust:"Corgan", hrs:42.5, rev:135890 },
+      { num:"24-046", name:"24-046", cust:"(see time report)", hrs:41.5, rev:0 },
       { num:"26-051", name:"Intercoast Materials POLC Loading Facility", cust:"Meyer & Associates, Inc.", hrs:41.0, rev:7175 },
-      { num:"\u2014", name:"No project number assigned", cust:"Flavored Operations, LLC", hrs:40.5, rev:0 },
       { num:"25-116", name:"Academy - Pascagoula, MS", cust:"Little", hrs:40.5, rev:12635 },
-      { num:"26-056", name:"Brookwood - Union Chapel - Bastrop, TX", cust:"Rosehill Construction", hrs:38.5, rev:5840 },
-      { num:"26-103", name:"Professional Civil Engineering and Land Surveying Services", cust:"Laitram", hrs:38.5, rev:1930 },
-      { num:"25-095", name:"West Calcasieu Community Center - Stall Barn Improvement", cust:"Meyer & Associates, Inc.", hrs:37.0, rev:6475 },
-      { num:"26-017", name:"QTS-DFW2 Marine - Mason Rd. Wilmer, TX", cust:"Quality Technology Services, LLC", hrs:36.0, rev:239711 },
-      { num:"26-063", name:"QTS - 201 Erie Rd., Eastlake, OH", cust:"Quality Technology Services, LLC", hrs:34.8, rev:0 },
-      { num:"20006", name:"JP Fire Training Center", cust:"Watermark Design", hrs:34.5, rev:0 },
-      { num:"24-069", name:"DFW2-DC3", cust:"Highland Associates", hrs:34.5, rev:79608 },
-      { num:"26-076", name:"Waterford 3 Chiller Foundations", cust:"Star Service, Inc. A Fidelity Company", hrs:33.0, rev:11184 },
-      { num:"25-093", name:"CarMax-Riverview,FL", cust:"CarMax", hrs:32.5, rev:16400 },
+      { num:"26-076", name:"Waterford 3 Chiller Foundations", cust:"Star Service, Inc. A Fidelity Company", hrs:40.5, rev:12456 },
+      { num:"26-109", name:"FM 1301, Matagorda County, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:39.5, rev:4500 },
+      { num:"24-069", name:"DFW2-DC3", cust:"Highland Associates", hrs:35.5, rev:79608 },
+      { num:"26-023", name:"26-023", cust:"(see time report)", hrs:35.0, rev:0 },
+      { num:"26-063", name:"QTS - 201 Erie Rd., Eastlake, OH", cust:"Quality Technology Services, LLC", hrs:34.8, rev:4500 },
+      { num:"26-086", name:"7 Brew - 4308 Ambassador Caffery Pkwy", cust:"Arnett Construction Company", hrs:33.0, rev:3790 },
       { num:"24-044", name:"7 Brew - 4735 Nelson Rd., Lake Charles, LA", cust:"Madison Capital Group", hrs:32.0, rev:4690 },
       { num:"25002", name:"Harvey Volunteer Fire Station #64", cust:"Watermark Design", hrs:30.0, rev:10000 },
       { num:"26-054", name:"Vinton Water Sector UV", cust:"Meyer & Associates, Inc.", hrs:30.0, rev:5250 },
-      { num:"26-091", name:"US Hwy 67, Johnson County, TX", cust:"Quality Technology Services, LLC", hrs:29.5, rev:0 },
+      { num:"26-067", name:"Smalls Sliders \u2013 Alameda \u2013 Lakewood, CO", cust:"Mile High Sliders, LLC", hrs:28.8, rev:1510 },
       { num:"25-107", name:"Bobcat Facility Septic System", cust:"Enbridge", hrs:28.5, rev:12480 },
-      { num:"\u2014", name:"No project number assigned", cust:"Meyer & Associates, Inc.", hrs:28.0, rev:0 },
-      { num:"26-067", name:"Smalls Sliders \u2013 Alameda \u2013 Lakewood, CO", cust:"Mile High Sliders, LLC", hrs:27.8, rev:1510 },
+      { num:"24-073", name:"Rubicon Geismer Lab", cust:"Duplantis Design group", hrs:28.5, rev:2115 },
+      { num:"24-019", name:"24-019", cust:"(see time report)", hrs:28.0, rev:0 },
+      { num:"23-068", name:"QTS COS1-DC1", cust:"Corgan", hrs:27.5, rev:10220 },
       { num:"26-075", name:"QII Bridgeport, Moreland, GA", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:27.5, rev:4500 },
-      { num:"23-068", name:"QTS COS1-DC1", cust:"Corgan", hrs:26.5, rev:10220 },
-      { num:"26-109", name:"FM 1301, Matagorda County, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:24.5, rev:4500 },
-      { num:"26-104", name:"Salco Road, Chunchula, AL", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:23.0, rev:4500 },
-      { num:"24-068", name:"DFW2-DC2", cust:"Highland Associates", hrs:22.5, rev:108058 },
-      { num:"26-057", name:"Brookwood - Highway 71 - Bastrop, TX", cust:"Rosehill Construction", hrs:22.0, rev:5840 },
+      { num:"25-052", name:"25-052", cust:"(see time report)", hrs:27.0, rev:0 },
+      { num:"23-011", name:"No Project Master entry", cust:"POH+W Architects Ltd.", hrs:26.5, rev:0 },
+      { num:"26-052", name:"7 Brew - Siegen, Baton Rouge, LA", cust:"Flavored Operations, LLC", hrs:25.8, rev:500 },
+      { num:"26-116", name:"Land Surveying services for the Seven Brew in Lafayette,\u2026", cust:"Kohl's Department Stores, Inc.", hrs:25.5, rev:4590 },
+      { num:"26-033", name:"QTS - Specifications Standards Maintenance", cust:"Quality Technology Services, LLC", hrs:24.0, rev:11540 },
+      { num:"26-057", name:"Brookwood - Highway 71 - Bastrop, TX", cust:"Rosehill Construction", hrs:23.5, rev:5840 },
+      { num:"24-068", name:"DFW2-DC2", cust:"Highland Associates", hrs:23.0, rev:108058 },
+      { num:"26-098", name:"Professional Civil Engineering Services QTS Prototype Sta\u2026", cust:"Corgan", hrs:22.2, rev:4895 },
       { num:"26-066", name:"7 Brew - 1301 N Barman Ave - Gonzales, LA", cust:"Flavored Operations, LLC", hrs:22.0, rev:500 },
+      { num:"24-094", name:"24-094", cust:"(see time report)", hrs:22.0, rev:0 },
       { num:"26-037", name:"W. Napoleon lane closure TTCP", cust:"Traffic Commander", hrs:21.5, rev:3760 },
-      { num:"3011", name:"JP Harvey Blvd. Roadway Improvement", cust:"JP Department of PW", hrs:21.0, rev:13053 },
+      { num:"25-064", name:"Salt Lake City - Eagle Mountain", cust:"Quality Technology Services, LLC", hrs:21.0, rev:5357 },
       { num:"26-087", name:"1425 Airline Dr. Structural Assessment", cust:"O'Connor Capital Partners", hrs:20.5, rev:9200 },
-      { num:"26-086", name:"7 Brew - 4308 Ambassador Caffery Pkwy", cust:"Arnett Construction Company", hrs:20.0, rev:3790 },
+      { num:"26-071", name:"7Brew \u2013 College Dr. \u2013 Baton Rouge, LA", cust:"Flavored Operations, LLC", hrs:20.0, rev:1000 },
+      { num:"25-080", name:"25-080", cust:"(see time report)", hrs:20.0, rev:0 },
       { num:"26-073", name:"7Brew \u2013 N Airline \u2013 Gonzales, LA", cust:"Flavored Operations, LLC", hrs:19.5, rev:500 },
+      { num:"25-075", name:"CarMax-Uxbridge, MA", cust:"CarMax", hrs:18.5, rev:46110 },
+      { num:"26-055", name:"Lift Station Improvements, Plaquemines Parish, LA", cust:"Trigon Associates", hrs:18.0, rev:0 },
       { num:"26-059", name:"CDR1 76th Ave. SW Tunnel Design, Cedar Rapids, IA", cust:"Suffolk", hrs:17.5, rev:233934 },
-      { num:"26-033", name:"QTS - Specifications Standards Maintenance", cust:"Quality Technology Services, LLC", hrs:17.0, rev:10000 },
       { num:"26-099", name:"QII - Emporia, KS", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:17.0, rev:4500 },
-      { num:"\u2014", name:"No project number assigned", cust:"7 Brew Drive Thru Coffee", hrs:16.0, rev:0 },
-      { num:"\u2014", name:"No project number assigned", cust:"Digital Engineering", hrs:16.0, rev:0 },
-      { num:"26-106", name:"US Hwy 331, Montgomery, AL", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:16.0, rev:4500 },
+      { num:"25-053", name:"Town of Vinton Water Treatment Plant Improvements", cust:"Meyer & Associates, Inc.", hrs:16.0, rev:23275 },
       { num:"26-111", name:"Poland #2", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:16.0, rev:4500 },
-      { num:"26-092", name:"TX Hwy 89, Sinton, TX", cust:"Quality Technology Services, LLC", hrs:15.5, rev:0 },
+      { num:"26-106", name:"US Hwy 331, Montgomery, AL", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:16.0, rev:4500 },
+      { num:"25-036", name:"25-036", cust:"(see time report)", hrs:16.0, rev:0 },
+      { num:"25-048", name:"25-048", cust:"(see time report)", hrs:16.0, rev:0 },
+      { num:"26-092", name:"TX Hwy 89, Sinton, TX", cust:"Quality Technology Services, LLC", hrs:15.5, rev:4500 },
+      { num:"26-117", name:"Test Fit Analysis", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:14.0, rev:4500 },
+      { num:"26-114", name:"Merryville LA110 Sewer Main", cust:"Meyer & Associates, Inc.", hrs:14.0, rev:2450 },
+      { num:"26-062", name:"Hockley #2, Harris County, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:13.0, rev:1000 },
+      { num:"\u2014", name:"No project number assigned", cust:"City Park Conservancy", hrs:13.0, rev:0 },
       { num:"24-097", name:"CarMax Waco, TX  (Centerpoint)", cust:"Centerpoint Integrated Solutions", hrs:12.5, rev:2545 },
       { num:"26-006", name:"Brookwood - Burbank Boat and RV", cust:"Rosehill Construction", hrs:12.5, rev:2035 },
+      { num:"25-047", name:"25-047", cust:"(see time report)", hrs:12.5, rev:0 },
       { num:"25-074", name:"GSSG Monolith Slab Rebar Support Houma Navigation Canal", cust:"SeaLevel Inc.", hrs:12.0, rev:1762 },
-      { num:"25-075", name:"CarMax-Uxbridge, MA", cust:"CarMax", hrs:12.0, rev:37860 },
-      { num:"26-062", name:"Hockley #2, Harris County, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:12.0, rev:1000 },
+      { num:"26-040", name:"26-040", cust:"(see time report)", hrs:12.0, rev:0 },
       { num:"26-035", name:"7Brew \u2013 Louisiana Ave. \u2013 Lafayette, LA", cust:"Flavored Operations, LLC", hrs:11.8, rev:500 },
       { num:"26-083", name:"No Project Master entry", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:11.5, rev:4500 },
+      { num:"26-061", name:"Hockley #1, Harris County, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:11.0, rev:1000 },
       { num:"24-070", name:"Baston Wellness Center - Mirabeau Ave.", cust:"Build Commercial Construction", hrs:10.5, rev:500 },
-      { num:"26-020", name:"DeRidder - West Park Restroom and Basketball Pavilion (H1-", cust:"Meyer & Associates, Inc.", hrs:10.0, rev:1750 },
-      { num:"26-061", name:"Hockley #1, Harris County, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:10.0, rev:1000 },
-      { num:"26-052", name:"7 Brew - Siegen, Baton Rouge, LA", cust:"Flavored Operations, LLC", hrs:9.8, rev:500 },
+      { num:"26-020", name:"DeRidder - West Park Restroom and Basketball Pavilion (H1\u2026", cust:"Meyer & Associates, Inc.", hrs:10.0, rev:1750 },
       { num:"26-027", name:"Causeway between Airline and W. Napoleon", cust:"Traffic Commander", hrs:9.5, rev:2965 },
-      { num:"\u2014", name:"No project number assigned", cust:"Arrowhead Contracting, Inc.", hrs:9.0, rev:0 },
+      { num:"24-010", name:"Permitting", cust:"Flavored Operations, LLC", hrs:9.2, rev:0 },
+      { num:"26-108", name:"West Road, Houston, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:9.0, rev:4500 },
       { num:"25-125", name:"Brookwood - Dowdy - Gonzales, LA", cust:"Rosehill Construction", hrs:9.0, rev:1790 },
-      { num:"26-049", name:"7 Brew 9614 Airline Hwy, East Baton Rouge, LA : Preliminar", cust:"Flavored Operations, LLC", hrs:8.5, rev:500 },
-      { num:"26-078", name:"7Brew - Airline - Baton Rouge", cust:"Flavored Operations, LLC", hrs:8.5, rev:500 },
+      { num:"25-022", name:"25-022", cust:"(see time report)", hrs:9.0, rev:0 },
       { num:"26-110", name:"Poland #1", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:8.5, rev:4500 },
-      { num:"25-053", name:"Town of Vinton Water Treatment Plant Improvements", cust:"Meyer & Associates, Inc.", hrs:8.0, rev:21875 },
+      { num:"26-049", name:"7 Brew 9614 Airline Hwy, East Baton Rouge, LA : Prelimina\u2026", cust:"Flavored Operations, LLC", hrs:8.5, rev:500 },
+      { num:"26-078", name:"7Brew - Airline - Baton Rouge", cust:"Flavored Operations, LLC", hrs:8.5, rev:500 },
       { num:"26-084", name:"No Project Master entry", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:8.0, rev:4500 },
       { num:"26-105", name:"Niederdamer Str., Lingen, Germany", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:8.0, rev:4500 },
-      { num:"26-004", name:"Cart Path Chateau Club", cust:"Traffic Commander", hrs:7.5, rev:2860 },
+      { num:"25-010", name:"25-010", cust:"(see time report)", hrs:8.0, rev:0 },
       { num:"26-041", name:"SLC1/SLC2 Offsite Road Improvements (1600 West)", cust:"Quality Technology Services, LLC", hrs:7.5, rev:350428 },
+      { num:"26-004", name:"Cart Path Chateau Club", cust:"Traffic Commander", hrs:7.5, rev:2860 },
       { num:"26-080", name:"Brookwood \u2013 Stumberg \u2013 St. George, LA", cust:"Rosehill Construction", hrs:7.5, rev:0 },
       { num:"24-074", name:"City of Gonzales Care Center", cust:"Build Commercial Construction", hrs:7.0, rev:1500 },
-      { num:"26-071", name:"7Brew \u2013 College Dr. \u2013 Baton Rouge, LA", cust:"Flavored Operations, LLC", hrs:7.0, rev:500 },
+      { num:"26003", name:"Dickory Ave Multi-Use Path", cust:"JP Department of PW", hrs:7.0, rev:0 },
+      { num:"25-018", name:"QTS-DFW2 Corner Mason Rd, Wilmer, TX", cust:"Corgan", hrs:6.0, rev:66150 },
       { num:"26-043", name:"Brookwood \u2013 Pinson \u2013 Birmingham, AL", cust:"Rosehill Construction", hrs:6.0, rev:1080 },
-      { num:"26-098", name:"Professional Civil Engineering Services QTS Prototype Stan", cust:"Corgan", hrs:5.2, rev:6250 },
-      { num:"22-102", name:"Kiro - 2312 Louisiana Ave", cust:"Studio Kiro", hrs:5.0, rev:1230 },
-      { num:"24-022", name:"Eagle Mountain Additional Land Pre-Development", cust:"Quality Technology Services, LLC", hrs:5.0, rev:605 },
-      { num:"25-018", name:"QTS-DFW2 Corner Mason Rd, Wilmer, TX", cust:"Corgan", hrs:5.0, rev:66150 },
-      { num:"26-001", name:"Brookwood - Highway 931 - Gonzales, LA", cust:"Rosehill Construction", hrs:5.0, rev:960 },
-      { num:"26-016", name:"7Brew \u2013 Gerstner Memorial \u2013 Lake Charles, LA", cust:"Flavored Operations, LLC", hrs:5.0, rev:500 },
+      { num:"25-062", name:"25-062", cust:"(see time report)", hrs:5.8, rev:0 },
       { num:"26-036", name:"Tanya Becnel v. DeRose Builders, Inc.", cust:"Arthur W. Landry", hrs:5.0, rev:1250 },
-      { num:"26-108", name:"West Road, Houston, TX", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:5.0, rev:4500 },
-      { num:"\u2014", name:"No project number assigned", cust:"Hutton", hrs:4.0, rev:0 },
-      { num:"23-011", name:"No Project Master entry", cust:"POH+W Architects Ltd.", hrs:4.0, rev:0 },
-      { num:"24-073", name:"Rubicon Geismer Lab", cust:"Duplantis Design group", hrs:4.0, rev:1058 },
+      { num:"22-102", name:"Kiro - 2312 Louisiana Ave", cust:"Studio Kiro", hrs:5.0, rev:1230 },
+      { num:"26-001", name:"Brookwood - Highway 931 - Gonzales, LA", cust:"Rosehill Construction", hrs:5.0, rev:960 },
+      { num:"24-022", name:"Eagle Mountain Additional Land Pre-Development", cust:"Quality Technology Services, LLC", hrs:5.0, rev:605 },
+      { num:"26-016", name:"7Brew \u2013 Gerstner Memorial \u2013 Lake Charles, LA", cust:"Flavored Operations, LLC", hrs:5.0, rev:500 },
+      { num:"26-122", name:"Creation Full Gospel Baptist Church (4832 Majestic Oaks D\u2026", cust:"Thoth Construction, LLC", hrs:5.0, rev:0 },
+      { num:"24-067", name:"DFW2-DAS114", cust:"Corgan", hrs:4.0, rev:188494 },
+      { num:"26-082", name:"No Project Master entry", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:4.0, rev:4500 },
+      { num:"26-081", name:"No Project Master entry", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:4.0, rev:1000 },
       { num:"26001", name:"700 Metairie Road Property", cust:"J Caldarera Company", hrs:4.0, rev:788 },
       { num:"26-026", name:"Brookwood \u2013 Perkins \u2013 Baton Rouge, LA", cust:"Rosehill Construction", hrs:4.0, rev:760 },
-      { num:"26-082", name:"No Project Master entry", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:4.0, rev:4500 },
-      { num:"26-088", name:"Merryville Replacement of LA 110 Sanitary Sewer Gravity Ma", cust:"Meyer & Associates, Inc.", hrs:4.0, rev:700 },
-      { num:"\u2014", name:"No project number assigned", cust:"Duplantis Design group", hrs:3.5, rev:0 },
+      { num:"26-088", name:"Merryville Replacement of LA 110 Sanitary Sewer Gravity M\u2026", cust:"Meyer & Associates, Inc.", hrs:4.0, rev:700 },
+      { num:"26-115", name:"Buzzi Substation Tap Structural/Civil Design Stockton, PA", cust:"Enginuity Global", hrs:4.0, rev:0 },
+      { num:"25-001", name:"25-001", cust:"(see time report)", hrs:4.0, rev:0 },
       { num:"26-002", name:"Brookwood - Bessemer", cust:"Rosehill Construction", hrs:3.5, rev:440 },
-      { num:"\u2014", name:"No project number assigned", cust:"Watermark Design", hrs:3.0, rev:0 },
+      { num:"24-035", name:"24-035", cust:"(see time report)", hrs:3.5, rev:0 },
+      { num:"25-082", name:"No Project Master entry", cust:"Quality Technology Services, LLC", hrs:3.2, rev:0 },
       { num:"24-064", name:"TKG - New Show Room", cust:"The Kitchen Guys", hrs:3.0, rev:7500 },
-      { num:"24-067", name:"DFW2-DAS114", cust:"Corgan", hrs:3.0, rev:155052 },
-      { num:"26-081", name:"No Project Master entry", cust:"Quality Infratech Intelligence, LLC (QII)", hrs:3.0, rev:1000 },
-      { num:"26-114", name:"Merryville LA110 Sewer Main", cust:"Meyer & Associates, Inc.", hrs:3.0, rev:0 },
-      { num:"\u2014", name:"No project number assigned", cust:"CarMax", hrs:2.0, rev:0 },
-      { num:"26-007", name:"Brookwood - Airline (Flea Market)", cust:"Rosehill Construction", hrs:2.0, rev:400 },
+      { num:"26-107", name:"Professional Engineering Services FedEx MobiDock 310 Jame\u2026", cust:"Diamond Z Engineering", hrs:3.0, rev:6150 },
+      { num:"25001", name:"25001", cust:"(see time report)", hrs:3.0, rev:0 },
       { num:"26-100", name:"Professional Surveying Services - 1425 Sams Ave", cust:"Jos. R. Labadot", hrs:2.0, rev:1500 },
-      { num:"26-107", name:"Professional Engineering Services FedEx MobiDock 310 James", cust:"Diamond Z Engineering", hrs:2.0, rev:1538 },
-      { num:"\u2014", name:"No project number assigned", cust:"Enbridge", hrs:1.8, rev:0 },
+      { num:"26-007", name:"Brookwood - Airline (Flea Market)", cust:"Rosehill Construction", hrs:2.0, rev:400 },
+      { num:"25-091", name:"25-091", cust:"(see time report)", hrs:2.0, rev:0 },
       { num:"25-061", name:"White Castle Septic System", cust:"Enbridge", hrs:1.8, rev:6240 },
-      { num:"\u2014", name:"No project number assigned", cust:"POH+W Architects Ltd.", hrs:1.5, rev:0 },
-      { num:"25-003", name:"Brookwood - 11670 Airline Hwy", cust:"Rosehill Construction", hrs:1.5, rev:0 },
-      { num:"25-082", name:"No Project Master entry", cust:"Quality Technology Services, LLC", hrs:1.5, rev:0 },
-      { num:"24-091", name:"Laitram Renovations", cust:"SCNZ Architects, LLC", hrs:1.0, rev:580 },
-      { num:"25-059", name:"7 Brew - 4735 Nelson Rd., Lake Charles, LA", cust:"Hutton", hrs:1.0, rev:8525 },
-      { num:"25-060", name:"No Project Master entry", cust:"Diamond Z Engineering, Inc.", hrs:1.0, rev:0 },
-      { num:"25-067", name:"Woodward Design Group - Canal Barge", cust:"Woodward Design Group", hrs:1.0, rev:8293 },
+      { num:"25-051", name:"25-051", cust:"(see time report)", hrs:1.8, rev:0 },
+      { num:"25-060", name:"No Project Master entry", cust:"Diamond Z Engineering, Inc.", hrs:1.5, rev:0 },
+      { num:"25-015", name:"25-015", cust:"(see time report)", hrs:1.2, rev:0 },
+      { num:"26-118", name:"ALTA and Topo Survey", cust:"Quality Technology Services, LLC", hrs:1.0, rev:16695 },
       { num:"25-083", name:"CarMax-Warner Robins, GA", cust:"CarMax", hrs:1.0, rev:15040 },
-      { num:"26-039", name:"7 Brew - Sulphur, LA - 212 S. Cities", cust:"Flavored Operations, LLC", hrs:1.0, rev:0 },
-      { num:"\u2014", name:"No project number assigned", cust:"CK Associates", hrs:0.5, rev:0 },
-      { num:"\u2014", name:"No project number assigned", cust:"SCNZ Architects, LLC", hrs:0.5, rev:0 },
-      { num:"\u2014", name:"No project number assigned", cust:"Zeeco, Inc.", hrs:0.5, rev:0 },
-      { num:"24-093", name:"No Project Master entry", cust:"Randall-Paulson Architects", hrs:0.5, rev:0 },
+      { num:"25-059", name:"7 Brew - 4735 Nelson Rd., Lake Charles, LA", cust:"Hutton", hrs:1.0, rev:8525 },
+      { num:"25-067", name:"Woodward Design Group - Canal Barge", cust:"Woodward Design Group", hrs:1.0, rev:8293 },
+      { num:"24-091", name:"Laitram Renovations", cust:"SCNZ Architects, LLC", hrs:1.0, rev:580 },
+      { num:"21-039", name:"21-039", cust:"(see time report)", hrs:1.0, rev:0 },
+      { num:"26-046", name:"Side Scan Sonar & Magnetometer Survey, Gulf Gateway Termi\u2026", cust:"Harbor Towing and Fleeting, LLC", hrs:0.5, rev:10560 },
+      { num:"26-074", name:"Frischertz \u2013 SunBelt Solar", cust:"Frischhertz", hrs:0.5, rev:1488 },
+      { num:"23-063", name:"Lucky Dog Lodge Burbank drive", cust:"Lucky Dog Lodge", hrs:0.5, rev:0 },
+      { num:"21-051", name:"21-051", cust:"(see time report)", hrs:0.5, rev:0 },
+      { num:"21-062", name:"21-062", cust:"(see time report)", hrs:0.5, rev:0 },
+      { num:"25-026", name:"25-026", cust:"(see time report)", hrs:0.5, rev:0 },
+      { num:"25-117", name:"25-117", cust:"(see time report)", hrs:0.5, rev:0 },
       { num:"26-010", name:"Tire Choice, Naples, FL", cust:"Monro, Inc.", hrs:0.5, rev:0 },
-      { num:"26-046", name:"Side Scan Sonar & Magnetometer Survey, Gulf Gateway Termin", cust:"Harbor Towing and Fleeting, LLC", hrs:0.5, rev:10560 },
-      { num:"26-074", name:"Frischertz \u2013 SunBelt Solar", cust:"Frischhertz", hrs:0.5, rev:1488 }
+      { num:"24-093", name:"No Project Master entry", cust:"Randall-Paulson Architects", hrs:0.5, rev:0 },
+      { num:"24-030", name:"24-030", cust:"(see time report)", hrs:0.5, rev:0 }
     ]
   }
 };
 /* ═══════════════ end of data block ═══════════════ */
 
 var SKY_PAL = ['#ff8a7a','#ffc95c','#7fd8b0','#6cb8f0','#b49ae8','#ff9fc4','#58c8cf','#ffab6b','#8fd97e','#7fb0e8'];
+
+// 2026 revenue projection, taken from Budgeting & Forecasting's Total Income
+// for FY 2026 (actuals uploaded so far, then the active Q4 Forecast version,
+// then the plan) so this page always shows the same figure as that tab.
+// 2026 revenue actually booked, from the actuals on Budgeting & Forecasting
+// (Total Income for every month with actuals), and the month it runs through.
+function ytdActuals(){
+  try {
+    var row = (BUDGET_DATA||[]).filter(function(r){ return /^Total Income$/i.test(String(r.label||'').trim()); })[0];
+    if (!row) return null;
+    var v = bgRowVals(row), rev = 0, lastNo = 0;
+    BG_IS_ACTUAL.forEach(function(on, i){
+      var up = i > 0 && Object.keys(BUDGET_ACTUALS[BG_MONTHS[i]]||{}).length > 0;
+      if (!on && !up) return;
+      rev += v[i] || 0;
+      lastNo = i === 0 ? 7 : 7 + i;               // Jan–Jul block, then Aug…Dec
+    });
+    if (!lastNo) return null;
+    var MON = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    return { rev:rev, monthNo:lastNo, asOf:MON[lastNo-1] + ' ' + (YTD_DATA.year || 2026) };
+  } catch(e){ return null; }
+}
+
+function ytdProjection(){
+  try {
+    var row = (BUDGET_DATA||[]).filter(function(r){ return /^Total Income$/i.test(String(r.label||'').trim()); })[0];
+    if (row) { var fy = bgRowVals(row)[6]; if (fy) return fy; }
+  } catch(e){}
+  return YTD_DATA.projection || 0;
+}
 
 function ytd$(n){ return '$'+Math.round(n||0).toLocaleString(); }
 function ytdShort(n){
@@ -10451,7 +10585,10 @@ function ubFor(num){
   var n = String(num).trim(), total = 0;
   u.items.forEach(function(it){
     var k = String(it.num).trim();
-    if (k === n || k.replace(/\.\d+$/,'') === n) total += it.amt;
+    // a sub-project's unbilled belongs to its parent, except where the
+    // sub-project stands alone (26-093.1 / 26-093.2 are not part of 26-093)
+    var standalone = typeof capNoRollup === 'function' && capNoRollup(k);
+    if (k === n || (!standalone && k.replace(/\.\d+$/,'') === n)) total += it.amt;
   });
   return total;
 }
@@ -10462,57 +10599,41 @@ function openUnbilled(){
   var rows = u.items.slice().sort(function(a,b){ return b.amt - a.amt; });
   var total = rows.reduce(function(s,r){ return s+r.amt; }, 0);
 
-  // Each slice is an arc with a leader line out to its own label, so the ring
-  // reads on its own without cross-referencing the list.
-  var CX = 190, CY = 190, R = 108, TH = 46;
+  // A plain ring; the list beside it does the labelling. Hovering a row (or
+  // a slice) pulls that slice out of the ring, lights it, and puts its
+  // figures in the centre.
+  var CX = 190, CY = 190, R = 128, TH = 50;
   var C = 2*Math.PI*R, off = 0;
-  var arcs = '', leaders = '', labels = '';
-  var lastLeft = -999, lastRight = -999;
-
+  var arcs = '';
   rows.forEach(function(r, i){
     var frac = r.amt/total;
     var col  = UB_PAL[i % UB_PAL.length];
-    arcs += '<circle class="ub-slice" data-ub="'+i+'" cx="'+CX+'" cy="'+CY+'" r="'+R+'" fill="none" '+
+    var mid  = (off + frac/2) * 2*Math.PI - Math.PI/2;
+    var dx = Math.cos(mid) * 14, dy = Math.sin(mid) * 14;
+    arcs += '<g class="ub-g" data-ub="'+i+'" style="--dx:'+dx.toFixed(1)+'px;--dy:'+dy.toFixed(1)+'px;--c:'+col+';">'+
+      '<circle class="ub-slice" data-ub="'+i+'" cx="'+CX+'" cy="'+CY+'" r="'+R+'" fill="none" '+
       'stroke="'+col+'" stroke-width="'+TH+'" '+
-      'stroke-dasharray="'+Math.max(0,(frac*C)-2).toFixed(2)+' '+C.toFixed(2)+'" '+
+      'stroke-dasharray="'+Math.max(0.6,(frac*C)-2).toFixed(2)+' '+C.toFixed(2)+'" '+
       'stroke-dashoffset="'+(-off*C).toFixed(2)+'" '+
-      'transform="rotate(-90 '+CX+' '+CY+')"><title>'+r.num+' \u00b7 '+ytd$(r.amt)+'</title></circle>';
-
-    // leader from the middle of the slice out to a label
-    var mid = (off + frac/2) * 2*Math.PI - Math.PI/2;
-    var right = Math.cos(mid) >= 0;
-    var x1 = CX + Math.cos(mid)*(R + TH/2 - 4), y1 = CY + Math.sin(mid)*(R + TH/2 - 4);
-    var x2 = CX + Math.cos(mid)*(R + TH/2 + 16), y2 = CY + Math.sin(mid)*(R + TH/2 + 16);
-    // keep labels from colliding when slices are thin
-    var track = right ? lastRight : lastLeft;
-    if (y2 - track < 30 && track > -900) y2 = track + 30;
-    if (right) lastRight = y2; else lastLeft = y2;
-    var x3 = right ? CX + R + TH/2 + 34 : CX - R - TH/2 - 34;
-
-    leaders += '<path class="ub-lead" data-ub="'+i+'" d="M'+x1.toFixed(1)+','+y1.toFixed(1)+
-      ' L'+x2.toFixed(1)+','+y2.toFixed(1)+' L'+x3.toFixed(1)+','+y2.toFixed(1)+'" '+
-      'fill="none" stroke="'+col+'" stroke-width="1.4" opacity="0.75"/>'+
-      '<circle cx="'+x3.toFixed(1)+'" cy="'+y2.toFixed(1)+'" r="2.4" fill="'+col+'"/>';
-
-    labels += '<text class="ub-lab" data-ub="'+i+'" x="'+(right?x3+7:x3-7).toFixed(1)+'" '+
-      'y="'+(y2-2).toFixed(1)+'" text-anchor="'+(right?'start':'end')+'" '+
-      'font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="800" '+
-      'fill="'+col+'">'+r.num+'</text>'+
-      '<text class="ub-lab2" data-ub="'+i+'" x="'+(right?x3+7:x3-7).toFixed(1)+'" '+
-      'y="'+(y2+11).toFixed(1)+'" text-anchor="'+(right?'start':'end')+'" '+
-      'font-family="Helvetica,Arial" font-size="11" font-weight="700" '+
-      'fill="#8a6a2a">'+(frac*100).toFixed(1)+'% \u00b7 '+ytdShort(r.amt)+'</text>';
-
+      'transform="rotate(-90 '+CX+' '+CY+')"/>'+
+      // a beacon just outside the ring, so even a sliver is easy to find
+      '<g class="ub-pin" transform="translate('+(CX + Math.cos(mid)*(R+TH/2+16)).toFixed(1)+' '+
+        (CY + Math.sin(mid)*(R+TH/2+16)).toFixed(1)+')">'+
+        '<circle r="9" fill="'+col+'" class="ub-pulse"/><circle r="5" fill="'+col+'" stroke="#fff" stroke-width="1.6"/></g>'+
+      '</g>';
     off += frac;
   });
+  UB_ROWS = rows; UB_TOTAL = total;
 
   var legend = rows.map(function(r, i){
+    var col = UB_PAL[i%UB_PAL.length], pc = r.amt/total*100;
     return '<div class="ub-row" data-ub="'+i+'">'+
-      '<span class="ub-sw" style="background:'+UB_PAL[i%UB_PAL.length]+';"></span>'+
+      '<span class="ub-sw" style="background:'+col+';"></span>'+
       '<span class="ub-pn">'+r.num+'</span>'+
       '<span class="ub-nm">'+r.name+'</span>'+
+      '<span class="ub-share"><i style="width:'+Math.max(pc,1.2).toFixed(1)+'%;background:'+col+';"></i></span>'+
       '<span class="ub-amt">'+ytd$(r.amt)+'</span>'+
-      '<span class="ub-pct">'+(r.amt/total*100).toFixed(1)+'%</span>'+
+      '<span class="ub-pct">'+pc.toFixed(1)+'%</span>'+
     '</div>';
   }).join('');
 
@@ -10526,52 +10647,86 @@ function openUnbilled(){
   ov.innerHTML =
     '<div class="ub-card">'+
       '<button class="ub-x" onclick="closeUnbilled()">\u00d7</button>'+
-      '<div class="ub-title">Unbilled Revenue by Project</div>'+
-      '<div class="ub-total">'+ytd$(total)+'</div>'+
-      '<div class="ub-sub">'+rows.length+' projects \u00b7 work performed, not yet invoiced \u00b7 as of '+
-        (u.asOf||'')+'</div>'+
+      '<div class="ub-head">'+
+        '<div class="ub-title">Unbilled Revenue by Project</div>'+
+        '<div class="ub-total">'+ytd$(total)+'</div>'+
+        '<div class="ub-sub">Work performed, not yet invoiced \u00b7 as of '+(u.asOf||'')+'</div>'+
+        '<div class="ub-orn"><i></i><b></b><i></i></div>'+
+      '</div>'+
       '<div class="ub-body">'+
-        '<svg viewBox="-92 8 564 364" style="width:min(560px,56vw);height:auto;flex-shrink:0;">'+
+        '<svg class="ub-ring" viewBox="16 16 348 348" style="width:min(380px,44vw);height:auto;flex-shrink:0;overflow:visible;">'+
           '<circle cx="'+CX+'" cy="'+CY+'" r="'+R+'" fill="none" '+
             'stroke="rgba(176,125,22,0.10)" stroke-width="'+TH+'"/>'+
-          arcs + leaders + labels +
-          '<text x="'+CX+'" y="'+(CY-4)+'" text-anchor="middle" font-family="Helvetica,Arial" '+
-            'font-size="27" font-weight="800" fill="#a8720f">'+ytdShort(total)+'</text>'+
-          '<text x="'+CX+'" y="'+(CY+15)+'" text-anchor="middle" font-family="monospace" '+
-            'font-size="9.5" letter-spacing="1.6" fill="#a58a55">UNBILLED</text>'+
+          arcs +
+          '<text id="ub-c0" x="'+CX+'" y="'+(CY-30)+'" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" '+
+            'font-size="12" font-weight="800" fill="#a58a55"></text>'+
+          '<text id="ub-c1" x="'+CX+'" y="'+(CY+4)+'" text-anchor="middle" font-family="Helvetica,Arial" '+
+            'font-size="30" font-weight="800" fill="#a8720f">'+rows.length+'</text>'+
+          '<text id="ub-c2" x="'+CX+'" y="'+(CY+24)+'" text-anchor="middle" font-family="monospace" '+
+            'font-size="10" letter-spacing="1.6" fill="#a58a55">PROJECTS</text>'+
+          '<text id="ub-c3" x="'+CX+'" y="'+(CY+42)+'" text-anchor="middle" font-family="Helvetica,Arial" '+
+            'font-size="10.5" font-weight="600" fill="#8a6a2a"></text>'+
         '</svg>'+
-        '<div class="ub-legend">'+legend+'</div>'+
+        '<div class="ub-legend">'+
+          '<div class="ub-lh"><span>Project</span><span>Share</span><span>Unbilled</span><span></span></div>'+
+          legend+
+          '<div class="ub-hint">Hover a project to find it on the ring</div>'+
+        '</div>'+
       '</div>'+
     '</div>';
   ov.classList.add('open');
   wireUnbilled();
 }
 
-// hovering a legend row lights its slice and dims the others
+// Hovering a list row (or a slice) pulls that slice out of the ring, lights
+// it in its own colour, dims the rest, and puts its figures in the centre.
+var UB_ROWS = [], UB_TOTAL = 0;
 function wireUnbilled(){
-  var slices = document.querySelectorAll('#unbilled-ov .ub-slice');
+  var groups = document.querySelectorAll('#unbilled-ov .ub-g');
   var legend = document.querySelectorAll('#unbilled-ov .ub-row');
-  var marks  = document.querySelectorAll('#unbilled-ov .ub-lead, #unbilled-ov .ub-lab, #unbilled-ov .ub-lab2');
+  var c0 = document.getElementById('ub-c0'), c1 = document.getElementById('ub-c1'),
+      c2 = document.getElementById('ub-c2'), c3 = document.getElementById('ub-c3');
+  function centre(r, col){
+    if (!c1) return;
+    if (!r) {
+      c0.textContent = ''; c3.textContent = '';
+      c1.textContent = String(UB_ROWS.length); c1.setAttribute('fill', '#a8720f');
+      c2.textContent = 'PROJECTS';
+      return;
+    }
+    var nm = String(r.name || '');
+    c0.textContent = r.num;
+    c1.textContent = ytdShort(r.amt); c1.setAttribute('fill', col);
+    c2.textContent = (r.amt / UB_TOTAL * 100).toFixed(1) + '% OF UNBILLED';
+    c3.textContent = nm.length > 30 ? nm.slice(0, 29) + '\u2026' : nm;
+  }
   function focus(k){
-    slices.forEach(function(sl){
-      sl.classList.toggle('lit', sl.dataset.ub === k);
-      sl.classList.toggle('dim', sl.dataset.ub !== k);
+    var i = +k;
+    groups.forEach(function(g){
+      g.classList.toggle('lit', g.dataset.ub === k);
+      g.classList.toggle('dim', g.dataset.ub !== k);
+      // bring the lit slice to the front so its glow isn't covered
+      if (g.dataset.ub === k) g.parentNode.insertBefore(g, document.getElementById('ub-c0'));
     });
-    marks.forEach(function(m){ m.classList.toggle('dim', m.dataset.ub !== k); });
-    legend.forEach(function(rw){ rw.classList.toggle('dim', rw.dataset.ub !== k); });
+    legend.forEach(function(rw){
+      rw.classList.toggle('lit', rw.dataset.ub === k);
+      rw.classList.toggle('dim', rw.dataset.ub !== k);
+    });
+    centre(UB_ROWS[i], UB_PAL[i % UB_PAL.length]);
   }
   function clear(){
-    slices.forEach(function(sl){ sl.classList.remove('lit','dim'); });
-    marks.forEach(function(m){ m.classList.remove('dim'); });
-    legend.forEach(function(rw){ rw.classList.remove('dim'); });
+    groups.forEach(function(g){ g.classList.remove('lit','dim'); });
+    legend.forEach(function(rw){ rw.classList.remove('lit','dim'); });
+    centre(null);
   }
   legend.forEach(function(rw){
+    rw.style.setProperty('--c', UB_PAL[(+rw.dataset.ub) % UB_PAL.length]);
     rw.addEventListener('mouseenter', function(){ focus(rw.dataset.ub); });
     rw.addEventListener('mouseleave', clear);
   });
-  slices.forEach(function(sl){
-    sl.addEventListener('mouseenter', function(){ focus(sl.dataset.ub); });
-    sl.addEventListener('mouseleave', clear);
+  groups.forEach(function(g){
+    g.addEventListener('mouseenter', function(){ focus(g.dataset.ub); });
+    g.addEventListener('mouseleave', clear);
   });
 }
 
@@ -10816,10 +10971,27 @@ function renderYTD(){
   if(!el) return;
 
   var sp = document.getElementById('ytd-status');
-  if(sp) sp.style.display = D.isPlaceholder ? 'block' : 'none';
+  if(sp) {
+    sp.style.display = 'block';
+    sp.classList.toggle('live', !D.isPlaceholder);
+    sp.innerHTML = D.isPlaceholder ? 'PLACEHOLDER DATA'
+      : '<i></i>Updated through ' + (D.asOfDate || D.asOf || '');
+    sp.title = D.source ? 'Sources: ' + D.source : '';
+  }
 
-  var vsProj   = D.projection ? D.revenue / D.projection : 0;
-  var remain   = Math.max(0, D.projection - D.revenue);
+  var proj     = ytdProjection();
+  // headline revenue and its date follow the actuals on Budgeting & Forecasting
+  var ACT      = ytdActuals();
+  // Use whichever runs later: the actuals on Budgeting & Forecasting, or this
+  // page's own project data (September arrives here before the P&L is loaded
+  // on the budget tab).
+  var MONS = ['january','february','march','april','may','june','july','august','september','october','november','december'];
+  var dMo  = MONS.indexOf(String(D.asOf||'').split(' ')[0].toLowerCase()) + 1;
+  var useAct = ACT && ACT.monthNo >= dMo;
+  var REV      = useAct ? ACT.rev : D.revenue;
+  var REV_ASOF = useAct ? ACT.asOf : D.asOf;
+  var vsProj   = proj ? REV / proj : 0;
+  var remain   = Math.max(0, proj - REV);
   var vsPace   = D.pace2025 ? D.revenue / D.pace2025 : 0;
   var paceDiff = D.revenue - D.pace2025;
   var mgDelta  = (D.marginYTD - (D.marginMin || D.marginTarget)) * 100;
@@ -10829,9 +11001,9 @@ function renderYTD(){
   '<div class="sky-card">'+
     '<div class="sc-titlerow">'+
       '<div class="sc-label" style="text-align:center;flex:1;">'+D.year+' Revenue</div>'+
-      (D.asOf ? '<div class="ytd-asof">as of '+D.asOf+'</div>' : '')+
+      (REV_ASOF ? '<div class="ytd-asof">as of '+REV_ASOF+'</div>' : '')+
     '</div>'+
-    '<div class="sc-huge" style="text-align:center;">'+ytd$(D.revenue)+'</div>'+
+    '<div class="sc-huge" style="text-align:center;">'+ytd$(REV)+'</div>'+
     '<div class="cash-box cash-click" onclick="openCashFlow()" title="Click for the month-by-month breakdown">'+
       '<div class="sc-label" style="margin-bottom:4px;">Cash Collected'+
         '<span class="cash-cue">\u25f7 monthly</span></div>'+
@@ -10865,10 +11037,10 @@ function renderYTD(){
     '<div class="bal-stage">'+skyBalloons(vsProj)+'</div>'+
     '<div style="text-align:center;margin-top:4px;">'+
       '<div class="sc-label" style="margin-bottom:3px;">'+D.year+' Projection</div>'+
-      '<div class="sc-mid">'+ytd$(D.projection)+'</div>'+
+      '<div class="sc-mid">'+ytd$(proj)+'</div>'+
     '</div>'+
     '<div class="bal-foot">'+
-      '<div><div class="bf-k">YTD Revenue</div><div class="bf-v" style="color:#17a06f;">'+ytd$(D.revenue)+'</div></div>'+
+      '<div><div class="bf-k">YTD Revenue</div><div class="bf-v" style="color:#17a06f;">'+ytd$(REV)+'</div></div>'+
       '<div><div class="bf-k">Remaining</div><div class="bf-v" style="color:#8b6fd0;">'+ytd$(remain)+'</div></div>'+
     '</div>'+
   '</div>';
@@ -11003,7 +11175,8 @@ function renderYTD(){
     '<div class="sc-head"><div class="sc-label" style="margin:0;">Total Backlog</div>'+
       '<div class="sc-link" onclick="openBacklog()" style="cursor:pointer;">view breakdown &#8599;</div></div>'+
     '<div class="sc-huge" style="font-size:34px;color:#b07d16;">'+ytd$(bk.total)+'</div>'+
-    '<div class="sc-note" style="margin-top:6px;">'+bk.projectCount+' projects &middot; remaining contract value</div>'+
+    '<div class="sc-note" style="margin-top:6px;">'+bk.projectCount+' projects &middot; remaining contract value'+
+      (bk.asOf && bk.asOf !== D.asOf ? ' &middot; <b style="color:#b07d16;">as of '+bk.asOf+'</b>' : '')+'</div>'+
     '<div class="sash"><div class="sash-cap">Backlog Sash \u00b7 top '+bkItems.length+'</div>'+
       '<div class="sash-in">'+badges+'</div></div>'+ bkRows +
   '</div>';
@@ -11045,7 +11218,7 @@ function renderYTD(){
     '<div style="display:flex;align-items:baseline;gap:8px;">'+
       '<div class="sc-huge" style="font-size:34px;color:#7b57c8;">'+Math.round(lb.hours||0).toLocaleString()+'</div>'+
       '<div style="font-size:15px;font-weight:700;color:#9b7fd4;">hrs</div></div>'+
-    '<div class="sc-note" style="margin-top:6px;">'+lb.projectCount+' projects &middot; hours recorded to projects &middot; '+D.year+' YTD</div>'+
+    '<div class="sc-note" style="margin-top:6px;">'+lb.projectCount+' projects &middot; hours recorded to projects &middot; through '+(D.asOf||'')+'</div>'+
     '<div class="lb-chart">'+lbBars+'</div>'+ lhRows +
   '</div>';
 
@@ -13467,13 +13640,14 @@ function capWeekAvgDLRate(wk) {
   return hrs > 0 ? cost / hrs : 0;
 }
 
-// Sub-projects normally roll into their parent. These stand alone because the
-// sub-project serves a different customer.
-var CAP_NO_ROLLUP = ['26-093', '26-093.1'];
+// Sub-projects normally roll into their parent. These stand alone: 26-093.1
+// and 26-093.2 are QTS work under a Corgan parent (26-093), and 26-093.2
+// (SLC Expansion Phase 1) is tracked as its own project, as it is on
+// Active Projects.
+var CAP_NO_ROLLUP = ['26-093', '26-093.1', '26-093.2'];
 
-// Sub-projects whose parent is not the plain whole number. 26-093.2 is QTS
-// work, so it belongs with 26-093.1 (QTS) rather than 26-093 (Corgan).
-var CAP_ROLLUP_TO = { '26-093.2': '26-093.1' };
+// Sub-projects whose parent is not the plain whole number (none at present).
+var CAP_ROLLUP_TO = {};
 
 // Where a project's hours should be counted.
 function capParentOf(num){
@@ -14085,13 +14259,14 @@ function capShowPriorsChart(metric) {
 
   if (!points.length) { alert('No data found for this metric.'); return; }
 
-  var W=520, H=248, PL=66,PR=18,PT=28,PB=56;
+  var W=Math.max(560, Math.min(760, 70*points.length + 120)), H=290, PL=66,PR=26,PT=40,PB=58;
   var cW=W-PL-PR, cH=H-PT-PB;
   var vals = points.map(function(p){ return p.val; });
   var minV=Math.min.apply(null,vals), maxV=Math.max.apply(null,vals);
   var rng  = maxV - minV || 1;
-  var yMin = Math.max(0, minV - rng*0.15);
-  var yMax = maxV + rng*0.15;
+  // headroom above and below so tags on the highest and lowest points fit
+  var yMin = Math.max(0, minV - rng*0.3);
+  var yMax = maxV + rng*0.24;
   var yRng = yMax - yMin;
 
   function px(i){ return PL + (i / Math.max(points.length-1,1)) * cW; }
@@ -14116,19 +14291,45 @@ function capShowPriorsChart(metric) {
            ' style="font-family:var(--mono);">'+tk.lbl+'</text>';
   }).join('');
 
-  var dotLabels = points.map(function(p,i){
-    var x=px(i).toFixed(1), y=py(p.val).toFixed(1);
+  // Value labels sit in solid tags so the line, glow and grid never run
+  // through them. Each goes on the side of its point away from the line
+  // (above a peak, below a dip), then neighbours that would touch are split.
+  var tags = points.map(function(p,i){
+    var x = px(i), y = py(p.val);
     var vl = isUtil ? p.val.toFixed(1)+'%' : '$'+Math.round(p.val);
-    var above = p.val > (yMin+yRng*0.65);
-    var ly = above ? (parseFloat(y)+18) : (parseFloat(y)-11);
-    // Nudge the end points inward so they clear the y-axis ticks / right edge
-    var last = (i === points.length-1);
-    var anch = i===0 ? 'start' : (last ? 'end' : 'middle');
-    var lx   = i===0 ? (parseFloat(x)+9) : (last ? (parseFloat(x)-9) : parseFloat(x));
-    return '<circle cx="'+x+'" cy="'+y+'" r="5" fill="'+color+'" stroke="rgba(3,6,18,0.9)" stroke-width="2"/>'+
-           '<text x="'+lx.toFixed(1)+'" y="'+ly+'" text-anchor="'+anch+'" font-size="12" font-weight="900"'+
-           ' fill="'+color+'" style="font-family:Chakra Petch,sans-serif;'+
-           'filter:drop-shadow(0 0 6px rgba('+rgb+',0.6));">'+vl+'</text>';
+    var prev = points[i-1], next = points[i+1];
+    var nb = [prev, next].filter(Boolean).map(function(q){ return q.val; });
+    var nbAvg = nb.length ? nb.reduce(function(a,b){ return a+b; },0)/nb.length : p.val;
+    var up = p.val >= nbAvg;
+    var w = vl.length*7 + 12;
+    var cx = Math.min(Math.max(x, PL + w/2 + 2), PL + cW - w/2 + 2);
+    return { x:x, y:y, cx:cx, w:w, vl:vl, up:up };
+  });
+  function tagY(t){ return t.up ? t.y - 22 : t.y + 22; }
+  for (var pass = 0; pass < 2; pass++) {
+    for (var k = 1; k < tags.length; k++) {
+      var a2 = tags[k-1], b2 = tags[k];
+      var overlapX = Math.abs(a2.cx - b2.cx) < (a2.w + b2.w)/2 + 4;
+      if (overlapX && a2.up === b2.up && Math.abs(tagY(a2) - tagY(b2)) < 20) {
+        // flip whichever has more room on the other side
+        if (b2.up ? b2.y + 40 < PT + cH : b2.y - 40 > PT) b2.up = !b2.up; else a2.up = !a2.up;
+      }
+    }
+  }
+  tags.forEach(function(t){
+    // keep tags inside the plot
+    if (t.up && t.y - 34 < PT - 14) t.up = false;
+    if (!t.up && t.y + 34 > PT + cH + 6) t.up = true;
+  });
+  var dotLabels = tags.map(function(t, i){
+    var ty = tagY(t), last = i === tags.length - 1;
+    return '<line x1="'+t.x.toFixed(1)+'" y1="'+(t.y + (t.up ? -6 : 6)).toFixed(1)+'" x2="'+t.x.toFixed(1)+
+             '" y2="'+(ty + (t.up ? 9 : -9)).toFixed(1)+'" stroke="rgba('+rgb+',0.45)" stroke-width="1"/>'+
+           '<rect x="'+(t.cx - t.w/2).toFixed(1)+'" y="'+(ty - 10).toFixed(1)+'" width="'+t.w.toFixed(1)+'" height="20" rx="6" '+
+             'fill="'+(last ? color : 'rgba(3,6,18,0.95)')+'" stroke="'+color+'" stroke-width="1.2"/>'+
+           '<text x="'+t.cx.toFixed(1)+'" y="'+(ty + 4.2).toFixed(1)+'" text-anchor="middle" font-size="11.5" font-weight="800" '+
+             'fill="'+(last ? '#03101f' : '#eaf6ff')+'" style="font-family:Chakra Petch,sans-serif;">'+t.vl+'</text>'+
+           '<circle cx="'+t.x.toFixed(1)+'" cy="'+t.y.toFixed(1)+'" r="5" fill="'+color+'" stroke="rgba(3,6,18,0.9)" stroke-width="2"/>';
   }).join('');
 
   var xLabels = points.map(function(p,i){
