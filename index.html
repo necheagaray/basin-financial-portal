@@ -11575,11 +11575,14 @@ function persist(){localStorage.setItem('basin_wf_data',JSON.stringify(WF_DATA))
 async function syncToGitHub(silent){
   if(!GH_CONFIG||!GH_CONFIG.token){ if(!silent){ prefillGHModal(); openModal('github-modal'); } return; }
   var weeks=(WF_DATA.laborWeeks||[]).filter(function(w){ return !capIsSeedWeek(w.weekKey); });
-  if(!weeks.length){ if(!silent) toast('No uploaded weeks to publish yet','error'); return; }
+  // nothing uploaded on this device: carry the published weeks forward so a
+  // publish of other data (pending contracts, a forecast) never drops them
+  if(!weeks.length && PUBLISHED && Array.isArray(PUBLISHED.laborWeeks)) weeks = PUBLISHED.laborWeeks;
+  var pubAt = new Date().toISOString();
   function readKey(k){ try{ return JSON.parse(localStorage.getItem(k)||'null'); }catch(e){ return null; } }
-  var payload={generated:new Date().toISOString(),laborWeeks:weeks,
+  var payload={generated:pubAt,laborWeeks:weeks,
     q4:readKey('basin_q4_forecast_v1'),q4Versions:readKey('basin_q4_versions'),budgetActuals:readKey('basin_budget_actuals'),
-    pendingContracts:readKey('basin_pending_contracts'),wcSnapshots:wcPublishList(),opex:opxPublishList(),payrollRuns:PAYROLL_RUNS};
+    pendingContracts:pcRead(),pendingContractsAt:(pcMeta().editedAt||pubAt),wcSnapshots:wcPublishList(),opex:opxPublishList(),payrollRuns:PAYROLL_RUNS};
   var dot=document.getElementById('sync-dot'); if(dot)dot.className='sync-dot pending';
   var msg=document.getElementById('sync-msg'); if(msg)msg.textContent='Publishing '+weeks.length+' week(s)...';
   try{
@@ -11597,6 +11600,7 @@ async function syncToGitHub(silent){
     if(res.ok){ if(dot)dot.className='sync-dot ok';
       if(msg)msg.textContent='Published '+weeks.length+' week(s) to '+GH_CONFIG.owner+'/'+GH_CONFIG.repo;
       GH_CONFIG.lastPublish=new Date().toISOString();
+      if (typeof pcMarkPublished === 'function') pcMarkPublished(payload.pendingContractsAt);
       try{localStorage.setItem('basin_gh_config',JSON.stringify(GH_CONFIG));}catch(e){}
       updatePublishLabel();
       toast('Published \u2014 Netlify will rebuild shortly','success'); }
@@ -17108,25 +17112,199 @@ var PC_SEED = [
     notes:'Salt Lake City / Eagle Mountain', contact:'Jack Hayes' }
 ];
 
+// ── Sharing ────────────────────────────────────────────────────────────
+// The published list (portal-data.json) is the shared copy everyone sees.
+// This browser keeps its own copy only while it holds edits that are newer
+// than the shared one; each edit is stamped, and so is each publish, so the
+// newer copy always wins when the site loads.
+var PC_META_KEY = 'basin_pc_meta';     // {editedAt, syncedAt}
+var PC_PUB_AT = null;                  // when the shared copy was published
+function pcMeta(){ try { return JSON.parse(localStorage.getItem(PC_META_KEY) || '{}') || {}; } catch(e){ return {}; } }
+function pcSetMeta(m){ try { localStorage.setItem(PC_META_KEY, JSON.stringify(m)); } catch(e){} }
 function pcRead(){
   try {
     var v = JSON.parse(localStorage.getItem(PC_KEY) || 'null');
     if (Array.isArray(v)) return v;
   } catch(e){}
   if (Array.isArray(PC_PUBLISHED)) return PC_PUBLISHED;
-  // first run on this browser: lay down the opening list, once
-  try {
-    if (!localStorage.getItem(PC_SEEDED_KEY)) {
-      localStorage.setItem(PC_SEEDED_KEY, '1');
-      localStorage.setItem(PC_KEY, JSON.stringify(PC_SEED));
-      return PC_SEED.slice();
-    }
-  } catch(e){ return PC_SEED.slice(); }
-  return [];
+  // nothing shared has arrived yet: show the opening list, but don't store
+  // it, so the shared copy can take over the moment it loads
+  return PC_SEED.slice();
 }
+var PC_AUTOSYNC_T = null;
 function pcWrite(list){
   try { localStorage.setItem(PC_KEY, JSON.stringify(list)); } catch(e){}
+  var m = pcMeta(); m.editedAt = new Date().toISOString(); pcSetMeta(m);
   pcUpdateBadge();
+  pcSyncNote();
+  clearTimeout(PC_AUTOSYNC_T);
+  if (PC_SHARED.ok !== false) {
+    // shared store: anyone can edit; send shortly after they stop typing
+    PC_AUTOSYNC_T = setTimeout(pcPushShared, 1200);
+  } else if (typeof GH_CONFIG !== 'undefined' && GH_CONFIG && GH_CONFIG.token) {
+    // no shared store on this host (e.g. the preview file): fall back to GitHub
+    PC_AUTOSYNC_T = setTimeout(function(){ syncToGitHub(true); }, 4000);
+  }
+}
+
+// ── Shared store (Netlify Function + Blobs at /api/pending-contracts) ─────
+// One list for everyone, editable without GitHub. Rows carry their own edit
+// time and deletions leave tombstones, so simultaneous edits merge row by row.
+var PC_API = '/api/pending-contracts';
+var PC_DEL_KEY = 'basin_pc_deleted';
+var PC_SHARED = { ok:null, at:null, busy:false };
+function pcDeleted(){ try { return JSON.parse(localStorage.getItem(PC_DEL_KEY) || '{}') || {}; } catch(e){ return {}; } }
+function pcSetDeleted(d){ try { localStorage.setItem(PC_DEL_KEY, JSON.stringify(d)); } catch(e){} }
+function pcTyping(){
+  var a = document.activeElement;
+  return !!(a && a.closest && a.closest('#pc-ov') && /INPUT|TEXTAREA/.test(a.tagName));
+}
+function pcTakeShared(d){
+  PC_SHARED.at = d.at || PC_SHARED.at;
+  if (!Array.isArray(d.list)) return;
+  var same = localStorage.getItem(PC_KEY) === JSON.stringify(d.list);
+  try { localStorage.setItem(PC_KEY, JSON.stringify(d.list)); } catch(e){}
+  var m = pcMeta(); m.syncedAt = m.editedAt = d.at || new Date().toISOString(); pcSetMeta(m);
+  PC_PUB_AT = d.at;
+  pcUpdateBadge();
+  if (!same && document.getElementById('pc-ov') && document.getElementById('pc-ov').classList.contains('open') && !pcTyping()) pcRender();
+  pcSyncNote();
+}
+function pcPullShared(){
+  if (PC_SHARED.busy) return Promise.resolve();
+  return fetch(PC_API, { cache:'no-store' }).then(function(r){
+    if (!r.ok) throw new Error('http ' + r.status);
+    return r.json();
+  }).then(function(d){
+    var first = PC_SHARED.ok !== true;
+    PC_SHARED.ok = true;
+    // First contact from this browser: hand over the list it kept on its own
+    // before the shared list existed. The server keeps a backup of it and
+    // uses the most recent such copy as the base, so recent changes -- yours
+    // included -- are never replaced by an older copy from another device.
+    if (!localStorage.getItem(PC_MIGRATED_KEY)) {
+      var local = localStorage.getItem(PC_KEY);
+      if (local) return pcMigrateLocal(JSON.parse(local));
+      try { localStorage.setItem(PC_MIGRATED_KEY, '1'); } catch(e){}
+    }
+    if (!Array.isArray(d.list)) return;            // nothing shared yet; nothing of ours to share
+    if (pcPending()) return pcPushShared();       // our edits go up, merged
+    if (first || d.at !== PC_SHARED.at) pcTakeShared(d);
+  }).catch(function(){
+    if (PC_SHARED.ok === null) PC_SHARED.ok = false;   // not on Netlify: use the old path
+    pcSyncNote();
+  });
+}
+var PC_MIGRATED_KEY = 'basin_pc_migrated_v1';
+// How recent is a copy kept in this browser before the shared list? Edits
+// made with the last two builds are time-stamped; older copies are ranked:
+// an untouched starter list lowest, then edited copies, with the computer that
+// publishes to GitHub (the owner's) ahead of other devices.
+function pcLegacyAt(list){
+  var m = pcMeta();
+  if (m.editedAt) return m.editedAt;
+  if (JSON.stringify(list) === JSON.stringify(PC_SEED)) return '1970-01-01T00:00:00.000Z';
+  var owner = typeof GH_CONFIG !== 'undefined' && GH_CONFIG && GH_CONFIG.token;
+  return owner ? '1970-01-03T00:00:00.000Z' : '1970-01-02T00:00:00.000Z';
+}
+function pcMigrateLocal(list){
+  PC_SHARED.busy = true;
+  return fetch(PC_API, {
+    method:'PUT', headers:{ 'Content-Type':'application/json' },
+    body: JSON.stringify({ list:list, deleted:pcDeleted(), legacyAt:pcLegacyAt(list) })
+  }).then(function(r){ if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
+  .then(function(d){
+    PC_SHARED.busy = false;
+    try { localStorage.setItem(PC_MIGRATED_KEY, '1'); } catch(e){}
+    pcSetDeleted({});
+    pcTakeShared(d);
+  }).catch(function(){ PC_SHARED.busy = false; });
+}
+function pcPushShared(replace){
+  clearTimeout(PC_AUTOSYNC_T);
+  if (PC_SHARED.ok === false) return Promise.resolve();
+  PC_SHARED.busy = true;
+  var sentDel = pcDeleted();
+  var note = document.getElementById('pc-savenote');
+  if (note) { note.textContent = 'Saving\u2026'; note.style.color = '#3DE8FF'; }
+  return fetch(PC_API, {
+    method:'PUT', headers:{ 'Content-Type':'application/json' },
+    body: JSON.stringify({ list:pcRead(), deleted:sentDel, replace:!!replace })
+  }).then(function(r){
+    if (!r.ok) throw new Error('http ' + r.status);
+    return r.json();
+  }).then(function(d){
+    PC_SHARED.ok = true; PC_SHARED.busy = false;
+    // tombstones that reached the server can go
+    var del = pcDeleted();
+    Object.keys(sentDel).forEach(function(id){ if (del[id] === sentDel[id]) delete del[id]; });
+    pcSetDeleted(del);
+    if (localStorage.getItem(PC_KEY) && pcMeta().editedAt > (d.at || '')) return;  // edited again meanwhile
+    pcTakeShared(d);
+  }).catch(function(){
+    PC_SHARED.busy = false;
+    if (note) { note.textContent = 'Couldn\u2019t reach the shared list \u2014 your edits are kept here and will retry.'; note.style.color = '#ff8a8a'; }
+    PC_AUTOSYNC_T = setTimeout(pcPushShared, 15000);
+  });
+}
+// keep everyone current: on load, when the tab comes back, and every 20s
+// while the list is open
+setTimeout(pcPullShared, 300);
+document.addEventListener('visibilitychange', function(){ if (!document.hidden) pcPullShared(); });
+setInterval(function(){
+  var ov = document.getElementById('pc-ov');
+  if (ov && ov.classList.contains('open') && !document.hidden) pcPullShared();
+}, 20000);
+function pcPending(){
+  var m = pcMeta();
+  return !!(m.editedAt && (!m.syncedAt || m.editedAt > m.syncedAt) && localStorage.getItem(PC_KEY));
+}
+// Called once published data arrives.
+function pcAdoptPublished(list, pubAt){
+  PC_PUBLISHED = list;
+  if (PC_SHARED.ok === true) return;          // the shared store is the live copy
+  PC_PUB_AT = pubAt || null;
+  var m = pcMeta(), hasLocal = !!localStorage.getItem(PC_KEY);
+  var editor = typeof GH_CONFIG !== 'undefined' && GH_CONFIG && GH_CONFIG.token;
+  var keepLocal = false;
+  if (hasLocal) {
+    if (m.editedAt) keepLocal = !pubAt || m.editedAt > pubAt;      // newer edits here
+    else if (editor) {
+      // a copy from before edits were stamped, on a device that publishes:
+      // keep it if it differs, and stamp it so it goes out with the next save
+      var local = localStorage.getItem(PC_KEY);
+      if (local !== JSON.stringify(list)) { keepLocal = true; m.editedAt = new Date().toISOString(); pcSetMeta(m); }
+    }
+  }
+  if (!keepLocal) {
+    try { localStorage.setItem(PC_KEY, JSON.stringify(list)); } catch(e){}
+    m.editedAt = pubAt || m.editedAt || null; m.syncedAt = pubAt || new Date().toISOString(); pcSetMeta(m);
+  }
+}
+function pcMarkPublished(at){
+  if (PC_SHARED.ok === true) return;
+  var m = pcMeta(); m.syncedAt = at; if (!m.editedAt || m.editedAt > at) m.syncedAt = m.editedAt || at;
+  pcSetMeta(m); PC_PUB_AT = at; pcSyncNote();
+}
+function pcSyncNote(){
+  var note = document.getElementById('pc-savenote');
+  if (!note) return;
+  if (PC_SHARED.ok === true) {
+    if (pcPending() || PC_SHARED.busy) { note.textContent = 'Saving\u2026'; note.style.color = '#3DE8FF'; return; }
+    note.textContent = 'Shared live with everyone \u00b7 saved ' + (PC_SHARED.at ?
+      new Date(PC_SHARED.at).toLocaleString([], {month:'numeric', day:'numeric', hour:'numeric', minute:'2-digit'}) : '');
+    note.style.color = '#5eeb96';
+    return;
+  }
+  if (pcPending()) {
+    note.textContent = 'Changes on this device not yet shared \u2014 click Save to Site.';
+    note.style.color = '#ffb454';
+  } else {
+    note.textContent = PC_PUB_AT ? 'Shared with everyone \u00b7 last published ' +
+      new Date(PC_PUB_AT).toLocaleString([], {month:'numeric', day:'numeric', hour:'numeric', minute:'2-digit'})
+      : 'Edits are shared with everyone when saved to the site.';
+    note.style.color = '';
+  }
 }
 function pcTotal(){
   return pcRead().reduce(function(t,r){ return t + (parseFloat(r.amount)||0); }, 0);
@@ -17141,7 +17319,7 @@ function pcUpdateBadge(){
 function pcAdd(){
   var l = pcRead().slice();
   var id = 'pc'+Date.now();
-  l.unshift({ id:id, num:'', prop:'', name:'', cust:'', amount:0, notes:'', contact:'' });
+  l.unshift({ id:id, num:'', prop:'', name:'', cust:'', amount:0, notes:'', contact:'', u:new Date().toISOString() });
   // a new row belongs at the top, so drop any column sort that would bury it
   PC_SORT = { col:null, dir:1 };
   pcWrite(l); pcRender();
@@ -17159,6 +17337,7 @@ function pcEdit(id, field, val){
     if (r.id !== id) return r;
     var c = Object.assign({}, r);
     c[field] = (field === 'amount') ? (parseFloat(String(val).replace(/[^0-9.\-]/g,'')) || 0) : val;
+    c.u = new Date().toISOString();
     return c;
   });
   pcWrite(l);
@@ -17166,6 +17345,7 @@ function pcEdit(id, field, val){
   if (tot) tot.textContent = ap2Money(pcTotal());
 }
 function pcRemove(id){
+  var del = pcDeleted(); del[id] = new Date().toISOString(); pcSetDeleted(del);
   pcWrite(pcRead().filter(function(r){ return r.id !== id; }));
   pcRender();
 }
@@ -17216,7 +17396,9 @@ function pcOpen(){
       '<div class="pc-scroll" id="pc-list"></div>'+
     '</div>';
   pcRender();
+  pcSyncNote();
   ov.classList.add('open');
+  pcPullShared();
 }
 
 function pcColsHTML(){
@@ -17293,13 +17475,21 @@ function pcPublish(){
     note.textContent = 'Saving\u2026';
     note.style.color = '#3DE8FF';
   }
+  if (PC_SHARED.ok !== false) { pcPushShared(); return; }
   try {
-    if (typeof capPublishData === 'function') capPublishData();
-    else if (typeof syncToGitHub === 'function') syncToGitHub();
-    if (note) setTimeout(function(){
-      note.textContent = 'Sent to the site \u00b7 Netlify rebuilds in a moment.';
-      note.style.color = '#5eeb96';
-    }, 400);
+    if (!(GH_CONFIG && GH_CONFIG.token)) {
+      if (note) { note.textContent = 'This device isn\u2019t connected to publish \u2014 set up GitHub to share edits.'; note.style.color = '#ffb454'; }
+      capPublishData();          // opens the GitHub setup
+      return;
+    }
+    clearTimeout(PC_AUTOSYNC_T);
+    syncToGitHub().then(function(){
+      if (!note) return;
+      if (!pcPending()) {
+        note.textContent = 'Shared with everyone \u00b7 others see it once the site rebuilds (about a minute) and they reload.';
+        note.style.color = '#5eeb96';
+      }
+    });
   } catch(e){
     if (note){ note.textContent = 'Could not save \u2014 check the GitHub setup.';
                note.style.color = '#ff8a8a'; }
@@ -18748,12 +18938,10 @@ function loadPublishedData() {
       // The published list is the shared copy; a local edit that has not been
       // published yet stays on top until it is.
       if (j.pendingContracts) {
-        PC_PUBLISHED = j.pendingContracts;
-        if (!localStorage.getItem('basin_pending_contracts')) {
-          try { localStorage.setItem('basin_pending_contracts', JSON.stringify(j.pendingContracts)); } catch(e){}
-        }
+        pcAdoptPublished(j.pendingContracts, j.pendingContractsAt || j.generated || null);
         if (document.getElementById('pc-ov')) pcRender();
         pcUpdateBadge();
+        pcSyncNote();
       }
       initCapacity();
       if (j.payrollRuns) { payrollMerge(); if (typeof renderMetrics === 'function' && document.getElementById('workforce') && document.getElementById('workforce').style.display !== 'none') renderMetrics(); }
@@ -18797,7 +18985,8 @@ function capDownloadData() {
     q4: readKey('basin_q4_forecast_v1'),
     q4Versions: readKey('basin_q4_versions'),
     budgetActuals: readKey('basin_budget_actuals'),
-    pendingContracts: readKey('basin_pending_contracts'),
+    pendingContracts: pcRead(),
+    pendingContractsAt: pcMeta().editedAt || new Date().toISOString(),
     wcSnapshots: wcPublishList(),
     opex: opxPublishList(),
     payrollRuns: PAYROLL_RUNS
