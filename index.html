@@ -2,6 +2,170 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<script>
+/* ══════════════════════════════════════════════════════════════════════════
+   SHARED DATA SYNC
+   Everything the portal saves (uploads, forecasts, versions, workforce,
+   working capital, OP EX, payroll, ...) is kept in one shared store on the
+   site (/api/portal-store), so every user sees the same data on any browser,
+   computer or site address. This runs before the rest of the page:
+     1. it loads the shared data into this browser before the portal reads it;
+     2. it watches the portal's own saves and sends real edits to the store;
+     3. it checks for other people's changes every minute and on return.
+   Moving over: the first time a browser connects, data it already has is
+   handed to the store. The owner's computer (the one set up to publish to
+   GitHub) outranks other browsers, and any genuinely new edit outranks both,
+   so existing data is never replaced by an older copy. The store keeps
+   backups of everything it replaces.
+   Pending Contracts have their own shared list and are not handled here.
+   ══════════════════════════════════════════════════════════════════════════ */
+(function(){
+  var API = '/api/portal-store';
+  var SHARED = ['basin_wf_data','basin_cap_weeks_v2','basin_cap_deleted','basin_cap_seed_hidden',
+    'basin_budget_actuals','basin_q4_forecast_v1','basin_q4_versions','basin_posted_forecast',
+    'basin_wc_snapshots','basin_wc_models_v1','basin_opex_detail_v1','basin_payroll_runs_v1'];
+  var META = '__portal_sync';
+  var ls; try { ls = window.localStorage; ls.getItem('x'); } catch(e){ return; }
+  var rawSet = Storage.prototype.setItem, rawGet = Storage.prototype.getItem, rawDel = Storage.prototype.removeItem;
+  function isShared(k){ return SHARED.indexOf(k) >= 0; }
+  function readMeta(){ try { return JSON.parse(rawGet.call(ls, META) || '{}') || {}; } catch(e){ return {}; } }
+  var M = readMeta(); M.keys = M.keys || {};
+  function saveMeta(){ try { rawSet.call(ls, META, JSON.stringify(M)); } catch(e){} }
+  function put(k, v){ try { if (v === null) rawDel.call(ls, k); else rawSet.call(ls, k, v); } catch(e){} }
+  var known = {};                       // last value we know the store holds
+  var S = window.PORTAL_SYNC = { ok:false, status:'', changed:false, pending:0 };
+  function owner(){
+    try { var g = JSON.parse(rawGet.call(ls, 'basin_gh_config') || 'null'); return !!(g && g.token); } catch(e){ return false; }
+  }
+  var LEGACY_AT = owner() ? '1970-01-03T00:00:00.000Z' : '1970-01-02T00:00:00.000Z';
+
+  // ── 1. load the shared data now, before the portal reads anything ───────
+  var srv = null;
+  try {
+    var x = new XMLHttpRequest();
+    x.open('GET', API, false);
+    x.send(null);
+    if (x.status === 200) srv = JSON.parse(x.responseText).items || {};
+  } catch(e){}
+  if (!srv) { S.status = 'local'; return; }      // preview file or offline: work as before
+  S.ok = true;
+
+  var outbox = {};
+  SHARED.forEach(function(k){
+    var s = srv[k], local = rawGet.call(ls, k), m = M.keys[k] || (M.keys[k] = {});
+    if (m.dirty && (!s || m.dirty > s.at)) { outbox[k] = m.dirty; return; }   // unsent edit here is newer
+    if (s) {
+      if (!M.migrated && local !== null && local !== s.value && !m.at && LEGACY_AT > s.at) {
+        m.dirty = LEGACY_AT; outbox[k] = LEGACY_AT; return;                     // this browser's copy outranks it
+      }
+      put(k, s.value); known[k] = s.value; m.at = s.at; delete m.dirty;
+    } else if (local !== null && (!M.migrated || m.dirty)) {
+      m.dirty = m.dirty || LEGACY_AT; outbox[k] = m.dirty;                     // only this browser has it
+    }
+  });
+  M.migrated = true; saveMeta();
+
+  // ── 2. watch the portal's saves; real edits go to the store ─────────────
+  var lastUser = 0;
+  ['pointerdown','keydown','change','input','drop','paste'].forEach(function(ev){
+    window.addEventListener(ev, function(){ lastUser = Date.now(); }, true);
+  });
+  function userEdit(){ return Date.now() - lastUser < 20000; }
+  function markDirty(k){
+    var m = M.keys[k] || (M.keys[k] = {});
+    m.dirty = new Date().toISOString(); saveMeta();
+    schedule();
+  }
+  Storage.prototype.setItem = function(k, v){
+    rawSet.call(this, k, v);
+    if (this === ls && isShared(k) && userEdit() && String(v) !== known[k]) markDirty(k);
+  };
+  Storage.prototype.removeItem = function(k){
+    rawDel.call(this, k);
+    if (this === ls && isShared(k) && userEdit() && known[k] !== null) markDirty(k);
+  };
+
+  var timer = null, busy = false;
+  function schedule(ms){ clearTimeout(timer); timer = setTimeout(push, ms == null ? 1500 : ms); status(); }
+  function dirtyKeys(){ return SHARED.filter(function(k){ return M.keys[k] && M.keys[k].dirty; }); }
+  function push(keepalive){
+    var ks = dirtyKeys();
+    if (!ks.length || busy) { status(); return; }
+    busy = true; status();
+    var sent = {};
+    var items = ks.map(function(k){ sent[k] = M.keys[k].dirty; return { key:k, value:rawGet.call(ls, k), at:M.keys[k].dirty }; });
+    fetch(API, { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ items:items }), keepalive:!!keepalive })
+      .then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function(d){
+        busy = false;
+        Object.keys(d.results || {}).forEach(function(k){
+          var res = d.results[k], m = M.keys[k];
+          if (res.ok) {
+            known[k] = items.filter(function(i){ return i.key === k; })[0].value;
+            m.at = res.at; if (m.dirty === sent[k]) delete m.dirty;
+          } else if (m.dirty === sent[k]) {
+            put(k, res.value); known[k] = res.value; m.at = res.at; delete m.dirty;   // a newer copy exists
+            S.changed = true;
+          }
+        });
+        saveMeta(); status();
+        if (dirtyKeys().length) schedule(400);
+      })
+      .catch(function(){ busy = false; status('retry'); schedule(15000); });
+  }
+  if (Object.keys(outbox).length) setTimeout(push, 0);
+  window.addEventListener('pagehide', function(){ if (dirtyKeys().length) push(true); });
+
+  // ── 3. other people's changes ────────────────────────────────────────────
+  function pull(){
+    if (busy) return;
+    fetch(API, { cache:'no-store' }).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
+      if (!d) return;
+      var items = d.items || {}, any = false;
+      SHARED.forEach(function(k){
+        var s = items[k], m = M.keys[k] || (M.keys[k] = {});
+        if (!s || m.dirty || (m.at && s.at <= m.at)) return;
+        put(k, s.value); known[k] = s.value; m.at = s.at; any = true;
+      });
+      if (any) { S.changed = true; saveMeta(); }
+      status();
+    }).catch(function(){});
+  }
+  setInterval(function(){ if (!document.hidden) pull(); }, 60000);
+  document.addEventListener('visibilitychange', function(){ if (!document.hidden) pull(); });
+
+  // ── status pill (bottom-left) ────────────────────────────────────────────
+  function status(mode){
+    var el = document.getElementById('portal-sync');
+    if (!el) return;
+    var n = dirtyKeys().length;
+    if (S.changed) {
+      el.className = 'ps-pill upd';
+      el.innerHTML = '<i></i>New updates from another user \u00b7 <a href="#" onclick="location.reload();return false;">Reload</a>';
+    } else if (mode === 'retry') {
+      el.className = 'ps-pill warn'; el.innerHTML = '<i></i>Couldn\u2019t save yet \u00b7 retrying';
+    } else if (n || busy) {
+      el.className = 'ps-pill busy'; el.innerHTML = '<i></i>Saving for everyone\u2026';
+    } else {
+      el.className = 'ps-pill ok'; el.innerHTML = '<i></i>Saved for everyone';
+    }
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    var st = document.createElement('style');
+    st.textContent =
+      '.ps-pill{position:fixed;left:14px;bottom:14px;z-index:9000;display:flex;align-items:center;gap:7px;'+
+      'padding:6px 12px;border-radius:999px;font:600 10.5px/1 "JetBrains Mono",ui-monospace,monospace;letter-spacing:.06em;'+
+      'background:rgba(6,10,22,.82);border:1px solid rgba(94,235,150,.35);color:#5eeb96;backdrop-filter:blur(6px);}'+
+      '.ps-pill i{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 6px currentColor;}'+
+      '.ps-pill.busy{color:#3DE8FF;border-color:rgba(61,232,255,.4);} .ps-pill.warn{color:#ffb454;border-color:rgba(255,180,84,.45);}'+
+      '.ps-pill.upd{color:#ffd24a;border-color:rgba(255,210,74,.55);} .ps-pill a{color:#fff;font-weight:800;}'+
+      '@media print{.ps-pill{display:none}}';
+    document.head.appendChild(st);
+    var el = document.createElement('div'); el.id = 'portal-sync'; document.body.appendChild(el);
+    status();
+  });
+})();
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Basin Engineering Portal</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
@@ -18916,7 +19080,8 @@ function loadPublishedData() {
       PUBLISHED = j;
       // Q4 versions: add any published version this device lacks, and take
       // the published active choice when it is newer than the local one.
-      if (j.q4Versions && Array.isArray(j.q4Versions.list)) {
+      // with the shared store live, it is the authority for Q4 versions
+      if (j.q4Versions && Array.isArray(j.q4Versions.list) && !(window.PORTAL_SYNC && PORTAL_SYNC.ok)) {
         var lv = q4vRead(), have = {};
         lv.list.forEach(function(x){ have[x.id] = 1; });
         j.q4Versions.list.forEach(function(x){ if (!have[x.id]) lv.list.push(x); });
