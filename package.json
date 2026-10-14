@@ -1,0 +1,8 @@
+{
+  "name": "basin-portal",
+  "private": true,
+  "description": "Basin Financial Portal. The only dependency is for the shared Pending Contracts list (Netlify Function + Netlify Blobs).",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  }
+}
