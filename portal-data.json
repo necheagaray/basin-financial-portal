@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-14T03:10:01.724Z",
+  "generated": "2026-10-15T02:16:22.361Z",
   "laborWeeks": [
     {
       "weekKey": "10-10",
@@ -1711,3645 +1711,825 @@
       "weekDate": "2026-09-26",
       "week": "Week Ending 09-26",
       "totals": {
-        "dlCustomer": 0,
-        "dlInternal": 0,
-        "dlSick": 0,
-        "dlVacation": 0,
-        "dlTotal": 0,
-        "adminTotal": 0,
-        "total": 0,
-        "utilization": 0
+        "dlCustomer": 965.5,
+        "dlInternal": 149,
+        "dlSick": 17.5,
+        "dlVacation": 52,
+        "dlTotal": 1184,
+        "adminTotal": 163.3,
+        "total": 1347.3,
+        "utilization": 81.5
       },
       "employees": {
         "Kennedy, Aleph": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 36,
+          "internal": 4,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "- No Customer/Project -": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-105 DAS114 (DC-5, DC-6, DC-7, and DC-8)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 26-093 SLC2 Campus Plan - DC1-DC2 Civil Construction Drawings": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 24-010 7 Brew - 4310 Ambassador Caffery": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 26-019 7Brew – Johnston – Lafayette, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 26-035 7Brew – Louisiana Ave. – Lafayette, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 26-039 7 Brew - Sulphur, LA - 212 S. Cities": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 26-048 7 Brew Pineville, LA : 26-048.1 Preliminary Site Plan": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 26-071 7Brew – College Dr. – Baton Rouge, LA : 26-071.1 Preliminary Site Plan": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 26-072 7Brew – Airline Hwy.": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 26-072 7Brew – Airline Hwy. : 26-072.1 Preliminary Site Plan": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 26-073 7Brew – N Airline – Gonzales, LA : 26-073.1 Preliminary Site Plan": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 26-078 7Brew – Airline – Baton Rouge : 26-078.1 Preliminary Site Plan": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "117 Madison Capital Group : 24-044 7 Brew - 4735 Nelson Rd., Lake Charles, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "124 Frischhertz : 26-042 Frischhertz Dow Lab Racks": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "134 SCNZ Architects, LLC : 26-047 Renovation of 5307 Toler - Laitram Harahan Campus": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "142 St. Tammany Parish Procurement : 24-042 Tammany Trace Bridge #7": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "160 Diamond Z Engineering, Inc. : 26-094 FedEx Parking Lot Expansion : 26-094.1 Boundary & Topographic Survey": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "166 Arrowhead Contracting, Inc. : 25-022 Fowler Canal Improvements - Belle Chasse": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "180 7 Brew Drive Thru Coffee : 25-048 7 Brew Ambassador Caffery Pkwy": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "181 Copeland and Johns : 25-040 UPS New Orleans Expansion : 25-040.1 Land Surveying": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "183 Edged : 25-085 Monroe Data Center Campus": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "183 Edged : 25-085 Monroe Data Center Campus : 25-085.1 Site Survey (ALTA/NSPS Land Title, Topographic, and Tree Survey": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "19 Cycle Construction Company : 24-104 Basin 2 Sea Level Rise Mitigation & Resilience Improvements Plaquemines Parish, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "196 McGlinchey : 25-092 Acadiana Mall": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "197 Hoist & Crane Service Group : 25-097 Parking Lot Expansion - Hoist & Crane Service": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "203 NOLA Dentures and General Dentistry : 25-118 Schafer Dentistry - Pearl River, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "204 Blue Whale Development : 26-038 7 Brew - 3209 Johnson Street - Subwork": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "204 Blue Whale Development : 26-038 7 Brew - 3209 Johnson Street - Subwork : 26-038.1 Platting": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "204 Blue Whale Development : 26-097 Professional Engineering & Land Surveying 7 Brew Breaux Bridge, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "23 Duplantis Design group : 26-003 BESS Building, Wadley, GA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "237 Mile High Sliders, LLC : 26-067 Smalls Sliders – Alameda – Lakewood, CO": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "237 Mile High Sliders, LLC : 26-067 Smalls Sliders – Alameda – Lakewood, CO : 26-067.1 Site Plan": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "239 Star Service, Inc. A Fidelity Company : 26-076 Waterford 3 Chiller Foundations": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "239 Star Service, Inc. A Fidelity Company : 26-076 Waterford 3 Chiller Foundations : 26-076.1 Topographic Survey": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "241 Arnett Construction Company, Inc. : 26-086 7 Brew - 4308 Ambassador Caffery Pkwy": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "246 Laitram, LLC : 26-103 Professional Civil Engineering and Land Surveying Services 5400 Jefferson Highway": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "248 Neo Infrastructure : 26-112 1544 & 1556 Tchoupitoulas Street New Orleans, LA 70130": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "250 Kohl's Department Stores, Inc. : 26-116 Land Surveying services for the Seven Brew in Lafayette, LA.": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "27 Galloway Johnson Tompkins Burr & Smith : 25-052 Lincoln Builders/Double D": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "45 M. R. Pittman Group, LLC : 26-022 SELA Urban Flood Control Project. Orleans, Parish": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-058 QTS Miscellaneous Projects": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-086 QTS - Turkey, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-086.1 QTS-WTX1-CAMPUS, Hall County, TX - Turkey, TX Civil Design": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-119 QTS - State Highway 349, Midland, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-023 QTS – Lincoln Hwy, Laramie, WY": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-028 QTS-SLC2 Campus Campus Planning Eagle Mountain, UT": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 22-070 5224 Nelson Rd., Lake Charles, LA : 22-070.5 Permitting": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-003 Brookwood - 11670 Airline Hwy": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-023 Brookwood - Ambassador Caffery Pkwy": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-031 Brookwood - Pearl, MS": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-047 Essen Rear Boat RV": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-006 Brookwood - Burbank Boat and RV": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-024 Brookwood – Highway 22 – St. Tammany Parish": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-024 Brookwood – Highway 22 – St. Tammany Parish : 26-024.1 Topographic, Tree Survey, and Boundary Survey": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-025 Brookwood - N 3rd Street - Baton Rouge, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-034 Brookwood – Highway 59 – St. Tammany : 26-034.1 Boundary & Resubdivision Survey": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-060 Brookwood - Highway 44, Gonzales, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-080 Brookwood – Stumberg – St. George, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "82 Woodward Design Group : 25-044 STPSO Training Facility": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "82 Woodward Design Group : 25-044 STPSO Training Facility : 25-044.2 Boundary and Topographic Survey": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "86 J Caldarera Company : 22006 LA Trace Subdivision Lot Study": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "96 (Internal) Basin Engineering & Surveying : 1003 Professional Activities": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "96 (Internal) Basin Engineering & Surveying : 1004 General Office": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "96 (Internal) Basin Engineering & Surveying : 1005 Holiday": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "96 (Internal) Basin Engineering & Surveying : 1007 Sick Leave": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "96 (Internal) Basin Engineering & Surveying : 1008 Personal/Vacation": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "97 (Internal) Perrin & Carter Inc. : 1004 General Office": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.100 Floor & Decor (Frederick, MD)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.112 Floor & Decor, Raleigh, NC (Capital Square)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.113 Floor & Decor (Hallandale Beach, FL)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.117 Floor & Decor, LA (Olympic Blvd) CA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.120 Floor & Decor - Lowell, AR (I-49)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.124 Floor & Decor - Sarasota, FL (Fruitville)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.125 Floor & Decor - Florence, KY": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.127 Floor & Decor - Fort Worth, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.128 Floor & Decor - North Bergen, NJ (2028)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.129 Floor & Decor-Delray Beach, FL": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.131 Fairfax, VA - Floor & Decor": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.132 Palmetto Bay, FL - Floor & Decor": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.134 Floor & Decor - Santa Clarita, CA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.135 Floor & Decor - Porter Ranch, CA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.136 Floor & Decor - Corpus Christi, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.137 Floor & Decor - Hialeah Gardens, FL": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.139 Floor & Decor - Cherry Creek, CO": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.140 Floor & Decor - Anaheim, CA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.145 Floor & Decor - Philadelphia, PA (Red Lion Plaza)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.146 Floor & Decor - Montclair, CA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.149 Floor & Decor - Newark, DE Christiana Town Center": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.149 Floor & Decor - Newark, DE Christiana Town Center : 24-002.149.1 Newark, DE Lease Exhibit": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.150 Floor & Decor - Snellville Exchange, GA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.151 Floor & Decor - Dallas Galleria Flowers Branch, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.152 Floor & Decor - New Port Richey, FL": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.153 Floor & Decor - St Petersburg, FL": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.154 Floor & Decor - N. Oklahoma City (Edmond), OK": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.155 Floor & Decor - Chattanooga, TN (Sportsman)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.156 Floor & Decor, Redmond, WA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.157 Floor & Decor - St Augustine, FL": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.158 Floor & Decor - Puerto Rico": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.159 Floor & Decor - Van Nuys, CA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.160 Floor & Decor - Culver City, CA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.161 Floor & Decor - Bridgewater, NJ": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.161 Floor & Decor - Bridgewater, NJ : 24-002.161.1 Bridgewater, NJ Lease Exhibit": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.163 Floor & Decor - Glendale, CA (Tyburn)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.164 Floor & Decor - Washington, DC": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.165 Floor & Decor - Queens, NY": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.166 Floor & Decor – Louisville, KY": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.167 Lubbock, Texas": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.168 Floor & Decor - San Jose (Blossom), CA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.169 Floor & Decor Queen Creek, AZ": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.170 Floor & Decor - Fern Park, FL": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.171 Floor & Decor (S. Dallas - Duncanville) TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.173 Chino Site Plan": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.60 Fredericksburg, VA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.98 Houston, TX (Randalls Meyerland)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002.133 Floor & Decor - Garner, NC": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002.64 Fredericksburg (Sportsman), VA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Heaton, Alex": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 28.5,
+          "internal": 3.5,
           "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-105 DAS114 (DC-5, DC-6, DC-7, and DC-8) : 25-105.4.1 QTS DFW2 Driveways": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "183 Edged : 25-096 Mobile, AL Data Center (Prichard)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "183 Edged : 25-096 Mobile, AL Data Center (Prichard) : 25-096.5 Development Plans": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "190 Outlyr : 25-102 LIV Golf Ops Center": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "199 Oracle : 26-095 ABI01 – Entry Enhancement Civil Design - Hrly up to $95K": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-075 QII Bridgeport, Moreland, GA : 26-075.1 Initial Site Sketch": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-075 QII Bridgeport, Moreland, GA : 26-075.2 Test Fit Analysis": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-083 Magnolia, TX : 26-083.1 Initial Site Sketch": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-083 Magnolia, TX : 26-083.2 Test Fit Analysis": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 23-044 QTS - SLC1": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 24-023 QTS Cedar Rapids, IA : 24-023.10 Site Entitlement and Development Permitting": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 24-023 QTS Cedar Rapids, IA : 24-023.12 Site Entitlement Meetings": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 24-023 QTS Cedar Rapids, IA : 24-023.8 Conceptual Site Layout and Plans Review": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-070 QTS-Gouldsboro,PA : 25-070.1 Pre DD Time Tracking": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-082 Specification Standards": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-086 QTS - Turkey, TX : 25-086.2 QTS Turkey, TX - Phase 2 - Mass Grading": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-086 QTS - Turkey, TX : 25-086.3 QTS - Turkey, TX - Phase 2 - Civil Site Plans": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-018.4 Construction Parking Lot": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-063 QTS - 201 Erie Rd., Eastlake, OH : 26-063.1.1 Initial Site Sketch – LC+ buildings": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-063 QTS - 201 Erie Rd., Eastlake, OH : 26-063.1.2 Initial Site Sketch – Rapids AI buildings": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-091 US Hwy 67, Johnson County, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-034 Brookwood – Highway 59 – St. Tammany": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "vacation": 8,
+          "total": 40
         },
         "Martinez, Alicia": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 37,
+          "internal": 3,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 26-098 Professional Civil Engineering Services QTS Prototype Standards Maintenance": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 24-010 7 Brew - 4310 Ambassador Caffery : 24-010.4 Permitting": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 26-039 7 Brew - Sulphur, LA - 212 S. Cities : 26-039.1 Preliminary Site Plan": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 26-040 7 Brew Rees & Enterprise, Breaux Bridge : 26-040.1 Preliminary Site Plan": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 26-052 7 Brew - Siegen, Baton Rouge, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "147 HUTTON : 25-059 7 Brew - 4735 Nelson Rd., Lake Charles, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "160 Diamond Z Engineering, Inc. : 24-072 FedEx Harahan": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "160 Diamond Z Engineering, Inc. : 25-060 FedEX MobiDock - St Rose": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "160 Diamond Z Engineering, Inc. : 26-094 FedEx Parking Lot Expansion": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "160 Diamond Z Engineering, Inc. : 26-094 FedEx Parking Lot Expansion : 26-094.4 Permitting": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "160 Diamond Z Engineering, Inc. : 26-107 Professional Engineering Services FedEx MobiDock 310 James Drive St. Rose, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "175 Enbridge : 25-051 Larose Septic System": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "175 Enbridge : 25-061 White Castle Septic System": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "175 Enbridge : 25-107 Bobcat Facility Septic System": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "181 Copeland and Johns : 25-040 UPS New Orleans Expansion": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "181 Copeland and Johns : 25-040 UPS New Orleans Expansion : 25-040.3 Civil Engineering Design": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "181 Copeland and Johns : 25-040 UPS New Orleans Expansion : 25-040.6 Construction Administration": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-075 CarMax-Uxbridge, MA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-078 CarMax-Riverdale-UT": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-078 CarMax-Riverdale-UT : 25-078.4 Site Entitlements": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-083 CarMax-Warner Robins, GA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-093 CarMax-Riverview,FL": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "204 Blue Whale Development : 26-038 7 Brew - 3209 Johnson Street - Subwork : 26-038.2 Civil Design": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "204 Blue Whale Development : 26-038 7 Brew - 3209 Johnson Street - Subwork : 26-038.3 Stormwater Design": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-064 QII Cedar Port, Houston, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "36 Highland Associates : 24-069 DFW2-DC3": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "43 Little : 25-116 Academy - Pascagoula, MS": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 24-023 QTS Cedar Rapids, IA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 24-023.15 QTS CDR East & West Campus (Stoney Meadows Laydown)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-015 QTS Civil Freedom Standards": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-084 LC+ Standards DD Development": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-011 Mason City, IA Data Center": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-033 QTS - Specifications Standards Maintenance": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-044 QTS Rapid AI Standards Development": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-002 Brookwood Jefferson Highway": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-017 Brookwood - Millerville - Baton Rouge": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-023 Brookwood - Ambassador Caffery Pkwy : 25-023.1 Permitting": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-062 Brookwood - Lot 86 - Denham Springs, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "87 JP Department of PW : 3011-01 JP Harvey Blvd. Extension": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "96 (Internal) Basin Engineering & Surveying : 1002 Marketing": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.123 Floor & Decor - Baytown, TX DC": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.141 Floor & Decor - Baltimore, MD DC": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.142 Floor & Decor - Frederickson, WA DC": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.143 Floor & Decor - Moreno Valley, CA DC": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.144 Floor & Decor - Savannah, GA DC": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.21 Murfreesboro, TN": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.25 Clearwater, FL": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.38 Raleigh, NC": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "Amy Love": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "96 (Internal) Basin Engineering & Surveying : 1010 Bereavement": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "De Monsalbert, Barbara": {
-          "customer": 0,
+          "customer": 36,
           "internal": 0,
           "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "84 Digital Engineering : 6012-40 JP Sewer Bond Program": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "97 (Internal) Perrin & Carter Inc. : 1005 Holiday": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "97 (Internal) Perrin & Carter Inc. : 1007 Sick Leave": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "97 (Internal) Perrin & Carter Inc. : 1008 Personal/Vacation": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "Ben Homola": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "vacation": 4,
+          "total": 40
         },
         "Wolf, Ben": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
+          "customer": 24.5,
+          "internal": 14,
+          "sick": 1.5,
           "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-105 DAS114 (DC-5, DC-6, DC-7, and DC-8) : 25-105.0.1 DC-5 Construction Administration": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-105 DAS114 (DC-5, DC-6, DC-7, and DC-8) : 25-105.1.1 DC-6 Construction Administration": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-105 DAS114 (DC-5, DC-6, DC-7, and DC-8) : 25-105.2.1 DC-7 Construction Administration": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-105 DAS114 (DC-5, DC-6, DC-7, and DC-8) : 25-105.4 Conceptual Master Plan Redesign - QTS DFW2 DAS 14": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-075 CarMax-Uxbridge, MA : 25-075.2 SIR and Executive Summary": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-075 CarMax-Uxbridge, MA : 25-075.3 Preliminary Feasibility Plans": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-078 CarMax-Riverdale-UT : 25-078.1 Site Information and Site Photos": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-078 CarMax-Riverdale-UT : 25-078.2 SIR and Executive Summary": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-083 CarMax-Warner Robins, GA : 25-083.1 Site Information & Site Photos": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-083 CarMax-Warner Robins, GA : 25-083.2 SIR & Executive Summary": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-083 CarMax-Warner Robins, GA : 25-083.3 Preliminary Feasibility Plans": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-093 CarMax-Riverview,FL : 25-093.1 Site Information and Site Photos": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-093 CarMax-Riverview,FL : 25-093.2 SIR & Executive Summary": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-093 CarMax-Riverview,FL : 25-093.5 Traffic Impact Assessment": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 23-044 QTS - SLC1 : 23-044.4 DC1 Civil Construction Admin": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 24-023 QTS Cedar Rapids, IA : 24-023.5 Traffic Impact Assessment": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 24-023.17 Traffic Impact Assessment (TIA) - Additional": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 24-023.19 CDR1 – Wright Bros Intersection Improvements": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 24-023.19 CDR1 – Wright Bros Intersection Improvements : 24-019.3 Traffic Analysis for Wright Bros and Edgewood/Cherry Valley/Tissel Hollow": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-029 QTS-SLC1 Expansion Campus Campus Planning Eagle Mountain, UT": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Knepper, Brennan": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 30,
+          "internal": 8,
           "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "100 Royal Engineers & Consultants, LLC : 25-114 Lake Road - Big Branch Marsh NWR": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 26-066 7 Brew - 1301 N Barman Ave - Gonzales, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "14 Build Commercial Construction LLC : 24-046 North Transit Center Construction Layout": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "14 Build Commercial Construction LLC : 24-070 Baston Wellness Center - Mirabeau Ave.": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "14 Build Commercial Construction LLC : 24-074 City of Gonzales Care Center": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "157 SeaLevel Inc. : 26-079 WSLP Hurricane and Storm Risk Reduction Project": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "174 Alpine Construction, LLC : 25-007 7 Brew 5821 Creek Centre Drive, BR, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "189 Gulf Gateway Terminal : 25-068 Gulf Gateway Terminal - Survey Layout": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "200 CK Associates : 25-117 Bisso Towboat": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-024 Brookwood - S. Darla Ave - Gonzales, LA.": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-035 Brookwood - Highway 42 Prairerville, LA : 25-035.1 Topographic & Boundary Survey": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "82 Woodward Design Group : 25-067 Woodward Design Group - Canal Barge": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "87 JP Department of PW : 20001 JP Stumpf Blvd. Lighting": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "vacation": 2,
+          "total": 40
         },
         "Harris, Brooke": {
           "customer": 0,
-          "internal": 0,
+          "internal": 40,
           "sick": 0,
           "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Glennon, Connor": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 29.5,
+          "internal": 10.5,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 26-069 QTS - DFW3 - Lancaster, TX : 26-069.1 Campus Master Planning": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 24-075 7 Brew 375 N Canal Blvd Thibodaux": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 26-016 7Brew – Gerstner Memorial – Lake Charles, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 26-049 7 Brew 9614 Airline Hwy, East Baton Rouge, LA : 26-049.1 Preliminary Site Plan": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "117 Madison Capital Group : 24-044 7 Brew - 4735 Nelson Rd., Lake Charles, LA : 24-044.2 ALTA & Topo Survey": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "117 Madison Capital Group : 24-044 7 Brew - 4735 Nelson Rd., Lake Charles, LA : 24-044.3 Civil Design": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "117 Madison Capital Group : 24-044 7 Brew - 4735 Nelson Rd., Lake Charles, LA : 24-044.6 Permitting": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "124 Frischhertz : 26-074 Frischertz – SunBelt Solar": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "134 SCNZ Architects, LLC : 24-030 Stewart Office Building": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "134 SCNZ Architects, LLC : 26-047.1 Renovation of 220 Plantation - Laitram Harahan Campus": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "147 HUTTON : 24-043 7 Brew Arlington Creek - Baton Rouge : 24-043.6 ALTA & Topographic As-built Survey": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "147 HUTTON : 25-001 7 Brew Alexandria": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "160 Diamond Z Engineering, Inc. : 26-094 FedEx Parking Lot Expansion : 26-094.2 Civil Engineering Design": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "163 Randall-Paulson Architects : 24-093 UPS-MDC  5700 Morrison Road NO LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "166 Arrowhead Contracting, Inc. : 25-022 Fowler Canal Improvements - Belle Chasse : 25-022.2 Civil and Structural Engineering": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "17 Centerpoint Integrated Solutions : 24-097 CarMax Waco, TX  (Centerpoint)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "179 Zeeco, Inc. : 25-026 Flair Platform Rev 1 Southwest LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "181 Copeland and Johns : 25-040 UPS New Orleans Expansion : 25-040.4 Stormwater Design": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "183 Edged : 25-085 Monroe Data Center Campus : 25-085.2 Due Diligence Report, Schedule, and Supporting Documentation": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "183 Edged : 25-085 Monroe Data Center Campus : 25-085.3 Conceptual Civil Plans": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "183 Edged : 25-085 Monroe Data Center Campus : 25-085.5 Development Plans": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "183 Edged : 25-096 Mobile, AL Data Center (Prichard) : 25-096.3 Conceptual Civil Plans": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "208 Monro, Inc. : 26-010 Tire Choice, Naples, FL": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "213 New Orleans Center for Aesthetics and Plastic Surgery : 26-012 3100 Metairie Road": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "221 Harbor Towing and Fleeting, LLC : 26-046 Side Scan Sonar & Magnetometer Survey, Gulf Gateway Terminal": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "243 Jos. R. Labadot, Inc. : 26-100 Professional Surveying Services - 1425 Sams Ave.": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "63 POH+W Architects Ltd. : 21-051 Carmax Tupelo : 21-051.2 CDs": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-041 SLC1/SLC2 Offsite Road Improvements (1600 West)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-093.1 SLC1 Expansion, SLC2 Phase 1, and SLC Phase 2 Offsite Infrastructure Improvements V": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 21-022 Verot School Rd., Lafayette": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 21-039.7 Life Storage Schillinger Asbuilt": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 21-062 2306 Austin Hwy, San Antonio, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 22-070 5224 Nelson Rd., Lake Charles, LA : 22-070.6 Landscape Plan": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 24-101 Brookwood - Hillcroft Ave. - Houston, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-035 Brookwood - Highway 42 Prairerville, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-035 Brookwood - Highway 42 Prairerville, LA : 25-035.4 Civil Engineering Design": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-035 Brookwood - Highway 42 Prairerville, LA : 25-035.5 Landscape Design": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-035 Brookwood - Highway 42 Prairerville, LA : 25-035.6 Permitting": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-099 Brookwood - Buffalo Boat & RV - Lafayette, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-104 Brookwood - Beglis Pkwy - Sulphur, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-108 Brookwood - Oak Villas": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-125 Brookwood - Dowdy - Gonzales, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-001 Brookwood - Highway 931 - Gonzales, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-002 Brookwood - Bessemer": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-007 Brookwood - Airline (Flea Market)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-024 Brookwood – Highway 22 – St. Tammany Parish : 26-024.2 Resubdivision Survey": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-026 Brookwood – Perkins – Baton Rouge, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-056 Brookwood - Union Chapel - Bastrop, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-057 Brookwood - Highway 71 - Bastrop, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-096 Brookwood - 11203 State Hwy 30, College Station, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "69 SBLM : 23-045 CD - Floor & Decor - Mt Pleasant, SC": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "69 SBLM : 23-045 CD - Floor & Decor - Mt Pleasant, SC : 23-045.1 Construction Documents": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "69 SBLM : 23-045 CD - Floor & Decor - Mt Pleasant, SC : 23-045.2 CD Meetings": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "69 SBLM : 23-045 CD - Floor & Decor - Mt Pleasant, SC : 23-045.3 Easements/Permit": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "69 SBLM : 24-002.21.11 F&D Murfreesboro, TN - SBLM : 24-002.21.12 Construction Documents": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "75 T. Baker Smith, LLC : 23-043 Ridgelake Survey - 2023-015-WRB Waterline Project": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "79 Traffic Commander : 26-004 Cart Path Chateau Club": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "79 Traffic Commander : 26-027 Causeway between Airline and W. Napoleon": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "79 Traffic Commander : 26-037 W. Napoleon lane closure TTCP": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "82 Woodward Design Group : 24-038 Carpenter & Paterson": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "82 Woodward Design Group : 24-100 Branch Pilots - Venice, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "82 Woodward Design Group : 25-044 STPSO Training Facility : 25-044.1 Civil Engineering Design": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "95 Lucky Dog Lodge : 23-063 Lucky Dog Lodge Burbank drive": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.115 Floor & Decor (Bucktown)(North Ave 2)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.122 Floor & Decor - Dallas (Galleria), TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.128 Floor & Decor - North Bergen, NJ (2028) : 24-002.128.1 North Bergen, NJ Lease Exhibit": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.130 Floor & Decor-Tucson, AZ": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.138 Floor & Decor - North Austin, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.147 Floor & Decor - Matthews, NC": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.148 Floor & Decor - Chattanooga, TN (Food City)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.162 Floor & Decor - Chino, CA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.172 Silver Springs Common - Mechanicsburg, PA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.80 Fayetteville, NC": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Martinez, Cory": {
-          "customer": 0,
+          "customer": 32,
           "internal": 0,
-          "sick": 0,
+          "sick": 8,
           "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Cuccia, Craig": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 35,
+          "internal": 5,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 24-009 QTS DFW2 DAS 100 (DC-1)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-105 DAS114 (DC-5, DC-6, DC-7, and DC-8) : 25-105.0 DC-5 Civil Drawings": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-105 DAS114 (DC-5, DC-6, DC-7, and DC-8) : 25-105.3 DC-8 Civil Drawings": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 26-018 QTS-DFW2 Corner Site - Wilmer, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-111 DFW2-Jones, Wilmer, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-111 DFW2-Jones, Wilmer, TX : 25-111.1 Planned Development": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-017 QTS-DFW2 Marine - Mason Rd. Wilmer, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "Bobeck, Daniel": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "10 Arthur W. Landry : 26-036 Tanya Becnel v. DeRose Builders, Inc.": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "103 Digital Engineering : 25-089 Harvey Canal GuideWall Repairs": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "103 Digital Engineering : 26-009 Parish Line Pump Station Improvements Phase 2": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "11 Baker, Donelson, Bearman, Caldwell & Berkowitz, PC : 24-024 900 S. Peters": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "198 Long Law Firm : 25-098 Allied World v Morphy Makofsky": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "23 Duplantis Design group : 26-003 BESS Building, Wadley, GA : 26-003.1 BESS Building, Wadley, GA Construction Issues": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "48 Meyer & Associates, Inc. : 23-065 Meyer - POLC Transloading Facility": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "48 Meyer & Associates, Inc. : 25-054 POLC New Grain Terminal at Industrial Canal": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "48 Meyer & Associates, Inc. : 25-079 VPPJ Rodeo Arena Pavilion Improvements Phase II": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "48 Meyer & Associates, Inc. : 25-080 Jeff Davis Water & Sewer #1 Lacassine booster station": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "48 Meyer & Associates, Inc. : 26-051 Intercoast Materials POLC Loading Facility": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "48 Meyer & Associates, Inc. : 26-058 LBB Concrete Batch Plant": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "48 Meyer & Associates, Inc. : 26-088 Merryville Replacement of LA 110 Sanitary Sewer Gravity Main Crossing (A9-23007-DC)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "81 Waskey Bridges Inc. : 26-021 Duke ERE North Carolina Sump Review": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "87 JP Department of PW : 5008 JP East Ames Blvd. Roadway": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Jurczak, Edward": {
-          "customer": 0,
+          "customer": 39.5,
           "internal": 0,
-          "sick": 0,
+          "sick": 0.5,
           "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 23-068.3 QTS COS1-DC1": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 23-068.3 QTS COS1-DC1 : 23-068.8 Civil Development Plan Minor Amendment": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 24-067 DFW2-DAS114": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "36 Highland Associates : 24-068 DFW2-DC2": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "96 (Internal) Basin Engineering & Surveying : 1006 No Pay": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "McDonald, Enrique": {
-          "customer": 0,
+          "customer": 8,
           "internal": 0,
           "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "103 Digital Engineering : 25-036 Ruddock Booster Station No. 1": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "137 Basic Systems, Inc. : 25-121 Southern Star Viola Energy, Sumner KS": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "137 Basic Systems, Inc. : 25-122 DTE Bell River Mills Filter Separator Platform": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "157 SeaLevel Inc. : 25-074 GSSG Monolith Slab Rebar Support Houma Navigation Canal": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "176 Frischhertz Barnes JV : 25-011 S&WB Power Complex": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "176 Frischhertz Barnes JV : 25-123 S&WB Power Complex Seismic Calculations": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "181 Copeland and Johns : 25-040 UPS New Orleans Expansion : 25-040.2 Structural Engineering Services": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "193 Venture Global Gator Express, LLC : 25-076 Boat Dock Modifications - Plaquemines, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "194 Poydras Construction Co., Inc. : 25-077 Semreh Club Building Additions": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "195 City of Westlake : 25-081 National Golf Club of Louisiana": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "23 Duplantis Design group : 24-078 John H. Carter, Inc. - Manufacturing & Repair Facility": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "235 A/C Electric Service, Inc. : 26-065 1106 LeBeau Roof Assessment": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "27 Galloway Johnson Tompkins Burr & Smith : 23-069 James v. Vertical Construction": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "48 Meyer & Associates, Inc. : 25-010 Rosepine WWTP": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "48 Meyer & Associates, Inc. : 25-053 Town of Vinton Water Treatment Plant Improvements": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "48 Meyer & Associates, Inc. : 25-106 CPPJ Phase 3 Elliot Road Pump Station": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "48 Meyer & Associates, Inc. : 25-115 Calcasieu Waterworks District No.1 Treatment Plant": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "48 Meyer & Associates, Inc. : 26-054 Vinton Water Sector UV": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "66 Refresh Commercial LLC : 25-088 300 N. Broad roof": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "81 Waskey Bridges Inc. : 26-015 ARM Mustang Meter Station Platform": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "81 Waskey Bridges Inc. : 26-030 Kinder Morgan TGP Compressor Station 530 Rev.1, MS": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "vacation": 32,
+          "total": 40
         },
         "Alvero, Garrett": {
-          "customer": 0,
+          "customer": 40,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 23-068.3 QTS COS1-DC1 : 23-068.10 Civil Construction Administration": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 26-069 QTS - DFW3 - Lancaster, TX : 26-069.2 Campus Construction Drawings": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-064 Salt Lake City - Eagle Mountain": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-086 QTS - Turkey, TX : 25-086.4 QTS - Turkey, TX - Phase 2 - Construction Administration": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Rendano, Gary": {
-          "customer": 0,
+          "customer": 39,
           "internal": 0,
-          "sick": 0,
+          "sick": 1,
           "vacation": 0,
-          "total": 0
-        },
-        "63 POH+W Architects Ltd. : 23-011 CarMax Tuscaloosa, AL (POH) : 23-011.5 Asbuilt ALTA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Cina, Heather": {
           "customer": 0,
-          "internal": 0,
+          "internal": 40,
           "sick": 0,
           "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Bosworth Jr., HJ": {
-          "customer": 0,
+          "customer": 46.5,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "153 Trigon Associates : 26-055 Lift Station Improvements, Plaquemines Parish, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "27 Galloway Johnson Tompkins Burr & Smith : 24-094 JEDCO Properties v. RHTC, et al.": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "48 Meyer & Associates, Inc. : 26-114 Merryville LA110 Sewer Main": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 46.5
         },
         "Hellmich, Jed": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 56.5,
+          "internal": 5,
           "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 24-009 QTS DFW2 DAS 100 (DC-1) : 24-009.14 DC1 Civil Construction Admin": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 24-009 QTS DFW2 DAS 100 (DC-1) : 24-009.6 Phase 1 Civil Construction Drawings": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 24-009 QTS DFW2 DAS 100 (DC-1) : 24-009.9 Phase 1 Construction Administration (Civil)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-021 QTS-DFW2-DC4 Wilmer, TX (DC-4)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-021 QTS-DFW2-DC4 Wilmer, TX (DC-4) : 25-021.3 DC4 Construction Administration": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 24-023 QTS Cedar Rapids, IA : 24-023.18 6th Ave. SW & Edgewood Rd. SW Intersection Imp, Cedar Rapids": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 24-023.16 CDR Stoney Meadows Laydown Yard Sewer & Water Design": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-038 Schuykill Predevelopment DD": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-086.1 QTS-WTX1-CAMPUS, Hall County, TX - Turkey, TX Civil Design : 25-086.12 WTX1 Offsite Road Improvements": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-093.2 SLC1 Expansion Phase 1 scope": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-118 Pre Dev. DD-Additional 380 Acres-Eagle Mountain : 26-118.2 ALTA and Topo Survey": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "Jennifer (Jenny) Sublett": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "183 Edged : 25-096 Mobile, AL Data Center (Prichard) : 25-096.2 Due Diligence Report, Schedule, and Supporting Documentation": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 24-023 QTS Cedar Rapids, IA : 24-023.13 Platting": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-070 QTS-Gouldsboro,PA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "vacation": 3,
+          "total": 64.5
         },
         "Meariman, Joel": {
           "customer": 0,
-          "internal": 0,
+          "internal": 35.25,
           "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "Taylor, John": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "vacation": 8,
+          "total": 43.25
         },
         "Catanzano, Jonathan": {
-          "customer": 0,
+          "customer": 40,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "183 Edged : 25-096 Mobile, AL Data Center (Prichard) : 25-096.6 Reimbursables Allowance": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "210 Layton - LF Driscoll : 26-013 CDR1 Laydown Area North of 68th Ave., Cedar Rapids, IA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "233 Suffolk : 26-059 CDR1 76th Ave. SW Tunnel Design, Cedar Rapids, IA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-061 Hockley #1, Harris County, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-062 Hockley #2, Harris County, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-062 Hockley #2, Harris County, TX : 26-062.1 Revisions": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-064 QII Cedar Port, Houston, TX : 26-064.1 Initial Site Sketch": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-070 QII-Fort Bend Parkway, Houston, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-081 ALC, Harris County, TX : 26-081.1 Initial Site Sketch": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-082 Carlsbad, New Mexico : 26-082.1 Initial Site Sketch": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-082 Carlsbad, New Mexico : 26-082.2 Test Fit Analysis": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-084 Generation Park, Houston, TX : 26-084.1 Initial Site Sketch": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-085 Hockley Business Park, Harris County, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-085 Hockley Business Park, Harris County, TX : 26-085.1 Initial Site Sktech": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-085 Hockley Business Park, Harris County, TX : 26-085.2 Test Fit Analysis": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-104 Salco Road, Chunchula, AL": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-104 Salco Road, Chunchula, AL : 26-104.1 Site Sketch": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-104 Salco Road, Chunchula, AL : 26-104.2 Test Fit Analysis": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-105 Niederdamer Str., Lingen, Germany : 26-105.1 Site Sketch": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-105 Niederdamer Str., Lingen, Germany : 26-105.2 Test Fit Analysis": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-106 US Hwy 331, Montgomery, AL : 26-106.1 Site Sketch": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-108 West Road, Houston, TX : 26-108.1 Site Sketch": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-108 West Road, Houston, TX : 26-108.2 Test Fit Analysis": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-109 FM 1301, Matagorda County, TX : 26-109.1 Initial Site Sketch": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-110 Poland #1": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-111 Poland #2": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-117 I-44 & US Route 66, Villa Ridge, MO : 26-117.2 Test Fit Analysis": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 24-022 Eagle Mountain Additional Land Pre-Development": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 24-023 QTS Cedar Rapids, IA : 24-023.11 Permit Assistance": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 24-023 QTS Cedar Rapids, IA : 24-023.7 Checklist, Report, Executive Summary, Schedule, & Supporting Docs": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-038 Schuykill Predevelopment DD : 25-038.4 Conceptual Site Layout & Plans Review": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-112 QTS - Mobile": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-120 QTS - I-20 Service Road, Crane County, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "96 (Internal) Basin Engineering & Surveying": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "Beaupierre, Kevin": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 26-069 QTS - DFW3 - Lancaster, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-100 Carmax Wayne, NJ expansion": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "63 POH+W Architects Ltd. : 24-098 Carmax Waco,TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Henry, Kirk": {
-          "customer": 0,
+          "customer": 50,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "134 SCNZ Architects, LLC : 24-091 Laitram Renovations": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "159 The Kitchen Guys : 24-064 TKG - New Show Room": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "181 Copeland and Johns : 25-072 Renasant Bank - Plaquemine": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "23 Duplantis Design group : 23-050 Shell Norco QM Lab": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "23 Duplantis Design group : 24-035 AP Darrow Blue Energy": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "23 Duplantis Design group : 24-073 Rubicon Geismer Lab": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "48 Meyer & Associates, Inc. : 25-095 West Calcasieu Community Center - Stall Barn Improvement": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "48 Meyer & Associates, Inc. : 26-020 DeRidder - West Park Restroom and Basketball Pavilion (H1-24029-DA)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "48 Meyer & Associates, Inc. : 26-050 WCCH Booster Station": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "74 Studio Kiro : 22-102 Kiro - 2312 Louisiana Ave": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 50
         },
         "Breaux, Kyle": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 25,
+          "internal": 12,
           "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "18 City Park Conservancy": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "Torrealba, Max": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "vacation": 3,
+          "total": 40
         },
         "Carter, Michael": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 30,
+          "internal": 1.5,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "242 O'Connor Capital Partners : 26-087 Progressive Building 1425 Airline Dr.": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "83 Burgdahl & Graves Arch : 22004 JP Water Admin Building": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "86 J Caldarera Company : 26001 700 Metairie Road Property": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "87 JP Department of PW : 24003 Seven Oaks - US 90 Street Lighting": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "87 JP Department of PW : 26003 Dickory Ave Multi-Use Path": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "88 Watermark Design : 20006 JP Fire Training Center": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "88 Watermark Design : 24002 Redesign of the Shrine on Airline": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "88 Watermark Design : 25001 Drug Court": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "88 Watermark Design : 25002 Harvey Volunteer Fire Station #64": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 31.5
         },
         "Echeagaray, Nick": {
           "customer": 0,
-          "internal": 0,
+          "internal": 40,
           "sick": 0,
           "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Poche, Parker": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 37.5,
+          "internal": 2.5,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-105 DAS114 (DC-5, DC-6, DC-7, and DC-8) : 25-105.1 DC-6 Civil Drawings": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-105 DAS114 (DC-5, DC-6, DC-7, and DC-8) : 25-105.2 DC-7 Civil Drawings": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-105 DAS114 (DC-5, DC-6, DC-7, and DC-8) : 25-105.3.1 DC-8 Construction Administration": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 26-069 QTS - DFW3 - Lancaster, TX : 26-069.4 Construction Administration": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-093 CarMax-Riverview,FL : 25-093.3 Preliminary Feasibility Plans": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-100 Carmax Wayne, NJ expansion : 25-100.2 Site Entitlements and Development Permitting": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 26-031 CarMax-Brownsville, TX : 26-031.3 Preliminary Feasibility Plans": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "63 POH+W Architects Ltd. : 24-098 Carmax Waco,TX : 24-098.1 Master Planning": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "McNeil, Payton": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 37.5,
+          "internal": 5,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 24-009 QTS DFW2 DAS 100 (DC-1) : 24-009.12 DC1 Civil Drawings": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-018 QTS-DFW2 Corner Mason Rd, Wilmer, TX : 25-018.1 ALTA, Topo & Tree Survey": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-018 QTS-DFW2 Corner Mason Rd, Wilmer, TX : 25-018.3 Conceptual Master Plan Civil Drawing(s)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-021 QTS-DFW2-DC4 Wilmer, TX (DC-4) : 25-021.5 Reimbursables Allowance": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-105 DAS114 (DC-5, DC-6, DC-7, and DC-8) : 25-105.0.2 DC-5 Landscape and Survey Coordination": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-105 DAS114 (DC-5, DC-6, DC-7, and DC-8) : 25-105.1.2 DC-6 Landscape and Survey Coordination": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 26-018 QTS-DFW2 Corner Site - Wilmer, TX : 26-018.1 Planned Development": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 26-069 QTS - DFW3 - Lancaster, TX : 26-069.3 Survey/Landscape Coordination": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-078 CarMax-Riverdale-UT : 25-078.3 Preliminary Feasibility Plans": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-087 CarMax-Dixon, CA : 25-087.1 Preliminary Research": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-091 CarMax-Ontario, CA : 25-091.1 Preliminary Research": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-093 CarMax-Riverview,FL : 25-093.4 Site Entitlements": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-094 CarMax-Ann Arbor, MI : 25-094.1 Preliminary Feasibility Plans": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 26-031 CarMax-Brownsville, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 26-031 CarMax-Brownsville, TX : 26-031.1 Site Information & Site Plans": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 26-031 CarMax-Brownsville, TX : 26-031.2 SIR & Executive Summary": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 26-031 CarMax-Brownsville, TX : 26-031.3.1 Feasibility Meetings": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 26-031 CarMax-Brownsville, TX : 26-031.4 Site Entitlements and Development Permitting": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "253 Thoth Construction, LLC : 26-122 Creation Full Gospel Baptist Church (4832 Majestic Oaks Drive)": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "63 POH+W Architects Ltd. : 23-011 CarMax Tuscaloosa, AL (POH) : 23-011.1 Construction Drawings": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "63 POH+W Architects Ltd. : 23-011 CarMax Tuscaloosa, AL (POH) : 23-011.4 Construction Admin": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-111 DFW2-Jones, Wilmer, TX : 25-111.3 Survey and Landscape Coordination": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-017 QTS-DFW2 Marine - Mason Rd. Wilmer, TX : 26-017.1 Planned Development": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-017 QTS-DFW2 Marine - Mason Rd. Wilmer, TX : 26-017.2 Conceptual Master Planning": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-017 QTS-DFW2 Marine - Mason Rd. Wilmer, TX : 26-017.3 Survey and Landscape Coordination": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-017 QTS-DFW2 Marine - Mason Rd. Wilmer, TX : 26-017.4 Permit assistance": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 22-085 W 6th & Ingram, Conway, AR : 22-085.7 Permitting": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 42.5
         },
         "Yemula, Rahul": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 15,
+          "internal": 25,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-109 FM 1301, Matagorda County, TX : 26-109.2 Test Fit Analysis": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Knepper, Riley": {
           "customer": 0,
-          "internal": 0,
+          "internal": 28,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "147 HUTTON : 24-043 7 Brew Arlington Creek - Baton Rouge": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "Johns, Robert": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 28
         },
         "Jourdan, Ross": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 37,
+          "internal": 3,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "Johnson, Rylon": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "Eustis, Seth": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "Sakib, Shadman": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "Steven Asher": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Mobley, Tatiana": {
-          "customer": 0,
+          "customer": 40,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Dumas, Toni": {
-          "customer": 0,
+          "customer": 34.5,
           "internal": 0,
-          "sick": 0,
+          "sick": 6.5,
           "vacation": 0,
-          "total": 0
+          "total": 41
         },
         "Le, Tuan": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 35,
+          "internal": 5,
           "sick": 0,
           "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Tiyapattanaputi, Warakorn": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 38.5,
+          "internal": 1.5,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-064 QII Cedar Port, Houston, TX : 26-064.2 Test Fit Analysis": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-084 Generation Park, Houston, TX : 26-084.2 Test Fit Analysis": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-092 TX Hwy 89, Sinton, TX : 26-092.2 Test Fit Analysis": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-099 QII - Emporia, KS": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-099 QII - Emporia, KS : 26-099.2 Test Fit Analysis": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-106 US Hwy 331, Montgomery, AL : 26-106.2 Test Fit Analysis": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-110 Poland #1 : 26-110.2 Test Fit Analysis": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-111 Poland #2 : 26-111.2 Test Fit Analysis": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Ryland, Reese": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 27.5,
+          "internal": 12.5,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-043 Brookwood – Pinson – Birmingham, AL": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "94 Basin Engineering & Surveying": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         }
       },
-      "customers": {},
-      "projects": {}
+      "customers": {
+        "Flavored Operations, LLC": 21.5,
+        "Laitram, LLC": 15.5,
+        "Rosehill Construction": 12.25,
+        "Floor & Decor": 47.5,
+        "Edged": 16,
+        "Quality Technology Services, LLC": 368.5,
+        "J Caldarera Company": 1,
+        "Diamond Z Engineering, Inc.": 1,
+        "Copeland and Johns": 5.5,
+        "Blue Whale Development": 10.75,
+        "Kohl's Department Stores, Inc.": 2.5,
+        "Digital Engineering": 99,
+        "Corgan": 99.5,
+        "CarMax": 74,
+        "JP Department of PW": 45.5,
+        "Lucky Dog Lodge": 0.5,
+        "Basic Systems, Inc.": 11.5,
+        "POH+W Architects Ltd.": 25.5,
+        "Trigon Associates": 12,
+        "Meyer & Associates, Inc.": 28,
+        "Waskey Bridges Inc.": 3,
+        "Quality Infratech Intelligence, LLC (QII)": 14,
+        "SCNZ Architects, LLC": 2,
+        "Duplantis Design group": 17,
+        "City Park Conservancy": 11,
+        "Watermark Design": 15.5,
+        "Thoth Construction, LLC": 2,
+        "Woodward Design Group": 3.5
+      },
+      "projects": {
+        "3011": {
+          "hours": 8.5,
+          "customer": "JP Department of PW",
+          "name": "3011",
+          "employees": {
+            "Carter, Michael": 8.5
+          }
+        },
+        "5008": {
+          "hours": 4,
+          "customer": "JP Department of PW",
+          "name": "5008",
+          "employees": {
+            "Carter, Michael": 4
+          }
+        },
+        "6012": {
+          "hours": 68,
+          "customer": "Digital Engineering",
+          "name": "6012",
+          "employees": {
+            "De Monsalbert, Barbara": 36,
+            "Martinez, Cory": 32
+          }
+        },
+        "20001": {
+          "hours": 33,
+          "customer": "JP Department of PW",
+          "name": "20001",
+          "employees": {
+            "Knepper, Brennan": 30,
+            "Glennon, Connor": 1,
+            "Carter, Michael": 2
+          }
+        },
+        "20006": {
+          "hours": 14.5,
+          "customer": "Watermark Design",
+          "name": "20006",
+          "employees": {
+            "Carter, Michael": 14.5
+          }
+        },
+        "22006": {
+          "hours": 1,
+          "customer": "J Caldarera Company",
+          "name": "22006",
+          "employees": {
+            "Heaton, Alex": 1
+          }
+        },
+        "24002": {
+          "hours": 1,
+          "customer": "Watermark Design",
+          "name": "24002",
+          "employees": {
+            "Carter, Michael": 1
+          }
+        },
+        "26-039": {
+          "hours": 15,
+          "customer": "Flavored Operations, LLC",
+          "name": "26-039",
+          "employees": {
+            "Kennedy, Aleph": 9.5,
+            "Glennon, Connor": 1,
+            "Poche, Parker": 4.5
+          }
+        },
+        "26-103": {
+          "hours": 15.5,
+          "customer": "Laitram, LLC",
+          "name": "26-103",
+          "employees": {
+            "Kennedy, Aleph": 0.5,
+            "Ryland, Reese": 15
+          }
+        },
+        "26-060": {
+          "hours": 5.5,
+          "customer": "Rosehill Construction",
+          "name": "26-060",
+          "employees": {
+            "Kennedy, Aleph": 5.5
+          }
+        },
+        "24-002": {
+          "hours": 47.5,
+          "customer": "Floor & Decor",
+          "name": "24-002",
+          "employees": {
+            "Kennedy, Aleph": 20.5,
+            "Martinez, Alicia": 6.5,
+            "Glennon, Connor": 15.5,
+            "Ryland, Reese": 5
+          }
+        },
+        "25-085": {
+          "hours": 5,
+          "customer": "Edged",
+          "name": "25-085",
+          "employees": {
+            "Heaton, Alex": 1,
+            "Catanzano, Jonathan": 4
+          }
+        },
+        "25-096": {
+          "hours": 11,
+          "customer": "Edged",
+          "name": "25-096",
+          "employees": {
+            "Heaton, Alex": 0.5,
+            "Catanzano, Jonathan": 10.5
+          }
+        },
+        "24-023": {
+          "hours": 19.5,
+          "customer": "Quality Technology Services, LLC",
+          "name": "24-023",
+          "employees": {
+            "Heaton, Alex": 0.5,
+            "Hellmich, Jed": 1,
+            "Catanzano, Jonathan": 12,
+            "Breaux, Kyle": 6
+          }
+        },
+        "25-086": {
+          "hours": 131,
+          "customer": "Quality Technology Services, LLC",
+          "name": "25-086",
+          "employees": {
+            "Heaton, Alex": 25,
+            "Cuccia, Craig": 2,
+            "Jurczak, Edward": 16,
+            "Rendano, Gary": 33,
+            "Hellmich, Jed": 2.5,
+            "Breaux, Kyle": 8,
+            "McNeil, Payton": 2,
+            "Mobley, Tatiana": 40,
+            "Dumas, Toni": 2.5
+          }
+        },
+        "26-091": {
+          "hours": 53.5,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-091",
+          "employees": {
+            "Heaton, Alex": 0.5,
+            "Catanzano, Jonathan": 5.5,
+            "Yemula, Rahul": 9,
+            "Tiyapattanaputi, Warakorn": 38.5
+          }
+        },
+        "24-010": {
+          "hours": 0.5,
+          "customer": "Flavored Operations, LLC",
+          "name": "24-010",
+          "employees": {
+            "Martinez, Alicia": 0.5
+          }
+        },
+        "26-071": {
+          "hours": 6,
+          "customer": "Flavored Operations, LLC",
+          "name": "26-071",
+          "employees": {
+            "Martinez, Alicia": 0.5,
+            "Glennon, Connor": 1.5,
+            "Ryland, Reese": 4
+          }
+        },
+        "26-094": {
+          "hours": 1,
+          "customer": "Diamond Z Engineering, Inc.",
+          "name": "26-094",
+          "employees": {
+            "Martinez, Alicia": 1
+          }
+        },
+        "25-040": {
+          "hours": 5.5,
+          "customer": "Copeland and Johns",
+          "name": "25-040",
+          "employees": {
+            "Martinez, Alicia": 4.5,
+            "Glennon, Connor": 1
+          }
+        },
+        "26-038": {
+          "hours": 10.75,
+          "customer": "Blue Whale Development",
+          "name": "26-038",
+          "employees": {
+            "Martinez, Alicia": 8.25,
+            "Glennon, Connor": 2.5
+          }
+        },
+        "26-116": {
+          "hours": 2.5,
+          "customer": "Kohl's Department Stores, Inc.",
+          "name": "26-116",
+          "employees": {
+            "Martinez, Alicia": 2.5
+          }
+        },
+        "26-011": {
+          "hours": 43,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-011",
+          "employees": {
+            "Martinez, Alicia": 7,
+            "Cuccia, Craig": 33,
+            "Hellmich, Jed": 3
+          }
+        },
+        "26-033": {
+          "hours": 6,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-033",
+          "employees": {
+            "Martinez, Alicia": 6
+          }
+        },
+        "25-031": {
+          "hours": 0.25,
+          "customer": "Rosehill Construction",
+          "name": "25-031",
+          "employees": {
+            "Martinez, Alicia": 0.25
+          }
+        },
+        "25-105": {
+          "hours": 13,
+          "customer": "Corgan",
+          "name": "25-105",
+          "employees": {
+            "Wolf, Ben": 5,
+            "Poche, Parker": 5,
+            "McNeil, Payton": 3
+          }
+        },
+        "25-093": {
+          "hours": 16.5,
+          "customer": "CarMax",
+          "name": "25-093",
+          "employees": {
+            "Wolf, Ben": 16.5
+          }
+        },
+        "23-044": {
+          "hours": 5.5,
+          "customer": "Quality Technology Services, LLC",
+          "name": "23-044",
+          "employees": {
+            "Wolf, Ben": 3,
+            "Hellmich, Jed": 2.5
+          }
+        },
+        "25-003": {
+          "hours": 1,
+          "customer": "Rosehill Construction",
+          "name": "25-003",
+          "employees": {
+            "Glennon, Connor": 1
+          }
+        },
+        "26-034": {
+          "hours": 5.5,
+          "customer": "Rosehill Construction",
+          "name": "26-034",
+          "employees": {
+            "Glennon, Connor": 5.5
+          }
+        },
+        "23-063": {
+          "hours": 0.5,
+          "customer": "Lucky Dog Lodge",
+          "name": "23-063",
+          "employees": {
+            "Glennon, Connor": 0.5
+          }
+        },
+        "23-068.3": {
+          "hours": 1,
+          "customer": "Corgan",
+          "name": "23-068.3",
+          "employees": {
+            "Jurczak, Edward": 0.5,
+            "Hellmich, Jed": 0.5
+          }
+        },
+        "26-093": {
+          "hours": 73,
+          "customer": "Corgan",
+          "name": "26-093",
+          "employees": {
+            "Jurczak, Edward": 20.5,
+            "Hellmich, Jed": 21.5,
+            "Le, Tuan": 31
+          }
+        },
+        "25-086.1": {
+          "hours": 8.5,
+          "customer": "Quality Technology Services, LLC",
+          "name": "25-086.1",
+          "employees": {
+            "Jurczak, Edward": 2.5,
+            "Hellmich, Jed": 6
+          }
+        },
+        "25-121": {
+          "hours": 11.5,
+          "customer": "Basic Systems, Inc.",
+          "name": "25-121",
+          "employees": {
+            "McDonald, Enrique": 8,
+            "Henry, Kirk": 3.5
+          }
+        },
+        "25-064": {
+          "hours": 21,
+          "customer": "Quality Technology Services, LLC",
+          "name": "25-064",
+          "employees": {
+            "Alvero, Garrett": 21
+          }
+        },
+        "26-093.1": {
+          "hours": 61.5,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-093.1",
+          "employees": {
+            "Alvero, Garrett": 19,
+            "Hellmich, Jed": 5.5,
+            "Jourdan, Ross": 37
+          }
+        },
+        "23-011": {
+          "hours": 9,
+          "customer": "POH+W Architects Ltd.",
+          "name": "23-011",
+          "employees": {
+            "Rendano, Gary": 6,
+            "McNeil, Payton": 3
+          }
+        },
+        "26-009": {
+          "hours": 31,
+          "customer": "Digital Engineering",
+          "name": "26-009",
+          "employees": {
+            "Bosworth Jr., HJ": 29.5,
+            "Henry, Kirk": 1.5
+          }
+        },
+        "26-055": {
+          "hours": 12,
+          "customer": "Trigon Associates",
+          "name": "26-055",
+          "employees": {
+            "Bosworth Jr., HJ": 12
+          }
+        },
+        "26-114": {
+          "hours": 2,
+          "customer": "Meyer & Associates, Inc.",
+          "name": "26-114",
+          "employees": {
+            "Bosworth Jr., HJ": 2
+          }
+        },
+        "26-030": {
+          "hours": 3,
+          "customer": "Waskey Bridges Inc.",
+          "name": "26-030",
+          "employees": {
+            "Bosworth Jr., HJ": 3
+          }
+        },
+        "24-023.19": {
+          "hours": 1,
+          "customer": "Quality Technology Services, LLC",
+          "name": "24-023.19",
+          "employees": {
+            "Hellmich, Jed": 1
+          }
+        },
+        "26-093.2": {
+          "hours": 16,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-093.2",
+          "employees": {
+            "Hellmich, Jed": 12,
+            "Le, Tuan": 4
+          }
+        },
+        "26-118": {
+          "hours": 1,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-118",
+          "employees": {
+            "Hellmich, Jed": 1
+          }
+        },
+        "26-085": {
+          "hours": 1,
+          "customer": "Quality Infratech Intelligence, LLC (QII)",
+          "name": "26-085",
+          "employees": {
+            "Catanzano, Jonathan": 1
+          }
+        },
+        "26-104": {
+          "hours": 13,
+          "customer": "Quality Infratech Intelligence, LLC (QII)",
+          "name": "26-104",
+          "employees": {
+            "Catanzano, Jonathan": 7,
+            "Yemula, Rahul": 6
+          }
+        },
+        "26-047": {
+          "hours": 2,
+          "customer": "SCNZ Architects, LLC",
+          "name": "26-047",
+          "employees": {
+            "Henry, Kirk": 2
+          }
+        },
+        "24-078": {
+          "hours": 13,
+          "customer": "Duplantis Design group",
+          "name": "24-078",
+          "employees": {
+            "Henry, Kirk": 13
+          }
+        },
+        "26-003": {
+          "hours": 4,
+          "customer": "Duplantis Design group",
+          "name": "26-003",
+          "employees": {
+            "Henry, Kirk": 4
+          }
+        },
+        "25-054": {
+          "hours": 3,
+          "customer": "Meyer & Associates, Inc.",
+          "name": "25-054",
+          "employees": {
+            "Henry, Kirk": 3
+          }
+        },
+        "25-095": {
+          "hours": 23,
+          "customer": "Meyer & Associates, Inc.",
+          "name": "25-095",
+          "employees": {
+            "Henry, Kirk": 23
+          }
+        },
+        "26-069": {
+          "hours": 5.5,
+          "customer": "Corgan",
+          "name": "26-069",
+          "employees": {
+            "Poche, Parker": 0.5,
+            "McNeil, Payton": 5
+          }
+        },
+        "26-098": {
+          "hours": 4,
+          "customer": "Corgan",
+          "name": "26-098",
+          "employees": {
+            "Poche, Parker": 4
+          }
+        },
+        "25-100": {
+          "hours": 18,
+          "customer": "CarMax",
+          "name": "25-100",
+          "employees": {
+            "Poche, Parker": 12,
+            "McNeil, Payton": 6
+          }
+        },
+        "24-098": {
+          "hours": 16.5,
+          "customer": "POH+W Architects Ltd.",
+          "name": "24-098",
+          "employees": {
+            "Poche, Parker": 11.5,
+            "McNeil, Payton": 5
+          }
+        },
+        "24-009": {
+          "hours": 3,
+          "customer": "Corgan",
+          "name": "24-009",
+          "employees": {
+            "McNeil, Payton": 3
+          }
+        },
+        "25-078": {
+          "hours": 2,
+          "customer": "CarMax",
+          "name": "25-078",
+          "employees": {
+            "McNeil, Payton": 2
+          }
+        },
+        "26-031": {
+          "hours": 37.5,
+          "customer": "CarMax",
+          "name": "26-031",
+          "employees": {
+            "McNeil, Payton": 5.5,
+            "Dumas, Toni": 32
+          }
+        },
+        "26-122": {
+          "hours": 2,
+          "customer": "Thoth Construction, LLC",
+          "name": "26-122",
+          "employees": {
+            "McNeil, Payton": 2
+          }
+        },
+        "26-017": {
+          "hours": 1,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-017",
+          "employees": {
+            "McNeil, Payton": 1
+          }
+        },
+        "24-100": {
+          "hours": 3.5,
+          "customer": "Woodward Design Group",
+          "name": "24-100",
+          "employees": {
+            "Ryland, Reese": 3.5
+          }
+        }
+      }
     },
     {
       "weekKey": "09-19",
@@ -12171,15 +9351,26 @@
   "budgetActuals": null,
   "pendingContracts": [
     {
+      "id": "pc1791986570631",
+      "num": "24-023.23",
+      "prop": "26M-195/SO#775",
+      "name": "CDR Site Infrastructure Water Main extension",
+      "cust": "QTS",
+      "amount": 622535,
+      "notes": "10/2/26 - proposal sent to QTS",
+      "contact": "Michael Lu",
+      "u": "2026-10-14T14:04:19.392Z"
+    },
+    {
       "id": "pc1791582415428",
       "num": "26-092",
       "prop": "SO#749",
       "name": "Test Fit - TX Hwy 90, Sinton, TX",
       "cust": "QII",
       "amount": 4500,
-      "notes": "10/5 emailed Jake Shields",
+      "notes": "10/14 Jake called - hoped to have update by 10/15 or 10/16\n10/5 emailed Jake Shields",
       "contact": "Jake Shields",
-      "u": "2026-10-09T21:47:48.586Z"
+      "u": "2026-10-14T17:18:03.445Z"
     },
     {
       "id": "pc1791582364456",
@@ -12188,9 +9379,9 @@
       "name": "Test Fit",
       "cust": "QII",
       "amount": 4500,
-      "notes": "10/5 emailed Jake",
+      "notes": "10/14 Jake called - hoped to have update by 10/15 or 10/16\n10/5 emailed Jake",
       "contact": "Jake Shields",
-      "u": "2026-10-09T21:46:49.644Z"
+      "u": "2026-10-14T17:18:10.290Z"
     },
     {
       "id": "pc1791582266657",
@@ -12199,9 +9390,9 @@
       "name": "National Test Fit",
       "cust": "QII",
       "amount": 100000,
-      "notes": "10/5 - emailed Jake",
+      "notes": "10/14 Jake called - hoped to have update by 10/15 or 10/16\n10/5 - emailed Jake",
       "contact": "Jake  Shields",
-      "u": "2026-10-13T21:59:44.754Z"
+      "u": "2026-10-14T17:18:19.174Z"
     },
     {
       "id": "pc1791499505512",
@@ -12261,8 +9452,9 @@
       "name": "Salco Road",
       "cust": "QII",
       "amount": 562650,
-      "notes": "10/5 - Joel emailed Jake",
-      "contact": "Jake"
+      "notes": "10/14 Jake called - hoped to have update by 10/15 or 10/16\n10/5 - Joel emailed Jake",
+      "contact": "Jake",
+      "u": "2026-10-14T17:18:25.292Z"
     },
     {
       "id": "pc1790787279973",
@@ -12301,8 +9493,9 @@
       "name": "Test Fit Proposal",
       "cust": "QII",
       "amount": 0,
-      "notes": "9/29 - Joel emailed Jack and Kyle",
-      "contact": "Jack and Kyle"
+      "notes": "10/14 Jake called - hoped to have update by 10/15 or 10/16\n9/29 - Joel emailed Jack and Kyle",
+      "contact": "Jack and Kyle",
+      "u": "2026-10-14T17:18:51.275Z"
     },
     {
       "id": "pcs1",
@@ -12322,8 +9515,9 @@
       "name": "Prof Civil Eng Serv — QTS-WTX1-CAMPUS, Hall County TX (Turkey) Ph 1",
       "cust": "Quality Technology Services, LLC",
       "amount": 2348200,
-      "notes": "Service Agreement received 10/1",
-      "contact": "Meghan Thomas & David C"
+      "notes": "10/14 emailed David for update  \nService Agreement received 10/1",
+      "contact": "Meghan Thomas & David C",
+      "u": "2026-10-14T14:44:50.896Z"
     },
     {
       "id": "pcs3",
@@ -12386,7 +9580,7 @@
       "contact": "Jack Hayes"
     }
   ],
-  "pendingContractsAt": "2026-10-13T21:59:45.079Z",
+  "pendingContractsAt": "2026-10-14T17:19:04.546Z",
   "wcSnapshots": [
     {
       "date": "2026-09-30",
@@ -28278,6 +25472,15 @@
       "erTax": 10409.55,
       "totalEarnings": 167349.33,
       "cashPerHead": 4641.29
+    },
+    {
+      "payDate": "2026-10-14",
+      "range": "9/27/26-10/10/26",
+      "headcount": 38,
+      "cashNeed": 173248.58,
+      "erTax": 11068.85,
+      "totalEarnings": 177141.13,
+      "cashPerHead": 4559.17
     }
   ]
 }
