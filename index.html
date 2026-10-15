@@ -3400,40 +3400,40 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 .lc-dept:not(.on){opacity:.55;}
 .lc-dept:not(.on) i{background:transparent;border:1px dashed rgba(255,255,255,0.35);}
 
-/* WC-101: legend as a construction sign beside the drawing */
-.wc-elev-row{display:flex;align-items:flex-start;gap:18px;}
+/* WC-101: legend as a construction sign beside the drawing, sized to sit
+   in scale with the columns */
+.wc-elev-row{display:flex;align-items:flex-start;gap:14px;}
 .wc-elev-row .wc-chart{flex:1;min-width:0;}
-.wc-signpost{flex:0 0 232px;display:flex;flex-direction:column;align-items:center;margin-top:34px;}
-.wc-sign{position:relative;width:100%;padding:0 14px 14px;border-radius:6px;color:#1a1204;
-  background:linear-gradient(180deg,#ffa53a,#ff8a12);border:3px solid #1a1204;
-  box-shadow:0 0 0 2px #ffb85c,0 14px 30px -10px rgba(0,0,0,0.7),inset 0 0 0 1px rgba(255,255,255,0.25);}
-.wc-sign-stripe{height:14px;margin:0 -14px 10px;border-bottom:3px solid #1a1204;
-  background:repeating-linear-gradient(-45deg,#1a1204 0 9px,#ffcc33 9px 18px);border-radius:3px 3px 0 0;}
-.wc-sign-t{text-align:center;font:900 15px/1 'Helvetica Neue',Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;}
-.wc-sign-h{display:flex;align-items:baseline;gap:6px;font:900 11px/1.2 'Helvetica Neue',Arial,sans-serif;letter-spacing:.8px;text-transform:uppercase;}
-.wc-sign-h span{font-size:10px;}
-.wc-sign-h{flex-wrap:wrap;row-gap:1px;}
-.wc-sign-h em{flex-basis:100%;padding-left:16px;font-style:normal;font-weight:700;font-size:8.5px;letter-spacing:1px;opacity:.7;}
-.wc-sign ul{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:4px;}
-.wc-sign li{display:flex;align-items:center;gap:9px;font:700 11.5px/1.25 'Helvetica Neue',Arial,sans-serif;}
-.wc-sign li i{width:13px;height:13px;flex-shrink:0;border:1.5px solid #1a1204;}
-.wc-sign-grade{position:relative;margin:10px -6px;height:14px;border-top:3px solid #1a1204;
-  background:repeating-linear-gradient(45deg,rgba(26,18,4,0.25) 0 2px,transparent 2px 7px);}
-.wc-sign-grade span{position:absolute;right:6px;top:-11px;padding:0 4px;background:#ff9a26;
-  font:900 8px/1 'JetBrains Mono',monospace;letter-spacing:1px;}
-.wc-sign-wc{display:flex;align-items:center;gap:10px;margin-top:12px;padding:8px 10px;border-radius:4px;
+.wc-signpost{flex:0 0 168px;display:flex;flex-direction:column;align-items:center;margin-top:120px;}
+.wc-sign{position:relative;width:100%;padding:0 10px 10px;border-radius:5px;color:#1a1204;
+  background:linear-gradient(180deg,#ffa53a,#ff8a12);border:2px solid #1a1204;
+  box-shadow:0 0 0 1.5px #ffb85c,0 10px 22px -10px rgba(0,0,0,0.7),inset 0 0 0 1px rgba(255,255,255,0.25);}
+.wc-sign-stripe{height:9px;margin:0 -10px 7px;border-bottom:2px solid #1a1204;
+  background:repeating-linear-gradient(-45deg,#1a1204 0 6px,#ffcc33 6px 12px);border-radius:3px 3px 0 0;}
+.wc-sign-t{text-align:center;font:900 11px/1 'Helvetica Neue',Arial,sans-serif;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:7px;}
+.wc-sign-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px;row-gap:0;font:900 8.5px/1.2 'Helvetica Neue',Arial,sans-serif;letter-spacing:.6px;text-transform:uppercase;}
+.wc-sign-h span{font-size:7.5px;}
+.wc-sign-h em{flex-basis:100%;padding-left:12px;font-style:normal;font-weight:700;font-size:6.5px;letter-spacing:.8px;opacity:.7;}
+.wc-sign ul{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-direction:column;gap:2px;}
+.wc-sign li{display:flex;align-items:center;gap:6px;font:700 9px/1.25 'Helvetica Neue',Arial,sans-serif;}
+.wc-sign li i{width:9px;height:9px;flex-shrink:0;border:1px solid #1a1204;}
+.wc-sign-grade{position:relative;margin:7px -4px;height:9px;border-top:2px solid #1a1204;
+  background:repeating-linear-gradient(45deg,rgba(26,18,4,0.25) 0 2px,transparent 2px 6px);}
+.wc-sign-grade span{position:absolute;right:4px;top:-8px;padding:0 3px;background:#ff9a26;
+  font:900 6px/1 'JetBrains Mono',monospace;letter-spacing:.8px;}
+.wc-sign-wc{display:flex;align-items:center;gap:7px;margin-top:8px;padding:6px 7px;border-radius:3px;
   background:#1a1204;color:#ffd24a;}
-.wc-sign-wc i{width:26px;height:5px;flex-shrink:0;background:#ffd24a;box-shadow:0 0 8px #ffd24a;}
-.wc-sign-wc b{display:block;font:900 10.5px/1.2 'Helvetica Neue',Arial,sans-serif;letter-spacing:1px;text-transform:uppercase;}
-.wc-sign-wc span{font:600 10px/1.3 'Helvetica Neue',Arial,sans-serif;color:#ffe6a0;}
-.wc-sign-bolts b{position:absolute;width:6px;height:6px;border-radius:50%;background:#5a3a10;box-shadow:inset 1px 1px 0 rgba(255,255,255,0.4);}
-.wc-sign-bolts b:nth-child(1){left:6px;top:20px} .wc-sign-bolts b:nth-child(2){right:6px;top:20px}
-.wc-sign-bolts b:nth-child(3){left:6px;bottom:6px} .wc-sign-bolts b:nth-child(4){right:6px;bottom:6px}
-.wc-sign-posts{display:flex;justify-content:space-between;width:58%;height:70px;}
-.wc-sign-posts i{width:10px;height:100%;background:linear-gradient(90deg,#6b7a8c,#c9d3df 45%,#55606e);
-  box-shadow:inset 0 -24px 0 rgba(0,0,0,0.15);}
-.wc-sign-base{width:78%;height:12px;border-radius:3px;background:repeating-linear-gradient(-45deg,#1a1204 0 7px,#ffcc33 7px 14px);
-  border:2px solid #1a1204;}
+.wc-sign-wc i{width:18px;height:4px;flex-shrink:0;background:#ffd24a;box-shadow:0 0 6px #ffd24a;}
+.wc-sign-wc b{display:block;font:900 8px/1.2 'Helvetica Neue',Arial,sans-serif;letter-spacing:.8px;text-transform:uppercase;}
+.wc-sign-wc span{font:600 7.5px/1.3 'Helvetica Neue',Arial,sans-serif;color:#ffe6a0;}
+.wc-sign-bolts b{position:absolute;width:4px;height:4px;border-radius:50%;background:#5a3a10;box-shadow:inset 1px 1px 0 rgba(255,255,255,0.4);}
+.wc-sign-bolts b:nth-child(1){left:4px;top:14px} .wc-sign-bolts b:nth-child(2){right:4px;top:14px}
+.wc-sign-bolts b:nth-child(3){left:4px;bottom:4px} .wc-sign-bolts b:nth-child(4){right:4px;bottom:4px}
+.wc-sign-posts{display:flex;justify-content:space-between;width:56%;height:44px;}
+.wc-sign-posts i{width:6px;height:100%;background:linear-gradient(90deg,#6b7a8c,#c9d3df 45%,#55606e);
+  box-shadow:inset 0 -14px 0 rgba(0,0,0,0.15);}
+.wc-sign-base{width:74%;height:8px;border-radius:2px;background:repeating-linear-gradient(-45deg,#1a1204 0 5px,#ffcc33 5px 10px);
+  border:1.5px solid #1a1204;}
 @media (max-width:1250px){
   .wc-elev-row{flex-direction:column;align-items:stretch;}
   .wc-signpost{flex:none;margin:6px auto 14px;width:min(440px,100%);}
@@ -3464,6 +3464,75 @@ body.wf-locked #panel-employees > div:has(.wf-sub-tabs){
 .wc-flight .fl-l{font-family:var(--mono);font-size:6.5px;letter-spacing:1px;fill:#7fa3c8;}
 .wc-flight .fl-bank{font-family:'Helvetica Neue',Arial,sans-serif;font-size:8px;font-weight:900;fill:#04140d;}
 .wc-fl-n{font-size:10.5px !important;}
+
+/* ── The war chest hero card ─────────────────────────────────────────── */
+.wc-k.wch{position:relative;overflow:hidden;isolation:isolate;padding:18px 20px 14px;border:1px solid transparent;
+  background:
+    linear-gradient(135deg,rgba(26,20,6,0.96),rgba(12,20,42,0.97) 55%,rgba(10,16,34,0.98)) padding-box,
+    conic-gradient(from var(--wch-a,0deg),#ffd24a,#ff9a26 18%,rgba(255,210,74,0.15) 35%,rgba(90,169,255,0.25) 55%,rgba(255,210,74,0.15) 72%,#ffe27a 90%,#ffd24a) border-box;
+  box-shadow:0 0 0 1px rgba(255,210,74,0.15),0 0 46px -10px rgba(255,190,60,0.55),0 24px 50px -24px rgba(0,0,0,0.9);
+  animation:wchSpin 9s linear infinite;}
+.wc-k.wch:before{display:none;}
+@property --wch-a{syntax:'<angle>';inherits:false;initial-value:0deg;}
+@keyframes wchSpin{to{--wch-a:360deg;}}
+.wch-glow{position:absolute;inset:-40% -10% auto auto;width:70%;height:140%;z-index:-1;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(255,200,70,0.28),transparent 70%);animation:wchBreathe 5s ease-in-out infinite;}
+@keyframes wchBreathe{50%{opacity:.55;transform:scale(1.08);}}
+.wch-dial{position:absolute;right:-46px;top:50%;width:250px;height:250px;transform:translateY(-50%);z-index:-1;opacity:.5;pointer-events:none;}
+.wch-dial line{stroke:rgba(255,210,74,0.55);stroke-width:1.2;}
+.wch-dial circle{fill:none;stroke:rgba(255,210,74,0.35);stroke-width:1.2;}
+.wch-dial text{font-family:var(--mono);font-size:7px;fill:rgba(255,210,74,0.5);text-anchor:middle;}
+.wch-dial path{fill:rgba(255,210,74,0.6);}
+.wch-dial .wch-hub{fill:rgba(255,210,74,0.25);stroke:rgba(255,210,74,0.7);}
+.wch-ring{transform-origin:100px 100px;}
+.wch-ring.r1{animation:wchTurn 60s linear infinite;}
+.wch-ring.r2{animation:wchTurn 90s linear infinite reverse;}
+.wch-ring.r3{animation:wchDial 8s cubic-bezier(.6,0,.2,1) infinite;}
+@keyframes wchTurn{to{transform:rotate(360deg);}}
+@keyframes wchDial{0%{transform:rotate(0)}30%{transform:rotate(130deg)}55%{transform:rotate(70deg)}80%{transform:rotate(250deg)}100%{transform:rotate(360deg)}}
+.wch-motes{position:absolute;inset:0;z-index:-1;pointer-events:none;}
+.wch-motes i{position:absolute;bottom:-6px;width:3px;height:3px;border-radius:50%;background:#ffd24a;box-shadow:0 0 6px #ffd24a;opacity:0;
+  animation:wchRise 6s linear infinite;}
+.wch-motes i:nth-child(1){left:12%;animation-delay:0s}.wch-motes i:nth-child(2){left:30%;animation-delay:1.4s}
+.wch-motes i:nth-child(3){left:47%;animation-delay:2.6s}.wch-motes i:nth-child(4){left:63%;animation-delay:.8s}
+.wch-motes i:nth-child(5){left:78%;animation-delay:3.4s}.wch-motes i:nth-child(6){left:90%;animation-delay:2s}
+@keyframes wchRise{0%{transform:translateY(0);opacity:0}15%{opacity:.9}100%{transform:translateY(-190px);opacity:0}}
+.wch-in{position:relative;display:flex;flex-direction:column;gap:6px;}
+.wch .wc-kk{display:flex;align-items:center;gap:7px;color:#ffd98a !important;}
+.wch-live{width:7px;height:7px;border-radius:50%;background:#ffd24a;box-shadow:0 0 0 0 rgba(255,210,74,0.7);animation:wchPing 2s ease-out infinite;}
+@keyframes wchPing{0%{box-shadow:0 0 0 0 rgba(255,210,74,0.6)}100%{box-shadow:0 0 0 9px rgba(255,210,74,0)}}
+.wc-k.wch .wch-num{font-size:46px !important;font-weight:900;letter-spacing:-1px;line-height:1.02;font-variant-numeric:tabular-nums;
+  background:linear-gradient(100deg,#d98a12 0%,#ffd24a 30%,#fff6d2 45%,#ffd24a 60%,#e9a223 100%);background-size:250% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent !important;
+  filter:drop-shadow(0 0 18px rgba(255,200,60,0.45));animation:wchSheen 4.5s ease-in-out infinite;}
+.wch-num.landed{animation:wchSheen 4.5s ease-in-out infinite,wchLand .6s ease-out;}
+@keyframes wchSheen{0%,100%{background-position:100% 0}50%{background-position:0 0}}
+@keyframes wchLand{0%{transform:scale(1.04);filter:drop-shadow(0 0 30px rgba(255,220,120,0.9))}100%{transform:none}}
+.wch-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.wch-chip{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.3px;padding:3px 9px;border-radius:999px;}
+.wch-chip.up{color:#34f5a4;background:rgba(52,245,164,0.1);border:1px solid rgba(52,245,164,0.4);}
+.wch-chip.x{color:#ffe6a0;background:rgba(255,210,74,0.1);border:1px solid rgba(255,210,74,0.45);}
+.wch-chip.x b{color:#ffd24a;font-size:11px;}
+.wch-climb{margin-top:4px;}
+.wch-spark{display:block;width:100%;height:46px;overflow:visible;}
+.wch-line{fill:none;stroke:#ffd24a;stroke-width:2.2;stroke-linejoin:round;stroke-dasharray:100;stroke-dashoffset:100;
+  filter:drop-shadow(0 0 4px rgba(255,210,74,0.8));animation:wchDraw 1.8s .2s cubic-bezier(.3,.7,.2,1) forwards;}
+.wch-area{opacity:0;animation:wchFade 1s 1.2s forwards;}
+@keyframes wchDraw{to{stroke-dashoffset:0;}}
+@keyframes wchFade{to{opacity:1;}}
+.wch-pt{fill:#0b1830;stroke:#ffd24a;stroke-width:1.6;opacity:0;animation:wchFade .3s forwards;vector-effect:non-scaling-stroke;}
+.wch-pt.last{fill:#ffd24a;}
+.wch-lbls{display:flex;justify-content:space-between;font-family:var(--mono);font-size:8.5px;letter-spacing:.8px;color:#9db3d3;margin-top:3px;}
+@media (prefers-reduced-motion:reduce){
+  .wc-k.wch,.wch-glow,.wch-ring,.wch-motes i,.wch-live,.wc-k.wch .wch-num{animation:none !important;}
+  .wch-line{stroke-dashoffset:0;animation:none;} .wch-area,.wch-pt{opacity:1;animation:none;}
+}
+.wc-eyebrow{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;}
+.wc-eyebrow span{display:inline-flex;align-items:center;gap:6px;}
+.wc-eyebrow b{opacity:.6;font-weight:400;}
+.wc-ico{width:18px;height:18px;flex-shrink:0;filter:drop-shadow(0 0 4px rgba(255,210,74,0.25));}
+.wc-span{text-align:center !important;color:#e8f0ff;background:rgba(255,255,255,0.025);}
+.wc-span span{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:1px;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-top:1px;}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
@@ -4316,6 +4385,84 @@ function wcParseBalanceSheet(rows){
 // 1.0-1.5x, green from 1.5x (healthy). The dial reads 0-4x; a ratio past
 // that pegs the needle and says how far over the healthy line it is.
 // Cash position: a ring showing how much of working capital is already cash.
+// ── The war chest: the page's headline number ─────────────────────────────
+// A vault dial turns behind the figure, the figure counts up to the balance
+// and a gold sheen runs across it, and the climb from year-end is drawn in
+// as a girder line underneath.
+function wcHeroCard(first, last, tl){
+  var growth = last.wc - first.wc;
+  var mult = first.wc > 0 ? last.wc / first.wc : 0;
+  // vault dial: concentric rings, ticks, and a pointer
+  var ticks = '';
+  for (var i = 0; i < 60; i++) {
+    var a = i * 6 * Math.PI / 180, r1 = i % 5 ? 84 : 78, r2 = 90;
+    ticks += '<line x1="'+(100+r1*Math.cos(a)).toFixed(1)+'" y1="'+(100+r1*Math.sin(a)).toFixed(1)+
+      '" x2="'+(100+r2*Math.cos(a)).toFixed(1)+'" y2="'+(100+r2*Math.sin(a)).toFixed(1)+'"/>';
+  }
+  var nums = '';
+  for (var j = 0; j < 12; j++) {
+    var b = (j * 30 - 90) * Math.PI / 180;
+    nums += '<text x="'+(100+66*Math.cos(b)).toFixed(1)+'" y="'+(100+66*Math.sin(b)+3).toFixed(1)+'">'+(j*5)+'</text>';
+  }
+  var dial = '<svg class="wch-dial" viewBox="0 0 200 200" aria-hidden="true">'+
+    '<g class="wch-ring r1"><circle cx="100" cy="100" r="94"/>'+ticks+'</g>'+
+    '<g class="wch-ring r2">'+nums+'<circle cx="100" cy="100" r="56"/></g>'+
+    '<g class="wch-ring r3"><circle cx="100" cy="100" r="40" stroke-dasharray="4 6"/>'+
+      '<path d="M100 60 L106 100 L100 108 L94 100 Z"/></g>'+
+    '<circle cx="100" cy="100" r="11" class="wch-hub"/>'+
+  '</svg>';
+  // the climb: working capital at each reading, drawn as a gold girder line
+  var vals = tl.map(function(x){ return x.wc; }), mx = Math.max.apply(null, vals.concat([1])), mn = Math.min.apply(null, vals.concat([0]));
+  var W = 480, H = 50, pad = 6;      // close to the card's shape, so dots stay round
+  var pts = vals.map(function(v, i){
+    var x = pad + (W - 2*pad) * (vals.length > 1 ? i/(vals.length-1) : 1);
+    var y = H - pad - (v - mn) / ((mx - mn) || 1) * (H - 2*pad);
+    return [x, y];
+  });
+  var line = pts.map(function(p, i){ return (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join(' ');
+  var area = line + ' L' + pts[pts.length-1][0].toFixed(1) + ' ' + H + ' L' + pts[0][0].toFixed(1) + ' ' + H + ' Z';
+  var spark = '<svg class="wch-spark" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" aria-hidden="true">'+
+    '<defs><linearGradient id="wch-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(255,210,74,0.22)"/>'+
+      '<stop offset="1" stop-color="rgba(255,210,74,0)"/></linearGradient></defs>'+
+    '<path d="'+area+'" fill="url(#wch-area)" class="wch-area"/>'+
+    '<path d="'+line+'" class="wch-line" pathLength="100"/>'+
+    pts.map(function(p, i){ return '<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+(i === pts.length-1 ? 4 : 2.5)+'" class="wch-pt'+(i === pts.length-1 ? ' last' : '')+'" style="animation-delay:'+(0.4 + i*0.18).toFixed(2)+'s"/>'; }).join('')+
+  '</svg>';
+  var labels = tl.map(function(x){ return '<span>'+wcTag(x.date).replace(' '+x.date.slice(0,4),'').replace('YEAR-END','YE '+x.date.slice(2,4))+'</span>'; }).join('');
+
+  return '<div class="wc-k hero wch">'+
+    '<div class="wch-glow"></div>'+dial+
+    '<div class="wch-motes">'+'<i></i><i></i><i></i><i></i><i></i><i></i>'+'</div>'+
+    '<div class="wch-in">'+
+      '<span class="wc-kk"><i class="wch-live"></i>The war chest \u00b7 working capital \u00b7 '+wcDateLbl(last.date)+'</span>'+
+      '<b class="wch-num" data-to="'+Math.round(last.wc)+'">'+wcbFull(last.wc)+'</b>'+
+      '<div class="wch-chips">'+
+        '<span class="wch-chip up">\u25b2 '+wcM(growth)+' since '+wcDateLbl(first.date)+'</span>'+
+        (mult ? '<span class="wch-chip x"><b>'+mult.toFixed(1)+'\u00d7</b> the year-end war chest</span>' : '')+
+      '</div>'+
+      '<div class="wch-climb">'+spark+'<div class="wch-lbls">'+labels+'</div></div>'+
+    '</div>'+
+  '</div>';
+}
+// count the headline up to its value the first time it's drawn
+function wcHeroAnimate(){
+  var el = document.querySelector('.wch-num');
+  if (!el) return;
+  var to = +el.getAttribute('data-to');
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || wcHeroAnimate.done === to) return;
+  wcHeroAnimate.done = to;
+  var t0 = null, dur = 1700;
+  function step(t){
+    if (!t0) t0 = t;
+    var k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(2, -10 * k);   // ease-out
+    el.textContent = '$' + Math.round(to * (k < 1 ? e : 1)).toLocaleString();
+    if (k < 1) requestAnimationFrame(step); else el.classList.add('landed');
+  }
+  el.textContent = '$0';
+  requestAnimationFrame(step);
+}
+
 function wcCashCard(cash, share, last){
   var R = 30, C = 2*Math.PI*R, on = C * Math.max(0, Math.min(100, share)) / 100;
   var ring = '<svg viewBox="0 0 80 80" class="wc-cring" aria-hidden="true">'+
@@ -4422,10 +4569,7 @@ function renderBudgetWC26(el){
 
   var kpis =
     '<div class="wc-kpis">'+
-      '<div class="wc-k hero"><span class="wc-kk">Working capital \u00b7 '+wcDateLbl(last.date)+'</span>'+
-        '<b>'+wcbFull(last.wc)+'</b>'+
-        '<em>'+wcM(last.wc - first.wc)+' since '+wcDateLbl(first.date)+' \u00b7 '+
-          (first.wc > 0 ? (last.wc/first.wc).toFixed(1)+'\u00d7 the year-end war chest' : '')+'</em></div>'+
+      wcHeroCard(first, last, tl)+
       wcCashCard(cash, cashShare, last)+
       wcFlightCard(inFlight, last)+
       wcRatioCard(ratio, last)+
@@ -4435,7 +4579,10 @@ function renderBudgetWC26(el){
     '<div class="wc-root">'+
       '<input type="file" id="wc-file" accept=".xlsx,.xls,.csv" style="display:none" onchange="wcHandleFile(this)">'+
       '<div class="wc-strap">'+
-        '<div><div class="wc-eyebrow">Liquidity \u00b7 the war chest \u00b7 risk mitigation</div>'+
+        '<div><div class="wc-eyebrow">'+
+          '<span><svg class="wc-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5C6 4.6 3.5 7.2 3.5 10a4.5 4.5 0 0 0 9 0C12.5 7.2 10 4.6 8 1.5Z" fill="#5ac8ff"/><path d="M6.2 9.6a2 2 0 0 0 1.4 2.2" stroke="#e6f7ff" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>Liquidity</span><b>\u00b7</b>'+
+          '<span><svg class="wc-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 7V5.8C2 3.7 4.7 2.5 8 2.5s6 1.2 6 3.3V7Z" fill="#c8892e"/><rect x="2" y="7" width="12" height="6.5" rx="0.8" fill="#9a5f1f"/><path d="M2 7h12" stroke="#ffd24a" stroke-width="1.2"/><path d="M5 2.9V13.5M11 2.9V13.5" stroke="#ffd24a" stroke-width="1"/><rect x="6.8" y="6.2" width="2.4" height="3" rx="0.5" fill="#ffd24a"/><circle cx="8" cy="3.4" r="0" /><path d="M3.5 4.3l1-.7M12.5 4.3l-1-.7" stroke="#ffe9a3" stroke-width=".7"/></svg>The war chest</span><b>\u00b7</b>'+
+          '<span><svg class="wc-ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="5.2" y="5" width="5.6" height="9.5" rx="2" fill="#ef3b3b"/><rect x="5.2" y="9" width="5.6" height="1.6" fill="#ffd24a"/><rect x="6.6" y="3.2" width="2.8" height="2" rx=".4" fill="#2b2f3a"/><path d="M9.4 3.8h2.4l1.8 1.6" stroke="#2b2f3a" stroke-width="1.1" fill="none" stroke-linecap="round"/><path d="M6.6 3.6L5 2.5" stroke="#2b2f3a" stroke-width="1.1" stroke-linecap="round"/><rect x="6" y="5.6" width="1" height="3" rx=".5" fill="#ff8a8a"/></svg>Risk mitigation</span></div>'+
           '<div class="wc-lede">Working capital is what Basin can deploy tomorrow. Cash is the part already in hand.</div></div>'+
         '<button class="wc-up" onclick="wcPickFile()">\u2191 Upload balance sheet</button>'+
       '</div>'+
@@ -4459,6 +4606,7 @@ function renderBudgetWC26(el){
       '</section>'+
     '</div>';
   wcWireTips();
+  wcHeroAnimate();
 }
 
 // ── Sheet WC-101: the elevation ─────────────────────────────────────────
@@ -4834,6 +4982,20 @@ function wcBridge(title, span, steps, growth, ebitda, foot){
   '</div>';
 }
 
+// ══════════════════════════════════════════════════════════════════════════
+// OP EX — non-labor overhead analysis
+// Facilities (7200s) and Business Overhead (7300–7490), built from the
+// NetSuite Income Statement Detail so every figure traces to a transaction.
+// ══════════════════════════════════════════════════════════════════════════
+var OPX_SEED = {"names":["John Basin Properties LLC","Worx BHM","Regus","Minimall Storage","(Prepaid amortization)","Parsons Lee & Juliano, PC","Swan Development, LLC","Minute Key","ASAP Moving & Delivery","First Horizon","PODS","Wesley Eustis","Paratech","Toggle Design","Rev Tucker","WillPower Construction","Surgi's Heating and Air","ServPro of Metairie","Uniti GulfCo LLC","Cox Communications","Level 3 Communications. LLC (Lumen)","Entergy","Jefferson Parish Water","(Refund / deposit)","CNA Insurance","Arthur J Gallagher Insurance","Rigby Financial Group","Anchor Group LLC","Galloway Law Firm","Deutsch Kerrigan, L.L.P.","Wimbush & Associates, Inc.","Retirement Strategies Group","Impact Recruitment LLC","Talent Staffing Solutions Inc.","Metairie Country Club","The Personnel Consulting Group, LLC","Cash Balance Actuaries, LLC","Lease Services","Autodesk","Microsoft","Ensoft, Inc","ATG USA, Inc.","Vertical Aspect, LLC","Network Solutions","Netsuite","Trimble","Service Channel","Illustrator","Adobe","Remarkable OPS","Softdraft LLC","Kahua","Open AI/ChatGPT","Mailchimp","Smartnet","Paddle.net","SmartSheet","Carlson Software","Anthropic","Dropbox","Canva","LinkedIn","Virtuosity","Netlify","Zipby","Satellite","SquareSpace","GumRoad","Quickbooks","Transoft Solutions","Amazon","Allfax","office Depot","Zoom Meetings","Amy Love","Wholefoods","Restaurants","Lowe's","Exxon Station","Walgreens","Edward Jurczak","Joe's Cafe","U.S. Copy","Trader Joe's","Lenovo","Upscale Coffee","Jura, Inc.","DKI Office Furniture","Audible","BYLR - calendar","Walmart","Haag & Trammell","Joel Meariman","Sam's Club","Jefferson Parish Clerk of Court","Atomic Coffee","Blanca Estela Madrid","G360, LLC","Tax1099","Home Depot","River Birch Renewable","Circulation The AdvoBaton Rouge","West Marine","The New Stand","Amain.com","Where Traveler","Seville Classics","RTI London","Rouses","Best Buy","CVS Pharmacy","Terminix","MPress","Jedidiah Hellmich","Heather Cina","Beetronics","Vari","Alicia Martinez","Absolutely Unique","Dollar General","Robert Fresh Market","Alex Heaton","Keepsake Frames","EDCO Awards","Instacart","Shell Station","Vistaprint","OfficeSupply.com","Shark Ninja","Rylon Johnson","Moo Inc","Jonathan  C Catanzano","Dell Financial Services LLC","Air Essentials","Costco","Congregation Coffee","PaperPlaneNOLA","Tchefuncte Ace Hardware","VXB Bearings","Academy Sports","Target","Wuiliam Perez","STXND","Evolve Coffee","Country Day School","Coreworks","Delta Airlines","Adam Massey","Carrollton Boosters","Tasc Performance, Inc.","University of New Orleans","Tatiana Pavlyukova","Wesley (Reese) Ryland","Toni Dumas","Enrique McDonald","Gary Rendano","Shadman Sakib","Aleph Kennedy","Meraux Tackle Box","John Taylor","Brooke Harris","Uber","United Airlines","CheapOAir","Hotels","Travel Guard","The Hertz Corporation","Southwest Airlines","Spirit Airlines","American Airlines","Garrett Alvero","Lyft","Allianz Insurance","Expedia","Enterprise Rental Car","IDENTOGO","Hampton Inn","Priceline","Clearme.com","Payless Car Rental","Hyatt Hotel","Avis","American Express","Budget","23 Duplantis Design group","JetBlue","Breeze Airways","Louis Armstrong Airport","Gas","Parking","Premium Parking","Chevron","Circle K","3501 N. Causeway Associates, LLC","Jetgo","RaceTrac","SP+Parking","Connor Glennon","Warakorn Tiyapattanaputi","Kirk Henry","48 Meyer & Associates, Inc.","Payton McNeil","Sunoco","Max Torrealba","Riley Knepper","Marathon","Craig Cuccia","Kevin Beaupierre","Tuan Le","Verizon Wireless","Friends of WWOZ New Orleans","The Exchange Pickleball","Marsh & Bayou","Antoine's Bakery","Ulta","I'm On Vacation","Chef Michael King","Acquistapace's","Total Wine & More","Neiman Marcus","Sneaux-LA","Campo's Marina","The Monogram Shoppe","City Park Conservancy","Feats4Funds","St. George's Episcopal School","Michael Pedalino","The Peak Coach Inc.","Vistage Worldwide","SurvMap Education","ACEC of Louisiana","Women's Energy Network","American Concrete Institute - LA","Jane Faia Mentz","LCPA","Louisiana Engineering Society of NO","NCTCOG RPA Training","American Society of Civil Engineers","Solomon Group Productions, LLC","William Chauvin","Tilt up","Louisiana Economic Alliance for Development","Dun & Bradstreet","Alabama State Gov","ASCE Purchasing","LSPS","LA Secretary of State","Accuris","Joseph P. Lopinto, III - Sheriff and Ex-Officio Tax Collector","Utah City Govt.","Corporate Filings","Institute of Transportation Engineers","American Concrete Institution","LAPELS","PE Stamps","Louisiana Interactive","Oklahoma State Board","South Carolina Licensing","NCEES Firm Licensure","NC Board of Examiners","Texas Board of Professional Engineers and Land Surveyors","LLR - Board of Engineers and Surveyors","St. Tammany Parish Clerk of Courts","New Mexico State Board of Licensure for Professional Engineers and Surveyors","Harbor Point","Banner Ford","Pelican Pointe Car Wash","Rich's","Greater New Orleans","O'Reillys Auto Parts","SunPass","OMV","Lexus of NO","Mavis Tire","Mossy Motors","Ford","USPS","Fedex","UPS","Gulf Coast Bank & Trust","(Journal entry)"],"rows":[[7210,"2026-01-02",0,10938.11,"B"],[7210,"2026-01-26",1,2670.0,"B"],[7210,"2026-02-02",0,10938.11,"B"],[7210,"2026-02-22",1,2670.0,"B"],[7210,"2026-03-02",0,10938.11,"B"],[7210,"2026-03-25",1,2670.0,"B"],[7210,"2026-04-06",0,10938.11,"B"],[7210,"2026-04-22",2,546.33,"C"],[7210,"2026-04-24",1,2670.0,"B"],[7210,"2026-04-29",3,82.96,"C"],[7210,"2026-05-04",0,10938.11,"B"],[7210,"2026-05-25",1,2670.0,"B"],[7210,"2026-05-29",3,143.72,"C"],[7210,"2026-06-01",0,10938.11,"B"],[7210,"2026-06-26",1,877.8,"B"],[7210,"2026-06-26",3,175.64,"C"],[7210,"2026-07-01",0,10938.11,"B"],[7210,"2026-07-17",2,1025.42,"C"],[7210,"2026-07-24",3,175.64,"C"],[7210,"2026-07-31",4,500.0,"J"],[7210,"2026-08-01",0,10938.11,"K"],[7210,"2026-08-01",5,5300.0,"K"],[7210,"2026-08-21",3,175.64,"C"],[7210,"2026-08-31",4,500.0,"J"],[7220,"2026-01-06",6,92821.09,"B"],[7220,"2026-01-10",7,118.53,"C"],[7220,"2026-01-10",7,118.53,"C"],[7220,"2026-01-12",8,8500.0,"B"],[7220,"2026-01-12",9,800.0,"K"],[7220,"2026-01-12",9,800.0,"K"],[7220,"2026-01-13",10,53.01,"C"],[7220,"2026-01-14",10,53.01,"C"],[7220,"2026-01-15",6,27322.77,"B"],[7220,"2026-01-19",11,400.0,"E"],[7220,"2026-01-20",12,9671.05,"B"],[7220,"2026-01-20",12,11407.26,"B"],[7220,"2026-01-21",13,525.0,"B"],[7220,"2026-01-23",14,240.0,"B"],[7220,"2026-02-19",6,13508.0,"B"],[7220,"2026-03-09",14,200.0,"B"],[7220,"2026-03-25",15,225.0,"B"],[7220,"2026-04-01",6,7029.28,"B"],[7220,"2026-04-30",15,3350.0,"B"],[7220,"2026-05-18",16,372.0,"C"],[7220,"2026-05-28",14,160.0,"B"],[7220,"2026-06-03",15,300.0,"B"],[7220,"2026-06-25",6,11278.78,"B"],[7220,"2026-08-27",17,2500.0,"K"],[7240,"2026-01-01",18,1429.75,"B"],[7240,"2026-01-20",19,996.4,"K"],[7240,"2026-02-01",18,997.5,"B"],[7240,"2026-02-20",19,532.06,"K"],[7240,"2026-03-01",18,997.5,"B"],[7240,"2026-03-01",12,839.23,"B"],[7240,"2026-03-23",19,178.86,"K"],[7240,"2026-04-01",12,898.13,"B"],[7240,"2026-04-01",18,997.5,"B"],[7240,"2026-05-01",12,898.13,"B"],[7240,"2026-05-01",18,997.5,"B"],[7240,"2026-06-01",18,997.5,"B"],[7240,"2026-06-01",12,898.13,"B"],[7240,"2026-07-01",20,1374.93,"B"],[7240,"2026-07-01",12,902.31,"B"],[7240,"2026-07-01",18,997.5,"B"],[7240,"2026-08-01",12,990.22,"B"],[7240,"2026-08-01",18,997.5,"B"],[7240,"2026-08-01",20,1085.47,"B"],[7240,"2026-08-31",12,990.22,"B"],[7250,"2026-01-22",21,308.24,"B"],[7250,"2026-02-18",21,754.16,"B"],[7250,"2026-03-01",22,97.02,"B"],[7250,"2026-03-19",21,694.35,"B"],[7250,"2026-04-17",21,653.87,"B"],[7250,"2026-04-23",22,140.61,"B"],[7250,"2026-05-18",21,724.01,"B"],[7250,"2026-06-17",21,870.03,"B"],[7250,"2026-06-17",22,140.61,"B"],[7250,"2026-07-17",21,847.02,"B"],[7250,"2026-08-10",22,122.3,"B"],[7250,"2026-08-15",21,997.02,"B"],[7310,"2026-02-03",23,-910.1,"D"],[7310,"2026-03-09",24,562.88,"B"],[7310,"2026-03-18",24,3823.07,"K"],[7310,"2026-03-31",4,580.64,"J"],[7310,"2026-04-17",25,61.5,"B"],[7310,"2026-04-30",4,580.64,"J"],[7310,"2026-05-01",23,-1815.81,"D"],[7310,"2026-05-25",24,3371.07,"B"],[7310,"2026-05-31",4,2568.31,"J"],[7310,"2026-05-31",4,580.64,"J"],[7310,"2026-06-08",24,545.82,"B"],[7310,"2026-06-30",4,467.33,"J"],[7310,"2026-06-30",4,580.64,"J"],[7310,"2026-06-30",4,2568.31,"J"],[7310,"2026-07-31",4,467.33,"J"],[7310,"2026-07-31",4,580.64,"J"],[7310,"2026-07-31",4,923.01,"J"],[7310,"2026-07-31",4,2568.31,"J"],[7310,"2026-08-31",4,580.64,"J"],[7310,"2026-08-31",4,209.33,"J"],[7310,"2026-08-31",4,2568.31,"J"],[7310,"2026-08-31",4,467.33,"J"],[7310,"2026-08-31",4,923.01,"J"],[7312,"2026-02-28",4,1135.42,"J"],[7312,"2026-02-28",4,793.75,"J"],[7312,"2026-03-31",4,1135.42,"J"],[7312,"2026-03-31",4,793.75,"J"],[7312,"2026-04-30",4,1135.42,"J"],[7312,"2026-04-30",4,531.11,"J"],[7312,"2026-04-30",4,793.75,"J"],[7312,"2026-05-31",4,531.11,"J"],[7312,"2026-05-31",4,793.75,"J"],[7312,"2026-05-31",4,1135.42,"J"],[7312,"2026-06-30",4,1135.42,"J"],[7312,"2026-06-30",4,531.11,"J"],[7312,"2026-06-30",4,793.75,"J"],[7312,"2026-07-31",4,793.75,"J"],[7312,"2026-07-31",4,1135.42,"J"],[7312,"2026-07-31",4,531.11,"J"],[7312,"2026-08-31",4,531.11,"J"],[7312,"2026-08-31",4,1135.42,"J"],[7312,"2026-08-31",4,793.75,"J"],[7320,"2026-01-06",26,2000.0,"B"],[7320,"2026-01-07",26,14300.0,"B"],[7320,"2026-01-12",27,6150.0,"B"],[7320,"2026-01-23",26,1750.0,"K"],[7320,"2026-01-30",28,877.5,"B"],[7320,"2026-02-03",27,7636.25,"B"],[7320,"2026-02-05",26,3200.0,"B"],[7320,"2026-02-23",26,1750.0,"K"],[7320,"2026-03-04",26,9180.0,"B"],[7320,"2026-03-05",27,4663.75,"B"],[7320,"2026-03-19",28,1300.0,"B"],[7320,"2026-03-20",29,3729.39,"B"],[7320,"2026-03-23",26,1750.0,"K"],[7320,"2026-03-30",30,6000.0,"B"],[7320,"2026-03-30",30,7000.0,"B"],[7320,"2026-03-31",31,1442.0,"B"],[7320,"2026-04-01",27,7123.75,"B"],[7320,"2026-04-09",26,10500.0,"B"],[7320,"2026-04-13",32,21325.0,"B"],[7320,"2026-04-20",33,22500.0,"B"],[7320,"2026-04-21",28,357.5,"B"],[7320,"2026-04-23",26,1750.0,"K"],[7320,"2026-04-27",28,2117.5,"B"],[7320,"2026-05-06",26,6910.0,"B"],[7320,"2026-05-12",28,110.0,"B"],[7320,"2026-05-12",27,5176.25,"B"],[7320,"2026-05-20",28,747.5,"B"],[7320,"2026-05-23",26,1750.0,"K"],[7320,"2026-05-26",29,2650.36,"B"],[7320,"2026-06-02",27,6201.25,"B"],[7320,"2026-06-04",26,6500.0,"B"],[7320,"2026-06-18",28,617.5,"B"],[7320,"2026-06-23",26,1750.0,"K"],[7320,"2026-06-25",34,2242.05,"B"],[7320,"2026-07-01",35,45000.0,"B"],[7320,"2026-07-01",36,3500.0,"B"],[7320,"2026-07-01",31,1036.0,"B"],[7320,"2026-07-02",27,8200.0,"B"],[7320,"2026-07-10",26,9147.5,"B"],[7320,"2026-07-21",28,845.0,"B"],[7320,"2026-07-22",28,97.5,"B"],[7320,"2026-07-23",26,1750.0,"K"],[7320,"2026-08-01",30,7000.0,"B"],[7320,"2026-08-01",30,7000.0,"B"],[7320,"2026-08-04",27,8610.0,"B"],[7320,"2026-08-07",26,12245.0,"B"],[7320,"2026-08-10",28,650.0,"B"],[7320,"2026-08-23",26,1750.0,"K"],[7320,"2026-08-31",27,10403.75,"B"],[7330,"2026-01-05",37,1244.47,"K"],[7330,"2026-01-07",38,126.5,"C"],[7330,"2026-01-11",39,36.96,"C"],[7330,"2026-01-14",38,385.13,"C"],[7330,"2026-01-14",38,674.06,"C"],[7330,"2026-01-14",40,65.0,"C"],[7330,"2026-01-14",38,-385.13,"R"],[7330,"2026-01-15",41,121.0,"K"],[7330,"2026-01-19",39,2128.16,"C"],[7330,"2026-01-21",42,3395.43,"B"],[7330,"2026-01-22",41,1331.0,"K"],[7330,"2026-01-22",39,1.06,"C"],[7330,"2026-01-24",43,17.99,"C"],[7330,"2026-01-24",39,5.36,"C"],[7330,"2026-01-28",44,1169.59,"B"],[7330,"2026-01-28",38,1012.0,"C"],[7330,"2026-01-28",39,22.0,"C"],[7330,"2026-01-29",39,17.6,"C"],[7330,"2026-02-05",37,1244.47,"K"],[7330,"2026-02-05",44,341.55,"C"],[7330,"2026-02-05",44,211.76,"C"],[7330,"2026-02-06",41,363.0,"K"],[7330,"2026-02-06",45,6853.0,"C"],[7330,"2026-02-07",38,126.5,"C"],[7330,"2026-02-08",44,2095.8,"B"],[7330,"2026-02-09",44,341.55,"B"],[7330,"2026-02-09",46,4.2,"K"],[7330,"2026-02-11",39,46.2,"C"],[7330,"2026-02-13",47,290.27,"C"],[7330,"2026-02-16",38,3157.0,"C"],[7330,"2026-02-19",39,2128.16,"C"],[7330,"2026-02-20",39,21.95,"C"],[7330,"2026-02-21",43,17.99,"C"],[7330,"2026-02-24",48,37.94,"C"],[7330,"2026-02-28",49,3.29,"C"],[7330,"2026-02-28",39,22.0,"C"],[7330,"2026-02-28",38,1012.0,"C"],[7330,"2026-02-28",4,1080.0,"J"],[7330,"2026-03-01",39,18.48,"C"],[7330,"2026-03-03",23,-21253.86,"D"],[7330,"2026-03-04",50,395.0,"C"],[7330,"2026-03-04",51,1490.0,"C"],[7330,"2026-03-06",45,-6853.0,"X"],[7330,"2026-03-07",38,126.5,"C"],[7330,"2026-03-11",39,46.2,"C"],[7330,"2026-03-19",39,2128.16,"C"],[7330,"2026-03-19",48,32.99,"C"],[7330,"2026-03-21",43,17.99,"C"],[7330,"2026-03-21",52,21.95,"C"],[7330,"2026-03-22",38,594.0,"C"],[7330,"2026-03-24",41,60.36,"B"],[7330,"2026-03-24",48,37.94,"C"],[7330,"2026-03-25",38,3157.0,"C"],[7330,"2026-03-25",39,11.65,"C"],[7330,"2026-03-28",52,22.0,"C"],[7330,"2026-03-28",38,1012.0,"C"],[7330,"2026-03-29",39,18.48,"C"],[7330,"2026-03-30",53,49.39,"C"],[7330,"2026-03-31",4,4168.08,"J"],[7330,"2026-03-31",4,1080.0,"J"],[7330,"2026-03-31",4,474.21,"J"],[7330,"2026-04-01",39,8.38,"C"],[7330,"2026-04-01",54,2730.0,"C"],[7330,"2026-04-06",44,-923.1,"X"],[7330,"2026-04-06",44,-341.55,"X"],[7330,"2026-04-06",44,-1810.19,"X"],[7330,"2026-04-07",38,126.5,"C"],[7330,"2026-04-09",55,1.99,"C"],[7330,"2026-04-09",39,139.93,"C"],[7330,"2026-04-12",39,46.2,"C"],[7330,"2026-04-18",43,19.99,"C"],[7330,"2026-04-19",39,2576.85,"C"],[7330,"2026-04-19",48,32.99,"C"],[7330,"2026-04-21",52,21.95,"C"],[7330,"2026-04-24",48,37.94,"C"],[7330,"2026-04-28",38,1012.0,"C"],[7330,"2026-04-28",52,22.0,"C"],[7330,"2026-04-29",39,18.48,"C"],[7330,"2026-04-30",53,49.39,"C"],[7330,"2026-04-30",4,4168.08,"J"],[7330,"2026-04-30",4,474.21,"J"],[7330,"2026-04-30",4,1080.0,"J"],[7330,"2026-05-05",56,118.8,"C"],[7330,"2026-05-06",57,385.0,"C"],[7330,"2026-05-07",38,126.5,"C"],[7330,"2026-05-08",39,10.58,"C"],[7330,"2026-05-11",39,46.2,"C"],[7330,"2026-05-11",52,54.88,"C"],[7330,"2026-05-16",43,19.99,"C"],[7330,"2026-05-16",39,2.15,"C"],[7330,"2026-05-19",41,1086.53,"K"],[7330,"2026-05-19",38,2497.22,"C"],[7330,"2026-05-19",58,137.19,"C"],[7330,"2026-05-19",38,3154.51,"C"],[7330,"2026-05-19",48,32.99,"C"],[7330,"2026-05-19",39,2620.2,"C"],[7330,"2026-05-21",52,21.95,"C"],[7330,"2026-05-22",39,12.32,"C"],[7330,"2026-05-24",48,37.94,"C"],[7330,"2026-05-28",52,22.0,"C"],[7330,"2026-05-28",38,1012.0,"C"],[7330,"2026-05-29",39,18.48,"C"],[7330,"2026-05-31",4,1080.0,"J"],[7330,"2026-05-31",4,753.5,"J"],[7330,"2026-05-31",4,474.21,"J"],[7330,"2026-05-31",4,4168.08,"J"],[7330,"2026-05-31",4,1114.66,"J"],[7330,"2026-06-06",38,2304.5,"C"],[7330,"2026-06-07",38,126.5,"C"],[7330,"2026-06-11",52,54.88,"C"],[7330,"2026-06-11",39,46.2,"C"],[7330,"2026-06-13",43,19.99,"C"],[7330,"2026-06-14",59,199.0,"C"],[7330,"2026-06-18",49,4.38,"C"],[7330,"2026-06-19",39,2634.65,"C"],[7330,"2026-06-19",48,32.99,"C"],[7330,"2026-06-19",58,137.19,"C"],[7330,"2026-06-21",52,21.95,"C"],[7330,"2026-06-22",60,18.0,"C"],[7330,"2026-06-24",48,37.94,"C"],[7330,"2026-06-27",61,76.99,"C"],[7330,"2026-06-28",52,22.0,"C"],[7330,"2026-06-28",38,1012.0,"C"],[7330,"2026-06-29",41,663.99,"B"],[7330,"2026-06-29",49,4.39,"C"],[7330,"2026-06-29",39,18.48,"C"],[7330,"2026-06-30",53,49.39,"C"],[7330,"2026-06-30",4,1080.0,"J"],[7330,"2026-06-30",4,753.5,"J"],[7330,"2026-06-30",4,558.89,"J"],[7330,"2026-06-30",4,474.21,"J"],[7330,"2026-06-30",4,1114.66,"J"],[7330,"2026-06-30",4,4168.08,"J"],[7330,"2026-07-01",62,6706.7,"C"],[7330,"2026-07-03",58,21.95,"C"],[7330,"2026-07-07",38,126.5,"C"],[7330,"2026-07-09",58,21.95,"C"],[7330,"2026-07-10",59,199.0,"C"],[7330,"2026-07-11",39,46.2,"C"],[7330,"2026-07-11",52,54.88,"C"],[7330,"2026-07-11",43,19.99,"C"],[7330,"2026-07-17",63,10.0,"C"],[7330,"2026-07-18",64,38.0,"C"],[7330,"2026-07-19",39,2649.1,"C"],[7330,"2026-07-19",48,32.99,"C"],[7330,"2026-07-19",58,137.19,"C"],[7330,"2026-07-19",65,2.06,"C"],[7330,"2026-07-20",63,10.0,"C"],[7330,"2026-07-20",58,49.39,"C"],[7330,"2026-07-20",66,39.51,"C"],[7330,"2026-07-21",39,12.74,"C"],[7330,"2026-07-21",52,21.95,"C"],[7330,"2026-07-22",60,18.0,"C"],[7330,"2026-07-22",67,7.68,"C"],[7330,"2026-07-24",48,37.94,"C"],[7330,"2026-07-26",58,21.95,"C"],[7330,"2026-07-28",52,22.0,"C"],[7330,"2026-07-28",38,1012.0,"C"],[7330,"2026-07-29",39,18.48,"C"],[7330,"2026-07-29",58,49.39,"C"],[7330,"2026-07-30",39,3.57,"C"],[7330,"2026-07-30",53,49.39,"C"],[7330,"2026-07-31",4,1080.0,"J"],[7330,"2026-07-31",4,558.89,"J"],[7330,"2026-07-31",4,474.21,"J"],[7330,"2026-07-31",4,307.45,"J"],[7330,"2026-07-31",4,1114.66,"J"],[7330,"2026-07-31",4,4168.08,"J"],[7330,"2026-07-31",4,365.83,"J"],[7330,"2026-07-31",4,753.5,"J"],[7330,"2026-07-31",4,519.94,"J"],[7330,"2026-08-03",58,21.95,"C"],[7330,"2026-08-03",63,10.0,"C"],[7330,"2026-08-06",49,876.9,"C"],[7330,"2026-08-07",49,4.39,"C"],[7330,"2026-08-07",38,126.5,"C"],[7330,"2026-08-08",43,19.99,"C"],[7330,"2026-08-09",58,21.95,"C"],[7330,"2026-08-09",63,9.0,"C"],[7330,"2026-08-10",49,4.39,"C"],[7330,"2026-08-11",52,54.88,"C"],[7330,"2026-08-11",39,55.44,"C"],[7330,"2026-08-14",39,3.12,"C"],[7330,"2026-08-15",58,49.39,"C"],[7330,"2026-08-16",58,12.82,"C"],[7330,"2026-08-16",58,11.25,"C"],[7330,"2026-08-16",58,11.34,"C"],[7330,"2026-08-17",68,46.1,"C"],[7330,"2026-08-18",49,4.38,"C"],[7330,"2026-08-19",69,1031.65,"B"],[7330,"2026-08-19",39,2678.0,"C"],[7330,"2026-08-19",48,32.99,"C"],[7330,"2026-08-19",58,137.19,"C"],[7330,"2026-08-21",58,11.12,"C"],[7330,"2026-08-21",52,21.95,"C"],[7330,"2026-08-21",58,12.12,"C"],[7330,"2026-08-22",58,11.07,"C"],[7330,"2026-08-22",60,18.0,"C"],[7330,"2026-08-22",58,11.02,"C"],[7330,"2026-08-24",48,37.94,"C"],[7330,"2026-08-24",58,11.04,"C"],[7330,"2026-08-24",58,11.52,"C"],[7330,"2026-08-25",44,813.82,"B"],[7330,"2026-08-25",58,109.15,"C"],[7330,"2026-08-28",52,22.0,"C"],[7330,"2026-08-28",39,10.26,"C"],[7330,"2026-08-28",38,1012.0,"C"],[7330,"2026-08-29",39,18.48,"C"],[7330,"2026-08-29",49,4.39,"C"],[7330,"2026-08-30",53,49.39,"C"],[7330,"2026-08-31",4,365.83,"J"],[7330,"2026-08-31",4,1080.0,"J"],[7330,"2026-08-31",4,558.89,"J"],[7330,"2026-08-31",4,519.94,"J"],[7330,"2026-08-31",4,356.74,"J"],[7330,"2026-08-31",4,1114.66,"J"],[7330,"2026-08-31",4,753.5,"J"],[7330,"2026-08-31",4,4168.08,"J"],[7330,"2026-08-31",4,474.21,"J"],[7330,"2026-08-31",4,307.45,"J"],[7340,"2026-01-01",12,261.8,"B"],[7340,"2026-01-03",70,818.36,"C"],[7340,"2026-01-03",71,100.46,"C"],[7340,"2026-01-03",72,523.58,"C"],[7340,"2026-01-03",72,-248.04,"R"],[7340,"2026-01-03",72,-236.49,"R"],[7340,"2026-01-05",73,175.9,"C"],[7340,"2026-01-05",74,71.5,"E"],[7340,"2026-01-06",75,19.73,"C"],[7340,"2026-01-06",70,980.07,"C"],[7340,"2026-01-07",72,43.99,"C"],[7340,"2026-01-07",72,5.94,"C"],[7340,"2026-01-07",72,38.49,"C"],[7340,"2026-01-07",72,76.98,"C"],[7340,"2026-01-07",70,362.16,"C"],[7340,"2026-01-07",70,-140.67,"R"],[7340,"2026-01-08",75,12.83,"C"],[7340,"2026-01-08",76,32.76,"C"],[7340,"2026-01-09",72,76.42,"C"],[7340,"2026-01-09",77,502.89,"C"],[7340,"2026-01-09",72,25.27,"C"],[7340,"2026-01-10",76,19.11,"C"],[7340,"2026-01-10",77,458.73,"C"],[7340,"2026-01-12",70,1316.96,"C"],[7340,"2026-01-12",78,6.99,"C"],[7340,"2026-01-12",77,169.81,"C"],[7340,"2026-01-12",79,18.11,"C"],[7340,"2026-01-12",80,44.92,"E"],[7340,"2026-01-13",81,39.59,"C"],[7340,"2026-01-13",70,47.73,"C"],[7340,"2026-01-13",72,1241.42,"C"],[7340,"2026-01-13",70,235.08,"C"],[7340,"2026-01-14",82,20.94,"B"],[7340,"2026-01-14",83,8.78,"C"],[7340,"2026-01-14",84,374.29,"C"],[7340,"2026-01-14",85,4648.52,"C"],[7340,"2026-01-15",70,108.66,"C"],[7340,"2026-01-15",86,1067.81,"C"],[7340,"2026-01-16",87,820.93,"B"],[7340,"2026-01-16",70,-108.66,"R"],[7340,"2026-01-17",88,16.41,"C"],[7340,"2026-01-17",89,78.5,"C"],[7340,"2026-01-19",90,5.36,"C"],[7340,"2026-01-19",84,640.4,"C"],[7340,"2026-01-20",91,41.16,"C"],[7340,"2026-01-20",92,176.46,"E"],[7340,"2026-01-21",72,23.77,"C"],[7340,"2026-01-21",2,1031.18,"C"],[7340,"2026-01-21",66,39.51,"C"],[7340,"2026-01-22",93,55.71,"C"],[7340,"2026-01-23",90,183.37,"C"],[7340,"2026-01-23",70,126.02,"C"],[7340,"2026-01-23",90,18.92,"C"],[7340,"2026-01-23",91,76.83,"C"],[7340,"2026-01-24",72,862.97,"C"],[7340,"2026-01-24",77,88.72,"C"],[7340,"2026-01-25",94,-5.25,"R"],[7340,"2026-01-26",92,560.0,"B"],[7340,"2026-01-27",84,2451.16,"C"],[7340,"2026-01-27",95,73.1,"C"],[7340,"2026-01-28",93,27.1,"C"],[7340,"2026-01-28",70,21.94,"C"],[7340,"2026-01-29",90,66.93,"C"],[7340,"2026-01-29",92,37.6,"E"],[7340,"2026-01-30",96,280.0,"B"],[7340,"2026-01-30",72,15.82,"C"],[7340,"2026-02-01",12,261.8,"B"],[7340,"2026-02-02",97,222.38,"B"],[7340,"2026-02-02",82,20.94,"B"],[7340,"2026-02-02",98,103.35,"C"],[7340,"2026-02-02",98,6.89,"C"],[7340,"2026-02-02",98,22.65,"C"],[7340,"2026-02-02",93,8.82,"C"],[7340,"2026-02-02",23,-45.0,"D"],[7340,"2026-02-04",70,27.49,"C"],[7340,"2026-02-04",77,21.59,"C"],[7340,"2026-02-05",96,280.0,"B"],[7340,"2026-02-05",99,60.73,"C"],[7340,"2026-02-05",71,89.96,"C"],[7340,"2026-02-06",70,196.45,"C"],[7340,"2026-02-06",100,14.0,"C"],[7340,"2026-02-06",70,77.92,"C"],[7340,"2026-02-06",23,-0.12,"D"],[7340,"2026-02-08",70,19.17,"C"],[7340,"2026-02-09",93,4.41,"C"],[7340,"2026-02-09",101,78.18,"C"],[7340,"2026-02-10",82,-13.46,"X"],[7340,"2026-02-10",72,14.26,"C"],[7340,"2026-02-10",70,22.67,"C"],[7340,"2026-02-11",96,280.0,"B"],[7340,"2026-02-12",75,28.1,"C"],[7340,"2026-02-12",99,117.43,"C"],[7340,"2026-02-12",49,3.29,"C"],[7340,"2026-02-13",90,135.95,"C"],[7340,"2026-02-14",102,93.47,"C"],[7340,"2026-02-17",88,16.41,"C"],[7340,"2026-02-19",96,280.0,"B"],[7340,"2026-02-20",95,73.1,"C"],[7340,"2026-02-20",66,39.51,"C"],[7340,"2026-02-24",91,91.36,"C"],[7340,"2026-02-24",70,59.91,"C"],[7340,"2026-02-24",103,15.65,"C"],[7340,"2026-02-24",75,19.14,"C"],[7340,"2026-02-24",92,125.1,"E"],[7340,"2026-02-25",79,7.64,"C"],[7340,"2026-02-25",104,215.5,"C"],[7340,"2026-02-26",96,280.0,"B"],[7340,"2026-02-27",75,66.73,"C"],[7340,"2026-03-01",12,261.8,"B"],[7340,"2026-03-02",82,20.1,"B"],[7340,"2026-03-03",90,23.79,"C"],[7340,"2026-03-03",105,3.9,"C"],[7340,"2026-03-04",106,189.99,"C"],[7340,"2026-03-04",70,12.05,"C"],[7340,"2026-03-04",90,16.43,"C"],[7340,"2026-03-04",92,21.55,"E"],[7340,"2026-03-04",92,101.93,"E"],[7340,"2026-03-05",96,280.0,"B"],[7340,"2026-03-05",71,84.31,"C"],[7340,"2026-03-05",70,52.76,"C"],[7340,"2026-03-05",76,9.61,"C"],[7340,"2026-03-06",49,3.29,"C"],[7340,"2026-03-06",79,54.99,"C"],[7340,"2026-03-10",93,71.92,"C"],[7340,"2026-03-10",49,3.29,"C"],[7340,"2026-03-10",70,32.66,"C"],[7340,"2026-03-10",70,14.78,"C"],[7340,"2026-03-11",70,15.84,"C"],[7340,"2026-03-12",96,280.0,"B"],[7340,"2026-03-12",107,200.81,"C"],[7340,"2026-03-12",84,1815.43,"C"],[7340,"2026-03-14",84,17.45,"C"],[7340,"2026-03-15",93,39.49,"C"],[7340,"2026-03-16",93,8.21,"C"],[7340,"2026-03-17",96,280.0,"B"],[7340,"2026-03-17",88,16.41,"C"],[7340,"2026-03-17",108,23.94,"C"],[7340,"2026-03-17",93,-4.41,"R"],[7340,"2026-03-18",108,5.16,"C"],[7340,"2026-03-18",49,3.28,"C"],[7340,"2026-03-19",109,117.42,"C"],[7340,"2026-03-19",70,66.4,"C"],[7340,"2026-03-20",95,73.1,"C"],[7340,"2026-03-20",99,52.27,"C"],[7340,"2026-03-20",66,39.51,"C"],[7340,"2026-03-21",93,216.45,"C"],[7340,"2026-03-24",75,43.75,"C"],[7340,"2026-03-24",108,25.48,"C"],[7340,"2026-03-25",96,280.0,"B"],[7340,"2026-03-25",84,2020.59,"C"],[7340,"2026-03-25",84,270.93,"C"],[7340,"2026-03-25",70,794.88,"C"],[7340,"2026-03-25",70,190.83,"C"],[7340,"2026-03-25",70,426.92,"C"],[7340,"2026-03-26",75,18.39,"C"],[7340,"2026-03-26",70,14.89,"C"],[7340,"2026-03-26",70,215.99,"C"],[7340,"2026-03-26",84,379.49,"C"],[7340,"2026-03-27",70,219.49,"C"],[7340,"2026-03-29",49,3.29,"C"],[7340,"2026-03-31",108,23.05,"C"],[7340,"2026-04-01",82,30.6,"B"],[7340,"2026-04-01",96,280.0,"B"],[7340,"2026-04-01",12,349.8,"B"],[7340,"2026-04-01",110,36.76,"C"],[7340,"2026-04-03",71,125.53,"C"],[7340,"2026-04-06",111,229.0,"B"],[7340,"2026-04-06",96,280.0,"B"],[7340,"2026-04-07",112,149.96,"C"],[7340,"2026-04-07",70,43.85,"C"],[7340,"2026-04-07",109,64.94,"C"],[7340,"2026-04-07",49,3.29,"C"],[7340,"2026-04-08",90,44.43,"C"],[7340,"2026-04-08",108,8.53,"C"],[7340,"2026-04-08",92,18.8,"E"],[7340,"2026-04-08",113,27.43,"E"],[7340,"2026-04-09",70,130.08,"C"],[7340,"2026-04-10",49,3.29,"C"],[7340,"2026-04-11",99,59.17,"C"],[7340,"2026-04-13",95,73.1,"C"],[7340,"2026-04-13",72,131.69,"C"],[7340,"2026-04-13",114,48.7,"E"],[7340,"2026-04-14",75,76.14,"C"],[7340,"2026-04-14",115,634.0,"C"],[7340,"2026-04-14",70,38.15,"C"],[7340,"2026-04-15",116,547.65,"C"],[7340,"2026-04-16",96,280.0,"B"],[7340,"2026-04-16",70,153.66,"C"],[7340,"2026-04-16",90,65.71,"C"],[7340,"2026-04-17",88,16.41,"C"],[7340,"2026-04-18",49,4.38,"C"],[7340,"2026-04-18",84,313.86,"C"],[7340,"2026-04-18",72,91.07,"C"],[7340,"2026-04-19",70,18.64,"C"],[7340,"2026-04-20",70,109.72,"C"],[7340,"2026-04-20",66,39.51,"C"],[7340,"2026-04-20",93,85.55,"C"],[7340,"2026-04-20",117,207.8,"E"],[7340,"2026-04-21",96,280.0,"B"],[7340,"2026-04-21",76,12.06,"C"],[7340,"2026-04-21",108,12.6,"C"],[7340,"2026-04-21",70,32.01,"C"],[7340,"2026-04-21",70,13.06,"C"],[7340,"2026-04-21",70,408.27,"C"],[7340,"2026-04-22",103,8.1,"C"],[7340,"2026-04-22",70,62.25,"C"],[7340,"2026-04-23",70,29.62,"C"],[7340,"2026-04-23",75,31.63,"C"],[7340,"2026-04-23",70,8.22,"C"],[7340,"2026-04-23",70,20.6,"C"],[7340,"2026-04-23",70,73.37,"C"],[7340,"2026-04-24",109,109.49,"C"],[7340,"2026-04-24",93,174.32,"C"],[7340,"2026-04-24",110,27.62,"C"],[7340,"2026-04-25",70,156.66,"C"],[7340,"2026-04-25",72,59.53,"C"],[7340,"2026-04-25",72,7.0,"C"],[7340,"2026-04-26",70,469.53,"C"],[7340,"2026-04-27",95,73.1,"C"],[7340,"2026-04-29",96,280.0,"B"],[7340,"2026-04-29",70,45.68,"C"],[7340,"2026-04-29",49,4.39,"C"],[7340,"2026-04-30",118,349.98,"B"],[7340,"2026-04-30",70,125.1,"C"],[7340,"2026-04-30",70,46.7,"C"],[7340,"2026-04-30",108,65.21,"C"],[7340,"2026-04-30",108,2.47,"C"],[7340,"2026-04-30",70,41.39,"C"],[7340,"2026-05-01",12,349.8,"B"],[7340,"2026-05-01",82,34.36,"B"],[7340,"2026-05-01",12,6358.75,"B"],[7340,"2026-05-01",70,814.34,"C"],[7340,"2026-05-01",70,193.92,"C"],[7340,"2026-05-03",93,226.74,"C"],[7340,"2026-05-05",96,280.0,"B"],[7340,"2026-05-05",71,117.85,"C"],[7340,"2026-05-05",70,69.13,"C"],[7340,"2026-05-05",119,7.3,"C"],[7340,"2026-05-06",120,19.43,"C"],[7340,"2026-05-06",70,47.18,"C"],[7340,"2026-05-06",70,197.44,"C"],[7340,"2026-05-07",8,1250.0,"B"],[7340,"2026-05-07",70,31.04,"C"],[7340,"2026-05-07",49,4.39,"C"],[7340,"2026-05-07",70,10.96,"C"],[7340,"2026-05-07",70,69.69,"C"],[7340,"2026-05-08",70,9.0,"C"],[7340,"2026-05-10",49,4.39,"C"],[7340,"2026-05-11",95,73.1,"C"],[7340,"2026-05-12",121,1403.95,"E"],[7340,"2026-05-14",96,280.0,"B"],[7340,"2026-05-14",75,18.81,"C"],[7340,"2026-05-15",70,51.14,"C"],[7340,"2026-05-16",93,212.74,"C"],[7340,"2026-05-17",88,16.41,"C"],[7340,"2026-05-18",49,4.38,"C"],[7340,"2026-05-18",70,20.82,"C"],[7340,"2026-05-19",120,25.48,"C"],[7340,"2026-05-19",72,77.62,"C"],[7340,"2026-05-19",122,37.32,"C"],[7340,"2026-05-20",96,280.0,"B"],[7340,"2026-05-20",66,39.51,"C"],[7340,"2026-05-20",70,208.46,"C"],[7340,"2026-05-21",123,151.46,"C"],[7340,"2026-05-22",60,19.8,"C"],[7340,"2026-05-25",95,73.1,"C"],[7340,"2026-05-27",96,280.0,"B"],[7340,"2026-05-27",75,15.92,"C"],[7340,"2026-05-27",93,266.22,"C"],[7340,"2026-05-29",124,37.78,"C"],[7340,"2026-05-29",90,125.06,"C"],[7340,"2026-05-29",49,4.39,"C"],[7340,"2026-05-29",90,169.11,"C"],[7340,"2026-05-29",90,11.98,"C"],[7340,"2026-05-29",124,100.34,"C"],[7340,"2026-05-30",90,8.78,"C"],[7340,"2026-05-30",53,49.39,"C"],[7340,"2026-05-30",90,5.56,"C"],[7340,"2026-05-30",90,16.5,"C"],[7340,"2026-05-31",70,207.43,"C"],[7340,"2026-06-01",12,300.0,"B"],[7340,"2026-06-01",12,49.5,"B"],[7340,"2026-06-01",82,38.13,"B"],[7340,"2026-06-02",70,76.58,"C"],[7340,"2026-06-03",125,4.57,"C"],[7340,"2026-06-04",96,280.0,"B"],[7340,"2026-06-04",108,9.77,"C"],[7340,"2026-06-04",70,77.11,"C"],[7340,"2026-06-04",90,14.21,"C"],[7340,"2026-06-05",12,-6358.75,"X"],[7340,"2026-06-05",70,64.72,"C"],[7340,"2026-06-05",93,173.11,"C"],[7340,"2026-06-05",71,110.72,"C"],[7340,"2026-06-05",90,-14.21,"R"],[7340,"2026-06-06",70,21.99,"C"],[7340,"2026-06-07",49,4.39,"C"],[7340,"2026-06-08",95,73.1,"C"],[7340,"2026-06-09",70,24.11,"C"],[7340,"2026-06-09",70,82.57,"C"],[7340,"2026-06-09",108,9.98,"C"],[7340,"2026-06-10",96,280.0,"B"],[7340,"2026-06-10",49,4.39,"C"],[7340,"2026-06-10",70,19.38,"C"],[7340,"2026-06-11",93,86.59,"C"],[7340,"2026-06-14",70,217.03,"C"],[7340,"2026-06-14",70,273.86,"C"],[7340,"2026-06-15",12,675.0,"B"],[7340,"2026-06-15",12,45.0,"B"],[7340,"2026-06-15",70,68.42,"C"],[7340,"2026-06-15",126,108.6,"C"],[7340,"2026-06-16",70,21.82,"C"],[7340,"2026-06-16",127,961.18,"C"],[7340,"2026-06-17",96,280.0,"B"],[7340,"2026-06-17",99,273.28,"C"],[7340,"2026-06-17",88,16.41,"C"],[7340,"2026-06-17",70,840.68,"C"],[7340,"2026-06-17",128,659.99,"C"],[7340,"2026-06-18",72,177.26,"C"],[7340,"2026-06-18",70,98.82,"C"],[7340,"2026-06-18",90,127.23,"C"],[7340,"2026-06-19",93,47.91,"C"],[7340,"2026-06-19",129,89.83,"E"],[7340,"2026-06-20",66,39.51,"C"],[7340,"2026-06-20",90,87.18,"C"],[7340,"2026-06-21",93,241.75,"C"],[7340,"2026-06-21",70,1016.54,"C"],[7340,"2026-06-21",70,45.4,"C"],[7340,"2026-06-22",91,61.46,"C"],[7340,"2026-06-22",95,73.1,"C"],[7340,"2026-06-22",93,-24.4,"R"],[7340,"2026-06-23",39,12.52,"C"],[7340,"2026-06-23",84,2542.37,"C"],[7340,"2026-06-23",90,37.53,"C"],[7340,"2026-06-24",96,280.0,"B"],[7340,"2026-06-26",70,43.89,"C"],[7340,"2026-06-26",130,379.17,"C"],[7340,"2026-06-26",130,26.96,"C"],[7340,"2026-06-28",70,108.94,"C"],[7340,"2026-06-29",70,306.85,"C"],[7340,"2026-06-29",103,67.02,"C"],[7340,"2026-06-29",70,14.99,"C"],[7340,"2026-06-29",70,226.05,"C"],[7340,"2026-06-29",131,254.72,"E"],[7340,"2026-06-30",70,16.77,"C"],[7340,"2026-06-30",70,66.79,"C"],[7340,"2026-06-30",70,108.03,"C"],[7340,"2026-06-30",90,90.3,"C"],[7340,"2026-06-30",70,52.66,"C"],[7340,"2026-07-01",82,14.65,"B"],[7340,"2026-07-01",96,280.0,"B"],[7340,"2026-07-01",12,150.0,"B"],[7340,"2026-07-01",12,600.6,"B"],[7340,"2026-07-01",93,132.43,"C"],[7340,"2026-07-03",77,48.62,"C"],[7340,"2026-07-03",71,137.71,"C"],[7340,"2026-07-04",90,14.21,"C"],[7340,"2026-07-05",90,-14.21,"R"],[7340,"2026-07-06",109,23.8,"C"],[7340,"2026-07-06",95,73.1,"C"],[7340,"2026-07-07",96,280.0,"B"],[7340,"2026-07-07",70,20.69,"C"],[7340,"2026-07-07",49,4.39,"C"],[7340,"2026-07-08",70,20.69,"C"],[7340,"2026-07-08",70,70.48,"C"],[7340,"2026-07-09",70,254.54,"C"],[7340,"2026-07-09",70,14.97,"C"],[7340,"2026-07-09",90,24.58,"C"],[7340,"2026-07-09",70,80.34,"C"],[7340,"2026-07-09",70,9.33,"C"],[7340,"2026-07-10",70,49.46,"C"],[7340,"2026-07-10",120,89.62,"C"],[7340,"2026-07-10",49,4.39,"C"],[7340,"2026-07-10",108,85.59,"C"],[7340,"2026-07-10",90,21.93,"C"],[7340,"2026-07-11",99,54.41,"C"],[7340,"2026-07-11",76,37.33,"C"],[7340,"2026-07-11",90,238.71,"C"],[7340,"2026-07-14",96,280.0,"B"],[7340,"2026-07-14",102,6.57,"C"],[7340,"2026-07-15",12,1350.0,"B"],[7340,"2026-07-15",70,59.93,"C"],[7340,"2026-07-15",70,17.36,"C"],[7340,"2026-07-15",124,23.17,"C"],[7340,"2026-07-15",132,87.79,"C"],[7340,"2026-07-16",70,12.69,"C"],[7340,"2026-07-16",70,31.04,"C"],[7340,"2026-07-16",90,79.05,"C"],[7340,"2026-07-16",95,73.1,"C"],[7340,"2026-07-17",70,19.48,"C"],[7340,"2026-07-17",88,16.41,"C"],[7340,"2026-07-17",99,110.21,"C"],[7340,"2026-07-17",70,23.59,"C"],[7340,"2026-07-17",70,54.28,"C"],[7340,"2026-07-17",133,4.64,"C"],[7340,"2026-07-18",70,40.09,"C"],[7340,"2026-07-18",99,9.53,"C"],[7340,"2026-07-18",49,4.38,"C"],[7340,"2026-07-18",99,-65.72,"R"],[7340,"2026-07-19",70,20.64,"C"],[7340,"2026-07-20",70,28.13,"C"],[7340,"2026-07-20",95,73.1,"C"],[7340,"2026-07-21",96,280.0,"B"],[7340,"2026-07-21",70,48.6,"C"],[7340,"2026-07-21",70,30.73,"C"],[7340,"2026-07-21",70,67.5,"C"],[7340,"2026-07-21",70,322.36,"C"],[7340,"2026-07-21",70,658.48,"C"],[7340,"2026-07-21",70,219.49,"C"],[7340,"2026-07-21",91,38.41,"C"],[7340,"2026-07-21",70,96.16,"C"],[7340,"2026-07-22",70,709.77,"C"],[7340,"2026-07-22",70,45.76,"C"],[7340,"2026-07-22",70,325.47,"C"],[7340,"2026-07-22",90,47.14,"C"],[7340,"2026-07-22",70,21.63,"C"],[7340,"2026-07-22",70,71.74,"C"],[7340,"2026-07-23",70,58.06,"C"],[7340,"2026-07-24",90,76.62,"C"],[7340,"2026-07-24",134,123.9,"C"],[7340,"2026-07-27",135,8.75,"C"],[7340,"2026-07-27",70,578.03,"C"],[7340,"2026-07-28",96,280.0,"B"],[7340,"2026-07-28",90,63.13,"C"],[7340,"2026-07-28",70,27.65,"C"],[7340,"2026-07-28",70,115.72,"C"],[7340,"2026-07-29",70,10.11,"C"],[7340,"2026-07-29",70,21.94,"C"],[7340,"2026-07-29",70,17.55,"C"],[7340,"2026-07-29",70,64.19,"C"],[7340,"2026-07-29",84,306.1,"C"],[7340,"2026-07-29",70,21.71,"C"],[7340,"2026-07-29",49,4.39,"C"],[7340,"2026-07-29",70,177.08,"C"],[7340,"2026-07-29",70,126.83,"C"],[7340,"2026-07-29",70,43.41,"C"],[7340,"2026-07-29",70,53.1,"C"],[7340,"2026-07-30",136,290.0,"C"],[7340,"2026-07-31",70,18.65,"C"],[7340,"2026-08-01",12,2481.12,"B"],[7340,"2026-08-01",12,345.3,"B"],[7340,"2026-08-01",137,34.95,"C"],[7340,"2026-08-03",82,61.78,"B"],[7340,"2026-08-03",70,9.71,"C"],[7340,"2026-08-03",70,10.95,"C"],[7340,"2026-08-03",95,73.1,"C"],[7340,"2026-08-04",70,104.08,"C"],[7340,"2026-08-04",70,72.0,"C"],[7340,"2026-08-04",11,120.0,"E"],[7340,"2026-08-05",96,280.0,"B"],[7340,"2026-08-05",70,18.69,"C"],[7340,"2026-08-05",71,124.7,"C"],[7340,"2026-08-05",70,37.3,"C"],[7340,"2026-08-05",70,79.19,"C"],[7340,"2026-08-05",70,-322.36,"R"],[7340,"2026-08-06",70,31.48,"C"],[7340,"2026-08-06",95,73.1,"C"],[7340,"2026-08-06",138,132.28,"C"],[7340,"2026-08-06",70,10.74,"C"],[7340,"2026-08-07",70,31.27,"C"],[7340,"2026-08-07",70,-79.19,"R"],[7340,"2026-08-09",139,65.99,"C"],[7340,"2026-08-10",90,15.4,"C"],[7340,"2026-08-10",88,2.92,"C"],[7340,"2026-08-11",96,280.0,"B"],[7340,"2026-08-11",90,88.21,"C"],[7340,"2026-08-11",70,8.25,"C"],[7340,"2026-08-11",70,111.44,"C"],[7340,"2026-08-11",70,96.42,"C"],[7340,"2026-08-15",12,225.0,"B"],[7340,"2026-08-15",134,210.95,"C"],[7340,"2026-08-16",95,73.1,"C"],[7340,"2026-08-17",88,16.41,"C"],[7340,"2026-08-17",121,44.25,"E"],[7340,"2026-08-18",96,280.0,"B"],[7340,"2026-08-18",140,6.42,"C"],[7340,"2026-08-19",90,120.4,"C"],[7340,"2026-08-19",70,127.99,"C"],[7340,"2026-08-20",66,42.8,"C"],[7340,"2026-08-20",90,59.34,"C"],[7340,"2026-08-21",141,60.0,"K"],[7340,"2026-08-21",70,158.05,"C"],[7340,"2026-08-21",90,50.17,"C"],[7340,"2026-08-21",76,208.49,"C"],[7340,"2026-08-24",96,280.0,"B"],[7340,"2026-08-24",90,78.11,"C"],[7340,"2026-08-25",72,672.71,"C"],[7340,"2026-08-25",90,155.7,"C"],[7340,"2026-08-26",90,140.7,"C"],[7340,"2026-08-27",95,73.1,"C"],[7340,"2026-08-28",70,42.1,"C"],[7340,"2026-08-28",70,80.83,"C"],[7340,"2026-08-28",70,164.38,"C"],[7340,"2026-08-29",110,11.03,"C"],[7340,"2026-08-29",70,56.72,"C"],[7340,"2026-08-29",70,2.84,"C"],[7340,"2026-08-29",70,73.86,"C"],[7340,"2026-08-29",142,100.0,"C"],[7340,"2026-08-31",12,825.0,"B"],[7340,"2026-08-31",12,345.3,"B"],[7340,"2026-08-31",95,73.1,"C"],[7340,"2026-08-31",143,14.28,"C"],[7340,"2026-08-31",131,240.17,"E"],[7350,"2026-01-07",144,5200.0,"C"],[7350,"2026-01-10",145,297.0,"B"],[7350,"2026-01-16",146,776.99,"C"],[7350,"2026-02-23",147,2500.0,"B"],[7350,"2026-04-21",145,297.0,"B"],[7350,"2026-05-06",148,300.0,"C"],[7350,"2026-07-15",145,297.0,"B"],[7350,"2026-08-14",149,2550.0,"B"],[7350,"2026-08-14",149,6540.6,"B"],[7350,"2026-08-20",150,750.0,"C"],[7360,"2026-01-05",76,42.0,"C"],[7360,"2026-01-07",11,896.06,"E"],[7360,"2026-01-08",76,68.04,"C"],[7360,"2026-01-09",76,78.41,"C"],[7360,"2026-01-11",76,40.76,"C"],[7360,"2026-01-12",76,51.9,"C"],[7360,"2026-01-12",76,43.48,"C"],[7360,"2026-01-12",76,23.63,"C"],[7360,"2026-01-12",80,150.77,"E"],[7360,"2026-01-13",76,51.37,"C"],[7360,"2026-01-13",76,77.34,"C"],[7360,"2026-01-13",76,59.4,"C"],[7360,"2026-01-13",76,24.92,"C"],[7360,"2026-01-13",76,21.4,"C"],[7360,"2026-01-13",76,30.16,"C"],[7360,"2026-01-14",76,16.71,"C"],[7360,"2026-01-14",76,85.17,"C"],[7360,"2026-01-14",76,22.79,"C"],[7360,"2026-01-14",76,11.77,"C"],[7360,"2026-01-14",76,87.98,"C"],[7360,"2026-01-17",76,19.86,"C"],[7360,"2026-01-20",76,20.98,"C"],[7360,"2026-01-21",76,12.83,"C"],[7360,"2026-01-23",76,55.88,"C"],[7360,"2026-01-24",76,43.12,"C"],[7360,"2026-01-27",76,43.67,"C"],[7360,"2026-01-27",76,10.0,"C"],[7360,"2026-02-05",76,26.02,"C"],[7360,"2026-02-07",76,35.14,"C"],[7360,"2026-02-10",76,13.03,"C"],[7360,"2026-02-10",76,45.22,"C"],[7360,"2026-02-20",76,48.15,"C"],[7360,"2026-02-24",76,46.2,"C"],[7360,"2026-02-24",76,39.73,"C"],[7360,"2026-02-24",76,12.23,"C"],[7360,"2026-02-25",76,74.38,"C"],[7360,"2026-02-26",76,48.43,"C"],[7360,"2026-02-26",76,65.98,"C"],[7360,"2026-02-26",76,11.95,"C"],[7360,"2026-02-26",151,86.06,"E"],[7360,"2026-02-27",76,69.24,"C"],[7360,"2026-02-28",76,27.4,"C"],[7360,"2026-03-03",76,13.28,"C"],[7360,"2026-03-03",76,48.28,"C"],[7360,"2026-03-03",76,24.98,"C"],[7360,"2026-03-03",76,10.79,"C"],[7360,"2026-03-03",76,23.0,"C"],[7360,"2026-03-03",76,23.0,"C"],[7360,"2026-03-04",76,8.74,"C"],[7360,"2026-03-04",76,85.43,"C"],[7360,"2026-03-04",76,18.07,"C"],[7360,"2026-03-04",76,20.8,"C"],[7360,"2026-03-05",76,42.84,"C"],[7360,"2026-03-05",76,83.28,"C"],[7360,"2026-03-05",76,7.81,"C"],[7360,"2026-03-06",76,129.94,"C"],[7360,"2026-03-06",76,359.25,"C"],[7360,"2026-03-07",76,124.64,"C"],[7360,"2026-03-10",76,39.13,"C"],[7360,"2026-03-12",76,86.88,"C"],[7360,"2026-03-13",76,45.58,"C"],[7360,"2026-03-13",117,33.15,"E"],[7360,"2026-03-16",76,6.48,"C"],[7360,"2026-03-18",76,25.72,"C"],[7360,"2026-03-19",76,12.83,"C"],[7360,"2026-03-19",76,5.25,"C"],[7360,"2026-03-20",76,65.73,"C"],[7360,"2026-03-24",76,63.68,"C"],[7360,"2026-03-27",76,75.14,"C"],[7360,"2026-04-07",76,65.51,"C"],[7360,"2026-04-07",76,43.93,"C"],[7360,"2026-04-08",76,64.58,"C"],[7360,"2026-04-08",76,3.8,"C"],[7360,"2026-04-08",76,3.8,"C"],[7360,"2026-04-11",76,467.81,"C"],[7360,"2026-04-14",76,31.17,"C"],[7360,"2026-04-16",76,78.69,"C"],[7360,"2026-04-17",76,69.91,"C"],[7360,"2026-04-17",76,42.0,"C"],[7360,"2026-04-21",76,112.22,"C"],[7360,"2026-04-21",76,117.51,"C"],[7360,"2026-04-23",76,24.68,"C"],[7360,"2026-04-23",76,34.49,"C"],[7360,"2026-04-24",76,46.61,"C"],[7360,"2026-04-24",121,40.56,"E"],[7360,"2026-04-29",152,22.0,"E"],[7360,"2026-04-30",76,9.85,"C"],[7360,"2026-04-30",76,41.17,"C"],[7360,"2026-04-30",76,6.48,"C"],[7360,"2026-04-30",114,22.0,"E"],[7360,"2026-04-30",153,22.0,"E"],[7360,"2026-04-30",117,22.0,"E"],[7360,"2026-04-30",154,22.0,"E"],[7360,"2026-05-01",76,106.63,"C"],[7360,"2026-05-01",155,22.0,"E"],[7360,"2026-05-01",156,22.0,"E"],[7360,"2026-05-02",76,116.4,"C"],[7360,"2026-05-02",76,26.62,"C"],[7360,"2026-05-02",76,25.69,"C"],[7360,"2026-05-02",76,29.54,"C"],[7360,"2026-05-02",76,25.25,"C"],[7360,"2026-05-02",76,29.79,"C"],[7360,"2026-05-03",76,146.99,"C"],[7360,"2026-05-03",76,32.4,"C"],[7360,"2026-05-03",76,35.65,"C"],[7360,"2026-05-03",76,133.31,"C"],[7360,"2026-05-03",76,19.69,"C"],[7360,"2026-05-05",76,40.28,"C"],[7360,"2026-05-07",76,114.94,"C"],[7360,"2026-05-08",76,8.15,"C"],[7360,"2026-05-08",76,59.82,"C"],[7360,"2026-05-09",76,128.75,"C"],[7360,"2026-05-11",113,22.0,"E"],[7360,"2026-05-11",157,22.0,"E"],[7360,"2026-05-12",34,1096.12,"B"],[7360,"2026-05-12",76,35.88,"C"],[7360,"2026-05-14",76,12.6,"C"],[7360,"2026-05-15",76,41.55,"C"],[7360,"2026-05-18",76,53.21,"C"],[7360,"2026-05-21",76,59.93,"C"],[7360,"2026-05-22",76,140.58,"C"],[7360,"2026-05-27",76,231.61,"C"],[7360,"2026-05-28",76,5.25,"C"],[7360,"2026-05-29",76,43.47,"C"],[7360,"2026-06-02",117,47.64,"E"],[7360,"2026-06-06",76,79.0,"C"],[7360,"2026-06-09",76,228.66,"C"],[7360,"2026-06-11",76,220.73,"C"],[7360,"2026-06-11",76,139.26,"C"],[7360,"2026-06-11",76,155.31,"C"],[7360,"2026-06-11",76,13.58,"C"],[7360,"2026-06-12",76,105.6,"C"],[7360,"2026-06-12",76,260.31,"C"],[7360,"2026-06-15",158,119.47,"C"],[7360,"2026-06-16",76,120.93,"C"],[7360,"2026-06-19",76,44.39,"C"],[7360,"2026-06-22",159,54.14,"E"],[7360,"2026-06-24",76,178.65,"C"],[7360,"2026-06-27",76,41.43,"C"],[7360,"2026-06-30",76,15.31,"C"],[7360,"2026-06-30",76,6.37,"C"],[7360,"2026-07-07",76,48.96,"C"],[7360,"2026-07-07",76,13.86,"C"],[7360,"2026-07-07",76,21.0,"C"],[7360,"2026-07-08",76,106.49,"C"],[7360,"2026-07-08",76,158.23,"C"],[7360,"2026-07-08",76,7.34,"C"],[7360,"2026-07-08",76,60.0,"C"],[7360,"2026-07-08",76,173.52,"C"],[7360,"2026-07-09",76,104.38,"C"],[7360,"2026-07-09",76,21.26,"C"],[7360,"2026-07-09",76,44.06,"C"],[7360,"2026-07-09",76,57.78,"C"],[7360,"2026-07-15",76,39.86,"C"],[7360,"2026-07-16",76,16.35,"C"],[7360,"2026-07-16",76,36.68,"C"],[7360,"2026-07-16",76,91.69,"C"],[7360,"2026-07-17",76,26.03,"C"],[7360,"2026-07-17",76,6.75,"C"],[7360,"2026-07-17",76,103.76,"C"],[7360,"2026-07-17",76,13.16,"C"],[7360,"2026-07-17",76,17.3,"C"],[7360,"2026-07-17",76,8.05,"C"],[7360,"2026-07-17",76,20.27,"C"],[7360,"2026-07-17",76,122.45,"C"],[7360,"2026-07-18",76,242.19,"C"],[7360,"2026-07-21",76,55.02,"C"],[7360,"2026-07-21",160,42.08,"E"],[7360,"2026-07-23",76,54.0,"C"],[7360,"2026-07-25",76,117.9,"C"],[7360,"2026-07-30",76,79.82,"C"],[7360,"2026-07-30",76,62.17,"C"],[7360,"2026-08-07",76,53.16,"C"],[7360,"2026-08-07",76,36.7,"C"],[7360,"2026-08-08",76,62.01,"C"],[7360,"2026-08-11",76,64.12,"C"],[7360,"2026-08-12",76,30.94,"C"],[7360,"2026-08-12",76,30.63,"C"],[7360,"2026-08-12",76,81.5,"C"],[7360,"2026-08-13",76,37.36,"C"],[7360,"2026-08-13",76,45.37,"C"],[7360,"2026-08-13",76,83.06,"C"],[7360,"2026-08-14",76,24.82,"C"],[7360,"2026-08-14",76,81.43,"C"],[7360,"2026-08-14",76,28.26,"C"],[7360,"2026-08-14",76,9.99,"C"],[7360,"2026-08-14",76,53.15,"C"],[7360,"2026-08-15",76,162.92,"C"],[7360,"2026-08-25",76,19.12,"C"],[7360,"2026-08-25",76,108.56,"C"],[7360,"2026-08-26",76,38.63,"C"],[7360,"2026-08-26",76,29.55,"C"],[7360,"2026-08-27",76,29.09,"C"],[7360,"2026-08-27",76,20.0,"C"],[7360,"2026-08-27",76,5.69,"C"],[7360,"2026-08-28",76,42.48,"C"],[7360,"2026-08-29",76,71.62,"C"],[7360,"2026-08-29",76,54.79,"C"],[7370,"2026-01-02",161,3.0,"C"],[7370,"2026-01-02",161,97.28,"C"],[7370,"2026-01-03",162,16.11,"C"],[7370,"2026-01-03",162,740.59,"C"],[7370,"2026-01-03",163,42.75,"C"],[7370,"2026-01-05",164,695.65,"C"],[7370,"2026-01-05",165,28.0,"C"],[7370,"2026-01-05",164,458.54,"C"],[7370,"2026-01-06",146,583.49,"C"],[7370,"2026-01-06",162,102.5,"C"],[7370,"2026-01-06",166,86.08,"C"],[7370,"2026-01-06",167,51.0,"C"],[7370,"2026-01-06",167,459.29,"C"],[7370,"2026-01-06",167,51.0,"C"],[7370,"2026-01-06",166,109.09,"C"],[7370,"2026-01-06",162,102.5,"C"],[7370,"2026-01-06",167,128.48,"C"],[7370,"2026-01-06",167,128.48,"C"],[7370,"2026-01-06",166,23.01,"C"],[7370,"2026-01-06",166,191.32,"C"],[7370,"2026-01-07",168,257.19,"C"],[7370,"2026-01-07",164,298.34,"C"],[7370,"2026-01-07",164,-23.17,"R"],[7370,"2026-01-07",164,-342.69,"R"],[7370,"2026-01-07",121,23.4,"E"],[7370,"2026-01-08",166,-16.03,"R"],[7370,"2026-01-09",164,145.45,"C"],[7370,"2026-01-12",80,77.22,"E"],[7370,"2026-01-13",164,263.94,"C"],[7370,"2026-01-13",162,8.0,"C"],[7370,"2026-01-13",166,48.17,"C"],[7370,"2026-01-15",164,149.77,"C"],[7370,"2026-01-15",164,149.77,"C"],[7370,"2026-01-22",169,957.57,"B"],[7370,"2026-01-22",170,168.16,"E"],[7370,"2026-01-23",167,29.0,"C"],[7370,"2026-01-23",167,246.48,"C"],[7370,"2026-01-23",169,246.48,"C"],[7370,"2026-01-23",169,27.12,"C"],[7370,"2026-01-23",167,-29.0,"R"],[7370,"2026-01-23",167,-246.48,"R"],[7370,"2026-01-23",117,280.09,"E"],[7370,"2026-01-25",166,45.32,"C"],[7370,"2026-01-25",169,-27.12,"R"],[7370,"2026-01-25",169,-246.48,"R"],[7370,"2026-01-27",166,155.66,"C"],[7370,"2026-01-27",162,790.98,"C"],[7370,"2026-02-04",171,10.98,"C"],[7370,"2026-02-04",164,108.15,"C"],[7370,"2026-02-04",171,29.91,"C"],[7370,"2026-02-05",171,34.96,"C"],[7370,"2026-02-14",146,1026.81,"C"],[7370,"2026-02-14",172,66.74,"C"],[7370,"2026-02-14",146,1026.81,"C"],[7370,"2026-02-14",172,66.74,"C"],[7370,"2026-02-20",173,445.96,"C"],[7370,"2026-02-23",169,105.78,"C"],[7370,"2026-02-23",172,51.73,"C"],[7370,"2026-02-23",169,756.4,"C"],[7370,"2026-02-24",173,16.0,"C"],[7370,"2026-02-26",174,270.18,"C"],[7370,"2026-02-26",151,189.91,"E"],[7370,"2026-02-27",164,327.69,"C"],[7370,"2026-02-27",173,563.4,"C"],[7370,"2026-02-27",175,116.0,"C"],[7370,"2026-02-27",173,374.2,"C"],[7370,"2026-03-04",164,237.67,"C"],[7370,"2026-03-05",174,247.49,"C"],[7370,"2026-03-05",176,349.28,"C"],[7370,"2026-03-06",164,319.2,"C"],[7370,"2026-03-06",164,254.2,"C"],[7370,"2026-03-06",164,304.3,"C"],[7370,"2026-03-11",169,24.64,"C"],[7370,"2026-03-11",169,24.64,"C"],[7370,"2026-03-11",169,615.05,"C"],[7370,"2026-03-11",169,615.05,"C"],[7370,"2026-03-13",167,1046.8,"C"],[7370,"2026-03-13",176,117.83,"C"],[7370,"2026-03-14",161,42.99,"C"],[7370,"2026-03-17",166,224.16,"C"],[7370,"2026-03-17",146,19.99,"C"],[7370,"2026-03-17",161,32.98,"C"],[7370,"2026-03-17",164,245.11,"C"],[7370,"2026-03-17",146,19.99,"C"],[7370,"2026-03-17",161,34.69,"C"],[7370,"2026-03-17",146,1156.8,"C"],[7370,"2026-03-18",161,35.99,"C"],[7370,"2026-03-18",161,42.52,"C"],[7370,"2026-03-18",164,46.15,"C"],[7370,"2026-03-18",161,39.88,"C"],[7370,"2026-03-19",164,209.63,"C"],[7370,"2026-03-19",164,209.63,"C"],[7370,"2026-03-26",170,379.2,"E"],[7370,"2026-03-27",166,111.92,"C"],[7370,"2026-03-27",170,23.65,"E"],[7370,"2026-03-31",164,490.0,"C"],[7370,"2026-03-31",177,79.56,"C"],[7370,"2026-04-01",178,199.0,"C"],[7370,"2026-04-01",166,217.75,"C"],[7370,"2026-04-01",177,298.4,"C"],[7370,"2026-04-01",177,29.16,"C"],[7370,"2026-04-01",177,198.4,"C"],[7370,"2026-04-01",70,148.11,"C"],[7370,"2026-04-01",177,29.16,"C"],[7370,"2026-04-01",177,31.15,"C"],[7370,"2026-04-01",177,298.4,"C"],[7370,"2026-04-01",177,31.15,"C"],[7370,"2026-04-01",177,198.4,"C"],[7370,"2026-04-04",176,263.94,"C"],[7370,"2026-04-14",162,240.2,"C"],[7370,"2026-04-14",164,487.44,"C"],[7370,"2026-04-14",166,140.99,"C"],[7370,"2026-04-14",146,24.99,"C"],[7370,"2026-04-14",146,1256.79,"C"],[7370,"2026-04-14",167,340.2,"C"],[7370,"2026-04-15",166,15.35,"C"],[7370,"2026-04-15",164,15.53,"C"],[7370,"2026-04-15",146,344.0,"C"],[7370,"2026-04-16",166,118.69,"C"],[7370,"2026-04-16",164,1590.86,"C"],[7370,"2026-04-16",164,18.12,"C"],[7370,"2026-04-17",166,90.32,"C"],[7370,"2026-04-18",166,144.23,"C"],[7370,"2026-04-22",179,190.69,"C"],[7370,"2026-04-22",164,267.63,"C"],[7370,"2026-04-22",166,66.97,"C"],[7370,"2026-04-22",155,318.39,"E"],[7370,"2026-04-22",155,5000.0,"E"],[7370,"2026-04-23",180,249.73,"C"],[7370,"2026-04-23",162,50.0,"C"],[7370,"2026-04-23",179,83.63,"C"],[7370,"2026-04-23",180,258.39,"C"],[7370,"2026-04-24",162,8.0,"C"],[7370,"2026-04-24",121,748.82,"E"],[7370,"2026-04-27",162,50.0,"C"],[7370,"2026-04-27",162,60.0,"C"],[7370,"2026-04-28",162,8.0,"C"],[7370,"2026-05-03",161,19.99,"C"],[7370,"2026-05-03",161,30.98,"C"],[7370,"2026-05-03",161,65.97,"C"],[7370,"2026-05-09",169,897.39,"C"],[7370,"2026-05-09",169,81.97,"C"],[7370,"2026-05-11",169,-21.99,"R"],[7370,"2026-05-11",169,-16.0,"R"],[7370,"2026-05-11",169,-22.99,"R"],[7370,"2026-05-11",169,-20.99,"R"],[7370,"2026-05-12",177,511.47,"C"],[7370,"2026-05-12",172,80.72,"C"],[7370,"2026-05-13",177,469.5,"C"],[7370,"2026-05-13",146,1241.8,"C"],[7370,"2026-05-13",181,694.51,"C"],[7370,"2026-05-13",177,24.0,"C"],[7370,"2026-05-16",146,1878.41,"C"],[7370,"2026-05-16",146,1878.41,"C"],[7370,"2026-05-20",177,195.36,"C"],[7370,"2026-05-20",173,188.18,"C"],[7370,"2026-05-20",177,-24.0,"R"],[7370,"2026-05-21",173,310.08,"C"],[7370,"2026-05-21",173,38.83,"C"],[7370,"2026-05-21",173,310.08,"C"],[7370,"2026-05-21",173,452.6,"C"],[7370,"2026-05-21",173,44.23,"C"],[7370,"2026-05-21",173,452.6,"C"],[7370,"2026-05-21",156,124.0,"E"],[7370,"2026-05-23",167,656.4,"C"],[7370,"2026-05-27",161,36.94,"C"],[7370,"2026-05-28",170,132.14,"E"],[7370,"2026-06-02",117,98.51,"E"],[7370,"2026-06-04",164,126.13,"C"],[7370,"2026-06-05",169,284.28,"C"],[7370,"2026-06-05",169,133.92,"C"],[7370,"2026-06-09",164,521.88,"C"],[7370,"2026-06-14",167,878.41,"C"],[7370,"2026-06-16",177,345.84,"C"],[7370,"2026-06-22",177,1050.6,"C"],[7370,"2026-06-24",164,153.77,"C"],[7370,"2026-06-24",164,153.77,"C"],[7370,"2026-06-25",162,10.0,"C"],[7370,"2026-06-25",164,14.33,"C"],[7370,"2026-06-26",182,986.8,"C"],[7370,"2026-06-28",146,118.25,"C"],[7370,"2026-06-29",164,96.32,"C"],[7370,"2026-06-29",170,148.38,"E"],[7370,"2026-06-30",167,482.79,"C"],[7370,"2026-06-30",164,204.0,"C"],[7370,"2026-06-30",167,482.79,"C"],[7370,"2026-07-01",166,299.84,"C"],[7370,"2026-07-01",162,814.8,"C"],[7370,"2026-07-01",183,171.2,"C"],[7370,"2026-07-01",166,182.72,"C"],[7370,"2026-07-06",121,235.67,"E"],[7370,"2026-07-07",177,575.98,"C"],[7370,"2026-07-07",177,818.4,"C"],[7370,"2026-07-07",177,-0.02,"R"],[7370,"2026-07-08",169,806.8,"C"],[7370,"2026-07-08",169,20.0,"C"],[7370,"2026-07-08",172,45.47,"C"],[7370,"2026-07-09",166,144.06,"C"],[7370,"2026-07-09",172,51.63,"C"],[7370,"2026-07-09",164,738.72,"C"],[7370,"2026-07-09",169,938.81,"C"],[7370,"2026-07-15",178,219.0,"C"],[7370,"2026-07-16",166,66.77,"C"],[7370,"2026-07-17",181,158.22,"C"],[7370,"2026-07-17",117,72.14,"E"],[7370,"2026-07-22",169,18.96,"C"],[7370,"2026-07-22",169,12.16,"C"],[7370,"2026-07-22",167,688.81,"C"],[7370,"2026-07-22",169,26.44,"C"],[7370,"2026-07-22",169,26.44,"C"],[7370,"2026-07-26",166,4.32,"C"],[7370,"2026-07-31",184,-1774.17,"I"],[7370,"2026-08-11",177,321.42,"C"],[7370,"2026-08-11",177,1166.8,"C"],[7370,"2026-08-13",164,314.36,"C"],[7370,"2026-08-14",146,836.79,"C"],[7370,"2026-08-14",146,836.79,"C"],[7370,"2026-08-18",146,768.8,"C"],[7370,"2026-08-18",146,768.8,"C"],[7370,"2026-08-20",175,42.5,"C"],[7370,"2026-08-27",169,1150.2,"C"],[7370,"2026-08-27",164,310.94,"C"],[7370,"2026-08-27",166,58.56,"C"],[7370,"2026-08-27",185,376.8,"C"],[7370,"2026-08-27",186,467.97,"C"],[7370,"2026-08-27",166,67.45,"C"],[7370,"2026-08-27",187,51.0,"C"],[7370,"2026-08-28",166,68.26,"C"],[7380,"2026-01-04",78,27.31,"C"],[7380,"2026-01-05",74,2.83,"E"],[7380,"2026-01-06",188,54.54,"C"],[7380,"2026-01-06",74,17.55,"E"],[7380,"2026-01-07",189,2.75,"C"],[7380,"2026-01-07",188,96.89,"C"],[7380,"2026-01-07",121,514.0,"E"],[7380,"2026-01-08",74,3.05,"E"],[7380,"2026-01-08",74,3.05,"E"],[7380,"2026-01-09",190,16.89,"C"],[7380,"2026-01-10",191,57.98,"C"],[7380,"2026-01-10",78,48.66,"C"],[7380,"2026-01-10",192,46.97,"C"],[7380,"2026-01-11",125,85.73,"C"],[7380,"2026-01-11",191,22.19,"C"],[7380,"2026-01-12",78,50.83,"C"],[7380,"2026-01-12",188,22.18,"C"],[7380,"2026-01-12",188,30.23,"C"],[7380,"2026-01-12",80,78.1,"E"],[7380,"2026-01-13",188,35.82,"C"],[7380,"2026-01-13",188,45.46,"C"],[7380,"2026-01-13",191,40.0,"C"],[7380,"2026-01-17",188,33.19,"C"],[7380,"2026-01-18",78,16.06,"C"],[7380,"2026-01-18",78,52.13,"C"],[7380,"2026-01-19",193,3050.0,"B"],[7380,"2026-01-19",78,69.19,"C"],[7380,"2026-01-20",191,6.91,"C"],[7380,"2026-01-20",125,56.27,"C"],[7380,"2026-01-21",189,5.0,"C"],[7380,"2026-01-21",188,17.62,"C"],[7380,"2026-01-22",78,31.81,"C"],[7380,"2026-01-22",189,22.7,"C"],[7380,"2026-01-22",170,52.0,"E"],[7380,"2026-01-24",78,35.0,"C"],[7380,"2026-01-25",125,75.95,"C"],[7380,"2026-01-27",188,46.04,"C"],[7380,"2026-01-27",189,17.0,"C"],[7380,"2026-01-28",131,506.78,"E"],[7380,"2026-01-29",189,42.0,"C"],[7380,"2026-01-30",78,41.37,"C"],[7380,"2026-01-31",194,76.33,"C"],[7380,"2026-01-31",188,52.09,"C"],[7380,"2026-02-04",187,26.35,"C"],[7380,"2026-02-04",188,45.07,"C"],[7380,"2026-02-04",160,217.5,"E"],[7380,"2026-02-05",191,52.5,"C"],[7380,"2026-02-06",78,40.01,"C"],[7380,"2026-02-06",78,3.7,"C"],[7380,"2026-02-10",188,13.41,"C"],[7380,"2026-02-11",78,49.84,"C"],[7380,"2026-02-12",188,52.5,"C"],[7380,"2026-02-15",194,73.07,"C"],[7380,"2026-02-16",188,38.56,"C"],[7380,"2026-02-19",188,40.32,"C"],[7380,"2026-02-20",125,60.24,"C"],[7380,"2026-02-23",188,-45.07,"R"],[7380,"2026-02-23",131,508.95,"E"],[7380,"2026-02-25",195,39.0,"C"],[7380,"2026-02-25",191,16.8,"C"],[7380,"2026-02-25",170,61.0,"E"],[7380,"2026-02-26",187,49.0,"C"],[7380,"2026-02-26",151,26.0,"E"],[7380,"2026-02-27",188,46.56,"C"],[7380,"2026-02-27",125,63.03,"C"],[7380,"2026-02-28",196,6.75,"C"],[7380,"2026-02-28",191,5.25,"C"],[7380,"2026-03-01",194,65.99,"C"],[7380,"2026-03-02",188,4.73,"C"],[7380,"2026-03-02",197,90.63,"E"],[7380,"2026-03-03",188,8.41,"C"],[7380,"2026-03-03",191,3.63,"C"],[7380,"2026-03-03",191,5.25,"C"],[7380,"2026-03-03",191,40.01,"C"],[7380,"2026-03-03",191,30.04,"C"],[7380,"2026-03-04",191,14.79,"C"],[7380,"2026-03-04",188,11.23,"C"],[7380,"2026-03-05",188,44.24,"C"],[7380,"2026-03-05",78,68.76,"C"],[7380,"2026-03-05",188,80.07,"C"],[7380,"2026-03-05",187,40.0,"C"],[7380,"2026-03-05",198,555.71,"E"],[7380,"2026-03-06",78,51.19,"C"],[7380,"2026-03-07",188,51.23,"C"],[7380,"2026-03-09",131,388.6,"E"],[7380,"2026-03-10",192,63.35,"C"],[7380,"2026-03-11",192,5.73,"C"],[7380,"2026-03-11",188,89.82,"C"],[7380,"2026-03-12",125,65.0,"C"],[7380,"2026-03-12",187,42.0,"C"],[7380,"2026-03-13",188,74.43,"C"],[7380,"2026-03-13",117,230.55,"E"],[7380,"2026-03-14",188,44.56,"C"],[7380,"2026-03-15",192,65.37,"C"],[7380,"2026-03-16",78,4.55,"C"],[7380,"2026-03-17",117,192.85,"E"],[7380,"2026-03-18",188,5.14,"C"],[7380,"2026-03-18",188,8.32,"C"],[7380,"2026-03-19",189,37.48,"C"],[7380,"2026-03-20",188,61.73,"C"],[7380,"2026-03-21",78,75.31,"C"],[7380,"2026-03-21",191,52.45,"C"],[7380,"2026-03-23",131,487.93,"E"],[7380,"2026-03-25",192,34.02,"C"],[7380,"2026-03-25",194,96.71,"C"],[7380,"2026-03-26",170,76.0,"E"],[7380,"2026-03-27",192,45.67,"C"],[7380,"2026-03-29",78,52.04,"C"],[7380,"2026-03-29",125,106.27,"C"],[7380,"2026-03-29",188,72.21,"C"],[7380,"2026-03-30",194,100.0,"C"],[7380,"2026-03-31",189,16.1,"C"],[7380,"2026-03-31",188,60.3,"C"],[7380,"2026-04-01",188,57.35,"C"],[7380,"2026-04-02",189,20.13,"C"],[7380,"2026-04-02",199,293.63,"E"],[7380,"2026-04-06",188,78.37,"C"],[7380,"2026-04-08",191,7.97,"C"],[7380,"2026-04-08",187,40.0,"C"],[7380,"2026-04-08",189,10.0,"C"],[7380,"2026-04-11",188,70.19,"C"],[7380,"2026-04-13",194,100.0,"C"],[7380,"2026-04-15",188,61.03,"C"],[7380,"2026-04-15",78,61.44,"C"],[7380,"2026-04-16",187,52.0,"C"],[7380,"2026-04-16",188,73.64,"C"],[7380,"2026-04-17",154,301.6,"E"],[7380,"2026-04-18",188,55.4,"C"],[7380,"2026-04-21",189,59.13,"C"],[7380,"2026-04-22",187,37.76,"C"],[7380,"2026-04-22",188,6.05,"C"],[7380,"2026-04-23",189,25.8,"C"],[7380,"2026-04-23",189,51.0,"C"],[7380,"2026-04-24",121,46.59,"E"],[7380,"2026-04-25",188,55.33,"C"],[7380,"2026-04-28",192,56.57,"C"],[7380,"2026-04-29",189,4.75,"C"],[7380,"2026-04-29",192,4.19,"C"],[7380,"2026-04-29",154,42.05,"E"],[7380,"2026-04-30",189,4.25,"C"],[7380,"2026-04-30",194,100.0,"C"],[7380,"2026-04-30",200,-293.63,"I"],[7380,"2026-05-01",199,108.46,"E"],[7380,"2026-05-03",125,81.18,"C"],[7380,"2026-05-05",188,83.72,"C"],[7380,"2026-05-07",197,98.6,"E"],[7380,"2026-05-08",188,67.81,"C"],[7380,"2026-05-11",125,77.32,"C"],[7380,"2026-05-12",191,66.4,"C"],[7380,"2026-05-14",78,48.5,"C"],[7380,"2026-05-14",201,206.99,"E"],[7380,"2026-05-15",194,100.0,"C"],[7380,"2026-05-17",191,62.33,"C"],[7380,"2026-05-19",78,83.16,"C"],[7380,"2026-05-20",188,83.58,"C"],[7380,"2026-05-22",188,75.69,"C"],[7380,"2026-05-22",188,73.75,"C"],[7380,"2026-05-22",189,14.0,"C"],[7380,"2026-05-22",117,21.75,"E"],[7380,"2026-05-25",194,100.0,"C"],[7380,"2026-05-27",202,64.28,"C"],[7380,"2026-05-28",125,53.63,"C"],[7380,"2026-05-28",170,52.0,"E"],[7380,"2026-05-29",188,30.0,"C"],[7380,"2026-05-30",125,55.22,"C"],[7380,"2026-05-30",166,105.0,"C"],[7380,"2026-06-02",117,40.0,"E"],[7380,"2026-06-03",125,76.79,"C"],[7380,"2026-06-03",203,14.5,"E"],[7380,"2026-06-05",78,132.15,"C"],[7380,"2026-06-05",194,100.0,"C"],[7380,"2026-06-07",188,65.53,"C"],[7380,"2026-06-10",125,70.01,"C"],[7380,"2026-06-13",188,60.25,"C"],[7380,"2026-06-14",204,463.06,"E"],[7380,"2026-06-16",197,9.43,"E"],[7380,"2026-06-17",125,67.67,"C"],[7380,"2026-06-18",125,76.81,"C"],[7380,"2026-06-18",203,11.6,"E"],[7380,"2026-06-19",129,216.05,"E"],[7380,"2026-06-20",125,58.78,"C"],[7380,"2026-06-22",188,23.39,"C"],[7380,"2026-06-22",159,512.87,"E"],[7380,"2026-06-23",195,6.66,"C"],[7380,"2026-06-23",191,72.98,"C"],[7380,"2026-06-24",188,25.06,"C"],[7380,"2026-06-25",125,57.37,"C"],[7380,"2026-06-25",125,39.74,"C"],[7380,"2026-06-25",125,67.04,"C"],[7380,"2026-06-25",191,7.55,"C"],[7380,"2026-06-28",194,100.0,"C"],[7380,"2026-06-28",204,248.02,"E"],[7380,"2026-06-29",189,41.75,"C"],[7380,"2026-06-29",170,36.0,"E"],[7380,"2026-06-29",131,508.95,"E"],[7380,"2026-06-29",198,530.7,"E"],[7380,"2026-06-30",125,77.86,"C"],[7380,"2026-06-30",192,8.82,"C"],[7380,"2026-06-30",205,7.88,"C"],[7380,"2026-06-30",187,44.0,"C"],[7380,"2026-06-30",206,56.55,"E"],[7380,"2026-06-30",203,11.6,"E"],[7380,"2026-07-01",188,72.71,"C"],[7380,"2026-07-01",125,46.8,"C"],[7380,"2026-07-02",154,42.92,"E"],[7380,"2026-07-02",207,10.44,"E"],[7380,"2026-07-02",201,94.25,"E"],[7380,"2026-07-03",204,215.98,"E"],[7380,"2026-07-04",125,64.59,"C"],[7380,"2026-07-05",187,122.0,"C"],[7380,"2026-07-06",121,55.37,"E"],[7380,"2026-07-06",197,90.63,"E"],[7380,"2026-07-07",78,68.47,"C"],[7380,"2026-07-08",191,19.75,"C"],[7380,"2026-07-08",125,77.19,"C"],[7380,"2026-07-09",188,50.0,"C"],[7380,"2026-07-09",205,11.73,"C"],[7380,"2026-07-09",188,54.76,"C"],[7380,"2026-07-09",189,48.0,"C"],[7380,"2026-07-09",129,23.93,"E"],[7380,"2026-07-09",197,9.43,"E"],[7380,"2026-07-10",192,74.92,"C"],[7380,"2026-07-11",195,50.91,"C"],[7380,"2026-07-14",125,44.0,"C"],[7380,"2026-07-14",187,28.0,"C"],[7380,"2026-07-15",125,86.87,"C"],[7380,"2026-07-15",203,11.6,"E"],[7380,"2026-07-16",188,18.24,"C"],[7380,"2026-07-16",125,72.1,"C"],[7380,"2026-07-16",194,97.8,"C"],[7380,"2026-07-17",187,22.0,"C"],[7380,"2026-07-17",78,44.48,"C"],[7380,"2026-07-17",189,4.24,"C"],[7380,"2026-07-17",125,10.26,"C"],[7380,"2026-07-17",187,26.0,"C"],[7380,"2026-07-17",188,21.92,"C"],[7380,"2026-07-17",117,28.0,"E"],[7380,"2026-07-19",188,61.35,"C"],[7380,"2026-07-20",131,508.95,"E"],[7380,"2026-07-22",78,64.37,"C"],[7380,"2026-07-22",195,7.22,"C"],[7380,"2026-07-23",189,6.55,"C"],[7380,"2026-07-23",192,62.38,"C"],[7380,"2026-07-24",189,6.58,"C"],[7380,"2026-07-24",188,67.42,"C"],[7380,"2026-07-26",204,643.03,"E"],[7380,"2026-07-27",187,100.0,"C"],[7380,"2026-07-29",191,71.17,"C"],[7380,"2026-07-29",125,81.35,"C"],[7380,"2026-07-29",78,104.31,"C"],[7380,"2026-08-01",188,72.77,"C"],[7380,"2026-08-02",204,227.37,"E"],[7380,"2026-08-06",191,71.98,"C"],[7380,"2026-08-06",125,75.81,"C"],[7380,"2026-08-07",125,112.01,"K"],[7380,"2026-08-08",125,45.19,"C"],[7380,"2026-08-11",125,83.45,"C"],[7380,"2026-08-13",188,67.89,"C"],[7380,"2026-08-14",129,8.7,"E"],[7380,"2026-08-16",78,20.01,"C"],[7380,"2026-08-16",188,47.82,"C"],[7380,"2026-08-18",78,12.94,"C"],[7380,"2026-08-18",191,42.04,"C"],[7380,"2026-08-18",78,10.01,"C"],[7380,"2026-08-18",191,8.24,"C"],[7380,"2026-08-18",125,129.46,"C"],[7380,"2026-08-19",191,52.57,"C"],[7380,"2026-08-19",208,123.25,"E"],[7380,"2026-08-20",78,107.02,"C"],[7380,"2026-08-20",191,7.11,"C"],[7380,"2026-08-20",191,73.72,"C"],[7380,"2026-08-20",201,193.94,"E"],[7380,"2026-08-21",191,36.82,"C"],[7380,"2026-08-22",188,6.34,"C"],[7380,"2026-08-22",188,11.59,"C"],[7380,"2026-08-22",188,54.61,"C"],[7380,"2026-08-26",188,13.83,"C"],[7380,"2026-08-26",125,153.12,"C"],[7380,"2026-08-27",188,63.28,"C"],[7380,"2026-08-27",192,47.36,"C"],[7380,"2026-08-29",125,102.3,"C"],[7380,"2026-08-29",195,16.85,"C"],[7380,"2026-08-29",188,131.47,"C"],[7380,"2026-08-29",188,4.59,"C"],[7380,"2026-08-29",188,3.52,"C"],[7390,"2026-01-07",209,606.95,"K"],[7390,"2026-01-27",209,498.07,"K"],[7390,"2026-02-09",209,604.14,"K"],[7390,"2026-02-27",209,503.07,"K"],[7390,"2026-03-05",160,63.75,"E"],[7390,"2026-03-06",209,604.14,"K"],[7390,"2026-03-27",209,498.05,"K"],[7390,"2026-04-07",209,604.14,"K"],[7390,"2026-04-14",160,63.75,"E"],[7390,"2026-04-21",209,307.84,"C"],[7390,"2026-04-24",209,120.7,"C"],[7390,"2026-04-27",209,538.27,"K"],[7390,"2026-05-06",209,603.62,"K"],[7390,"2026-05-23",209,524.44,"C"],[7390,"2026-05-27",209,578.16,"K"],[7390,"2026-06-05",209,529.13,"K"],[7390,"2026-06-29",209,578.18,"B"],[7390,"2026-07-07",209,650.12,"K"],[7390,"2026-07-25",209,650.48,"C"],[7390,"2026-07-28",209,578.41,"K"],[7390,"2026-08-03",160,255.0,"E"],[7390,"2026-08-07",209,593.07,"K"],[7390,"2026-08-27",209,579.91,"K"],[7390,"2026-08-31",160,63.75,"E"],[7400,"2026-01-09",210,2400.0,"C"],[7400,"2026-04-30",92,5000.0,"B"],[7400,"2026-05-02",158,215.86,"C"],[7400,"2026-06-02",211,6650.32,"C"],[7400,"2026-06-19",212,1135.34,"C"],[7400,"2026-06-23",213,320.52,"C"],[7400,"2026-06-24",211,4526.97,"C"],[7400,"2026-06-27",212,471.93,"C"],[7400,"2026-06-28",211,463.5,"C"],[7400,"2026-06-29",214,108.9,"C"],[7400,"2026-07-07",215,7500.0,"B"],[7400,"2026-07-08",161,21.98,"C"],[7400,"2026-07-08",216,4928.5,"C"],[7400,"2026-07-08",161,18.98,"C"],[7400,"2026-07-08",161,83.76,"C"],[7400,"2026-07-09",9,300.0,"K"],[7400,"2026-07-09",161,15.98,"C"],[7400,"2026-07-09",161,11.97,"C"],[7400,"2026-07-09",161,2.0,"C"],[7400,"2026-07-09",161,54.99,"C"],[7400,"2026-07-09",161,13.99,"C"],[7400,"2026-07-09",161,26.99,"C"],[7400,"2026-07-09",161,25.58,"C"],[7400,"2026-07-09",217,840.41,"C"],[7400,"2026-07-10",218,282.32,"C"],[7400,"2026-07-11",161,19.98,"C"],[7400,"2026-07-12",158,113.66,"C"],[7400,"2026-07-12",161,58.99,"C"],[7400,"2026-07-12",219,218.5,"C"],[7400,"2026-07-13",164,3478.04,"C"],[7400,"2026-07-21",220,474.78,"C"],[7400,"2026-08-22",221,220.0,"K"],[7410,"2026-03-06",222,1111.81,"C"],[7420,"2026-03-03",223,3150.0,"C"],[7420,"2026-03-21",224,1259.14,"C"],[7420,"2026-05-20",225,1000.0,"B"],[7420,"2026-07-06",226,500.0,"C"],[7430,"2026-01-12",227,14000.0,"B"],[7430,"2026-01-22",228,1855.0,"C"],[7430,"2026-01-22",228,875.0,"C"],[7430,"2026-02-22",228,875.0,"C"],[7430,"2026-02-22",228,1855.0,"C"],[7430,"2026-02-25",229,1200.0,"C"],[7430,"2026-03-11",230,1350.0,"B"],[7430,"2026-03-21",228,1855.0,"C"],[7430,"2026-03-22",228,875.0,"C"],[7430,"2026-04-13",227,14000.0,"B"],[7430,"2026-04-21",228,1855.0,"C"],[7430,"2026-04-22",228,875.0,"C"],[7430,"2026-04-22",231,180.25,"C"],[7430,"2026-04-23",232,160.0,"C"],[7430,"2026-05-07",233,1307.18,"B"],[7430,"2026-05-07",234,210.0,"C"],[7430,"2026-05-07",234,159.0,"C"],[7430,"2026-05-14",235,35.0,"C"],[7430,"2026-05-17",236,50.0,"C"],[7430,"2026-05-22",228,1855.0,"C"],[7430,"2026-05-22",228,875.0,"C"],[7430,"2026-05-24",237,2227.5,"C"],[7430,"2026-06-09",238,4600.0,"B"],[7430,"2026-06-22",227,14000.0,"B"],[7430,"2026-06-24",228,1855.0,"C"],[7430,"2026-06-25",228,875.0,"C"],[7430,"2026-07-06",227,14000.0,"B"],[7430,"2026-07-22",228,1855.0,"C"],[7430,"2026-07-23",228,875.0,"C"],[7430,"2026-07-26",164,2179.56,"C"],[7430,"2026-08-06",239,3564.07,"B"],[7430,"2026-08-10",136,320.0,"C"],[7430,"2026-08-11",230,47.25,"C"],[7430,"2026-08-18",240,2580.0,"C"],[7430,"2026-08-22",228,1855.0,"C"],[7430,"2026-08-23",228,875.0,"C"],[7430,"2026-08-28",241,525.0,"C"],[7440,"2026-01-09",182,-95.0,"R"],[7440,"2026-01-10",242,42.9,"C"],[7440,"2026-01-12",101,78.18,"C"],[7440,"2026-01-16",61,43.99,"C"],[7440,"2026-01-16",182,95.0,"C"],[7440,"2026-01-16",182,95.0,"C"],[7440,"2026-01-27",61,38.49,"C"],[7440,"2026-02-10",242,42.9,"C"],[7440,"2026-02-16",61,43.99,"C"],[7440,"2026-02-21",61,43.89,"C"],[7440,"2026-02-27",61,38.49,"C"],[7440,"2026-03-09",101,74.77,"C"],[7440,"2026-03-10",242,42.9,"C"],[7440,"2026-03-16",61,43.99,"C"],[7440,"2026-03-21",61,43.89,"C"],[7440,"2026-03-27",61,76.99,"C"],[7440,"2026-04-01",230,739.25,"C"],[7440,"2026-04-06",101,81.31,"C"],[7440,"2026-04-07",240,595.0,"C"],[7440,"2026-04-10",242,42.9,"C"],[7440,"2026-04-16",182,95.0,"C"],[7440,"2026-04-16",61,43.99,"C"],[7440,"2026-04-21",61,43.89,"C"],[7440,"2026-04-27",61,76.99,"C"],[7440,"2026-05-04",101,81.31,"C"],[7440,"2026-05-10",242,42.9,"C"],[7440,"2026-05-16",61,43.99,"C"],[7440,"2026-05-21",61,109.99,"C"],[7440,"2026-05-21",61,43.89,"C"],[7440,"2026-05-27",61,76.99,"C"],[7440,"2026-06-01",101,77.6,"C"],[7440,"2026-06-10",242,42.9,"C"],[7440,"2026-06-16",61,43.99,"C"],[7440,"2026-06-21",61,109.99,"C"],[7440,"2026-06-21",61,43.89,"C"],[7440,"2026-06-29",101,84.14,"C"],[7440,"2026-06-30",101,9.98,"C"],[7440,"2026-07-10",242,42.9,"C"],[7440,"2026-07-16",61,43.99,"C"],[7440,"2026-07-17",182,95.0,"C"],[7440,"2026-07-17",182,375.0,"C"],[7440,"2026-07-17",182,95.0,"C"],[7440,"2026-07-17",182,95.0,"C"],[7440,"2026-07-21",61,109.99,"C"],[7440,"2026-07-21",61,43.89,"C"],[7440,"2026-07-27",61,76.99,"C"],[7440,"2026-07-27",101,84.14,"C"],[7440,"2026-08-10",242,42.9,"C"],[7440,"2026-08-16",61,43.99,"C"],[7440,"2026-08-21",61,109.99,"C"],[7440,"2026-08-21",61,43.89,"C"],[7440,"2026-08-24",101,77.6,"C"],[7440,"2026-08-27",61,76.99,"C"],[7450,"2026-01-01",243,100.0,"C"],[7450,"2026-01-01",243,200.0,"C"],[7450,"2026-01-05",230,45.0,"C"],[7450,"2026-01-08",244,306.0,"C"],[7450,"2026-01-09",245,60.0,"C"],[7450,"2026-01-11",246,30.0,"C"],[7450,"2026-01-11",246,30.0,"C"],[7450,"2026-01-21",247,481.78,"C"],[7450,"2026-01-22",248,438.21,"B"],[7450,"2026-01-22",248,2000.0,"B"],[7450,"2026-01-23",49,31.9,"C"],[7450,"2026-01-28",249,124.0,"C"],[7450,"2026-01-29",49,3.29,"C"],[7450,"2026-02-06",230,739.25,"C"],[7450,"2026-02-08",250,239.0,"C"],[7450,"2026-02-08",251,1445.0,"C"],[7450,"2026-02-10",252,200.0,"C"],[7450,"2026-02-12",253,5.05,"C"],[7450,"2026-02-12",253,120.0,"C"],[7450,"2026-02-16",250,49.0,"C"],[7450,"2026-02-18",246,25.0,"C"],[7450,"2026-02-19",253,125.05,"C"],[7450,"2026-02-19",253,125.05,"C"],[7450,"2026-02-19",248,51.95,"C"],[7450,"2026-02-19",248,51.95,"C"],[7450,"2026-02-19",253,125.05,"C"],[7450,"2026-02-20",246,25.0,"C"],[7450,"2026-02-20",246,25.0,"C"],[7450,"2026-02-25",254,40.0,"C"],[7450,"2026-02-26",253,120.0,"C"],[7450,"2026-02-26",255,5.05,"C"],[7450,"2026-03-03",230,45.0,"C"],[7450,"2026-03-18",253,125.05,"C"],[7450,"2026-04-21",235,35.0,"C"],[7450,"2026-05-01",256,78.0,"C"],[7450,"2026-05-01",257,70.0,"C"],[7450,"2026-05-04",199,180.0,"E"],[7450,"2026-05-08",250,49.0,"C"],[7450,"2026-05-28",258,100.0,"C"],[7450,"2026-05-28",234,275.0,"C"],[7450,"2026-06-01",256,254.0,"K"],[7450,"2026-06-05",259,75.0,"C"],[7450,"2026-06-11",260,300.0,"C"],[7450,"2026-06-16",117,150.0,"E"],[7450,"2026-06-24",256,204.0,"K"],[7450,"2026-06-24",117,70.0,"E"],[7450,"2026-06-27",246,35.0,"C"],[7450,"2026-07-08",117,154.0,"E"],[7450,"2026-07-15",258,100.0,"C"],[7450,"2026-07-31",261,60.0,"K"],[7450,"2026-07-31",256,91.0,"K"],[7450,"2026-08-01",262,4.0,"C"],[7450,"2026-08-03",254,10.0,"C"],[7450,"2026-08-04",253,145.55,"C"],[7450,"2026-08-04",260,50.0,"C"],[7450,"2026-08-07",230,796.16,"C"],[7450,"2026-08-11",253,3.55,"C"],[7450,"2026-08-11",258,100.0,"C"],[7450,"2026-08-11",253,60.0,"C"],[7450,"2026-08-12",253,145.55,"C"],[7450,"2026-08-12",253,145.55,"C"],[7450,"2026-08-18",253,145.55,"C"],[7450,"2026-08-24",263,220.0,"K"],[7460,"2026-01-09",264,36.95,"C"],[7460,"2026-01-12",265,102.34,"C"],[7460,"2026-01-20",266,24.72,"C"],[7460,"2026-01-23",267,39.95,"C"],[7460,"2026-01-24",264,47.44,"C"],[7460,"2026-01-24",268,100.0,"C"],[7460,"2026-02-09",264,36.95,"C"],[7460,"2026-02-09",269,12.05,"C"],[7460,"2026-02-18",268,100.0,"C"],[7460,"2026-02-23",267,39.95,"C"],[7460,"2026-03-05",270,104.95,"C"],[7460,"2026-03-09",264,36.95,"C"],[7460,"2026-03-10",271,115.0,"C"],[7460,"2026-03-15",268,100.0,"C"],[7460,"2026-03-23",267,39.95,"C"],[7460,"2026-04-07",265,102.34,"C"],[7460,"2026-04-08",268,100.0,"C"],[7460,"2026-04-09",264,36.95,"C"],[7460,"2026-04-10",268,6.18,"C"],[7460,"2026-04-11",268,6.18,"C"],[7460,"2026-04-14",272,1581.23,"C"],[7460,"2026-04-14",268,6.18,"C"],[7460,"2026-04-20",264,84.82,"C"],[7460,"2026-04-27",264,68.74,"C"],[7460,"2026-05-09",264,36.95,"C"],[7460,"2026-05-13",268,100.0,"C"],[7460,"2026-05-18",268,100.0,"C"],[7460,"2026-05-18",268,-100.0,"R"],[7460,"2026-05-25",269,17.54,"C"],[7460,"2026-06-09",264,36.95,"C"],[7460,"2026-06-10",268,100.0,"C"],[7460,"2026-06-26",273,32.76,"C"],[7460,"2026-06-27",274,971.95,"C"],[7460,"2026-07-09",264,36.95,"C"],[7460,"2026-07-10",268,100.0,"C"],[7460,"2026-07-18",268,100.0,"C"],[7460,"2026-07-25",266,24.72,"C"],[7460,"2026-07-30",273,25.0,"C"],[7460,"2026-07-30",266,24.72,"C"],[7460,"2026-07-31",273,1624.77,"C"],[7460,"2026-08-06",268,100.0,"C"],[7460,"2026-08-09",264,36.95,"C"],[7460,"2026-08-10",266,24.72,"K"],[7460,"2026-08-26",268,100.0,"C"],[7460,"2026-08-27",275,156.35,"C"],[7470,"2026-01-09",276,1.25,"C"],[7470,"2026-01-09",276,1.25,"C"],[7470,"2026-01-09",277,26.47,"C"],[7470,"2026-01-30",277,44.22,"C"],[7470,"2026-02-04",277,43.99,"C"],[7470,"2026-02-10",277,35.68,"C"],[7470,"2026-03-06",276,15.6,"C"],[7470,"2026-03-10",277,38.01,"C"],[7470,"2026-03-31",277,28.75,"C"],[7470,"2026-03-31",277,29.77,"C"],[7470,"2026-04-10",276,15.6,"C"],[7470,"2026-04-16",277,45.69,"C"],[7470,"2026-04-21",277,14.75,"C"],[7470,"2026-04-21",277,61.0,"C"],[7470,"2026-04-22",277,557.19,"C"],[7470,"2026-04-23",277,51.9,"C"],[7470,"2026-04-29",277,11.0,"C"],[7470,"2026-05-01",277,14.75,"C"],[7470,"2026-05-01",277,15.95,"C"],[7470,"2026-05-02",278,20.43,"C"],[7470,"2026-05-02",277,22.71,"C"],[7470,"2026-05-06",277,15.8,"C"],[7470,"2026-05-16",276,15.6,"C"],[7470,"2026-06-06",277,41.15,"C"],[7470,"2026-06-10",277,14.75,"C"],[7470,"2026-06-10",277,61.76,"C"],[7470,"2026-06-17",276,398.0,"C"],[7470,"2026-06-27",276,15.6,"C"],[7470,"2026-06-30",277,20.05,"C"],[7470,"2026-07-04",277,47.55,"C"],[7470,"2026-07-09",277,204.7,"C"],[7470,"2026-07-21",277,20.05,"C"],[7470,"2026-07-22",277,7.34,"C"],[7470,"2026-07-24",277,116.5,"C"],[7470,"2026-07-25",277,111.88,"C"],[7470,"2026-07-29",277,8.16,"C"],[7470,"2026-08-01",276,16.4,"C"],[7470,"2026-08-04",277,68.58,"C"],[7470,"2026-08-12",277,27.25,"C"],[7470,"2026-08-15",277,168.6,"C"],[7470,"2026-08-21",277,19.2,"C"],[7470,"2026-08-25",277,14.75,"C"],[7470,"2026-08-28",277,47.3,"C"],[7470,"2026-08-28",277,14.75,"C"],[7470,"2026-08-29",277,74.6,"C"],[7480,"2026-01-20",9,150.19,"K"],[7480,"2026-01-30",279,20.0,"K"],[7480,"2026-02-19",9,146.24,"K"],[7480,"2026-02-27",279,20.0,"K"],[7480,"2026-03-19",9,148.14,"K"],[7480,"2026-03-31",279,20.0,"K"],[7480,"2026-04-15",279,25.0,"K"],[7480,"2026-04-20",9,147.94,"K"],[7480,"2026-04-30",279,20.0,"K"],[7480,"2026-05-19",9,152.64,"K"],[7480,"2026-05-29",279,20.0,"K"],[7480,"2026-06-22",9,149.64,"K"],[7480,"2026-06-30",279,20.0,"K"],[7480,"2026-07-20",9,149.18,"K"],[7480,"2026-07-31",279,20.0,"K"],[7480,"2026-08-19",9,284.32,"K"],[7490,"2026-06-30",280,7326.25,"J"],[7490,"2026-07-08",280,119.74,"J"],[7490,"2026-07-08",280,1184.0,"J"],[7490,"2026-07-22",280,23.47,"J"],[7490,"2026-08-05",280,1184.0,"J"],[7490,"2026-08-05",280,96.0,"J"]],"accts":{"7210":"Rent & Lease","7220":"Repairs & Maint. - Metairie","7240":"Internet/Telephone","7250":"Utilities","7310":"Business Insurance","7312":"Officer Life Insurance","7320":"Legal & Professional Services","7330":"Software Subscriptions","7340":"Office Expenses","7350":"Advertising & Marketing","7360":"Meals & Meetings","7370":"Travel","7380":"Employee Mileage/Parking","7390":"Mobile Phones","7400":"Entertainment","7410":"Client Gifts","7420":"Charitable Contributions","7430":"Professional Dev.","7440":"Dues & Subscriptions","7450":"Permits & Licenses","7460":"Auto Repair & Maint.","7470":"Shipping & Postage","7480":"Bank Charges & Fees","7490":"Payroll Processing"},"src":"IncomeStatementDetail Jan–Aug 2026"};
+var OPX_KEY  = 'basin_opex_detail_v1';
+var OPX_FOCUS = null;      // 'YYYY-MM' month in focus; defaults to the latest
+var OPX_CAT   = null;      // selected account (number) or null for all
+var OPX_GRP   = { fac:{ label:'Facilities', c:'#2ee6c5', rgb:'46,230,197' },
+                  bo: { label:'Business Overhead', c:'#b18cff', rgb:'177,140,255' } };
+var OPX_FOCUS_C = '#ff9a3d', OPX_FOCUS_RGB = '255,154,61';
+var OPX_MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
 function opxGrpOf(a){ return a < 7300 ? 'fac' : 'bo'; }
 function opxM(v){
   var a = Math.abs(v), sg = v < 0 ? '\u2212' : '';
@@ -4894,12 +5056,14 @@ function opxModel(){
 function opxSum(a){ return a.reduce(function(s,v){ return s + v; }, 0); }
 
 // Revenue from the P&L already on the site, for "% of revenue".
-function opxRevenue(){
+function opxRevenue(maxMo){
   var row = (BUDGET_DATA||[]).filter(function(r){ return /^Total Income$/i.test(r.label); })[0];
   if (!row) return null;
   var v = bgRowVals(row), ytd = 0, byMonth = {};
   BG_IS_ACTUAL.forEach(function(on,i){
     if (!on && !(i > 0 && Object.keys(BUDGET_ACTUALS[BG_MONTHS[i]]||{}).length)) return;
+    // only months the overhead detail covers, so the % compares like with like
+    if (maxMo && (i === 0 ? 7 : 7 + i) > maxMo) return;
     ytd += v[i] || 0;
     if (i > 0) byMonth[7 + i] = v[i];         // Aug = 8 …
   });
@@ -4981,7 +5145,7 @@ function renderOpex(){
   var facF = M.grp.fac[fi], boF = M.grp.bo[fi], totF = facF + boF;
   var avg = totY / n;
   var dF = avg ? (totF - avg) / avg * 100 : 0;
-  var rev = opxRevenue();
+  var rev = opxRevenue(+M.months[M.months.length-1].slice(5,7));
   var pctY = rev && rev.ytd ? totY / rev.ytd * 100 : null;
   var fmNo = +fk.slice(5,7);
   var pctF = rev && rev.byMonth[fmNo] ? totF / rev.byMonth[fmNo] * 100 : null;
@@ -6340,26 +6504,30 @@ function thCell(label, sub, color, minW, extraStyle) {
 // ═══════════════════════════════════════════════════════════════════════════
 var WC_KEY = 'basin_wc_models_v1';
 
-// Per-month baselines carried over from the workbook (Aug–Dec)
-// August is now an actual month, so the projection window is Sep-Dec.
+// Per-month baselines from the September update of the workbook
+// (Basin_2026_Compact_EBITDA_and_Working_Capital_Model-SepUpdate.xlsx).
+// January–September are actuals; the projection window is Oct–Dec.
 var WC_BASE = {
-  months: ['Sep','Oct','Nov','Dec'],
-  dlBase:    [220466.99, 232916.99, 240498.31, 246879.62],  // direct labor
-  matOther:  [8000, 8000, 8000, 8000],                      // materials + other
-  indirect:  [155047.78, 158520.28, 174316.56, 191312.84],
-  opexBase:  [269762.24, 289903.24, 270069.74, 332135.85]
+  months: ['Oct','Nov','Dec'],
+  dlBase:    [232916.99, 240498.31, 246879.62],   // direct labor
+  matOther:  [8000, 8000, 8000],                  // materials + other
+  indirect:  [224000, 242000, 290000],
+  opexBase:  [289903.24, 270069.74, 332135.85]
 };
+// Capital uses already spent (not on the P&L): Jan–Aug and September.
+var WC_CAP_ACTUAL = { preCapex:123000, preDist:600000, sepCapex:392.94, sepDist:5206000 };
 
+// The site's default model: the parameters entered in the September update.
 var WC_DEFAULTS = {
   dcRate: 800, ndcRate: 200, dcPct: 0.33,
-  // hours are built per month from headcount x hours x utilization
-  headcount:   [32, 33, 34, 35],
+  // hours are built per month (Oct, Nov, Dec) from headcount x hours x utilization
+  headcount:   [32.5, 34, 35],
   hoursPerEmp: 174,
-  utilization: [0.84, 0.84, 0.82, 0.80],
-  subPct: 0.06, opexAdj: 0.05,
-  capexTotal: 200000, distTotal: 13000000,
+  utilization: [0.85, 0.83, 0.75],
+  subPct: 0.06, opexAdj: 0.10,
+  capexTotal: 150000, distTotal: 4000000,   // Oct–Dec totals, carried as one amount
   taxRate: 0.37,
-  cashBasisAdj: 3000000,     // accrual EBITDA less this = cash basis
+  cashBasisAdj: 7000000,     // accrual EBITDA less this = cash basis
   sh1Pct: 0.50, sh2Pct: 0.50 // ownership split for distributions and tax
 };
 
@@ -6369,22 +6537,24 @@ var WC_ACTIVE_ID = null;   // id of the saved model being edited, if any
 function wcLoadModels(){ try { return JSON.parse(localStorage.getItem(WC_KEY)||'[]'); } catch(e){ return []; } }
 function wcSaveModels(list){ try { localStorage.setItem(WC_KEY, JSON.stringify(list)); } catch(e){} }
 
-// Jan–Jul actuals, read live from the Budget & Forecasting tab
-function wcActuals(){
+// Actuals, read live from the Budget & Forecasting tab: Jan–Aug (columns 0
+// and 1) and September (column 2), each with its own capital uses.
+function wcActuals(which){
   function row(lbl){ return BUDGET_DATA.find(function(r){ return r.label === lbl; }); }
-  // Jan-Jul (col 0) plus August actual (col 1)
-  function ja(lbl){
+  function pick(lbl){
     var r = row(lbl); if (!r) return 0;
     var v = bgRowVals(r);
-    return (v[0]||0) + (v[1]||0);
+    return which === 'sep' ? (v[2]||0) : (v[0]||0) + (v[1]||0);
   }
-  var rev      = ja('Total Income');
-  var direct   = ja('Total \u2013 COGS Direct Costs');
-  var indirect = ja('Total \u2013 COGS Indirect Costs');
-  var opex     = ja('Total Expense');
+  var rev      = pick('Total Income');
+  var direct   = pick('Total \u2013 COGS Direct Costs');
+  var indirect = pick('Total \u2013 COGS Indirect Costs');
+  var opex     = pick('Total Expense');
+  var C = WC_CAP_ACTUAL;
   return { rev:rev, direct:direct, indirect:indirect, opex:opex,
            ebitda: rev - direct - indirect - opex,
-           capex:123000, dist:600000 };   // Jan-Aug actual
+           capex: which === 'sep' ? C.sepCapex : C.preCapex,
+           dist:  which === 'sep' ? C.sepDist  : C.preDist };
 }
 
 function wcCompute(inp){
@@ -6397,7 +6567,8 @@ function wcCompute(inp){
       return (inp.headcount[i]||0) * (inp.hoursPerEmp||174) * (inp.utilization[i]||0);
     return inp.hoursPerMonth || 0;
   }
-  var capexM = inp.capexTotal/N, distM = inp.distTotal/N;
+  // Oct–Dec capital uses are one combined amount for the period (not spread
+  // by month); like the workbook, the working capital line carries it in October.
   var dcHrs = 0, ndcHrs = 0, revPerMonth = 0;
   for (var i=0;i<N;i++){
     var hrs = hrsFor(i);
@@ -6409,26 +6580,25 @@ function wcCompute(inp){
     var indirect = B.indirect[i];
     var opex = B.opexBase[i]*(1+inp.opexAdj);
     var ebitda = rev - direct - indirect - opex;
+    var cx = i === 0 ? (inp.capexTotal||0) : 0, ds = i === 0 ? (inp.distTotal||0) : 0;
     out.months.push({ name:B.months[i], rev:rev, direct:direct, indirect:indirect,
-      opex:opex, ebitda:ebitda, capex:capexM, dist:distM, hrs:hrs,
-      wc: ebitda - capexM - distM, tax: ebitda*inp.taxRate });
+      opex:opex, ebitda:ebitda, capex:cx, dist:ds, hrs:hrs,
+      wc: ebitda - cx - ds, tax: ebitda*inp.taxRate });
   }
   revPerMonth = N ? revPerMonth/N : 0;
-  var A = wcActuals();
-  // the actuals column needs these two derived rows as well
-  A.wc  = A.ebitda - A.capex - A.dist;
-  A.tax = A.ebitda * inp.taxRate;
+  var A = wcActuals('pre'), SP = wcActuals('sep');
+  // the actuals columns need these two derived rows as well
+  [A, SP].forEach(function(x){ x.wc = x.ebitda - x.capex - x.dist; x.tax = x.ebitda * inp.taxRate; });
+  out.sep = SP;
   var sum = function(k){ return out.months.reduce(function(a,m){ return a+m[k]; },0); };
   out.actuals = A;
   out.proj = { rev:sum('rev'), direct:sum('direct'), indirect:sum('indirect'), opex:sum('opex'),
                ebitda:sum('ebitda'), capex:sum('capex'), dist:sum('dist'),
                wc:sum('wc'), tax:sum('tax') };
-  out.fy = {
-    rev:A.rev+out.proj.rev, direct:A.direct+out.proj.direct, indirect:A.indirect+out.proj.indirect,
-    opex:A.opex+out.proj.opex, ebitda:A.ebitda+out.proj.ebitda,
-    capex:A.capex+out.proj.capex, dist:A.dist+out.proj.dist,
-    wc:(A.ebitda-A.capex-A.dist)+out.proj.wc, tax:(A.ebitda*inp.taxRate)+out.proj.tax
-  };
+  out.fy = {};
+  ['rev','direct','indirect','opex','ebitda','capex','dist','wc','tax'].forEach(function(k){
+    out.fy[k] = A[k] + SP[k] + out.proj[k];
+  });
 
   // ── Cash basis: accrual FY EBITDA less the adjustment, taxed at the
   //    effective rate. Informational — it does not touch Working Capital.
@@ -6616,7 +6786,12 @@ function renderBudgetWC(el){
     opts = opts || {};
     var cells = '<td class="wc-lbl'+(opts.bold?' b':'')+'" style="'+(opts.color?'color:'+opts.color+';':'')+'">'+label+'</td>';
     cells += '<td class="wc-num act">'+wcMoney(R.actuals[key])+'</td>';
-    R.months.forEach(function(m){ cells += '<td class="wc-num">'+wcMoney(m[key])+'</td>'; });
+    cells += '<td class="wc-num act">'+wcMoney(R.sep[key])+'</td>';
+    if (opts.period) {
+      // one combined amount for Oct–Dec, as in the workbook
+      cells += '<td class="wc-num wc-span" colspan="'+R.months.length+'">'+wcMoney(R.proj[key])+
+        '<span>Oct\u2013Dec combined</span></td>';
+    } else R.months.forEach(function(m){ cells += '<td class="wc-num">'+wcMoney(m[key])+'</td>'; });
     cells += '<td class="wc-num fy"'+(opts.color?' style="color:'+opts.color+';"':'')+'>'+wcMoney(R.fy[key])+'</td>';
     return '<tr class="'+(opts.bold?'wc-bold':'')+'">'+cells+'</tr>';
   }
@@ -6700,11 +6875,11 @@ function renderBudgetWC(el){
           '<div class="wc-h">Model Inputs</div>'+
           '<div class="wc-sub">1 · Revenue Drivers</div>'+
           slider('dcRate','QTS & Corgan — Rate / Hour',300,1500,10,dol,
-            'Billing rate for QTS and Corgan data centre work. Jan–Aug blended $1,133/hr, or about $920/hr excluding QTS Midland.')+
+            'Billing rate for QTS and Corgan data center work. Jan–Sep blended $1,149/hr (up from $1,133 through August), or $966/hr excluding QTS Midland. September: QTS $998/hr, Corgan $1,970/hr.')+
           slider('ndcRate','All Other Work — Rate / Hour',80,400,5,dol,
-            'Billing rate for all non-QTS/Corgan work. Jan–Aug ran about $225/hr.')+
+            'Billing rate for all non-QTS/Corgan work. Jan–Sep ran $219/hr; September alone was $168/hr.')+
           slider('dcPct','% of Hours to QTS & Corgan',0,1,0.01,pct,
-            'Share of hours on QTS and Corgan work; the rest is All Other Work. The Jan–Aug actual mix was 42%.')+
+            'Share of hours on QTS and Corgan work; the rest is All Other Work. Jan–Sep actual mix was 43%, and September ran 48%.')+
           wcHoursBuild(I, R)+
           '<div class="wc-help" style="background:rgba(0,212,255,0.06);border-radius:8px;padding:9px 11px;margin-top:-4px;">'+
             'Derived: <b style="color:#00d4ff;">'+Math.round(R.derived.dcHrs).toLocaleString()+'</b> DC hrs + '+
@@ -6713,21 +6888,21 @@ function renderBudgetWC(el){
 
           '<div class="wc-sub">2 · Cost Drivers</div>'+
           slider('subPct','Subcontractor — % of Revenue',0,0.20,0.005,pct,
-            'Direct subcontractor cost as a share of revenue. Jan–Jul actual ran about 4%.')+
+            'Direct subcontractor cost as a share of revenue. Jan–Sep ran about 4.5% ($1.05M on $23.37M); September alone was 5.3%.')+
           slider('opexAdj','Operating Expense Adjustment',-0.10,0.10,0.005,pct,
-            'Scales monthly Op. Ex up or down from the baseline plan.')+
+            'Scales Oct–Dec Op. Ex up or down from the 2026 Projection. September Op. Ex was $379,889 against a $291,630 Jan–Aug monthly average \u2014 30% over, almost all Business Overhead.')+
 
-          '<div class="wc-sub">3 · Capital Allocation (Sep–Dec)</div>'+
-          slider('capexTotal','Cap. Ex & Debt Pay — Total',0,600000,10000,dol,
-            'Total for Sep–Dec, spread evenly. Reduces working capital growth dollar for dollar. Jan–Aug actual was $123k.')+
-          slider('distTotal','Distributions — Total',0,16000000,100000,dol,
-            'Owner distributions for Sep–Dec, inclusive of expected shareholder tax. Reduces working capital growth. Jan–Aug actual was $600k.')+
+          '<div class="wc-sub">3 · Capital Allocation (Oct–Dec)</div>'+
+          slider('capexTotal','Cap. Ex, Debt Pay & Other — Oct–Dec',0,600000,10000,dol,
+            'One combined amount for Oct\u2013Dec, not tied to a month. Jan\u2013Sep was $123,393 (September only $393). Mostly cap ex: a surveying drone and a conferencing system.')+
+          slider('distTotal','Distributions — Oct–Dec',0,16000000,100000,dol,
+            'One combined amount for Oct\u2013Dec, inclusive of expected shareholder tax. Jan\u2013Sep was $5,806,000 ($600k Jan\u2013Aug, $5,206,000 in September from the Midland collection).')+
 
           '<div class="wc-sub">4 · Tax & Cash Basis Adjustment</div>'+
           slider('taxRate','Effective Tax Rate',0,0.5,0.01,pct,
             'Applied to FY2026 cash basis EBITDA to estimate the tax liability. Informational — does not reduce working capital growth.')+
-          slider('cashBasisAdj','Cash Basis Adjustment — FY2026',0,8000000,100000,dol,
-            'Accrual FY2026 EBITDA less this amount equals cash basis EBITDA, and the tax rate applies to that reduced figure.')+
+          slider('cashBasisAdj','Cash Basis Adjustment — FY2026',0,12000000,100000,dol,
+            'Accrual FY2026 EBITDA less this amount equals cash basis EBITDA, and the tax rate applies to that reduced figure. At 9/30 there was $4.55M of WIP and $4.84M of A/R on the books.')+
 
           '<div class="wc-sub">5 · Ownership Split</div>'+
           slider('sh1Pct','Shareholder 1 — Ownership %',0,1,0.01,pct,
@@ -6756,7 +6931,7 @@ function renderBudgetWC(el){
           '<div class="wc-kpi" style="background:rgba(74,222,128,0.07);border:1px solid rgba(74,222,128,0.28);">'+
             '<div class="wc-kpi-l" style="color:rgba(94,235,150,0.9);">FY2026 Revenue</div>'+
             '<div class="wc-kpi-v" style="color:#4ade80;">'+wcMoney(R.fy.rev)+'</div>'+
-            '<div class="wc-kpi-s">'+wcMoney(R.proj.rev)+' Aug–Dec</div></div>'+
+            '<div class="wc-kpi-s">'+wcMoney(R.proj.rev)+' Oct–Dec</div></div>'+
           '<div class="wc-kpi" style="background:rgba(213,128,255,0.07);border:1px solid rgba(213,128,255,0.28);">'+
             '<div class="wc-kpi-l" style="color:rgba(213,128,255,0.9);">FY2026 EBITDA</div>'+
             '<div class="wc-kpi-v" style="color:#d580ff;">'+wcMoney(R.fy.ebitda)+'</div>'+
@@ -6774,7 +6949,7 @@ function renderBudgetWC(el){
         '<div class="wc-panel">'+
           '<div class="wc-h">Compact P&amp;L Model</div>'+
           '<table class="wc-table">'+
-            '<thead><tr><th>Line Item</th><th>Actuals<br>Jan–Aug</th>'+
+            '<thead><tr><th>Line Item</th><th>Actuals<br>Jan–Aug</th><th>Sep<br>Actual</th>'+
               R.months.map(function(m){ return '<th>'+m.name+'<br>Proj</th>'; }).join('')+
               '<th>FY2026<br>Total</th></tr></thead>'+
             '<tbody>'+
@@ -6783,9 +6958,9 @@ function renderBudgetWC(el){
               row('Indirect Costs','indirect',{color:'#ff9090'})+
               row('Op. Ex','opex',{color:'#fbbf24'})+
               row('EBITDA','ebitda',{bold:true,color:'#d580ff'})+
-              '<tr class="wc-sec"><td colspan="8">Working Capital Growth</td></tr>'+
-              row('(–) Cap. Ex &amp; Debt Pay','capex',{})+
-              row('(–) Distributions','dist',{})+
+              '<tr class="wc-sec"><td colspan="'+(R.months.length+4)+'">Working Capital Growth</td></tr>'+
+              row('(–) Cap. Ex, Debt Pay &amp; Other','capex',{period:true})+
+              row('(–) Distributions','dist',{period:true})+
               row('Working Capital Growth','wc',{bold:true,color:'#00d4ff'})+
             '</tbody>'+
           '</table>'+
@@ -6793,7 +6968,7 @@ function renderBudgetWC(el){
           wcOwnersBlock(R)+
           '<div class="wc-help" style="margin-top:12px;">'+
             'The Actuals column reads live from Budget &amp; Forecasting, so uploading a new month '+
-            'updates this model automatically. Sep–Dec are driven by the assumptions on the left.</div>'+
+            'updates this model automatically. Oct–Dec are driven by the assumptions on the left.</div>'+
         '</div>'+
       '</div>'+
     '</div>';
@@ -6856,6 +7031,10 @@ function wcLoadModel(id){
   var m = wcLoadModels().find(function(x){ return x.id===id; });
   if (!m) return;
   WC_INPUTS = JSON.parse(JSON.stringify(m.inputs));
+  // models saved before September closed ran Sep–Dec; keep their Oct–Dec months
+  ['headcount','utilization'].forEach(function(k){
+    if (Array.isArray(WC_INPUTS[k]) && WC_INPUTS[k].length === 4) WC_INPUTS[k] = WC_INPUTS[k].slice(1);
+  });
   WC_ACTIVE_ID = id;
   toast('Loaded "'+m.name+'"', 'success');
   wcRerender();
@@ -14987,7 +15166,7 @@ function capShowPriorsChart(metric) {
   var tickLabels = [];
   for (var t=0; t<=5; t++) {
     var v = yMin + (yRng*t/5);
-    var lbl = isUtil ? v.toFixed(1)+'%' : '$'+Math.round(v);
+    var lbl = isUtil ? Math.round(v)+'%' : '$'+Math.round(v);
     tickLabels.push({ v:v, lbl:lbl });
   }
 
@@ -15004,7 +15183,7 @@ function capShowPriorsChart(metric) {
   // (above a peak, below a dip), then neighbours that would touch are split.
   var tags = points.map(function(p,i){
     var x = px(i), y = py(p.val);
-    var vl = isUtil ? p.val.toFixed(1)+'%' : '$'+Math.round(p.val);
+    var vl = isUtil ? Math.round(p.val)+'%' : '$'+Math.round(p.val);
     var prev = points[i-1], next = points[i+1];
     var nb = [prev, next].filter(Boolean).map(function(q){ return q.val; });
     var nbAvg = nb.length ? nb.reduce(function(a,b){ return a+b; },0)/nb.length : p.val;
@@ -15078,9 +15257,9 @@ function capShowPriorsChart(metric) {
   var latest  = points[points.length-1];
   var first   = points[0];
   var trend   = latest.val - first.val;
-  var trendStr = (trend>=0?'+':'') + (isUtil ? trend.toFixed(1)+'%' : '$'+Math.round(Math.abs(trend)));
+  var trendStr = (trend>=0?'+':'') + (isUtil ? Math.round(trend)+'%' : '$'+Math.round(Math.abs(trend)));
   var trendCol = trend>=0 ? '#4ade80' : '#f87171';
-  var curStr   = isUtil ? latest.val.toFixed(1)+'%' : '$'+Math.round(latest.val);
+  var curStr   = isUtil ? Math.round(latest.val)+'%' : '$'+Math.round(latest.val);
 
   var modal = document.createElement('div');
   modal.id = 'cap-priors-modal';
