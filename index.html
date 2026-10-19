@@ -3855,11 +3855,46 @@ var RPH_EXCLUDE = ['Quality Technology Services','Corgan','Highland','Suffolk','
 var RPH_DATA_AUGYTD = {"A/C Electric Service, Inc.":117.19,"Arnett Construction Company":189.5,"Arthur W. Landry":250.0,"Basic Systems, Inc.":187.17,"Blue Whale Development":142.36,"Build Commercial Construction":33.9,"CarMax":162.36,"Centerpoint Integrated Solutions":203.6,"City of Westlake":97.82,"Copeland and Johns":56.71,"Corgan":575.42,"Cycle Construction":126.85,"Diamond Z Engineering":107.06,"Digital Engineering":105.95,"Duplantis Design group":58.67,"Edged":363.66,"Enbridge":585.0,"Flavored Operations, LLC":19.67,"Floor & Decor":290.09,"Frischhertz":166.42,"Harbor Towing and Fleeting, LLC":21120.0,"Highland Associates":3292.39,"Hoist & Crane Service Group":277.87,"Hutton":1705.0,"J Caldarera Company":248.57,"JP Department of PW":243.24,"Jos. R. Labadot":750.0,"Laitram":50.13,"Layton - LF Driscoll":488.5,"Little":311.98,"Long Law Firm":263.12,"M.R. Pittman Group, LLC":67.24,"Madison Capital Group":146.56,"Meyer & Associates, Inc.":226.49,"Mile High Sliders, LLC":54.41,"NOLA Dentures and General Dentistry":51.9,"New Orleans Center for Aesthetics and Plastic Surgery":77.01,"O'Connor Capital Partners":448.78,"Outlyr":395.86,"POH+W Architects Ltd.":169.59,"Quality Infratech Intelligence, LLC (QII)":315.97,"Quality Technology Services, LLC":1273.05,"Rosehill Construction":75.17,"SCNZ Architects, LLC":126.13,"SeaLevel Inc.":121.14,"St. Tammany Parish Procurement":211.87,"Star Service, Inc. A Fidelity Company":338.91,"Studio Kiro":246.0,"Suffolk":13367.63,"The Kitchen Guys":2500.0,"Traffic Commander":248.96,"Venture Global Gator Express, LLC":796.25,"Waskey Bridges Inc.":505.4,"Watermark Design":242.88,"Woodward Design Group":166.88};
 var RPH_EFFECTIVE_FROM = '2026-09-06';
 
+// From the first week ending in October, Capacity Utilization values each
+// customer's hours at its Jan–Sep 2026 YTD RPH (Summary by Customer YTD,
+// Basin_Project_Data_Sep2026YTD.xlsx). Weeks ending in September or earlier
+// keep the tables above. Name variants of the same customer are combined
+// (Cycle Construction / Cycle Construction Company; M.R. Pittman Group, LLC /
+// M R Pittman Group). Customers with no YTD revenue or no YTD hours are left
+// out, so they fall back to the section's default rate.
+var RPH_DATA_SEPYTD = {"Quality Technology Services, LLC": 1242.64, "Corgan": 804.26, "Waskey Bridges Inc.": 510.2, "Meyer & Associates, Inc.": 234.24, "JP Department of PW": 218.03, "Digital Engineering": 108.75, "Floor & Decor": 283.02, "Edged": 342.41, "CarMax": 159.34, "Suffolk": 13367.63, "Basic Systems, Inc.": 178.44, "Highland Associates": 3207.97, "Venture Global Gator Express, LLC": 796.25, "Rosehill Construction": 72.9, "Quality Infratech Intelligence, LLC (QII)": 335.66, "J Caldarera Company": 240.06, "St. Tammany Parish Procurement": 341.12, "Blue Whale Development": 144.7, "Long Law Firm": 263.12, "Duplantis Design group": 54.52, "SCNZ Architects, LLC": 128.17, "City of Westlake": 97.82, "POH+W Architects Ltd.": 146.02, "Layton - LF Driscoll": 488.5, "Watermark Design": 285.56, "Hoist & Crane Service Group": 293.0, "Diamond Z Engineering, Inc.": 192.76, "Outlyr": 395.86, "Copeland and Johns": 57.61, "Woodward Design Group": 158.9, "Frischhertz": 303.63, "Enbridge": 585.0, "Little": 311.98, "Star Service, Inc. A Fidelity Company": 307.56, "Harbor Towing and Fleeting, LLC": 21120.0, "Flavored Operations, LLC": 23.46, "Traffic Commander": 248.96, "O'Connor Capital Partners": 448.78, "SeaLevel Inc.": 121.14, "Cycle Construction": 126.85, "A/C Electric Service, Inc.": 117.19, "Hutton": 1705.0, "The Kitchen Guys": 2500.0, "NOLA Dentures and General Dentistry": 53.73, "Neo Infrastructure": 140.75, "Frischhertz Barnes JV": 130.0, "M.R. Pittman Group, LLC": 67.24, "New Orleans Center for Aesthetics and Plastic Surgery": 75.28, "Madison Capital Group": 146.56, "Kohl's Department Stores, Inc.": 180.0, "Laitram": 43.39, "Arnett Construction Company": 114.85, "Centerpoint Integrated Solutions": 203.6, "Build Commercial Construction": 33.9, "Mile High Sliders, LLC": 52.52, "Jos. R. Labadot": 750.0, "Arthur W. Landry": 250.0, "Studio Kiro": 246.0};
+var RPH_EFFECTIVE_SEPYTD = '2026-10-01';
+
+function rphNorm(n){
+  var stop = {inc:1,llc:1,ltd:1,company:1,co:1,the:1,corp:1,corporation:1,lp:1,pllc:1};
+  return String(n||'').toLowerCase().replace(/\./g,'').replace(/[^a-z0-9 ]/g,' ')
+    .split(/\s+/).filter(function(w){ return w && !stop[w]; }).join('');
+}
+// Exact name, then the same name ignoring punctuation and Inc/LLC/Company,
+// then one name containing the other. No first-word guessing, so a customer
+// with no YTD rate is never handed a different customer's rate.
+function rphSepLookup(cust){
+  if (!cust) return null;
+  if (RPH_DATA_SEPYTD[cust] !== undefined) return RPH_DATA_SEPYTD[cust];
+  var c = rphNorm(cust); if (!c) return null;
+  var best = null, bestLen = 0;
+  for (var k in RPH_DATA_SEPYTD) {
+    var kn = rphNorm(k);
+    if (kn === c) return RPH_DATA_SEPYTD[k];
+    if (kn.length >= 5 && c.length >= 5 && (c.indexOf(kn) >= 0 || kn.indexOf(c) >= 0) && kn.length > bestLen) {
+      best = RPH_DATA_SEPYTD[k]; bestLen = kn.length;
+    }
+  }
+  return best;
+}
+
 // Set by the capacity render to the week being drawn; blank means "today".
 var RPH_AS_OF = '';
 
 function rphTableFor(dateStr){
-  var d = dateStr || RPH_AS_OF || new Date().toISOString().slice(0,10);
+  var explicit = dateStr || RPH_AS_OF;
+  if (explicit && explicit >= RPH_EFFECTIVE_SEPYTD) return RPH_DATA_SEPYTD;
+  var d = explicit || new Date().toISOString().slice(0,10);
   return d >= RPH_EFFECTIVE_FROM ? RPH_DATA_AUGYTD : RPH_DATA;
 }
 
@@ -3867,6 +3902,13 @@ function getRPH(customer, asOf){
 
   var TBL = rphTableFor(asOf);
   if(!customer) return TBL['_nonQTS']||RPH_DATA['_nonQTS']||null;
+  if(TBL===RPH_DATA_SEPYTD){
+    var sr=rphSepLookup(customer);
+    if(sr!==null) return sr;
+    var sl=customer.toLowerCase();
+    for(var si=0;si<RPH_EXCLUDE.length;si++){ if(sl.indexOf(RPH_EXCLUDE[si].toLowerCase())>=0) return null; }
+    return RPH_DATA['_nonQTS']||null;
+  }
   // Exact match first
   if(TBL[customer]!==undefined) return TBL[customer];
   // Partial match: customer contains key or key contains customer
@@ -15291,6 +15333,7 @@ function capShowPriorsChart(metric) {
 function renderCapDashboard(wk) {
   var el = document.getElementById('cap-dashboard');
   if (!el) return;
+  RPH_AS_OF = wk.weekDate || '';   // value this week with the rates in force then
   var t = wk.totals;
   var util = t.utilization||0;
   var uColor = util>=80?'#4ade80':util>=65?'var(--amber)':'#f87171';
@@ -15804,6 +15847,7 @@ function buildCustBars(top5Cust, restCustHrs, totalCustHrs) {
   // only, so an unlisted customer clearly falls to the $176 default instead.
   function rphNamed(cust) {
     if (!cust) return null;
+    if (RPH_AS_OF && RPH_AS_OF >= RPH_EFFECTIVE_SEPYTD) return rphSepLookup(cust);
     if (RPH_DATA[cust] !== undefined) return RPH_DATA[cust];
     var cLow = String(cust).toLowerCase();
     for (var k in RPH_DATA) {
