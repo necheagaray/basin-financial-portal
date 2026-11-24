@@ -1,927 +1,1716 @@
 {
-  "generated": "2026-11-24T18:46:32.348Z",
+  "generated": "2026-11-24T18:52:41.053Z",
   "laborWeeks": [
     {
-      "weekKey": "11-14",
-      "weekDate": "2026-11-14",
-      "week": "Week Ending 11-14",
+      "weekKey": "11-21",
+      "weekDate": "2026-11-21",
+      "week": "Week Ending 11-21",
       "totals": {
-        "dlCustomer": 0,
-        "dlInternal": 0,
-        "dlSick": 0,
-        "dlVacation": 0,
-        "dlTotal": 0,
-        "adminTotal": 0,
-        "total": 0,
-        "utilization": 0
+        "dlCustomer": 1207.5,
+        "dlInternal": 157,
+        "dlSick": 20.5,
+        "dlVacation": 31.5,
+        "dlTotal": 1416.5,
+        "adminTotal": 160,
+        "total": 1576.5,
+        "utilization": 85.2
       },
       "employees": {
         "Kennedy, Aleph": {
-          "customer": 0,
+          "customer": 40,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-002 Brookwood Jefferson Highway": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-060 Brookwood - Highway 44, Gonzales, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-137 Brookwood As-Built Surveys - Read Blvd": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-138 Brookwood As-Built Surveys - 32nd Street": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.138 Floor & Decor - North Austin, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.175 Site Plan Alpharetta, GA.": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.53 Pleasanton (Kohl's), CA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Heaton, Alex": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 33,
+          "internal": 7,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "183 Edged : 25-085 Monroe Data Center Campus": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "183 Edged : 25-096 Mobile, AL Data Center (Prichard) : 25-096.5 Development Plans": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-085 Hockley Business Park, Harris County, TX : 26-085.7 ATS3 Declaration Exhibits": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-086 QTS - Turkey, TX : 25-086.3 QTS - Turkey, TX - Phase 2 - Civil Site Plans": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-111 DFW2-Jones, Wilmer, TX : 25-111.5 DFW2 Jones Lot Trailer City Wilmer, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "86 J Caldarera Company : 22006 LA Trace Subdivision Lot Study": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "96 (Internal) Basin Engineering & Surveying : 1004 General Office": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "96 (Internal) Basin Engineering & Surveying : 1008 Personal/Vacation": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Martinez, Alicia": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 36.5,
+          "internal": 3.5,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 26-069 QTS - DFW3 - Lancaster, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 26-048 7 Brew Pineville, LA : 26-048.1 Preliminary Site Plan": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "142 St. Tammany Parish Procurement : 24-042 Tammany Trace Bridge #7": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "181 Copeland and Johns : 25-040 UPS New Orleans Expansion : 25-040.6 Construction Administration": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-078 CarMax-Riverdale-UT : 25-078.8 Permitting": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "204 Blue Whale Development : 26-038 7 Brew - 3209 Johnson Street - Subwork : 26-038.2 Civil Design": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "250 Kohl's Department Stores, Inc. : 26-116 Land Surveying services for the Seven Brew in Lafayette, LA.": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-033 QTS - Specifications Standards Maintenance": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-034 Brookwood – Highway 59 – St. Tammany : 26-034.1 Boundary & Resubdivision Survey": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "96 (Internal) Basin Engineering & Surveying : 1007 Sick Leave": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "99 Floor & Decor : 24-002 Floor & Decor Site Planning & Lease Exhibits : 24-002.174 Floor & Decor - Tomball, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Longo, Audrey": {
-          "customer": 0,
+          "customer": 40.5,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 26-142 CarMax -Louisville, - Preliminary Feasibility": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40.5
         },
         "De Monsalbert, Barbara": {
-          "customer": 0,
+          "customer": 36,
           "internal": 0,
-          "sick": 0,
+          "sick": 4,
           "vacation": 0,
-          "total": 0
-        },
-        "84 Digital Engineering : 6012-40 JP Sewer Bond Program": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "97 (Internal) Perrin & Carter Inc. : 1005 Holiday": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "97 (Internal) Perrin & Carter Inc. : 1008 Personal/Vacation": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Wolf, Ben": {
-          "customer": 0,
+          "customer": 34,
           "internal": 0,
           "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-105 DAS114 (DC-5, DC-6, DC-7, and DC-8) : 25-105.1.1 DC-6 Construction Administration": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-105 DAS114 (DC-5, DC-6, DC-7, and DC-8) : 25-105.2 DC-7 Civil Drawings": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 26-069 QTS - DFW3 - Lancaster, TX : 26-069.2 Campus Construction Drawings": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 23-044 QTS - SLC1 : 23-044.4 DC1 Civil Construction Admin": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-135 QTS-City of Turkey Roadway Assessment Turkey, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "vacation": 6,
+          "total": 40
         },
         "Knepper, Brennan": {
-          "customer": 0,
+          "customer": 40,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "254 JJR Construction : 26-126 Calcasieu River - Survey": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Harris, Brooke": {
           "customer": 0,
-          "internal": 0,
-          "sick": 0,
+          "internal": 32,
+          "sick": 8,
           "vacation": 0,
-          "total": 0
-        },
-        "- No Customer/Project -": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Glennon, Connor": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 35.5,
+          "internal": 13.5,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "112 Flavored Operations, LLC : 26-052 7 Brew - Siegen, Baton Rouge, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "241 Arnett Construction Company, Inc. : 26-086 7 Brew - 4308 Ambassador Caffery Pkwy": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 25-002 Brookwood Jefferson Highway : 25-002.1 As-Built Surveys": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "68 Rosehill Construction : 26-034 Brookwood – Highway 59 – St. Tammany : 26-034.3 Permitting - Mandeville - Highway 59": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "82 Woodward Design Group : 26-129 Professional Civil Engineering Services Jefferson Highway and Maine Street": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "87 JP Department of PW : 20001 JP Stumpf Blvd. Lighting": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "96 (Internal) Basin Engineering & Surveying : 1002 Marketing": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 49
         },
         "Martinez, Cory": {
-          "customer": 0,
+          "customer": 38,
           "internal": 0,
-          "sick": 0,
+          "sick": 2,
           "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Cuccia, Craig": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 21,
+          "internal": 11,
           "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 26-093 SLC2 Campus Plan - DC1-DC2 Civil Construction Drawings": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-086 QTS - Turkey, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "vacation": 8,
+          "total": 40
         },
         "Jurczak, Edward": {
-          "customer": 0,
+          "customer": 39.5,
           "internal": 0,
-          "sick": 0,
+          "sick": 0.5,
           "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-086.1 QTS-WTX1-CAMPUS, Hall County, TX - Turkey, TX Civil Design": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "McDonald, Enrique": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 39,
+          "internal": 1,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "81 Waskey Bridges Inc. : 26-015 ARM Mustang Meter Station Platform": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "81 Waskey Bridges Inc. : 26-030 Kinder Morgan TGP Compressor Station 530 Rev.1, MS": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Alvero, Garrett": {
-          "customer": 0,
+          "customer": 38,
           "internal": 0,
           "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 24-023 QTS Cedar Rapids, IA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-093.1 SLC1 Expansion, SLC2 Phase 1, and SLC Phase 2 Offsite Infrastructure Improvements V": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "vacation": 2,
+          "total": 40
         },
         "Rendano, Gary": {
-          "customer": 0,
+          "customer": 32,
           "internal": 0,
-          "sick": 0,
+          "sick": 8,
           "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-141 WTX1 Offsite Road Improvements County Road BB": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Cina, Heather": {
           "customer": 0,
-          "internal": 0,
-          "sick": 0,
+          "internal": 35,
+          "sick": 5,
           "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Bosworth Jr., HJ": {
-          "customer": 0,
+          "customer": 47,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "103 Digital Engineering : 26-009 Parish Line Pump Station Improvements Phase 2": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 47
         },
         "Heyl, Jack": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 36,
+          "internal": 4,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "134 SCNZ Architects, LLC : 26-047 Renovation of 5307 Toler - Laitram Harahan Campus": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Hellmich, Jed": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 40.5,
+          "internal": 7.5,
           "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-093 CarMax-Riverview,FL": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 24-023 QTS Cedar Rapids, IA : 24-023.23 CDR1 Site Infrastructure – 76th Ave. Water Main Extension Cedar Rapids, IA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-093.2 SLC1 Expansion Phase 1 scope": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "96 (Internal) Basin Engineering & Surveying : 1010 Bereavement": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "vacation": 4.5,
+          "total": 52.5
         },
         "Meariman, Joel": {
           "customer": 0,
-          "internal": 0,
+          "internal": 40,
           "sick": 0,
           "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Richards, Jon": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 6,
+          "internal": 34,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "96 (Internal) Basin Engineering & Surveying": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Catanzano, Jonathan": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 36,
+          "internal": 4,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "183 Edged : 25-085 Monroe Data Center Campus : 25-085.5 Development Plans": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "199 Oracle : 26-095 ABI01 – Entry Enhancement Civil Design - Hrly up to $95K": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-075 QII Bridgeport, Moreland, GA : 26-075.2 Test Fit Analysis": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-085 Hockley Business Park, Harris County, TX : 26-085.5 ATS1 Declaration Exhibits": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-085 Hockley Business Park, Harris County, TX : 26-085.6 ATS2 Declaration Exhibits": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 24-023 QTS Cedar Rapids, IA : 24-023.22 Construction Administration": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 26-091 US Hwy 67, Johnson County, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Henry, Kirk": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 64.5,
+          "internal": 0.5,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "124 Frischhertz : 26-130 CPG Data Center Alexandria, LA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "181 Copeland and Johns : 25-040 UPS New Orleans Expansion : 25-040.2 Structural Engineering Services": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "23 Duplantis Design group : 24-078 John H. Carter, Inc. - Manufacturing & Repair Facility": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "23 Duplantis Design group : 26-003 BESS Building, Wadley, GA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "48 Meyer & Associates, Inc. : 25-054 POLC New Grain Terminal at Industrial Canal": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "48 Meyer & Associates, Inc. : 25-080 Jeff Davis Water & Sewer #1 Lacassine booster station": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 65
         },
         "Breaux, Kyle": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 23.5,
+          "internal": 7.5,
           "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "183 Edged : 25-096 Mobile, AL Data Center (Prichard) : 25-096.3 Conceptual Civil Plans": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "vacation": 9,
+          "total": 40
         },
         "Carter, Michael": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 23,
+          "internal": 9,
           "sick": 0,
           "vacation": 0,
-          "total": 0
+          "total": 32
         },
-        "87 JP Department of PW : 24003 Seven Oaks - US 90 Street Lighting": {
-          "customer": 0,
-          "internal": 0,
+        "Rongay, Morgan": {
+          "customer": 13,
+          "internal": 25,
           "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "87 JP Department of PW : 3011-01 JP Harvey Blvd. Extension": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "87 JP Department of PW : 5008 JP East Ames Blvd. Roadway": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "97 (Internal) Perrin & Carter Inc. : 1004 General Office": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "vacation": 2,
+          "total": 40
         },
         "Echeagaray, Nick": {
           "customer": 0,
           "internal": 0,
           "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "vacation": 40,
+          "total": 40
         },
         "Poche, Parker": {
-          "customer": 0,
+          "customer": 40,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-021 QTS-DFW2-DC4 Wilmer, TX (DC-4) : 25-021.3 DC4 Construction Administration": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-105 DAS114 (DC-5, DC-6, DC-7, and DC-8) : 25-105.2.1 DC-7 Construction Administration": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 26-069 QTS - DFW3 - Lancaster, TX : 26-069.1 Campus Master Planning": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 26-098 Professional Civil Engineering Services QTS Prototype Standards Maintenance": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 26-125 MV UPS BESS Standard V1.0": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "McNeil, Payton": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
+          "customer": 31.5,
+          "internal": 13,
+          "sick": 2,
           "vacation": 0,
-          "total": 0
-        },
-        "109 Corgan : 25-105 DAS114 (DC-5, DC-6, DC-7, and DC-8) : 25-105.0.1 DC-5 Construction Administration": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-075 CarMax-Uxbridge, MA : 25-075.4 Site Entitlements - CarMax-Uxbridge, MA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-078 CarMax-Riverdale-UT : 25-078.7 Construction Documents": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-111 DFW2-Jones, Wilmer, TX : 25-111.6 Master Planning - DFW2 Jones Lot Trailer City Wilmer, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "65 Quality Technology Services, LLC : 25-111 DFW2-Jones, Wilmer, TX : 25-111.7 Permitting - DFW2 Jones Lot Trailer City Wilmer, TX": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 46.5
         },
         "Yemula, Rahul": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 34,
+          "internal": 6,
           "sick": 0,
           "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Knepper, Riley": {
-          "customer": 0,
+          "customer": 40,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Jourdan, Ross": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 37.5,
+          "internal": 2.5,
           "sick": 0,
           "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Mobley, Tatiana": {
-          "customer": 0,
+          "customer": 36,
           "internal": 0,
-          "sick": 0,
+          "sick": 4,
           "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Lee, Tom": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 38,
+          "internal": 6,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "96 (Internal) Basin Engineering & Surveying : 1003 Professional Activities": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 44
         },
         "Dumas, Toni": {
-          "customer": 0,
+          "customer": 40,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-078 CarMax-Riverdale-UT : 25-078.6 Construction Administration": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
-        },
-        "192 CarMax : 25-093 CarMax-Riverview,FL : 25-093.4 Site Entitlements": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Le, Tuan": {
-          "customer": 0,
+          "customer": 40,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Tiyapattanaputi, Warakorn": {
-          "customer": 0,
-          "internal": 0,
+          "customer": 38,
+          "internal": 2,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "234 Quality Infratech Intelligence, LLC (QII) : 26-075 QII Bridgeport, Moreland, GA": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         },
         "Ryland, Reese": {
-          "customer": 0,
+          "customer": 40,
           "internal": 0,
           "sick": 0,
           "vacation": 0,
-          "total": 0
-        },
-        "246 Laitram, LLC : 26-103 Professional Civil Engineering and Land Surveying Services 5400 Jefferson Highway": {
-          "customer": 0,
-          "internal": 0,
-          "sick": 0,
-          "vacation": 0,
-          "total": 0
+          "total": 40
         }
       },
-      "customers": {},
-      "projects": {}
+      "customers": {
+        "Flavored Operations, LLC": 21.5,
+        "Rosehill Construction": 78.5,
+        "Edged": 44.5,
+        "Oracle": 28.5,
+        "Quality Technology Services, LLC": 301.25,
+        "J Caldarera Company": 27,
+        "St. Tammany Parish Procurement": 85.25,
+        "Copeland and Johns": 22.25,
+        "CarMax": 107.5,
+        "Kohl's Department Stores, Inc.": 12,
+        "Corgan": 88.25,
+        "Thoth Construction, LLC": 24,
+        "Digital Engineering": 74,
+        "JJR Construction": 38.5,
+        "Hoist & Crane Service Group": 2,
+        "Woodward Design Group": 13.5,
+        "A/C Electric Service, Inc.": 13.5,
+        "Meyer & Associates, Inc.": 29.5,
+        "Waskey Bridges Inc.": 17,
+        "Enginuity Global": 1,
+        "SCNZ Architects, LLC": 92.5,
+        "JP Department of PW": 21,
+        "Quality Infratech Intelligence, LLC (QII)": 23,
+        "Frischhertz": 15,
+        "Duplantis Design group": 0.5,
+        "Watermark Design": 10.5,
+        "Highland Associates": 0.5,
+        "POH+W Architects Ltd.": 14,
+        "Laitram, LLC": 1
+      },
+      "projects": {
+        "3011": {
+          "hours": 7.5,
+          "customer": "JP Department of PW",
+          "name": "3011",
+          "employees": {
+            "Carter, Michael": 7.5
+          }
+        },
+        "6012": {
+          "hours": 74,
+          "customer": "Digital Engineering",
+          "name": "6012",
+          "employees": {
+            "De Monsalbert, Barbara": 36,
+            "Martinez, Cory": 38
+          }
+        },
+        "20001": {
+          "hours": 4.5,
+          "customer": "JP Department of PW",
+          "name": "20001",
+          "employees": {
+            "Richards, Jon": 1,
+            "Carter, Michael": 3.5
+          }
+        },
+        "22006": {
+          "hours": 27,
+          "customer": "J Caldarera Company",
+          "name": "22006",
+          "employees": {
+            "Heaton, Alex": 24.5,
+            "Carter, Michael": 2.5
+          }
+        },
+        "24002": {
+          "hours": 0.5,
+          "customer": "Watermark Design",
+          "name": "24002",
+          "employees": {
+            "Carter, Michael": 0.5
+          }
+        },
+        "24003": {
+          "hours": 9,
+          "customer": "JP Department of PW",
+          "name": "24003",
+          "employees": {
+            "Carter, Michael": 9
+          }
+        },
+        "26-052": {
+          "hours": 21.5,
+          "customer": "Flavored Operations, LLC",
+          "name": "26-052",
+          "employees": {
+            "Kennedy, Aleph": 6,
+            "Knepper, Brennan": 6,
+            "Glennon, Connor": 3.5,
+            "Knepper, Riley": 6
+          }
+        },
+        "26-060": {
+          "hours": 3,
+          "customer": "Rosehill Construction",
+          "name": "26-060",
+          "employees": {
+            "Kennedy, Aleph": 1,
+            "Glennon, Connor": 1,
+            "Ryland, Reese": 1
+          }
+        },
+        "26-137": {
+          "hours": 32,
+          "customer": "Rosehill Construction",
+          "name": "26-137",
+          "employees": {
+            "Kennedy, Aleph": 19,
+            "Knepper, Brennan": 6,
+            "Glennon, Connor": 1,
+            "Knepper, Riley": 6
+          }
+        },
+        "26-138": {
+          "hours": 27,
+          "customer": "Rosehill Construction",
+          "name": "26-138",
+          "employees": {
+            "Kennedy, Aleph": 14,
+            "Knepper, Brennan": 4,
+            "Glennon, Connor": 3,
+            "Poche, Parker": 2,
+            "Knepper, Riley": 4
+          }
+        },
+        "25-085": {
+          "hours": 7.5,
+          "customer": "Edged",
+          "name": "25-085",
+          "employees": {
+            "Heaton, Alex": 2.5,
+            "Catanzano, Jonathan": 5
+          }
+        },
+        "25-096": {
+          "hours": 37,
+          "customer": "Edged",
+          "name": "25-096",
+          "employees": {
+            "Heaton, Alex": 1,
+            "Catanzano, Jonathan": 14,
+            "Breaux, Kyle": 22
+          }
+        },
+        "26-095": {
+          "hours": 28.5,
+          "customer": "Oracle",
+          "name": "26-095",
+          "employees": {
+            "Heaton, Alex": 1.5,
+            "Catanzano, Jonathan": 2,
+            "Henry, Kirk": 1,
+            "Yemula, Rahul": 18,
+            "Lee, Tom": 6
+          }
+        },
+        "25-086": {
+          "hours": 122,
+          "customer": "Quality Technology Services, LLC",
+          "name": "25-086",
+          "employees": {
+            "Heaton, Alex": 3.5,
+            "Cuccia, Craig": 1,
+            "Jurczak, Edward": 38,
+            "Rendano, Gary": 24,
+            "Hellmich, Jed": 13.5,
+            "Yemula, Rahul": 6,
+            "Mobley, Tatiana": 36
+          }
+        },
+        "24-042": {
+          "hours": 85.25,
+          "customer": "St. Tammany Parish Procurement",
+          "name": "24-042",
+          "employees": {
+            "Martinez, Alicia": 17.75,
+            "Knepper, Brennan": 4,
+            "Glennon, Connor": 3.5,
+            "McDonald, Enrique": 3,
+            "Bosworth Jr., HJ": 46,
+            "Knepper, Riley": 4,
+            "Lee, Tom": 7
+          }
+        },
+        "25-040": {
+          "hours": 22.25,
+          "customer": "Copeland and Johns",
+          "name": "25-040",
+          "employees": {
+            "Martinez, Alicia": 2.25,
+            "Knepper, Brennan": 4,
+            "Glennon, Connor": 2,
+            "Richards, Jon": 2,
+            "Henry, Kirk": 5,
+            "Knepper, Riley": 4,
+            "Ryland, Reese": 3
+          }
+        },
+        "25-078": {
+          "hours": 36,
+          "customer": "CarMax",
+          "name": "25-078",
+          "employees": {
+            "Martinez, Alicia": 12,
+            "McNeil, Payton": 8,
+            "Dumas, Toni": 16
+          }
+        },
+        "26-116": {
+          "hours": 12,
+          "customer": "Kohl's Department Stores, Inc.",
+          "name": "26-116",
+          "employees": {
+            "Martinez, Alicia": 2,
+            "Glennon, Connor": 10
+          }
+        },
+        "26-033": {
+          "hours": 1,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-033",
+          "employees": {
+            "Martinez, Alicia": 1
+          }
+        },
+        "26-024": {
+          "hours": 1.5,
+          "customer": "Rosehill Construction",
+          "name": "26-024",
+          "employees": {
+            "Martinez, Alicia": 1.5
+          }
+        },
+        "26-125": {
+          "hours": 24.5,
+          "customer": "Corgan",
+          "name": "26-125",
+          "employees": {
+            "Longo, Audrey": 8.5,
+            "Poche, Parker": 16
+          }
+        },
+        "26-142": {
+          "hours": 8,
+          "customer": "CarMax",
+          "name": "26-142",
+          "employees": {
+            "Longo, Audrey": 8
+          }
+        },
+        "26-133": {
+          "hours": 24,
+          "customer": "Thoth Construction, LLC",
+          "name": "26-133",
+          "employees": {
+            "Longo, Audrey": 24
+          }
+        },
+        "25-105": {
+          "hours": 25,
+          "customer": "Corgan",
+          "name": "25-105",
+          "employees": {
+            "Wolf, Ben": 6.5,
+            "Poche, Parker": 7.5,
+            "McNeil, Payton": 11
+          }
+        },
+        "23-044": {
+          "hours": 27.5,
+          "customer": "Quality Technology Services, LLC",
+          "name": "23-044",
+          "employees": {
+            "Wolf, Ben": 1.5,
+            "Jurczak, Edward": 1.5,
+            "Alvero, Garrett": 22,
+            "Hellmich, Jed": 1,
+            "Jourdan, Ross": 1.5
+          }
+        },
+        "26-135": {
+          "hours": 39.5,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-135",
+          "employees": {
+            "Wolf, Ben": 26,
+            "Hellmich, Jed": 13.5
+          }
+        },
+        "26-126": {
+          "hours": 38.5,
+          "customer": "JJR Construction",
+          "name": "26-126",
+          "employees": {
+            "Knepper, Brennan": 16,
+            "Glennon, Connor": 1.5,
+            "Knepper, Riley": 16,
+            "Ryland, Reese": 5
+          }
+        },
+        "25-097": {
+          "hours": 2,
+          "customer": "Hoist & Crane Service Group",
+          "name": "25-097",
+          "employees": {
+            "Glennon, Connor": 1.5,
+            "Henry, Kirk": 0.5
+          }
+        },
+        "26-034": {
+          "hours": 5.5,
+          "customer": "Rosehill Construction",
+          "name": "26-034",
+          "employees": {
+            "Glennon, Connor": 5.5
+          }
+        },
+        "26-146": {
+          "hours": 6,
+          "customer": "Rosehill Construction",
+          "name": "26-146",
+          "employees": {
+            "Glennon, Connor": 1.5,
+            "Ryland, Reese": 4.5
+          }
+        },
+        "26-129": {
+          "hours": 13.5,
+          "customer": "Woodward Design Group",
+          "name": "26-129",
+          "employees": {
+            "Glennon, Connor": 1.5,
+            "Ryland, Reese": 12
+          }
+        },
+        "26-093": {
+          "hours": 23.75,
+          "customer": "Corgan",
+          "name": "26-093",
+          "employees": {
+            "Cuccia, Craig": 16,
+            "Hellmich, Jed": 3.5,
+            "Richards, Jon": 3,
+            "Jourdan, Ross": 1.25
+          }
+        },
+        "24-023": {
+          "hours": 49.5,
+          "customer": "Quality Technology Services, LLC",
+          "name": "24-023",
+          "employees": {
+            "Cuccia, Craig": 4,
+            "Hellmich, Jed": 4,
+            "Catanzano, Jonathan": 11,
+            "Breaux, Kyle": 1.5,
+            "Yemula, Rahul": 10,
+            "Tiyapattanaputi, Warakorn": 19
+          }
+        },
+        "26-065": {
+          "hours": 13.5,
+          "customer": "A/C Electric Service, Inc.",
+          "name": "26-065",
+          "employees": {
+            "McDonald, Enrique": 6,
+            "Henry, Kirk": 0.5,
+            "Lee, Tom": 7
+          }
+        },
+        "25-115": {
+          "hours": 20.5,
+          "customer": "Meyer & Associates, Inc.",
+          "name": "25-115",
+          "employees": {
+            "McDonald, Enrique": 15,
+            "Henry, Kirk": 1.5,
+            "Lee, Tom": 4
+          }
+        },
+        "26-015": {
+          "hours": 15,
+          "customer": "Waskey Bridges Inc.",
+          "name": "26-015",
+          "employees": {
+            "McDonald, Enrique": 15
+          }
+        },
+        "26-093.1": {
+          "hours": 52.75,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-093.1",
+          "employees": {
+            "Alvero, Garrett": 16,
+            "Hellmich, Jed": 2,
+            "Jourdan, Ross": 34.75
+          }
+        },
+        "26-141": {
+          "hours": 8,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-141",
+          "employees": {
+            "Rendano, Gary": 8
+          }
+        },
+        "26-115": {
+          "hours": 1,
+          "customer": "Enginuity Global",
+          "name": "26-115",
+          "employees": {
+            "Bosworth Jr., HJ": 1
+          }
+        },
+        "26-047": {
+          "hours": 92.5,
+          "customer": "SCNZ Architects, LLC",
+          "name": "26-047",
+          "employees": {
+            "Heyl, Jack": 36,
+            "Henry, Kirk": 46.5,
+            "Ryland, Reese": 10
+          }
+        },
+        "25-093": {
+          "hours": 24,
+          "customer": "CarMax",
+          "name": "25-093",
+          "employees": {
+            "Hellmich, Jed": 3,
+            "McNeil, Payton": 1,
+            "Dumas, Toni": 20
+          }
+        },
+        "26-075": {
+          "hours": 3,
+          "customer": "Quality Infratech Intelligence, LLC (QII)",
+          "name": "26-075",
+          "employees": {
+            "Catanzano, Jonathan": 3
+          }
+        },
+        "26-143": {
+          "hours": 20,
+          "customer": "Quality Infratech Intelligence, LLC (QII)",
+          "name": "26-143",
+          "employees": {
+            "Catanzano, Jonathan": 1,
+            "Tiyapattanaputi, Warakorn": 19
+          }
+        },
+        "26-130": {
+          "hours": 15,
+          "customer": "Frischhertz",
+          "name": "26-130",
+          "employees": {
+            "Henry, Kirk": 1,
+            "Lee, Tom": 14
+          }
+        },
+        "24-078": {
+          "hours": 0.5,
+          "customer": "Duplantis Design group",
+          "name": "24-078",
+          "employees": {
+            "Henry, Kirk": 0.5
+          }
+        },
+        "25-054": {
+          "hours": 9,
+          "customer": "Meyer & Associates, Inc.",
+          "name": "25-054",
+          "employees": {
+            "Henry, Kirk": 8,
+            "Rongay, Morgan": 1
+          }
+        },
+        "26-030": {
+          "hours": 1,
+          "customer": "Waskey Bridges Inc.",
+          "name": "26-030",
+          "employees": {
+            "Rongay, Morgan": 1
+          }
+        },
+        "26-144": {
+          "hours": 1,
+          "customer": "Waskey Bridges Inc.",
+          "name": "26-144",
+          "employees": {
+            "Rongay, Morgan": 1
+          }
+        },
+        "26-136": {
+          "hours": 10,
+          "customer": "Watermark Design",
+          "name": "26-136",
+          "employees": {
+            "Rongay, Morgan": 10
+          }
+        },
+        "25-021": {
+          "hours": 0.5,
+          "customer": "Corgan",
+          "name": "25-021",
+          "employees": {
+            "Poche, Parker": 0.5
+          }
+        },
+        "26-069": {
+          "hours": 4.5,
+          "customer": "Corgan",
+          "name": "26-069",
+          "employees": {
+            "Poche, Parker": 4.5
+          }
+        },
+        "26-098": {
+          "hours": 9,
+          "customer": "Corgan",
+          "name": "26-098",
+          "employees": {
+            "Poche, Parker": 9
+          }
+        },
+        "24-068": {
+          "hours": 0.5,
+          "customer": "Highland Associates",
+          "name": "24-068",
+          "employees": {
+            "Poche, Parker": 0.5
+          }
+        },
+        "24-009": {
+          "hours": 1,
+          "customer": "Corgan",
+          "name": "24-009",
+          "employees": {
+            "McNeil, Payton": 1
+          }
+        },
+        "25-075": {
+          "hours": 36,
+          "customer": "CarMax",
+          "name": "25-075",
+          "employees": {
+            "McNeil, Payton": 3,
+            "Dumas, Toni": 4,
+            "Le, Tuan": 29
+          }
+        },
+        "25-100": {
+          "hours": 0.5,
+          "customer": "CarMax",
+          "name": "25-100",
+          "employees": {
+            "McNeil, Payton": 0.5
+          }
+        },
+        "26-031": {
+          "hours": 3,
+          "customer": "CarMax",
+          "name": "26-031",
+          "employees": {
+            "McNeil, Payton": 3
+          }
+        },
+        "24-098": {
+          "hours": 14,
+          "customer": "POH+W Architects Ltd.",
+          "name": "24-098",
+          "employees": {
+            "McNeil, Payton": 3,
+            "Le, Tuan": 11
+          }
+        },
+        "26-018.4": {
+          "hours": 1,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-018.4",
+          "employees": {
+            "McNeil, Payton": 1
+          }
+        },
+        "26-103": {
+          "hours": 1,
+          "customer": "Laitram, LLC",
+          "name": "26-103",
+          "employees": {
+            "Ryland, Reese": 1
+          }
+        },
+        "24-101": {
+          "hours": 3.5,
+          "customer": "Rosehill Construction",
+          "name": "24-101",
+          "employees": {
+            "Ryland, Reese": 3.5
+          }
+        }
+      }
+    },
+    {
+      "weekKey": "11-14",
+      "weekDate": "2026-11-14",
+      "week": "Week Ending 11-14",
+      "totals": {
+        "dlCustomer": 1157.5,
+        "dlInternal": 94.5,
+        "dlSick": 55.5,
+        "dlVacation": 51.5,
+        "dlTotal": 1359,
+        "adminTotal": 160,
+        "total": 1519,
+        "utilization": 85.2
+      },
+      "employees": {
+        "Kennedy, Aleph": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Heaton, Alex": {
+          "customer": 29,
+          "internal": 3,
+          "sick": 0,
+          "vacation": 8,
+          "total": 40
+        },
+        "Martinez, Alicia": {
+          "customer": 24,
+          "internal": 1,
+          "sick": 12.5,
+          "vacation": 2.5,
+          "total": 40
+        },
+        "Longo, Audrey": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "De Monsalbert, Barbara": {
+          "customer": 16,
+          "internal": 8,
+          "sick": 0,
+          "vacation": 16,
+          "total": 40
+        },
+        "Wolf, Ben": {
+          "customer": 36,
+          "internal": 4,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Knepper, Brennan": {
+          "customer": 25,
+          "internal": 0,
+          "sick": 16,
+          "vacation": 0,
+          "total": 41
+        },
+        "Harris, Brooke": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Glennon, Connor": {
+          "customer": 29.5,
+          "internal": 17,
+          "sick": 0,
+          "vacation": 0,
+          "total": 46.5
+        },
+        "Martinez, Cory": {
+          "customer": 30,
+          "internal": 8,
+          "sick": 0,
+          "vacation": 2,
+          "total": 40
+        },
+        "Cuccia, Craig": {
+          "customer": 32,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 8,
+          "total": 40
+        },
+        "Jurczak, Edward": {
+          "customer": 34,
+          "internal": 0,
+          "sick": 6,
+          "vacation": 0,
+          "total": 40
+        },
+        "McDonald, Enrique": {
+          "customer": 39,
+          "internal": 1,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Alvero, Garrett": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Rendano, Gary": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Cina, Heather": {
+          "customer": 0,
+          "internal": 40,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Bosworth Jr., HJ": {
+          "customer": 29,
+          "internal": 0,
+          "sick": 12,
+          "vacation": 0,
+          "total": 41
+        },
+        "Heyl, Jack": {
+          "customer": 32,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 8,
+          "total": 40
+        },
+        "Hellmich, Jed": {
+          "customer": 27,
+          "internal": 15,
+          "sick": 0,
+          "vacation": 3,
+          "total": 45
+        },
+        "Meariman, Joel": {
+          "customer": 0,
+          "internal": 27.5,
+          "sick": 12.5,
+          "vacation": 0,
+          "total": 40
+        },
+        "Richards, Jon": {
+          "customer": 40.5,
+          "internal": 4.5,
+          "sick": 0,
+          "vacation": 0,
+          "total": 45
+        },
+        "Catanzano, Jonathan": {
+          "customer": 35,
+          "internal": 5,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Henry, Kirk": {
+          "customer": 60,
+          "internal": 1,
+          "sick": 0,
+          "vacation": 0,
+          "total": 61
+        },
+        "Breaux, Kyle": {
+          "customer": 29,
+          "internal": 10,
+          "sick": 1,
+          "vacation": 0,
+          "total": 40
+        },
+        "Carter, Michael": {
+          "customer": 25,
+          "internal": 1.5,
+          "sick": 0,
+          "vacation": 0,
+          "total": 26.5
+        },
+        "Echeagaray, Nick": {
+          "customer": 0,
+          "internal": 40,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Poche, Parker": {
+          "customer": 46.5,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 46.5
+        },
+        "McNeil, Payton": {
+          "customer": 41,
+          "internal": 9,
+          "sick": 0,
+          "vacation": 0,
+          "total": 50
+        },
+        "Yemula, Rahul": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Knepper, Riley": {
+          "customer": 28,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 28
+        },
+        "Jourdan, Ross": {
+          "customer": 38.5,
+          "internal": 1.5,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Mobley, Tatiana": {
+          "customer": 40,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Lee, Tom": {
+          "customer": 47.5,
+          "internal": 1,
+          "sick": 0,
+          "vacation": 0,
+          "total": 48.5
+        },
+        "Dumas, Toni": {
+          "customer": 36,
+          "internal": 0,
+          "sick": 0,
+          "vacation": 4,
+          "total": 40
+        },
+        "Le, Tuan": {
+          "customer": 38,
+          "internal": 2,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Tiyapattanaputi, Warakorn": {
+          "customer": 38,
+          "internal": 2,
+          "sick": 0,
+          "vacation": 0,
+          "total": 40
+        },
+        "Ryland, Reese": {
+          "customer": 32,
+          "internal": 0,
+          "sick": 8,
+          "vacation": 0,
+          "total": 40
+        }
+      },
+      "customers": {
+        "Rosehill Construction": 63,
+        "Floor & Decor": 11,
+        "Edged": 15.5,
+        "Quality Infratech Intelligence, LLC (QII)": 73,
+        "Quality Technology Services, LLC": 280,
+        "J Caldarera Company": 22.5,
+        "Corgan": 130,
+        "Flavored Operations, LLC": 2.5,
+        "St. Tammany Parish Procurement": 30,
+        "Copeland and Johns": 2,
+        "CarMax": 122,
+        "Blue Whale Development": 1.5,
+        "Kohl's Department Stores, Inc.": 6.5,
+        "Digital Engineering": 49,
+        "JJR Construction": 54.5,
+        "- No Customer/Project -": 40,
+        "Arnett Construction Company, Inc.": 0.5,
+        "Woodward Design Group": 30,
+        "JP Department of PW": 62.5,
+        "Waskey Bridges Inc.": 39,
+        "SCNZ Architects, LLC": 82.5,
+        "Oracle": 58.5,
+        "Frischhertz": 14,
+        "Duplantis Design group": 2.5,
+        "Meyer & Associates, Inc.": 3.5,
+        "Laitram, LLC": 1.5
+      },
+      "projects": {
+        "3011": {
+          "hours": 3,
+          "customer": "JP Department of PW",
+          "name": "3011",
+          "employees": {
+            "Carter, Michael": 3
+          }
+        },
+        "5008": {
+          "hours": 3.5,
+          "customer": "JP Department of PW",
+          "name": "5008",
+          "employees": {
+            "Carter, Michael": 3.5
+          }
+        },
+        "6012": {
+          "hours": 46,
+          "customer": "Digital Engineering",
+          "name": "6012",
+          "employees": {
+            "De Monsalbert, Barbara": 16,
+            "Martinez, Cory": 30
+          }
+        },
+        "20001": {
+          "hours": 53.5,
+          "customer": "JP Department of PW",
+          "name": "20001",
+          "employees": {
+            "Glennon, Connor": 0.5,
+            "Richards, Jon": 38.5,
+            "Carter, Michael": 14.5
+          }
+        },
+        "22006": {
+          "hours": 22.5,
+          "customer": "J Caldarera Company",
+          "name": "22006",
+          "employees": {
+            "Heaton, Alex": 18,
+            "Glennon, Connor": 3,
+            "Carter, Michael": 1.5
+          }
+        },
+        "24003": {
+          "hours": 2.5,
+          "customer": "JP Department of PW",
+          "name": "24003",
+          "employees": {
+            "Carter, Michael": 2.5
+          }
+        },
+        "25-002": {
+          "hours": 15,
+          "customer": "Rosehill Construction",
+          "name": "25-002",
+          "employees": {
+            "Kennedy, Aleph": 12,
+            "Glennon, Connor": 3
+          }
+        },
+        "26-060": {
+          "hours": 26,
+          "customer": "Rosehill Construction",
+          "name": "26-060",
+          "employees": {
+            "Kennedy, Aleph": 2,
+            "Glennon, Connor": 7,
+            "Cuccia, Craig": 15,
+            "Ryland, Reese": 2
+          }
+        },
+        "26-137": {
+          "hours": 5.5,
+          "customer": "Rosehill Construction",
+          "name": "26-137",
+          "employees": {
+            "Kennedy, Aleph": 4.5,
+            "Glennon, Connor": 1
+          }
+        },
+        "26-138": {
+          "hours": 15,
+          "customer": "Rosehill Construction",
+          "name": "26-138",
+          "employees": {
+            "Kennedy, Aleph": 15
+          }
+        },
+        "24-002": {
+          "hours": 11,
+          "customer": "Floor & Decor",
+          "name": "24-002",
+          "employees": {
+            "Kennedy, Aleph": 6.5,
+            "Martinez, Alicia": 1.5,
+            "Glennon, Connor": 3
+          }
+        },
+        "25-085": {
+          "hours": 2.5,
+          "customer": "Edged",
+          "name": "25-085",
+          "employees": {
+            "Heaton, Alex": 1.5,
+            "Catanzano, Jonathan": 1
+          }
+        },
+        "25-096": {
+          "hours": 13,
+          "customer": "Edged",
+          "name": "25-096",
+          "employees": {
+            "Heaton, Alex": 1,
+            "Catanzano, Jonathan": 6,
+            "Breaux, Kyle": 6
+          }
+        },
+        "26-085": {
+          "hours": 65,
+          "customer": "Quality Infratech Intelligence, LLC (QII)",
+          "name": "26-085",
+          "employees": {
+            "Heaton, Alex": 5,
+            "Catanzano, Jonathan": 6,
+            "Yemula, Rahul": 32,
+            "Tiyapattanaputi, Warakorn": 22
+          }
+        },
+        "25-086": {
+          "hours": 75.5,
+          "customer": "Quality Technology Services, LLC",
+          "name": "25-086",
+          "employees": {
+            "Heaton, Alex": 1,
+            "Cuccia, Craig": 1,
+            "Jurczak, Edward": 29,
+            "Hellmich, Jed": 4.5,
+            "Mobley, Tatiana": 40
+          }
+        },
+        "25-111": {
+          "hours": 5.5,
+          "customer": "Quality Technology Services, LLC",
+          "name": "25-111",
+          "employees": {
+            "Heaton, Alex": 2.5,
+            "McNeil, Payton": 3
+          }
+        },
+        "26-069": {
+          "hours": 80,
+          "customer": "Corgan",
+          "name": "26-069",
+          "employees": {
+            "Martinez, Alicia": 13.5,
+            "Wolf, Ben": 6,
+            "Cuccia, Craig": 2,
+            "Poche, Parker": 35.5,
+            "McNeil, Payton": 23
+          }
+        },
+        "26-048": {
+          "hours": 1,
+          "customer": "Flavored Operations, LLC",
+          "name": "26-048",
+          "employees": {
+            "Martinez, Alicia": 0.5,
+            "Glennon, Connor": 0.5
+          }
+        },
+        "24-042": {
+          "hours": 30,
+          "customer": "St. Tammany Parish Procurement",
+          "name": "24-042",
+          "employees": {
+            "Martinez, Alicia": 3,
+            "Bosworth Jr., HJ": 26,
+            "Lee, Tom": 1
+          }
+        },
+        "25-040": {
+          "hours": 2,
+          "customer": "Copeland and Johns",
+          "name": "25-040",
+          "employees": {
+            "Martinez, Alicia": 1.5,
+            "Henry, Kirk": 0.5
+          }
+        },
+        "25-078": {
+          "hours": 15.5,
+          "customer": "CarMax",
+          "name": "25-078",
+          "employees": {
+            "Martinez, Alicia": 0.5,
+            "McNeil, Payton": 6,
+            "Dumas, Toni": 9
+          }
+        },
+        "26-038": {
+          "hours": 1.5,
+          "customer": "Blue Whale Development",
+          "name": "26-038",
+          "employees": {
+            "Martinez, Alicia": 1.5
+          }
+        },
+        "26-116": {
+          "hours": 6.5,
+          "customer": "Kohl's Department Stores, Inc.",
+          "name": "26-116",
+          "employees": {
+            "Martinez, Alicia": 0.5,
+            "Glennon, Connor": 6
+          }
+        },
+        "26-033": {
+          "hours": 0.5,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-033",
+          "employees": {
+            "Martinez, Alicia": 0.5
+          }
+        },
+        "26-034": {
+          "hours": 1.5,
+          "customer": "Rosehill Construction",
+          "name": "26-034",
+          "employees": {
+            "Martinez, Alicia": 1,
+            "Glennon, Connor": 0.5
+          }
+        },
+        "26-142": {
+          "hours": 42,
+          "customer": "CarMax",
+          "name": "26-142",
+          "employees": {
+            "Longo, Audrey": 40,
+            "McNeil, Payton": 2
+          }
+        },
+        "25-105": {
+          "hours": 17,
+          "customer": "Corgan",
+          "name": "25-105",
+          "employees": {
+            "Wolf, Ben": 9,
+            "Poche, Parker": 5,
+            "McNeil, Payton": 3
+          }
+        },
+        "23-044": {
+          "hours": 6,
+          "customer": "Quality Technology Services, LLC",
+          "name": "23-044",
+          "employees": {
+            "Wolf, Ben": 5,
+            "Hellmich, Jed": 1
+          }
+        },
+        "26-135": {
+          "hours": 20,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-135",
+          "employees": {
+            "Wolf, Ben": 16,
+            "Hellmich, Jed": 2,
+            "Richards, Jon": 2
+          }
+        },
+        "26-126": {
+          "hours": 54.5,
+          "customer": "JJR Construction",
+          "name": "26-126",
+          "employees": {
+            "Knepper, Brennan": 25,
+            "Glennon, Connor": 1.5,
+            "Knepper, Riley": 28
+          }
+        },
+        "26-052": {
+          "hours": 1.5,
+          "customer": "Flavored Operations, LLC",
+          "name": "26-052",
+          "employees": {
+            "Glennon, Connor": 1.5
+          }
+        },
+        "26-086": {
+          "hours": 0.5,
+          "customer": "Arnett Construction Company, Inc.",
+          "name": "26-086",
+          "employees": {
+            "Glennon, Connor": 0.5
+          }
+        },
+        "26-129": {
+          "hours": 30,
+          "customer": "Woodward Design Group",
+          "name": "26-129",
+          "employees": {
+            "Glennon, Connor": 1.5,
+            "Ryland, Reese": 28.5
+          }
+        },
+        "26-093": {
+          "hours": 27,
+          "customer": "Corgan",
+          "name": "26-093",
+          "employees": {
+            "Cuccia, Craig": 14,
+            "Jurczak, Edward": 4,
+            "Hellmich, Jed": 3,
+            "Le, Tuan": 6
+          }
+        },
+        "25-086.1": {
+          "hours": 1,
+          "customer": "Quality Technology Services, LLC",
+          "name": "25-086.1",
+          "employees": {
+            "Jurczak, Edward": 1
+          }
+        },
+        "26-015": {
+          "hours": 36,
+          "customer": "Waskey Bridges Inc.",
+          "name": "26-015",
+          "employees": {
+            "McDonald, Enrique": 36
+          }
+        },
+        "26-030": {
+          "hours": 3,
+          "customer": "Waskey Bridges Inc.",
+          "name": "26-030",
+          "employees": {
+            "McDonald, Enrique": 3
+          }
+        },
+        "24-023": {
+          "hours": 48,
+          "customer": "Quality Technology Services, LLC",
+          "name": "24-023",
+          "employees": {
+            "Alvero, Garrett": 16,
+            "Hellmich, Jed": 4,
+            "Catanzano, Jonathan": 15,
+            "Breaux, Kyle": 3,
+            "Yemula, Rahul": 8,
+            "Tiyapattanaputi, Warakorn": 2
+          }
+        },
+        "26-093.1": {
+          "hours": 65.5,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-093.1",
+          "employees": {
+            "Alvero, Garrett": 24,
+            "Hellmich, Jed": 3,
+            "Jourdan, Ross": 38.5
+          }
+        },
+        "26-141": {
+          "hours": 42.5,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-141",
+          "employees": {
+            "Rendano, Gary": 40,
+            "Hellmich, Jed": 2.5
+          }
+        },
+        "26-009": {
+          "hours": 3,
+          "customer": "Digital Engineering",
+          "name": "26-009",
+          "employees": {
+            "Bosworth Jr., HJ": 3
+          }
+        },
+        "26-047": {
+          "hours": 82.5,
+          "customer": "SCNZ Architects, LLC",
+          "name": "26-047",
+          "employees": {
+            "Heyl, Jack": 32,
+            "Henry, Kirk": 50.5
+          }
+        },
+        "25-093": {
+          "hours": 28.5,
+          "customer": "CarMax",
+          "name": "25-093",
+          "employees": {
+            "Hellmich, Jed": 1.5,
+            "Dumas, Toni": 27
+          }
+        },
+        "26-093.2": {
+          "hours": 5.5,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-093.2",
+          "employees": {
+            "Hellmich, Jed": 5.5
+          }
+        },
+        "26-095": {
+          "hours": 58.5,
+          "customer": "Oracle",
+          "name": "26-095",
+          "employees": {
+            "Catanzano, Jonathan": 3,
+            "Henry, Kirk": 1,
+            "Breaux, Kyle": 20,
+            "Lee, Tom": 34.5
+          }
+        },
+        "26-075": {
+          "hours": 8,
+          "customer": "Quality Infratech Intelligence, LLC (QII)",
+          "name": "26-075",
+          "employees": {
+            "Catanzano, Jonathan": 2,
+            "Tiyapattanaputi, Warakorn": 6
+          }
+        },
+        "26-091": {
+          "hours": 10,
+          "customer": "Quality Technology Services, LLC",
+          "name": "26-091",
+          "employees": {
+            "Catanzano, Jonathan": 2,
+            "Tiyapattanaputi, Warakorn": 8
+          }
+        },
+        "26-130": {
+          "hours": 14,
+          "customer": "Frischhertz",
+          "name": "26-130",
+          "employees": {
+            "Henry, Kirk": 2,
+            "Lee, Tom": 12
+          }
+        },
+        "24-078": {
+          "hours": 2,
+          "customer": "Duplantis Design group",
+          "name": "24-078",
+          "employees": {
+            "Henry, Kirk": 2
+          }
+        },
+        "26-003": {
+          "hours": 0.5,
+          "customer": "Duplantis Design group",
+          "name": "26-003",
+          "employees": {
+            "Henry, Kirk": 0.5
+          }
+        },
+        "25-054": {
+          "hours": 2.5,
+          "customer": "Meyer & Associates, Inc.",
+          "name": "25-054",
+          "employees": {
+            "Henry, Kirk": 2.5
+          }
+        },
+        "25-080": {
+          "hours": 1,
+          "customer": "Meyer & Associates, Inc.",
+          "name": "25-080",
+          "employees": {
+            "Henry, Kirk": 1
+          }
+        },
+        "25-021": {
+          "hours": 0.5,
+          "customer": "Corgan",
+          "name": "25-021",
+          "employees": {
+            "Poche, Parker": 0.5
+          }
+        },
+        "26-098": {
+          "hours": 1.5,
+          "customer": "Corgan",
+          "name": "26-098",
+          "employees": {
+            "Poche, Parker": 1.5
+          }
+        },
+        "26-125": {
+          "hours": 4,
+          "customer": "Corgan",
+          "name": "26-125",
+          "employees": {
+            "Poche, Parker": 4
+          }
+        },
+        "25-075": {
+          "hours": 36,
+          "customer": "CarMax",
+          "name": "25-075",
+          "employees": {
+            "McNeil, Payton": 4,
+            "Le, Tuan": 32
+          }
+        },
+        "26-103": {
+          "hours": 1.5,
+          "customer": "Laitram, LLC",
+          "name": "26-103",
+          "employees": {
+            "Ryland, Reese": 1.5
+          }
+        }
+      }
     },
     {
       "weekKey": "11-07",
